@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>FilterBird for Path of Diablo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" href="./data/simulation.css">
+<script type="text/javascript" src="./data/items.js"></script>
+<script type="text/javascript" src="./data/simulation.js"></script>
+
+<link rel="shortcut icon" href="./images/wing_icon.png" type="image/x-icon">
+
+</head>
+<body style="background-color:black;" onload="initial_load()">
+<div id="main">
+<div class="navbar" oncontextmenu="return false">
+<!--
+  <div class="nav-dropdown">
+    <button class="nav-dropbtn">Settings</button>
+    <div class="nav-dropdown-content">
+      <div class="nav-dropdown-content-item"><div class="nav-text">
+	<label> ­ ­ ­ ­ A ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ </label>
+      </div></div>
+      <div class="nav-dropdown-content-item"><div class="nav-text">
+	<label> ­ ­ ­ ­ B ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ </label>
+      </div></div>
+    </div>
+  </div>
+-->
+<img src="./images/bird.png" style="float:left; margin-left:10px; margin-right:10px; height:25px;">
+  <div class="nav-dropdown">
+    <button class="nav-dropbtn" style="cursor:pointer;" onClick="location.href='https://github.com/BetweenWalls/filterbird'"><a href="https://github.com/BetweenWalls/filterbird">About</a></button>
+  </div>
+</div>
+
+<div id="full_interface">
+<br>
+<button style="height:29px;" onClick="simulate()">Simulate</button>
+<div class="dropdown" style="width:200px; height:20px; position:relative; z-index:6; display:inline;">
+<select class="dropdown" id="dropdown_item" onChange="setItem(this.value)"></select>
+<br><br>
+</div>
+<label for="fileToLoad_1" style="color:white; display:block; background-color:#777; max-width:933px;">Choose Filter #1</label><input type="file" id="fileToLoad_1" name="fileToLoad_1" value="./filters/default.filter" onchange="loadFileAsText(1)"></input>
+<textarea id="filter_text_1" style="width:927px;" cols="130" rows="6"></textarea>
+<label for="fileToLoad_2" style="color:white; display:block; background-color:#777; max-width:933px;">Choose Filter #2</label><input type="file" id="fileToLoad_2" name="fileToLoad_2" value="./filters/default.filter" onchange="loadFileAsText(2)"></input>
+<textarea id="filter_text_2" style="width:927px;" cols="130" rows="6"></textarea>
+<br><br>
+<div id="output_area_1" style="height:100px; width:800px; position:relative;"><div style="color:white; position:absolute;">Filter #1</div><img id="background_1" src=""><div id="output_1" style="text-align:center; background-color:black; opacity:0.85; color:white; position:absolute; left:100px; top:40px;"></div></div>
+<div id="output_area_2" style="height:100px; width:800px; position:relative;"><div style="color:white; position:absolute;">Filter #2</div><img id="background_2" src=""><div id="output_2" style="text-align:center; background-color:black; opacity:0.85; color:white; position:absolute; left:100px; top:40px;"></div></div>
+<br>
+<div id="o6" style="color:#aaa;">Note: Simulated display is not 100% accurate</div><br>
+<div id="o1" style="color:white;"></div>
+<div id="o2" style="color:white;"></div>
+<div id="o3" style="color:white;"></div>
+<div id="o4" style="color:white;"></div>
+<div id="o5" style="color:white;"></div>
+</div>	<!-- /full_interface -->
+</div>	<!-- /main -->
+</body>
+</html>
+
+<script>
+
+//
+// ---------------------------------
+function initial_load() {
+	startup()
+}
+
+</script>
