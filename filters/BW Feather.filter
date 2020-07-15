@@ -1,6 +1,6 @@
 //═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 /	"Feather" Item Filter for Diablo II: Path of Diablo
-/		Date Updated:	11 JULY 2020
+/		Date Updated:	15 JULY 2020
 /		Info:		https://github.com/BetweenWalls/Feather#feather
 /		Direct URL:     https://raw.githubusercontent.com/BetweenWalls/Feather/master/item.filter
 //═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -489,7 +489,7 @@ ItemDisplay[UNI ETH ((uhm ILVL>76) OR (7fl ILVL>85) OR (7sc ILVL>79))]: %NAME% %
 ItemDisplay[UNI ETH (xla OR xpl OR uul OR uvb OR 9la OR 7ba OR 7sp OR 9cr OR 7bl OR 9st OR 7s7 OR 7gl OR 7ts OR ama OR 9ta OR 9tk OR 7bk OR 7b8 OR 7cs)]: %GRAY%>> %GOLD%%NAME%%CONTINUE%
 //    Natural Sockets
 ItemDisplay[UNI upk]: %NAME% %GRAY%[1]%CONTINUE%
-ItemDisplay[((UNI (9fc OR bae OR xml OR 8s8 OR xng OR 6hx)) OR (SET (ba5 OR dr8 OR urn OR 7m7)))]: %NAME% %GRAY%[2]%CONTINUE%
+ItemDisplay[((UNI (9fc OR xml OR 8s8 OR xng OR 6hx)) OR (SET (ba5 OR dr8 OR urn OR 7m7)))]: %NAME% %GRAY%[2]%CONTINUE%
 ItemDisplay[((UNI (ush OR 9st OR xul)) OR (SET (xar OR paf)))]: %NAME% %GRAY%[3]%CONTINUE%
 ItemDisplay[UNI (urn OR uh9 OR 7sm OR 7sc)]: %NAME% %GRAY%[1-2]%CONTINUE%
 ItemDisplay[((UNI 7pa) OR (SET ucl))]: %NAME% %GRAY%[1-3]%CONTINUE%

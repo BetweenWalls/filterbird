@@ -14,7 +14,7 @@
 </head>
 <body style="background-color:black;" onload="initial_load()">
 <div id="main">
-<div class="navbar" oncontextmenu="return false">
+<div class="navbar">
 <!--
   <div class="nav-dropdown">
     <button class="nav-dropbtn">Settings</button>
@@ -39,15 +39,16 @@
 <button style="height:29px;" onClick="simulate()">Simulate</button>
 <div class="dropdown" style="width:200px; height:20px; position:relative; z-index:6; display:inline;">
 <select class="dropdown" id="dropdown_item" onChange="setItem(this.value)"></select>
+<select class="dropdown" id="dropdown_id" style="width:36px; padding-left:0px;" onChange="setId(this.value)"></select>
 <br><br>
 </div>
 <label for="fileToLoad_1" style="color:white; display:block; background-color:#777; max-width:933px;">Choose Filter #1</label><input type="file" id="fileToLoad_1" name="fileToLoad_1" value="./filters/default.filter" onchange="loadFileAsText(1)"></input>
-<textarea id="filter_text_1" style="width:927px;" cols="130" rows="6"></textarea>
+<textarea id="filter_text_1" style="width:927px;" cols="130" rows="6">ItemDisplay[]: %NAME%</textarea>
 <label for="fileToLoad_2" style="color:white; display:block; background-color:#777; max-width:933px;">Choose Filter #2</label><input type="file" id="fileToLoad_2" name="fileToLoad_2" value="./filters/default.filter" onchange="loadFileAsText(2)"></input>
-<textarea id="filter_text_2" style="width:927px;" cols="130" rows="6"></textarea>
+<textarea id="filter_text_2" style="width:927px;" cols="130" rows="6">ItemDisplay[]: %NAME%</textarea>
 <br><br>
-<div id="output_area_1" style="height:100px; width:800px; position:relative;"><div style="color:white; position:absolute;">Filter #1</div><img id="background_1" src=""><div id="output_1" style="text-align:center; background-color:black; opacity:0.85; color:white; position:absolute; left:100px; top:40px;"></div></div>
-<div id="output_area_2" style="height:100px; width:800px; position:relative;"><div style="color:white; position:absolute;">Filter #2</div><img id="background_2" src=""><div id="output_2" style="text-align:center; background-color:black; opacity:0.85; color:white; position:absolute; left:100px; top:40px;"></div></div>
+<div id="output_area_1" style="height:100px; width:800px; position:relative;"><div style="color:white; position:absolute;">Filter #1</div><img id="background_1" src=""><div id="output_1" class="item"></div></div>
+<div id="output_area_2" style="height:100px; width:800px; position:relative;"><div style="color:white; position:absolute;">Filter #2</div><img id="background_2" src=""><div id="output_2" class="item"></div></div>
 <br>
 <div id="o6" style="color:#aaa;">Note: Simulated display is not 100% accurate</div><br>
 <div id="o1" style="color:white;"></div>

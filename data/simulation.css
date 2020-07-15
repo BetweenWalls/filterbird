@@ -1,4 +1,19 @@
-
+@font-face {
+  font-family: AvQuest;
+  src: url(Avqest.ttf);
+}
+.item {
+  font-family: AvQuest;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  background-color: black;
+  opacity: 0.80;
+  color: white;
+  position: absolute;
+  left: 100px;
+  top: 40px;
+}
 .no-selection {
   -webkit-user-select: none; /* for safari & chrome browsers */
   -moz-user-select: none; /* for mozilla browsers */

@@ -1,4 +1,4 @@
-var itemToCompare = {NAME:"9999 Gold",CODE:"GOLD",GOLD:9999};												// Gold
+var itemToCompare = {NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true};									// Gold
 //var itemToCompare = {NAME:"Grand Charm",ILVL:91,PRICE:35000,CODE:"cm3",cm3:true,MAG:true};								// Unidentified Grand Charm
 //var itemToCompare = {NAME:"Zod Rune",PRICE:5000,CODE:"r33",r33:true,ID:true,RUNE:33,RUNENAME:"Zod"};							// Rune
 //var itemToCompare = {NAME:"Flawless Skull",PRICE:10000,CODE:"skl",skl:true,ID:true,GEMLEVEL:4,GEMTYPE:7,GLEVEL:"Flawless",GTYPE:"Skull"};		// Gem
@@ -13,8 +13,8 @@ var itemToCompare = {NAME:"9999 Gold",CODE:"GOLD",GOLD:9999};												// Gold
 //var itemToCompare = {NAME:"Tier 4 Relic",PRICE:1,CODE:"ma2",ma2:true,ILVL:86,ID:true};
 //var itemToCompare = {NAME:"Echoing Javelin",ILVL:70,PRICE:35000,CODE:"jav",jav:true,MAG:true,WEAPON:true,WP5:true,WP6:true,ID:true,TABSK34:3};
 
-var character = {CLVL:80,CHARSTAT14:100000,CHARSTAT15:100000,DIFFICULTY:2};
-
+var character = {CLVL:20,CHARSTAT14:100000,CHARSTAT15:100000,DIFFICULTY:2};
+var item_settings = {ID:false};
 var colors = {
 	White:"#c7c3c0",
 	Gray:"#524e4b",
@@ -34,6 +34,7 @@ var colors = {
 // ---------------------------------
 function startup() {
 	loadItems()
+	loadOptions()
 	var r = Math.floor(Math.random()*5+1);
 	var background = "./images/act_"+r+".png";
 	document.getElementById("background_1").src = background
@@ -57,14 +58,31 @@ function loadItems() {
 	document.getElementById("dropdown_item").innerHTML = choices
 }
 
+// loadOptions - 
+// ---------------------------------
+function loadOptions() {
+	document.getElementById("dropdown_id").innerHTML = "<option>Id</option><option selected>Unid (if possible)</option>";
+}
+
+// setId - 
+//	value: 
+// ---------------------------------
+function setId(value) {
+	if (value == "Id") { item_settings.ID = true }
+	else { item_settings.ID = false }
+	setItem(document.getElementById("dropdown_item").value )
+	simulate()
+}
+
 // setItem - 
 //	value: 
 // ---------------------------------
 function setItem(value) {
-	if (value != "­ ­ ­ ­ Select Item") { for (group in equipment) { if (group != "charms") { for (itemNew in equipment[group]) { if (value == equipment[group][itemNew].name) {
+	if (value != "­ ­ ­ ­ Select Item") { for (group in equipment) { for (itemNew in equipment[group]) { if (value == equipment[group][itemNew].name) {
+		itemToCompare = {}
 		itemToCompare = equipment[group][itemNew]
 		itemToCompare.NAME = itemToCompare.name.split(" (")[0].split(" ­ ")[0]
-		itemToCompare.ILVL = 85
+		itemToCompare.ILVL = 91
 		itemToCompare.PRICE = 35000
 		itemToCompare.ID = true
 		if (typeof(itemToCompare.base) != 'undefined') {
@@ -74,15 +92,15 @@ function setItem(value) {
 			else if (itemToCompare.tier == 2) { itemToCompare.EXC = true }
 			else if (itemToCompare.tier == 3) { itemToCompare.ELT = true }
 		} else {
-			if (group == "amulet" && typeof(itemToCompare.CODE) == 'undefined') { itemToCompare.CODE = "amu" }
-			else if (group == "ring") { itemToCompare.CODE = "rin" }
+			if (group == "amulet" && typeof(itemToCompare.CODE) == 'undefined') { itemToCompare.CODE = "amu"; itemToCompare.base = "Amulet"; }
+			else if (group == "ring") { itemToCompare.CODE = "rin"; itemToCompare.base = "Ring"; }
 			else if (group == "charms") {
-				if (itemToCompare.size == "small") { itemToCompare.CODE = "cm1" }
-				else if (itemToCompare.size == "large") { itemToCompare.CODE = "cm2" }
-				else if (itemToCompare.size == "grand") { itemToCompare.CODE = "cm3" }
+				if (itemToCompare.size == "small") { itemToCompare.CODE = "cm1"; itemToCompare.base = "Small Charm"; }
+				else if (itemToCompare.size == "large") { itemToCompare.CODE = "cm2"; itemToCompare.base = "Large Charm"; }
+				else if (itemToCompare.size == "grand") { itemToCompare.CODE = "cm3"; itemToCompare.base = "Grand Charm"; }
 			}
 			else if (group == "socketables") {
-				if (itemToCompare.type == "jewel") { itemToCompare.CODE = "jew" }
+				if (itemToCompare.type == "jewel") { itemToCompare.CODE = "jew"; itemToCompare.base = "Jewel"; }
 				else if (itemToCompare.type == "rune") { itemToCompare.RUNENAME = itemToCompare.name.split(" ")[0] }
 				else if (itemToCompare.type == "gem") {
 					var g_level = [0,"Chipped","Flawed","Standard","Flawless","Perfect"];
@@ -91,27 +109,47 @@ function setItem(value) {
 					itemToCompare.GTYPE = g_type[itemToCompare.GEMTYPE]
 				}
 			}
+			else if (itemToCompare.CODE == "aq2") { itemToCompare.base = "Arrows" }
+			else if (itemToCompare.CODE == "cq2") { itemToCompare.base = "Bolts" }
+			else if (itemToCompare.CODE == "ma4") { itemToCompare.base = "Tier 1 Relic" }
+			else if (itemToCompare.CODE == "ma5") { itemToCompare.base = "Tier 2 Relic" }
+			else if (itemToCompare.CODE == "ma6") { itemToCompare.base = "Tier 3 Relic" }
+			else if (itemToCompare.CODE == "ma2") { itemToCompare.base = "Tier 4 Relic" }
+			else if (itemToCompare.CODE == "cm4") { itemToCompare.base = "Grand Charm" }
 		}
 		if (typeof(itemToCompare.rarity) != 'undefined') {
 			if (itemToCompare.rarity == "set") { itemToCompare.SET = true }
 			else if (itemToCompare.rarity == "rare") { itemToCompare.RARE = true }
 			else if (itemToCompare.rarity == "magic") { itemToCompare.MAG = true }
-			else if (itemToCompare.rarity == "common") { itemToCompare.NMAG = true }
-			else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.SOCK = 2 }	// TODO: edit sockets for RWs
+			else if (itemToCompare.rarity == "common") { itemToCompare.NMAG = true; itemToCompare.always_id = true; }
+			else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; itemToCompare.SOCK = 3; }	// TODO: edit sockets for RWs
 			else if (itemToCompare.rarity == "unique") { itemToCompare.UNI = true }
+			else if (itemToCompare.rarity == "craft") { itemToCompare.always_id = true }
 		} else { itemToCompare.UNI = true }
-		if (typeof(itemToCompare.ethereal) != 'undefined' && itemToCompare.ethereal == 1) { itemToCompare.ETH = true }
-		if (typeof(itemToCompare.sockets) != 'undefined' && itemToCompare.sockets > 0) { itemToCompare.SOCK = itemToCompare.sockets }
-		if (typeof(itemToCompare.sup) != 'undefined' && itemToCompare.sup > 0) { itemToCompare.SUP = true; itemToCompare.ED = itemToCompare.sup }
-		// TODO: Update other stats...
-		// DEF, RES, LIFE, MANA, IAS, FCR, FHR, FBR, skills, etc
 		itemToCompare[itemToCompare.CODE] = true
-	} } } } }
+		if (typeof(itemToCompare.always_id) == 'undefined') { itemToCompare.always_id = false }
+		if (itemToCompare.always_id == false && item_settings.ID == false) { itemToCompare.ID = false }
+		if (itemToCompare.ID == true) {
+			if (typeof(itemToCompare.ethereal) != 'undefined' && itemToCompare.ethereal == 1) { itemToCompare.ETH = true }
+			if (typeof(itemToCompare.sup) != 'undefined' && itemToCompare.sup > 0) { itemToCompare.SUP = true; itemToCompare.ED = itemToCompare.sup; }
+			if (typeof(itemToCompare.sockets) != 'undefined' && itemToCompare.sockets > 0) { itemToCompare.SOCK = itemToCompare.sockets }
+			//if (itemToCompare.CODE == "aq2" || itemToCompare.CODE == "cq2" || itemToCompare.CODE == "aqv" || itemToCompare.CODE == "cqv") { itemToCompare.QUANTITY = 500 }
+			// TODO: Update other stats...
+			// DEF, RES, LIFE, MANA, IAS, FCR, FHR, FBR, skills, etc
+			for (affix in itemToCompare) { for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = itemToCompare[affix] } } }
+		} else {
+			itemToCompare.ETH = false
+			itemToCompare.SUP = false
+			itemToCompare.SOCK = 0
+			for (affix in itemToCompare) { for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = 0 } } }
+		}
+	} } }
 	if (typeof(itemToCompare.RW) == 'undefined') { itemToCompare.RW = false }
 	if (typeof(itemToCompare.NMAG) == 'undefined') { itemToCompare.NMAG = false }
 	if (typeof(itemToCompare.ETH) == 'undefined') { itemToCompare.ETH = false }
 	if (typeof(itemToCompare.SOCK) == 'undefined') { itemToCompare.SOCK = 0 }
 	simulate()
+	}
 }
 
 // simulate - 
@@ -153,6 +191,7 @@ function parseFile(file,num) {
 	var color_new_default = "";
 	var display = "";
 	var name_saved = itemToCompare.NAME;
+	if (itemToCompare.ID == false) { name_saved = itemToCompare.base }
 	var done = false;
 	var rules_checked = 0;
 	var lines = file.split("\t").join("").split("­").join("•").split("\n");
@@ -267,12 +306,8 @@ function parseFile(file,num) {
 	if (color_new_default != "") { document.getElementById("output_"+num).style.color = color_new_default }
 	else { document.getElementById("output_"+num).style.color = getColor(itemToCompare) }
 	document.getElementById("o"+num).innerHTML += "<br>"
-	if (obscured == false) {
-		if (typeof(itemToCompare.base) != 'undefined') { display += "<br>"+itemToCompare.base }
-		else if (itemToCompare.CODE == "amu") { display += "<br>Amulet" }
-		else if (itemToCompare.CODE == "rin") { display += "<br>Ring" }
-		else if (itemToCompare.CODE == "aq2") { display += "<br>Arrows" }
-		else if (itemToCompare.CODE == "cq2") { display += "<br>Bolts" }
+	if (obscured == false && itemToCompare.ID == true && !(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {
+		if (typeof(itemToCompare.base) != 'undefined' && itemToCompare.CODE != "ma4" && itemToCompare.CODE != "ma5" && itemToCompare.CODE != "ma6" && itemToCompare.CODE != "ma2") { display += "<br>"+itemToCompare.base }
 	}
 	return display
 }
