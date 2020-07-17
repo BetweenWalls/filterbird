@@ -13,12 +13,12 @@ var itemToCompare = {NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:tr
 //var itemToCompare = {NAME:"Tier 4 Relic",PRICE:1,CODE:"ma2",ma2:true,ILVL:86,ID:true};
 //var itemToCompare = {NAME:"Echoing Javelin",ILVL:70,PRICE:35000,CODE:"jav",jav:true,MAG:true,WEAPON:true,WP5:true,WP6:true,ID:true,TABSK34:3};
 
-var character = {CLVL:20,CHARSTAT14:100000,CHARSTAT15:100000,DIFFICULTY:2};
+var character = {CLVL:90,CHARSTAT14:100000,CHARSTAT15:100000,DIFFICULTY:2,ILVL:90};
 var item_settings = {ID:false};
 var colors = {
-	White:"#c7c3c0",
+	White:"#dddddd",
 	Gray:"#524e4b",
-	Blue:"#52519d",
+	Blue:"#6666bb",	
 	Yellow:"#cccc77",
 	Gold:"#9b885e",
 	Green:"#31eb1b",
@@ -62,93 +62,130 @@ function loadItems() {
 // ---------------------------------
 function loadOptions() {
 	document.getElementById("dropdown_id").innerHTML = "<option>Id</option><option selected>Unid (if possible)</option>";
+	var options_clvl = "<option class='gray-all' style='color:gray' disabled>Character Level</option>"; for (let i = 1; i < 100; i++) { options_clvl += "<option>"+i+"</option>" }
+	document.getElementById("dropdown_clvl").innerHTML = options_clvl
+	document.getElementById("dropdown_clvl").selectedIndex = character.CLVL
+	var options_ilvl = "<option class='gray-all' style='color:gray' disabled>Item Level</option>"; for (let i = 1; i < 100; i++) { options_ilvl += "<option>"+i+"</option>" }
+	document.getElementById("dropdown_ilvl").innerHTML = options_ilvl
+	document.getElementById("dropdown_ilvl").selectedIndex = character.ILVL
 }
 
-// setId - 
+// setID - 
 //	value: 
 // ---------------------------------
-function setId(value) {
+function setID(value) {
 	if (value == "Id") { item_settings.ID = true }
 	else { item_settings.ID = false }
+	itemToCompare.ID = item_settings.ID
 	setItem(document.getElementById("dropdown_item").value )
+}
+
+// setCLVL - 
+//	value: 
+// ---------------------------------
+function setCLVL(value) {
+	character.CLVL = Number(value)
 	simulate()
+}
+
+// setILVL - 
+//	value: 
+// ---------------------------------
+function setILVL(value) {
+	character.ILVL = Number(value)
+	if (value < 36) { character.DIFFICULTY = 0 }
+	else if (value > 66) { character.DIFFICULTY = 1 }
+	else { character.DIFFICULTY = 2 }
+	setItem(document.getElementById("dropdown_item").value )
 }
 
 // setItem - 
 //	value: 
 // ---------------------------------
 function setItem(value) {
-	if (value != "­ ­ ­ ­ Select Item") { for (group in equipment) { for (itemNew in equipment[group]) { if (value == equipment[group][itemNew].name) {
-		itemToCompare = {}
-		itemToCompare = equipment[group][itemNew]
-		itemToCompare.NAME = itemToCompare.name.split(" (")[0].split(" ­ ")[0]
-		itemToCompare.ILVL = 91
-		itemToCompare.PRICE = 35000
-		itemToCompare.ID = true
-		if (typeof(itemToCompare.base) != 'undefined') {
-			var base = bases[itemToCompare.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
-			for (affix in base) { itemToCompare[affix] = base[affix] }
-			if (itemToCompare.tier == 1) { itemToCompare.NORM = true }
-			else if (itemToCompare.tier == 2) { itemToCompare.EXC = true }
-			else if (itemToCompare.tier == 3) { itemToCompare.ELT = true }
-		} else {
-			if (group == "amulet" && typeof(itemToCompare.CODE) == 'undefined') { itemToCompare.CODE = "amu"; itemToCompare.base = "Amulet"; }
-			else if (group == "ring") { itemToCompare.CODE = "rin"; itemToCompare.base = "Ring"; }
-			else if (group == "charms") {
-				if (itemToCompare.size == "small") { itemToCompare.CODE = "cm1"; itemToCompare.base = "Small Charm"; }
-				else if (itemToCompare.size == "large") { itemToCompare.CODE = "cm2"; itemToCompare.base = "Large Charm"; }
-				else if (itemToCompare.size == "grand") { itemToCompare.CODE = "cm3"; itemToCompare.base = "Grand Charm"; }
+	if (value != "­ ­ ­ ­ Select Item") {
+		for (group in equipment) { for (itemNew in equipment[group]) { if (value == equipment[group][itemNew].name) {
+			var item = equipment[group][itemNew];
+			itemToCompare = {}
+			for (affix in item) { itemToCompare[affix] = item[affix] }
+			itemToCompare.NAME = value.split(" (")[0].split(" ­ ")[0]
+			itemToCompare.ILVL = character.ILVL
+			itemToCompare.PRICE = 35000
+			itemToCompare.ID = true
+			if (typeof(itemToCompare.base) != 'undefined') {
+				var base = bases[itemToCompare.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
+				for (affix in base) { itemToCompare[affix] = base[affix] }
+				if (item.tier == 1) { itemToCompare.NORM = true }
+				else if (item.tier == 2) { itemToCompare.EXC = true }
+				else if (item.tier == 3) { itemToCompare.ELT = true }
+			} else {
+				if (group == "amulet" && typeof(itemToCompare.CODE) == 'undefined') { itemToCompare.CODE = "amu"; itemToCompare.base = "Amulet"; }
+				else if (group == "ring") { itemToCompare.CODE = "rin"; itemToCompare.base = "Ring"; }
+				else if (group == "charms") {
+					if (item.size == "small") { itemToCompare.CODE = "cm1"; itemToCompare.base = "Small Charm"; }
+					else if (item.size == "large") { itemToCompare.CODE = "cm2"; itemToCompare.base = "Large Charm"; }
+					else if (item.size == "grand") { itemToCompare.CODE = "cm3"; itemToCompare.base = "Grand Charm"; }
+				}
+				else if (group == "socketables") {
+					if (item.type == "jewel") { itemToCompare.CODE = "jew"; itemToCompare.base = "Jewel"; }
+					else if (item.type == "rune") { itemToCompare.RUNENAME = itemToCompare.name.split(" ")[0] }
+					else if (item.type == "gem") {
+						var g_level = [0,"Chipped","Flawed","Standard","Flawless","Perfect"];
+						var g_type = [0,"Amethyst","Diamond","Emerald","Ruby","Sapphire","Topaz","Skull"];
+						itemToCompare.GLEVEL = g_level[itemToCompare.GEMLEVEL]
+						itemToCompare.GTYPE = g_type[itemToCompare.GEMTYPE]
+					}
+				}
+				else if (itemToCompare.CODE == "aq2") { itemToCompare.base = "Arrows" }
+				else if (itemToCompare.CODE == "cq2") { itemToCompare.base = "Bolts" }
+				else if (itemToCompare.CODE == "ma4") { itemToCompare.base = "Tier 1 Relic" }
+				else if (itemToCompare.CODE == "ma5") { itemToCompare.base = "Tier 2 Relic" }
+				else if (itemToCompare.CODE == "ma6") { itemToCompare.base = "Tier 3 Relic" }
+				else if (itemToCompare.CODE == "ma2") { itemToCompare.base = "Tier 4 Relic" }
+				else if (itemToCompare.CODE == "cm4") { itemToCompare.base = "Grand Charm" }
 			}
-			else if (group == "socketables") {
-				if (itemToCompare.type == "jewel") { itemToCompare.CODE = "jew"; itemToCompare.base = "Jewel"; }
-				else if (itemToCompare.type == "rune") { itemToCompare.RUNENAME = itemToCompare.name.split(" ")[0] }
-				else if (itemToCompare.type == "gem") {
-					var g_level = [0,"Chipped","Flawed","Standard","Flawless","Perfect"];
-					var g_type = [0,"Amethyst","Diamond","Emerald","Ruby","Sapphire","Topaz","Skull"];
-					itemToCompare.GLEVEL = g_level[itemToCompare.GEMLEVEL]
-					itemToCompare.GTYPE = g_type[itemToCompare.GEMTYPE]
+			for (affix in item) { itemToCompare[affix] = item[affix] }	// some base affixes are overridden by regular affixes
+			if (typeof(itemToCompare.rarity) != 'undefined') {
+				if (itemToCompare.rarity == "set") { itemToCompare.SET = true }
+				else if (itemToCompare.rarity == "rare") { itemToCompare.RARE = true }
+				else if (itemToCompare.rarity == "magic") { itemToCompare.MAG = true }
+				else if (itemToCompare.rarity == "common") { itemToCompare.NMAG = true; itemToCompare.always_id = true; }
+				else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; }
+				else if (itemToCompare.rarity == "unique") { itemToCompare.UNI = true }
+				else if (itemToCompare.rarity == "craft") { itemToCompare.always_id = true }
+			} else { itemToCompare.UNI = true }
+			if (itemToCompare.RW == true) {
+				var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
+				var s = 0;
+				for (let i = 0; i < runewords[rw_name].length; i++) { s+=1; }
+				itemToCompare.sockets = s
+			}
+			itemToCompare[itemToCompare.CODE] = true
+			if (typeof(itemToCompare.always_id) == 'undefined') { itemToCompare.always_id = false }
+			if (itemToCompare.always_id == false && item_settings.ID == false) { itemToCompare.ID = false }
+			if (itemToCompare.ID == true) {
+				for (affix in itemToCompare) { for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = itemToCompare[affix] } } }
+				// TODO: Update other stats... DEF, RES, LIFE, MANA, IAS, FCR, FHR, FBR, skills, etc
+				if (typeof(itemToCompare.ethereal) != 'undefined' && itemToCompare.ethereal == 1) { itemToCompare.ETH = true }
+				if (typeof(itemToCompare.sup) != 'undefined' && itemToCompare.sup > 0) { itemToCompare.SUP = true; itemToCompare.ED = itemToCompare.sup; }
+				if (typeof(itemToCompare.sockets) != 'undefined' && itemToCompare.sockets > 0) { itemToCompare.SOCK = itemToCompare.sockets }	// redundant now?
+				if (itemToCompare.CODE == "aq2" || itemToCompare.CODE == "cq2" || itemToCompare.CODE == "aqv" || itemToCompare.CODE == "cqv") { itemToCompare.QUANTITY = 500 }
+			} else {
+				itemToCompare.ETH = false
+				itemToCompare.SUP = false
+				itemToCompare.SOCK = 0
+				for (affix in itemToCompare) {
+					for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = 0 } }
+					if (typeof(unequipped[affix]) != 'undefined') { if (affix != "base_damage_min" && affix != "base_damage_max" && affix != "base_defense" && affix != "req_level" && affix != "req_strength" && affix != "req_dexterity" && affix != "durability" && affix != "baseSpeed" && affix != "range" && affix != "throw_min"  && affix != "throw_max" && affix != "base_min_alternate" && affix != "base_max_alternate" && affix != "block" && affix != "velocity") { itemToCompare[affix] = unequipped[affix] } }
 				}
 			}
-			else if (itemToCompare.CODE == "aq2") { itemToCompare.base = "Arrows" }
-			else if (itemToCompare.CODE == "cq2") { itemToCompare.base = "Bolts" }
-			else if (itemToCompare.CODE == "ma4") { itemToCompare.base = "Tier 1 Relic" }
-			else if (itemToCompare.CODE == "ma5") { itemToCompare.base = "Tier 2 Relic" }
-			else if (itemToCompare.CODE == "ma6") { itemToCompare.base = "Tier 3 Relic" }
-			else if (itemToCompare.CODE == "ma2") { itemToCompare.base = "Tier 4 Relic" }
-			else if (itemToCompare.CODE == "cm4") { itemToCompare.base = "Grand Charm" }
-		}
-		if (typeof(itemToCompare.rarity) != 'undefined') {
-			if (itemToCompare.rarity == "set") { itemToCompare.SET = true }
-			else if (itemToCompare.rarity == "rare") { itemToCompare.RARE = true }
-			else if (itemToCompare.rarity == "magic") { itemToCompare.MAG = true }
-			else if (itemToCompare.rarity == "common") { itemToCompare.NMAG = true; itemToCompare.always_id = true; }
-			else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; itemToCompare.SOCK = 3; }	// TODO: edit sockets for RWs
-			else if (itemToCompare.rarity == "unique") { itemToCompare.UNI = true }
-			else if (itemToCompare.rarity == "craft") { itemToCompare.always_id = true }
-		} else { itemToCompare.UNI = true }
-		itemToCompare[itemToCompare.CODE] = true
-		if (typeof(itemToCompare.always_id) == 'undefined') { itemToCompare.always_id = false }
-		if (itemToCompare.always_id == false && item_settings.ID == false) { itemToCompare.ID = false }
-		if (itemToCompare.ID == true) {
-			if (typeof(itemToCompare.ethereal) != 'undefined' && itemToCompare.ethereal == 1) { itemToCompare.ETH = true }
-			if (typeof(itemToCompare.sup) != 'undefined' && itemToCompare.sup > 0) { itemToCompare.SUP = true; itemToCompare.ED = itemToCompare.sup; }
-			if (typeof(itemToCompare.sockets) != 'undefined' && itemToCompare.sockets > 0) { itemToCompare.SOCK = itemToCompare.sockets }
-			//if (itemToCompare.CODE == "aq2" || itemToCompare.CODE == "cq2" || itemToCompare.CODE == "aqv" || itemToCompare.CODE == "cqv") { itemToCompare.QUANTITY = 500 }
-			// TODO: Update other stats...
-			// DEF, RES, LIFE, MANA, IAS, FCR, FHR, FBR, skills, etc
-			for (affix in itemToCompare) { for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = itemToCompare[affix] } } }
-		} else {
-			itemToCompare.ETH = false
-			itemToCompare.SUP = false
-			itemToCompare.SOCK = 0
-			for (affix in itemToCompare) { for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = 0 } } }
-		}
-	} } }
-	if (typeof(itemToCompare.RW) == 'undefined') { itemToCompare.RW = false }
-	if (typeof(itemToCompare.NMAG) == 'undefined') { itemToCompare.NMAG = false }
-	if (typeof(itemToCompare.ETH) == 'undefined') { itemToCompare.ETH = false }
-	if (typeof(itemToCompare.SOCK) == 'undefined') { itemToCompare.SOCK = 0 }
-	simulate()
+			// TODO: Validate ILVL
+		} } }
+		if (typeof(itemToCompare.RW) == 'undefined') { itemToCompare.RW = false }
+		if (typeof(itemToCompare.NMAG) == 'undefined') { itemToCompare.NMAG = false }
+		if (typeof(itemToCompare.ETH) == 'undefined') { itemToCompare.ETH = false }
+		if (typeof(itemToCompare.SOCK) == 'undefined') { itemToCompare.SOCK = 0 }
+		simulate()
 	}
 }
 
@@ -328,4 +365,104 @@ function getColor(item) {
 	else if (item.RUNE > 0) { color = "Orange" }
 	else if (item.CODE == "cx5" || item.CODE == "cx6" || item.CODE == "cx7" || item.CODE == "maz" || item.CODE == "ma4" || item.CODE == "ma5" || item.CODE == "ma6" || item.CODE == "ma2" || item.CODE == "cx8") { color = "Purple" }
 	return colors[color]
+}
+
+// equipmentHover - shows equipment info on mouse-over
+//	group: equipment group name
+// ---------------------------------
+function equipmentHover(num) {
+	var name = document.getElementById("output_"+num).innerHTML;
+	var main_affixes = ""
+	var affixes = "";
+	for (affix in itemToCompare) {
+		if (typeof(stats[affix]) != 'undefined') { if (itemToCompare[affix] != unequipped[affix] && stats[affix] != unequipped[affix] && stats[affix] != 1 && affix != "velocity" && affix != "smite_min") {
+			var affix_info = getAffixLine(affix);
+			if (affix_info[1] != 0) {
+				if (affix == "base_damage_min" || affix == "base_defense" || affix == "req_level" || affix == "req_strength" || affix == "req_dexterity" || affix == "durability" || affix == "baseSpeed" || affix == "range" || affix == "throw_min" || affix == "base_min_alternate" || affix == "block" || affix == "velocity") { main_affixes += affix_info[0]+"<br>" }
+				else { affixes += affix_info[0]+"<br>" }
+			}
+		} }
+	}
+	if (itemToCompare.RW == true) {
+		var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
+		var runes = "";
+		for (let i = 0; i < runewords[rw_name].length; i++) { runes += runewords[rw_name][i]; }
+		name += "<br>"+"<font color='"+colors.Gold+"'>'"+runes+"'</font>"
+	}
+	document.getElementById("item_name").innerHTML = name
+	document.getElementById("item_name").style.color = document.getElementById("output_"+num).style.color
+	document.getElementById("item_info").innerHTML = main_affixes
+	document.getElementById("item_affixes").innerHTML = affixes
+	if (main_affixes != "" || affixes != "") { document.getElementById("tooltip_inventory").style.display = "block" }
+	
+	var tooltip_width = document.getElementById("tooltip_inventory").getBoundingClientRect().width/2;
+	var item = document.getElementById("output_"+num).getBoundingClientRect();
+	var offset_x = Math.floor(item.left + item.width/2 - tooltip_width);
+	var offset_y = item.top + item.height
+	document.getElementById("tooltip_inventory").style.left = offset_x+"px"
+	document.getElementById("tooltip_inventory").style.top = offset_y+"px"
+}
+
+// equipmentOut - stops showing equipment info (mouse-over ends)
+// ---------------------------------
+function equipmentOut() {
+	document.getElementById("tooltip_inventory").style.left = 820+"px"
+	document.getElementById("tooltip_inventory").style.display = "none"
+}
+
+// getAffixLine - determines how an affix should be displayed
+//	affix: name of the affix
+// return: the formatted affix line and combined value of affixes used
+// ---------------------------------
+function getAffixLine(affix) {
+	var source = itemToCompare;
+	var affix_line = "";
+	var value = source[affix];
+	var value_combined = ~~value;
+	var halt = false;
+	var both = 0;
+	var stat = stats[affix];
+	if (affix != "ctc" && affix != "cskill" && affix != "set_bonuses") {
+		if (stat.alt != null) {
+			if (typeof(source[stat.index[0]]) != 'undefined' && typeof(source[stat.index[1]]) != 'undefined') { if (source[stat.index[0]] > 0 && source[stat.index[1]] > 0) { both = 1; if (stat.index[1] == affix) { halt = true } } }
+			if (both == 0) { stat = null; stat = stats_alternate[affix]; }
+		}
+		for (let i = 0; i < stat.index.length; i++) {
+			value = source[stat.index[i]]
+			if (value == 'undefined') { value = 0 }
+			if (isNaN(value) == false) { value_combined += value }
+			var rounding = true;
+			if (stat.mult != null) {
+				if (stat.mult[i] != 1) { value *= character[stat.mult[i]] }	// 
+				else { rounding = false }
+			}
+			if (isNaN(value) == false && rounding == true) { value = Math.floor(Math.round(value)) }
+			var affix_text = stat.format[i];
+			if (value < 0 && affix_text[affix_text.length-1] == "+") { affix_text = affix_text.slice(0,affix_text.length-1) }
+			affix_line += affix_text
+			affix_line += value
+		}
+		var affix_text = stat.format[stat.index.length];
+		//if (affix_text == " to Class Skills") { affix_text = " to "+character.class_name+" Skills" }
+		affix_line += affix_text
+		if (affix == "aura" && (source[affix] == "Lifted Spirit" || source[affix] == "Righteous Fire")) { affix_line = source[affix]+" Aura when Equipped" }
+		if (halt == true) { value_combined = 0 }
+	} else {
+		affix_line == ""; value_combined = 1;
+		if (affix == "ctc") {
+			for (let i = 0; i < source[affix].length; i++) {
+				var line = source[affix][i][0]+"% chance to cast level "+source[affix][i][1]+" "+source[affix][i][2]+" "+source[affix][i][3];
+				affix_line += line
+				if (i < source[affix].length-1) { affix_line += "<br>" }
+			}
+		} else if (affix == "cskill") {
+			for (let i = 0; i < source[affix].length; i++) {
+				var line = "Level "+source[affix][i][0]+" "+source[affix][i][1]+" ("+source[affix][i][2]+" charges)";
+				affix_line += line
+				if (i < source[affix].length-1) { affix_line += "<br>" }
+			}
+		}
+	}
+	var result = [affix_line,value_combined];
+	return result
 }

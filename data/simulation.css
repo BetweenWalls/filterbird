@@ -11,8 +11,6 @@
   opacity: 0.80;
   color: white;
   position: absolute;
-  left: 100px;
-  top: 40px;
 }
 .no-selection {
   -webkit-user-select: none; /* for safari & chrome browsers */
@@ -31,6 +29,9 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+.dropdown option {
+  padding-left: 7px;
 }
 .dropdown-set, .dropdown-unique, .dropdown-magic, .dropdown-rare, .dropdown-craft, .dropdown-common, .dropdown-rw, .dropdown-debug, .dropdown:hover, .dropdown:focus {
   background-color: #222;
@@ -67,6 +68,14 @@
   color: #bbb;
   z-index: 3;
   background-color: #161616;
+}
+.hover {
+  position: absolute;
+  text-align: center;
+  color: white;
+  background-color: black;
+  padding: 5px;
+  z-index: 7;
 }
 
 input[type="file"] {
