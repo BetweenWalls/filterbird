@@ -161,23 +161,30 @@ function setItem(value) {
 				itemToCompare.sockets = s
 			}
 			itemToCompare[itemToCompare.CODE] = true
+			if (typeof(itemToCompare.velocity) != 'undefined') { if (itemToCompare.velocity < 0) { itemToCompare.velocity += 100000 } }	// negative values overflow for this in-game code
 			if (typeof(itemToCompare.always_id) == 'undefined') { itemToCompare.always_id = false }
 			if (itemToCompare.always_id == false && item_settings.ID == false) { itemToCompare.ID = false }
 			if (itemToCompare.ID == true) {
+				// affix codes translated to in-game codes
 				for (affix in itemToCompare) { for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = itemToCompare[affix] } } }
-				// TODO: Update other stats... DEF, RES, LIFE, MANA, IAS, FCR, FHR, FBR, skills, etc
+				if (typeof(itemToCompare.sup) != 'undefined') { if (itemToCompare.sup > 0) { if (typeof(itemToCompare.ED) == 'undefined') { itemToCompare.ED = 0 }; itemToCompare.ED += itemToCompare.sup; itemToCompare.SUP = true; if (item.rarity == "common") { itemToCompare.NAME = "Superior "+itemToCompare.NAME } } }
 				if (typeof(itemToCompare.ethereal) != 'undefined' && itemToCompare.ethereal == 1) { itemToCompare.ETH = true }
-				if (typeof(itemToCompare.sup) != 'undefined' && itemToCompare.sup > 0) { itemToCompare.SUP = true; itemToCompare.ED = itemToCompare.sup; }
-				if (typeof(itemToCompare.sockets) != 'undefined' && itemToCompare.sockets > 0) { itemToCompare.SOCK = itemToCompare.sockets }	// redundant now?
 				if (itemToCompare.CODE == "aq2" || itemToCompare.CODE == "cq2" || itemToCompare.CODE == "aqv" || itemToCompare.CODE == "cqv") { itemToCompare.QUANTITY = 500 }
+				itemToCompare.DEF = Math.ceil((~~itemToCompare.base_defense * (1+~~item.ethereal*0.5) * (1+~~item.e_def/100+~~item.sup/100)) + ~~item.defense + Math.floor(~~item.defense_per_level*character.CLVL))
+				itemToCompare.REQ_STR = Math.ceil(~~itemToCompare.req_strength * (1+(~~itemToCompare.req/100)) - ~~itemToCompare.ethereal*10)
+				itemToCompare.REQ_DEX = Math.ceil(~~itemToCompare.req_dexterity * (1+(~~itemToCompare.req/100)) - ~~itemToCompare.ethereal*10)
+				itemToCompare.BLOCK = itemToCompare.block + itemToCompare.ibc
 			} else {
-				itemToCompare.ETH = false
 				itemToCompare.SUP = false
-				itemToCompare.SOCK = 0
+				itemToCompare.ETH = false
 				for (affix in itemToCompare) {
 					for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = 0 } }
 					if (typeof(unequipped[affix]) != 'undefined') { if (affix != "base_damage_min" && affix != "base_damage_max" && affix != "base_defense" && affix != "req_level" && affix != "req_strength" && affix != "req_dexterity" && affix != "durability" && affix != "baseSpeed" && affix != "range" && affix != "throw_min"  && affix != "throw_max" && affix != "base_min_alternate" && affix != "base_max_alternate" && affix != "block" && affix != "velocity") { itemToCompare[affix] = unequipped[affix] } }
 				}
+				itemToCompare.DEF = ~~itemToCompare.base_defense
+				itemToCompare.REQ_STR = ~~itemToCompare.req_strength
+				itemToCompare.REQ_DEX = ~~itemToCompare.req_dexterity
+				itemToCompare.BLOCK = itemToCompare.block
 			}
 			// TODO: Validate ILVL
 		} } }
@@ -338,6 +345,7 @@ function parseFile(file,num) {
 	if (done == false) {
 		obscured = false
 		display = name_saved
+		if (itemToCompare.RW == true) { display = "<font color='"+colors.Gold+"'>"+display+"</font>" }
 		document.getElementById("o"+num).innerHTML += "#"+num+" No match found after checking "+rules_checked+" rules ... (default display)<br>"
 	}
 	if (color_new_default != "") { document.getElementById("output_"+num).style.color = color_new_default }
@@ -378,7 +386,7 @@ function equipmentHover(num) {
 		if (typeof(stats[affix]) != 'undefined') { if (itemToCompare[affix] != unequipped[affix] && stats[affix] != unequipped[affix] && stats[affix] != 1 && affix != "velocity" && affix != "smite_min") {
 			var affix_info = getAffixLine(affix);
 			if (affix_info[1] != 0) {
-				if (affix == "base_damage_min" || affix == "base_defense" || affix == "req_level" || affix == "req_strength" || affix == "req_dexterity" || affix == "durability" || affix == "baseSpeed" || affix == "range" || affix == "throw_min" || affix == "base_min_alternate" || affix == "block" || affix == "velocity") { main_affixes += affix_info[0]+"<br>" }
+				if (affix == "base_damage_min" || affix == "base_defense" || affix == "req_level" || affix == "req_strength" || affix == "req_dexterity" || affix == "durability" || affix == "baseSpeed" || affix == "range" || affix == "throw_min" || affix == "base_min_alternate" || affix == "block" || affix == "velocity" || affix == "QUANTITY") { main_affixes += affix_info[0]+"<br>" }
 				else { affixes += affix_info[0]+"<br>" }
 			}
 		} }
@@ -397,8 +405,9 @@ function equipmentHover(num) {
 	
 	var tooltip_width = document.getElementById("tooltip_inventory").getBoundingClientRect().width/2;
 	var item = document.getElementById("output_"+num).getBoundingClientRect();
+	var textbox_height = document.getElementById("filter_text_1").getBoundingClientRect().height + document.getElementById("filter_text_2").getBoundingClientRect().height
 	var offset_x = Math.floor(item.left + item.width/2 - tooltip_width);
-	var offset_y = item.top + item.height
+	var offset_y = Math.floor(110 + textbox_height + 100*num + item.height/2);
 	document.getElementById("tooltip_inventory").style.left = offset_x+"px"
 	document.getElementById("tooltip_inventory").style.top = offset_y+"px"
 }

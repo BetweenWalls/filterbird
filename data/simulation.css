@@ -7,8 +7,7 @@
   font-style: normal;
   font-weight: 400;
   text-align: center;
-  background-color: black;
-  opacity: 0.80;
+  background-color: rgba(0,0,0,0.8);
   color: white;
   position: absolute;
 }
@@ -73,7 +72,7 @@
   position: absolute;
   text-align: center;
   color: white;
-  background-color: black;
+  background-color: rgba(0,0,0,0.85);
   padding: 5px;
   z-index: 7;
 }
