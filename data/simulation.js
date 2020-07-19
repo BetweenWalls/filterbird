@@ -173,7 +173,7 @@ function setItem(value) {
 				itemToCompare.DEF = Math.ceil((~~itemToCompare.base_defense * (1+~~item.ethereal*0.5) * (1+~~item.e_def/100+~~item.sup/100)) + ~~item.defense + Math.floor(~~item.defense_per_level*character.CLVL))
 				itemToCompare.REQ_STR = Math.ceil(~~itemToCompare.req_strength * (1+(~~itemToCompare.req/100)) - ~~itemToCompare.ethereal*10)
 				itemToCompare.REQ_DEX = Math.ceil(~~itemToCompare.req_dexterity * (1+(~~itemToCompare.req/100)) - ~~itemToCompare.ethereal*10)
-				itemToCompare.BLOCK = itemToCompare.block + itemToCompare.ibc
+				itemToCompare.BLOCK = ~~itemToCompare.block + ~~itemToCompare.ibc
 			} else {
 				itemToCompare.SUP = false
 				itemToCompare.ETH = false
@@ -184,7 +184,7 @@ function setItem(value) {
 				itemToCompare.DEF = ~~itemToCompare.base_defense
 				itemToCompare.REQ_STR = ~~itemToCompare.req_strength
 				itemToCompare.REQ_DEX = ~~itemToCompare.req_dexterity
-				itemToCompare.BLOCK = itemToCompare.block
+				itemToCompare.BLOCK = ~~itemToCompare.block
 			}
 			// TODO: Validate ILVL
 		} } }
