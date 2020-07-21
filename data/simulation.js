@@ -13,15 +13,15 @@ var itemToCompare = {NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:tr
 //var itemToCompare = {NAME:"Tier 4 Relic",PRICE:1,CODE:"ma2",ma2:true,ILVL:86,ID:true};
 //var itemToCompare = {NAME:"Echoing Javelin",ILVL:70,PRICE:35000,CODE:"jav",jav:true,MAG:true,WEAPON:true,WP5:true,WP6:true,ID:true,TABSK34:3};
 
-var character = {CLVL:90,CHARSTAT14:100000,CHARSTAT15:100000,DIFFICULTY:2,ILVL:90};
+var character = {CLVL:90,CHARSTAT14:100000,CHARSTAT15:100000,DIFFICULTY:2,ILVL:90,CHARSTAT70:0};
 var item_settings = {ID:false};
 var colors = {
 	White:"#dddddd",
-	Gray:"#524e4b",
+	Gray:"#707070",
 	Blue:"#6666bb",	
 	Yellow:"#cccc77",
 	Gold:"#9b885e",
-	Green:"#31eb1b",
+	Green:"#00f000",
 	DarkGreen:"#255d16",
 	Tan:"#9b8c6d",
 	Black:"Black",
@@ -169,11 +169,13 @@ function setItem(value) {
 				for (affix in itemToCompare) { for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = itemToCompare[affix] } } }
 				if (typeof(itemToCompare.sup) != 'undefined') { if (itemToCompare.sup > 0) { if (typeof(itemToCompare.ED) == 'undefined') { itemToCompare.ED = 0 }; itemToCompare.ED += itemToCompare.sup; itemToCompare.SUP = true; if (item.rarity == "common") { itemToCompare.NAME = "Superior "+itemToCompare.NAME } } }
 				if (typeof(itemToCompare.ethereal) != 'undefined' && itemToCompare.ethereal == 1) { itemToCompare.ETH = true }
-				if (itemToCompare.CODE == "aq2" || itemToCompare.CODE == "cq2" || itemToCompare.CODE == "aqv" || itemToCompare.CODE == "cqv") { itemToCompare.QUANTITY = 500 }
+				if (itemToCompare.CODE == "aq2" || itemToCompare.CODE == "cq2" || itemToCompare.CODE == "aqv" || itemToCompare.CODE == "cqv") { itemToCompare.QUANTITY = 500; character.CHARSTAT70 = 500; }
 				itemToCompare.DEF = Math.ceil((~~itemToCompare.base_defense * (1+~~item.ethereal*0.5) * (1+~~item.e_def/100+~~item.sup/100)) + ~~item.defense + Math.floor(~~item.defense_per_level*character.CLVL))
 				itemToCompare.REQ_STR = Math.ceil(~~itemToCompare.req_strength * (1+(~~itemToCompare.req/100)) - ~~itemToCompare.ethereal*10)
 				itemToCompare.REQ_DEX = Math.ceil(~~itemToCompare.req_dexterity * (1+(~~itemToCompare.req/100)) - ~~itemToCompare.ethereal*10)
 				itemToCompare.BLOCK = ~~itemToCompare.block + ~~itemToCompare.ibc
+				itemToCompare.ITEMSTAT17 = ~~itemToCompare.e_damage + ~~itemToCompare.damage_bonus
+				// TODO: Add more codes that aren't handled properly by codes[code]
 			} else {
 				itemToCompare.SUP = false
 				itemToCompare.ETH = false
@@ -181,11 +183,15 @@ function setItem(value) {
 					for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = 0 } }
 					if (typeof(unequipped[affix]) != 'undefined') { if (affix != "base_damage_min" && affix != "base_damage_max" && affix != "base_defense" && affix != "req_level" && affix != "req_strength" && affix != "req_dexterity" && affix != "durability" && affix != "baseSpeed" && affix != "range" && affix != "throw_min"  && affix != "throw_max" && affix != "base_min_alternate" && affix != "base_max_alternate" && affix != "block" && affix != "velocity") { itemToCompare[affix] = unequipped[affix] } }
 				}
+				//character.CHARSTAT70 = 0;
 				itemToCompare.DEF = ~~itemToCompare.base_defense
 				itemToCompare.REQ_STR = ~~itemToCompare.req_strength
 				itemToCompare.REQ_DEX = ~~itemToCompare.req_dexterity
 				itemToCompare.BLOCK = ~~itemToCompare.block
+				itemToCompare.ITEMSTAT17 = 0
 			}
+			itemToCompare.ITEMSTAT31 = itemToCompare.DEF
+			itemToCompare.ITEMSTAT18 = itemToCompare.ITEMSTAT17
 			// TODO: Validate ILVL
 		} } }
 		if (typeof(itemToCompare.RW) == 'undefined') { itemToCompare.RW = false }
@@ -255,31 +261,28 @@ function parseFile(file,num) {
 			if (index_end > index+12) {
 				var cond_format = conditions.split("  ").join(" ").split("(").join(",(,").split(")").join(",),").split("!").join(",!,").split("<=").join(",≤,").split(">=").join(",≥,").split(">").join(",>,").split("<").join(",<,").split("=").join(",=,").split(" AND ").join(" ").split(" OR ").join(",|,").split("+").join(",+,").split(" ").join(",&,").split(",,").join(",");
 				var cond_list = cond_format.split(",");
+				var neg_paren_close = 0;
 				for (cond in cond_list) {
+					cond = Number(cond)
 					var c = cond_list[cond];
 					var number = false;
 					if (isNaN(Number(c)) == false) { cond_list[cond] = Number(c); number = true; }
 					if (number == false && c != "(" && c != ")" && c != "≤" && c != "≥" && c != "<" && c != ">" && c != "=" && c != "|" && c != "&" && c != "+" && c != "!") {
-						if (typeof(itemToCompare[c]) == 'undefined' && c != "GOLD") { itemToCompare[c] = false }
-						if (c == "CLVL" || c == "DIFFICULTY" || c == "CHARSTAT14" || c == "CHARSTAT15") { formula += character[c]+" " }
+						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { if (typeof(character[c]) == 'undefined') { character[c] = 0 } }
+						else if (typeof(itemToCompare[c]) == 'undefined' && c != "GOLD") { itemToCompare[c] = false }
+						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { formula += character[c]+" " }
 						else { formula += itemToCompare[c]+" " }
 					} else {
-						if (c == "&") {
-						/*	var valid_before = false;
-							var valid_after = false;
-							var c_before = cond_list[cond-1];
-							var c_after = cond_list[cond+1];
-							if (c_before != "(" && c_before != "<=" && c_before != ">=" && c_before != "<" && c_before != ">" && c_before != "=" && c_before != "|" && c_before != "&" && c_before != "+" && c_before != "!") { valid_before = true }
-							if (c_after != ")" && c_before != "<=" && c_before != ">=" && c_after != "<" && c_after != ">" && c_after != "=" && c_after != "|" && c_after != "&" && c_after != "+" && isNaN(Number(c_after)) != false) { valid_after = true }
-							//if (valid_before == true && valid_after == true) { formula += "&& " }
-						*/	formula += "&& "
-						}
+						if (c == "&") { formula += "&& " }
 						else if (c == "|") { formula += "|| " }
 						else if (c == "=") { formula += "== " }
 						else if (c == "≤") { formula += "<= " }
 						else if (c == "≥") { formula += ">= " }
+						else if (c == "!") { formula += "!" }
 						else { formula += c+" " }
 					}
+					if (neg_paren_close > 0 && neg_paren_close == cond) { formula += ") "; neg_paren_close = 0; }
+					if (c == "!" && cond_list.length > cond+3) { if ((isNaN(Number(cond_list[cond+1])) == false || isNaN(Number(cond_list[cond+3])) == false) && (cond_list[cond+2] == "=" || cond_list[cond+2] == ">" || cond_list[cond+2] == "<" || cond_list[cond+2] == "≤" || cond_list[cond+2] == "≥")) { formula += "( "; neg_paren_close = cond+3; } }
 				}
 				match = eval(formula)
 			} else {
