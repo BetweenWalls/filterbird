@@ -1,7 +1,7 @@
 /⃓═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 /	"Journey" Item Filter for Diablo II: Path of Diablo  (streamlined)
-/		Date Updated:	19 JULY 2020
-/		Info:		https://github.com/BetweenWalls/Journey/tree/streamlined#Journey-streamlined
+/		Date Updated:	21 JULY 2020
+/		Info:		https://github.com/BetweenWalls/Journey/tree/streamlined
 /
 /		Direct URL:	https://raw.githubusercontent.com/BetweenWalls/Journey/streamlined/item.filter
 /⃓═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -517,8 +517,8 @@ ItemDisplay[!(CL1 OR CL2 OR CL4 OR CL5 OR CL6 OR WP11 OR WP12 OR WP13) ((SOCK=2 
 ItemDisplay[!(CL1 OR CL2 OR CL4 OR CL5 OR CL6 OR WP11 OR WP12 OR WP13) ((SOCK=2 NMAG) CLVL>69) (WEAPON OR ITEMSTAT67>999)]:
 ItemDisplay[!(CL1 OR CL2 OR CL4 OR CL5 OR CL6 OR WP11 OR WP12 OR WP13) ((NMAG (SOCK=2 OR SOCK=0) CLVL>59) (NORM OR (EXC !(xh9 OR xtp OR xsh OR ci2 OR (xar ETH)))))]:
 ItemDisplay[!(CL1 OR CL2 OR CL4 OR CL5 OR CL6 OR WP11 OR WP12 OR WP13) ((SOCK=1 NMAG) CLVL>14)]:
-ItemDisplay[NMAG CLVL>14 (ARMOR SOCK=0 !(CL1 OR CL2 OR ((EQ1 OR EQ2 OR EQ3) (ELT OR ED>0)) OR ci2 OR xar OR xtp))]:
-ItemDisplay[NMAG CLVL>14 ((WP4 (dgr OR 9dg OR 7dg OR dir OR 9di OR 7di)) OR buc OR xuc OR (WP9 (SOCK=5 OR (SOCK=0 SUP (lbw OR 8lb OR 6lb OR sbb OR 8s8 OR 6s7 OR swb OR 8sw OR 6sw OR rxb OR 8rx OR 6rx)))))]:
+ItemDisplay[NMAG CLVL>14 (ARMOR SOCK=0 !(CL1 OR CL2 OR CL3 OR CL4 OR ((EQ1 OR EQ2 OR EQ3) (ELT OR ED>0)) OR ci2 OR xar OR xtp))]:
+ItemDisplay[NMAG CLVL>14 ((WP4 (dgr OR 9dg OR 7dg OR dir OR 9di OR 7di)) OR buc OR xuc OR (WP9 (SOCK=5 OR (SOCK=0 ILVL>40 SUP (CL7 OR lbw OR 8lb OR 6lb OR sbb OR 8s8 OR 6s7 OR swb OR 8sw OR 6sw OR rxb OR 8rx OR 6rx)))))]:
 
 /⃓̲ Hidden: Regular body armor
 /⃓̲    GROUP			EXCEPTIONS							LEVEL
@@ -624,8 +624,8 @@ ItemDisplay[(NMAG ILVL>9) (ETH (CL1 OR CL2 OR CL4))]:
 /⃓̲ Hidden: Amazon weapons
 /⃓̲    1-2 sockets, +1 skill, non-elite +2 skill, any +2 skill (except 4-socket bows), any non-elite - levels 20, 40, 60, 80, 90
 /⃓̲    Spears/Bows: normal, exceptional - levels 40, 70
-ItemDisplay[NMAG CL7 (((SOCK>0 SOCK<3) CLVL>19) OR ((TABSK0<2 TABSK2<2) CLVL>39) OR ((TABSK0<3 TABSK2<3) !ELT CLVL>59) OR ((TABSK0<3 TABSK2<3) CLVL>79 !(TABSK0>1 SOCK=4)) OR (CLVL>89 !(ELT OR ((SOCK=0 OR SOCK>3) (TABSK0>2 OR TABSK2>2)))))]:
-ItemDisplay[NMAG (CL7 !WP6) ((NORM CLVL>39) OR (EXC CLVL>69 !((SOCK=0 OR SOCK>3) (TABSK0>2 OR TABSK2>2))))]:
+ItemDisplay[NMAG CL7 (((SOCK>0 SOCK<3) CLVL>19) OR ((TABSK0<2 TABSK2<2) CLVL>39) OR ((TABSK0<3 TABSK2<3) !ELT CLVL>59) OR ((TABSK0<3 TABSK2<3) CLVL>79 !(TABSK0>1 SOCK=4)) OR (CLVL>89 !(ELT OR ((SOCK=0 OR SOCK>3) TABSK0>2))))]:
+ItemDisplay[NMAG (CL7 !WP6) ((NORM CLVL>39) OR (EXC CLVL>69 !((SOCK=0 OR SOCK>3) TABSK0>2)))]:
 
 /⃓̲ Hidden: Paladin shields
 /⃓̲    1-3 socket eth, 1-socket, 2-socket non-elite - levels 1, 15, 80
@@ -1084,26 +1084,9 @@ ItemDisplay[MAG ILVL>47 uit]:			%NAME% %TAN%(%WHITE%4%TAN%)%GRAY%±%ORANGE%[%GRE
 /⃓̲ Obscured/Hidden: Magic Merchant Items
 /⃓̲    Difficulty: Normal, Acts 1-5 - levels 7, 15, 23, 31, 40
 ItemDisplay[MAG ((ILVL=12 CLVL>6) OR (ILVL=20 CLVL>14) OR (ILVL=28 CLVL>22) OR (ILVL=36 CLVL>30) OR (ILVL=45 CLVL>39))]:%BLACK%
-/⃓̲    Difficulty: Any
-ItemDisplay[MAG ((ILVL=6 CLVL=1) OR (ILVL=7 CLVL=2) OR (ILVL=8 CLVL=3) OR (ILVL=9 CLVL=4) OR (ILVL=10 CLVL=5))]:%BLACK%
-ItemDisplay[MAG ((ILVL=11 CLVL=6) OR (ILVL=12 CLVL=7) OR (ILVL=13 CLVL=8) OR (ILVL=14 CLVL=9) OR (ILVL=15 CLVL=10))]:%BLACK%
-ItemDisplay[MAG ((ILVL=16 CLVL=11) OR (ILVL=17 CLVL=12) OR (ILVL=18 CLVL=13) OR (ILVL=19 CLVL=14) OR (ILVL=20 CLVL=15))]:%BLACK%
-ItemDisplay[MAG ((ILVL=21 CLVL=16) OR (ILVL=22 CLVL=17) OR (ILVL=23 CLVL=18) OR (ILVL=24 CLVL=19) OR (ILVL=25 CLVL=20))]:%BLACK%
-ItemDisplay[MAG ((ILVL=26 CLVL=21) OR (ILVL=27 CLVL=22) OR (ILVL=28 CLVL=23) OR (ILVL=29 CLVL=24) OR (ILVL=30 CLVL=25))]:%BLACK%
-ItemDisplay[MAG ((ILVL=31 CLVL=26) OR (ILVL=32 CLVL=27) OR (ILVL=33 CLVL=28) OR (ILVL=34 CLVL=29) OR (ILVL=35 CLVL=30))]:%BLACK%
-ItemDisplay[MAG ((ILVL=36 CLVL=31) OR (ILVL=37 CLVL=32) OR (ILVL=38 CLVL=33) OR (ILVL=39 CLVL=34) OR (ILVL=40 CLVL=35))]:%BLACK%
-ItemDisplay[MAG ((ILVL=41 CLVL=36) OR (ILVL=42 CLVL=37) OR (ILVL=43 CLVL=38) OR (ILVL=44 CLVL=39) OR (ILVL=45 CLVL=40))]:%BLACK%
-ItemDisplay[MAG ((ILVL=46 CLVL=41) OR (ILVL=47 CLVL=42) OR (ILVL=48 CLVL=43) OR (ILVL=49 CLVL=44) OR (ILVL=50 CLVL=45))]:%BLACK%
-ItemDisplay[MAG ((ILVL=51 CLVL=46) OR (ILVL=52 CLVL=47) OR (ILVL=53 CLVL=48) OR (ILVL=54 CLVL=49) OR (ILVL=55 CLVL=50))]:%BLACK%
-ItemDisplay[MAG ((ILVL=56 CLVL=51) OR (ILVL=57 CLVL=52) OR (ILVL=58 CLVL=53) OR (ILVL=59 CLVL=54) OR (ILVL=60 CLVL=55))]:%BLACK%
-ItemDisplay[MAG ((ILVL=61 CLVL=56) OR (ILVL=62 CLVL=57) OR (ILVL=63 CLVL=58) OR (ILVL=64 CLVL=59) OR (ILVL=65 CLVL=60))]:%BLACK%
-ItemDisplay[MAG ((ILVL=66 CLVL=61) OR (ILVL=67 CLVL=62) OR (ILVL=68 CLVL=63) OR (ILVL=69 CLVL=64) OR (ILVL=70 CLVL=65))]:%BLACK%
-ItemDisplay[MAG ((ILVL=71 CLVL=66) OR (ILVL=72 CLVL=67) OR (ILVL=73 CLVL=68) OR (ILVL=74 CLVL=69) OR (ILVL=75 CLVL=70))]:%BLACK%
-ItemDisplay[MAG ((ILVL=76 CLVL=71) OR (ILVL=77 CLVL=72) OR (ILVL=78 CLVL=73) OR (ILVL=79 CLVL=74) OR (ILVL=80 CLVL=75))]:%BLACK%
-ItemDisplay[MAG ((ILVL=81 CLVL=76) OR (ILVL=82 CLVL=77) OR (ILVL=83 CLVL=78) OR (ILVL=84 CLVL=79) OR (ILVL=85 CLVL=80))]:%BLACK%
-ItemDisplay[MAG ((ILVL=86 CLVL=81) OR (ILVL=87 CLVL=82) OR (ILVL=88 CLVL=83) OR (ILVL=89 CLVL=84) OR (ILVL=90 CLVL=85))]:%BLACK%
-ItemDisplay[MAG ((ILVL=91 CLVL=86) OR (ILVL=92 CLVL=87) OR (ILVL=93 CLVL=88) OR (ILVL=94 CLVL=89) OR (ILVL=95 CLVL=90))]:%BLACK%
-ItemDisplay[MAG ILVL>95 CLVL>90]:%BLACK%
+/⃓̲    Difficulty: Nightmare/Hell
+ItemDisplay[MAG CLVL<50 ((ILVL=6 CLVL=1) OR (ILVL=7 CLVL=2) OR (ILVL=8 CLVL=3) OR (ILVL=9 CLVL=4) OR (ILVL=10 CLVL=5) OR (ILVL=11 CLVL=6) OR (ILVL=12 CLVL=7) OR (ILVL=13 CLVL=8) OR (ILVL=14 CLVL=9) OR (ILVL=15 CLVL=10) OR (ILVL=16 CLVL=11) OR (ILVL=17 CLVL=12) OR (ILVL=18 CLVL=13) OR (ILVL=19 CLVL=14) OR (ILVL=20 CLVL=15) OR (ILVL=21 CLVL=16) OR (ILVL=22 CLVL=17) OR (ILVL=23 CLVL=18) OR (ILVL=24 CLVL=19) OR (ILVL=25 CLVL=20) OR (ILVL=26 CLVL=21) OR (ILVL=27 CLVL=22) OR (ILVL=28 CLVL=23) OR (ILVL=29 CLVL=24) OR (ILVL=30 CLVL=25) OR (ILVL=31 CLVL=26) OR (ILVL=32 CLVL=27) OR (ILVL=33 CLVL=28) OR (ILVL=34 CLVL=29) OR (ILVL=35 CLVL=30) OR (ILVL=36 CLVL=31) OR (ILVL=37 CLVL=32) OR (ILVL=38 CLVL=33) OR (ILVL=39 CLVL=34) OR (ILVL=40 CLVL=35) OR (ILVL=41 CLVL=36) OR (ILVL=42 CLVL=37) OR (ILVL=43 CLVL=38) OR (ILVL=44 CLVL=39) OR (ILVL=45 CLVL=40) OR (ILVL=46 CLVL=41) OR (ILVL=47 CLVL=42) OR (ILVL=48 CLVL=43) OR (ILVL=49 CLVL=44) OR (ILVL=50 CLVL=45) OR (ILVL=51 CLVL=46) OR (ILVL=52 CLVL=47) OR (ILVL=53 CLVL=48) OR (ILVL=54 CLVL=49))]:%BLACK%
+ItemDisplay[MAG CLVL>49 ((ILVL=55 CLVL=50) OR (ILVL=56 CLVL=51) OR (ILVL=57 CLVL=52) OR (ILVL=58 CLVL=53) OR (ILVL=59 CLVL=54) OR (ILVL=60 CLVL=55) OR (ILVL=61 CLVL=56) OR (ILVL=62 CLVL=57) OR (ILVL=63 CLVL=58) OR (ILVL=64 CLVL=59) OR (ILVL=65 CLVL=60) OR (ILVL=66 CLVL=61) OR (ILVL=67 CLVL=62) OR (ILVL=68 CLVL=63) OR (ILVL=69 CLVL=64) OR (ILVL=70 CLVL=65) OR (ILVL=71 CLVL=66) OR (ILVL=72 CLVL=67) OR (ILVL=73 CLVL=68) OR (ILVL=74 CLVL=69) OR (ILVL=75 CLVL=70) OR (ILVL=76 CLVL=71) OR (ILVL=77 CLVL=72) OR (ILVL=78 CLVL=73) OR (ILVL=79 CLVL=74) OR (ILVL=80 CLVL=75) OR (ILVL=81 CLVL=76) OR (ILVL=82 CLVL=77) OR (ILVL=83 CLVL=78) OR (ILVL=84 CLVL=79) OR (ILVL=85 CLVL=80) OR (ILVL=86 CLVL=81) OR (ILVL=87 CLVL=82) OR (ILVL=88 CLVL=83) OR (ILVL=89 CLVL=84) OR (ILVL=90 CLVL=85) OR (ILVL=91 CLVL=86) OR (ILVL=92 CLVL=87) OR (ILVL=93 CLVL=88) OR (ILVL=94 CLVL=89) OR (ILVL=95 CLVL=90) OR (ILVL>95 CLVL>90))]:%BLACK%
 
 /⃓̲ Catchall - Magic Items  (identified)
 /⃓̲    Show item price  (when below 800,000 gold)
@@ -1128,7 +1111,7 @@ ItemDisplay[UNI ETH (xla OR xpl OR uul OR uvb OR 9la OR 7ba OR 7sp OR 9cr OR 7bl
 ItemDisplay[UNI upk]: %NAME% %GRAY%[1]%CONTINUE%
 ItemDisplay[((UNI (9fc OR xml OR 8s8 OR xng OR 6hx)) OR (SET (ba5 OR dr8 OR urn OR 7m7)))]: %NAME% %GRAY%[2]%CONTINUE%
 ItemDisplay[((UNI (ush OR 9st OR xul)) OR (SET (xar OR paf)))]: %NAME% %GRAY%[3]%CONTINUE%
-ItemDisplay[UNI (urn OR uh9 OR 7sm OR 7sc)]: %NAME% %GRAY%[1-2]%CONTINUE%
+ItemDisplay[UNI (urn OR uh9 OR 7sm)]: %NAME% %GRAY%[1-2]%CONTINUE%
 ItemDisplay[((UNI 7pa) OR (SET ucl))]: %NAME% %GRAY%[1-3]%CONTINUE%
 ItemDisplay[((UNI 7o7) OR (SET 9mt))]: %NAME% %GRAY%[2-3]%CONTINUE%
 ItemDisplay[SET 7ws]: %NAME% %GRAY%[3-4]%CONTINUE%
@@ -1140,7 +1123,7 @@ ItemDisplay[UNI ((ETH (7gw OR obc OR obf)) OR (!ETH ((amu ILVL>84) OR (rin ILVL>
 ItemDisplay[((UNI ((ETH ama) OR (!ETH ((amu ILVL>72) OR (rin ILVL>65) OR cm3 OR dre OR xlt OR uld OR ama OR (7wh ILVL>82) OR (7sc ILVL>79) OR 6cs OR oba OR 6ws)))) OR (SET ulg))]:	     %NAME%%DGREEN%     	
 ItemDisplay[((UNI ((ETH (xhn OR xlt)) OR (!ETH ((rin ILVL>38) OR ci2 OR bac OR tgl OR hgl OR xvb OR xmb OR zlb OR zvb OR umc OR 7kr OR 7s8 OR rxb OR urn OR (7fl ILVL>85) OR 7gd OR 7gm OR 7sc OR pac OR xrs OR upl)))) OR (SET ((amu ILVL>25) OR xhm OR xtb OR xmg)))]:	    %NAME%%DGREEN%    	
 ItemDisplay[((UNI ((ETH (6cs OR oba OR uvb OR 7s8 OR 6ws OR 7bk OR 7b8 OR ulc OR xrs)) OR (!ETH ((amu ILVL>57) OR xhm OR utu OR uvb OR uhb OR ztb OR 9ws OR 7ws OR amf OR 6l7 OR 8hx OR 7gi OR 9ls OR am7 OR xtp OR uar OR 7fl OR 8lw OR 7bk OR 7m7 OR nef OR uow OR xpl)))) OR (SET 7qr))]:	   %NAME%%DGREEN%   	
-ItemDisplay[((UNI ((ETH (uar OR uap OR baa OR dra OR ci3 OR uui OR 7wa OR (7sc ILVL>79) OR 7sc OR 7o7 OR 7pa OR dgr OR (uhm ILVL>76) OR uhm OR 9fc OR utu OR 7gm OR xpl OR 9ws OR 7ws)) OR (!ETH (xsh OR nee OR umg OR uvc OR 7b8 OR 8lb OR 8sw OR 9fc OR 7pa OR drb OR pae OR dgr OR 9bs OR umb OR 9mp OR 7wh OR tbl OR mgl)))) OR (SET (ult OR xhb OR ci3 OR zvb OR xmb OR ne9 OR utc OR oba OR xsk OR uhm OR uld OR amc OR (vbt ((ILVL>27 ILVL<32) OR (ILVL>63 ILVL<68) OR (ILVL>80 ILVL<85))))))]:	  %NAME%%DGREEN%  	
+ItemDisplay[((UNI ((ETH (uar OR uap OR baa OR dra OR ci3 OR uui OR 7wa OR 7sc OR 7o7 OR 7pa OR dgr OR (uhm ILVL>76) OR uhm OR 9fc OR utu OR 7gm OR xpl OR 9ws OR 7ws)) OR (!ETH (xsh OR nee OR umg OR uvc OR 7b8 OR 8lb OR 8sw OR 9fc OR 7pa OR drb OR pae OR dgr OR 9bs OR umb OR 9mp OR 7wh OR tbl OR mgl)))) OR (SET (ult OR xhb OR ci3 OR zvb OR xmb OR ne9 OR utc OR oba OR xsk OR uhm OR uld OR amc OR (vbt ((ILVL>27 ILVL<32) OR (ILVL>63 ILVL<68) OR (ILVL>80 ILVL<85))))))]:	  %NAME%%DGREEN%  	
 ItemDisplay[((UNI ETH (9cr OR 7cs OR 7dg OR 9tk OR xkp OR xlm OR xrn OR bac OR xts OR xhb OR ztb OR 7sp OR 9ta OR 9wn OR 9bw OR 7bw OR 7br OR 9bs OR 7kr OR 72a OR 7gi OR dre OR (7fl ILVL>85) OR 7fl OR 7m7 OR umb OR xhm OR 7wh OR 7s7 OR 9st OR zvb OR zhb OR uhb OR xmb OR xtb OR uvg OR nea OR nef OR pa9 OR uow OR upk OR upl OR xea)) OR (SET ((amu ILVL>16) OR xap OR stu OR xhl OR 6cs OR 7gd OR uul OR zhb OR xhg OR xtg OR xh9 OR uh9 OR xul OR vbt OR xar OR urn OR 7ws OR paf OR 7m7 OR ucl OR ba5 OR zmb)))]:	 %NAME%%DGREEN% 	
 ItemDisplay[UNI !ETH (amu OR rin OR skp OR xap OR xkp OR xlm OR xsk OR xrn OR bad OR stu OR aar OR xui OR xar OR xts OR vgl OR xlg OR xmg OR xtg OR uhg OR xlb OR lbl OR 9gi OR 7mp OR mau OR 9sp OR 9m9 OR 7sp OR 9sb OR 9cm OR 7gs OR 7dg OR 7wc OR 7sr OR am9 OR 6sw OR amb OR 8rx OR 8ls OR 8ws OR 9wn OR 9bw OR 7bw OR 7wb OR 7lw OR uh9 OR bae OR upk OR 72a OR uts OR 8s8 OR 9fb OR 9gs OR 7ls OR 7b7 OR gma OR 9fl OR 9qs OR 9cr OR 9kr OR 9s8 OR 7bt OR 7ga OR 9pa OR 92h OR drd OR lbt OR 9gm OR plt OR xow OR gsd OR 9gw OR 9tw OR 7p7 OR 7br OR 7o7 OR uml OR cap)]:	 %NAME%%DGREEN% 	
 

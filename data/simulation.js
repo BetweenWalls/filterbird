@@ -12,7 +12,7 @@ var itemToCompare = {NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:tr
 //var itemToCompare = {NAME:"Tier 4 Relic",PRICE:1,CODE:"ma2",ma2:true,ILVL:86};
 //var itemToCompare = {NAME:"Tier 4 Relic",PRICE:1,CODE:"ma2",ma2:true,ILVL:86,ID:true};
 //var itemToCompare = {NAME:"Echoing Javelin",ILVL:70,PRICE:35000,CODE:"jav",jav:true,MAG:true,WEAPON:true,WP5:true,WP6:true,ID:true,TABSK34:3};
-
+//var compared_items = {};
 var character = {CLVL:90,CHARSTAT14:100000,CHARSTAT15:100000,DIFFICULTY:2,ILVL:90,CHARSTAT70:0};
 var item_settings = {ID:false};
 var colors = {
@@ -115,9 +115,9 @@ function setItem(value) {
 			if (typeof(itemToCompare.base) != 'undefined') {
 				var base = bases[itemToCompare.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
 				for (affix in base) { itemToCompare[affix] = base[affix] }
-				if (item.tier == 1) { itemToCompare.NORM = true }
-				else if (item.tier == 2) { itemToCompare.EXC = true }
-				else if (item.tier == 3) { itemToCompare.ELT = true }
+				if (base.tier == 1) { itemToCompare.NORM = true }
+				else if (base.tier == 2) { itemToCompare.EXC = true }
+				else if (base.tier == 3) { itemToCompare.ELT = true }
 			} else {
 				if (group == "amulet" && typeof(itemToCompare.CODE) == 'undefined') { itemToCompare.CODE = "amu"; itemToCompare.base = "Amulet"; }
 				else if (group == "ring") { itemToCompare.CODE = "rin"; itemToCompare.base = "Ring"; }
@@ -142,7 +142,7 @@ function setItem(value) {
 				else if (itemToCompare.CODE == "ma5") { itemToCompare.base = "Tier 2 Relic" }
 				else if (itemToCompare.CODE == "ma6") { itemToCompare.base = "Tier 3 Relic" }
 				else if (itemToCompare.CODE == "ma2") { itemToCompare.base = "Tier 4 Relic" }
-				else if (itemToCompare.CODE == "cm4") { itemToCompare.base = "Grand Charm" }
+				else if (itemToCompare.CODE == "cm4") { itemToCompare.base = "Grand Charm" }	// TOCHECK: Does this item still display with 2 lines?
 			}
 			for (affix in item) { itemToCompare[affix] = item[affix] }	// some base affixes are overridden by regular affixes
 			if (typeof(itemToCompare.rarity) != 'undefined') {
