@@ -1,18 +1,4 @@
-var itemToCompare = {NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true};									// Gold
-//var itemToCompare = {NAME:"Grand Charm",ILVL:91,PRICE:35000,CODE:"cm3",cm3:true,MAG:true};								// Unidentified Grand Charm
-//var itemToCompare = {NAME:"Zod Rune",PRICE:5000,CODE:"r33",r33:true,ID:true,RUNE:33,RUNENAME:"Zod"};							// Rune
-//var itemToCompare = {NAME:"Flawless Skull",PRICE:10000,CODE:"skl",skl:true,ID:true,GEMLEVEL:4,GEMTYPE:7,GLEVEL:"Flawless",GTYPE:"Skull"};		// Gem
-//var itemToCompare = {NAME:"Archon Plate",ILVL:80,PRICE:35000,CODE:"utp",utp:true,NMAG:true,ID:true,SOCK:3,DEF:524,ARMOR:true,EQ2:true,ELT:true};	// 3os Armor
-//var itemToCompare = {NAME:"Mithril Coil",ILVL:80,PRICE:8000,CODE:"umc",umc:true,SET:true,ARMOR:true,EQ6:true,ELT:true}; 				// Credendum, Mithril Coil (unid set belt)
-//var itemToCompare = {NAME:"Grand Charm",ILVL:91,PRICE:35000,CODE:"cm3",cm3:true,UNI:true};								// Gheed's Grand Charm (unidentified)
-//var itemToCompare = {NAME:"Amulet",ILVL:86,PRICE:15000,CODE:"amu",amu:true,UNI:true};
-//var itemToCompare = {NAME:"Dimensional Shard",ILVL:65,PRICE:35000,CODE:"obf",obf:true,NMAG:true,WEAPON:true,CL6:true,ELT:true,ID:true,SOCK:3,LIFE:60,SK65:3,SK64:3,SK62:3};
-//var itemToCompare = {NAME:"Orb of Corruption",PRICE:1,CODE:"cx5",cx5:true,ID:true,ILVL:28};
-//var itemToCompare = {NAME:"Key of Chaos",PRICE:1,CODE:"cx7",cx7:true,ID:true,ILVL:85};
-//var itemToCompare = {NAME:"Tier 4 Relic",PRICE:1,CODE:"ma2",ma2:true,ILVL:86};
-//var itemToCompare = {NAME:"Tier 4 Relic",PRICE:1,CODE:"ma2",ma2:true,ILVL:86,ID:true};
-//var itemToCompare = {NAME:"Echoing Javelin",ILVL:70,PRICE:35000,CODE:"jav",jav:true,MAG:true,WEAPON:true,WP5:true,WP6:true,ID:true,TABSK34:3};
-//var compared_items = {};
+var itemToCompare = {NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true};
 var character = {CLVL:90,CHARSTAT14:100000,CHARSTAT15:100000,DIFFICULTY:2,ILVL:90,CHARSTAT70:0};
 var item_settings = {ID:false};
 var colors = {
@@ -30,7 +16,7 @@ var colors = {
 	Red:"#a94838"
 };
 
-// startup - 
+// startup - runs when the page loads
 // ---------------------------------
 function startup() {
 	loadItems()
@@ -41,7 +27,7 @@ function startup() {
 	document.getElementById("background_2").src = background
 }
 
-// loadItems - 
+// loadItems - adds equipment and other items to the item dropdown menu
 // ---------------------------------
 function loadItems() {
 	var choices = "<option>­ ­ ­ ­ Select Item</option>";
@@ -58,7 +44,7 @@ function loadItems() {
 	document.getElementById("dropdown_item").innerHTML = choices
 }
 
-// loadOptions - 
+// loadOptions - populates the dropdown menus (other than the item menu)
 // ---------------------------------
 function loadOptions() {
 	document.getElementById("dropdown_id").innerHTML = "<option>Id</option><option selected>Unid (if possible)</option>";
@@ -70,8 +56,8 @@ function loadOptions() {
 	document.getElementById("dropdown_ilvl").selectedIndex = character.ILVL
 }
 
-// setID - 
-//	value: 
+// setID - handles input from the ID dropdown menu
+//	value: 'Id' or 'Unid (if possible)'
 // ---------------------------------
 function setID(value) {
 	if (value == "Id") { item_settings.ID = true }
@@ -80,16 +66,16 @@ function setID(value) {
 	setItem(document.getElementById("dropdown_item").value )
 }
 
-// setCLVL - 
-//	value: 
+// setCLVL - handles input from the CLVL dropdown menu
+//	value: character's level (1-99)
 // ---------------------------------
 function setCLVL(value) {
 	character.CLVL = Number(value)
 	simulate()
 }
 
-// setILVL - 
-//	value: 
+// setILVL - handles input from the ILVL dropdown menu
+//	value: item's level (1-99)
 // ---------------------------------
 function setILVL(value) {
 	character.ILVL = Number(value)
@@ -99,8 +85,8 @@ function setILVL(value) {
 	setItem(document.getElementById("dropdown_item").value )
 }
 
-// setItem - 
-//	value: 
+// setItem - handles input from the item dropdown menu
+//	value: the item's name
 // ---------------------------------
 function setItem(value) {
 	if (value != "­ ­ ­ ­ Select Item") {
@@ -202,21 +188,21 @@ function setItem(value) {
 	}
 }
 
-// simulate - 
+// simulate - begins the filter simulation process
 // ---------------------------------
 function simulate() {
-		for (let num = 1; num <= 2; num++) { if (document.getElementById("filter_text_"+num).value != "") {
-			document.getElementById("output_"+num).innerHTML = ""
-			result = parseFile(document.getElementById("filter_text_"+num).value,num)
-			document.getElementById("output_"+num).innerHTML = result
-			var wid = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().width/2 - document.getElementById("output_"+num).getBoundingClientRect().width/2);
-			var hei = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().height/2 - document.getElementById("output_"+num).getBoundingClientRect().height/2);
-			document.getElementById("output_"+num).style.left = wid+"px"
-			document.getElementById("output_"+num).style.top = hei+"px"
-		} }
+	for (let num = 1; num <= 2; num++) { if (document.getElementById("filter_text_"+num).value != "") {
+		document.getElementById("output_"+num).innerHTML = ""
+		result = parseFile(document.getElementById("filter_text_"+num).value,num)
+		document.getElementById("output_"+num).innerHTML = result
+		var wid = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().width/2 - document.getElementById("output_"+num).getBoundingClientRect().width/2);
+		var hei = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().height/2 - document.getElementById("output_"+num).getBoundingClientRect().height/2);
+		document.getElementById("output_"+num).style.left = wid+"px"
+		document.getElementById("output_"+num).style.top = hei+"px"
+	} }
 }
 
-// loadFileAsText - 
+// loadFileAsText - loads text from a file
 // ---------------------------------
 function loadFileAsText(num) {
 	var fileToLoad = document.getElementById("fileToLoad_"+num).files[0];
@@ -230,8 +216,8 @@ function loadFileAsText(num) {
 	fileReader.readAsText(fileToLoad, "UTF-8");
 }
 
-// parseFile - 
-//	file: text from file
+// parseFile - parses the filter file line by line
+//	file: text of the filter
 //	num: filter number (1 or 2)
 // ---------------------------------
 function parseFile(file,num) {
@@ -360,8 +346,9 @@ function parseFile(file,num) {
 	return display
 }
 
-// getColor - 
-//	item: 
+// getColor - gets the default color for a given item
+//	item: the item being compared
+//	return: the item's default color
 // ---------------------------------
 function getColor(item) {
 	var color = "White";
@@ -378,8 +365,8 @@ function getColor(item) {
 	return colors[color]
 }
 
-// equipmentHover - shows equipment info on mouse-over
-//	group: equipment group name
+// equipmentHover - shows equipment info (on mouse-over)
+//	num: filter number (1 or 2)
 // ---------------------------------
 function equipmentHover(num) {
 	var name = document.getElementById("output_"+num).innerHTML;
@@ -424,7 +411,7 @@ function equipmentOut() {
 
 // getAffixLine - determines how an affix should be displayed
 //	affix: name of the affix
-// return: the formatted affix line and combined value of affixes used
+//	return: the formatted affix line and combined value of affixes used
 // ---------------------------------
 function getAffixLine(affix) {
 	var source = itemToCompare;

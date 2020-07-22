@@ -12,9 +12,9 @@
   position: absolute;
 }
 .no-selection {
-  -webkit-user-select: none; /* for safari & chrome browsers */
-  -moz-user-select: none; /* for mozilla browsers */
-  -ms-user-select: none; /* for IE10+ */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   background-color: black;
 }
 .dropdown select {

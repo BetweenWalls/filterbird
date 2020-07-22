@@ -15,8 +15,6 @@ var unequipped = {		strength:0, dexterity:0, vitality:0, energy:0, life:0, mana:
 /* misc			*/	bonus_corpse_explosion:0, phys_Lightning_Surge:0, extraValkyrie:0, extraGrizzly:0, extraFireGolem:0, extraHydra:0, radius_FreezingArrow:0, reset_cooldown_on_kill:0, cdr_on_striking:0, reanimate:0, 
 /* misc (non-item)	*/	flamme:0, ias_skill:0, ar_shrine_bonus:0, charge_ember:0, charge_thunder:0, charge_ice:0, skeleton_bonus:0, hammer_bonus:0, hammer_on_hit:0, redeem_chance:0, redeem_amount:0, absorb_elemental:0, absorb_melee:0, absorb_es_redirect:0, absorb_es_deplete:0, duration:0, radius:0, amountSummoned:0, enemy_damage:0, enemy_attack:0, enemy_physRes:0, enemy_allRes:0, fleeing:0, flee_distance:0, dimmedVision:0, confused:0, attraction:0, enemy_ias:0, enemy_frw:0, 
 
-/*   not used (yet?)	*///	energy_per_level:0, lAbsorb_flat_per_level:0, mAbsorb_flat_per_level:0, mAbsorb:0, lDamage_max_per_level:0, pDamage_max_per_level:0, e_damage_per_level:0, ar_vs_demons_per_level:0, stun_length:0, base:"", img:"", original_tier:0, 
-
 /* skill tabs		*/	skills_javelins:0, skills_passives:0, skills_bows:0, skills_martial:0, skills_shadow:0, skills_traps:0, skills_warcries:0, skills_masteries:0, skills_combat_barbarian:0, skills_elemental:0, skills_shapeshifting:0, skills_summoning_druid:0, skills_summoning_necromancer:0, skills_poisonBone:0, skills_curses:0, skills_offensive:0, skills_defensive:0, skills_combat_paladin:0, skills_cold:0, skills_lightning:0, skills_fire:0, skills_amazon:0, skills_assassin:0, skills_barbarian:0, skills_druid:0, skills_necromancer:0, skills_paladin:0, skills_sorceress:0, skills_fire_all:0, skills_cold_all:0, skills_poison_all:0,
 /* skills   amazon	*/	skill_Jab:0, skill_Power_Strike:0, skill_Poison_Javelin:0, skill_Fend:0, skill_Lightning_Bolt:0, skill_Charged_Strike:0, skill_Plague_Javelin:0, skill_Ground_Slam:0, skill_Lightning_Strike:0, skill_Lightning_Fury:0, skill_Inner_Sight:0, skill_Lethal_Strike:0, skill_Phase_Run:0, skill_Dodge:0, skill_Avoid:0, skill_Penetrate:0, skill_Evade:0, skill_Decoy:0, skill_Valkyrie:0, skill_Pierce:0, skill_Cold_Arrow:0, skill_Magic_Arrow:0, skill_Multiple_Shot:0, skill_Fire_Arrow:0, skill_Ice_Arrow:0, skill_Guided_Arrow:0, skill_Exploding_Arrow:0, skill_Strafe:0, skill_Immolation_Arrow:0, skill_Freezing_Arrow:0, 
 /* skills   assassin	*/	skill_Dual_Strike:0, skill_Fists_of_Ember:0, skill_Fists_of_Thunder:0, skill_Fists_of_Ice:0, skill_Static_Strike:0, skill_Dragon_Talon:0, skill_Emberstorm:0, skill_Dragon_Flight:0, skill_Blades_of_Ice:0, skill_Claw_Mastery:0, skill_Psychic_Hammer:0, skill_Burst_of_Speed:0, skill_Mind_Barrier:0, skill_Weapon_Block:0, skill_Cloak_of_Shadows:0, skill_Fade:0, skill_Shadow_Warrior:0, skill_Mind_Blast:0, skill_Venom:0, skill_Shadow_Master:0, skill_Fire_Blast:0, skill_Shock_Web:0, skill_Blade_Throw:0, skill_Charged_Bolt_Sentry:0, skill_Wake_of_Fire:0, skill_Blade_Fury:0, skill_Lightning_Sentry:0, skill_Wake_of_Inferno:0, skill_Death_Sentry:0, skill_Blade_Shield:0, skill_Dragon_Tail:0, 
@@ -343,9 +341,6 @@ var equipment = {
 	],
     weapon: [
 {name:"Weapon"},
-//	],
-//    weapon_special: [
-//{name:"Weapon (special)"},
 // Special
 {CODE:"hdm",always_id:true,name:"Horadric Malus", type:"hammer", req_strength:15, req_dexterity:15, special:1, damage_vs_undead:150, base_damage_min:6, base_damage_max:15, durability:83, max_sockets:2, img:"Horadric_Malus", tier:0},
 {CODE:"msf",always_id:true,name:"Staff of Kings", type:"staff", twoHanded:1, req_strength:25, special:1, damage_vs_undead:50, base_damage_min:10, base_damage_max:15, durability:0, ias:50, all_res:10, max_sockets:2, img:"Staff_of_Kings", tier:0},
@@ -355,9 +350,6 @@ var equipment = {
 {CODE:"qf2",always_id:true,name:"Khalim's Will", type:"mace", special:1, ias:50, ar:40, life_leech:6, mana_leech:6, damage_vs_undead:50, base_damage_min:1, base_damage_max:15, lDamage_min:1, lDamage_max:40, max_sockets:3, img:"Khalim's_Will", tier:0},
 {CODE:"hfh",always_id:true,name:"Hellforge Hammer", type:"hammer", special:1, defense:35, fRes:40, damage_vs_undead:50, base_damage_min:6, base_damage_max:15, durability:83, fDamage_min:5, fDamage_max:20, max_sockets:4, img:"Hellforge_Hammer", tier:0},
 {CODE:"leg",rarity:"common", name:"Wirt's Leg", type:"mace", special:2, damage_vs_undead:50, base_damage_min:2, base_damage_max:8, durability:0, max_sockets:3, sockets:3, img:"Wirt's_Leg"},
-//	],
-//    weapon_amazon: [
-//{name:"Weapon (amazon - all)"},
 // Amazon Weapons
 {only:"amazon", name:"Titan's Revenge", req_level:42, skills_javelins:2, skills_amazon:2, e_damage:200, damage_min:25, damage_max:50, life_leech:9, frw:30, strength:20, dexterity:20, autoreplenish:1, type:"javelin", base:"Ceremonial Javelin"},
 {only:"amazon", name:"Thunderstroke", req_level:69, skills_javelins:4, skill_Lightning_Bolt:3, e_damage:200, lDamage_min:1, lDamage_max:511, ias:15, enemy_lRes:-15, type:"javelin", base:"Matriarchal Javelin"},
@@ -378,9 +370,6 @@ var equipment = {
 {rarity:"common", name:"Grand Matron Bow", skills_bows:3, sockets:4, twoHanded:1, type:"bow", base:"Grand Matron Bow"},
 {rarity:"common", name:"Matriarchal Pike", skills_javelins:3, sockets:6, twoHanded:1, type:"spear", base:"Matriarchal Pike"},
 {rarity:"magic", only:"amazon", name:"Lancer's Javelin of Quickness", req_level:45, skills_javelins:6, ias:40, type:"javelin", base:"Maiden Javelin"},
-//	],
-//    weapon_assassin: [
-//{name:"Weapon (assassin - all)"},
 // Assassin Claw-Class Weapons
 {only:"assassin", name:"Bartuc's Cut-Throat", req_level:42, skills_assassin:2, skills_martial:1, e_damage:200, damage_min:25, damage_max:50, fhr:30, bonus_ar:20, life_leech:9, strength:20, dexterity:20, type:"claw", base:"Greater Talons"},
 {only:"assassin", name:"Jade Talon", type:"claw", req_level:66, skills_martial:2, skills_shadow:2, e_damage:240, fhr:30, mana_leech:15, all_res:50, base:"Wrist Sword"},
@@ -394,9 +383,6 @@ var equipment = {
 {only:"assassin", rarity:"magic", name:"Cunning Suwayyah of Evisceration", type:"claw", req_level:65, damage_max:63, skills_traps:3, skill_Wake_of_Fire:3, skill_Blade_Shield:3, skill_Lightning_Sentry:3, base:"Suwayyah"},
 {only:"assassin", rarity:"magic", name:"Shadow Claws of Simplicity", type:"claw", req_level:45, req:-30, skills_shadow:3, skill_Mind_Blast:3, skill_Venom:3, skill_Fade:3, base:"Greater Claws"},
 {only:"assassin", rarity:"rare", name:"Heavenly Suwayyah", req_level:48, ctc:[[10,1,"Amplify Damage","on striking"]], e_damage:450, ar:250, ar_per_level:16.5, max_damage_per_level:0.5, ias:40, req:-30, skill_Blade_Shield:3, skill_Blades_of_Ice:3, skill_Wake_of_Fire:3, type:"claw", base:"Suwayyah"},
-//	],
-//    weapon_sorceress: [
-//{name:"Weapon (sorceress - all)"},
 // Sorceress Orbs
 {only:"sorceress", name:"The Oculus", req_level:42, skills_sorceress:3, mana_per_kill:5, all_res:20, fcr:30, vitality:20, energy:20, defense_bonus:20, mf:50, type:"orb", base:"Swirling Crystal"},
 {only:"sorceress", name:"Eschuta's Temper", req_level:72, skills_sorceress:3, fcr:40, fDamage:20, lDamage:20, energy:30, type:"orb", base:"Eldritch Orb"},
@@ -406,9 +392,6 @@ var equipment = {
 {rarity:"common", name:"Dimensional Shard", life:60, skill_Cold_Mastery:3, skill_Shiver_Armor:3, skill_Energy_Shield:3, sockets:3, type:"orb", base:"Dimensional Shard"},
 {only:"sorceress", rarity:"magic", name:"Glacial Stone of the Magus", type:"orb", req_level:67, life:60, fcr:20, skills_cold:3, skill_Shiver_Armor:3, skill_Chilling_Armor:3, skill_Cold_Mastery:3, base:"Jared's Stone"},
 {only:"sorceress", rarity:"magic", name:"Powered Stone of the Magus", type:"orb", req_level:67, life:60, fcr:20, skills_lightning:3, skill_Energy_Shield:3, skill_Lightning_Mastery:3, skill_Nova:3, base:"Jared's Stone"},
-//	],
-//    weapon_staff: [
-//{name:"Weapon (staff)"},
 // Staves
 {name:"Bane Ash", req_level:5, e_damage:60, ias:20, mana:30, fRes:50, fDamage_min:4, fDamage_max:6, skill_Fire_Bolt:5, skill_Warmth:2, twoHanded:1, type:"staff", base:"Short Staff", img:"Bane_Ash"},
 {name:"Serpent Lord", req_level:9, e_damage:40, pDamage_all:12, pDamage_duration:3, mana_leech:100, target_defense:-50, mana:10, pRes:50, light_radius:-1, twoHanded:1, type:"staff", base:"Long Staff", img:"Serpent_Lord"},
@@ -422,9 +405,6 @@ var equipment = {
 {name:"Skull Collector", req_level:41, all_skills:2, mana_per_kill:20, max_mana:20, mf_per_level:1, twoHanded:1, type:"staff", base:"Rune Staff", img:"Skull_Collector"},
 {name:"Ondal's Wisdom", req_level:66, all_skills:4, fcr:45, defense:550, energy:50, mDamage_reduced:8, oskill_Ball_Lightning:20, type:"staff", twoHanded:1, base:"Elder Staff", pod_changes:1, img:"Spire_of_Lazarus"},
 {name:"Mang Song's Lesson", req_level:82, all_skills:5, fcr:30, enemy_lRes:-15, enemy_cRes:-15, enemy_fRes:-15, mana_regen:10, twoHanded:1, type:"staff", base:"Archon Staff", img:"Mang_Song's_Lesson"},
-//	],
-//    weapon_wand: [
-//{name:"Weapon (wand)"},
 // Wands
 {name:"Torch of Iro", req_level:5, skills_necromancer:1, fDamage_min:5, fDamage_max:9, energy:10, mana_regen:5, life_leech:6, light_radius:3, type:"wand", base:"Wand", img:"Torch_of_Iro"},
 {name:"Maelstrom", req_level:14, lDamage_min:1, lDamage_max:9, mana:13, fcr:30, lRes:40, skill_Iron_Maiden:3, skill_Amplify_Damage:3, skill_Terror:3, skill_Corpse_Explosion:3, type:"wand", base:"Yew Wand", img:"Maelstrom"},
@@ -436,9 +416,6 @@ var equipment = {
 {name:"Blackhand Key", req_level:41, skills_necromancer:2, skills_curses:1, damage_to_mana:20, fcr:30, fRes:37, life:50, light_radius:-2, type:"wand", base:"Grave Wand", img:"Blackhand_Key", cskill:[[13,"Grim Ward",30]]},
 {name:"Boneshade", req_level:79, skills_necromancer:2, skill_Bone_Spirit:2, skill_Bone_Spear:3, skill_Bone_Wall:3, skill_Bone_Armor:5, skill_Teeth:5, fcr:25, type:"wand", base:"Lich Wand", img:"Gravenspine"},
 {name:"Death's Web", req_level:66, all_skills:2, skills_poisonBone:2, enemy_pRes:-50, mana_per_kill:12, life_per_kill:12, type:"wand", base:"Unearthed Wand", img:"Death's_Web"},
-//	],
-//    weapon_scepter: [
-//{name:"Weapon (scepter)"},
 // Scepters
 {name:"Knell Striker", req_level:5, e_damage:80, cblow:25, ar:35, pRes:20, fRes:20, mana:15, type:"scepter", base:"Scepter"},
 {name:"Rusthandle", req_level:18, skills_paladin:1, e_damage:60, damage_vs_undead:60, damage_min:3, damage_max:7, life_leech:8, mDamage_reduced:1, skill_Precision:3, skill_Vengeance:3, type:"scepter", base:"Grand Scepter"},
