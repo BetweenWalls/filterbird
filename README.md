@@ -10,14 +10,15 @@ Path of Diablo Filter Simulation
 * Discover how many rules are processed to display different items
 
 ### Future Goals:
+* Allow multiple items to be viewed simultaneously
+* Create option to generate variety of different items so filters can be compared effectively with just a few clicks
+* Allow any number of filters to be compared simultaneously
 * Item Customization
   * change base item info
   * add/remove affixes
   * corrupt, socket, upgrade
-* Allow multiple items to be viewed simultaneously
-* Create option to generate variety of different items so filters can be compared effectively with just a few clicks
-* Allow any number of filters to be compared simultaneously
-* Make item tooltips better reflect in-game tooltips
+* Character Customization (only CLVL can be adjusted so far)
+* Make item tooltips better match in-game tooltips
 
 ### Feedback:
 [Reddit](https://www.reddit.com/r/pathofdiablo/comments/hstnii/filterbird_lootfilter_simulation_program/)
