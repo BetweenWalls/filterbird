@@ -1,0 +1,180 @@
+// Smooth Loot Filter 1.0.1 by *scroll
+
+// Relics
+
+ItemDisplay[ma4]: %PURPLE%Desecrated Temple Relic (T1)
+ItemDisplay[ma5]: %PURPLE%Frigid Plateau Relic (T2)
+ItemDisplay[ma6]: %PURPLE%Ruined Chapel Relic (T3)
+ItemDisplay[ma2]: %PURPLE%Forgotten Desert Relic (T4)
+
+
+// Essences
+
+ItemDisplay[tes]: %PURPLE%%NAME%
+ItemDisplay[ceh]: %PURPLE%%NAME%
+ItemDisplay[bet]: %PURPLE%%NAME%
+ItemDisplay[fed]: %PURPLE%%NAME%
+
+
+// Pandemonium Keys
+
+ItemDisplay[pk1]: %PURPLE%%NAME%
+ItemDisplay[pk2]: %PURPLE%%NAME%
+ItemDisplay[pk3]: %PURPLE%%NAME%
+ItemDisplay[cx7]: %PURPLE%Key of Chaos
+
+
+// Basic Items
+
+ItemDisplay[tsc]: %GRAY%TP
+ItemDisplay[isc]: %GRAY%ID
+
+ItemDisplay[tbk]: %GRAY%Tome of Town Portal
+ItemDisplay[ibk]: %GRAY%Tome of Identify
+
+ItemDisplay[key]: %GRAY%Key
+
+
+// Potions
+
+ItemDisplay[rvl]: %PURPLE%(%WHITE%Full%PURPLE%)
+ItemDisplay[rvs]: %PURPLE%(%WHITE%Rejuvenation%PURPLE%)
+
+ItemDisplay[mp1]: %BLUE%(%WHITE%Minor%BLUE%)
+ItemDisplay[mp2]: %BLUE%(%WHITE%Light%BLUE%)
+ItemDisplay[mp3]: %BLUE%(%WHITE%Mana%BLUE%)
+ItemDisplay[mp4]: %BLUE%(%WHITE%Greater%BLUE%)
+ItemDisplay[mp5]: %BLUE%(%WHITE%Super%BLUE%)
+
+ItemDisplay[hp1]: %RED%(%WHITE%Minor%RED%)
+ItemDisplay[hp2]: %RED%(%WHITE%Light%RED%)
+ItemDisplay[hp3]: %RED%(%WHITE%Healing%RED%)
+ItemDisplay[hp4]: %RED%(%WHITE%Greater%RED%)
+ItemDisplay[hp5]: %RED%(%WHITE%Super%RED%)
+
+ItemDisplay[vps]: %WHITE%(%WHITE%Stamina%WHITE%)
+ItemDisplay[yps]: %DGREEN%(%WHITE%Antidote%DGREEN%)
+ItemDisplay[wms]: %YELLOW%(%WHITE%Thawing%YELLOW%)
+
+ItemDisplay[opl]: %ORANGE%(%WHITE%Fulminating%ORANGE%)
+ItemDisplay[opm]: %ORANGE%(%WHITE%Exploding%ORANGE%)
+ItemDisplay[ops]: %ORANGE%(%WHITE%Oil%ORANGE%)
+
+ItemDisplay[gpl]: %GREEN%(%WHITE%Strangling Gas%GREEN%)
+ItemDisplay[gpm]: %GREEN%(%WHITE%Choking Gas%GREEN%)
+ItemDisplay[gps]: %GREEN%(%WHITE%Rancid Gas%GREEN%)
+
+
+// Magic Rings
+
+ItemDisplay[rin MAG]: %BLUE%%NAME% %WHITE%{%ILVL%}
+
+
+// Runes
+
+ItemDisplay[r01]: %ORANGE%El (1)
+ItemDisplay[r02]: %ORANGE%Eld (2)
+ItemDisplay[r03]: %ORANGE%Tir (3)
+ItemDisplay[r04]: %ORANGE%Nef (4)
+ItemDisplay[r05]: %ORANGE%Eth (5)
+ItemDisplay[r06]: %ORANGE%Ith (6)
+ItemDisplay[r07]: %ORANGE%Tal (7)
+ItemDisplay[r08]: %ORANGE%Ral (8)
+ItemDisplay[r09]: %ORANGE%Ort (9)
+ItemDisplay[r10]: %ORANGE%Thul (10)
+ItemDisplay[r11]: %ORANGE%Amn (11)
+ItemDisplay[r12]: %ORANGE%Sol (12)
+ItemDisplay[r13]: %ORANGE%Shael (13)
+ItemDisplay[r14]: %ORANGE%Dol (14)
+ItemDisplay[r15]: %ORANGE%Hel (15)
+ItemDisplay[r16]: %ORANGE%Io (16)
+ItemDisplay[r17]: %ORANGE%Lum (17)
+ItemDisplay[r18]: %ORANGE%Ko (18)
+ItemDisplay[r19]: %ORANGE%Fal (19)
+ItemDisplay[r20]: %ORANGE%Lem (20)
+ItemDisplay[r21]: %ORANGE%Pul (21)
+ItemDisplay[r22]: %ORANGE%Um (22)
+ItemDisplay[r23]: %ORANGE%Mal (23)
+ItemDisplay[r24]: %ORANGE%Ist (24)
+ItemDisplay[r25]: %ORANGE%Gul (25)
+ItemDisplay[r26]: %ORANGE%Vex (26)
+ItemDisplay[r27]: %ORANGE%Ohm (27)
+ItemDisplay[r28]: %ORANGE%Lo (28)
+ItemDisplay[r29]: %ORANGE%Sur (29)
+ItemDisplay[r30]: %ORANGE%Ber (30)
+ItemDisplay[r31]: %ORANGE%Jah (31)
+ItemDisplay[r32]: %ORANGE%Cham (32)
+ItemDisplay[r33]: %ORANGE%Zod (33)
+
+
+// Gems
+
+ItemDisplay[gcv]: %PURPLE%[%WHITE%Chipped Amethyst%PURPLE%]
+ItemDisplay[gfv]: %PURPLE%[%WHITE%Flawed Amethyst%PURPLE%]
+ItemDisplay[gsv]: %PURPLE%[%WHITE%Amethyst%PURPLE%]
+ItemDisplay[gzv]: %PURPLE%[%WHITE%Flawless Amethyst%PURPLE%]
+ItemDisplay[gpv]: %PURPLE%[%WHITE%Perfect Amethyst%PURPLE%]
+
+ItemDisplay[gcy]: %ORANGE%[%WHITE%Chipped Topaz%ORANGE%]
+ItemDisplay[gfy]: %ORANGE%[%WHITE%Flawed Topaz%ORANGE%]
+ItemDisplay[gsy]: %ORANGE%[%WHITE%Topaz%ORANGE%]
+ItemDisplay[gly]: %ORANGE%[%WHITE%Flawless Topaz%ORANGE%]
+ItemDisplay[gpy]: %ORANGE%[%WHITE%Perfect Topaz%ORANGE%]
+
+ItemDisplay[gcb]: %BLUE%[%WHITE%Chipped Sapphire%BLUE%]
+ItemDisplay[gfb]: %BLUE%[%WHITE%Flawed Sapphire%BLUE%]
+ItemDisplay[gsb]: %BLUE%[%WHITE%Sapphire%BLUE%]
+ItemDisplay[glb]: %BLUE%[%WHITE%Flawless Sapphire%BLUE%]
+ItemDisplay[gpb]: %BLUE%[%WHITE%Perfect Sapphire%BLUE%]
+
+ItemDisplay[gcg]: %GREEN%[%WHITE%Chipped Emerald%GREEN%]
+ItemDisplay[gfg]: %GREEN%[%WHITE%Flawed Emerald%GREEN%]
+ItemDisplay[gsg]: %GREEN%[%WHITE%Emerald%GREEN%]
+ItemDisplay[glg]: %GREEN%[%WHITE%Flawless Emerald%GREEN%]
+ItemDisplay[gpg]: %GREEN%[%WHITE%Perfect Emerald%GREEN%]
+
+ItemDisplay[gcr]: %RED%[%WHITE%Chipped Ruby%RED%]
+ItemDisplay[gfr]: %RED%[%WHITE%Flawed Ruby%RED%]
+ItemDisplay[gsr]: %RED%[%WHITE%Ruby%RED%]
+ItemDisplay[glr]: %RED%[%WHITE%Flawless Ruby%RED%]
+ItemDisplay[gpr]: %RED%[%WHITE%Perfect Ruby%RED%]
+
+ItemDisplay[gcw]: %WHITE%[%WHITE%Chipped Diamond%WHITE%]
+ItemDisplay[gfw]: %WHITE%[%WHITE%Flawed Diamond%WHITE%]
+ItemDisplay[gsw]: %WHITE%[%WHITE%Diamond%WHITE%]
+ItemDisplay[glw]: %WHITE%[%WHITE%Flawless Diamond%WHITE%]
+ItemDisplay[gpw]: %WHITE%[%WHITE%Perfect Diamond%WHITE%]
+
+ItemDisplay[skc]: %TAN%[%WHITE%Chipped Skull%TAN%]
+ItemDisplay[skf]: %TAN%[%WHITE%Flawed Skull%TAN%]
+ItemDisplay[sku]: %TAN%[%WHITE%Skull%TAN%]
+ItemDisplay[skl]: %TAN%[%WHITE%Flawless Skull%TAN%]
+ItemDisplay[skz]: %TAN%[%WHITE%Perfect Skull%TAN%]
+
+
+// Socketed and Ethereal
+
+ItemDisplay[ETH RW (SOCK>0)]: %GOLD%%NAME% %GRAY%[%SOCKETS%]%YELLOW%#
+ItemDisplay[ETH UNI (SOCK>0)]: %GOLD%%NAME% %GRAY%[%SOCKETS%]%YELLOW%#
+ItemDisplay[ETH SET (SOCK>0)]: %GOLD%%NAME% %GRAY%[%SOCKETS%]%YELLOW%#
+ItemDisplay[ETH RARE (SOCK>0)]: %YELLOW%%NAME% %GRAY%[%SOCKETS%]%YELLOW%#
+ItemDisplay[ETH MAG (SOCK>0)]: %BLUE%%NAME% %GRAY%[%SOCKETS%]%YELLOW%#
+ItemDisplay[ETH NMAG (SOCK>0)]: %WHITE%%NAME% %GRAY%[%SOCKETS%]%YELLOW%#
+
+// Socketed Items
+
+
+ItemDisplay[NMAG (SOCK>0)]: %WHITE%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[MAG (SOCK>0)]: %BLUE%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[RARE (SOCK>0)]: %YELLOW%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[SET (SOCK>0)]:  %GREEN%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[UNI (SOCK>0)]: %GOLD%%NAME% %GRAY%[%SOCKETS%]
+
+// Ethereal
+
+ItemDisplay[ETH RW]: %GOLD%%NAME% %YELLOW%#
+ItemDisplay[ETH UNI]: %GOLD%%NAME% %YELLOW%#
+ItemDisplay[ETH SET]: %GREEN%%NAME% %YELLOW%#
+ItemDisplay[ETH RARE]: %YELLOW%%NAME% %YELLOW%#
+ItemDisplay[ETH MAG]: %BLUE%%NAME% %YELLOW%#
+ItemDisplay[ETH NMAG]: %WHITE%%NAME% %YELLOW%#

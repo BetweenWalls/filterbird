@@ -1,0 +1,303 @@
+// lordbean's loot filter based on Smooth Loot Filter 1.0.1 by *scroll with inspirations from other filters
+
+// Autopass - items that shouldn't filter through more rules
+
+ItemDisplay[pk1]: %NAME%
+ItemDisplay[pk2]: %NAME%
+ItemDisplay[pk3]: %NAME%
+ItemDisplay[dhn]: %NAME%
+ItemDisplay[bey]: %NAME%
+ItemDisplay[mbr]: %NAME%
+ItemDisplay[toa]: %NAME%
+ItemDisplay[tes]: %NAME%
+ItemDisplay[ceh]: %NAME%
+ItemDisplay[bet]: %NAME%
+ItemDisplay[fed]: %NAME%
+ItemDisplay[std]: %NAME%
+ItemDisplay[cx5]: %NAME%
+ItemDisplay[cm4]: %NAME%
+ItemDisplay[ma1]: %NAME%
+ItemDisplay[ma2]: %NAME%
+ItemDisplay[ma3]: %NAME%
+ItemDisplay[ma4]: %NAME%
+ItemDisplay[ma5]: %NAME%
+ItemDisplay[ma6]: %NAME%
+ItemDisplay[cx6]: %NAME%
+ItemDisplay[cx7]: %NAME%
+ItemDisplay[cx8]: %NAME%
+
+
+// Money Piles
+// Less than 100, always disabled. Somewhat larger piles get hidden as toon gets higher
+
+ItemDisplay[GOLD<100]:
+ItemDisplay[GOLD<300 CLVL>15]:
+ItemDisplay[GOLD<800 CLVL>30]:
+ItemDisplay[GOLD<1500 CLVL>50]:
+ItemDisplay[GOLD<3000 CLVL>75]:
+
+// Basic Items
+
+ItemDisplay[tsc CLVL<15]: %GRAY%[%BLUE%tp%GRAY%]%DGREEN%
+ItemDisplay[tsc]:
+ItemDisplay[isc CLVL<15]: %GRAY%[%RED%id%GRAY%]%DGREEN%
+ItemDisplay[isc]:
+
+ItemDisplay[tbk]: %GRAY%[%BLUE%tome%GRAY%]%DGREEN%
+ItemDisplay[ibk]: %GRAY%[%RED%tome%GRAY%]%DGREEN%
+
+ItemDisplay[key]: %GRAY%[%WHITE%key%GRAY%]%DGREEN%
+
+// Potions
+
+ItemDisplay[rvl]: %GRAY%[%PURPLE%====%GRAY%]%DGREEN%
+ItemDisplay[rvs]: %GRAY%[%PURPLE%==%BLACK%--%GRAY%]%DGREEN%
+
+ItemDisplay[mp1 CLVL<12]: %GRAY%[%BLUE%-%BLACK%--%GRAY%]%DGREEN%
+ItemDisplay[mp1]:
+ItemDisplay[mp2 CLVL<24]: %GRAY%[%BLUE%=%BLACK%--%GRAY%]%DGREEN%
+ItemDisplay[mp2]:
+ItemDisplay[mp3 CLVL<36]: %GRAY%[%BLUE%=-%BLACK%-%GRAY%]%DGREEN%
+ItemDisplay[mp3]:
+ItemDisplay[mp4 CLVL<60]: %GRAY%[%BLUE%==%BLACK%-%GRAY%]%DGREEN%
+ItemDisplay[mp4]:
+ItemDisplay[mp5]: %GRAY%[%BLUE%===%GRAY%]%DGREEN%
+
+ItemDisplay[hp1 CLVL<12]: %GRAY%[%RED%-%BLACK%--%GRAY%]%DGREEN%
+ItemDisplay[hp1]:
+ItemDisplay[hp2 CLVL<24]: %GRAY%[%RED%=%BLACK%--%GRAY%]%DGREEN%
+ItemDisplay[hp2]:
+ItemDisplay[hp3 CLVL<36]: %GRAY%[%RED%=-%BLACK%-%GRAY%]%DGREEN%
+ItemDisplay[hp3]:
+ItemDisplay[hp4 CLVL<60]: %GRAY%[%RED%==%BLACK%-%GRAY%]%DGREEN%
+ItemDisplay[hp4]:
+ItemDisplay[hp5]: %GRAY%[%RED%===%GRAY%]%DGREEN%
+
+ItemDisplay[vps CLVL<50]: %GRAY%[%WHITE%stam%GRAY%]%DGREEN%
+ItemDisplay[vps]:
+ItemDisplay[yps DIFFICULTY=0 CHARSTAT45<75]: %GRAY%[%DGREEN%anti%GRAY%]%DGREEN%
+ItemDisplay[yps DIFFICULTY=1 CHARSTAT45<115]: %GRAY%[%DGREEN%anti%GRAY%]%DGREEN%
+ItemDisplay[yps DIFFICULTY=2 CHARSTAT45<175]: %GRAY%[%DGREEN%anti%GRAY%]%DGREEN%
+ItemDisplay[yps]:
+ItemDisplay[wms DIFFICULTY=0 CHARSTAT43<75]: %GRAY%[%YELLOW%thaw%GRAY%]%DGREEN%
+ItemDisplay[wms DIFFICULTY=1 CHARSTAT43<115]: %GRAY%[%YELLOW%thaw%GRAY%]%DGREEN%
+ItemDisplay[wms DIFFICULTY=2 CHARSTAT43<175]: %GRAY%[%YELLOW%thaw%GRAY%]%DGREEN%
+ItemDisplay[wms]:
+
+ItemDisplay[opl CLVL<8]: %GRAY%[%ORANGE%=%BLACK%--%GRAY%]%DGREEN%
+ItemDisplay[opl]:
+ItemDisplay[opm CLVL<20]: %GRAY%[%ORANGE%==%BLACK%-%GRAY%]%DGREEN%
+ItemDisplay[opm]:
+ItemDisplay[ops CLVL<40]: %GRAY%[%ORANGE%===%GRAY%]%DGREEN%
+ItemDisplay[ops]:
+
+ItemDisplay[gpl CLVL<8]: %GRAY%[%GREEN%=%BLACK%--%GRAY%]%DGREEN%
+ItemDisplay[gpl]:
+ItemDisplay[gpm CLVL<20]: %GRAY%[%GREEN%==%BLACK%-%GRAY%]%DGREEN%
+ItemDisplay[gpm]:
+ItemDisplay[gps CLVL<40]: %GRAY%[%GREEN%===%GRAY%]%DGREEN%
+ItemDisplay[gps]:
+
+// Always hide low-quality items and normal items with exactly one socket
+
+ItemDisplay[WEAPON INF]:
+ItemDisplay[ARMOR INF]:
+ItemDisplay[SOCK=1 NMAG !leg]:
+
+// Hide items that aren't interesting after passing the point where they might be useful
+// Generalized rules for hiding out-of-date non-magic and magic items have wirt's leg and circlets as exclusions
+
+ItemDisplay[EQ4 NORM NMAG DIFFICULTY>0]:
+ItemDisplay[EQ5 NORM NMAG DIFFICULTY>0]:
+ItemDisplay[EQ6 NORM NMAG DIFFICULTY>0]:
+ItemDisplay[WP5 NORM NMAG DIFFICULTY>0]:
+ItemDisplay[WP6 NORM NMAG DIFFICULTY>0]:
+ItemDisplay[EQ4 EXC NMAG DIFFICULTY>1]:
+ItemDisplay[EQ5 EXC NMAG DIFFICULTY>1]:
+ItemDisplay[EQ6 EXC NMAG DIFFICULTY>1]:
+ItemDisplay[WP5 EXC NMAG DIFFICULTY>1]:
+ItemDisplay[WP6 EXC NMAG DIFFICULTY>1]:
+ItemDisplay[aq2 (NMAG OR MAG) DIFFICULTY>0]:
+ItemDisplay[cq2 (NMAG OR MAG) DIFFICULTY>0]:
+ItemDisplay[NORM MAG !ID DIFFICULTY>0 !EQ7]:
+ItemDisplay[EXC MAG !ID DIFFICULTY>1 !EQ7]:
+ItemDisplay[NORM NMAG SOCK=0 DIFFICULTY>0 !ETH !leg !EQ7]:
+ItemDisplay[EXC NMAG SOCK=0 DIFFICULTY>1 !ETH !leg !EQ7]:
+
+// Magic Rings, Amulets - add ilvl when high clvl - only when identified
+
+ItemDisplay[rin MAG CLVL>85 ID]: %BLUE%%NAME% %WHITE%(L%GREEN%%ILVL%%WHITE%)%DGREEN%
+ItemDisplay[amu MAG CLVL>85 ID]: %BLUE%%NAME% %WHITE%(L%GREEN%%ILVL%%WHITE%)%DGREEN%
+
+// Jewels - for consistency with other socketables + visibility help on the ground
+
+ItemDisplay[jew MAG !ID]: %ORANGE%[%BLUE%%NAME%%ORANGE%]%DGREEN%
+ItemDisplay[jew RARE !ID]: %RED%{%ORANGE%[%YELLOW%%NAME%%ORANGE%]%RED%}%DGREEN%
+ItemDisplay[jew UNI !ID]: %RED%{%ORANGE%[%GOLD%%NAME%%ORANGE%]%RED%}%DGREEN%
+
+// Charms - visibility increase, show level on 50+ charms
+
+ItemDisplay[cm1 MAG !ID]: %RED%{%BLUE%%NAME%%RED%}%DGREEN%
+ItemDisplay[cm1 UNI !ID]: %RED%{%GOLD%%NAME%%RED%}%DGREEN%
+ItemDisplay[cm2 MAG !ID]: %RED%{%BLUE%%NAME%%RED%}%DGREEN%
+ItemDisplay[cm2 UNI !ID]: %RED%{%GOLD%%NAME%%RED%}%DGREEN%
+ItemDisplay[cm3 MAG !ID]: %RED%{%BLUE%%NAME%%RED%}%DGREEN%
+ItemDisplay[cm3 UNI !ID]: %RED%{%GOLD%%NAME%%RED%}%DGREEN%
+ItemDisplay[cm3 MAG ID ILVL>90]: %BLUE%%NAME% %WHITE%(L%RED%%ILVL%%WHITE%)%DGREEN%
+ItemDisplay[cm3 MAG ID ILVL>76]: %BLUE%%NAME% %WHITE%(L%YELLOW%%ILVL%%WHITE%)%DGREEN%
+ItemDisplay[cm3 MAG ID ILVL>60]: %BLUE%%NAME% %WHITE%(L%DGREEN%%ILVL%%WHITE%)%DGREEN%
+ItemDisplay[cm3 MAG ID ILVL>49]: %BLUE%%NAME% %WHITE%(L%GRAY%%ILVL%%WHITE%)%DGREEN%
+
+// Runes
+
+ItemDisplay[r01]: %ORANGE%Rune %ORANGE%[%WHITE%El%ORANGE%]%DGREEN%
+ItemDisplay[r02]: %ORANGE%Rune %ORANGE%[%WHITE%Eld%ORANGE%]%DGREEN%
+ItemDisplay[r03]: %ORANGE%Rune %ORANGE%[%WHITE%Tir%ORANGE%]%DGREEN%
+ItemDisplay[r04]: %ORANGE%Rune %ORANGE%[%WHITE%Nef%ORANGE%]%DGREEN%
+ItemDisplay[r05]: %ORANGE%Rune %ORANGE%[%WHITE%Eth%ORANGE%]%DGREEN%
+ItemDisplay[r06]: %ORANGE%Rune %ORANGE%[%WHITE%Ith%ORANGE%]%DGREEN%
+ItemDisplay[r07]: %ORANGE%Rune %ORANGE%[%GREEN%Tal%ORANGE%]%DGREEN%
+ItemDisplay[r08]: %ORANGE%Rune %ORANGE%[%GREEN%Ral%ORANGE%]%DGREEN%
+ItemDisplay[r09]: %ORANGE%Rune %ORANGE%[%GREEN%Ort%ORANGE%]%DGREEN%
+ItemDisplay[r10]: %ORANGE%Rune %ORANGE%[%GREEN%Thul%ORANGE%]%DGREEN%
+ItemDisplay[r11]: %ORANGE%Rune %ORANGE%[%GREEN%Amn%ORANGE%]%DGREEN%
+ItemDisplay[r12]: %ORANGE%Rune %ORANGE%[%GREEN%Sol%ORANGE%]%DGREEN%
+ItemDisplay[r13]: %ORANGE%Rune %ORANGE%[%GREEN%Shael%ORANGE%]%DGREEN%
+ItemDisplay[r14]: %ORANGE%Rune %ORANGE%[%BLUE%Dol%ORANGE%]%DGREEN%
+ItemDisplay[r15]: %ORANGE%Rune %ORANGE%[%BLUE%Hel%ORANGE%]%DGREEN%
+ItemDisplay[r16]: %ORANGE%Rune %ORANGE%[%BLUE%Io%ORANGE%]%DGREEN%
+ItemDisplay[r17]: %ORANGE%Rune %ORANGE%[%BLUE%Lum%ORANGE%]%DGREEN%
+ItemDisplay[r18]: %ORANGE%Rune %ORANGE%[%BLUE%Ko%ORANGE%]%DGREEN%
+ItemDisplay[r19]: %ORANGE%Rune %ORANGE%[%BLUE%Fal%ORANGE%]%DGREEN%
+ItemDisplay[r20]: %ORANGE%Rune %ORANGE%[%YELLOW%Lem%ORANGE%]%DGREEN%
+ItemDisplay[r21]: %ORANGE%Rune %ORANGE%[%YELLOW%Pul%ORANGE%]%DGREEN%
+ItemDisplay[r22]: %ORANGE%Rune %ORANGE%[%YELLOW%Um%ORANGE%]%DGREEN%
+ItemDisplay[r23]: %ORANGE%Rune %ORANGE%[%YELLOW%Mal%ORANGE%]%DGREEN%
+ItemDisplay[r24]: %ORANGE%Rune %ORANGE%[%YELLOW%Ist%ORANGE%]%DGREEN%
+ItemDisplay[r25]: %ORANGE%Rune %ORANGE%[%YELLOW%Gul%ORANGE%]%DGREEN%
+ItemDisplay[r26]: %ORANGE%Rune %ORANGE%[%GOLD%Vex%ORANGE%]%DGREEN%
+ItemDisplay[r27]: %ORANGE%Rune %ORANGE%[%GOLD%Ohm%ORANGE%]%DGREEN%
+ItemDisplay[r28]: %ORANGE%Rune %ORANGE%[%GOLD%Lo%ORANGE%]%DGREEN%
+ItemDisplay[r29]: %ORANGE%Rune %ORANGE%[%GOLD%Sur%ORANGE%]%DGREEN%
+ItemDisplay[r30]: %ORANGE%Rune %ORANGE%[%RED%Ber%ORANGE%]%DGREEN%
+ItemDisplay[r31]: %ORANGE%Rune %ORANGE%[%RED%Jah%ORANGE%]%DGREEN%
+ItemDisplay[r32]: %ORANGE%Rune %ORANGE%[%RED%Cham%ORANGE%]%DGREEN%
+ItemDisplay[r33]: %ORANGE%Rune %ORANGE%[%RED%Zod%ORANGE%]%DGREEN%
+
+
+// Gems
+
+ItemDisplay[gcv DIFFICULTY=0]: %ORANGE%gem [%PURPLE%chipped%ORANGE%]%DGREEN%
+ItemDisplay[gfv DIFFICULTY=0]: %ORANGE%gem [%PURPLE%flawed%ORANGE%]%DGREEN%
+ItemDisplay[gsv DIFFICULTY<2]: %ORANGE%gem [%PURPLE%common%ORANGE%]%DGREEN%
+ItemDisplay[gzv]: %ORANGE%gem [%PURPLE%flawless%ORANGE%]%DGREEN%
+ItemDisplay[gpv]: %ORANGE%gem [%PURPLE%perfect%ORANGE%]%DGREEN%
+
+ItemDisplay[gcv]:
+ItemDisplay[gfv]:
+ItemDisplay[gsv]:
+
+ItemDisplay[gcy DIFFICULTY=0]: %ORANGE%gem [%YELLOW%chipped%ORANGE%]%DGREEN%
+ItemDisplay[gfy DIFFICULTY=0]: %ORANGE%gem [%YELLOW%flawed%ORANGE%]%DGREEN%
+ItemDisplay[gsy DIFFICULTY<2]: %ORANGE%gem [%YELLOW%common%ORANGE%]%DGREEN%
+ItemDisplay[gly]: %ORANGE%gem [%YELLOW%flawless%ORANGE%]%DGREEN%
+ItemDisplay[gpy]: %ORANGE%gem [%YELLOW%perfect%ORANGE%]%DGREEN%
+
+ItemDisplay[gcy]:
+ItemDisplay[gfy]:
+ItemDisplay[gsy]:
+
+ItemDisplay[gcb DIFFICULTY=0]: %ORANGE%gem [%BLUE%chipped%ORANGE%]%DGREEN%
+ItemDisplay[gfb DIFFICULTY=0]: %ORANGE%gem [%BLUE%flawed%ORANGE%]%DGREEN%
+ItemDisplay[gsb DIFFICULTY<2]: %ORANGE%gem [%BLUE%common%ORANGE%]%DGREEN%
+ItemDisplay[glb]: %ORANGE%gem [%BLUE%flawless%ORANGE%]%DGREEN%
+ItemDisplay[gpb]: %ORANGE%gem [%BLUE%perfect%ORANGE%]%DGREEN%
+
+ItemDisplay[gcb]:
+ItemDisplay[gfb]:
+ItemDisplay[gsb]:
+
+ItemDisplay[gcg DIFFICULTY=0]: %ORANGE%gem [%GREEN%chipped%ORANGE%]%DGREEN%
+ItemDisplay[gfg DIFFICULTY=0]: %ORANGE%gem [%GREEN%flawed%ORANGE%]%DGREEN%
+ItemDisplay[gsg DIFFICULTY<2]: %ORANGE%gem [%GREEN%common%ORANGE%]%DGREEN%
+ItemDisplay[glg]: %ORANGE%gem [%GREEN%flawless%ORANGE%]%DGREEN%
+ItemDisplay[gpg]: %ORANGE%gem [%GREEN%perfect%ORANGE%]%DGREEN%
+
+ItemDisplay[gcg]:
+ItemDisplay[gfg]:
+ItemDisplay[gsg]:
+
+ItemDisplay[gcr DIFFICULTY=0]: %ORANGE%gem [%RED%chipped%ORANGE%]%DGREEN%
+ItemDisplay[gfr DIFFICULTY=0]: %ORANGE%gem [%RED%flawed%ORANGE%]%DGREEN%
+ItemDisplay[gsr DIFFICULTY<2]: %ORANGE%gem [%RED%common%ORANGE%]%DGREEN%
+ItemDisplay[glr]: %ORANGE%gem [%RED%flawless%ORANGE%]%DGREEN%
+ItemDisplay[gpr]: %ORANGE%gem [%RED%perfect%ORANGE%]%DGREEN%
+
+ItemDisplay[gcr]:
+ItemDisplay[gfr]:
+ItemDisplay[gsr]:
+
+ItemDisplay[gcw DIFFICULTY=0]: %ORANGE%gem [%WHITE%chipped%ORANGE%]%DGREEN%
+ItemDisplay[gfw DIFFICULTY=0]: %ORANGE%gem [%WHITE%flawed%ORANGE%]%DGREEN%
+ItemDisplay[gsw DIFFICULTY<2]: %ORANGE%gem [%WHITE%common%ORANGE%]%DGREEN%
+ItemDisplay[glw]: %ORANGE%gem [%WHITE%flawless%ORANGE%]%DGREEN%
+ItemDisplay[gpw]: %ORANGE%gem [%WHITE%perfect%ORANGE%]%DGREEN%
+
+ItemDisplay[gcw]:
+ItemDisplay[gfw]:
+ItemDisplay[gsw]:
+
+ItemDisplay[skc DIFFICULTY=0]: %ORANGE%gem [%TAN%chipped%ORANGE%]%DGREEN%
+ItemDisplay[skf DIFFICULTY=0]: %ORANGE%gem [%TAN%flawed%ORANGE%]%DGREEN%
+ItemDisplay[sku DIFFICULTY<2]: %ORANGE%gem [%TAN%common%ORANGE%]%DGREEN%
+ItemDisplay[skl]: %ORANGE%gem [%TAN%flawless%ORANGE%]%DGREEN%
+ItemDisplay[skz]: %ORANGE%gem [%TAN%perfect%ORANGE%]%DGREEN%
+
+ItemDisplay[skc]:
+ItemDisplay[skf]:
+ItemDisplay[sku]:
+
+// May or may not be an easter egg
+
+ItemDisplay[box]: %GOLD%Place %ORANGE%Cats %GOLD%Here
+ItemDisplay[leg SOCK>0]: %RED%Dead Cat%DGREEN%
+ItemDisplay[leg]: %GREEN%Cat%DGREEN%
+
+// Unid rare rings + amulets, all unid set and unique items - visibility help
+
+ItemDisplay[UNI !ID]: %RED%{%GOLD%%NAME%%RED%}%DGREEN%
+ItemDisplay[SET !ID]: %RED%{%GREEN%%NAME%%RED%}%DGREEN%
+ItemDisplay[UNI !ID ETH]: %RED%{%GRAY%eth %GOLD%%NAME%%RED%}%DGREEN%
+ItemDisplay[SET !ID ETH]: %RED%{%GRAY%eth %GREEN%%NAME%%RED%}%DGREEN%
+ItemDisplay[RARE !ID (rin OR amu)]: %RED%{%YELLOW%%NAME%%RED%}%DGREEN%
+
+// Socketed and Ethereal
+
+ItemDisplay[ETH RW]: %GRAY%%NAME%%DGREEN%
+ItemDisplay[ETH UNI (SOCK>0)]: %GOLD%(%ORANGE%%SOCKETS%%GOLD%) %GRAY%eth %GOLD%%NAME%%DGREEN%
+ItemDisplay[ETH SET (SOCK>0)]: %GREEN%(%ORANGE%%SOCKETS%%GREEN%) %GRAY%eth %GREEN%%NAME%%DGREEN%
+ItemDisplay[ETH RARE (SOCK>0)]: %YELLOW%(%ORANGE%%SOCKETS%%YELLOW%) %GRAY%eth %YELLOW%%NAME%%DGREEN%
+ItemDisplay[ETH MAG (SOCK>0)]: %BLUE%(%ORANGE%%SOCKETS%%BLUE%) %GRAY%eth %BLUE%%NAME%%DGREEN%
+ItemDisplay[ETH NMAG (SOCK>0)]: %GRAY%(%ORANGE%%SOCKETS%%GRAY%) %GRAY%%NAME%%DGREEN%
+
+// Socketed Items
+
+ItemDisplay[RW]: %WHITE%%NAME%%DGREEN%
+ItemDisplay[NMAG (SOCK>0)]: %WHITE%(%ORANGE%%SOCKETS%%WHITE%) %WHITE%%NAME%%DGREEN%
+ItemDisplay[MAG (SOCK>0)]: %BLUE%(%ORANGE%%SOCKETS%%BLUE%) %BLUE%%NAME%%DGREEN%
+ItemDisplay[RARE (SOCK>0)]: %YELLOW%(%ORANGE%%SOCKETS%%YELLOW%) %YELLOW%%NAME%%DGREEN%
+ItemDisplay[SET (SOCK>0)]:  %GREEN%(%ORANGE%%SOCKETS%%GREEN%) %GREEN%%NAME%%DGREEN%
+ItemDisplay[UNI (SOCK>0)]: %GOLD%(%ORANGE%%SOCKETS%%GOLD%) %GOLD%%NAME%%DGREEN%
+
+// Ethereal
+
+ItemDisplay[ETH UNI]: %GRAY%eth %GOLD%%NAME%%DGREEN%
+ItemDisplay[ETH SET]: %GRAY%eth %GREEN%%NAME%%DGREEN%
+ItemDisplay[ETH RARE]: %GRAY%eth %YELLOW%%NAME%%DGREEN%
+ItemDisplay[ETH MAG]: %GRAY%eth %BLUE%%NAME%%DGREEN%
+ItemDisplay[ETH NMAG]: %GRAY%%NAME%%DGREEN%
+
+
+// Catch-all for anything remaining to override the "Sell price:" line - the game uses the last color that was set in the name (this rule needs to stay at the bottom!)
+
+ItemDisplay[]: %NAME%%DGREEN%

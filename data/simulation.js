@@ -244,6 +244,7 @@ function parseFile(file,num) {
 			var rulesub = rule.substr(0,index)+rule.substr(index+12);
 			var conditions = rulesub.split("]:")[0];
 			var output = rulesub.split("]:")[1];
+			if (conditions[conditions.length-1] == " ") { conditions = conditions.substr(0,conditions.length-1) }
 			if (index_end > index+12) {
 				var cond_format = conditions.split("  ").join(" ").split("(").join(",(,").split(")").join(",),").split("!").join(",!,").split("<=").join(",≤,").split(">=").join(",≥,").split(">").join(",>,").split("<").join(",<,").split("=").join(",=,").split(" AND ").join(" ").split(" OR ").join(",|,").split("+").join(",+,").split(" ").join(",&,").split(",,").join(",");
 				var cond_list = cond_format.split(",");

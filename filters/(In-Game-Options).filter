@@ -1,0 +1,54 @@
+// In-Game-Options (recreated as filter rules)
+
+// Shorten Names
+ItemDisplay[hp1]:	%RED%**%WHITE%Min Heal
+ItemDisplay[mp1]:	%BLUE%**%WHITE%Min Mana
+ItemDisplay[hp2]:	%RED%**%WHITE%Lt Heal
+ItemDisplay[mp2]:	%BLUE%**%WHITE%Lt Mana
+ItemDisplay[hp3]:	%RED%**%WHITE%Heal
+ItemDisplay[mp3]:	%BLUE%**%WHITE%Mana
+ItemDisplay[hp4]:	%RED%**%WHITE%Gt Heal
+ItemDisplay[mp4]:	%BLUE%**%WHITE%Gt Mana
+ItemDisplay[hp5]:	%RED%**%WHITE%Sup Heal
+ItemDisplay[mp5]:	%BLUE%**%WHITE%Sup Mana
+ItemDisplay[rvs]:	%PURPLE%**%WHITE%Rejuv
+ItemDisplay[rvl]:	%PURPLE%**%WHITE%Full
+ItemDisplay[yps]:	Anti
+ItemDisplay[wms]:	Thaw
+ItemDisplay[vps]:	Stam
+ItemDisplay[opl]:	Fulm
+ItemDisplay[opm]:	Expl
+ItemDisplay[ops]:	Oil
+ItemDisplay[gpl]:	Stra
+ItemDisplay[gpm]:	Chok
+ItemDisplay[gps]:	Ranc
+ItemDisplay[tsc]:	%GREEN%**%WHITE%TP
+ItemDisplay[isc]:	%GREEN%**%WHITE%ID
+
+// Show Sockets
+ItemDisplay[SOCK>0]: %NAME%(%SOCKETS%)%CONTINUE%
+
+// Alt Style
+// replaces "Show Ethereal", "Show iLvl", "Show Rune #"
+ItemDisplay[ETH]: Eth %NAME%%CONTINUE%
+ItemDisplay[ILVL>1]: %NAME% L%ILVL%
+ItemDisplay[RUNENAME>0]: %RUNENUM% - %NAME%%CONTINUE%
+
+// Show Ethereal
+/ItemDisplay[ETH]: %NAME%(Eth)%CONTINUE%
+
+// Show iLvl
+/ItemDisplay[ILVL>0]: %NAME%(L%ILVL%)%CONTINUE%
+
+// Show Rune #
+/ItemDisplay[RUNENAME>0]: [%RUNENUM%]%NAME%%CONTINUE%
+
+// Color Mod
+ItemDisplay[RUNENAME>0 RUNENAME<10]: %WHITE%%NAME%
+ItemDisplay[RUNENAME>9 RUNENAME<17]: %GOLD%%NAME%
+ItemDisplay[RUNENAME>16 RUNENAME<11]: %ORANGE%%NAME%
+ItemDisplay[RUNENAME>22]: %RED%%NAME%
+
+
+// Default
+ItemDisplay[]: %NAME%
