@@ -162,8 +162,8 @@ ItemDisplay[r31]:	                %NAME%                		// Jah
 // Collective Rules
 ItemDisplay[RUNE>0 RUNE<15]:	%NAME%
 ItemDisplay[RUNE>14 RUNE<20]:	 %NAME% 	
-ItemDisplay[r20 OR r21]:		  %NAME%  	
-ItemDisplay[r22 OR r23]:		   %NAME%   	
+ItemDisplay[r20 OR r21]:	  %NAME%  	
+ItemDisplay[r22 OR r23]:	   %NAME%   	
 
 
 // ┌─────────────────┐

@@ -1,6 +1,6 @@
 /⃓═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 /	"Journey" Item Filter for Diablo II: Path of Diablo  (streamlined)
-/		Date Updated:	21 JULY 2020
+/		Date Updated:	24 JULY 2020
 /		Info:		https://github.com/BetweenWalls/Journey/tree/streamlined
 /
 /		Direct URL:	https://raw.githubusercontent.com/BetweenWalls/Journey/streamlined/item.filter
@@ -11,6 +11,7 @@
 /	This file was created in Notepad++, and may display incorrectly with other programs or settings  (8-space tabs, UTF-8 encoding, Courier New, no line wrapping)
 /	"Regular": non-magic  (white/gray items)
 /	"Pointmod": any affix that adds extra skill points to an individual skill  (also known as "staffmods")
+/	Spaces/tabs can be seen in Notepad++ from the menu: View -> Show Symbol -> Show White Space and TAB
 /
 / Filtration Rules:
 /	1.  Rules have two parts: conditions (which items to display) and output (how they are displayed)
@@ -23,54 +24,6 @@
 /	8.  Any "/" symbols are ignored, as are any rules/text that follow them
 /	9.  Leading spaces (those which precede all other output) are ignored in-game, as are trailing spaces if they follow data keywords such as "%DGREEN%" or "%ILVL%"
 /	10. Leading/trailing tabs are always ignored in-game
-/
-/⃓═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-/ Index:
-/
-/   CATEGORY					NOTES
-/   non-equipment
-/     basic items
-/	  Gold					
-/	  Potions				
-/	  Quest Items				
-/	  Endgame				essences, uber keys/organs, PoD items
-/	  Miscellaneous				scrolls, keys
-/     socketable items
-/	  Gems					
-/	  Runes					
-/	  Jewels				
-/     other
-/	  Charms				
-/   equipment
-/	  General Equipment			
-/     not weapon/armor
-/	  Quivers				arrows, bolts
-/	  Jewelry				amulets, rings
-/     weapon/armor
-/	  Rare Items				(id)
-/	  Unique/Set Items			(id)
-/	  Runewords				
-/	  Crafted Equipment			
-/	  Crafting Ingredients			(unid)
-/	  Magic Items				(unid)
-/	  Rare Items				(unid)
-/	regular
-/	  Regular: High-Precedence		
-/	  Regular Non-Class Items		
-/	  Regular Items				
-/	  Amazon				amazon weapons
-/	  Assassin				katars
-/	  Barbarian				primal helms
-/	  Druid					pelts
-/	  Necromancer				wands, totems
-/	  Paladin				scepters, paladin shields
-/	  Sorceress				orbs, staves
-/	  Regular: Low-Precedence
-/	uncommon
-/	  Magic Items				(id)	includes identified crafting ingredients
-/	  Unique Items				(unid)	individual rules (600+)
-/	  Set Items				(unid)	individual rules (100+)
-/	  Unique/Set Items			(unid)	collective rules
 /⃓═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 
 

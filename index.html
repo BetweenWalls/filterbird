@@ -1,70 +1,162 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>FilterBird for Path of Diablo</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link rel="stylesheet" type="text/css" href="./data/simulation.css">
-<script type="text/javascript" src="./data/items.js"></script>
-<script type="text/javascript" src="./data/simulation.js"></script>
-
-<link rel="shortcut icon" href="./images/wing_icon.png" type="image/x-icon">
-
+	<title>FilterBird for Path of Diablo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" type="text/css" href="./data/simulation.css">
+	<script type="text/javascript" src="./data/items.js"></script>
+	<script type="text/javascript" src="./data/item_affixes.js"></script>
+	<script type="text/javascript" src="./data/simulation.js"></script>
+	<script type="text/javascript" src="./data/custom_items.js"></script>
+	<link rel="shortcut icon" href="./images/wing_icon.png" type="image/x-icon">
 </head>
+
 <body style="background-color:black;" onload="initial_load()">
 <div id="main">
-<div class="navbar">
-  <img src="./images/bird.png" style="float:left; margin-left:10px; margin-right:10px; height:25px;">
-  <div class="nav-dropdown">
-    <button class="nav-dropbtn" style="cursor:pointer;" onClick="location.href='https://github.com/BetweenWalls/filterbird'"><a href="https://github.com/BetweenWalls/filterbird">About</a></button>
-  </div>
-</div>
+	<div class="navbar">
+		<img src="./images/bird.png" style="float:left; margin-left:10px; margin-right:10px; height:25px;">
+		<div class="nav-dropdown">
+			<button class="nav-dropbtn">Options</button>
+				<div class="nav-dropdown-content">
+				<div class="nav-dropdown-content-item"><div class="nav-option">
+					<input id="custom" type="checkbox" name="custom" onclick="toggleCustom(this.checked);">
+					<label for="custom">Custom Items (under construction)</label>
+				</div></div>
+			</div>
+		</div>
+		<div class="nav-dropdown">
+			<button class="nav-dropbtn" style="cursor:pointer;" onClick="location.href='https://github.com/BetweenWalls/filterbird'"><a href="https://github.com/BetweenWalls/filterbird">About</a></button>
+		</div>
+	</div>
 
-<div style="display:flex; width:800px;">
-  <div class ="hover" style="display:none;" id="tooltip_inventory">
-    <a id="item_name" style="display:block;"></a>
-    <a id="item_info" style="display:block; color:#dddddd;"></a>
-    <a id="item_affixes" style="display:block; color:#6666bb;"></a>
-  </div>
-</div>
+	<div style="display:flex; width:800px;">
+	  <div class ="hover" style="display:none;" id="tooltip_inventory">
+		<a id="item_name" style="display:block;"></a>
+		<a id="item_info" style="display:block; color:#dddddd;"></a>
+		<a id="item_affixes" style="display:block; color:#6666bb;"></a>
+	  </div>
+	</div>
 
-<div id="full_interface">
-<br>
-<div style="width:800px;">
-<button style="height:29px;" onClick="simulate()">Simulate</button>
-<div class="dropdown" style="width:200px; height:20px; position:relative; z-index:6; display:inline;">
-<select class="dropdown" id="dropdown_item" onChange="setItem(this.value)"></select>
-<select class="dropdown" id="dropdown_id" style="width:34px; padding-left:0px;" onChange="setID(this.value)"></select>
-<select class="dropdown" id="dropdown_ilvl" style="width:25px; padding-left:0px;" onChange="setILVL(this.value)"></select>
-</div>
-<div class="dropdown" style="height:20px; position:relative; z-index:6; display:inline; float:right;">
-<select class="dropdown" id="dropdown_clvl" style="width:25px; padding-left:0px;" onChange="setCLVL(this.value)"></select>
-</div>
-<br><br>
-</div>
-<label for="fileToLoad_1" style="color:white; display:block; background-color:#777; max-width:800px;">Choose Filter #1</label><input type="file" id="fileToLoad_1" name="fileToLoad_1" value="./filters/default.filter" onchange="loadFileAsText(1)"></input>
-<textarea id="filter_text_1" style="width:793px;" cols="130" rows="6">ItemDisplay[]: %NAME%</textarea>
-<label for="fileToLoad_2" style="color:white; display:block; background-color:#777; max-width:800px;">Choose Filter #2</label><input type="file" id="fileToLoad_2" name="fileToLoad_2" value="./filters/default.filter" onchange="loadFileAsText(2)"></input>
-<textarea id="filter_text_2" style="width:793px;" cols="130" rows="6">ItemDisplay[]: %NAME%</textarea>
-<br><br>
-<div id="output_area_1" style="height:100px; width:800px; position:relative;"><div style="color:white; position:absolute;">Filter #1</div><img id="background_1" src=""><div id="output_1" class="item" onmouseover="equipmentHover(1)" onmouseout="equipmentOut()"></div></div>
-<div id="output_area_2" style="height:100px; width:800px; position:relative;"><div style="color:white; position:absolute;">Filter #2</div><img id="background_2" src=""><div id="output_2" class="item" onmouseover="equipmentHover(2)" onmouseout="equipmentOut()"></div></div>
-<br>
-<div id="o1" style="color:white;"></div>
-<div id="o2" style="color:white;"></div>
-<div id="o3" style="color:white;"></div>
-</div>	<!-- /full_interface -->
+	<div id="full_interface">
+		<br>
+		<div style="width:800px;">
+			<button style="height:29px;" onClick="simulate()">Simulate</button>
+			<div class="dropdown" style="width:200px; height:20px; position:relative; z-index:6; display:inline;">
+				<select class="dropdown" id="dropdown_item" onChange="setItem(this.value)"></select>
+				<select class="dropdown" id="dropdown_id" style="width:34px; padding-left:0px;" onChange="setID(this.value)"></select>
+				<select class="dropdown" id="dropdown_ilvl" style="width:25px; padding-left:0px;" onChange="setILVL(this.value)"></select>
+			</div>
+			<div class="dropdown" style="height:20px; position:relative; z-index:6; display:inline; float:right;">
+				<select class="dropdown" id="dropdown_clvl" style="width:25px; padding-left:0px;" onChange="setCLVL(this.value)"></select>
+			</div>
+		</div>
+		<br>
+		<div id="item_editing" style="display:none;">
+			<div style="background-color:#222; max-width:350px;">
+				<div class="new-dropdown-title">Select Base Item</div>
+				<div id="select_group" style="display:inline;"><div class="label">Group: </div><select id="dropdown_group" class="new-dropdown" onChange="setGroup(this.value)"></select></div>
+				<div id="select_type" style="display:inline;"><div class="label">Type: </div><select id="dropdown_type" class="new-dropdown" onChange="setType(this.value)"></select></div>
+				<div id="select_base"><div class="label">Base: </div><select id="dropdown_base" class="new-dropdown" onChange="setBase(this.value)"></select></div>
+				<div id="select_rarity" style="display:inline;"><div class="label">Rarity: </div><select id="dropdown_rarity" class="new-dropdown" onChange="setRarity(this.value)"></select></div>
+				<div id="select_name" style="display:inline;"><div class="label">Name: </div><select id="dropdown_name" class="new-dropdown" onChange="setName(this.value)"></select></div>
+			</div>
+			<br>
+			<div style="background-color:#222; max-width:800px;">
+				<div class="new-dropdown-title">Edit Item</div>
+				<!--	automods & common affixes	-->
+				<div id="select_identified"><label class="label" for="identified">Identified</label><input id="identified" type="checkbox" name="identified" onchange="setIdentified(this.checked)"></div>
+				<div id="select_ethereal"><label class="label" for="ethereal">Ethereal</label><input id="ethereal" type="checkbox" name="ethereal" onchange="setEthereal(this.checked)"></div>
+				<div id="select_sockets"><div class="label">Sockets: </div><select id="dropdown_sockets" class="new-dropdown" onChange="setSockets(this.selectedIndex)"></select></div>
+				<div id="select_quality"><div class="label">Quality: </div><select id="dropdown_quality" class="new-dropdown" onChange="setQuality(this.selectedIndex)"></select></div>
+				<div id="select_superior_1"><div class="label">Superior: </div><select id="dropdown_superior_1" class="new-dropdown" onChange="setSuperior(1,this.selectedIndex)"></select></div>
+				<div id="select_superior_value_1" style="display:none;"><div class="label">Value: </div><input id="range_superior_1" type="range" class="range" onChange="setSuperiorValue(1,this.value)"></input><div id="superior_value_1" class="label"></div></div>
+				<div id="select_superior_2"><div class="label">Superior: </div><select id="dropdown_superior_2" class="new-dropdown" onChange="setSuperior(2,this.selectedIndex)"></select></div>
+				<div id="select_superior_value_2" style="display:none;"><div class="label">Value: </div><input id="range_superior_2" type="range" class="range" onChange="setSuperiorValue(2,this.value)"></input><div id="superior_value_2" class="label"></div></div>
+				<div id="select_automod"><div class="label">Automod: </div><select id="dropdown_automod" class="new-dropdown" onChange="setAutomod(this.selectedIndex)"></select></div>
+				<div id="select_automod_value_1" style="display:none;"><div class="label">Value: </div><input id="range_automod_1" type="range" class="range" onChange="setAutomodValue(1,this.value)"></input><div id="automod_value_1" class="label"></div></div>
+				<div id="select_automod_value_2" style="display:none;"><div class="label">Value: </div><input id="range_automod_2" type="range" class="range" onChange="setAutomodValue(2,this.value)"></input><div id="automod_value_2" class="label"></div></div>
+				<!--	pointmods	-->
+				<div id="select_pointmod_1"><div class="label">Pointmod: </div><select id="dropdown_pointmod_1" class="new-dropdown" onChange="setPointmod(1,this.selectedIndex)"></select></div>
+				<div id="select_pointmod_value_1" style="display:none;"><div class="label">Value: </div><input id="range_pointmod_1" type="range" class="range" onChange="setPointmodValue(1,this.value)"></input><div id="pointmod_value_1" class="label"></div></div>
+				<div id="select_pointmod_2"><div class="label">Pointmod: </div><select id="dropdown_pointmod_2" class="new-dropdown" onChange="setPointmod(2,this.selectedIndex)"></select></div>
+				<div id="select_pointmod_value_2" style="display:none;"><div class="label">Value: </div><input id="range_pointmod_2" type="range" class="range" onChange="setPointmodValue(2,this.value)"></input><div id="pointmod_value_2" class="label"></div></div>
+				<div id="select_pointmod_3"><div class="label">Pointmod: </div><select id="dropdown_pointmod_3" class="new-dropdown" onChange="setPointmod(3,this.selectedIndex)"></select></div>
+				<div id="select_pointmod_value_3" style="display:none;"><div class="label">Value: </div><input id="range_pointmod_3" type="range" class="range" onChange="setPointmodValue(3,this.value)"></input><div id="pointmod_value_3" class="label"></div></div>
+				<!--	magic affixes	-->
+				<div id="select_affix_1"><div class="label">Prefix: </div><select id="dropdown_affix_1" class="new-dropdown" onChange="setAffix(1,this.selectedIndex,1)"></select></div>
+				<div id="select_affix_value_1_1" style="display:none;"><div class="label">Value: </div><input id="range_affix_1_1" type="range" class="range" onChange="setAffixValue(1,1,this.value,1)"></input><div id="affix_value_1_1" class="label"></div></div>
+				<div id="select_affix_value_1_2" style="display:none;"><div class="label">Value: </div><input id="range_affix_1_2" type="range" class="range" onChange="setAffixValue(1,2,this.value,1)"></input><div id="affix_value_1_2" class="label"></div></div>
+				<div id="select_affix_value_1_3" style="display:none;"><div class="label">Value: </div><input id="range_affix_1_3" type="range" class="range" onChange="setAffixValue(1,3,this.value,1)"></input><div id="affix_value_1_3" class="label"></div></div>
+				<div id="select_affix_2"><div class="label">Prefix: </div><select id="dropdown_affix_2" class="new-dropdown" onChange="setAffix(2,this.selectedIndex,1)"></select></div>
+				<div id="select_affix_value_2_1" style="display:none;"><div class="label">Value: </div><input id="range_affix_2_1" type="range" class="range" onChange="setAffixValue(2,1,this.value,1)"></input><div id="affix_value_2_1" class="label"></div></div>
+				<div id="select_affix_value_2_2" style="display:none;"><div class="label">Value: </div><input id="range_affix_2_2" type="range" class="range" onChange="setAffixValue(2,2,this.value,1)"></input><div id="affix_value_2_2" class="label"></div></div>
+				<div id="select_affix_value_2_3" style="display:none;"><div class="label">Value: </div><input id="range_affix_2_3" type="range" class="range" onChange="setAffixValue(2,3,this.value,1)"></input><div id="affix_value_2_3" class="label"></div></div>
+				<div id="select_affix_3"><div class="label">Prefix: </div><select id="dropdown_affix_3" class="new-dropdown" onChange="setAffix(3,this.selectedIndex,1)"></select></div>
+				<div id="select_affix_value_3_1" style="display:none;"><div class="label">Value: </div><input id="range_affix_3_1" type="range" class="range" onChange="setAffixValue(3,1,this.value,1)"></input><div id="affix_value_3_1" class="label"></div></div>
+				<div id="select_affix_value_3_2" style="display:none;"><div class="label">Value: </div><input id="range_affix_3_2" type="range" class="range" onChange="setAffixValue(3,2,this.value,1)"></input><div id="affix_value_3_2" class="label"></div></div>
+				<div id="select_affix_value_3_3" style="display:none;"><div class="label">Value: </div><input id="range_affix_3_3" type="range" class="range" onChange="setAffixValue(3,3,this.value,1)"></input><div id="affix_value_3_3" class="label"></div></div>
+				<div id="select_affix_4"><div class="label">Suffix: </div><select id="dropdown_affix_4" class="new-dropdown" onChange="setAffix(4,this.selectedIndex,0)"></select></div>
+				<div id="select_affix_value_4_1" style="display:none;"><div class="label">Value: </div><input id="range_affix_4_1" type="range" class="range" onChange="setAffixValue(4,1,this.value,0)"></input><div id="affix_value_4_1" class="label"></div></div>
+				<div id="select_affix_value_4_2" style="display:none;"><div class="label">Value: </div><input id="range_affix_4_2" type="range" class="range" onChange="setAffixValue(4,2,this.value,0)"></input><div id="affix_value_4_2" class="label"></div></div>
+				<div id="select_affix_value_4_3" style="display:none;"><div class="label">Value: </div><input id="range_affix_4_3" type="range" class="range" onChange="setAffixValue(4,3,this.value,0)"></input><div id="affix_value_4_3" class="label"></div></div>
+				<div id="select_affix_5"><div class="label">Suffix: </div><select id="dropdown_affix_5" class="new-dropdown" onChange="setAffix(5,this.selectedIndex,0)"></select></div>
+				<div id="select_affix_value_5_1" style="display:none;"><div class="label">Value: </div><input id="range_affix_5_1" type="range" class="range" onChange="setAffixValue(5,1,this.value,0)"></input><div id="affix_value_5_1" class="label"></div></div>
+				<div id="select_affix_value_5_2" style="display:none;"><div class="label">Value: </div><input id="range_affix_5_2" type="range" class="range" onChange="setAffixValue(5,2,this.value,0)"></input><div id="affix_value_5_2" class="label"></div></div>
+				<div id="select_affix_value_5_3" style="display:none;"><div class="label">Value: </div><input id="range_affix_5_3" type="range" class="range" onChange="setAffixValue(5,3,this.value,0)"></input><div id="affix_value_5_3" class="label"></div></div>
+				<div id="select_affix_6"><div class="label">Suffix: </div><select id="dropdown_affix_6" class="new-dropdown" onChange="setAffix(6,this.selectedIndex,0)"></select></div>
+				<div id="select_affix_value_6_1" style="display:none;"><div class="label">Value: </div><input id="range_affix_6_1" type="range" class="range" onChange="setAffixValue(6,1,this.value,0)"></input><div id="affix_value_6_1" class="label"></div></div>
+				<div id="select_affix_value_6_2" style="display:none;"><div class="label">Value: </div><input id="range_affix_6_2" type="range" class="range" onChange="setAffixValue(6,2,this.value,0)"></input><div id="affix_value_6_2" class="label"></div></div>
+				<div id="select_affix_value_6_3" style="display:none;"><div class="label">Value: </div><input id="range_affix_6_3" type="range" class="range" onChange="setAffixValue(6,3,this.value,0)"></input><div id="affix_value_6_3" class="label"></div></div>
+				<!--	other changes	-->
+				<div id="select_corruption"><div class="label">Corruption: </div><select id="dropdown_corruption" class="new-dropdown" onChange="setCorruption(this.selectedIndex)"></select></div>
+				<div id="select_corruption_value_1" style="display:none;"><div class="label">Value: </div><input id="range_corruption_1" type="range" class="range" onChange="setCorruptionValue(1,this.value)"></input><div id="corruption_value_1" class="label"></div></div>
+				<div id="select_corruption_value_2" style="display:none;"><div class="label">Value: </div><input id="range_corruption_2" type="range" class="range" onChange="setCorruptionValue(2,this.value)"></input><div id="corruption_value_2" class="label"></div></div>
+				<div id="select_upgrade"><div class="label">Upgraded: </div><select id="dropdown_upgrade" class="new-dropdown" onChange="setUpgrade(this.selectedIndex)"></select></div>
+				
+				<div><button onClick="setItemFromCustom()" style="float:right; margin-top:-22px;">Simulate this Item</button></div>
+			</div>
+			<br>
+		</div>
+		
+		<label for="fileToLoad_1" style="color:white; display:block; background-color:#777; max-width:800px;">Choose Filter #1</label><input type="file" id="fileToLoad_1" name="fileToLoad_1" value="./filters/default.filter" onchange="loadFileAsText(1)"></input>
+		<textarea id="filter_text_1" style="width:793px;" cols="130" rows="6">ItemDisplay[]: %NAME%</textarea>
+		<label for="fileToLoad_2" style="color:white; display:block; background-color:#777; max-width:800px;">Choose Filter #2</label><input type="file" id="fileToLoad_2" name="fileToLoad_2" value="./filters/default.filter" onchange="loadFileAsText(2)"></input>
+		<textarea id="filter_text_2" style="width:793px;" cols="130" rows="6">ItemDisplay[]: %NAME%</textarea>
+		<br><br>
+
+		<div id="output_area_1" style="height:100px; width:800px; position:relative;">
+			<div style="color:white; position:absolute;">Filter #1</div>
+			<img id="background_1" src="">
+			<div id="output_1" class="item" onmouseover="equipmentHover(1)" onmouseout="equipmentOut()"></div>
+		</div>
+		<div id="output_area_2" style="height:100px; width:800px; position:relative;">
+			<div style="color:white; position:absolute;">Filter #2</div>
+			<img id="background_2" src="">
+			<div id="output_2" class="item" onmouseover="equipmentHover(2)" onmouseout="equipmentOut()"></div>
+		</div>
+		<br>
+		
+		<div id="output_processing_info">
+			<div id="o1" style="color:white;"></div>
+			<div id="o2" style="color:white;"></div>
+			<div id="o3" style="color:white;"></div>
+		</div>
+		
+		<div id="extra_space"></div>
+
+		<div id="debug" style="display:none;">
+			<button onClick="printAffixes()">Debug</button>
+			<div id="print" style="color:white;"></div>
+		</div>
+	</div>	<!-- /full_interface -->
 </div>	<!-- /main -->
 </body>
 </html>
 
 <script>
-
-//
-// ---------------------------------
 function initial_load() {
 	startup()
 }
-
 </script>

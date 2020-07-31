@@ -1,4 +1,6 @@
-var itemToCompare = {NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true};
+var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"common"};
+var itemCustom = {};
+var itemCustomAffixes = {};
 var character = {CLVL:90,CHARSTAT14:100000,CHARSTAT15:100000,DIFFICULTY:2,ILVL:90,CHARSTAT70:0};
 var item_settings = {ID:false};
 var colors = {
@@ -16,6 +18,22 @@ var colors = {
 	Red:"#a94838"
 };
 
+var data = {
+		// categories[cat] = {info:{},lines:[]}, where cat is a unique identifier for that group and mod combination (mod1+mod2+mod3+group)
+		// index[i] = cat for #i element in dropdown list
+		// info.group = non-shareable group number for dropdown element
+		// info.desc = text description for dropdown element
+		// lines[a] = info of #a line from item_affixes.js with the same values for group, mod1, mod2, & mod3
+	superior:{index:[0],categories:{}},
+	automod:{index:[0],categories:{}},
+	pointmod:{index:[0],categories:{}},
+	affix:[
+		{index:[0],categories:{}},
+		{index:[0],categories:{}},
+	],
+	corruption:{index:[0],categories:{}},
+};
+
 // startup - runs when the page loads
 // ---------------------------------
 function startup() {
@@ -25,6 +43,8 @@ function startup() {
 	var background = "./images/act_"+r+".png";
 	document.getElementById("background_1").src = background
 	document.getElementById("background_2").src = background
+	loadCustomization()
+	//document.getElementById("debug").style.display = "block"
 }
 
 // loadItems - adds equipment and other items to the item dropdown menu
@@ -60,8 +80,8 @@ function loadOptions() {
 //	value: 'Id' or 'Unid (if possible)'
 // ---------------------------------
 function setID(value) {
-	if (value == "Id") { item_settings.ID = true }
-	else { item_settings.ID = false }
+	if (value == "Id") { item_settings.ID = true; document.getElementById("identified").checked = true; }
+	else { item_settings.ID = false; document.getElementById("identified").checked = false; }
 	itemToCompare.ID = item_settings.ID
 	setItem(document.getElementById("dropdown_item").value )
 }
@@ -397,10 +417,13 @@ function equipmentHover(num) {
 	var tooltip_width = document.getElementById("tooltip_inventory").getBoundingClientRect().width/2;
 	var item = document.getElementById("output_"+num).getBoundingClientRect();
 	var textbox_height = document.getElementById("filter_text_1").getBoundingClientRect().height + document.getElementById("filter_text_2").getBoundingClientRect().height
+	var editing_height = document.getElementById("item_editing").getBoundingClientRect().height
 	var offset_x = Math.floor(item.left + item.width/2 - tooltip_width);
-	var offset_y = Math.floor(110 + textbox_height + 100*num + item.height/2);
+	var offset_y = Math.floor(110 + textbox_height + editing_height + 100*num + item.height/2);
 	document.getElementById("tooltip_inventory").style.left = offset_x+"px"
 	document.getElementById("tooltip_inventory").style.top = offset_y+"px"
+	var extra_height = Math.max(0,(document.getElementById("tooltip_inventory").getBoundingClientRect().height - 50 - document.getElementById("output_processing_info").getBoundingClientRect().height))
+	document.getElementById("extra_space").style.height = extra_height+"px"
 }
 
 // equipmentOut - stops showing equipment info (mouse-over ends)
@@ -465,4 +488,105 @@ function getAffixLine(affix) {
 	}
 	var result = [affix_line,value_combined];
 	return result
+}
+
+// 
+// ---------------------------------
+function setItemFromCustom() {
+	// TODO: Merge duplicated code since this is mostly copied from setItem()
+	// TODO: Some of this is now done in setCustomBase() instead
+	var item = itemCustom;
+	var group = document.getElementById("dropdown_group").value
+	var value = item.name;
+	var valid = true;
+	if (valid == true) {
+		if (item.rarity == "Regular") { item.rarity = "regular" }
+		else if (item.rarity == "Magic") { item.rarity = "magic" }
+		else if (item.rarity == "Rare") { item.rarity = "rare" }
+		else if (item.rarity == "Set") { item.rarity = "set" }
+		else if (item.rarity == "Unique") { item.rarity = "unique" }
+		else if (item.rarity == "Craft") { item.rarity = "craft" }
+		itemToCompare = {}
+		for (affix in item) { itemToCompare[affix] = item[affix] }
+		itemToCompare.NAME = value.split(" (")[0].split(" ­ ")[0]
+		itemToCompare.ILVL = character.ILVL
+		itemToCompare.PRICE = 35000
+		itemToCompare.ID = true
+		if (item.base != "Amulet" && item.base != "Ring" && item.base != "Arrows" && item.base != "Bolts" && item.base != "Small Charm" && item.base != "Large Charm" && item.base != "Grand Charm" && item.base != "Jewel") {
+			var base = bases[item.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
+			for (affix in base) { itemToCompare[affix] = base[affix] }
+			if (base.tier == 1) { itemToCompare.NORM = true }
+			else if (base.tier == 2) { itemToCompare.EXC = true }
+			else if (base.tier == 3) { itemToCompare.ELT = true }
+		}
+		for (affix in item) { itemToCompare[affix] = item[affix] }	// some base affixes are overridden by regular affixes
+		for (affix in itemCustomAffixes) { itemToCompare[affix] = itemCustomAffixes[affix] }
+		if (typeof(itemToCompare.rarity) != 'undefined') {
+			if (itemToCompare.rarity == "set") { itemToCompare.SET = true }
+			else if (itemToCompare.rarity == "rare") { itemToCompare.RARE = true }
+			else if (itemToCompare.rarity == "magic") { itemToCompare.MAG = true }
+			else if (itemToCompare.rarity == "regular") { itemToCompare.NMAG = true; itemToCompare.always_id = true; }
+			else if (itemToCompare.rarity == "unique") { itemToCompare.UNI = true }
+			else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; }
+			else if (itemToCompare.rarity == "craft") { itemToCompare.always_id = true }
+		} else { itemToCompare.UNI = true }
+		if (itemToCompare.RW == true) {
+			var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
+			var s = 0;
+			for (let i = 0; i < runewords[rw_name].length; i++) { s+=1; }
+			itemToCompare.sockets = s
+		}
+		itemToCompare[itemToCompare.CODE] = true
+		if (typeof(itemToCompare.velocity) != 'undefined') { if (itemToCompare.velocity < 0) { itemToCompare.velocity += 100000 } }	// negative values overflow for this in-game code
+		if (typeof(itemToCompare.always_id) == 'undefined') { itemToCompare.always_id = false }
+		if (itemToCompare.always_id == false && item_settings.ID == false) { itemToCompare.ID = false }
+		if (itemToCompare.ID == true) {
+			// affix codes translated to in-game codes
+			for (affix in itemToCompare) { for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = itemToCompare[affix] } } }
+			if (typeof(itemToCompare.sup) != 'undefined') { if (itemToCompare.sup > 0) { if (typeof(itemToCompare.ED) == 'undefined') { itemToCompare.ED = 0 }; itemToCompare.ED += itemToCompare.sup; itemToCompare.SUP = true; if (item.rarity == "regular") { itemToCompare.NAME = "Superior "+itemToCompare.NAME } } }
+			if (itemToCompare.superior == true) { itemToCompare.SUP = true; itemToCompare.NAME = "Superior "+itemToCompare.NAME; }
+			if (typeof(itemToCompare.ethereal) != 'undefined' && itemToCompare.ethereal == 1) { itemToCompare.ETH = true }
+			if (itemToCompare.CODE == "aq2" || itemToCompare.CODE == "cq2" || itemToCompare.CODE == "aqv" || itemToCompare.CODE == "cqv") { itemToCompare.QUANTITY = 500; character.CHARSTAT70 = 500; }
+			if (typeof(itemToCompare.sockets) != 'undefined') { itemToCompare.SOCK = itemToCompare.sockets }
+			itemToCompare.DEF = Math.ceil((~~itemToCompare.base_defense * (1+~~item.ethereal*0.5) * (1+~~item.e_def/100+~~item.sup/100)) + ~~item.defense + Math.floor(~~item.defense_per_level*character.CLVL))
+			itemToCompare.REQ_STR = Math.ceil(~~itemToCompare.req_strength * (1+(~~itemToCompare.req/100)) - ~~itemToCompare.ethereal*10)
+			itemToCompare.REQ_DEX = Math.ceil(~~itemToCompare.req_dexterity * (1+(~~itemToCompare.req/100)) - ~~itemToCompare.ethereal*10)
+			itemToCompare.BLOCK = ~~itemToCompare.block + ~~itemToCompare.ibc
+			itemToCompare.ITEMSTAT17 = ~~itemToCompare.e_damage + ~~itemToCompare.damage_bonus
+			// TODO: Add more codes that aren't handled properly by codes[code]
+		} else {
+			itemToCompare.SUP = false
+			itemToCompare.ETH = false
+			for (affix in itemToCompare) {
+				for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = 0 } }
+				if (typeof(unequipped[affix]) != 'undefined') { if (affix != "base_damage_min" && affix != "base_damage_max" && affix != "base_defense" && affix != "req_level" && affix != "req_strength" && affix != "req_dexterity" && affix != "durability" && affix != "baseSpeed" && affix != "range" && affix != "throw_min"  && affix != "throw_max" && affix != "base_min_alternate" && affix != "base_max_alternate" && affix != "block" && affix != "velocity") { itemToCompare[affix] = unequipped[affix] } }
+			}
+			//character.CHARSTAT70 = 0;
+			itemToCompare.DEF = ~~itemToCompare.base_defense
+			itemToCompare.REQ_STR = ~~itemToCompare.req_strength
+			itemToCompare.REQ_DEX = ~~itemToCompare.req_dexterity
+			itemToCompare.BLOCK = ~~itemToCompare.block
+			itemToCompare.ITEMSTAT17 = 0
+		}
+		itemToCompare.ITEMSTAT31 = itemToCompare.DEF
+		itemToCompare.ITEMSTAT18 = itemToCompare.ITEMSTAT17
+		// TODO: Validate ILVL
+		if (typeof(itemToCompare.RW) == 'undefined') { itemToCompare.RW = false }
+		if (typeof(itemToCompare.NMAG) == 'undefined') { itemToCompare.NMAG = false }
+		if (typeof(itemToCompare.ETH) == 'undefined') { itemToCompare.ETH = false }
+		if (typeof(itemToCompare.SOCK) == 'undefined') { itemToCompare.SOCK = 0 }
+		simulate()
+	}
+}
+
+// debug
+function printAffixes() {
+	document.getElementById("print").innerHTML = ""
+	var output = "---------------------------<br>";
+	for (affix in itemCustom) {
+		output += affix+" "+itemCustom[affix]+"<br>"
+	}
+	output += "---------------------------<br>"
+	document.getElementById("print").innerHTML += output
+	
 }
