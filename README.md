@@ -13,10 +13,6 @@ Path of Diablo Filter Simulation
 * Allow multiple items to be viewed simultaneously
 * Create option to generate variety of different items so filters can be compared effectively with just a few clicks
 * Allow any number of filters to be compared simultaneously
-* Item Customization
-  * change base item info
-  * add/remove affixes
-  * corrupt, socket, upgrade
 * Character Customization (only CLVL can be adjusted so far)
 * Make item tooltips better match in-game tooltips
 

@@ -612,9 +612,9 @@ function setAutomod(selected) {
 function setAutomodValue(mod, value) {
 	document.getElementById("automod_value_"+mod).innerHTML = value
 	var selected = document.getElementById("dropdown_automod").selectedIndex;
-	var cat = data.automod.index[selected];
-	var mods = data.automod.categories[cat].info.mods;
-	if (selected > 0 && mods >= mod) {
+	if (selected > 0) {
+		var cat = data.automod.index[selected];
+		var mods = data.automod.categories[cat].info.mods;
 		var index = 7;
 		if (mod == 2) { index = 10 }
 		var mod_line = -1;
@@ -790,9 +790,9 @@ function setAffix(num, selected, prefix) {
 function setAffixValue(num, mod, value, prefix) {
 	document.getElementById("affix_value_"+num+"_"+mod).innerHTML = value
 	var selected = document.getElementById("dropdown_affix_"+num).selectedIndex;
-	var cat = data.affix[prefix].index[selected];
-	var mods = data.affix[prefix].categories[cat].info.mods;
-	if (mods >= mod) {
+	if (selected > 0) {
+		var cat = data.affix[prefix].index[selected];
+		var mods = data.affix[prefix].categories[cat].info.mods;
 		var index = 10;
 		if (mod == 2) { index = 14 }
 		if (mod == 3) { index = 18 }
