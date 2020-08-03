@@ -85,9 +85,21 @@
 	appearance: none;
 	min-width: 80px;
 }
+.num-input {
+	color: #ddd;
+	background-color: black;
+	border-color: #999;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	max-width: 35px;
+}
 .label {
 	color: white;
 	display: inline;
+}
+.label2 {
+	display: inline;
+	opacity: 0%;
 }
 .new-dropdown-title {
 	color: white;

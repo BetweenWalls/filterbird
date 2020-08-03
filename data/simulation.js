@@ -45,6 +45,7 @@ function startup() {
 	document.getElementById("background_2").src = background
 	loadCustomization()
 	//document.getElementById("debug").style.display = "block"
+	//document.getElementById("simulate_custom").style.display = "block"
 }
 
 // loadItems - adds equipment and other items to the item dropdown menu
@@ -98,6 +99,10 @@ function setCLVL(value) {
 //	value: item's level (1-99)
 // ---------------------------------
 function setILVL(value) {
+	// keep ilvl consistent (temporary while old item selection & custom item editing coexist)
+	itemCustom.ILVL = value
+	document.getElementById("ilvl").value = value
+	
 	character.ILVL = Number(value)
 	if (value < 36) { character.DIFFICULTY = 0 }
 	else if (value > 66) { character.DIFFICULTY = 1 }
@@ -509,7 +514,6 @@ function setItemFromCustom() {
 		itemToCompare = {}
 		for (affix in item) { itemToCompare[affix] = item[affix] }
 		itemToCompare.NAME = item.name_prefix + item.name.split(" (")[0].split(" ­ ")[0] + item.name_suffix
-		itemToCompare.ILVL = character.ILVL
 		itemToCompare.PRICE = 35000
 		itemToCompare.ID = true
 		if (item.base != "Amulet" && item.base != "Ring" && item.base != "Arrows" && item.base != "Bolts" && item.base != "Small Charm" && item.base != "Large Charm" && item.base != "Grand Charm" && item.base != "Jewel") {
@@ -521,8 +525,12 @@ function setItemFromCustom() {
 		}
 		for (affix in item) { itemToCompare[affix] = item[affix] }	// some base affixes are overridden by regular affixes
 		for (affix in itemCustomAffixes) {
-			//if (typeof(itemToCompare[affix]) == 'undefined') { itemToCompare[affix] = 0 }
-			itemToCompare[affix] = itemCustomAffixes[affix]
+			if (typeof(itemToCompare[affix]) == 'undefined') { itemToCompare[affix] = 0 }
+			if (isNaN(Number(itemCustomAffixes[affix])) == false && affix != "req_level" && affix != "req_strength" && affix != "req_dexterity") {
+				itemToCompare[affix] += itemCustomAffixes[affix]
+			} else {
+				itemToCompare[affix] = itemCustomAffixes[affix]
+			}
 		}
 		if (typeof(itemToCompare.rarity) != 'undefined') {
 			if (itemToCompare.rarity == "set") { itemToCompare.SET = true }

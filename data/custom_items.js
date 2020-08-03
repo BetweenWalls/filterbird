@@ -22,8 +22,26 @@ var rare_suffix = {
 // toggleCustom - 
 // ---------------------------------
 function toggleCustom(checked) {
-	if (checked == true) { document.getElementById("item_editing").style.display = "block" }
-	else { document.getElementById("item_editing").style.display = "none" }
+	if (checked == true) {
+		document.getElementById("item_editing").style.display = "block"
+		document.getElementById("show_custom_format").style.display = "block"
+	}
+	else {
+		document.getElementById("item_editing").style.display = "none"
+		document.getElementById("show_custom_format").style.display = "none"
+	}
+}
+// toggleCustomFormat - 
+// ---------------------------------
+function toggleCustomFormat(checked) {
+	if (checked == true) {
+		document.getElementById("editing_1").style.display = "inline-table"
+		document.getElementById("editing_2").style.display = "inline-table"
+	}
+	else {
+		document.getElementById("editing_1").style.display = "table"
+		document.getElementById("editing_2").style.display = "table"
+	}
 }
 
 // loadCustomization - 
@@ -145,14 +163,16 @@ function loadName(value) {
 	document.getElementById("dropdown_name").innerHTML = options
 	setCustomBase()
 	tidyBaseSelection()
-	itemCustomAffixes = {}
+	//itemCustomAffixes = {}
+	setValues()
 }
 // 
 // ---------------------------------
 function setName(value) {
 	setCustomBase()
 	tidyBaseSelection()
-	itemCustomAffixes = {}
+	//itemCustomAffixes = {}
+	setValues()
 }
 // 
 // ---------------------------------
@@ -163,15 +183,16 @@ function setCustomBase() {
 	var rarity = document.getElementById("dropdown_rarity").value;
 	var name = document.getElementById("dropdown_name").value;
 	data = {superior:{index:[0],categories:{}},automod:{index:[0],categories:{}},pointmod:{index:[0],categories:{}},affix:[{index:[0],categories:{}},{index:[0],categories:{}}],corruption:{index:[0],categories:{}}};
-	itemCustom = {}
-	itemCustom.name_prefix = ""
-	itemCustom.name_suffix = ""
-	itemCustom.req_level = 1
+	itemCustom = {name_prefix:"",name_suffix:"",req_level:0};
+	itemCustom.base = base;
+	itemCustom.type_affix = type;
+	itemCustom.rarity = rarity.toLowerCase();
+	itemCustom.ILVL = document.getElementById("ilvl").value;
 	
 	if (type != "amulet" && type != "ring" && type != "quiver" && type != "charm" && type != "jewel") {
 		var base_id = bases[base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
 		for (affix in base_id) { itemCustom[affix] = base_id[affix] }
-		itemCustom.original_base = itemCustom.base;
+		itemCustom.original_base = base
 		itemCustom.original_tier = itemCustom.tier;
 		if (itemCustom.tier == 1) { itemCustom.upgrade2 = bases[itemCustom.upgrade.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")].upgrade }
 	} else {
@@ -199,16 +220,13 @@ function setCustomBase() {
 			for (itemNew in equipment[group]) {
 				if (equipment[group][itemNew].name == name) {
 					for (affix in equipment[group][itemNew]) { itemCustom[affix] = equipment[group][itemNew][affix] }
+					// TODO: unique/set affix customization?
 				}
 			}
 		}
 	}
-	itemCustom.type_affix = type
-	itemCustom.base = base
-	itemCustom.rarity = rarity.toLowerCase()
 	if (rarity == "Set" || rarity == "Unique") { itemCustom.name = name }
 	else if (rarity == "Regular" || rarity == "Magic") { itemCustom.name = base }
-	//else if (rarity == "Magic") { itemCustom.name = "___ "+base+" of __" }
 	else if (rarity == "Rare") {
 		var suffix = "";
 		if (itemCustom.shield == true) { suffix = rare_suffix["shield"][Math.floor(Math.random()*rare_suffix["shield"].length)] }
@@ -243,7 +261,7 @@ function tidyBaseSelection() {
 function getMatch(kind) {
 	var result = false;
 	if (kind == "identified" && itemCustom.rarity != "regular") { result = true }
-	if (kind == "ethereal" && !((itemCustom.WEAPON != true && itemCustom.ARMOR != true) || itemCustom.rarity == "set" || itemCustom["7cr"] == true || itemCustom.name == "Crown of Ages" || itemCustom.name == "Leviathan" || itemCustom.name == "Tyrael's Might" || itemCustom.name == "The Gavel of Pain" || itemCustom.name == "Schaefer's Hammer" || itemCustom.name == "Butcher's Pupil" || itemCustom.name == "Doombringer" || itemCustom.name == "The Grandfather" || itemCustom.name == "Wizardspike" || itemCustom.name == "Stormspire" || itemCustom.name == "Steel Pillar" || itemCustom.name == "Stormshield")) { result = true }
+	if (kind == "ethereal" && !((itemCustom.WEAPON != true && itemCustom.ARMOR != true) || itemCustom.rarity == "set" || itemCustom.WP9 == true || itemCustom["7cr"] == true || itemCustom.name == "Crown of Ages" || itemCustom.name == "Leviathan" || itemCustom.name == "Tyrael's Might" || itemCustom.name == "The Gavel of Pain" || itemCustom.name == "Schaefer's Hammer" || itemCustom.name == "Butcher's Pupil" || itemCustom.name == "Doombringer" || itemCustom.name == "The Grandfather" || itemCustom.name == "Wizardspike" || itemCustom.name == "Stormspire" || itemCustom.name == "Steel Pillar" || itemCustom.name == "Stormshield")) { result = true }
 	if (kind == "sockets" && itemCustom.rarity == "regular" && typeof(itemCustom.max_sockets) != 'undefined') { result = true }
 	if (kind == "quality" && itemCustom.rarity == "regular" && itemCustom.affix_type != "quiver") { result = true }
 	if (kind == "automod" && itemCustom.rarity != "unique" && itemCustom.rarity != "set" && (itemCustom.CL3 || itemCustom.CL4 || itemCustom.CL6 || itemCustom.CL7)) { result = true }
@@ -291,12 +309,12 @@ function getALVL() {
 // 
 // ---------------------------------
 function loadEditing() {
-	for (let n = 1; n <= 2; n++) { document.getElementById("select_superior_"+n).style.display = "none"; document.getElementById("select_superior_value_"+n).style.display = "none"; }
-	for (let n = 1; n <= 3; n++) { document.getElementById("select_pointmod_"+n).style.display = "none"; document.getElementById("select_pointmod_value_"+n).style.display = "none"; }
-	for (let n = 1; n <= 2; n++) { document.getElementById("select_automod_value_"+n).style.display = "none"; }
-	for (let n = 1; n <= 6; n++) { document.getElementById("select_affix_"+n).style.display = "none"; for (let m = 1; m <= 3; m++) { document.getElementById("select_affix_value_"+n+"_"+m).style.display = "none"; }; }
-	for (let n = 1; n <= 2; n++) { document.getElementById("select_corruption_value_"+n).style.display = "none"; }
-	
+	for (let n = 1; n <= 2; n++) { document.getElementById("select_superior_"+n).style.display = "none"; document.getElementById("select_superior_value_"+n).style.display = "none"; document.getElementById("dropdown_superior_"+n).selectedIndex = 0; }
+	for (let n = 1; n <= 2; n++) { document.getElementById("select_automod_value_"+n).style.display = "none"; }; document.getElementById("dropdown_automod").selectedIndex = 0;
+	for (let n = 1; n <= 3; n++) { document.getElementById("select_pointmod_"+n).style.display = "none"; document.getElementById("select_pointmod_value_"+n).style.display = "none"; document.getElementById("dropdown_pointmod_"+n).selectedIndex = 0; }
+	for (let n = 1; n <= 6; n++) { document.getElementById("select_affix_"+n).style.display = "none"; document.getElementById("dropdown_affix_"+n).selectedIndex = 0; for (let m = 1; m <= 3; m++) { document.getElementById("select_affix_value_"+n+"_"+m).style.display = "none"; }; }
+	for (let n = 1; n <= 2; n++) { document.getElementById("select_corruption_value_"+n).style.display = "none"; }; document.getElementById("dropdown_corruption").selectedIndex = 0;
+
 	var selects = ["identified","ethereal","sockets","quality","automod","pointmod","affix","corruption","upgrade"];
 	for (s in selects) {
 		var divs = [];
@@ -317,9 +335,12 @@ function loadEditing() {
 // 
 // ---------------------------------
 function load(kind) {
+	// TODO: Preserve affixes if possible when resetting
 	var alvl = getALVL();
 	var options = "<option class='gray-all'>" + "None" + "</option>";
-	if (kind == "sockets") {
+	if (kind == "ethereal") {
+		if (document.getElementById("ethereal").checked == true) { itemCustom.ethereal = true }
+	} else if (kind == "sockets") {
 		// TODO: reference list of max sockets if ilvl < 40
 		for (let i = 1; i <= itemCustom.max_sockets; i++) { options += "<option class='gray-all'>"+i+"</option>" }
 		document.getElementById("dropdown_sockets").innerHTML = options
@@ -457,6 +478,24 @@ function loadDetails(kind,aff,alvl,prefix,spawnable,rare,lvl,maxlvl,group,mod1,m
 
 // 
 // ---------------------------------
+function setILVL2(value) {
+	value = Number(value)
+	if (isNaN(value) == true || value < 1 || value > 99) { value = document.getElementById("dropdown_ilvl").selectedIndex }
+	document.getElementById("ilvl").value = value
+	// keep ilvl consistent (temporary while old item selection & custom item editing coexist)
+	document.getElementById("dropdown_ilvl").selectedIndex = value
+	character.ILVL = value
+	if (value < 36) { character.DIFFICULTY = 0 }
+	else if (value > 66) { character.DIFFICULTY = 1 }
+	else { character.DIFFICULTY = 2 }
+	
+	itemCustom.ILVL = value
+	// TODO: What is affected by ilvl? sockets & alvl (which means many affixes can change)
+	//setValues()
+	setItemFromCustom()
+}
+// 
+// ---------------------------------
 function setIdentified(checked) {
 	itemCustom.ID = checked
 	item_settings.ID = checked
@@ -469,7 +508,6 @@ function setIdentified(checked) {
 // ---------------------------------
 function setEthereal(checked) {
 	itemCustom.ethereal = checked
-	itemCustom.ETH = checked
 	//setValues()
 	setItemFromCustom()
 }
@@ -755,9 +793,7 @@ function setAffix(num, selected, prefix) {
 	for (let n = 1; n <= 6; n++) {
 		var pre = 1; if (n >= 4) { pre = 0 }
 		var sel_index = document.getElementById("dropdown_affix_"+n).selectedIndex;
-		if (sel_index > 0) {
-			used_groups[used_groups.length] = data.affix[pre].categories[data.affix[pre].index[sel_index]].info.group
-		}
+		if (sel_index > 0) { used_groups[used_groups.length] = data.affix[pre].categories[data.affix[pre].index[sel_index]].info.group }
 	}
 	for (let n = 1; n <= 6; n++) {
 		var pre = 1; if (n >= 4) { pre = 0 }
@@ -772,7 +808,7 @@ function setAffix(num, selected, prefix) {
 			}
 		}
 	}
-	// display no more than 1 empty dropdown for affixes (prefixes/suffixes)
+	// display no more than 1 empty dropdown for prefixes/suffixes
 	if (itemCustom.rarity == "rare" || itemCustom.rarity == "craft") {
 		var first_empty_index = -1;
 		for (let n = 1; n <= 6; n++) {
@@ -781,6 +817,20 @@ function setAffix(num, selected, prefix) {
 			var index = document.getElementById("dropdown_affix_"+n).selectedIndex;
 			if (index == 0 && first_empty_index < 0) { first_empty_index = index }
 			else if (index == 0) { document.getElementById("select_affix_"+n).style.display = "none" }
+		}
+		//limit jewels to 4 affixes instead of 6
+		if (itemCustom.type_affix == "jewel") {
+			var amount = 0;
+			for (let n = 1; n <= 6; n++) {
+				var sel_index = document.getElementById("dropdown_affix_"+n).selectedIndex;
+				if (sel_index > 0) { amount += 1 }
+			}
+			if (amount == 4) {
+				for (let n = 1; n <= 6; n++) {
+					var sel_index = document.getElementById("dropdown_affix_"+n).selectedIndex;
+					if (sel_index == 0) { document.getElementById("select_affix_"+n).style.display = "none" }
+				}
+			}
 		}
 	}
 	for (let m = 1; m <= 3; m++) { setAffixValue(num,m,document.getElementById("range_affix_"+num+"_"+m).value,prefix) }
@@ -883,23 +933,25 @@ function setCorruptionValue(num, value) {
 // 
 // ---------------------------------
 function setUpgrade(selected) {
-	var base = itemCustom.original_base;
-	var old_max_sockets = itemCustom.max_sockets;
-	if (selected > 0) {
-		base = document.getElementById("dropdown_upgrade").options[selected].value
-	}
+	// reset old base affixes
 	itemCustom[itemCustom.CODE] = false
+	var old_max_sockets = itemCustom.max_sockets;
+	var old_base_id = bases[itemCustom.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
+	for (affix in old_base_id) { itemCustom[affix] = 0 }	// TODO: it might be better to just reset the data structure for base info (but it would need to be separate from other info in itemCustom)
+	// add new base affixes
+	var base = itemCustom.original_base;
+	if (selected > 0) { base = document.getElementById("dropdown_upgrade").options[selected].value }
 	var base_id = bases[base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
 	for (affix in base_id) { itemCustom[affix] = base_id[affix] }
 	itemCustom[itemCustom.CODE] = true
 	itemCustom.base = base
-	
+	// reset corruption if it would change
 	if (document.getElementById("dropdown_corruption").selectedIndex == 1 && typeof(old_max_sockets) != 'undefined' && old_max_sockets != itemCustom.max_sockets) {
 		for (let n = 1; n <= 2; n++) { document.getElementById("select_corruption_value_"+n).style.display = "none"; }
 		data.corruption = {index:[0],categories:{}}
 		load("corruption")
 	}
-	
+
 	setValues()
 }
 
