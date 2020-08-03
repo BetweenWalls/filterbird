@@ -1,14 +1,30 @@
 
+var rare_prefix = ["Armageddon", "Beast", "Bitter", "Blood", "Bone", "Bramble", "Brimstone", "Carrion", "Chaos", "Corpse", "Corruption", "Cruel", "Death", "Demon", "Dire", "Dread", "Doom", "Eagle", "Empyrian", "Entropy", "Fiend", "Gale", "Ghoul", "Glyph", "Grim", "Hailstone", "Havoc", "Imp", "Loath", "Order", "Pain", "Plague", "Raven", "Rift", "Rule", "Rune", "Shadow", "Skull", "Soul", "Spirit", "Stone", "Storm", "Viper", "Warp", "Wraith"];
+var rare_suffix = {
+	helm:["Brow", "Casque", "Circlet", "Cowl", "Crest", "Hood", "Horn", "Mask", "Veil", "Visage", "Visor"],
+	armor:["Carapace", "Cloak", "Coat", "Hide", "Jack", "Mantle", "Pelt", "Shroud", "Suit", "Wrap"],
+	gloves:["Claw", "Clutches", "Finger", "Fist", "Grasp", "Grip", "Hand", "Hold", "Knuckle", "Touch"],
+	boots:["Blazer","Brogues","Greave","Nails","Slippers", "Spur","Stalker","Track","Trample","Tread"],
+	belt:["Buckle", "Chain", "Clasp", "Cord", "Fringe", "Harness", "Lash", "Lock", "Strap", "Winding"],
+	amulet:["Beads", "Collar", "Gorget", "Heart", "Necklace", "Noose", "Scarab", "Talisman", "Torc"],
+	ring:["Band", "Circle", "Coil", "Eye", "Finger", "Grasp", "Grip", "Gyre", "Hold", "Knuckle", "Loop", "Nails", "Spiral", "Touch", "Turn", "Whorl"],
+	shield:["Aegis", "Badge", "Emblem", "Guard", "Mark", "Rock", "Shield", "Tower", "Ward", "Wing", "Shell"],
+	axe:["Beak", "Bite", "Cleaver", "Edge", "Gnash", "Mangler", "Reaver", "Rend", "Scythe", "Sever", "Slayer", "Song", "Spawn", "Splitter", "Sunder", "Thirst"],
+	mace:["Bane", "Blow", "Brand", "Breaker", "Crack", "Crusher", "Grinder", "Knell", "Mallet", "Ram", "Smasher", "Star"],
+	sword:["Barb", "Bite", "Cleaver", "Edge", "Fang", "Gutter", "Impaler", "Needle", "Razor", "Saw", "Scalpel", "Scratch", "Scythe", "Sever", "Skewer", "Spike", "Song", "Stinger", "Thirst", "Wand"],
+	spear:["Barb", "Branch", "Dart", "Fang", "Goad", "Gutter", "Impaler", "Lance", "Nails", "Needle", "Prod", "Scourge", "Scratch", "Skewer", "Spike", "Stinger", "Wand", "Wrack"],
+	bow:["Bolt", "Branch", "Fletch", "Flight", "Horn", "Nock", "Quarrel", "Quill", "Song", "Stinger", "Thirst"],
+	staff:["Branch", "Call", "Chant", "Cry", "Goad", "Gnarl", "Spell", "Spire", "Song", "Weaver"],
+	scepter:["Blow", "Breaker", "Call", "Chant", "Crack", "Crusher", "Cry", "Gnarl", "Grinder", "Knell", "Ram", "Smasher", "Song", "Spell", "Star", "Weaver"],
+	other:["Scratch","Fang","Thirst","Rend","Star","Bane","Spike","Scourge","Barb","Horn","Song","Brand","Loom"],	// dagger, throwing weapon, javelin, polearm, crossbow, wand, claw, orb, amazon weapon, quiver
+};
+
 // toggleCustom - 
 // ---------------------------------
 function toggleCustom(checked) {
-	if (checked == true) {
-		document.getElementById("item_editing").style.display = "block"
-	} else {
-		document.getElementById("item_editing").style.display = "none"
-	}
+	if (checked == true) { document.getElementById("item_editing").style.display = "block" }
+	else { document.getElementById("item_editing").style.display = "none" }
 }
-
 
 // loadCustomization - 
 // ---------------------------------
@@ -141,20 +157,16 @@ function setName(value) {
 // 
 // ---------------------------------
 function setCustomBase() {
+	var group = document.getElementById("dropdown_group").value;
 	var type = document.getElementById("dropdown_type").value;
 	var base = document.getElementById("dropdown_base").value;
 	var rarity = document.getElementById("dropdown_rarity").value;
 	var name = document.getElementById("dropdown_name").value;
-	itemCustom = {}
 	data = {superior:{index:[0],categories:{}},automod:{index:[0],categories:{}},pointmod:{index:[0],categories:{}},affix:[{index:[0],categories:{}},{index:[0],categories:{}}],corruption:{index:[0],categories:{}}};
-
-	itemCustom.type_affix = type
-	itemCustom.base = base
-	itemCustom.rarity = rarity.toLowerCase()
-	if (rarity == "Set" || rarity == "Unique") { itemCustom.name = name }
-	else if (rarity == "Regular") { itemCustom.name = base }
-	else if (rarity == "Magic") { itemCustom.name = "___ "+base+" of __" }
-	else if (rarity == "Rare") { itemCustom.name = "Dire Vortex" }
+	itemCustom = {}
+	itemCustom.name_prefix = ""
+	itemCustom.name_suffix = ""
+	itemCustom.req_level = 1
 	
 	if (type != "amulet" && type != "ring" && type != "quiver" && type != "charm" && type != "jewel") {
 		var base_id = bases[base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
@@ -190,6 +202,20 @@ function setCustomBase() {
 				}
 			}
 		}
+	}
+	itemCustom.type_affix = type
+	itemCustom.base = base
+	itemCustom.rarity = rarity.toLowerCase()
+	if (rarity == "Set" || rarity == "Unique") { itemCustom.name = name }
+	else if (rarity == "Regular" || rarity == "Magic") { itemCustom.name = base }
+	//else if (rarity == "Magic") { itemCustom.name = "___ "+base+" of __" }
+	else if (rarity == "Rare") {
+		var suffix = "";
+		if (itemCustom.shield == true) { suffix = rare_suffix["shield"][Math.floor(Math.random()*rare_suffix["shield"].length)] }
+		else if (itemCustom.ARMOR == true) { suffix = rare_suffix[group][Math.floor(Math.random()*rare_suffix[group].length)] }
+		else if (typeof(rare_suffix[type]) != 'undefined') { suffix = rare_suffix[type][Math.floor(Math.random()*rare_suffix[type].length)] }
+		else { suffix = rare_suffix["other"][Math.floor(Math.random()*rare_suffix["other"].length)] }
+		itemCustom.name = rare_prefix[Math.floor(Math.random()*rare_prefix.length)] + " " + suffix
 	}
 	itemCustom[itemCustom.CODE] = true
 	loadEditing()
@@ -457,25 +483,35 @@ function setSockets(selected) {
 // 
 // ---------------------------------
 function setQuality(selected) {
-	// TODO
 	for (let n = 1; n <= 2; n++) {
-		document.getElementById("select_superior_"+n).style.display = "none"
-		document.getElementById("select_superior_value_"+n).style.display = "none"
+		document.getElementById("select_superior_"+n).style.display = "none";
+		document.getElementById("select_superior_value_"+n).style.display = "none";
 	}
 	if (selected == 2) {
 		document.getElementById("select_superior_1").style.display = "block";
 		load("superior");
 		itemCustom.superior = true;
 		itemCustom.inferior = false;
+		itemCustom.name_prefix = "Superior ";
+		document.getElementById("dropdown_superior_1").selectedIndex = 1;
+		setSuperior(1,1)
 	} else {
 		data.superior = {index:[0],categories:{}}
 		itemCustom.sup = 0;
 		itemCustom.superior = false;
-		itemCustom.inferior = false;
-		if (selected == 1) { itemCustom.inferior = true; }
+		if (selected == 1) {
+			itemCustom.inferior = true;
+			var inferior_prefixes = ["Low Quality ", "Cracked ", "Crude ", "Damaged "];
+			var r = Math.floor(Math.random()*4);
+			itemCustom.name_prefix = inferior_prefixes[r];
+			// TODO: pointmods cannot be from tier 5/6, and cannot be more than +1
+			// TODO: durability & defense/damage may be affected
+		} else {
+			itemCustom.inferior = false;
+			itemCustom.name_prefix = "";
+		}
 	}
-	//setValues()
-	setItemFromCustom()
+	setValues()
 }
 // 
 // ---------------------------------
@@ -573,8 +609,49 @@ function setAutomod(selected) {
 }
 // 
 // ---------------------------------
-function setAutomodValue(num, value) {
-	document.getElementById("automod_value_"+num).innerHTML = value
+function setAutomodValue(mod, value) {
+	document.getElementById("automod_value_"+mod).innerHTML = value
+	var selected = document.getElementById("dropdown_automod").selectedIndex;
+	var cat = data.automod.index[selected];
+	var mods = data.automod.categories[cat].info.mods;
+	if (selected > 0 && mods >= mod) {
+		var index = 7;
+		if (mod == 2) { index = 10 }
+		var mod_line = -1;
+		var mod_next_line = -1;
+		for (line in data.automod.categories[cat].lines) {
+			var min = data.automod.categories[cat].lines[line][index+1];
+			var max = data.automod.categories[cat].lines[line][index+2];
+			if (value >= min && value <= max) { mod_line = Number(line) }
+			if (value < min && mod_next_line < 0) { mod_next_line = Number(line) }
+		}
+		// invalid values get increased to next available minimum
+		if (mod_line < 0) {
+			var new_value = data.automod.categories[cat].lines[mod_next_line][index+1];
+			document.getElementById("range_automod_"+mod).value = new_value
+			document.getElementById("automod_value_"+mod).innerHTML = new_value
+			mod_line = mod_next_line
+		}
+		// invalid values for other mods are set to the nearest valid value
+		for (let m = 1; m <= mods; m++) {
+			if (m != mod) {
+				var m_value = document.getElementById("range_automod_"+m).value;
+				var m_index = 7;
+				if (m == 2) { m_index = 10 }
+				var m_min = data.automod.categories[cat].lines[mod_line][m_index+1];
+				var m_max = data.automod.categories[cat].lines[mod_line][m_index+2];
+				if (m_value < m_min) {
+					document.getElementById("range_automod_"+m).value = m_min
+					document.getElementById("automod_value_"+m).innerHTML = m_min
+				}
+				else if (m_value > m_max) {
+					document.getElementById("range_automod_"+m).value = m_max
+					document.getElementById("automod_value_"+m).innerHTML = m_max
+				}
+			}
+		}
+		data.automod.categories[cat].info.used = mod_line
+	}
 	setValues()
 }
 // 
@@ -624,20 +701,32 @@ function setPointmod(num,selected) {
 // ---------------------------------
 function setPointmodValue(num, value) {
 	document.getElementById("pointmod_value_"+num).innerHTML = value
+	var selected = document.getElementById("dropdown_pointmod_"+num).selectedIndex;
+	if (selected > 0) {
+		var cat = data.pointmod.index[selected];
+		var mod_line = -1;
+		for (line in data.pointmod.categories[cat].lines) {
+			var min = data.pointmod.categories[cat].lines[line][5];
+			var max = data.pointmod.categories[cat].lines[line][6];
+			if (value >= min && value <= max) { mod_line = Number(line) }
+		}
+		data.pointmod.categories[cat].info.used = 0//mod_line
+	}
 	setValues()
 }
 // 
 // ---------------------------------
 function setAffix(num, selected, prefix) {
-	// TODO: if multiple affixes are included, update others to fit within the same sub-range
-	// TODO: ensure min values are lower than max values
 	// tidy ranges
 	var mods = 0;
 	if (selected == 0) {
 		for (let m = 1; m <= 3; m++) { document.getElementById("select_affix_value_"+num+"_"+m).style.display = "none" }
+		if (itemCustom.rarity == "magic") {
+			if (prefix == 1) { itemCustom.name_prefix = "" }
+			else if (prefix == 0) { itemCustom.name_suffix = "" }
+		}
 	} else {
 		var cat = data.affix[prefix].index[selected];
-		var affix_group = data.affix[prefix].categories[cat].info.group;
 		mods = data.affix[prefix].categories[cat].info.mods;
 		for (let m = 1; m <= mods; m++) {
 			var mod_min = 1000;
@@ -700,6 +789,55 @@ function setAffix(num, selected, prefix) {
 // ---------------------------------
 function setAffixValue(num, mod, value, prefix) {
 	document.getElementById("affix_value_"+num+"_"+mod).innerHTML = value
+	var selected = document.getElementById("dropdown_affix_"+num).selectedIndex;
+	var cat = data.affix[prefix].index[selected];
+	var mods = data.affix[prefix].categories[cat].info.mods;
+	if (mods >= mod) {
+		var index = 10;
+		if (mod == 2) { index = 14 }
+		if (mod == 3) { index = 18 }
+		var mod_line = -1;
+		var mod_next_line = -1;
+		for (line in data.affix[prefix].categories[cat].lines) {
+			var min = data.affix[prefix].categories[cat].lines[line][index+2];
+			var max = data.affix[prefix].categories[cat].lines[line][index+3];
+			if (value >= min && value <= max) { mod_line = Number(line) }
+			if (value < min && mod_next_line < 0) { mod_next_line = Number(line) }
+		}
+		// invalid values get increased to next available minimum
+		if (mod_line < 0) {
+			var new_value = data.affix[prefix].categories[cat].lines[mod_next_line][index+2];
+			document.getElementById("range_affix_"+num+"_"+mod).value = new_value
+			document.getElementById("affix_value_"+num+"_"+mod).innerHTML = new_value
+			mod_line = mod_next_line
+		}
+		// invalid values for other mods are set to the nearest valid value
+		for (let m = 1; m <= mods; m++) {
+			if (m != mod) {
+				var m_value = document.getElementById("range_affix_"+num+"_"+m).value;
+				var m_index = 10;
+				if (m == 2) { m_index = 14 }
+				if (m == 3) { m_index = 18 }
+				var m_min = data.affix[prefix].categories[cat].lines[mod_line][m_index+2];
+				var m_max = data.affix[prefix].categories[cat].lines[mod_line][m_index+3];
+				if (m_value < m_min) {
+					document.getElementById("range_affix_"+num+"_"+m).value = m_min
+					document.getElementById("affix_value_"+num+"_"+m).innerHTML = m_min
+				}
+				else if (m_value > m_max) {
+					document.getElementById("range_affix_"+num+"_"+m).value = m_max
+					document.getElementById("affix_value_"+num+"_"+m).innerHTML = m_max
+				}
+			}
+		}
+		// name adjusted for magic items
+		if (itemCustom.rarity == "magic") {
+			var affix_name = data.affix[prefix].categories[cat].lines[mod_line][1];
+			if (prefix == 1) { itemCustom.name_prefix = affix_name+" " }
+			else if (prefix == 0) { itemCustom.name_suffix = " "+affix_name }
+		}
+		data.affix[prefix].categories[cat].info.used = mod_line
+	}
 	setValues()
 }
 // 
@@ -778,11 +916,31 @@ function setUpgrade(selected) {
 // ---------------------------------
 function setValues() {
 	itemCustomAffixes = {}
+	if (document.getElementById("dropdown_quality").selectedIndex == 2) {
+		for (let n = 1; n <= 2; n++) {
+			var selected = document.getElementById("dropdown_superior_"+n).selectedIndex;
+			if (selected > 0) {
+				var value = Number(document.getElementById("range_superior_"+n).value);
+				var code = data.superior.categories[data.superior.index[selected]].info["mod1"];
+				if (typeof(itemCustomAffixes[code]) == 'undefined') { itemCustomAffixes[code] = 0 }
+				itemCustomAffixes[code] += value
+			}
+		}
+	}
 	for (let m = 1; m <= 2; m++) {
 		var selected = document.getElementById("dropdown_automod").selectedIndex;
 		if (selected > 0) {
+			var cat = data.automod.index[selected];
+			var used = data.automod.categories[cat].info.used;
+			if (typeof(used) != 'undefined') {
+				var req_level = data.automod.categories[cat].lines[used][5];
+				if (req_level > itemCustom.req_level) {
+					if (typeof(itemCustomAffixes.req_level) == 'undefined') { itemCustomAffixes.req_level = 0 }
+					if (req_level > itemCustomAffixes.req_level) { itemCustomAffixes.req_level = req_level }
+				}
+			}
 			var value = Number(document.getElementById("range_automod_"+m).value);
-			var code = data.automod.categories[data.automod.index[selected]].info["mod"+m];
+			var code = data.automod.categories[cat].info["mod"+m];
 			if (typeof(itemCustomAffixes[code]) == 'undefined') { itemCustomAffixes[code] = 0 }
 			itemCustomAffixes[code] += value
 		}
@@ -790,8 +948,17 @@ function setValues() {
 	for (let n = 1; n <= 3; n++) {
 		var selected = document.getElementById("dropdown_pointmod_"+n).selectedIndex;
 		if (selected > 0) {
+			var cat = data.pointmod.index[selected];
+			var used = data.pointmod.categories[cat].info.used;
+			if (typeof(used) != 'undefined') {
+				var req_level = data.pointmod.categories[cat].lines[used][2];
+				if (req_level > itemCustom.req_level) {
+					if (typeof(itemCustomAffixes.req_level) == 'undefined') { itemCustomAffixes.req_level = 0 }
+					if (req_level > itemCustomAffixes.req_level) { itemCustomAffixes.req_level = req_level }
+				}
+			}
 			var value = Number(document.getElementById("range_pointmod_"+n).value);
-			var code = data.pointmod.categories[data.pointmod.index[selected]].info["mod1"];
+			var code = data.pointmod.categories[cat].info["mod1"];
 			if (typeof(itemCustomAffixes[code]) == 'undefined') { itemCustomAffixes[code] = 0 }
 			itemCustomAffixes[code] += value
 		}
@@ -801,8 +968,17 @@ function setValues() {
 			var prefix = 1; if (n >= 4) { prefix = 0 }
 			var selected = document.getElementById("dropdown_affix_"+n).selectedIndex;
 			if (selected > 0) {
+				var cat = data.affix[prefix].index[selected];
+				var used = data.affix[prefix].categories[cat].info.used;
+				if (typeof(used) != 'undefined') {
+					var req_level = data.affix[prefix].categories[cat].lines[used][6];
+					if (req_level > itemCustom.req_level) {
+						if (typeof(itemCustomAffixes.req_level) == 'undefined') { itemCustomAffixes.req_level = 0 }
+						if (req_level > itemCustomAffixes.req_level) { itemCustomAffixes.req_level = req_level }
+					}
+				}
 				var value = Number(document.getElementById("range_affix_"+n+"_"+m).value);
-				var code = data.affix[prefix].categories[data.affix[prefix].index[selected]].info["mod"+m];
+				var code = data.affix[prefix].categories[cat].info["mod"+m];
 				if (typeof(itemCustomAffixes[code]) == 'undefined') { itemCustomAffixes[code] = 0 }
 				itemCustomAffixes[code] += value
 			}
@@ -815,17 +991,6 @@ function setValues() {
 			var code = data.corruption.categories[data.corruption.index[selected]].info["mod"+m];
 			if (typeof(itemCustomAffixes[code]) == 'undefined') { itemCustomAffixes[code] = 0 }
 			itemCustomAffixes[code] += value
-		}
-	}
-	if (document.getElementById("dropdown_quality").selectedIndex == 2) {
-		for (let n = 1; n <= 2; n++) {
-			var selected = document.getElementById("dropdown_superior_"+n).selectedIndex;
-			if (selected > 0) {
-				var value = Number(document.getElementById("range_superior_"+n).value);
-				var code = data.superior.categories[data.superior.index[selected]].info["mod1"];
-				if (typeof(itemCustomAffixes[code]) == 'undefined') { itemCustomAffixes[code] = 0 }
-				itemCustomAffixes[code] += value
-			}
 		}
 	}
 	setItemFromCustom()

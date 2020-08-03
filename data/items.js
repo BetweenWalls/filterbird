@@ -1937,7 +1937,7 @@ aura:{index:["aura_lvl","aura"], format:["Level "," "," Aura when Equipped"]},
 aura_lvl:1,
 special:1,
 pod_changes:1,
-sup:{index:["sup"], format:["Superior +","%"]},
+//sup:{index:["sup"], format:["Superior +","%"]},
 req_level:{index:["req_level"], format:["Required Level: ",""]},
 req_strength:{index:["REQ_STR"], format:["Required Strength: ",""]},
 req_dexterity:{index:["REQ_DEX"], format:["Required Dexterity: ",""]},
@@ -2370,12 +2370,12 @@ BLOCK:1,
 QUANTITY:{index:["QUANTITY"], format:["Quantity: ",""]},
 
 // temporary implementation
-	max_durability:{index:[""], format:["Increase Maximum Durability ","%"]},
+	max_durability:{index:["max_durability"], format:["Increase Maximum Durability ","%"]},
 	dmg_lvl:{index:["",""], format:["+"," Damage ("," per level)"], mult:["CLVL",1]},
 	dmg_cold:{index:[""], format:["+"," Cold Damage"]},
 	dmg_fire:{index:[""], format:["+"," Fire Damage"]},
 	dmg_ltng:{index:[""], format:["+"," Lightning Damage"]},
-	cold_len:{index:[], format:[""]},
+	//cold_len:{index:[], format:[""]},
 	hit_skill:{index:[""], format:["Chance to cast Level "," [skill] on striking"]},
 	att_skill:{index:[""], format:["Chance to cast Level "," [skill] on attack"]},
 	gethit_skill:{index:[""], format:["Chance to cast Level "," [skill] when struck"]},
@@ -2427,7 +2427,8 @@ var item_groups = {
 	weapon:["axe","mace","sword","dagger","throwing weapon","javelin","spear","polearm","bow","crossbow","staff","wand","scepter","claw","orb","amazon weapon"],
 	offhand:["shield","paladin shield","necromancer shield","quiver"],
 	charm:["charm"],
-	jewel:["jewel"],
+	jewel:["jewel"],	//socketable:["jewel","rune","gem","standard"],
+	//misc:["gold","stackable","other"],	// most of these can be defined solely by their CODE. Only a few have variation associated with them: Gold, and 3 stackable items which have quantity: Key, Scroll of Town Portal, Scroll of Identify
 };
 
 var item_types = {

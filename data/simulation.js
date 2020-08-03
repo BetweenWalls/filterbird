@@ -44,7 +44,7 @@ function startup() {
 	document.getElementById("background_1").src = background
 	document.getElementById("background_2").src = background
 	loadCustomization()
-	//document.getElementById("debug").style.display = "block"
+	document.getElementById("debug").style.display = "block"
 }
 
 // loadItems - adds equipment and other items to the item dropdown menu
@@ -390,6 +390,7 @@ function getColor(item) {
 //	num: filter number (1 or 2)
 // ---------------------------------
 function equipmentHover(num) {
+	document.getElementById("tooltip_inventory").style.left = "0px"
 	var name = document.getElementById("output_"+num).innerHTML;
 	var main_affixes = ""
 	var affixes = "";
@@ -414,11 +415,11 @@ function equipmentHover(num) {
 	document.getElementById("item_affixes").innerHTML = affixes
 	if (main_affixes != "" || affixes != "") { document.getElementById("tooltip_inventory").style.display = "block" }
 	
-	var tooltip_width = document.getElementById("tooltip_inventory").getBoundingClientRect().width/2;
 	var item = document.getElementById("output_"+num).getBoundingClientRect();
+	var tooltip_width = document.getElementById("tooltip_inventory").getBoundingClientRect().width;
 	var textbox_height = document.getElementById("filter_text_1").getBoundingClientRect().height + document.getElementById("filter_text_2").getBoundingClientRect().height
 	var editing_height = document.getElementById("item_editing").getBoundingClientRect().height
-	var offset_x = Math.floor(item.left + item.width/2 - tooltip_width);
+	var offset_x = Math.floor(item.left + item.width/2 - tooltip_width/2);
 	var offset_y = Math.floor(110 + textbox_height + editing_height + 100*num + item.height/2);
 	document.getElementById("tooltip_inventory").style.left = offset_x+"px"
 	document.getElementById("tooltip_inventory").style.top = offset_y+"px"
@@ -429,7 +430,7 @@ function equipmentHover(num) {
 // equipmentOut - stops showing equipment info (mouse-over ends)
 // ---------------------------------
 function equipmentOut() {
-	document.getElementById("tooltip_inventory").style.left = 820+"px"
+	document.getElementById("tooltip_inventory").style.left = "820px"
 	document.getElementById("tooltip_inventory").style.display = "none"
 }
 
@@ -497,7 +498,6 @@ function setItemFromCustom() {
 	// TODO: Some of this is now done in setCustomBase() instead
 	var item = itemCustom;
 	var group = document.getElementById("dropdown_group").value
-	var value = item.name;
 	var valid = true;
 	if (valid == true) {
 		if (item.rarity == "Regular") { item.rarity = "regular" }
@@ -508,7 +508,7 @@ function setItemFromCustom() {
 		else if (item.rarity == "Craft") { item.rarity = "craft" }
 		itemToCompare = {}
 		for (affix in item) { itemToCompare[affix] = item[affix] }
-		itemToCompare.NAME = value.split(" (")[0].split(" ­ ")[0]
+		itemToCompare.NAME = item.name_prefix + item.name.split(" (")[0].split(" ­ ")[0] + item.name_suffix
 		itemToCompare.ILVL = character.ILVL
 		itemToCompare.PRICE = 35000
 		itemToCompare.ID = true
@@ -520,7 +520,10 @@ function setItemFromCustom() {
 			else if (base.tier == 3) { itemToCompare.ELT = true }
 		}
 		for (affix in item) { itemToCompare[affix] = item[affix] }	// some base affixes are overridden by regular affixes
-		for (affix in itemCustomAffixes) { itemToCompare[affix] = itemCustomAffixes[affix] }
+		for (affix in itemCustomAffixes) {
+			//if (typeof(itemToCompare[affix]) == 'undefined') { itemToCompare[affix] = 0 }
+			itemToCompare[affix] = itemCustomAffixes[affix]
+		}
 		if (typeof(itemToCompare.rarity) != 'undefined') {
 			if (itemToCompare.rarity == "set") { itemToCompare.SET = true }
 			else if (itemToCompare.rarity == "rare") { itemToCompare.RARE = true }
@@ -543,8 +546,7 @@ function setItemFromCustom() {
 		if (itemToCompare.ID == true) {
 			// affix codes translated to in-game codes
 			for (affix in itemToCompare) { for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = itemToCompare[affix] } } }
-			if (typeof(itemToCompare.sup) != 'undefined') { if (itemToCompare.sup > 0) { if (typeof(itemToCompare.ED) == 'undefined') { itemToCompare.ED = 0 }; itemToCompare.ED += itemToCompare.sup; itemToCompare.SUP = true; if (item.rarity == "regular") { itemToCompare.NAME = "Superior "+itemToCompare.NAME } } }
-			if (itemToCompare.superior == true) { itemToCompare.SUP = true; itemToCompare.NAME = "Superior "+itemToCompare.NAME; }
+			if (typeof(itemToCompare.sup) != 'undefined') { if (itemToCompare.sup > 0) { if (typeof(itemToCompare.ED) == 'undefined') { itemToCompare.ED = 0 }; itemToCompare.ED += itemToCompare.sup; itemToCompare.SUP = true; itemToCompare.superior = true } }
 			if (typeof(itemToCompare.ethereal) != 'undefined' && itemToCompare.ethereal == 1) { itemToCompare.ETH = true }
 			if (itemToCompare.CODE == "aq2" || itemToCompare.CODE == "cq2" || itemToCompare.CODE == "aqv" || itemToCompare.CODE == "cqv") { itemToCompare.QUANTITY = 500; character.CHARSTAT70 = 500; }
 			if (typeof(itemToCompare.sockets) != 'undefined') { itemToCompare.SOCK = itemToCompare.sockets }
