@@ -1,4 +1,28 @@
 
+// TODO: reduce similar/duplicated code for setSuperior/setSuperiorValue, setAutomod/setAutomodValue, setPointmod/setPointmodValue, setAffix/setAffixValue, setCorruption/setCorruptionValue
+
+var itemCustom = {};
+var itemCustomAffixes = {};
+var data = {
+		// index[i] = cat for #i element in dropdown list, where cat is a unique identifier for that group and mod combination  (mod1+mod2+mod3+group)
+		// categories[cat] = {info:{},lines:[]}
+		//	.info.group = group number for category  (items cannot have multiple affixes from the same group)
+		//	.info.desc = text description for category
+		//	.info.mods = number of mods for category
+		//	.info.mod1 = variable for mod #1
+		//	.info.mod2 = variable for mod #2
+		//	.info.mod3 = variable for mod #3
+		//	.lines[a] = info of #a line from item_affixes.js for category
+		// TODO: add selected[] and value[]?
+	superior:{index:[0],categories:{}},	//,selected:[0,0],value:[[0],[0]]
+	automod:{index:[0],categories:{}},	//,selected:[0],value:[[0,0]]
+	pointmod:{index:[0],categories:{}},	//,selected:[0,0,0],value:[[0],[0],[0]]
+	affix:[
+		{index:[0],categories:{}},	//,selected:[0,0,0],value:[[0,0,0],[0,0,0],[0,0,0]]
+		{index:[0],categories:{}},	//,selected:[0,0,0],value:[[0,0,0],[0,0,0],[0,0,0]]
+	],
+	corruption:{index:[0],categories:{}},	//,selected:[0],value:[[0,0]]
+};
 var rare_prefix = ["Armageddon", "Beast", "Bitter", "Blood", "Bone", "Bramble", "Brimstone", "Carrion", "Chaos", "Corpse", "Corruption", "Cruel", "Death", "Demon", "Dire", "Dread", "Doom", "Eagle", "Empyrian", "Entropy", "Fiend", "Gale", "Ghoul", "Glyph", "Grim", "Hailstone", "Havoc", "Imp", "Loath", "Order", "Pain", "Plague", "Raven", "Rift", "Rule", "Rune", "Shadow", "Skull", "Soul", "Spirit", "Stone", "Storm", "Viper", "Warp", "Wraith"];
 var rare_suffix = {
 	helm:["Brow", "Casque", "Circlet", "Cowl", "Crest", "Hood", "Horn", "Mask", "Veil", "Visage", "Visor"],
@@ -16,10 +40,10 @@ var rare_suffix = {
 	bow:["Bolt", "Branch", "Fletch", "Flight", "Horn", "Nock", "Quarrel", "Quill", "Song", "Stinger", "Thirst"],
 	staff:["Branch", "Call", "Chant", "Cry", "Goad", "Gnarl", "Spell", "Spire", "Song", "Weaver"],
 	scepter:["Blow", "Breaker", "Call", "Chant", "Crack", "Crusher", "Cry", "Gnarl", "Grinder", "Knell", "Ram", "Smasher", "Song", "Spell", "Star", "Weaver"],
-	other:["Scratch","Fang","Thirst","Rend","Star","Bane","Spike","Scourge","Barb","Horn","Song","Brand","Loom"],	// dagger, throwing weapon, javelin, polearm, crossbow, wand, claw, orb, amazon weapon, quiver
+	other:["Scratch","Fang","Thirst","Rend","Star","Bane","Spike","Scourge","Barb","Horn","Song","Brand","Loom"],	// dagger, throwing weapon, javelin, polearm, crossbow, wand, claw, orb, amazon weapon, quiver, jewel	(none of these were listed in the source I found, so they just use this list of generic-sounding suffixes)	...TOCHECK: determine which suffix names should actually apply
 };
 
-// toggleCustom - 
+// toggleCustom - toggles the custom item editing UI
 // ---------------------------------
 function toggleCustom(checked) {
 	if (checked == true) {
@@ -31,7 +55,7 @@ function toggleCustom(checked) {
 		document.getElementById("show_custom_format").style.display = "none"
 	}
 }
-// toggleCustomFormat - 
+// toggleCustomFormat - switches the custom item editing UI between horizontal and vertical orientations
 // ---------------------------------
 function toggleCustomFormat(checked) {
 	if (checked == true) {
@@ -44,7 +68,8 @@ function toggleCustomFormat(checked) {
 	}
 }
 
-// loadCustomization - 
+// loadCustomization - populates the 'group' dropdown
+//	other dropdowns (type, base, rarity, name) are subsequently populated from here too
 // ---------------------------------
 function loadCustomization() {
 	var options = "";
@@ -64,12 +89,12 @@ function loadCustomization() {
 	//		- setBase() should adjust Type if it's 'any'
 	//		- setName() should adjust Type/Base if either are 'any'
 }
-// 
+// setGroup - called when 'group' dropdown is used, loads the next dropdown
 // ---------------------------------
 function setGroup(value) {
 	loadType(value)
 }
-// 
+// loadType - populates the 'type' dropdown, subsequent dropdowns
 // ---------------------------------
 function loadType(value) {
 	var options = "";
@@ -77,12 +102,12 @@ function loadType(value) {
 	document.getElementById("dropdown_type").innerHTML = options
 	loadBase(document.getElementById("dropdown_type").value)
 }
-// 
+// setType - called when 'type' dropdown is used, loads the next dropdown
 // ---------------------------------
 function setType(value) {
 	loadBase(value)
 }
-// 
+// loadBase - populates the 'base' dropdown, subsequent dropdowns
 // ---------------------------------
 function loadBase(value) {
 	value = value.split(" ").join("_")
@@ -91,12 +116,12 @@ function loadBase(value) {
 	document.getElementById("dropdown_base").innerHTML = options
 	loadRarity(document.getElementById("dropdown_base").value)
 }
-// 
+// setBase - called when 'base' dropdown is used, loads the next dropdown
 // ---------------------------------
 function setBase(value) {
 	loadRarity(value)
 }
-// 
+// loadRarity - populates the 'rarity' dropdown, subsequent dropdowns
 // ---------------------------------
 function loadRarity(value) {
 	var options = "";
@@ -137,12 +162,12 @@ function loadRarity(value) {
 	
 	loadName(document.getElementById("dropdown_rarity").value)
 }
-// 
+// setRarity - called when 'rarity' dropdown is used, loads the next dropdown
 // ---------------------------------
 function setRarity(value) {
 	loadName(value)
 }
-// 
+// loadName - populates the 'name' dropdown
 // ---------------------------------
 function loadName(value) {
 	var options = "";
@@ -161,20 +186,49 @@ function loadName(value) {
 	}
 	// TODO: Prevent duplicate unique/set items (any with variations) from being duplicated here, if needed
 	document.getElementById("dropdown_name").innerHTML = options
+	setCustomBase()	// called to set qlvl
+	validateILVL(document.getElementById("ilvl").value)
 	setCustomBase()
 	tidyBaseSelection()
-	//itemCustomAffixes = {}
 	setValues()
 }
-// 
+// setName - called when 'name' dropdown is used
 // ---------------------------------
 function setName(value) {
+	setCustomBase()	// called to set qlvl
+	validateILVL(document.getElementById("ilvl").value)
 	setCustomBase()
 	tidyBaseSelection()
-	//itemCustomAffixes = {}
 	setValues()
 }
-// 
+// validateILVL - 
+// ---------------------------------
+function validateILVL(value) {
+	var qlvl = 1;
+	if (typeof(itemCustom.qlvl) != 'undefined') { qlvl = itemCustom.qlvl }
+	if (isNaN(value) == true || value < 1 || value > 99) { value = document.getElementById("dropdown_ilvl").selectedIndex }
+	if (value < qlvl) { value = qlvl }
+	document.getElementById("ilvl").value = value
+}
+// setILVL2 - another selector for ilvl
+// ---------------------------------
+function setILVL2(value) {
+	// TODO: ILVL is an oft-used filter condition, so it's even more important that it can be changed without resetting all selected affixes
+	validateILVL(value)
+	value = document.getElementById("ilvl").value
+	// keep ilvl consistent (temporary while old item selection & custom item editing coexist)
+	document.getElementById("dropdown_ilvl").selectedIndex = value
+	character.ILVL = value
+	if (value < 36) { character.DIFFICULTY = 0 }
+	else if (value > 66) { character.DIFFICULTY = 1 }
+	else { character.DIFFICULTY = 2 }
+	
+	setCustomBase()
+	tidyBaseSelection()
+	setValues()
+}
+// setCustomBase - sets basic item info from 5 dropdowns: Group, Type, Base, Rarity, Name
+//	dropdowns for possible affixes are then populated
 // ---------------------------------
 function setCustomBase() {
 	var group = document.getElementById("dropdown_group").value;
@@ -238,11 +292,13 @@ function setCustomBase() {
 	itemCustom[itemCustom.CODE] = true
 	loadEditing()
 }
-// 
+// tidyBaseSelection - hides type/name dropdowns when they're irrelevant
 // ---------------------------------
 function tidyBaseSelection() {
 	if (document.getElementById("dropdown_type").length == 1) { document.getElementById("select_type").style.display = "none" }
 	else { document.getElementById("select_type").style.display = "inline" }
+	//if (document.getElementById("dropdown_base").length == 1) { document.getElementById("select_base").style.visibility = "hidden" }
+	//else { document.getElementById("select_base").style.visibility = "visible" }
 	if (document.getElementById("dropdown_name").innerHTML == "") { document.getElementById("select_name").style.display = "none" }
 	else { document.getElementById("select_name").style.display = "inline" }
 }
@@ -256,7 +312,7 @@ function tidyBaseSelection() {
 
 
 
-// 
+// getMatch - returns true if the given kind of affix should be available for the selected base item
 // ---------------------------------
 function getMatch(kind) {
 	var result = false;
@@ -271,13 +327,13 @@ function getMatch(kind) {
 	if (kind == "upgrade" && (itemCustom.rarity == "unique" || itemCustom.rarity == "rare") && (itemCustom.tier == 1 || itemCustom.tier == 2)) { result = true }
 	return result
 }
-// 
+// getALVL - returns the 'affix level' for the item
 // ---------------------------------
 function getALVL() {
 	var type = itemCustom.type_affix;
 	var base_qlvl = 1;
 	var magic_lvl = 0;
-	var ilvl = character.ILVL;
+	var ilvl = itemCustom.ILVL;
 	var x = 0;
 	var alvl = 0;
 	
@@ -290,23 +346,21 @@ function getALVL() {
 		else if (itemCustom.base == "Coronet") { magic_lvl = 8 }
 		else if (itemCustom.base == "Tiara") { magic_lvl = 13 }
 		else if (itemCustom.base == "Diadem") { magic_lvl = 18 }
-	} else if (type == "staff" || type == "wand" || type == "orb") {
+	} else if (type == "staff" || type == "orb" || (type == "wand" && itemCustom.tier != 3)) {
 		magic_lvl = 1
 	}
-
-	if (base_qlvl > ilvl) { x = base_qlvl }
-	else { x = ilvl }
+	
+	x = Math.max(ilvl,base_qlvl)
 	if (magic_lvl > 0) { x = x + magic_lvl }
 	else {
 		if (x < (99 - base_qlvl/2)) { x = x - base_qlvl/2 }
 		else { x = 2*x - 99 }
 	}
-	if (x > 99) { alvl = 99 }
-	else { alvl = x }
+	alvl = Math.min(x,99)
 	
 	return alvl
 }
-// 
+// loadEditing - disables all affix options, then enables any that are relevant to the item
 // ---------------------------------
 function loadEditing() {
 	for (let n = 1; n <= 2; n++) { document.getElementById("select_superior_"+n).style.display = "none"; document.getElementById("select_superior_value_"+n).style.display = "none"; document.getElementById("dropdown_superior_"+n).selectedIndex = 0; }
@@ -332,7 +386,7 @@ function loadEditing() {
 		if (getMatch(selects[s])) { load(selects[s]) }
 	}
 }
-// 
+// load - subfunction for loadEditing, 
 // ---------------------------------
 function load(kind) {
 	// TODO: Preserve affixes if possible when resetting
@@ -341,8 +395,10 @@ function load(kind) {
 	if (kind == "ethereal") {
 		if (document.getElementById("ethereal").checked == true) { itemCustom.ethereal = true }
 	} else if (kind == "sockets") {
-		// TODO: reference list of max sockets if ilvl < 40
-		for (let i = 1; i <= itemCustom.max_sockets; i++) { options += "<option class='gray-all'>"+i+"</option>" }
+		var most_sockets = itemCustom.max_sockets;
+		if (itemCustom.ILVL <= 40 && typeof(itemCustom.max_sockets_lvl_40) != 'undefined') { most_sockets = itemCustom.max_sockets_lvl_40 }
+		if (itemCustom.ILVL <= 25 && typeof(itemCustom.max_sockets_lvl_25) != 'undefined') { most_sockets = itemCustom.max_sockets_lvl_25 }
+		for (let i = 1; i <= most_sockets; i++) { options += "<option class='gray-all'>"+i+"</option>" }
 		document.getElementById("dropdown_sockets").innerHTML = options
 	} else if (kind == "quality") {
 		options += "<option class='gray-all'>" + "Inferior" + "</option>"
@@ -396,11 +452,12 @@ function load(kind) {
 		if (itemCustom["WEAPON"] == true) { document.getElementById("dropdown_superior_2").innerHTML = options }
 	}
 }
-// 
+// loadDetails - subfunction for load, iterates through the list of affixes and returns the relevant ones as a string of options
+//	data is also configured to match the relevant options
 // ---------------------------------
 function loadDetails(kind,aff,alvl,prefix,spawnable,rare,lvl,maxlvl,group,mod1,mod2,mod3,included,excluded) {
 	var options = "";
-	if (spawnable == 1 && alvl >= lvl && alvl <= maxlvl && (rare == 1 || itemCustom.rarity == "magic")) {
+	if (spawnable == 1 && alvl >= lvl && alvl <= maxlvl && (rare == 1 || itemCustom.rarity != "rare")) {
 		var match = false;
 		// check inclusions
 		for (let i = 0; i < included.length; i++) {
@@ -476,25 +533,9 @@ function loadDetails(kind,aff,alvl,prefix,spawnable,rare,lvl,maxlvl,group,mod1,m
 
 
 
-// 
-// ---------------------------------
-function setILVL2(value) {
-	value = Number(value)
-	if (isNaN(value) == true || value < 1 || value > 99) { value = document.getElementById("dropdown_ilvl").selectedIndex }
-	document.getElementById("ilvl").value = value
-	// keep ilvl consistent (temporary while old item selection & custom item editing coexist)
-	document.getElementById("dropdown_ilvl").selectedIndex = value
-	character.ILVL = value
-	if (value < 36) { character.DIFFICULTY = 0 }
-	else if (value > 66) { character.DIFFICULTY = 1 }
-	else { character.DIFFICULTY = 2 }
-	
-	itemCustom.ILVL = value
-	// TODO: What is affected by ilvl? sockets & alvl (which means many affixes can change)
-	//setValues()
-	setItemFromCustom()
-}
-// 
+
+
+// setIdentified - handles 'identified' checkbox
 // ---------------------------------
 function setIdentified(checked) {
 	itemCustom.ID = checked
@@ -504,21 +545,21 @@ function setIdentified(checked) {
 	//setValues()
 	setItemFromCustom()
 }
-// 
+// setEthereal - handles 'ethereal' checkbox
 // ---------------------------------
 function setEthereal(checked) {
 	itemCustom.ethereal = checked
 	//setValues()
 	setItemFromCustom()
 }
-// 
+// setSockets - handles 'sockets' dropdown
 // ---------------------------------
 function setSockets(selected) {
 	itemCustom.sockets = selected
 	//setValues()
 	setItemFromCustom()
 }
-// 
+// setQuality - handles 'quality' dropdown, sets superior/inferior info and shows/hides 'superior' dropdowns
 // ---------------------------------
 function setQuality(selected) {
 	for (let n = 1; n <= 2; n++) {
@@ -551,7 +592,7 @@ function setQuality(selected) {
 	}
 	setValues()
 }
-// 
+// setSuperior - handles 'superior' dropdowns
 // ---------------------------------
 function setSuperior(num,selected) {
 	// tidy ranges
@@ -607,7 +648,7 @@ function setSuperior(num,selected) {
 	}
 	setSuperiorValue(num,document.getElementById("range_superior_"+num).value)
 }
-// 
+// setSuperiorValue - handles 'superior' range values
 // ---------------------------------
 function setSuperiorValue(num, value) {
 	document.getElementById("superior_value_"+num).innerHTML = value
@@ -615,7 +656,7 @@ function setSuperiorValue(num, value) {
 	if (document.getElementById("dropdown_superior_1").selectedIndex != 1 && document.getElementById("dropdown_superior_2").selectedIndex != 1) { itemCustom.sup = 0 }
 	setValues()
 }
-// 
+// setAutomod - handles 'automod' dropdown
 // ---------------------------------
 function setAutomod(selected) {
 	var mods = 0;
@@ -645,7 +686,7 @@ function setAutomod(selected) {
 	}
 	for (let m = 1; m <= 2; m++) { setAutomodValue(m,document.getElementById("range_automod_"+m).value) }
 }
-// 
+// setAutomodValue - handles 'automod' range values
 // ---------------------------------
 function setAutomodValue(mod, value) {
 	document.getElementById("automod_value_"+mod).innerHTML = value
@@ -692,7 +733,7 @@ function setAutomodValue(mod, value) {
 	}
 	setValues()
 }
-// 
+// setPointmod - handles 'pointmod' dropdowns
 // ---------------------------------
 function setPointmod(num,selected) {
 	// tidy ranges
@@ -735,7 +776,7 @@ function setPointmod(num,selected) {
 	}
 	setPointmodValue(num,document.getElementById("range_pointmod_"+num).value)
 }
-// 
+// setPointmodValue - handles 'pointmod' range values
 // ---------------------------------
 function setPointmodValue(num, value) {
 	document.getElementById("pointmod_value_"+num).innerHTML = value
@@ -752,7 +793,7 @@ function setPointmodValue(num, value) {
 	}
 	setValues()
 }
-// 
+// setAffix - handles 'prefix' & 'suffix' dropdowns
 // ---------------------------------
 function setAffix(num, selected, prefix) {
 	// tidy ranges
@@ -835,7 +876,7 @@ function setAffix(num, selected, prefix) {
 	}
 	for (let m = 1; m <= 3; m++) { setAffixValue(num,m,document.getElementById("range_affix_"+num+"_"+m).value,prefix) }
 }
-// 
+// setAffixValue - handles 'prefix' & 'suffix' range values
 // ---------------------------------
 function setAffixValue(num, mod, value, prefix) {
 	document.getElementById("affix_value_"+num+"_"+mod).innerHTML = value
@@ -890,7 +931,7 @@ function setAffixValue(num, mod, value, prefix) {
 	}
 	setValues()
 }
-// 
+// setCorruption - handles 'corruption' dropdown
 // ---------------------------------
 function setCorruption(selected) {
 	var mods = 0;
@@ -906,8 +947,11 @@ function setCorruption(selected) {
 				var min = data.corruption.categories[cat].lines[line][index+1];
 				var max = data.corruption.categories[cat].lines[line][index+2];
 				if (data.corruption.categories[cat].lines[line][index] == "sock") {
-					if (min > itemCustom.max_sockets) { min = itemCustom.max_sockets }
-					if (max > itemCustom.max_sockets) { max = itemCustom.max_sockets }
+					var most_sockets = itemCustom.max_sockets;
+					if (itemCustom.ILVL <= 40 && typeof(itemCustom.max_sockets_lvl_40) != 'undefined') { most_sockets = itemCustom.max_sockets_lvl_40 }
+					if (itemCustom.ILVL <= 25 && typeof(itemCustom.max_sockets_lvl_25) != 'undefined') { most_sockets = itemCustom.max_sockets_lvl_25 }
+					if (min > most_sockets) { min = most_sockets }
+					if (max > most_sockets) { max = most_sockets }
 				}
 				if (min <= mod_min) { mod_min = min }
 				if (max >= mod_max) { mod_max = max }
@@ -924,13 +968,13 @@ function setCorruption(selected) {
 	}
 	for (let m = 1; m <= 2; m++) { setCorruptionValue(m,document.getElementById("range_corruption_"+m).value) }
 }
-// 
+// setCorruptionValue - handles 'corruption' range values
 // ---------------------------------
 function setCorruptionValue(num, value) {
 	document.getElementById("corruption_value_"+num).innerHTML = value
 	setValues()
 }
-// 
+// setUpgrade - handles 'upgrade' dropdown
 // ---------------------------------
 function setUpgrade(selected) {
 	// reset old base affixes
@@ -964,7 +1008,7 @@ function setUpgrade(selected) {
 
 
 
-// 
+// setValues - sets values for various affixes, calls setItemFromCustom (in simulation.js)
 // ---------------------------------
 function setValues() {
 	itemCustomAffixes = {}

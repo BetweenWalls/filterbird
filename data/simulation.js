@@ -1,6 +1,4 @@
 var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"common"};
-var itemCustom = {};
-var itemCustomAffixes = {};
 var character = {CLVL:90,CHARSTAT14:100000,CHARSTAT15:100000,DIFFICULTY:2,ILVL:90,CHARSTAT70:0};
 var item_settings = {ID:false};
 var colors = {
@@ -16,22 +14,6 @@ var colors = {
 	Orange:"#c48736",
 	Purple:"#9b2aea",
 	Red:"#a94838"
-};
-
-var data = {
-		// categories[cat] = {info:{},lines:[]}, where cat is a unique identifier for that group and mod combination (mod1+mod2+mod3+group)
-		// index[i] = cat for #i element in dropdown list
-		// info.group = non-shareable group number for dropdown element
-		// info.desc = text description for dropdown element
-		// lines[a] = info of #a line from item_affixes.js with the same values for group, mod1, mod2, & mod3
-	superior:{index:[0],categories:{}},
-	automod:{index:[0],categories:{}},
-	pointmod:{index:[0],categories:{}},
-	affix:[
-		{index:[0],categories:{}},
-		{index:[0],categories:{}},
-	],
-	corruption:{index:[0],categories:{}},
 };
 
 // startup - runs when the page loads
