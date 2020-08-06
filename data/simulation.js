@@ -1,6 +1,7 @@
 var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"common"};
-var character = {CLVL:90,CHARSTAT14:100000,CHARSTAT15:100000,DIFFICULTY:2,ILVL:90,CHARSTAT70:0};
+var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:90,CHARSTAT70:0,CHARSTAT13:1000};
 var item_settings = {ID:false};
+var settings = {auto_difficulty:true};
 var colors = {
 	White:"#dddddd",
 	Gray:"#707070",
@@ -86,9 +87,11 @@ function setILVL(value) {
 	document.getElementById("ilvl").value = value
 	
 	character.ILVL = Number(value)
-	if (value < 36) { character.DIFFICULTY = 0 }
-	else if (value > 66) { character.DIFFICULTY = 1 }
-	else { character.DIFFICULTY = 2 }
+	if (settings.auto_difficulty == true) {
+		if (value < 36) { character.DIFFICULTY = 0 }
+		else if (value > 66) { character.DIFFICULTY = 2 }
+		else { character.DIFFICULTY = 1 }
+	}
 	setItem(document.getElementById("dropdown_item").value )
 }
 
@@ -405,7 +408,7 @@ function equipmentHover(num) {
 	var item = document.getElementById("output_"+num).getBoundingClientRect();
 	var tooltip_width = document.getElementById("tooltip_inventory").getBoundingClientRect().width;
 	var textbox_height = document.getElementById("filter_text_1").getBoundingClientRect().height + document.getElementById("filter_text_2").getBoundingClientRect().height
-	var editing_height = document.getElementById("item_editing").getBoundingClientRect().height
+	var editing_height = document.getElementById("item_editing").getBoundingClientRect().height + document.getElementById("non_item_editing").getBoundingClientRect().height
 	var offset_x = Math.floor(item.left + item.width/2 - tooltip_width/2);
 	var offset_y = Math.floor(110 + textbox_height + editing_height + 100*num + item.height/2);
 	document.getElementById("tooltip_inventory").style.left = offset_x+"px"
@@ -581,4 +584,80 @@ function printAffixes() {
 	output += "---------------------------<br>"
 	document.getElementById("print").innerHTML += output
 	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// character codes used by filters:
+/*
+CHARSTAT15	gold in stash
+CHARSTAT14	gold on character
+CHARSTAT70	quantity (quiver = 500 arrows, javelins & throwing weapons > 0)
+CHARSTAT45	poison resist
+CHARSTAT43	cold resist
+CHARSTAT13	experience (0 for mules ...tied to character level)
+*/
+
+// toggleNonItemDetails - 
+// ---------------------------------
+function toggleNonItemDetails(checked)  {
+	if (checked == true) { document.getElementById("non_item_editing").style.display = "block" }
+	else { document.getElementById("non_item_editing").style.display = "none" }
+}
+// setCLVL2 - 
+// ---------------------------------
+function setCLVL2(value) {
+	if (isNaN(value) == true || value < 1 || value > 99) { value = document.getElementById("dropdown_clvl").selectedIndex }
+	document.getElementById("clvl").value = value
+	document.getElementById("dropdown_clvl").value = value
+	character.CLVL = Number(value)
+	if (character.CHARSTAT14 > (character.CLVL * 10000)) {
+		character.CHARSTAT14 = character.CLVL * 10000
+		document.getElementById("gold_char").value = character.CHARSTAT14
+	}
+	if (value == 1) { character.CHARSTAT13 = 0 }
+	else { character.CHARSTAT13 = 1000 }
+	simulate()
+}
+// setDifficulty - 
+// ---------------------------------
+function setDifficulty(selected) {
+	if (selected < 3) {
+		character.auto_difficulty = false
+		character.DIFFICULTY = selected
+	} else {
+		character.auto_difficulty = true
+		if (itemCustom.ILVL < 36) { character.DIFFICULTY = 0 }
+		else if (itemCustom.ILVL > 66) { character.DIFFICULTY = 2 }
+		else { character.DIFFICULTY = 1 }
+	}
+	simulate()
+}
+// setGoldStash - 
+// ---------------------------------
+function setGoldStash(value) {
+	if (isNaN(value) == true || value < 0 || value > 2500000) { value = character.CHARSTAT15 }
+	document.getElementById("gold_stash").value = Number(value)
+	character.CHARSTAT15 = Number(value)
+	simulate()
+}
+// setGoldChar - 
+// ---------------------------------
+function setGoldChar(value) {
+	if (isNaN(value) == true || value < 0 || value > (character.CLVL * 10000)) {
+		value = Number(character.CHARSTAT14);
+		if (value > (character.CLVL * 10000)) { value = character.CLVL * 10000 };
+	}
+	document.getElementById("gold_char").value = Number(value)
+	character.CHARSTAT14 = Number(value)
+	simulate()
 }

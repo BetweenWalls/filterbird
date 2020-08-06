@@ -21,8 +21,12 @@
 			<button class="nav-dropbtn">Options</button>
 			<div class="nav-dropdown-content">
 				<div class="nav-dropdown-content-item"><div class="nav-option">
+					<input id="non_item_custom" type="checkbox" name="non_item_custom" onclick="toggleNonItemDetails(this.checked);">
+					<label for="non_item_custom">Non-Item Details</label>
+				</div></div>
+				<div class="nav-dropdown-content-item"><div class="nav-option">
 					<input id="custom" type="checkbox" name="custom" onclick="toggleCustom(this.checked);">
-					<label for="custom">Custom Items (under construction)</label>
+					<label for="custom">Custom Items</label>
 				</div></div>
 				<div id="show_custom_format" class="nav-dropdown-content-item" style="display:none;"><div class="nav-option">
 					<input id="custom_format" type="checkbox" name="custom_format" onclick="toggleCustomFormat(this.checked);">
@@ -55,6 +59,22 @@
 			<div class="dropdown" style="height:20px; position:relative; z-index:6; display:inline; float:right;">
 				<label class="label" for="dropdown_clvl">Character Level </label>
 				<select class="dropdown" id="dropdown_clvl" name="dropdown_clvl" style="width:25px; padding-left:0px;" onChange="setCLVL(this.value)"></select>
+			</div>
+		</div>
+		<div id="non_item_editing" style="display:none;">
+			<br>
+			<div style="background-color:#222; display:table;">
+				<div class="new-dropdown-title">Non-Item Details</div>
+				<div style="display:inline-table; margin-right:5px;">
+					<div><label class="label" for="clvl">Character Level: </label><input id="clvl" name="clvl" class="num-input" type="number" min="1" max="99" value="90" onchange="setCLVL2(this.value)"></div>
+					<div><label class="label">Difficulty: </label><select id="dropdown_difficulty" class="new-dropdown" onChange="setDifficulty(this.selectedIndex)">
+						<option class="gray-all">Normal</option><option class="gray-all">Nightmare</option><option class="gray-all">Hell</option><option class="gray-all" selected>Auto (item level based)</option>
+					</select></div>
+				</div>
+				<div style="display:inline-table;">
+					<div><label class="label" for="gold_stash">Gold in Stash: </label><input id="gold_stash" name="gold_stash" class="num-input" style="max-width:72px;" type="number" min="0" max="2500000" value="199000" onchange="setGoldStash(this.value)"></div>
+					<div><label class="label" for="gold_char">Gold Carried: </label><input id="gold_char" name="gold_char" class="num-input" style="max-width:66px;" type="number" min="0" max="900000" value="199000" onchange="setGoldChar(this.value)"></div>
+				</div>
 			</div>
 		</div>
 		<div id="item_editing" style="display:none;">

@@ -110,11 +110,15 @@ function setType(value) {
 // loadBase - populates the 'base' dropdown, subsequent dropdowns
 // ---------------------------------
 function loadBase(value) {
-	value = value.split(" ").join("_")
-	var options = "";
-	for (base in item_types[value]) { options += "<option class='gray-all'>" + item_types[value][base] + "</option>" }
-	document.getElementById("dropdown_base").innerHTML = options
-	loadRarity(document.getElementById("dropdown_base").value)
+	//if (value == "rune" || value == "gem" || value == "other" || value == "misc") {
+	//	loadMisc(value)
+	//} else {
+		value = value.split(" ").join("_")
+		var options = "";
+		for (base in item_types[value]) { options += "<option class='gray-all'>" + item_types[value][base] + "</option>" }
+		document.getElementById("dropdown_base").innerHTML = options
+		loadRarity(document.getElementById("dropdown_base").value)
+	//}
 }
 // setBase - called when 'base' dropdown is used, loads the next dropdown
 // ---------------------------------
@@ -209,6 +213,7 @@ function validateILVL(value) {
 	if (isNaN(value) == true || value < 1 || value > 99) { value = document.getElementById("dropdown_ilvl").selectedIndex }
 	if (value < qlvl) { value = qlvl }
 	document.getElementById("ilvl").value = value
+	character.ILVL = Number(value)
 }
 // setILVL2 - another selector for ilvl
 // ---------------------------------
@@ -219,9 +224,6 @@ function setILVL2(value) {
 	// keep ilvl consistent (temporary while old item selection & custom item editing coexist)
 	document.getElementById("dropdown_ilvl").selectedIndex = value
 	character.ILVL = value
-	if (value < 36) { character.DIFFICULTY = 0 }
-	else if (value > 66) { character.DIFFICULTY = 1 }
-	else { character.DIFFICULTY = 2 }
 	
 	setCustomBase()
 	tidyBaseSelection()
@@ -295,6 +297,8 @@ function setCustomBase() {
 // tidyBaseSelection - hides type/name dropdowns when they're irrelevant
 // ---------------------------------
 function tidyBaseSelection() {
+	//document.getElementById("select_base").style.display = "block"
+	//document.getElementById("select_rarity").style.display = "inline"
 	if (document.getElementById("dropdown_type").length == 1) { document.getElementById("select_type").style.display = "none" }
 	else { document.getElementById("select_type").style.display = "inline" }
 	//if (document.getElementById("dropdown_base").length == 1) { document.getElementById("select_base").style.visibility = "hidden" }
@@ -304,6 +308,28 @@ function tidyBaseSelection() {
 }
 
 
+
+
+
+// loadMisc - 
+// ---------------------------------
+function loadMisc(value) {
+	var options = "";
+	for (let i = 0; i < premade[value].length; i++) { options += "<option class='gray-all'>"+premade[value][i].name+"</option>" }
+	document.getElementById("dropdown_name").innerHTML = options
+	document.getElementById("select_name").style.display = "block"
+	document.getElementById("select_base").style.display = "none"
+	document.getElementById("select_rarity").style.display = "none"
+	if (document.getElementById("dropdown_type").length == 1) { document.getElementById("select_type").style.display = "none" }
+	else { document.getElementById("select_type").style.display = "inline" }
+	// TODO
+	// ...use a different dropdown than dropdown_name?
+	//loadEditing()
+	//setCustomBase()
+	//itemCustom = {}
+	//for (affix in premade[value][0]) { itemCustom[affix] = premade[value][0][affix] }
+	//setValues()
+}
 
 
 
@@ -356,7 +382,7 @@ function getALVL() {
 		if (x < (99 - base_qlvl/2)) { x = x - base_qlvl/2 }
 		else { x = 2*x - 99 }
 	}
-	alvl = Math.min(x,99)
+	alvl = Math.round(Math.min(x,99))
 	
 	return alvl
 }
