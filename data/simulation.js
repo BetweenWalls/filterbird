@@ -75,6 +75,14 @@ function setID(value) {
 // ---------------------------------
 function setCLVL(value) {
 	character.CLVL = Number(value)
+	// keep clvl consistent (temporary while old item selection & non-item details coexist)
+	document.getElementById("clvl").value = Number(value)
+	if (character.CHARSTAT14 > (character.CLVL * 10000)) {
+		character.CHARSTAT14 = character.CLVL * 10000
+		document.getElementById("gold_char").value = character.CHARSTAT14
+	}
+	if (value == 1) { character.CHARSTAT13 = 0 }
+	else { character.CHARSTAT13 = 1000 }
 	simulate()
 }
 
