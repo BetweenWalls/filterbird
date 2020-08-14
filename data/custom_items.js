@@ -1,5 +1,9 @@
 
 // TODO: reduce similar/duplicated code for setSuperior/setSuperiorValue, setAutomod/setAutomodValue, setPointmod/setPointmodValue, setAffix/setAffixValue, setCorruption/setCorruptionValue
+// TODO: add crafted items
+// TODO: add option to insert socketables into items (also: Runewords)
+// TODO: add option to 'Larzuk'-socket items (mostly just relevant when a non-socket corruption is already applied)
+// TODO: update mutual compatibility of superior mod options (ar_bonus & req)
 
 var itemCustom = {};
 var itemCustomAffixes = {};
@@ -224,6 +228,11 @@ function setILVL2(value) {
 	// keep ilvl consistent (temporary while old item selection & custom item editing coexist)
 	document.getElementById("dropdown_ilvl").selectedIndex = value
 	character.ILVL = value
+	if (settings.auto_difficulty == true) {
+		if (value < 36) { character.DIFFICULTY = 0 }
+		else if (value > 66) { character.DIFFICULTY = 2 }
+		else { character.DIFFICULTY = 1 }
+	}
 	
 	setCustomBase()
 	tidyBaseSelection()
@@ -350,7 +359,7 @@ function getMatch(kind) {
 	if (kind == "pointmod" && itemCustom.rarity != "unique" && itemCustom.rarity != "set" && (itemCustom.CL1 || itemCustom.CL2 || itemCustom.CL4 || itemCustom.CL5 || itemCustom.CL6 || itemCustom.WP11 || itemCustom.WP12 || itemCustom.WP13) && !(itemCustom.CL5 == true && (itemCustom.tier == 1 || itemCustom["9ar"] == true || itemCustom["9wb"] == true || itemCustom["9xf"] == true))) { result = true }
 	if (kind == "affix" && (itemCustom.rarity == "magic" || itemCustom.rarity == "rare" || itemCustom.rarity == "craft")) { result = true }
 	if (kind == "corruption" && itemCustom.rarity != "regular" && itemCustom.type_affix != "charm" && itemCustom.type_affix != "jewel" && !(itemCustom.sockets > 0)) { result = true }
-	if (kind == "upgrade" && (itemCustom.rarity == "unique" || itemCustom.rarity == "rare") && (itemCustom.tier == 1 || itemCustom.tier == 2)) { result = true }
+	if (kind == "upgrade" && (itemCustom.rarity == "unique" || itemCustom.rarity == "rare" || itemCustom.rarity == "set") && (itemCustom.tier == 1 || itemCustom.tier == 2)) { result = true }
 	return result
 }
 // getALVL - returns the 'affix level' for the item

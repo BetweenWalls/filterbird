@@ -455,7 +455,10 @@ function getAffixLine(affix) {
 			if (isNaN(value) == false) { value_combined += value }
 			var rounding = true;
 			if (stat.mult != null) {
-				if (stat.mult[i] != 1) { value *= character[stat.mult[i]] }	// 
+				if (stat.mult[i] != 1) {
+					value *= character[stat.mult[i]]
+					if (affix == "all_skills_per_level") { value = Math.ceil(value) }
+				}
 				else { rounding = false }
 			}
 			if (isNaN(value) == false && rounding == true) { value = Math.floor(Math.round(value)) }

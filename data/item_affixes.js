@@ -1,4 +1,7 @@
 
+// TODO: add affixes for crafted items
+// TODO: add affixes for "Summons have +X% Increased Damage" (Amulets, Circlets, Wands, Necromancer Heads)
+
 // info from magicPrefixes.txt & magicSuffixes.txt, copy to excel for easier viewing/editing (copy to word first to preserve quotation marks)
 // 		notes on changes:
 // 		mod1,mod2,mod3 changed ("%" replaced with "P", "/lvl" replaced with "_lvl", "/time" replaced with "_time", "-" replaced with "_")
@@ -1147,8 +1150,8 @@ var affixes = [
 [	0,	"of Magic Arrows",	0,	0,	35,	99,	28,	"ama",	3,	44,	"charged",	6,	-20,	-6,	"",	0,	0,	0,	"",	0,	0,	0,	"glov",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Fire Arrows",	0,	0,	13,	99,	12,	"ama",	1,	44,	"charged",	7,	-30,	-10,	"",	0,	0,	0,	"",	0,	0,	0,	"miss",	"abow",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Fire Arrows",	1,	1,	40,	99,	32,	"ama",	3,	44,	"charged",	7,	-20,	-6,	"",	0,	0,	0,	"",	0,	0,	0,	"glov",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of Inner Sight",	1,	1,	18,	99,	14,	"ama",	2,	44,	"charged",	8,	-30,	-6,	"",	0,	0,	0,	"",	0,	0,	0,	"amul",	"amaz",	"circ",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of Inner Sight",	1,	1,	50,	99,	42,	"ama",	5,	44,	"charged",	8,	-20,	-4,	"",	0,	0,	0,	"",	0,	0,	0,	"glov",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
+[	0,	"of Phase Run",	1,	1,	18,	99,	14,	"ama",	2,	44,	"charged",	8,	-30,	-6,	"",	0,	0,	0,	"",	0,	0,	0,	"amul",	"amaz",	"circ",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// changed from Inner Sight
+[	0,	"of Phase Run",	1,	1,	50,	99,	42,	"ama",	5,	44,	"charged",	8,	-20,	-4,	"",	0,	0,	0,	"",	0,	0,	0,	"glov",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// changed from Inner Sight
 [	0,	"of Jabbing",	0,	0,	24,	99,	18,	"ama",	3,	44,	"charged",	10,	-60,	-7,	"",	0,	0,	0,	"",	0,	0,	0,	"spea",	"aspe",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Jabbing",	0,	0,	50,	99,	42,	"ama",	5,	44,	"charged",	10,	-20,	-4,	"",	0,	0,	0,	"",	0,	0,	0,	"glov",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Cold Arrows",	1,	1,	15,	99,	16,	"ama",	6,	44,	"charged",	11,	-30,	-8,	"",	0,	0,	0,	"",	0,	0,	0,	"miss",	"abow",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
@@ -1567,8 +1570,11 @@ var affixes_superior = [
 [	2,		"durP",		10,		15,		"armo"	],
 [	1,		"dmgP",		5,		15,		"weap"	],
 [	2,		"durP",		10,		15,		"weap"	],
-[	3,		"att",		1,		3,		"weap"	],
+[	3,		"attP",		1,		3,		"weap"	],
 [	1,		"dmg_max",	1,		1,		"weap"	],
+
+[	1,		"ease",		-10,	-5,		"armo"	],
+[	1,		"ease",		-10,	-5,		"weap"	],
 ];
 
 var affixes_automod = [
@@ -1675,6 +1681,7 @@ var affixes_pointmod = [
 [	37,	99,	30,	28,	"skill_Whirlwind",	1,	3,	"phlm",	""	],
 [	12,	99,	1,	29,	"skill_One_Handed_Weapon_Mastery",	1,	3,	"phlm",	""	],	// not in skill tree
 [	1,	36,	1,	30,	"skill_Two_Handed_Weapon_Mastery",	1,	3,	"phlm",	""	],	// not in skill tree
+//[	1,	99,	1,	31,	"skill_Double_Swing",	1,	3,	"phlm",	""	],	// no code?
 
 [	1,	24,	1,	1,	"skill_Firestorm",	1,	3,	"pelt",	""	],
 [	1,	36,	6,	2,	"skill_Molten_Boulder",	1,	3,	"pelt",	""	],
@@ -1810,11 +1817,11 @@ var affixes_corruption = [
 //	mod1	mod1min	mod1max	mod2	mod2min	mod2max	itype
 //	0	1	2	3	4	5	6
 [	"sock",	1,	3,	"",	0,	0,	"helm"	],
+[	"pierce",	15,	20,	"",	0,	0,	"helm"	],
 [	"life_per_hit",	10,	14,	"hp_hit",	5,	10,	"helm"	],
 [	"str",	5,	10,	"",	0,	0,	"helm"	],
 [	"enr",	5,	10,	"",	0,	0,	"helm"	],
 [	"hp",	10,	15,	"",	0,	0,	"helm"	],
-[	"acP",	20,	25,	"",	0,	0,	"helm"	],
 [	"sock",	1,	4,	"",	0,	0,	"tors"	],
 [	"cast",	10,	10,	"",	0,	0,	"tors"	],
 [	"swing",	10,	10,	"",	0,	0,	"tors"	],
@@ -1928,6 +1935,7 @@ var affix_item_mods = {
 	dmg_lvl:"dmg_lvl",	// "Trump" is "Fool's"?
 	acP:"e_def",	// defense_bonus?
 	dmgP:"e_damage",	// damage_bonus?
+	attP:"ar_bonus",
 	sock:"sockets",
 	ac:"defense",
 	hp:"life",
