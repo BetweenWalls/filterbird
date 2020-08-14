@@ -4,6 +4,7 @@
 // TODO: add option to insert socketables into items (also: Runewords)
 // TODO: add option to 'Larzuk'-socket items (mostly just relevant when a non-socket corruption is already applied)
 // TODO: update mutual compatibility of superior mod options (ar_bonus & req)
+// TODO: update relics
 
 var itemCustom = {};
 var itemCustomAffixes = {};
