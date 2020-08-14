@@ -358,13 +358,16 @@ ItemDisplay[UNI !ETH !ID 6cs]: %RED% ¤ %PURPLE%ONDALS (BALL LIGHTNING STAFF)%RE
 //Frostwind
 //ItemDisplay[UNI !ETH !ID 7ls]: Frostwind
 //Blackoak
-ItemDisplay[UNI !ETH !ID uml]: %PURPLE%Black Oak
-
+ItemDisplay[UNI !ETH !ID uml]: Black Oak
+//Civerb wep
+ItemDisplay[SET !ETH !ID gsc] %RED%¤ %GREEN% Civerb wep %RED%¤ 
+//Cleglaw sword
+ItemDisplay[SET !ETH !ID lsd]  %RED%¤¤ %GREEN% Cleglaw Sword %RED%¤¤
 
 
 //Arrows
-ItemDisplay[UNI !ID aq2]: %PURPLE%Unique %NAME%
-ItemDisplay[UNI !ID cq2]: %PURPLE%Unique %NAME%
+ItemDisplay[UNI !ID aq2]: Unique %NAME%
+ItemDisplay[UNI !ID cq2]: Unique %NAME%
 
 
 //Shields
@@ -1142,6 +1145,19 @@ ItemDisplay[CL2 NMAG (SK150>0) !SOCK=1 CLVL<90]: %GRAY%grim ward helm%GRAY%[%SOC
 ItemDisplay[CL2 NMAG (SK142>0) !SOCK=1 CLVL<90]: %GRAY%find item helm%GRAY%[%SOCKETS%]
 ItemDisplay[CL2 NMAG (SK138>0) !SOCK=1 CLVL<90]: %GRAY%shout helm%GRAY%[%SOCKETS%]
 
+//4 soc spear
+ItemDisplay[WP7 NMAG SOCK=4]%GRAY%%NAME% %GRAY%[%SOCKETS%]
+// 4 soc amazon spears
+ItemDisplay[am3 NMAG SOCK=4]%GRAY%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[am3 NMAG SOCK=4]%GRAY%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[am8 NMAG SOCK=4]%GRAY%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[am9 NMAG SOCK=4]%GRAY%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[amd NMAG SOCK=4 CLSK0<3]%GRAY%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[ame NMAG SOCK=4 CLSK0<3]%GRAY%%NAME% %GRAY%[%SOCKETS%] ItemDisplay[amd NMAG SOCK=4 CLSK0=3]%GRAY% +3 %NAME% %GRAY%[%SOCKETS%] %RED% +3 
+ItemDisplay[ame NMAG SOCK=4 CLSK0=3]%GRAY%%NAME% %GRAY%[%SOCKETS%] %RED% +3 
+
+
+
 //scepters
 ItemDisplay[WP13 NMAG SOCK=4]: %GRAY%%NAME% %GRAY%[%SOCKETS%]
 ItemDisplay[WP13 NMAG SOCK=5 (SK117>0)]: %GRAY%Holy Shield cta base%GRAY%[%SOCKETS%]
@@ -1281,7 +1297,7 @@ ItemDisplay[RARE WP2 !ID ILVL>65]:
 ItemDisplay[RARE WP4 !ID ILVL>65]:
 ItemDisplay[RARE WP5 !ID ILVL>65]:
 ItemDisplay[RARE WP6 !ID ILVL>65]:
-//ItemDisplay[RARE WP7 !ID ILVL>65]:
+//ItemDisplay[RARE  !ID ILVL>65]:
 //ItemDisplay[RARE WP8 !ID ILVL>65]:
 ItemDisplay[RARE WP9 !ID ILVL>65]:
 ItemDisplay[RARE WP10 !ID ILVL>65]:
@@ -1597,6 +1613,7 @@ ItemDisplay[NMAG !RW ILVL>14 9ts]:
 ItemDisplay[NMAG !RW ILVL>14 7ts]:
 
 //Spear
+
 ItemDisplay[NMAG !RW ILVL>14 spr]:
 ItemDisplay[NMAG !RW ILVL>14 9sr]:
 ItemDisplay[NMAG !RW ILVL>14 9tr]:

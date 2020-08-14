@@ -1572,7 +1572,6 @@ var affixes_superior = [
 [	2,		"durP",		10,		15,		"weap"	],
 [	3,		"attP",		1,		3,		"weap"	],
 [	1,		"dmg_max",	1,		1,		"weap"	],
-
 [	1,		"ease",		-10,	-5,		"armo"	],
 [	1,		"ease",		-10,	-5,		"weap"	],
 ];

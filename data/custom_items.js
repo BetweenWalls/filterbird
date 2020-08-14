@@ -1049,6 +1049,7 @@ function setUpgrade(selected) {
 function setValues() {
 	itemCustomAffixes = {}
 	if (document.getElementById("dropdown_quality").selectedIndex == 2) {
+		itemCustomAffixes.SUP = true
 		for (let n = 1; n <= 2; n++) {
 			var selected = document.getElementById("dropdown_superior_"+n).selectedIndex;
 			if (selected > 0) {
@@ -1058,6 +1059,8 @@ function setValues() {
 				itemCustomAffixes[code] += value
 			}
 		}
+	} else {
+		itemCustomAffixes.SUP = false
 	}
 	for (let m = 1; m <= 2; m++) {
 		var selected = document.getElementById("dropdown_automod").selectedIndex;
