@@ -22,11 +22,11 @@
 			<div class="nav-dropdown-content">
 				<div class="nav-dropdown-content-item"><div class="nav-option">
 					<input id="non_item_custom" type="checkbox" name="non_item_custom" onclick="toggleNonItemDetails(this.checked);">
-					<label for="non_item_custom">Non-Item Details</label>
+					<label for="non_item_custom">Character Info</label>
 				</div></div>
 				<div class="nav-dropdown-content-item"><div class="nav-option">
 					<input id="custom" type="checkbox" name="custom" onclick="toggleCustom(this.checked);">
-					<label for="custom">Custom Items</label>
+					<label for="custom">Custom Item Info</label>
 				</div></div>
 				<div id="show_custom_format" class="nav-dropdown-content-item" style="display:none;"><div class="nav-option">
 					<input id="custom_format" type="checkbox" name="custom_format" onclick="toggleCustomFormat(this.checked);">
@@ -64,11 +64,11 @@
 		<div id="non_item_editing" style="display:none;">
 			<br>
 			<div style="background-color:#222; display:table;">
-				<div class="new-dropdown-title">Non-Item Details</div>
+				<div class="new-dropdown-title">Character Info</div>
 				<div style="display:inline-table; margin-right:5px;">
-					<div><label class="label" for="clvl">Character Level: </label><input id="clvl" name="clvl" class="num-input" type="number" min="1" max="99" value="90" onchange="setCLVL2(this.value)"></div>
+					<div><label class="label" for="clvl">Level: </label><input id="clvl" name="clvl" class="num-input" type="number" min="1" max="99" value="90" onchange="setCLVL2(this.value)"></div>
 					<div><label class="label">Difficulty: </label><select id="dropdown_difficulty" class="new-dropdown" onChange="setDifficulty(this.selectedIndex)">
-						<option class="gray-all">Normal</option><option class="gray-all">Nightmare</option><option class="gray-all">Hell</option><option class="gray-all" selected>Auto (item level based)</option>
+						<option class="gray-all">Normal</option><option class="gray-all">Nightmare</option><option class="gray-all">Hell</option><option class="gray-all" selected>Auto (ilvl-based)</option>
 					</select></div>
 				</div>
 				<div style="display:inline-table;">
@@ -80,17 +80,17 @@
 		<div id="item_editing" style="display:none;">
 			<br>
 			<div id="editing_1" style="background-color:#222; display:table;">
-				<div class="new-dropdown-title">Select Base Item</div>
+				<div class="new-dropdown-title">Basic Item Info</div>
 				<div id="select_group" style="display:inline;"><label class="label">Group: </label><select id="dropdown_group" class="new-dropdown" onChange="setGroup(this.value)"></select></div>
 				<div id="select_type" style="display:inline;"><label class="label">Type: </label><select id="dropdown_type" class="new-dropdown" onChange="setType(this.value)"></select></div>
 				<div id="select_base"><label class="label">Base: </label><select id="dropdown_base" class="new-dropdown" onChange="setBase(this.value)"></select></div>
 				<div id="select_rarity" style="display:inline;"><label class="label">Rarity: </label><select id="dropdown_rarity" class="new-dropdown" style="min-width:0px;" onChange="setRarity(this.value)"></select></div>
 				<div id="select_name" style="display:inline;"><label class="label">Name: </label><select id="dropdown_name" class="new-dropdown" onChange="setName(this.value)"></select></div>
-				<div id="select_ilvl"><label class="label" for="ilvl">Item Level: </label><input id="ilvl" name="ilvl" class="num-input" type="number" min="1" max="99" value="90" onchange="setILVL2(this.value)"></div>
+				<div id="select_ilvl"><label class="label" for="ilvl">Level: </label><input id="ilvl" name="ilvl" class="num-input" type="number" min="1" max="99" value="90" onchange="setILVL2(this.value)"></div>
 			</div>
 			<div style="display:inline-table;"><br></div>
 			<div id="editing_2" style="background-color:#222; max-width:800px; display:table;">
-				<div class="new-dropdown-title">Edit Item</div>
+				<div class="new-dropdown-title">Item Affix Info</div>
 				<!--	automods & common affixes	-->
 				<div id="select_identified"><label class="label" for="identified">Identified </label><input id="identified" type="checkbox" name="identified" onchange="setIdentified(this.checked)"></div>
 				<div id="select_ethereal"><label class="label" for="ethereal">Ethereal </label><input id="ethereal" type="checkbox" name="ethereal" onchange="setEthereal(this.checked)"></div>

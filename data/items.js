@@ -32,7 +32,7 @@ var unequipped = {		strength:0, dexterity:0, vitality:0, energy:0, life:0, mana:
 /* oskills  sorceress	*/	oskill_Frigerate:0, oskill_Shiver_Armor:0, oskill_Cold_Mastery:0, oskill_Hydra:0, oskill_Fire_Ball:0, oskill_Fire_Wall:0, oskill_Meteor:0, oskill_Fire_Mastery:0, // Frostwind, Medusa's Gaze, Bing Sz Wang, Dragonscale, Trang-Oul's Set
 // TODO: confirm oskill_Guided_Arrow (Widowmaker)
 				durability_extra:0, experience:0, skills_class:0, skills_tree1:0, skills_tree2:0, skills_tree3:0, weapon:"", armor:"", shield:"", item_defense:0, block_skillup:0, velocity_skillup:0, dodge:0, avoid:0, evade:0, edged_damage:0, edged_ar:0, edged_cstrike:0, pole_damage:0, pole_ar:0, pole_cstrike:0, blunt_damage:0, blunt_ar:0, blunt_cstrike:0, thrown_damage:0, thrown_ar:0, thrown_pierce:0, claw_damage:0, claw_ar:0, claw_cstrike:0, 
-				summon_damage:0, summon_defense:0, all_skills_per_level:0, reset_on_kill:0, 
+				summon_damage:0, summon_defense:0, all_skills_per_level:0, reset_on_kill:0, max_durability:0, 
 };
 
 // Item names must be unique to be loaded correctly
@@ -413,7 +413,7 @@ var equipment = {
     misc: [
 {name:"Miscellaneous"},
 // 
-{name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"common"},
+{name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",money:5000,ID:true,always_id:true,rarity:"common"},
 {CODE:"key", name:"Key", rarity:"common", QUANTITY:12},
 {CODE:"tbk", name:"Tome of Town Portal", rarity:"common", QUANTITY:20},
 {CODE:"ibk", name:"Tome of Identify", rarity:"common", QUANTITY:20},
@@ -2073,7 +2073,7 @@ var codes = {
 	defense_bonus:"ITEMSTAT16", life_leech:"ITEMSTAT60", life_leech:"ITEMSTAT61", mana_leech:"ITEMSTAT62", mana_leech:"ITEMSTAT63", ias:"ITEMSTAT68", ias:"ITEMSTAT93", durability:"ITEMSTAT72", durability:"ITEMSTAT73", 
 	e_damage:"ITEMSTAT17", e_damage:"ITEMSTAT18", e_damage:"ITEMSTAT25", damage_bonus:"ITEMSTAT17", damage_bonus:"ITEMSTAT18", damage_bonus:"ITEMSTAT25", base_damage_min:"ITEMSTAT21", base_damage_min:"ITEMSTAT23", base_damage_max:"ITEMSTAT22", base_damage_max:"ITEMSTAT24", damage_min:"ITEMSTAT159", damage_max:"ITEMSTAT160", 
 	// TODO: many skills are still unsupported, and there's no error handling for them - having multiple elements here refer to the same code (or vice versa) may not work
-	ethereal:"ETH", 
+	ethereal:"ETH", max_durability:"ITEMSTAT75", money:"GOLD", 
 };
 
 var item_groups = {

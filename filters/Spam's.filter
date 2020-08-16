@@ -5,8 +5,8 @@
 //╠═╬═══════════════════════════════════════════════════════════════════════════════════════════╬═╣
 //║█║███████████████████████████████████████████████████████████████████████████████████████████║█║
 //╚═╩═══════════════════════════════════════════════════════════════════════════════════════════╩═╝
-// Last Updated: 2020-5-27
-// To Be Used with Patch: #18 - Flint
+// Last Updated: 2020-08-14
+// To Be Used with Patch: #19 - Zincite
 //╔═══════════════════════════════════════════════════════════════════════════════════════════════╗
 //║ ///////////////////////////////////  ▬▬▬▬▬ WARNING ▬▬▬▬▬ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ ║
 //╚═══════════════════════════════════════════════════════════════════════════════════════════════╝
@@ -335,18 +335,12 @@ ItemDisplay[cx7]: %NAME% //Key of Chaos
 //─────────────────────────────────────────────────────────────────────────────────────────────────
 // Relics
 //─────────────────────────────────────────────────────────────────────────────────────────────────
-ItemDisplay[ma4 !ID]: %NAME%
-ItemDisplay[ma4 ID]: %NAME% - Tier 1
-ItemDisplay[ma5 !ID]: %NAME%
-ItemDisplay[ma5 ID]: %NAME% - Tier 2
-ItemDisplay[ma6 !ID]: %NAME%
-ItemDisplay[ma6 ID]: %NAME% - Tier 3
-ItemDisplay[ma2 !ID]: %NAME%
-ItemDisplay[ma2 ID]: %NAME% - Tier 4
+ItemDisplay[(ma1 OR ma2 OR ma3 OR ma4 OR ma5 OR ma6 OR ma7 OR ma8 OR ma9 OR ma10) !ID]: %NAME%
+ItemDisplay[(ma1 OR ma2 OR ma3 OR ma4 OR ma5 OR ma6 OR ma7 OR ma8 OR ma9 OR ma10) ID]: %NAME%[%CODE%]
 //╔═══════════════════════════════════════════════════════════════════════════════════════════════╗
 //║                             ▬▬▬▬▬ Catch-All for Misc Items ▬▬▬▬▬                              ║
 //╚═══════════════════════════════════════════════════════════════════════════════════════════════╝
-ItemDisplay[!(WEAPON OR ARMOR OR aq2 OR cq2 OR cm1 OR cm2 OR cm3 OR rin OR amu OR jew)]: %NAME%
+ItemDisplay[!(WEAPON OR ARMOR OR aq2 OR cq2 OR cm1 OR cm2 OR cm3 OR rin OR amu OR jew)]: %NAME%[%CODE%]
 //╔═╦═══════════════════════════════════════════════════════════════════════════════════════════╦═╗
 //║█║███████████████████████████████████████████████████████████████████████████████████████████║█║
 //╠═╬═══════════════════════════════════════════════════════════════════════════════════════════╬═╣
@@ -802,9 +796,9 @@ ItemDisplay[INF ci3]: %WHITE%%NAME%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[CLVL<70 NMAG SOCK=0 !ETH !INF (2ax OR fla) ILVL>40]: %WHITE%%NAME%%BLUE%[%WHITE%0%YELLOW%»5%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[CLVL<70 NMAG SOCK=0 !ETH !INF (fla OR bsd OR 9vo OR 8cb) ILVL>25]: %WHITE%%NAME%%BLUE%[%WHITE%0%YELLOW%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[CLVL<70 NMAG SOCK=0 !ETH !INF (crs OR 9s8 OR rxb) (ILVL>25 AND ILVL<41)]: %WHITE%%NAME%%BLUE%[%WHITE%0%YELLOW%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
-ItemDisplay[CLVL<70 NMAG SOCK=0 !ETH !INF !SUP (9h9 OR 9wc OR 8rx) ILVL>40]: %WHITE%%NAME%%BLUE%[%WHITE%0%RED%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[CLVL<70 NMAG SOCK=0 !ETH !INF !SUP (9h9 OR 9wc OR 9br OR 8rx) ILVL>40]: %WHITE%%NAME%%BLUE%[%WHITE%0%RED%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[CLVL<70 NMAG SOCK=0 ETH 9vo ILVL>25]: %GRAY%E.%NAME%%BLUE%[%WHITE%0%YELLOW%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
-ItemDisplay[CLVL<70 NMAG SOCK=0 ETH (scy OR hal OR wsc) (ILVL>25 AND ILVL<41)]: %GRAY%E.%NAME%%BLUE%[%WHITE%0%YELLOW%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[CLVL<70 NMAG SOCK=0 ETH (scy OR hal OR wsc OR brn) (ILVL>25 AND ILVL<41)]: %GRAY%E.%NAME%%BLUE%[%WHITE%0%YELLOW%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 //╔═══════════════════════════════════════════════════════════════════════════════════════════════╗
 //║           ▬▬▬▬▬ Magic Equipment Exclusions for Immediately Ignored Equipment ▬▬▬▬▬            ║
 //╚═══════════════════════════════════════════════════════════════════════════════════════════════╝
@@ -1033,11 +1027,11 @@ ItemDisplay[ID (cm2 OR cm3) (CLSK6>0 OR TABSK48>0 OR TABSK49>0 OR TABSK50>0)]: %
 // Large and grand charms have their rules based on how many small charms with similar bonuses
 // could be put in their place using the rules for small charms.
 //─────────────────────────────────────────────────────────────────────────────────────────────────
-ItemDisplay[MAG ID cm1 (LIFE>14 OR MANA>14 OR RES>3 OR ITEMSTAT39>9 OR ITEMSTAT41>9 OR ITEMSTAT43>9 OR ITEMSTAT45>9 OR (ITEMSTAT22>2 AND ITEMSTAT22<4 AND (ITEMSTAT92<77 OR (ITEMSTAT92>99 AND ITEMSTAT92<177))) OR ITEMSTAT22>3 OR ITEMSTAT80>6)]: %NAME%%WHITE%[%GREEN%Keep%WHITE%][%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[MAG ID cm1 (LIFE>14 OR MANA>14 OR RES>3 OR ITEMSTAT39>9 OR ITEMSTAT41>9 OR ITEMSTAT43>9 OR ITEMSTAT45>9 OR ITEMSTAT22>3 OR ITEMSTAT80>6)]: %NAME%%WHITE%[%GREEN%Keep%WHITE%][%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[MAG ID cm1 ((MANA>9 OR RES>0 OR ITEMSTAT39>6 OR ITEMSTAT41>6 OR ITEMSTAT43>6 OR ITEMSTAT45>6 OR ITEMSTAT22>1 OR ITEMSTAT19>29) AND (LIFE>9 OR ITEMSTAT99>0 OR ITEMSTAT96>0 OR ITEMSTAT80>4 OR ITEMSTAT0>1 OR ITEMSTAT2>1))]: %NAME%%WHITE%[%GREEN%Keep%WHITE%][%GRAY%Lv.%ILVL%%WHITE%]
-ItemDisplay[MAG ID cm2 (LIFE>29 OR MANA>29 OR RES>7 OR (ITEMSTAT22>5 AND (ITEMSTAT92<48 OR (ITEMSTAT92>99 AND ITEMSTAT92<148))) OR ITEMSTAT22>6)]: %NAME%%WHITE%[%GREEN%Keep%WHITE%][%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[MAG ID cm2 (LIFE>29 OR MANA>29 OR RES>7 OR ITEMSTAT22>6)]: %NAME%%WHITE%[%GREEN%Keep%WHITE%][%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[MAG ID cm2 ((MANA>19 OR RES>5 OR ITEMSTAT39>13 OR ITEMSTAT41>13 OR ITEMSTAT43>13 OR ITEMSTAT45>13 OR ITEMSTAT22>3 OR ITEMSTAT19>59) AND (LIFE>19 OR ITEMSTAT99>0 OR ITEMSTAT96>0 OR ITEMSTAT0>4 OR ITEMSTAT2>4))]: %NAME%%WHITE%[%GREEN%Keep%WHITE%][%GRAY%Lv.%ILVL%%WHITE%]
-ItemDisplay[MAG ID cm3 (LIFE>44 OR MANA>44 OR RES>11 OR ITEMSTAT39>29 OR ITEMSTAT41>29 OR ITEMSTAT43>29 OR ITEMSTAT45>29 OR (ITEMSTAT22>8 AND (ITEMSTAT92<63 OR (ITEMSTAT92>99 AND ITEMSTAT92<163))) OR ITEMSTAT22>11)]: %NAME%%WHITE%[%GREEN%Keep%WHITE%][%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[MAG ID cm3 (LIFE>44 OR MANA>44 OR RES>11 OR ITEMSTAT39>29 OR ITEMSTAT41>29 OR ITEMSTAT43>29 OR ITEMSTAT45>29 OR ITEMSTAT22>11)]: %NAME%%WHITE%[%GREEN%Keep%WHITE%][%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[MAG ID cm3 ((MANA>29 OR RES>8 OR ITEMSTAT39>20 OR ITEMSTAT41>20 OR ITEMSTAT43>20 OR ITEMSTAT45>20 OR ITEMSTAT22>5 OR ITEMSTAT19>89) AND (LIFE>29 OR ITEMSTAT99>0 OR ITEMSTAT96>0 OR ITEMSTAT0>5 OR ITEMSTAT2>5))]: %NAME%%WHITE%[%GREEN%Keep%WHITE%][%GRAY%Lv.%ILVL%%WHITE%]
 //╔═══════════════════════════════════════════════════════════════════════════════════════════════╗
 //║                              ▬▬▬▬▬ Rerollable Small Charms ▬▬▬▬▬                              ║
@@ -1303,7 +1297,7 @@ ItemDisplay[CL3 RES=3]: %NAME%%PURPLE%[%GRAY%3%%PURPLE%]%CONTINUE%
 ItemDisplay[SUP ED>0 SOCK=0 (6hb OR 6cb) ILVL>25]: %NAME%%BLUE%[%WHITE%0%YELLOW%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[ETH SOCK=0 9s8 (ILVL>25 AND ILVL<41)]: %NAME%%BLUE%[%WHITE%0%YELLOW%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[ETH SOCK=0 (7mp OR 7wa OR 7gd OR 7h7 OR 7wc) ILVL>40]: %NAME%%BLUE%[%WHITE%0%YELLOW%»6%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
-ItemDisplay[ETH SOCK=0 (7fb OR 7s8 OR 7pa) ILVL>40]: %NAME%%BLUE%[%WHITE%0%YELLOW%»5%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[ETH SOCK=0 (7fb OR 7s8 OR 7pa OR 7br) ILVL>40]: %NAME%%BLUE%[%WHITE%0%YELLOW%»5%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[ETH !SUP SOCK=0 9wc ILVL>40]: %NAME%%BLUE%[%WHITE%0%RED%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[!ETH SUP ED=15 SOCK=0 (brs OR ltp OR xtp)]: %NAME%%BLUE%[%WHITE%0%YELLOW%»3%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[!ETH SUP ED=15 SOCK=0 (ci2 OR ci3) ILVL>40]: %NAME%%BLUE%[%WHITE%0%YELLOW%»3%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
@@ -1330,15 +1324,15 @@ ItemDisplay[!ETH SUP ED=15 SOCK=3 (ci2 OR ci3 OR brs OR ltp OR xtp)]: %NAME%%BLU
 ItemDisplay[ETH SOCK=4 (uui OR uea OR ula OR utu) DEF>674]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[ETH SOCK=4 (ung OR urs OR uhn) DEF>711]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[ETH SOCK=4 (upl OR utp OR uld) DEF>749]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
-ItemDisplay[SOCK=4 (crs OR bsd OR 7cr OR 9wc OR 7s8 OR 7wc OR 8cb OR 8rx OR 6hb OR 6cb OR 6rx)]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
-ItemDisplay[ETH SOCK=4 (7mp OR 7wa OR 7fb OR 7gd OR wsc OR 9s8)]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[SOCK=4 (crs OR bsd OR 7cr OR 9wc OR 9br OR 7s8 OR 7wc OR 7br OR 8cb OR 8rx OR 6hb OR 6cb OR 6rx)]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[ETH SOCK=4 (7mp OR 7wa OR 7fb OR 7gd OR wsc OR brn OR 9s8)]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[!ETH SOCK=4 (fla OR uit)]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[SOCK=4 ((am6 OR am7 OR amb OR amc) AND TABSK0>2)]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[!ETH SOCK=4 pab RES>39]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 //─────────────────────────────────────────────────────────────────────────────────────────────────
 // 5 Sockets
 //─────────────────────────────────────────────────────────────────────────────────────────────────
-ItemDisplay[SOCK=5 (7mp OR 7wa OR 7cr OR 9s8 OR 9wc OR 7s8 OR 7pa OR 7h7 OR 7wc)]: %NAME%%BLUE%[%GREEN%5%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[SOCK=5 (7mp OR 7wa OR 7cr OR 9s8 OR 9wc OR 9br OR 7s8 OR 7pa OR 7h7 OR 7wc OR 7br)]: %NAME%%BLUE%[%GREEN%5%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[ETH SOCK=5 (7fb OR 7gd)]: %NAME%%BLUE%[%GREEN%5%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[!ETH SOCK=5 (2ax OR mpi OR crs OR fla)]: %NAME%%BLUE%[%GREEN%5%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 //─────────────────────────────────────────────────────────────────────────────────────────────────

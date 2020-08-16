@@ -485,7 +485,7 @@ function load(kind) {
 			options += loadDetails(kind,aff,alvl,1,1,1,1,99,aff[0],aff[1],"","",[aff[4]],[])
 		}
 		document.getElementById("dropdown_superior_1").innerHTML = options
-		if (itemCustom["WEAPON"] == true) { document.getElementById("dropdown_superior_2").innerHTML = options }
+		document.getElementById("dropdown_superior_2").innerHTML = options
 	}
 }
 // loadDetails - subfunction for load, iterates through the list of affixes and returns the relevant ones as a string of options
@@ -608,8 +608,6 @@ function setQuality(selected) {
 		itemCustom.superior = true;
 		itemCustom.inferior = false;
 		itemCustom.name_prefix = "Superior ";
-		document.getElementById("dropdown_superior_1").selectedIndex = 1;
-		setSuperior(1,1)
 	} else {
 		data.superior = {index:[0],categories:{}}
 		itemCustom.sup = 0;
@@ -673,14 +671,12 @@ function setSuperior(num,selected) {
 		}
 	}
 	// display no more than 1 empty dropdown for superior affixes
-	if (itemCustom.WEAPON == true) {
-		var first_empty_index = -1;
-		for (let n = 1; n <= 2; n++) {
-			document.getElementById("select_superior_"+n).style.display = "block"
-			var index = document.getElementById("dropdown_superior_"+n).selectedIndex;
-			if (index == 0 && first_empty_index < 0) { first_empty_index = index }
-			else if (index == 0) { document.getElementById("select_superior_"+n).style.display = "none" }
-		}
+	var first_empty_index = -1;
+	for (let n = 1; n <= 2; n++) {
+		document.getElementById("select_superior_"+n).style.display = "block"
+		var index = document.getElementById("dropdown_superior_"+n).selectedIndex;
+		if (index == 0 && first_empty_index < 0) { first_empty_index = index }
+		else if (index == 0) { document.getElementById("select_superior_"+n).style.display = "none" }
 	}
 	setSuperiorValue(num,document.getElementById("range_superior_"+num).value)
 }

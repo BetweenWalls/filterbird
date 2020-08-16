@@ -36,19 +36,21 @@ ItemDisplay[std]: %NAME%
 ItemDisplay[cx5]: %PURPLE%Corrupt Orb
 ItemDisplay[cx6]: %PURPLE%Diablo's Soulstone
 ItemDisplay[cx7]: %RED%¤¤¤¤¤¤¤¤¤¤ %PURPLE%KEY OF CHAOS%RED% ¤¤¤¤¤¤¤¤¤¤
-//ItemDisplay[ma1]: %PURPLE%%NAME%
+
+//Maps
+
 ItemDisplay[ma1]: %PURPLE%%NAME%
-//ItemDisplay[ma2]: %PURPLE%Tier 4 Relic
-ItemDisplay[ma2]: %PURPLE%Tier 4 Relic
-//ItemDisplay[ma3]: %PURPLE%%NAME%
+ItemDisplay[ma2]: %PURPLE%%NAME%
 ItemDisplay[ma3]: %PURPLE%%NAME%
-//ItemDisplay[ma4]: %PURPLE% Tier 1 Relic
-ItemDisplay[ma4]: %PURPLE% Tier 1 Relic
-//ItemDisplay[ma5]: %PURPLE%Tier 2 Relic
-ItemDisplay[ma5]: %PURPLE%Tier 2 Relic
-//ItemDisplay[ma6]: %PURPLE%Tier 3 Relic
-ItemDisplay[ma6]: %PURPLE%Tier 3 Relic
-ItemDisplay[maz]: %PURPLE%%NAME%
+ItemDisplay[ma4]: %PURPLE%%NAME%
+ItemDisplay[ma5]: %PURPLE%%NAME%
+ItemDisplay[ma6]: %PURPLE%%NAME%
+ItemDisplay[ma7]: %PURPLE%%NAME%
+ItemDisplay[ma8]: %PURPLE%%NAME%
+ItemDisplay[ma9]: %PURPLE%%NAME%
+ItemDisplay[ma10]: %PURPLE%%NAME%
+
+
 
 
 //Wirt's Leg
@@ -360,9 +362,9 @@ ItemDisplay[UNI !ETH !ID 6cs]: %RED% ¤ %PURPLE%ONDALS (BALL LIGHTNING STAFF)%RE
 //Blackoak
 ItemDisplay[UNI !ETH !ID uml]: Black Oak
 //Civerb wep
-ItemDisplay[SET !ETH !ID gsc] %RED%¤ %GREEN% Civerb wep %RED%¤ 
+ItemDisplay[SET !ETH !ID gsc]: %RED%¤ %GREEN% Civerb wep %RED%¤ 
 //Cleglaw sword
-ItemDisplay[SET !ETH !ID lsd]  %RED%¤¤ %GREEN% Cleglaw Sword %RED%¤¤
+ItemDisplay[SET !ETH !ID lsd]:  %RED%¤¤ %GREEN% Cleglaw Sword %RED%¤¤
 
 
 //Arrows
@@ -616,6 +618,15 @@ ItemDisplay[uui !ETH NMAG SOCK=0 DEF>440]: %GREEN%%NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[utp !ETH NMAG SOCK=3 DEF>500]: %GREEN%%NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[utp !ETH NMAG SOCK=4 DEF>500]: %GREEN%%NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[utp !ETH NMAG SOCK=0 DEF>500]: %GREEN%%NAME% %YELLOW%[%SOCKETS%]
+
+//Superior Dusk Shroud, Archon Plate
+ItemDisplay[uui !ETH NMAG SUP SOCK=3 !ITEMSTAT91=0]: %PURPLE% -Req %GREEN%%NAME% %YELLOW%[%SOCKETS%]
+ItemDisplay[uui !ETH NMAG  SUP SOCK=4 !ITEMSTAT91=0]: %PURPLE% -Req %GREEN%%NAME% %YELLOW%[%SOCKETS%]
+ItemDisplay[uui !ETH NMAG  SUP SOCK=0 !ITEMSTAT91=0]: %PURPLE% -Req %GREEN%%NAME% %YELLOW%[%SOCKETS%]
+ItemDisplay[utp !ETH NMAG SUP SOCK=3 !ITEMSTAT91=0]: %PURPLE% -Req %GREEN%%NAME% %YELLOW%[%SOCKETS%]
+ItemDisplay[utp !ETH NMAG SUP SOCK=4 !ITEMSTAT91=0]: %PURPLE% -Req %GREEN%%NAME% %YELLOW%[%SOCKETS%]
+ItemDisplay[utp !ETH NMAG SUP SOCK=0 !ITEMSTAT91=0]: %PURPLE% -Req %GREEN%%NAME% %YELLOW%[%SOCKETS%]
+
 //Standard Dusk Shroud, Archon Plate
 ItemDisplay[uui !ETH NMAG !SOCK=1]: %DGREEN%%NAME% %GRAY%[%SOCKETS%] 
 ItemDisplay[utp !ETH NMAG !SOCK=1]: %DGREEN%%NAME% %GRAY%[%SOCKETS%]
@@ -772,6 +783,7 @@ ItemDisplay[NMAG SOCK=1 xtp]:
 
 //Shields
 //4os Monarch, Monarch
+ItemDisplay[uit !ETH NMAG SOCK=4 !ITEMSTAT91=0]: %PURPLE% -Req %RED%Monarch %YELLOW%[%SOCKETS%] 
 ItemDisplay[uit !ETH NMAG DEF>147 SOCK=4]: %DGREEN%%NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[uit !ETH SOCK=4 NMAG]: %DGREEN%%NAME% %YELLOW%[%SOCKETS%] 
 ItemDisplay[uit !ETH SOCK=0 DEF<147 NMAG]: %DGREEN%%NAME%%YELLOW%[%SOCKETS%] 
@@ -1146,15 +1158,16 @@ ItemDisplay[CL2 NMAG (SK142>0) !SOCK=1 CLVL<90]: %GRAY%find item helm%GRAY%[%SOC
 ItemDisplay[CL2 NMAG (SK138>0) !SOCK=1 CLVL<90]: %GRAY%shout helm%GRAY%[%SOCKETS%]
 
 //4 soc spear
-ItemDisplay[WP7 NMAG SOCK=4]%GRAY%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[WP7 NMAG SOCK=4]:%GRAY%%NAME% %GRAY%[%SOCKETS%]
 // 4 soc amazon spears
-ItemDisplay[am3 NMAG SOCK=4]%GRAY%%NAME% %GRAY%[%SOCKETS%]
-ItemDisplay[am3 NMAG SOCK=4]%GRAY%%NAME% %GRAY%[%SOCKETS%]
-ItemDisplay[am8 NMAG SOCK=4]%GRAY%%NAME% %GRAY%[%SOCKETS%]
-ItemDisplay[am9 NMAG SOCK=4]%GRAY%%NAME% %GRAY%[%SOCKETS%]
-ItemDisplay[amd NMAG SOCK=4 CLSK0<3]%GRAY%%NAME% %GRAY%[%SOCKETS%]
-ItemDisplay[ame NMAG SOCK=4 CLSK0<3]%GRAY%%NAME% %GRAY%[%SOCKETS%] ItemDisplay[amd NMAG SOCK=4 CLSK0=3]%GRAY% +3 %NAME% %GRAY%[%SOCKETS%] %RED% +3 
-ItemDisplay[ame NMAG SOCK=4 CLSK0=3]%GRAY%%NAME% %GRAY%[%SOCKETS%] %RED% +3 
+ItemDisplay[am3 NMAG SOCK=4]:%GRAY%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[am3 NMAG SOCK=4]:%GRAY%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[am8 NMAG SOCK=4]:%GRAY%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[am9 NMAG SOCK=4]:%GRAY%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[amd NMAG SOCK=4 CLSK0<3]:%GRAY%%NAME% %GRAY%[%SOCKETS%]
+ItemDisplay[ame NMAG SOCK=4 CLSK0<3]:%GRAY%%NAME% %GRAY%[%SOCKETS%] 
+ItemDisplay[amd NMAG SOCK=4 CLSK0=3]:%GRAY% %NAME% %GRAY%[%SOCKETS%] %RED% +3 
+ItemDisplay[ame NMAG SOCK=4 CLSK0=3]:%GRAY%%NAME% %GRAY%[%SOCKETS%] %RED% +3 
 
 
 
@@ -1306,7 +1319,7 @@ ItemDisplay[RARE EQ1 !ID (ILVL>65 AND ILVL<85)]:
 ItemDisplay[RARE EQ2 !ID (ILVL>65 AND ILVL<85)]: 
 ItemDisplay[RARE EQ3 !ID (ILVL>65 AND ILVL<85)]: 
 //Show Rare Elite Armor
-ItemDisplay[ELT RARE ARMOR !ID ILVL>84]: /(reformatted for FilterBird)
+ItemDisplay[ELT RARE ARMOR !ID (ILVL>84)]: 
 //Hide Helm, Body, Shield
 //ItemDisplay[RARE EQ1 !ID ILVL>65]:
 //ItemDisplay[RARE EQ2 !ID ILVL>65]:

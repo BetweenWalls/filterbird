@@ -1,8 +1,10 @@
 //test lines
-ItemDisplay[ITEMSTAT73<86 uit NMAG !RW !ETH SOCK=0]:%GREEN%%NAME%%RED%[%SOCKETS%]
-ItemDisplay[ITEMSTAT73<86 uit NMAG !RW !ETH SOCK=4]:%GREEN%%NAME%%RED%[%SOCKETS%]
-ItemDisplay[ITEMSTAT91<0 uit NMAG !RW !ETH SOCK=0]:%GREEN%%NAME%%RED%[%SOCKETS%]
-ItemDisplay[ITEMSTAT91<0 uit NMAG !RW !ETH SOCK=4]:%GREEN%%NAME%%RED%[%SOCKETS%]
+ItemDisplay[ITEMSTAT91>0 uit NMAG !RW !ETH SOCK=0]:%GREEN%%NAME%%RED%[%SOCKETS%]
+ItemDisplay[ITEMSTAT91>0 uit NMAG !RW !ETH SOCK=4]:%GREEN%%NAME%%RED%[%SOCKETS%]
+ItemDisplay[ITEMSTAT91>0 uui NMAG !RW !ETH SOCK=0]:%GREEN%%NAME%%RED%[%SOCKETS%]
+ItemDisplay[ITEMSTAT91>0 uui NMAG !RW !ETH SOCK=3]:%GREEN%%NAME%%RED%[%SOCKETS%]
+ItemDisplay[ITEMSTAT91>0 utp NMAG !RW !ETH SOCK=0]:%GREEN%%NAME%%RED%[%SOCKETS%]
+ItemDisplay[ITEMSTAT91>0 utp NMAG !RW !ETH SOCK=3]:%GREEN%%NAME%%RED%[%SOCKETS%]
 
 //Basics
 //Hide Gold Piles Smaller Than (<) X
@@ -53,6 +55,10 @@ ItemDisplay[ma4]: %PURPLE%%NAME%
 ItemDisplay[ma5]: %PURPLE%%NAME%
 //ItemDisplay[ma6]: %PURPLE%%NAME%
 ItemDisplay[ma6]: %PURPLE%%NAME%
+ItemDisplay[ma7]: %PURPLE%%NAME%
+ItemDisplay[ma8]: %PURPLE%%NAME%
+ItemDisplay[ma9]: %PURPLE%%NAME%
+ItemDisplay[ma10]: %PURPLE%%NAME%
 ItemDisplay[maz]: %PURPLE%%NAME%
 
 //Wirt's Leg
@@ -718,9 +724,9 @@ ItemDisplay[xit MAG !ID]: %NAME%
 ItemDisplay[uit MAG SOCK=4 FBR=30]: Get Rekt
 
 //Amazon Javelins 
-ItemDisplay[MAG am5 ILVL<71]: %ORANGE%%NAME%[%ILVL%]
-ItemDisplay[MAG ama ILVL<77]: %ORANGE%%NAME%[%ILVL%]
-ItemDisplay[MAG amf ILVL<80]: %ORANGE%%NAME%[%ILVL%]
+ItemDisplay[MAG am5 ILVL>71]: %ORANGE%%NAME%[%ILVL%]
+ItemDisplay[MAG ama ILVL>77]: %ORANGE%%NAME%[%ILVL%]
+ItemDisplay[MAG amf ILVL>80]: %ORANGE%%NAME%[%ILVL%]
 ItemDisplay[MAG am5 !ID]: %BLUE%%NAME%
 ItemDisplay[MAG ama !ID]: %BLUE%%NAME%
 ItemDisplay[MAG amf !ID]: %BLUE%%NAME%
@@ -816,7 +822,7 @@ ItemDisplay[NMAG !ETH SOCK=4 7s8]: %GRAY%%NAME% %GRAY%[%SOCKETS%]
 ItemDisplay[NMAG !ETH SOCK=4 7pa]: 
 ItemDisplay[NMAG !ETH SOCK=4 7h7]: %GRAY%%NAME% %GRAY%[%SOCKETS%]
 ItemDisplay[NMAG !ETH SOCK=4 7wc]: %GRAY%%NAME% %GRAY%[%SOCKETS%]
-ItemDisplay[NMAG !ETH SOCK=4 7br]: %GREEN%ETH %NAME%%YELLOW%[%SOCKETS%]
+ItemDisplay[NMAG !ETH SOCK=4 7br]: %GREEN%%NAME%%YELLOW%[%SOCKETS%]
 //
 ItemDisplay[NMAG vou !ETH SOCK=4]: 
 ItemDisplay[NMAG 9vo !ETH SOCK=4]: 
@@ -850,13 +856,14 @@ ItemDisplay[ETH 7pa NMAG !SUP SOCK=0]: %GRAY%ETH %NAME%%GRAY%[%SOCKETS%]
 ItemDisplay[ETH 7h7 NMAG !SUP SOCK=0]: %GRAY%ETH %NAME%%GRAY%[%SOCKETS%]
 ItemDisplay[ETH 7wc NMAG !SUP SOCK=0]: %GRAY%ETH %NAME%%GRAY%[%SOCKETS%]
 ItemDisplay[ETH 7br NMAG !SUP SOCK=0]: %GREEN%ETH %NAME%%YELLOW%[%SOCKETS%]
+ItemDisplay[!ETH 7p7 NMAG !SUP SOCK=0]: %GRAY%%NAME% %GRAY%[%SOCKETS%]
 //
 ItemDisplay[NMAG scy SOCK=4]:
 ItemDisplay[NMAG wsc SOCK=4]:
 ItemDisplay[NMAG 9wc SOCK=4]:
 ItemDisplay[NMAG 9s8 SOCK=4]:
 
-//5 socket polearms
+//5 socket polearms & spears
 ItemDisplay[NMAG ETH SUP SOCK=5 7h7]: %PURPLE%¤ ¤ %GREEN%ETH SUP DOOM BASE%RED%[%SOCKETS%] %PURPLE%¤ ¤ 
 ItemDisplay[NMAG ETH SOCK=5 7s8]: %DGREEN%ETH %NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[NMAG ETH SOCK=5 7pa]: %DGREEN%ETH %NAME% %YELLOW%[%SOCKETS%]
@@ -867,6 +874,7 @@ ItemDisplay[NMAG !ETH SOCK=5 7s8]: %DGREEN%%NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[NMAG !ETH SOCK=5 7pa]: %DGREEN%%NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[NMAG !ETH SOCK=5 7h7]: %DGREEN%%NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[NMAG !ETH SOCK=5 7wc]: %DGREEN%%NAME% %YELLOW%[%SOCKETS%]
+ItemDisplay[NMAG !ETH SOCK=5 7p7]: %WHITE%%NAME% %GRAY%[%SOCKETS%]
 
 //6 socket polearms
 ItemDisplay[NMAG ETH SOCK=6 7h7]: ETH %NAME% %GRAY%[%SOCKETS%]
@@ -1728,7 +1736,6 @@ ItemDisplay[NMAG !RW SOCK<2 ILVL<45 xld]:
 ItemDisplay[NMAG !RW SOCK<2 ILVL<45 xth]:
 ItemDisplay[NMAG !RW SOCK<2 ILVL<45 xul]:
 ItemDisplay[NMAG !RW SOCK<2 ILVL<45 xar]:
-ItemDisplay[NMAG !RW SOCK<2 ILVL<45 xtp]:
 //
 ItemDisplay[NMAG !RW ILVL>44 qui]:
 ItemDisplay[NMAG !RW ILVL>44 xui]:
