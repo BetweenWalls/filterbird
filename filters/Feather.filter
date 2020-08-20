@@ -1,6 +1,6 @@
 //═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 /	"Feather" Item Filter for Diablo II: Path of Diablo
-/		Date Updated:	15 AUG 2020
+/		Date Updated:	18 AUG 2020
 /		Info:		https://github.com/BetweenWalls/Feather
 /		Direct URL:     https://raw.githubusercontent.com/BetweenWalls/Feather/master/item.filter
 //═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -79,15 +79,15 @@ ItemDisplay[cx5]:	%RED% Orb of Corruption 		// Orb of Corruption
 ItemDisplay[cx7]:	%ORANGE%   Key of Chaos   		// Key of Chaos
 ItemDisplay[maz]: %TAN%%NAME%%RED%				// Infernal Trial	("DClone")
 // Relics (maps)
-/ItemDisplay[ma1]: %NAME%%RED%					// Icy Cavern		(tier 1, white)
-/ItemDisplay[ma5]: %NAME%%RED%					// Frigid Plateau	(tier 1, white)
-/ItemDisplay[ma4]: %NAME%%RED%					// Desecrated Temple	(tier 2, yellow)
-/ItemDisplay[ma8]: %NAME%%RED%					// Musty Crypt		(tier 2, yellow)
-/ItemDisplay[ma9]: %NAME%%RED%					// Dim Cellar		(tier 2, yellow)
-/ItemDisplay[ma2]: %NAME%%RED%					// Forgotten Desert	(tier 3, red)
-/ItemDisplay[ma7]: %NAME%%RED%					// Burnt Forest		(tier 3, red)
-/ItemDisplay[ma6]: %NAME%%RED%					// Ruined Citadel	(tier 3, red)
-ItemDisplay[ma1 OR ma2 OR ma4 OR ma5 OR ma6 OR ma7 OR ma8 OR ma9]: %TAN%%NAME%%RED%
+/ItemDisplay[ma1]: %NAME%					// Icy Cavern		(tier 1, white)
+/ItemDisplay[ma5]: %NAME%					// Frigid Plateau	(tier 1, white)
+/ItemDisplay[ma4]: %NAME%					// Desecrated Temple	(tier 2, yellow)
+/ItemDisplay[ma8]: %NAME%					// Musty Crypt		(tier 2, yellow)
+/ItemDisplay[ma9]: %NAME%					// Dim Cellar		(tier 2, yellow)
+/ItemDisplay[ma2]: %NAME%					// Forgotten Desert	(tier 3, red)
+/ItemDisplay[ma7]: %NAME%					// Burnt Forest		(tier 3, red)
+/ItemDisplay[ma6]: %NAME%					// Ruined Citadel	(tier 3, red)
+ItemDisplay[(ma1 OR ma2 OR ma4 OR ma5 OR ma6 OR ma7 OR ma8 OR ma9 OR ma10 OR ma3)]: %NAME%
 // Legacy Items 
 /ItemDisplay[cm4]:	  Horadrim Sigil  			// Horadrim Sigil Grand Charm	(non-ladder only)
 /ItemDisplay[cx8]:	  %DGREEN%%NAME%  			// Orb of Enchantment		(non-ladder only)
@@ -312,7 +312,12 @@ ItemDisplay[ED=8 NMAG]: %NAME% %BLUE%+8%CONTINUE%
 ItemDisplay[ED=7 NMAG]: %NAME% %BLUE%+7%CONTINUE%
 ItemDisplay[ED=6 NMAG]: %NAME% %BLUE%+6%CONTINUE%
 ItemDisplay[ED=5 NMAG]: %NAME% %BLUE%+5%CONTINUE%
-ItemDisplay[!ITEMSTAT91=0 NMAG]: %NAME% %BLUE%®%CONTINUE%
+ItemDisplay[ITEMSTAT91=-10 NMAG]: %NAME% %BLUE%-10%CONTINUE%
+ItemDisplay[ITEMSTAT91=-9 NMAG]: %NAME% %BLUE%-9%CONTINUE%
+ItemDisplay[ITEMSTAT91=-8 NMAG]: %NAME% %BLUE%-8%CONTINUE%
+ItemDisplay[ITEMSTAT91=-7 NMAG]: %NAME% %BLUE%-7%CONTINUE%
+ItemDisplay[ITEMSTAT91=-6 NMAG]: %NAME% %BLUE%-6%CONTINUE%
+ItemDisplay[ITEMSTAT91=-5 NMAG]: %NAME% %BLUE%-5%CONTINUE%
 ItemDisplay[NMAG SOCK>0]: %NAME% %GRAY%[%SOCKETS%]%CONTINUE%
 
 // Highlighting
