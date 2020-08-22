@@ -1,4 +1,4 @@
-// Kryszard's Loot Filter ver 1.6
+// Kryszard's Loot Filter ver 1.7
 //
 // twitch.tv/kryszard
 //
@@ -58,10 +58,7 @@ ItemDisplay[pk3]: %NAME% %GRAY%[Nihlathak]
 
 //PoD Items
 ItemDisplay[cx7]: %RED%»»»» %NAME%%RED% ««««
-ItemDisplay[ma2]: %PURPLE%Map Relic %GRAY%[%ORANGE%T4%GRAY%]
-ItemDisplay[ma4]: %PURPLE%Map Relic %GRAY%[T1]
-ItemDisplay[ma5]: %PURPLE%Map Relic %GRAY%[%WHITE%T2%GRAY%]
-ItemDisplay[ma6]: %PURPLE%Map Relic %GRAY%[%GOLD%T3%GRAY%]
+ItemDisplay[ma1 OR ma2 OR ma3 OR ma4 OR ma5 OR ma6 OR ma7 OR ma8 OR ma9 OR ma10 OR maz]: %NAME% %GRAY%[%DGREEN%~ %PURPLE%MAP %DGREEN%~%GRAY%]/(reformatted for FilterBird)
 
 //Wirt Leg
 ItemDisplay[leg SOCK>0]: %NAME% %TAN%[%SOCKETS%]
@@ -356,9 +353,9 @@ ItemDisplay[amc (NMAG OR RW) TABSK0>2 SOCK=4]: %GRAY%[%WHITE%3bow%GRAY%] %NAME% 
 ItemDisplay[amc (NMAG OR RW) TABSK0>2 SOCK=0 (!INF AND !SUP)]: %GRAY%[%WHITE%3bow%GRAY%] %NAME% %TAN%[%SOCKETS%]
 ItemDisplay[6cb SOCK=4]: %NAME% %TAN%[%SOCKETS%]
 //Infi/Insi/Pride and Obedience/Doom
-ItemDisplay[(7wc OR 7pa OR 7s8 OR 7vo OR 7h7) (ETH AND NMAG OR RW) (SOCK=4 OR SOCK=5)]: %GRAY%[%WHITE%eth%GRAY%] %NAME% %TAN%[%SOCKETS%]
-ItemDisplay[7vo (ETH AND !INF) AND (NMAG OR RW) SOCK=0]: %GRAY%[%WHITE%eth%GRAY%] %NAME% %TAN%[%SOCKETS%]
-ItemDisplay[(7wc OR 7pa OR 7s8 OR 7h7) (ETH AND !INF AND !SUP) AND (NMAG OR RW) SOCK=0]: %GRAY%[%WHITE%eth%GRAY%] %NAME% %TAN%[%SOCKETS%]
+ItemDisplay[(7wc OR 7pa OR 7s8 OR 7vo OR 7h7 OR 7tr OR 7br OR 7st OR 7p7) (ETH AND NMAG OR RW) (SOCK=4 OR SOCK=5)]: %GRAY%[%WHITE%eth%GRAY%] %NAME% %TAN%[%SOCKETS%]
+ItemDisplay[(7vo OR 7tr) (ETH AND !INF) AND (NMAG OR RW) SOCK=0]: %GRAY%[%WHITE%eth%GRAY%] %NAME% %TAN%[%SOCKETS%]
+ItemDisplay[(7wc OR 7pa OR 7s8 OR 7h7 OR 7br OR 7st) (ETH AND !INF AND !SUP) AND (NMAG OR RW) SOCK=0]: %GRAY%[%WHITE%eth%GRAY%] %NAME% %TAN%[%SOCKETS%]
 //Grief/Beast/Passion
 ItemDisplay[(7cr OR 7wa) (!ETH AND NMAG OR RW) (SOCK=4 OR SOCK=5)]: %NAME% %TAN%[%SOCKETS%]
 ItemDisplay[(7cr OR 7wa) (!ETH AND !INF AND !SUP) AND (NMAG OR RW) SOCK=0]: %GRAY%%NAME% %TAN%[%SOCKETS%]

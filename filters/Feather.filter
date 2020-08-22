@@ -1,6 +1,6 @@
 //═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 /	"Feather" Item Filter for Diablo II: Path of Diablo
-/		Date Updated:	18 AUG 2020
+/		Date Updated:	22 AUG 2020
 /		Info:		https://github.com/BetweenWalls/Feather
 /		Direct URL:     https://raw.githubusercontent.com/BetweenWalls/Feather/master/item.filter
 //═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -87,7 +87,7 @@ ItemDisplay[maz]: %TAN%%NAME%%RED%				// Infernal Trial	("DClone")
 /ItemDisplay[ma2]: %NAME%					// Forgotten Desert	(tier 3, red)
 /ItemDisplay[ma7]: %NAME%					// Burnt Forest		(tier 3, red)
 /ItemDisplay[ma6]: %NAME%					// Ruined Citadel	(tier 3, red)
-ItemDisplay[(ma1 OR ma2 OR ma4 OR ma5 OR ma6 OR ma7 OR ma8 OR ma9 OR ma10 OR ma3)]: %NAME%
+ItemDisplay[ma1 OR ma2 OR ma3 OR ma4 OR ma5 OR ma6 OR ma7 OR ma8 OR ma9 OR ma10]: %TAN%%NAME%
 // Legacy Items 
 /ItemDisplay[cm4]:	  Horadrim Sigil  			// Horadrim Sigil Grand Charm	(non-ladder only)
 /ItemDisplay[cx8]:	  %DGREEN%%NAME%  			// Orb of Enchantment		(non-ladder only)
@@ -106,6 +106,9 @@ ItemDisplay[(hdm OR msf OR vip OR hst OR g33 OR qf1 OR qf2 OR hfh) SOCK=0]: %NAM
 // ┌──────┐
 //═╡ Gems ╞══════════════════════════════════════════════════════════════════════════════════════════════════════════════
 // └──────┘
+// Hidden: Chipped, Flawed & Standard gems - levels 30, 40, 60
+/ItemDisplay[((GEMLEVEL=1 CLVL>29) OR (GEMLEVEL=2 CLVL>39) OR (GEMLEVEL=3 CLVL>59))]:
+
 // Gem Colors & Quality Differentiation
 ItemDisplay[GEMLEVEL=1]: *%ORANGE%]  %GRAY%%NAME%%CONTINUE%
 ItemDisplay[GEMLEVEL=2]: +%ORANGE%]  %GRAY%%NAME%%CONTINUE%
@@ -281,9 +284,11 @@ ItemDisplay[RARE !ID]: %NAME%
 //    gloves, boots, belts
 //    1-socket
 //    daggers/shields incapable of 2 sockets, 5 socket bows
+//    normal throwing weapons
 ItemDisplay[NMAG CLVL>14 (EQ4 OR EQ5 OR EQ6)]:
 ItemDisplay[NMAG CLVL>14 !(CL1 OR CL2 OR CL4 OR CL5 OR CL6 OR WP11 OR WP12 OR WP13) SOCK=1]:
 ItemDisplay[NMAG CLVL>14 (dgr OR 9dg OR 7dg OR dir OR 9di OR 7di OR buc OR xuc OR (WP9 (SOCK=5 OR (SOCK=0 ILVL>40 SUP (CL7 OR lbw OR 8lb OR 6lb OR sbb OR 8s8 OR 6s7 OR swb OR 8sw OR 6sw OR rxb OR 8rx OR 6rx)))))]:
+ItemDisplay[NMAG CLVL>14 NORM (WP5 !CL7)]:
 
 // Hidden: Skill-Capable Items without skills  (ilvl 10+)
 //    GROUP			EXCEPTIONS							LEVEL
@@ -319,6 +324,9 @@ ItemDisplay[ITEMSTAT91=-7 NMAG]: %NAME% %BLUE%-7%CONTINUE%
 ItemDisplay[ITEMSTAT91=-6 NMAG]: %NAME% %BLUE%-6%CONTINUE%
 ItemDisplay[ITEMSTAT91=-5 NMAG]: %NAME% %BLUE%-5%CONTINUE%
 ItemDisplay[NMAG SOCK>0]: %NAME% %GRAY%[%SOCKETS%]%CONTINUE%
+
+// Show ilvl for 0-socket swords that will get 4-sockets via Larzuk's quest (Spirit RW) - until level 60
+ItemDisplay[NMAG CLVL<60 SOCK=0 ILVL>25 ((crs ILVL<41) OR (bsd OR lsd))]: %NAME% %GRAY%[L%ILVL%]
 
 // Highlighting
 //    eth armor with high defense: heavy 800+, medium 750+, light 700+

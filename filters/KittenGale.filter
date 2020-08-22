@@ -1,3 +1,5 @@
+
+
 //Basics
 //Hide Gold Piles Smaller Than (<) X
 ItemDisplay[GOLD<100 CLVL<20]:
@@ -50,7 +52,8 @@ ItemDisplay[ma8]: %PURPLE%%NAME%
 ItemDisplay[ma9]: %PURPLE%%NAME%
 ItemDisplay[ma10]: %PURPLE%%NAME%
 
-
+// Meme items
+ItemDisplay[NMAG EQ2 !RW SOCK>0 ITEMSTAT45=30]: %GREEN%Tal Armor
 
 
 //Wirt's Leg
@@ -288,6 +291,8 @@ ItemDisplay[UNI !ETH !ID umg]: %RED%¤ %PURPLE% %NAME% %RED%¤
 ItemDisplay[SET !ETH !ID ulg]: %RED%¤¤¤ %GREEN%Laying Of Hands%RED% ¤¤¤
 //Trang-Ouls Claws
 ItemDisplay[SET !ETH !ID xmg]: %RED%¤¤%GREEN% Trang Gloves %RED%¤¤ 
+//Magefist
+ItemDisplay[UNI !ETH !ID tgl]: %PURPLE% Magefist
 
 //Belts
 //Arachnid Mesh
@@ -782,8 +787,14 @@ ItemDisplay[NMAG SOCK=0 xtp]:
 ItemDisplay[NMAG SOCK=1 xtp]:
 
 //Shields
+
+//-Req 4os Monarch, Monarch
+ItemDisplay[uit !ETH !RW  NMAG SOCK=4 !ITEMSTAT91=0 !ITEMSTAT91=-10]: %PURPLE% -% Req %RED%Monarch %YELLOW%[%SOCKETS%] 
+ItemDisplay[uit !ETH NMAG SOCK=0 !ITEMSTAT91=0 !ITEMSTAT91=-10]: %PURPLE% -% Req %RED%Monarch %YELLOW%[%SOCKETS%] 
+ItemDisplay[uit !ETH NMAG SOCK=0 ITEMSTAT91=-10]: %RED%¤%PURPLE% -10% Req %RED%Monarch %YELLOW%[%SOCKETS%] %RED%¤
+ItemDisplay[uit !ETH !RW NMAG SOCK=4 ITEMSTAT91=-10]: %RED%¤¤¤ %PURPLE% -10% Req %RED%Monarch %YELLOW%[%SOCKETS%] %RED%¤¤¤
+
 //4os Monarch, Monarch
-ItemDisplay[uit !ETH NMAG SOCK=4 !ITEMSTAT91=0]: %PURPLE% -Req %RED%Monarch %YELLOW%[%SOCKETS%] 
 ItemDisplay[uit !ETH NMAG DEF>147 SOCK=4]: %DGREEN%%NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[uit !ETH SOCK=4 NMAG]: %DGREEN%%NAME% %YELLOW%[%SOCKETS%] 
 ItemDisplay[uit !ETH SOCK=0 DEF<147 NMAG]: %DGREEN%%NAME%%YELLOW%[%SOCKETS%] 
@@ -870,6 +881,9 @@ ItemDisplay[CL5 NMAG !ETH SOCK=0 (SK273>0)]: %GRAY%Mind Blast Claw[%SOCKETS%]
 ItemDisplay[CL5 NMAG !ETH SOCK=3 (SK273>0)]: %GRAY%Mind Blast Claw[%SOCKETS%]
 
 
+
+
+
 //SPIRIT
 //4os Crystal Sword, Broad Sword, Larzuk Gaurantee = SPIRIT 
 ItemDisplay[crs NMAG SOCK=4 CLVL<95]: %DGREEN%%NAME% %GRAY%[%SOCKETS%]
@@ -915,6 +929,7 @@ ItemDisplay[NMAG 9h9 ETH SOCK=4]:
 ItemDisplay[NMAG wsc ETH SOCK=4 CLVL<93]: %DGREEN%ETH %NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[NMAG 9wc ETH SOCK=4 CLVL<93]: %DGREEN%ETH %NAME% %YELLOW%[%SOCKETS%]
 //
+ItemDisplay[NMAG ETH SOCK=0 !ITEMSTAT91=0 7s8]: %RED% -Req %DGREEN%ETH %NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[ETH 7vo NMAG !SUP SOCK=0]: 
 ItemDisplay[ETH 7s8 NMAG !SUP SOCK=0]: %GREEN%ETH %NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[ETH 7pa NMAG !SUP SOCK=0]: %DGREEN%ETH %NAME% %YELLOW%[%SOCKETS%]
@@ -928,6 +943,7 @@ ItemDisplay[NMAG 9s8 SOCK=4]:
 
 //5 socket polearms
 ItemDisplay[NMAG ETH SUP SOCK=5 7h7]: %GREEN%¤ ETH SUP DOOM BASE ¤ %RED%[%SOCKETS%]
+ItemDisplay[NMAG ETH SOCK=5 !ITEMSTAT91=0 7s8]: %RED% -Req %DGREEN%ETH %NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[NMAG ETH SOCK=5 7s8]: %DGREEN%ETH %NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[NMAG ETH SOCK=5 7pa]: %DGREEN%ETH %NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[NMAG ETH !SUP SOCK=5 7h7]: %GREEN%¤ ETH DOOM BASE ¤ %RED%[%SOCKETS%]
@@ -1372,6 +1388,7 @@ ItemDisplay[!ELT MAG EQ2 !ID ILVL>65]:
 
 //Shields - Hidden !monarch !troll nest
 ItemDisplay[MAG EQ3 !ID !uit !ush ILVL>65]:
+
 //
 
 //Elite Boots - Shown
@@ -1930,6 +1947,7 @@ ItemDisplay[NMAG !RW ILVL>44 xar]:
 //Shield
 // hide hyperion line below to show them // that line
 ItemDisplay[NMAG !RW urg]: 
+ItemDisplay[xsh NMAG !ETH !RW SOCK=2]: %NAME% [%SOCKETS%] 
 //
 ItemDisplay[NMAG ETH !RW SOCK=3 ush]: %DGREEN% ETH %NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[NMAG ETH !RW SOCK=3 urg]: ETH %NAME% [%SOCKETS%]
@@ -1937,7 +1955,7 @@ ItemDisplay[NMAG ETH !RW SOCK=0 ush]: %DGREEN% ETH %NAME% %YELLOW%[%SOCKETS%]
 ItemDisplay[NMAG !ETH !RW SOCK=3 ush]: %GRAY%%NAME% [%SOCKETS%]
 ItemDisplay[NMAG !ETH !RW SOCK=2 ush]: %GRAY%%NAME% [%SOCKETS%]
 ItemDisplay[NMAG !ETH !RW SOCK=3 urg]: %GRAY%%NAME% [%SOCKETS%]
-ItemDisplay[NMAG !ETH !RW SOCK=2 urg]: %GRAY%%NAME% [%SOCKETS%]
+GIRM
 ItemDisplay[NMAG !ETH !RW SOCK=0 ush]: %GRAY%%NAME%
 ItemDisplay[NMAG !ETH !RW SOCK=0 urg]: %GRAY%%NAME%
 ItemDisplay[NMAG SOCK=1 urg]: 

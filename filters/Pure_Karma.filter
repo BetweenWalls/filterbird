@@ -1,8 +1,8 @@
 //╔══════════════════════════════════════════╗
 //║ Look Up Item Codes @ Path of Diablo Wiki ║
-//║ Pure Karma Loot Filter 9.0               ║
-//║ Patch: Flint	                         ║
-//║ By: KarmaNation	                     ║
+//║ Pure Karma Loot Filter 10.0              ║
+//║ Patch: Zincite	                         ║
+//║ By: KarmaNation	                         ║
 //╚══════════════════════════════════════════╝
 ItemDisplay[CLVL>79 GOLD<5000]:
 ItemDisplay[CLVL>59 GOLD<2500]:
@@ -11,10 +11,16 @@ ItemDisplay[CLVL>24 GOLD<250]:
 ItemDisplay[CLVL<25 GOLD<100]:
 ItemDisplay[cx5]: %RED%© %PURPLE%Corrupted Orb %RED%©
 ItemDisplay[maz]: %PURPLE%÷÷÷÷÷÷÷÷÷÷÷÷÷ %RED%TRIAL %PURPLE%÷÷÷÷÷÷÷÷÷÷÷÷÷
-ItemDisplay[ma2]: %PURPLE%¤¤¤¤ %RED%TIER %PURPLE%4 %RED%MAP %PURPLE%¤¤¤¤
-ItemDisplay[ma6]: %RED%³ %GOLD%Tier %RED%3 %GOLD%Map %RED%³
-ItemDisplay[ma5]: %RED%² %YELLOW%Tier %RED%2 %YELLOW%Map %RED%²
-ItemDisplay[ma4]: %RED%¹ %DGREEN%Tier %RED%1 %DGREEN%Map %RED%¹
+ItemDisplay[ma1]: %RED%%NAME%
+ItemDisplay[ma2]: %RED%%NAME%
+ItemDisplay[ma3]: %RED%%NAME%
+ItemDisplay[ma4]: %RED%%NAME%
+ItemDisplay[ma5]: %RED%%NAME%
+ItemDisplay[ma6]: %RED%%NAME%
+ItemDisplay[ma7]: %RED%%NAME%
+ItemDisplay[ma8]: %RED%%NAME%
+ItemDisplay[ma9]: %RED%%NAME%
+ItemDisplay[ma10]: %RED%%NAME%
 ItemDisplay[fed]: %GREEN%¤¤¤¤¤¤¤¤¤¤ ESSENCE ¤¤¤¤¤¤¤¤¤¤
 ItemDisplay[tes]: %BLUE%¤¤¤ ESSENCE ¤¤¤
 ItemDisplay[ceh]: %YELLOW%¤¤¤ ESSENCE ¤¤¤
@@ -898,12 +904,18 @@ ItemDisplay[NMAG EQ2 SOCK=0 !ETH EXC ED=15]: %PURPLE%+ %GRAY%%NAME% %PURPLE%+ %B
 ItemDisplay[NMAG EQ2 SOCK>2 !ETH EXC ED=15]: %PURPLE%+ %GRAY%%NAME% %PURPLE%+ %BLUE%15ED (%SOCKETS%)
 ItemDisplay[NMAG EQ2 SOCK=0 !ETH ELT ED=15]: %PURPLE%+++ %GRAY%%NAME% %PURPLE%+++ %BLUE%15ED (%SOCKETS%)
 ItemDisplay[NMAG EQ2 SOCK>2 !ETH ELT ED=15]: %PURPLE%+++ %GRAY%%NAME% %PURPLE%+++ %BLUE%15ED (%SOCKETS%)
+ItemDisplay[NMAG EQ2 SOCK=0 !ETH EXC ITEMSTAT91>0]: %GRAY%%NAME% %BLUE%-Req (%SOCKETS%)
+ItemDisplay[NMAG EQ2 SOCK>2 !ETH EXC ITEMSTAT91>0]: %GRAY%%NAME% %BLUE%-Req (%SOCKETS%)
+ItemDisplay[NMAG EQ2 SOCK=0 !ETH ELT ITEMSTAT91>0]: %GRAY%%NAME% %BLUE%-Req (%SOCKETS%)
+ItemDisplay[NMAG EQ2 SOCK>2 !ETH ELT ITEMSTAT91>0]: %GRAY%%NAME% %BLUE%-Req (%SOCKETS%)
 ItemDisplay[NMAG EQ2 SOCK=0 !ETH ELT (ED>4 AND ED<15)]: %RED%+ %GRAY%%NAME% %RED%+ %BLUE%ED (%SOCKETS%)
 ItemDisplay[NMAG EQ2 SOCK>2 !ETH ELT (ED>4 AND ED<15)]: %RED%+ %GRAY%%NAME% %RED%+ %BLUE%ED (%SOCKETS%)
 ItemDisplay[NMAG EQ2 SOCK=0 ETH ELT ED=15]: %PURPLE%+++ %GRAY%%NAME% %PURPLE%+++ %BLUE%eth 15ED (%SOCKETS%)
 ItemDisplay[NMAG EQ2 SOCK>2 ETH ELT ED=15]: %PURPLE%+++ %GRAY%%NAME% %PURPLE%+++ %BLUE%eth 15ED (%SOCKETS%)
 ItemDisplay[NMAG EQ2 SOCK=0 ETH ELT (ED>4 AND ED<15)]: %RED%+ %GRAY%%NAME% %RED%+ %BLUE%eth ED (%SOCKETS%)
 ItemDisplay[NMAG EQ2 SOCK>2 ETH ELT (ED>4 AND ED<15)]: %RED%+ %GRAY%%NAME% %RED%+ %BLUE%eth ED (%SOCKETS%)
+ItemDisplay[NMAG EQ2 SOCK=0 ETH ELT ITEMSTAT91>5]: %GRAY%%NAME% %BLUE%eth -Req (%SOCKETS%)
+ItemDisplay[NMAG EQ2 SOCK>2 ETH ELT ITEMSTAT91>5]: %GRAY%%NAME% %BLUE%eth -Req (%SOCKETS%)
 ItemDisplay[NMAG EQ2 SOCK>1 !ETH ILVL<67]: %NAME% %BLUE%(%SOCKETS%)
 ItemDisplay[NMAG EQ2 SOCK>1 ETH ILVL<67]: %NAME% %BLUE%eth (%SOCKETS%)
 ItemDisplay[NMAG EQ2 SOCK>1 ILVL>66]:
@@ -913,6 +925,8 @@ ItemDisplay[NMAG uit SOCK=0 !ETH ED=15]: %PURPLE%+++ %GRAY%Monarch %PURPLE%+++ %
 ItemDisplay[NMAG uit SOCK=4 !ETH  ED=15]: %PURPLE%+++ %GRAY%Monarch %PURPLE%+++ %BLUE%15ED (%SOCKETS%)
 ItemDisplay[NMAG uit SOCK=0 !ETH  (ED>4 AND ED<15)]: %RED%+ %GRAY%Monarch %RED%+ %BLUE%ED (%SOCKETS%)
 ItemDisplay[NMAG uit SOCK=4 !ETH  (ED>4 AND ED<15)]: %RED%+ %GRAY%Monarch %RED%+ %BLUE%ED (%SOCKETS%)
+ItemDisplay[NMAG uit SOCK=0 !ETH ITEMSTAT91>0]: %RED%++ %GRAY%Monarch %RED%++ %BLUE%-Req(%SOCKETS%)
+ItemDisplay[NMAG uit SOCK=4 !ETH ITEMSTAT91>0]: %RED%++ %GRAY%Monarch %RED%++ %BLUE%-Req(%SOCKETS%)
 ItemDisplay[NMAG uit SOCK=4 !ETH !INF]: %RED%+ %GRAY%Monarch %RED%+ %BLUE%(%SOCKETS%)
 ItemDisplay[NMAG uit SOCK=0 !ETH !INF]: %NAME%
 ItemDisplay[NMAG kit SOCK=3 !ETH !SUP ILVL<79]: %NAME% %BLUE%(%SOCKETS%)
@@ -981,29 +995,29 @@ ItemDisplay[NMAG 72a SOCK>2 ETH !INF]: %NAME% %BLUE%eth (%SOCKETS%)
 //ItemDisplay[NMAG 7ax SOCK=4 ETH ED=15]: %PURPLE%+ %ORANGE%Small Crescent %PURPLE%+ %BLUE%eth 15ED (%SOCKETS%)
 //ItemDisplay[NMAG 7ax SOCK=0 ETH (ED>4 AND ED<15)]: %RED%+ %ORANGE%Small Crescent %RED%+ %BLUE%eth ED (%SOCKETS%)
 //ItemDisplay[NMAG 7ax SOCK=4 ETH (ED>4 AND ED<15)]: %RED%+ %ORANGE%Smell Crescent %RED%+ %BLUE%eth ED (%SOCKETS%)
-ItemDisplay[NMAG 7ax SOCK=4 !ETH !INF]: %NAME% %BLUE%(%SOCKETS%)
-ItemDisplay[NMAG 7ax SOCK=4 ETH !INF]: %NAME% %BLUE%eth (%SOCKETS%)
+//ItemDisplay[NMAG 7ax SOCK=4 !ETH !INF]: %NAME% %BLUE%(%SOCKETS%)
+//ItemDisplay[NMAG 7ax SOCK=4 ETH !INF]: %NAME% %BLUE%eth (%SOCKETS%)
 //ItemDisplay[NMAG 7ga SOCK=0 ETH ED=15]: %PURPLE%+ %ORANGE%Champion Axe %PURPLE%+ %BLUE%eth 15ED (%SOCKETS%)
 //ItemDisplay[NMAG 7ga SOCK>3 ETH ED=15]: %PURPLE%+ %ORANGE%Champion Axe %PURPLE%+ %BLUE%eth 15ED (%SOCKETS%)
 //ItemDisplay[NMAG 7ga SOCK=0 ETH (ED>4 AND ED<15)]: %RED%+ %ORANGE%Champion Axe %RED%+ %BLUE%eth ED (%SOCKETS%)
 //ItemDisplay[NMAG 7ga SOCK>3 ETH (ED>4 AND ED<15)]: %RED%+ %ORANGE%Champion Axe %RED%+ %BLUE%eth ED (%SOCKETS%)
-ItemDisplay[NMAG 7ga SOCK>3 ETH !INF]: %NAME% %BLUE%eth (%SOCKETS%)
+//ItemDisplay[NMAG 7ga SOCK>3 ETH !INF]: %NAME% %BLUE%eth (%SOCKETS%)
 //ItemDisplay[NMAG 7gi SOCK=0 ETH ED=15]: %PURPLE%+ %ORANGE%Glorious Axe %PURPLE%+ %BLUE%eth 15ED (%SOCKETS%)
 //ItemDisplay[NMAG 7gi SOCK>3 ETH ED=15]: %PURPLE%+ %ORANGE%Glorious Axe %PURPLE%+ %BLUE%eth 15ED (%SOCKETS%)
 //ItemDisplay[NMAG 7gi SOCK=0 ETH (ED>4 AND ED<15)]: %RED%+ %ORANGE%Glorious Axe %RED%+ %BLUE%eth ED (%SOCKETS%)
 //ItemDisplay[NMAG 7gi SOCK>3 ETH (ED>4 AND ED<15)]: %RED%+ %ORANGE%Glorious Axe %RED%+ %BLUE%eth ED (%SOCKETS%)
-ItemDisplay[NMAG 7gi SOCK>3 ETH !INF]: %NAME% %BLUE%eth (%SOCKETS%)
+//ItemDisplay[NMAG 7gi SOCK>3 ETH !INF]: %NAME% %BLUE%eth (%SOCKETS%)
 //ItemDisplay[NMAG 7bt SOCK=0 ETH ED=15]: %PURPLE%+ %ORANGE%Decapitator %PURPLE%+ %BLUE%eth 15ED (%SOCKETS%)
 //ItemDisplay[NMAG 7bt SOCK>3 ETH ED=15]: %PURPLE%+ %ORANGE%Decapitator %PURPLE%+ %BLUE%eth 15ED (%SOCKETS%)
 //ItemDisplay[NMAG 7bt SOCK=0 ETH (ED>4 AND ED<15)]: %RED%+ %ORANGE%Decapitator %RED%+ %BLUE%eth ED (%SOCKETS%)
 //ItemDisplay[NMAG 7bt SOCK>3 ETH (ED>4 AND ED<15)]: %RED%+ %ORANGE%Decapitator %RED%+ %BLUE%eth ED (%SOCKETS%)
-ItemDisplay[NMAG 7bt SOCK>3 ETH !INF]: %NAME% %BLUE%eth (%SOCKETS%)
+//ItemDisplay[NMAG 7bt SOCK>3 ETH !INF]: %NAME% %BLUE%eth (%SOCKETS%)
 //ItemDisplay[NMAG 7la SOCK=0 ETH ED=15]: %PURPLE%+ %ORANGE%Feral Axe %PURPLE%+ %BLUE%eth 15ED (%SOCKETS%)
 //ItemDisplay[NMAG 7la SOCK=4 ETH ED=15]: %PURPLE%+ %ORANGE%Feral Axe %PURPLE%+ %BLUE%eth 15ED (%SOCKETS%)
 //ItemDisplay[NMAG 7la SOCK=0 ETH (ED>4 AND ED<15)]: %RED%+ %ORANGE%Feral Axe %RED%+ %BLUE%eth ED (%SOCKETS%)
 //ItemDisplay[NMAG 7la SOCK=4 ETH (ED>4 AND ED<15)]: %RED%+ %ORANGE%Feral Axe %RED%+ %BLUE%eth ED (%SOCKETS%)
-ItemDisplay[NMAG 7la SOCK=4 ETH !INF]: %NAME% %BLUE%eth (%SOCKETS%)
-ItemDisplay[NMAG 7la SOCK=4 !ETH !INF]: %NAME% %BLUE%eth (%SOCKETS%)
+//ItemDisplay[NMAG 7la SOCK=4 ETH !INF]: %NAME% %BLUE%eth (%SOCKETS%)
+//ItemDisplay[NMAG 7la SOCK=4 !ETH !INF]: %NAME% %BLUE%eth (%SOCKETS%)
 ItemDisplay[NMAG WP1 SOCK>1 !ETH ILVL<67]: %NAME% %BLUE%(%SOCKETS%)
 ItemDisplay[NMAG WP1 SOCK>1 ETH ILVL<67]: %NAME% %BLUE%eth (%SOCKETS%)
 ItemDisplay[NMAG WP1 SOCK>1 ILVL>66]:
@@ -1051,6 +1065,8 @@ ItemDisplay[NMAG 7cr SOCK=0 ED=15]: %PURPLE%+ %ORANGE%Phase Blade %PURPLE%+ %BLU
 ItemDisplay[NMAG 7cr SOCK>2 ED=15]: %PURPLE%+++ %ORANGE%Phase Blade %PURPLE%+++ %BLUE%15ED (%SOCKETS%)
 ItemDisplay[NMAG 7cr SOCK=0 (ED>4 AND ED<15)]: %RED%+ %ORANGE%Phase Blade %RED%+ %BLUE%ED (%SOCKETS%)
 ItemDisplay[NMAG 7cr SOCK>2 (ED>4 AND ED<15)]: %RED%+++ %ORANGE%Phase Blade %RED%+++ %BLUE%ED (%SOCKETS%)
+ItemDisplay[NMAG 7cr SOCK=0 ITEMSTAT91>0]: %GRAY%%NAME% %BLUE%-Req (%SOCKETS%)
+ItemDisplay[NMAG 7cr SOCK>2 ITEMSTAT91>0]: %GRAY%%NAME% %BLUE%-Req (%SOCKETS%)
 ItemDisplay[NMAG 7cr SOCK=0 !INF]: %NAME%
 ItemDisplay[NMAG 7cr SOCK>2 !INF]: %NAME% %BLUE%(%SOCKETS%)
 //ItemDisplay[NMAG 7bs SOCK=0 ETH ED=15]: %PURPLE%+ %ORANGE%Conquest Sword %PURPLE%+ %BLUE%eth 15ED (%SOCKETS%)
