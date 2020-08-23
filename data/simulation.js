@@ -1,3 +1,6 @@
+
+// TODO: items with multiple lines should have pre-NAME modifications shown at the start of the second line
+
 var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"common"};
 var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:90,CHARSTAT70:0,CHARSTAT13:1000};
 var item_settings = {ID:false};
@@ -142,10 +145,10 @@ function setItem(value) {
 				}
 				else if (itemToCompare.CODE == "aq2") { itemToCompare.base = "Arrows" }
 				else if (itemToCompare.CODE == "cq2") { itemToCompare.base = "Bolts" }
-				//else if (itemToCompare.CODE == "ma4") { itemToCompare.base = "Tier 1 Relic" }
-				//else if (itemToCompare.CODE == "ma5") { itemToCompare.base = "Tier 2 Relic" }
-				//else if (itemToCompare.CODE == "ma6") { itemToCompare.base = "Tier 3 Relic" }
-				//else if (itemToCompare.CODE == "ma2") { itemToCompare.base = "Tier 4 Relic" }
+				else if (itemToCompare.CODE == "ma1" || itemToCompare.CODE == "ma2" || itemToCompare.CODE == "ma4" || itemToCompare.CODE == "ma5" || itemToCompare.CODE == "ma6" || itemToCompare.CODE == "ma7" || itemToCompare.CODE == "ma8" || itemToCompare.CODE == "ma9") {
+					itemToCompare.base = itemToCompare.name
+					itemToCompare.NAME = rare_prefix[Math.floor(Math.random()*rare_prefix.length)] + " Eye"
+				}
 				else if (itemToCompare.CODE == "cm4") { itemToCompare.base = "Grand Charm" }	// TOCHECK: Does this item still display with 2 lines?
 			}
 			for (affix in item) { itemToCompare[affix] = item[affix] }	// some base affixes are overridden by regular affixes
@@ -360,7 +363,7 @@ function parseFile(file,num) {
 	else { document.getElementById("output_"+num).style.color = getColor(itemToCompare) }
 	document.getElementById("o"+num).innerHTML += "<br>"
 	if (obscured == false && itemToCompare.ID == true && !(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {
-		if (typeof(itemToCompare.base) != 'undefined' && itemToCompare.CODE != "ma4" && itemToCompare.CODE != "ma5" && itemToCompare.CODE != "ma6" && itemToCompare.CODE != "ma2") { display += "<br>"+itemToCompare.base }
+		if (typeof(itemToCompare.base) != 'undefined') { display += "<br>"+itemToCompare.base }
 	}
 	return display
 }
@@ -396,7 +399,7 @@ function equipmentHover(num) {
 		if (typeof(stats[affix]) != 'undefined') { if (itemToCompare[affix] != unequipped[affix] && stats[affix] != unequipped[affix] && stats[affix] != 1 && affix != "velocity" && affix != "smite_min") {
 			var affix_info = getAffixLine(affix);
 			if (affix_info[1] != 0) {
-				if (affix == "base_damage_min" || affix == "base_defense" || affix == "req_level" || affix == "req_strength" || affix == "req_dexterity" || affix == "durability" || affix == "baseSpeed" || affix == "range" || affix == "throw_min" || affix == "base_min_alternate" || affix == "block" || affix == "velocity" || affix == "QUANTITY") { main_affixes += affix_info[0]+"<br>" }
+				if (affix == "base_damage_min" || affix == "base_defense" || affix == "req_level" || affix == "req_strength" || affix == "req_dexterity" || affix == "durability" || affix == "baseSpeed" || affix == "range" || affix == "throw_min" || affix == "base_min_alternate" || affix == "block" || affix == "velocity" || affix == "QUANTITY" || affix == "relic_experience" || affix == "relic_density") { main_affixes += affix_info[0]+"<br>" }
 				else { affixes += affix_info[0]+"<br>" }
 			}
 		} }
@@ -418,7 +421,7 @@ function equipmentHover(num) {
 	var textbox_height = document.getElementById("filter_text_1").getBoundingClientRect().height + document.getElementById("filter_text_2").getBoundingClientRect().height
 	var editing_height = document.getElementById("item_editing").getBoundingClientRect().height + document.getElementById("non_item_editing").getBoundingClientRect().height
 	var offset_x = Math.floor(item.left + item.width/2 - tooltip_width/2);
-	var offset_y = Math.floor(110 + textbox_height + editing_height + 100*num + item.height/2);
+	var offset_y = Math.floor(117 + textbox_height + editing_height + 100*num + item.height/2);
 	document.getElementById("tooltip_inventory").style.left = offset_x+"px"
 	document.getElementById("tooltip_inventory").style.top = offset_y+"px"
 	var extra_height = Math.max(0,(document.getElementById("tooltip_inventory").getBoundingClientRect().height - 50 - document.getElementById("output_processing_info").getBoundingClientRect().height))

@@ -32,7 +32,7 @@ var unequipped = {			strength:0, dexterity:0, vitality:0, energy:0, life:0, mana
 /* oskills  sorceress	*/	oskill_Frigerate:0, oskill_Shiver_Armor:0, oskill_Cold_Mastery:0, oskill_Hydra:0, oskill_Fire_Ball:0, oskill_Fire_Wall:0, oskill_Meteor:0, oskill_Fire_Mastery:0, // Frostwind, Medusa's Gaze, Bing Sz Wang, Dragonscale, Trang-Oul's Set
 
 							durability_extra:0, experience:0, skills_class:0, skills_tree1:0, skills_tree2:0, skills_tree3:0, weapon:"", armor:"", shield:"", item_defense:0, block_skillup:0, velocity_skillup:0, dodge:0, avoid:0, evade:0, edged_damage:0, edged_ar:0, edged_cstrike:0, pole_damage:0, pole_ar:0, pole_cstrike:0, blunt_damage:0, blunt_ar:0, blunt_cstrike:0, thrown_damage:0, thrown_ar:0, thrown_pierce:0, claw_damage:0, claw_ar:0, claw_cstrike:0, 
-							summon_damage:0, summon_defense:0, all_skills_per_level:0, reset_on_kill:0, max_durability:0, bonus_sanctuary_rate:0, 
+							summon_damage:0, summon_defense:0, all_skills_per_level:0, reset_on_kill:0, max_durability:0, bonus_sanctuary_rate:0, relic_experience:0, relic_density:0, 
 };
 
 // Item names must be unique to be loaded correctly
@@ -422,13 +422,14 @@ var equipment = {
 {CODE:"isc", name:"Scroll of Identify", rarity:"common"},
 {CODE:"ear", name:"Player Ear", rarity:"common"},
 // pod
-{CODE:"ma1", name:"Icy Cavern Relic", rarity:"magic", always_id:true},
-{CODE:"ma5", name:"Frigid Plateau Relic", rarity:"magic", always_id:true},
-{CODE:"ma9", name:"Dim Cellar Relic", rarity:"magic", always_id:true},
-{CODE:"ma7", name:"Burnt Forest Relic", rarity:"magic", always_id:true},
-{CODE:"ma4", name:"Desecrated Temple Relic", rarity:"magic", always_id:true},
-{CODE:"ma6", name:"Ruined Citadel Relic", rarity:"magic", always_id:true},
-{CODE:"ma2", name:"Forgotten Desert Relic", rarity:"magic", always_id:true},
+{CODE:"ma1", name:"Icy Cavern Relic", rarity:"rare", relic_experience:10, relic_density:100},
+{CODE:"ma5", name:"Frigid Plateau Relic", rarity:"rare", relic_experience:10, relic_density:100},
+{CODE:"ma4", name:"Desecrated Temple Relic", rarity:"rare", relic_experience:10, relic_density:100},
+{CODE:"ma8", name:"Musty Crypt Relic", rarity:"rare", relic_experience:10, relic_density:100},
+{CODE:"ma9", name:"Dim Cellar Relic", rarity:"rare", relic_experience:10, relic_density:100},
+{CODE:"ma2", name:"Forgotten Desert Relic", rarity:"rare", relic_experience:10, relic_density:100},
+{CODE:"ma6", name:"Ruined Citadel Relic", rarity:"rare", relic_experience:10, relic_density:100},
+{CODE:"ma7", name:"Burnt Forest Relic", rarity:"rare", relic_experience:10, relic_density:100},
 {CODE:"maz", name:"Infernal Trial", rarity:"unique", always_id:true},
 {CODE:"cx6", name:"Diablo's Soulstone", rarity:"craft"},
 {CODE:"cx7", name:"Key of Chaos", rarity:"craft"},
@@ -622,136 +623,6 @@ var premade = {
 	]
 };
 */
-
-var corruptions = {	// Note: non-socket corruptions include +1 socket if possible (from Larzuk)
-	helm: [
-		{name:"Helm"},
-		{name:"+ Sockets", sockets:3},
-		{name:"+ Life per Hit", life_per_hit:14, life_per_ranged_hit:10, sockets:1},
-		{name:"+ Strength", strength:10, sockets:1},
-		{name:"+ Energy", energy:10, sockets:1},
-		{name:"+ Life", life:15, sockets:1},
-		{name:"+ Enhanced Defense", e_def:25, sockets:1},
-	],
-	armor: [
-		{name:"Armor"},
-		{name:"+ Sockets", sockets:4},
-		{name:"+ Faster Cast Rate", fcr:10, sockets:1},
-		{name:"+ Increased Attack Speed", ias:10, sockets:1},
-		{name:"+ Attack Rating", ar_bonus:20, sockets:1},
-		{name:"+ Max Life", max_life:2, sockets:1},
-		{name:"+ Enhanced Defense", e_def:20, sockets:1},
-	],
-	gloves: [
-		{name:"Gloves"},
-		{name:"+ All Resistances", all_res:10},
-		{name:"+ Cold Resistance", cRes:20},
-		{name:"+ Poison Resistance", pRes:20},
-		{name:"+ Increased Attack Speed", ias:10},
-		{name:"+ Life per Hit", life_per_hit:10, life_per_ranged_hit:10},
-	],
-	boots: [
-		{name:"Boots"},
-		{name:"+ All Resistances", all_res:10},
-		{name:"+ Fire Resistance", fRes:20},
-		{name:"+ Lightning Resistance", lRes:20},
-		{name:"+ Cooldown Reduction", cdr:10},
-		{name:"+ Dexterity", dexterity:10},
-	],
-	belt: [
-		{name:"Belt"},
-		{name:"+ Pierce", pierce:8},
-		{name:"+ Max Fire Resist", fRes_max:2},
-		{name:"+ Max Cold Resist", cRes_max:2},
-		{name:"+ Max Lightning Resist", lRes_max:2},
-		{name:"+ Max Poison Resist", pRes_max:2},
-	],
-	amulet: [
-		{name:"Amulet"},
-		{name:"+ All Skills", all_skills:1},
-		{name:"+ All Resistances", all_res:5},
-		{name:"+ Mana Regen", mana_regen:15},
-		{name:"+ Magic Find", mf:10},
-		{name:"+ Life", life:18},
-	],
-	ring: [
-		{name:"Ring"},
-		{name:"+ Faster Cast Rate", fcr:10},
-		{name:"+ Faster Run/Walk", frw:10},
-		{name:"+ Damage Reduction", pdr:6},
-		{name:"+ Magic Find", mf:10},
-		{name:"+ Life", life:15},
-	],
-	weapon: [
-		{name:"Weapon"},
-		{name:"+ Sockets", sockets:6},
-		{name:"+ Damage per Level", max_damage_per_level:1, sockets:1},
-		{name:"+ Enhanced Damage", e_damage:50, sockets:1},
-		{name:"+ Deadly Strike", dstrike:10, sockets:1},
-		{name:"+ Crushing Blow", cblow:10, sockets:1},
-		{name:"+ Increased Attack Speed", ias:15, sockets:1},
-	],
-	offhand: [
-		{name:"Offhand"},
-		// weapon
-		{name:"+ Sockets", base:"weapon", sockets:6},
-		{name:"+ Damage per Level", base:"weapon", max_damage_per_level:1, sockets:1},
-		{name:"+ Enhanced Damage", base:"weapon", e_damage:50, sockets:1},
-		{name:"+ Deadly Strike", base:"weapon", dstrike:10, sockets:1},
-		{name:"+ Crushing Blow", base:"weapon", cblow:10, sockets:1},
-		{name:"+ Increased Attack Speed", base:"weapon", ias:15, sockets:1},
-		// shield
-		{name:"+ Sockets", base:"shield", sockets:4},
-		{name:"+ Block Chance", base:"shield", ibc:10, sockets:1},
-		{name:"+ Fire Damage", base:"shield", fDamage:10, sockets:1},
-		{name:"+ Cold Damage", base:"shield", cDamage:10, sockets:1},
-		{name:"+ Lightning Damage", base:"shield", lDamage:10, sockets:1},
-		{name:"+ Poison Damage", base:"shield", pDamage:10, sockets:1},
-		// quiver
-		{name:"+ Increased Attack Speed", base:"quiver", ias:10},
-		{name:"+ All Resistances", base:"quiver", all_res:5},
-		{name:"+ Life per Hit", base:"quiver", life_per_ranged_hit:6},
-		{name:"+ Mana per Hit", base:"quiver", mana_per_ranged_hit:4},
-		{name:"+ Vitality", base:"quiver", vitality:10},
-	],
-};
-
-var sets = {
-	set_IK:["Immortal King",{},{ar:50},{ar:75},{ar:125},{ar:200},{skills_barbarian:3, life:150, all_res:50, mDamage_reduced:10, glow:1}],
-	set_Mav:["M'avina's Battle Hymn",{},{strength:20},{dexterity:30},{},{skills_amazon:3, all_res:50, defense:100, ar:100, mf:100, glow:1}],
-	set_Ald:["Aldur's Watchtower",{},{ar_bonus:150},{mf:50},{skills_druid:3, damage_bonus:350, mana_leech:10, all_res:50, defense:150, mana:150, glow:1}],
-	set_TO:["Trang-Oul's Avatar",{},{oskill_Fire_Ball:18, mana_regen:15},{oskill_Fire_Wall:13, mana_regen:15},{oskill_Meteor:10, mana_regen:15},{skills_necromancer:3, life_leech:20, oskill_Fire_Mastery:3, defense:200, mana:100, mana_regen:15, life_replenish:5, all_res:50, glow:1}],
-	set_Gris:["Griswold's Legacy",{},{strength:20},{dexterity:30},{skills_paladin:3, fhr:30, ar:200, life:150, all_res:50, glow:1}],
-	set_Nat:["Natalya's Odium",{},{mDamage_reduced:15},{defense:200},{skills_assassin:3, defense:150, life_leech:14, mana_leech:14, all_res:50, pdr:30, glow:1}],
-	set_TR:["Tal Rasha's Wrappings",{},{life_replenish:10},{mf:65},{fhr:25},{skills_sorceress:3, life:150, all_res:50, missile_defense:50, defense:150, glow:1}],
-	
-	set_BK:["Bul-Kathos' Children",{},{all_skills:2, ar:200, damage_vs_demons:200, damage_vs_undead:200, fDamage_min:20, fDamage_max:20, defense:25}],
-	set_Disciple:["The Disciple",{},{defense:150},{skills_poison_all:1},{strength:10},{all_skills:2, all_res:50, mana:100}],
-	set_Cow:["Cow King's Leathers",{},{pRes:25},{stamina:100, strength:20, ias:30, mf:100}],
-	set_Brethren:["Heaven's Brethren",{},{heal_stam:50},{life_replenish:20},{all_skills:2, all_res:50, cbf:1, light_radius:5}],
-	set_Hwanin:["Hwanin's Majesty",{},{defense:100},{defense:200},{all_skills:2, frw:30, life_leech:20, all_res:30}],
-	set_Naj:["Naj's Ancient Vestige",{},{defense:175},{dexterity:15, all_res:50, strength:20, mana:100, all_skills:1}],
-	set_Orphan:["Orphan's Call",{},{life:35},{thorns:5},{life:50, all_res:15, defense:100, dexterity:10, strength:20, mf:80}],
-	set_Sander:["Sander's Folly",{},{defense:50},{ar:75},{all_skills:1, life_leech:4, mana:50, mf:50}],
-	set_Sazabi:["Sazabi's Grand Tribute",{},{frw:40},{life_leech:15, max_life:27, all_res:30}],
-	
-	set_Angelic:["Angelic Raiment",{},{dexterity:10},{mana:50},{half_freeze:1, all_res:25, mf:40, mana_regen:8}],
-	set_Arcanna:["Arcanna's Tricks",{},{mana:25},{life:50},{fcr:20, mana_leech:5}],
-	set_Arctic:["Arctic Gear",{},{strength:5},{life:50},{cbf:1, cDamage_min:6, cDamage_max:14}],
-	set_Berserker:["Berserker's Arsenal",{},{life:50},{defense:75, poison_length_reduced:75, pDamage_min:5, pDamage_max:9, pDamage_duration:3}],
-	set_Cathan:["Cathan's Traps",{},{fDamage_min:15, fDamage_max:20},{lRes:25},{},{fcr:10, mDamage_reduced:3, all_res:25, ar:60, mana:20}],
-	set_Civerb:["Civerb's Vestments",{},{fRes:15},{damage_vs_undead:200, strength:15, lRes:25}],
-	set_Cleglaw:["Cleglaw's Brace",{},{defense:50},{defense:50, cblow:35, mana_leech:6, ias:20}],
-	set_Death:["Death's Disguise",{},{life_leech:8},{ar_bonus:40, all_res:25, damage_min:10}],
-	set_Hsarus:["Hsarus' Defense",{},{thorns:5},{cbf:1, lRes:25, damage_max:5}],
-	set_Infernal:["Infernal Tools",{},{pDamage_all:8, pDamage_duration:3},{owounds:20, skills_necromancer:1, ar_bonus:20, mana_leech:6}],
-	set_Iratha:["Iratha's Finery",{},{defense:50},{frw:20},{dexterity:15, all_res:20, fRes_max:10, cRes_max:10, lRes_max:10, pRes_max:10}],
-	set_Isenhart:["Isenhart's Armory",{},{strength:10},{dexterity:10},{frw:20, ibc:30, ar_bonus:35, life_leech:5, all_res:10}],
-	set_Milabrega:["Milabrega's Regalia",{},{ar:75},{ar:125},{skills_paladin:2, life_leech:8, mana_leech:10, pRes:15}],
-	set_Sigon:["Sigon's Complete Steel",{},{life_leech:10},{defense:100},{},{},{mana:20, fRes:12, fDamage_max:24, thorns:12, damage_reduced:7}],
-	set_Tancred:["Tancred's Battlegear",{},{lDamage_min:15, lDamage_max:15},{life_leech:5},{},{slows_target:35, mana_leech:5, all_res:10, gf:75}],
-	set_Vidala:["Vidala's Rig",{},{ar:75},{dexterity:15},{cDamage_min:15, cDamage_max:20, pierce:50, freezes_target:1, dexterity:15, strength:10}],
-};
 
 var runewords = {
 	Breath_of_the_Dying:["Vex","Hel","El","Eld","Zod","Eth"],
@@ -2021,6 +1892,8 @@ summon_defense:{index:["summon_defense"], format:["Summons have +","% Enhanced D
 all_skills_per_level:{index:["all_skills_per_level"], format:["+"," to All Skills (based on character level)"], mult:["level"]},
 reset_on_kill:{index:["reset_on_kill"], format:["Chance to Reset Duration on Kill: ","%"]},
 bonus_sanctuary_rate:{index:["bonus_sanctuary_rate"], format:["+","% Increased Sanctuary Area Damage Rate"]},
+relic_experience:{index:["relic_experience"], format:["Experience: +","%"]},
+relic_density:{index:["relic_density"], format:["Monster Density: +","%"]},
 
 inferior:1,//{index:[""], format:["Inferior"]},
 REQ_DEX:1,
