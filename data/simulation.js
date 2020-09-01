@@ -30,7 +30,7 @@ function startup() {
 	document.getElementById("background_1").src = background
 	document.getElementById("background_2").src = background
 	loadCustomization()
-	//document.getElementById("debug").style.display = "block"
+	document.getElementById("debug").style.display = "block"
 	//document.getElementById("simulate_custom").style.display = "block"
 }
 

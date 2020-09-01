@@ -1,6 +1,6 @@
 /⃓═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 /	"Journey" Item Filter for Diablo II: Path of Diablo  (all skills for regular items enabled)
-/		Date Updated:	22 AUG 2020
+/		Date Updated:	27 AUG 2020
 /		Info:		https://github.com/BetweenWalls/Journey/tree/all-skills
 /		Direct URL:	https://raw.githubusercontent.com/BetweenWalls/Journey/all-skills/item.filter
 /⃓═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -1003,7 +1003,7 @@ ItemDisplay[NMAG CL7]: %NAME%%DGREEN%
 /ItemDisplay[NMAG ((CL5 !(9cs OR 7xf OR 7cs)) (SOCK>2 OR SOCK=0) (((SK274>0 OR SK275>0) (SK261>2 OR SK262>2 OR SK271>2 OR SK272>2 OR SK276>2 OR SK266>2 OR SK277>2)) OR (((SK274>0 SK275>0) OR ((SK274>0 OR SK275>0) (SK268>0 OR SK279>0))) (SK261>1 OR SK262>1 OR SK271>1 OR SK272>1 OR SK276>1 OR SK266>1 OR SK277>1))))]: %NAME% %TAN%Traps +%DGREEN%
 /⃓̲    Others
 /ItemDisplay[NMAG ((CL5 !(9cs OR 7xf OR 7cs)) (SOCK>2 OR SOCK=0) (SK277>2 (SK275>0 OR SK267>0 OR SK278>0 OR SK268>0 OR SK279>0)))]: %NAME% %TAN%Blade Shield +%DGREEN%
-/ItemDisplay[NMAG ((CL5 !(9cs OR 7xf OR 7cs)) (SOCK>2 OR SOCK=0) (SK267>2 (SK275>0 OR SK277>0 OR SK278>0 OR SK268>0 OR SK279>0)))]: %NAME% %TAN%Fade +%DGREEN
+/ItemDisplay[NMAG ((CL5 !(9cs OR 7xf OR 7cs)) (SOCK>2 OR SOCK=0) (SK267>2 (SK275>0 OR SK277>0 OR SK278>0 OR SK268>0 OR SK279>0)))]: %NAME% %TAN%Fade +%DGREEN%
 /ItemDisplay[NMAG ((CL5 !(9cs OR 7xf OR 7cs)) (SOCK>2 OR SOCK=0) (SK278>1 SK277>1))]: %NAME% %TAN%Venom & Blade Shield%DGREEN%
 /ItemDisplay[NMAG ((CL5 !(9cs OR 7xf OR 7cs)) (SOCK>2 OR SOCK=0) SK277>2)]: %NAME% %TAN%Blade Shield%DGREEN%
 /ItemDisplay[NMAG ((CL5 !(9cs OR 7xf OR 7cs)) (SOCK>2 OR SOCK=0) SK272>2)]: %NAME% %TAN%Wake of Inferno%DGREEN%
