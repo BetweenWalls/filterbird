@@ -418,13 +418,15 @@ function getALVL() {
 // ---------------------------------
 function loadEditing() {
 	for (let n = 1; n <= 2; n++) { document.getElementById("select_superior_"+n).style.display = "none"; document.getElementById("select_superior_value_"+n).style.display = "none"; }
-	for (let n = 1; n <= 2; n++) { document.getElementById("select_automod_value_"+n).style.display = "none"; }; document.getElementById("dropdown_automod").selectedIndex = 0;
+	for (let n = 1; n <= 2; n++) { document.getElementById("select_automod_value_"+n).style.display = "none"; };
 	for (let n = 1; n <= 3; n++) { document.getElementById("select_pointmod_"+n).style.display = "none"; document.getElementById("select_pointmod_value_"+n).style.display = "none"; }
 	for (let n = 1; n <= 6; n++) { document.getElementById("select_affix_"+n).style.display = "none"; document.getElementById("dropdown_affix_"+n).selectedIndex = 0; for (let m = 1; m <= 3; m++) { document.getElementById("select_affix_value_"+n+"_"+m).style.display = "none"; }; }
-	for (let n = 1; n <= 2; n++) { document.getElementById("select_corruption_value_"+n).style.display = "none"; }; document.getElementById("dropdown_corruption").selectedIndex = 0;
+	for (let n = 1; n <= 2; n++) { document.getElementById("select_corruption_value_"+n).style.display = "none"; };
 	if (getMatch("superior") == false) { for (let n = 1; n <= 2; n++) { document.getElementById("dropdown_superior_"+n).selectedIndex = 0; } }
 	if (getMatch("pointmod") == false) { for (let n = 1; n <= 3; n++) { document.getElementById("dropdown_pointmod_"+n).selectedIndex = 0; } }
-
+	if (getMatch("corruption") == false) { document.getElementById("dropdown_corruption").selectedIndex = 0; }
+	if (getMatch("automod") == false) { document.getElementById("dropdown_automod").selectedIndex = 0; }
+	
 	var selects = ["identified","ethereal","sockets","quality","automod","pointmod","affix","corruption","upgrade"];
 	for (s in selects) {
 		var divs = [];
@@ -445,7 +447,7 @@ function loadEditing() {
 // load - subfunction for loadEditing, 
 // ---------------------------------
 function load(kind) {
-	// TODO: Preserve affixes if possible when resetting
+	// TODO: reduce duplicated code
 	var alvl = getALVL();
 	var options = "<option class='gray-all'>" + "None" + "</option>";
 	if (kind == "ethereal") {
@@ -471,13 +473,36 @@ function load(kind) {
 			doQuality(quality_index)
 		}
 	} else if (kind == "automod") {
+		var automod_index = document.getElementById("dropdown_automod").selectedIndex;
+		var automod_value = ""; if (automod_index > 0) { automod_value = document.getElementById("dropdown_automod").options[automod_index].innerHTML };
+		var automod_mod_value_1 = document.getElementById("automod_value_1").innerHTML;
+		var automod_mod_value_2 = document.getElementById("automod_value_2").innerHTML;
+		
 		for (a in affixes_automod) {
 			var aff = affixes_automod[a];
 			options += loadDetails(kind,aff,alvl,aff[0],1,aff[2],aff[3],aff[4],aff[6],aff[7],aff[10],"",[aff[13]],[])
 		}
 		document.getElementById("dropdown_automod").innerHTML = options
+		
+		if (automod_index > 0) {
+			for (opt in document.getElementById("dropdown_automod").options) {
+				if (automod_value == document.getElementById("dropdown_automod").options[opt].innerHTML) {
+					document.getElementById("dropdown_automod").selectedIndex = opt
+					doAutomod(opt)
+					if (automod_mod_value_1 < document.getElementById("automod_value_1").innerHTML) {
+						document.getElementById("range_automod_1").value = automod_mod_value_1
+						document.getElementById("automod_value_1").innerHTML = automod_mod_value_1
+						doAutomodValue(1,automod_mod_value_1)
+					}
+					if (automod_mod_value_2 < document.getElementById("automod_value_2").innerHTML) {
+						document.getElementById("range_automod_2").value = automod_mod_value_2
+						document.getElementById("automod_value_2").innerHTML = automod_mod_value_2
+						doAutomodValue(2,automod_mod_value_2)
+					}
+				}
+			}
+		}
 	} else if (kind == "pointmod") {
-		// TODO: reduce duplicated code
 		var pointmod_index_1 = document.getElementById("dropdown_pointmod_1").selectedIndex;
 		var pointmod_value_1 = ""; if (pointmod_index_1 > 0) { pointmod_value_1 = document.getElementById("dropdown_pointmod_1").options[pointmod_index_1].innerHTML };
 		var pointmod_mod_value_1 = document.getElementById("pointmod_value_1").innerHTML;
@@ -496,7 +521,7 @@ function load(kind) {
 		
 		if (pointmod_index_1 > 0) {
 			for (opt in document.getElementById("dropdown_pointmod_1").options) {
-				if (pointmod_value_1 == document.getElementById("dropdown_pointmod_1").options[opt].value) {
+				if (pointmod_value_1 == document.getElementById("dropdown_pointmod_1").options[opt].innerHTML) {
 					document.getElementById("dropdown_pointmod_1").selectedIndex = opt
 					doPointmod(1,opt)
 					document.getElementById("range_pointmod_1").value = pointmod_mod_value_1
@@ -507,7 +532,7 @@ function load(kind) {
 		}
 		if (pointmod_index_2 > 0) {
 			for (opt in document.getElementById("dropdown_pointmod_2").options) {
-				if (pointmod_value_2 == document.getElementById("dropdown_pointmod_2").options[opt].value) {
+				if (pointmod_value_2 == document.getElementById("dropdown_pointmod_2").options[opt].innerHTML) {
 					document.getElementById("dropdown_pointmod_2").selectedIndex = opt
 					doPointmod(2,opt)
 					document.getElementById("range_pointmod_2").value = pointmod_mod_value_2
@@ -518,7 +543,7 @@ function load(kind) {
 		}
 		if (pointmod_index_3 > 0) {
 			for (opt in document.getElementById("dropdown_pointmod_3").options) {
-				if (pointmod_value_3 == document.getElementById("dropdown_pointmod_3").options[opt].value) {
+				if (pointmod_value_3 == document.getElementById("dropdown_pointmod_3").options[opt].innerHTML) {
 					document.getElementById("dropdown_pointmod_3").selectedIndex = opt
 					doPointmod(3,opt)
 					document.getElementById("range_pointmod_3").value = pointmod_mod_value_3
@@ -528,6 +553,7 @@ function load(kind) {
 			}
 		}
 	} else if (kind == "affix") {
+		// TODO: Preserve affixes if possible when resetting
 		var options_prefix = options;
 		var options_suffix = options;
 		for (a in affixes) {
@@ -545,11 +571,35 @@ function load(kind) {
 			else { document.getElementById("dropdown_affix_"+n).innerHTML = options_suffix }
 		}
 	} else if (kind == "corruption") {
+		var corruption_index = document.getElementById("dropdown_corruption").selectedIndex;
+		var corruption_value = ""; if (corruption_index > 0) { corruption_value = document.getElementById("dropdown_corruption").options[corruption_index].innerHTML };
+		var corruption_mod_value_1 = document.getElementById("corruption_value_1").innerHTML;
+		var corruption_mod_value_2 = document.getElementById("corruption_value_2").innerHTML;
+		
 		for (a in affixes_corruption) {
 			var aff = affixes_corruption[a];
 			options += loadDetails(kind,aff,alvl,1,1,1,1,99,1,aff[0],aff[3],"",[aff[6]],[])
 		}
 		document.getElementById("dropdown_corruption").innerHTML = options
+
+		if (corruption_index > 0) {
+			for (opt in document.getElementById("dropdown_corruption").options) {
+				if (corruption_value == document.getElementById("dropdown_corruption").options[opt].innerHTML) {
+					document.getElementById("dropdown_corruption").selectedIndex = opt
+					doCorruption(opt)
+					if (corruption_mod_value_1 < document.getElementById("corruption_value_1").innerHTML) {
+						document.getElementById("range_corruption_1").value = corruption_mod_value_1
+						document.getElementById("corruption_value_1").innerHTML = corruption_mod_value_1
+						doCorruptionValue(1,corruption_mod_value_1)
+					}
+					if (corruption_mod_value_2 < document.getElementById("corruption_value_2").innerHTML) {
+						document.getElementById("range_corruption_2").value = corruption_mod_value_2
+						document.getElementById("corruption_value_2").innerHTML = corruption_mod_value_2
+						doCorruptionValue(2,corruption_mod_value_2)
+					}
+				}
+			}
+		}
 	} else if (kind == "upgrade") {
 		var upgrade_index = document.getElementById("dropdown_upgrade").selectedIndex;
 		var upgrade_value = ""; if (upgrade_index > 0) { upgrade_value = document.getElementById("dropdown_upgrade").options[upgrade_index].innerHTML };
@@ -578,7 +628,7 @@ function load(kind) {
 		
 		if (superior_index_1 > 0) {
 			for (opt in document.getElementById("dropdown_superior_1").options) {
-				if (superior_value_1 == document.getElementById("dropdown_superior_1").options[opt].value) {
+				if (superior_value_1 == document.getElementById("dropdown_superior_1").options[opt].innerHTML) {
 					document.getElementById("dropdown_superior_1").selectedIndex = opt
 					doSuperior(1,opt)
 					document.getElementById("range_superior_1").value = superior_mod_value_1
@@ -589,7 +639,7 @@ function load(kind) {
 		}
 		if (superior_index_2 > 0) {
 			for (opt in document.getElementById("dropdown_superior_2").options) {
-				if (superior_value_2 == document.getElementById("dropdown_superior_2").options[opt].value) {
+				if (superior_value_2 == document.getElementById("dropdown_superior_2").options[opt].innerHTML) {
 					document.getElementById("dropdown_superior_2").selectedIndex = opt
 					doSuperior(2,opt)
 					document.getElementById("range_superior_2").value = superior_mod_value_2
@@ -819,6 +869,12 @@ function doSuperiorValue(num, value) {
 // setAutomod - handles 'automod' dropdown
 // ---------------------------------
 function setAutomod(selected) {
+	doAutomod(selected)
+	for (let m = 1; m <= 2; m++) { doAutomodValue(m,document.getElementById("range_automod_"+m).value); setValues(); }
+}
+// doAutomod - wrapped by setAutomod
+// ---------------------------------
+function doAutomod(selected) {
 	var mods = 0;
 	if (selected > 0) {
 		var cat = data.automod.index[selected];
@@ -844,11 +900,17 @@ function setAutomod(selected) {
 		if (mods >= mod) { document.getElementById("select_automod_value_"+mod).style.display = "block" }
 		else { document.getElementById("select_automod_value_"+mod).style.display = "none" }
 	}
-	for (let m = 1; m <= 2; m++) { setAutomodValue(m,document.getElementById("range_automod_"+m).value) }
+	//for (let m = 1; m <= 2; m++) { doAutomodValue(m,document.getElementById("range_automod_"+m).value) }
 }
 // setAutomodValue - handles 'automod' range values
 // ---------------------------------
 function setAutomodValue(mod, value) {
+	doAutomodValue(mod,value)
+	setValues()
+}
+// doAutomodValue - wrapped by setAutomodValue
+// ---------------------------------
+function doAutomodValue(mod, value) {
 	document.getElementById("automod_value_"+mod).innerHTML = value
 	var selected = document.getElementById("dropdown_automod").selectedIndex;
 	if (selected > 0) {
@@ -891,7 +953,6 @@ function setAutomodValue(mod, value) {
 		}
 		data.automod.categories[cat].info.used = mod_line
 	}
-	setValues()
 }
 // setPointmod - handles 'pointmod' dropdowns
 // ---------------------------------
@@ -1105,6 +1166,12 @@ function setAffixValue(num, mod, value, prefix) {
 // setCorruption - handles 'corruption' dropdown
 // ---------------------------------
 function setCorruption(selected) {
+	doCorruption(selected)
+	setValues()
+}
+// doCorruption - wrapped by setCorruption
+// ---------------------------------
+function doCorruption(selected) {
 	var mods = 0;
 	if (selected > 0) {
 		var cat = data.corruption.index[selected];
@@ -1137,13 +1204,18 @@ function setCorruption(selected) {
 		if (mods >= mod) { document.getElementById("select_corruption_value_"+mod).style.display = "block" }
 		else { document.getElementById("select_corruption_value_"+mod).style.display = "none" }
 	}
-	for (let m = 1; m <= 2; m++) { setCorruptionValue(m,document.getElementById("range_corruption_"+m).value) }
+	for (let m = 1; m <= 2; m++) { doCorruptionValue(m,document.getElementById("range_corruption_"+m).value) }
 }
 // setCorruptionValue - handles 'corruption' range values
 // ---------------------------------
 function setCorruptionValue(num, value) {
-	document.getElementById("corruption_value_"+num).innerHTML = value
+	doCorruptionValue(num,value)
 	setValues()
+}
+// doCorruptionValue - wrapped by setCorruptionValue
+// ---------------------------------
+function doCorruptionValue(num, value) {
+	document.getElementById("corruption_value_"+num).innerHTML = value
 }
 // setUpgrade - handles 'upgrade' dropdown
 // ---------------------------------
