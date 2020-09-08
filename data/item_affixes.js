@@ -1618,18 +1618,18 @@ var affixes_pointmod = [
 // NOTE: These mod names correspond directly to variable names used elsewhere, rather than being sent through affix_item_mods[]
 //	lvl	maxlvl	lvlreq	group	mod	modmin	modmax	itype1	itype2
 //	0	1	2	3	4	5	6	7	8
-//[	1,	36,	1,	1,	"skill_Dual_Strike",	1,	3,	"h2h",	""	],	// doesn't appear naturally
-//[	1,	36,	6,	2,	"skill_Fists_of_Ember",	1,	3,	"h2h",	""	],	// doesn't appear naturally
-//[	1,	24,	6,	3,	"skill_Fists_of_Thunder",	1,	3,	"h2h",	""	],	// doesn't appear naturally
+[	1,	36,	1,	1,	"skill_Dual_Strike",	1,	3,	"h2h",	""	],	// doesn't appear naturally
+[	1,	36,	6,	2,	"skill_Fists_of_Ember",	1,	3,	"h2h",	""	],	// doesn't appear naturally
+[	1,	24,	6,	3,	"skill_Fists_of_Thunder",	1,	3,	"h2h",	""	],	// doesn't appear naturally
 [	12,	99,	6,	4,	"skill_Fists_of_Ice",	1,	3,	"h2h",	""	],
 [	37,	99,	12,	5,	"skill_Static_Strike",	1,	3,	"h2h",	""	],
-//[	1,	24,	18,	6,	"skill_Dragon_Talon",	1,	3,	"h2h",	""	],	// doesn't appear naturally
+[	1,	24,	18,	6,	"skill_Dragon_Talon",	1,	3,	"h2h",	""	],	// doesn't appear naturally
 [	19,	99,	24,	7,	"skill_Emberstorm",	1,	3,	"h2h",	""	],
 [	25,	99,	24,	8,	"skill_Dragon_Flight",	1,	3,	"h2h",	""	],
 [	25,	99,	30,	9,	"skill_Blades_of_Ice",	1,	3,	"h2h",	""	],
-//[	1,	24,	1,	10,	"skill_Claw_Mastery",	1,	3,	"h2h",	""	],	// doesn't appear naturally
-//[	1,	24,	1,	11,	"skill_Psychic_Hammer",	1,	3,	"h2h",	""	],	// doesn't appear naturally
-//[	1,	36,	6,	12,	"skill_Burst_of_Speed",	1,	3,	"h2h",	""	],	// doesn't appear naturally
+[	1,	24,	1,	10,	"skill_Claw_Mastery",	1,	3,	"h2h",	""	],	// doesn't appear naturally
+[	1,	24,	1,	11,	"skill_Psychic_Hammer",	1,	3,	"h2h",	""	],	// doesn't appear naturally
+[	1,	36,	6,	12,	"skill_Burst_of_Speed",	1,	3,	"h2h",	""	],	// doesn't appear naturally
 //[	1,	99,	6,	13,	"skill_Mind_Barrier",	1,	3,	"h2h",	""	],	// no code
 [	12,	99,	12,	14,	"skill_Weapon_Block",	1,	3,	"h2h",	""	],
 [	12,	99,	12,	15,	"skill_Cloak_of_Shadows",	1,	3,	"h2h",	""	],
@@ -1638,9 +1638,9 @@ var affixes_pointmod = [
 [	25,	99,	24,	18,	"skill_Mind_Blast",	1,	3,	"h2h",	""	],
 [	37,	99,	30,	19,	"skill_Venom",	1,	3,	"h2h",	""	],
 [	37,	99,	30,	20,	"skill_Shadow_Master",	1,	3,	"h2h",	""	],
-//[	1,	24,	1,	21,	"skill_Fire_Blast",	1,	3,	"h2h",	""	],	// doesn't appear naturally
-//[	1,	36,	6,	22,	"skill_Shock_Web",	1,	3,	"h2h",	""	],	// doesn't appear naturally
-//[	1,	36,	6,	23,	"skill_Blade_Throw",	1,	3,	"h2h",	""	],	// doesn't appear naturally
+[	1,	24,	1,	21,	"skill_Fire_Blast",	1,	3,	"h2h",	""	],	// doesn't appear naturally
+[	1,	36,	6,	22,	"skill_Shock_Web",	1,	3,	"h2h",	""	],	// doesn't appear naturally
+[	1,	36,	6,	23,	"skill_Blade_Throw",	1,	3,	"h2h",	""	],	// doesn't appear naturally
 [	12,	99,	12,	24,	"skill_Charged_Bolt_Sentry",	1,	3,	"h2h",	""	],
 [	12,	99,	12,	25,	"skill_Wake_of_Fire",	1,	3,	"h2h",	""	],
 [	19,	99,	18,	26,	"skill_Blade_Fury",	1,	3,	"h2h",	""	],

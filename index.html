@@ -21,6 +21,10 @@
 			<button class="nav-dropbtn">Options</button>
 			<div class="nav-dropdown-content">
 				<div class="nav-dropdown-content-item"><div class="nav-option">
+					<input id="original" type="checkbox" name="original" onclick="toggleOriginalChoices(this.checked);" checked=true>
+					<label for="original">Original Options</label>
+				</div></div>
+				<div class="nav-dropdown-content-item"><div class="nav-option">
 					<input id="non_item_custom" type="checkbox" name="non_item_custom" onclick="toggleNonItemDetails(this.checked);">
 					<label for="non_item_custom">Character Info</label>
 				</div></div>
@@ -48,8 +52,8 @@
 	</div>
 
 	<div id="full_interface">
+		<div id="original_choices" style="width:800px;">
 		<br>
-		<div style="width:800px;">
 			<button style="height:29px;" onClick="simulate()">Simulate</button>
 			<div class="dropdown" style="width:200px; height:20px; position:relative; z-index:6; display:inline;">
 				<select class="dropdown" id="dropdown_item" onChange="setItem(this.value)"></select>
@@ -83,7 +87,7 @@
 				<div class="new-dropdown-title">Basic Item Info</div>
 				<div id="select_group" style="display:inline;"><label class="label">Group: </label><select id="dropdown_group" class="new-dropdown" onChange="setGroup(this.value)"></select></div>
 				<div id="select_type" style="display:inline;"><label class="label">Type: </label><select id="dropdown_type" class="new-dropdown" onChange="setType(this.value)"></select></div>
-				<div id="select_base"><label class="label">Base: </label><select id="dropdown_base" class="new-dropdown" onChange="setBase(this.value)"></select></div>
+				<div id="select_base"><label class="label">Base: </label><select id="dropdown_base" class="new-dropdown" onChange="setBase(this.value)"></select></div><div id="select_base_placeholder" style="display:none;"></div>
 				<div id="select_rarity" style="display:inline;"><label class="label">Rarity: </label><select id="dropdown_rarity" class="new-dropdown" style="min-width:0px;" onChange="setRarity(this.value)"></select></div>
 				<div id="select_name" style="display:inline;"><label class="label">Name: </label><select id="dropdown_name" class="new-dropdown" onChange="setName(this.value)"></select></div>
 				<div id="select_ilvl"><label class="label" for="ilvl">Level: </label><input id="ilvl" name="ilvl" class="num-input" type="number" min="1" max="99" value="90" onchange="setILVL2(this.value)"></div>
@@ -112,7 +116,7 @@
 				<div id="select_pointmod_value_3" style="display:none;"><label class="label2">Pointmod: </label><input id="range_pointmod_3" type="range" class="range" onChange="setPointmodValue(3,this.value)"></input><div id="pointmod_value_3" class="label"></div></div>
 				<!--	magic affixes	-->
 				<div id="select_affix_1"><label class="label">Prefix: </label><select id="dropdown_affix_1" class="new-dropdown" onChange="setAffix(1,this.selectedIndex,1)"></select></div>
-				<div id="select_affix_value_1_1" style="display:none;"><label class="label2">Prefix: </label><input id="range_affix_1_1" name="range_affix_1_1" type="range" class="range" onChange="setAffixValue(1,1,this.value,1)"></input><div id="affix_value_1_1" class="label"></div></div>
+				<div id="select_affix_value_1_1" style="display:none;"><label class="label2">Prefix: </label><input id="range_affix_1_1" type="range" class="range" onChange="setAffixValue(1,1,this.value,1)"></input><div id="affix_value_1_1" class="label"></div></div>
 				<div id="select_affix_value_1_2" style="display:none;"><label class="label2">Prefix: </label><input id="range_affix_1_2" type="range" class="range" onChange="setAffixValue(1,2,this.value,1)"></input><div id="affix_value_1_2" class="label"></div></div>
 				<div id="select_affix_value_1_3" style="display:none;"><label class="label2">Prefix: </label><input id="range_affix_1_3" type="range" class="range" onChange="setAffixValue(1,3,this.value,1)"></input><div id="affix_value_1_3" class="label"></div></div>
 				<div id="select_affix_2"><label class="label">Prefix: </label><select id="dropdown_affix_2" class="new-dropdown" onChange="setAffix(2,this.selectedIndex,1)"></select></div>

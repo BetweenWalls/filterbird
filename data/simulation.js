@@ -30,8 +30,18 @@ function startup() {
 	document.getElementById("background_1").src = background
 	document.getElementById("background_2").src = background
 	loadCustomization()
-	document.getElementById("debug").style.display = "block"
+	/*
+	document.getElementById("original").checked = false
+	toggleOriginalChoices(false)
+	document.getElementById("non_item_custom").checked = true
+	toggleNonItemDetails(true)
+	document.getElementById("custom").checked = true
+	toggleCustom(true)
+	document.getElementById("custom_format").checked = true
+	toggleCustomFormat(true)
+	//document.getElementById("debug").style.display = "block"
 	//document.getElementById("simulate_custom").style.display = "block"
+	*/
 }
 
 // loadItems - adds equipment and other items to the item dropdown menu
@@ -248,7 +258,11 @@ function parseFile(file,num) {
 	var color_new_default = "";
 	var display = "";
 	var name_saved = itemToCompare.NAME;
-	if (itemToCompare.ID == false) { name_saved = itemToCompare.base }
+	//if (itemToCompare.ID == false) { name_saved = itemToCompare.base }
+	if (itemToCompare.ID == false) {
+		if (typeof(itemToCompare.base) == 'undefined') { name_saved = itemToCompare.NAME }	// TODO: remove after fixing premade items?
+		else { name_saved = itemToCompare.base }
+	}
 	var done = false;
 	var rules_checked = 0;
 	var lines = file.split("\t").join("").split("­").join("•").split("\n");
@@ -503,6 +517,8 @@ function setItemFromCustom() {
 	var item = itemCustom;
 	var group = document.getElementById("dropdown_group").value
 	var valid = true;
+	var premade = false;
+	if (item.type_affix == "rune" || item.type_affix == "gem" || item.type_affix == "other" || item.type_affix == "misc") { premade = true }
 	if (valid == true) {
 		if (item.rarity == "Regular") { item.rarity = "regular" }
 		else if (item.rarity == "Magic") { item.rarity = "magic" }
@@ -515,7 +531,7 @@ function setItemFromCustom() {
 		itemToCompare.NAME = item.name_prefix + item.name.split(" (")[0].split(" ­ ")[0] + item.name_suffix
 		itemToCompare.PRICE = 35000
 		itemToCompare.ID = true
-		if (item.base != "Amulet" && item.base != "Ring" && item.base != "Arrows" && item.base != "Bolts" && item.base != "Small Charm" && item.base != "Large Charm" && item.base != "Grand Charm" && item.base != "Jewel") {
+		if (premade == false && item.base != "Amulet" && item.base != "Ring" && item.base != "Arrows" && item.base != "Bolts" && item.base != "Small Charm" && item.base != "Large Charm" && item.base != "Grand Charm" && item.base != "Jewel") {
 			var base = bases[item.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
 			for (affix in base) { itemToCompare[affix] = base[affix] }
 			if (base.tier == 1) { itemToCompare.NORM = true }
@@ -595,6 +611,9 @@ function printAffixes() {
 	for (affix in itemCustom) {
 		output += affix+" "+itemCustom[affix]+"<br>"
 	}
+	//for (affix in itemToCompare) {
+	//	output += affix+" "+itemToCompare[affix]+"<br>"
+	//}
 	output += "---------------------------<br>"
 	document.getElementById("print").innerHTML += output
 	
@@ -674,4 +693,12 @@ function setGoldChar(value) {
 	document.getElementById("gold_char").value = Number(value)
 	character.CHARSTAT14 = Number(value)
 	simulate()
+}
+
+
+// toggleOriginalChoices - 
+// ---------------------------------
+function toggleOriginalChoices(checked)  {
+	if (checked == true) { document.getElementById("original_choices").style.display = "block" }
+	else { document.getElementById("original_choices").style.display = "none" }
 }

@@ -132,15 +132,21 @@ function setType(value) {
 // loadBase - populates the 'base' dropdown, subsequent dropdowns
 // ---------------------------------
 function loadBase(value) {
-	//if (value == "rune" || value == "gem" || value == "other" || value == "misc") {
-	//	loadMisc(value)
-	//} else {
+	var options = "";
+	if (value == "rune" || value == "gem" || value == "other" || value == "misc") {
+		for (let i = 0; i < premade[value].length; i++) { options += "<option class='gray-all'>"+premade[value][i].name+"</option>" }
+		document.getElementById("dropdown_base").innerHTML = ""
+		document.getElementById("dropdown_rarity").innerHTML = ""
+		document.getElementById("dropdown_name").innerHTML = options
+		setCustomBase()
+		tidyBaseSelection()
+		setValues()
+	} else {
 		value = value.split(" ").join("_")
-		var options = "";
 		for (base in item_types[value]) { options += "<option class='gray-all'>" + item_types[value][base] + "</option>" }
 		document.getElementById("dropdown_base").innerHTML = options
 		loadRarity(document.getElementById("dropdown_base").value)
-	//}
+	}
 }
 // setBase - called when 'base' dropdown is used, loads the next dropdown
 // ---------------------------------
@@ -210,7 +216,6 @@ function loadName(value) {
 			}
 		}
 	}
-	// TODO: Prevent duplicate unique/set items (any with variations) from being duplicated here, if needed
 	document.getElementById("dropdown_name").innerHTML = options
 	setCustomBase()	// called to set qlvl
 	validateILVL(document.getElementById("ilvl").value)
@@ -221,6 +226,7 @@ function loadName(value) {
 // setName - called when 'name' dropdown is used
 // ---------------------------------
 function setName(value) {
+	var type = itemCustom.type_affix;
 	setCustomBase()	// called to set qlvl
 	validateILVL(document.getElementById("ilvl").value)
 	setCustomBase()
@@ -240,7 +246,6 @@ function validateILVL(value) {
 // setILVL2 - another selector for ilvl
 // ---------------------------------
 function setILVL2(value) {
-	// TODO: ILVL is an oft-used filter condition, so it's even more important that it can be changed without resetting all selected affixes
 	validateILVL(value)
 	value = document.getElementById("ilvl").value
 	// keep ilvl consistent (temporary while old item selection & custom item editing coexist)
@@ -267,97 +272,90 @@ function setCustomBase() {
 	var name = document.getElementById("dropdown_name").value;
 	data = {superior:{index:[0],categories:{}},automod:{index:[0],categories:{}},pointmod:{index:[0],categories:{}},affix:[{index:[0],categories:{}},{index:[0],categories:{}}],corruption:{index:[0],categories:{}}};
 	itemCustom = {name_prefix:"",name_suffix:"",req_level:0};
-	itemCustom.base = base;
 	itemCustom.type_affix = type;
-	itemCustom.rarity = rarity.toLowerCase();
 	itemCustom.ILVL = document.getElementById("ilvl").value;
 	
-	if (type != "amulet" && type != "ring" && type != "quiver" && type != "charm" && type != "jewel") {
-		var base_id = bases[base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
-		for (affix in base_id) { itemCustom[affix] = base_id[affix] }
-		itemCustom.original_base = base
-		itemCustom.original_tier = itemCustom.tier;
-		if (itemCustom.tier == 1) { itemCustom.upgrade2 = bases[itemCustom.upgrade.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")].upgrade }
-	} else {
-		if (type == "amulet") { itemCustom.CODE = "amu" }
-		else if (type == "ring") { itemCustom.CODE = "rin" }
-		else if (type == "charm") {
-			if (base == "Small Charm") { itemCustom.CODE = "cm1" }
-			else if (base == "Large Charm") { itemCustom.CODE = "cm2" }
-			else if (base == "Grand Charm") { itemCustom.CODE = "cm3" }
-		}
-		else if (type == "jewel") { itemCustom.CODE = "jew" }
-		else if (type == "quiver") {
-			itemCustom.quiv = true
-			if (base == "Arrows") {
-				if (rarity == "Regular") { itemCustom.CODE = "aqv"; itemCustom.name = "Rusted Arrows"; itemCustom.NAME = "Rusted Arrows"; }
-				else { itemCustom.CODE = "aq2" }
-			} else if (base == "Bolts") {
-				if (rarity == "Regular") { itemCustom.CODE = "cqv"; itemCustom.name = "Rusted Bolts"; itemCustom.NAME = "Rusted Bolts"; }
-				else { itemCustom.CODE = "cq2" }
+	if (type == "rune" || type == "gem" || type == "other" || type == "misc") {
+		document.getElementById("select_rarity").style.display = "none"
+		for (itemNew in premade[type]) {
+			if (premade[type][itemNew].name == name) {
+				for (affix in premade[type][itemNew]) { itemCustom[affix] = premade[type][itemNew][affix] }
 			}
 		}
-	}
-	if (rarity == "Set" || rarity == "Unique") {
-		for (group in equipment) {
-			for (itemNew in equipment[group]) {
-				if (equipment[group][itemNew].name == name) {
-					for (affix in equipment[group][itemNew]) { itemCustom[affix] = equipment[group][itemNew][affix] }
-					// TODO: unique/set affix customization?
+		if (typeof(itemCustom.relic_density) != 'undefined') {
+			//if (rarity == "Magic") { itemCustom.base =  }
+			if (itemCustom.rarity == "rare") {
+				itemCustom.base = itemCustom.name
+				itemCustom.name = rare_prefix[Math.floor(Math.random()*rare_prefix.length)] + " Eye"
+			}
+		}
+	} else {
+		document.getElementById("select_rarity").style.display = "inline"
+		itemCustom.base = base;
+		itemCustom.rarity = rarity.toLowerCase();
+		
+		if (type != "amulet" && type != "ring" && type != "quiver" && type != "charm" && type != "jewel") {
+			var base_id = bases[base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
+			for (affix in base_id) { itemCustom[affix] = base_id[affix] }
+			itemCustom.original_base = base
+			itemCustom.original_tier = itemCustom.tier;
+			if (itemCustom.tier == 1) { itemCustom.upgrade2 = bases[itemCustom.upgrade.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")].upgrade }
+		} else {
+			if (type == "amulet") { itemCustom.CODE = "amu" }
+			else if (type == "ring") { itemCustom.CODE = "rin" }
+			else if (type == "charm") {
+				if (base == "Small Charm") { itemCustom.CODE = "cm1" }
+				else if (base == "Large Charm") { itemCustom.CODE = "cm2" }
+				else if (base == "Grand Charm") { itemCustom.CODE = "cm3" }
+			}
+			else if (type == "jewel") { itemCustom.CODE = "jew" }
+			else if (type == "quiver") {
+				itemCustom.quiv = true
+				if (base == "Arrows") {
+					if (rarity == "Regular") { itemCustom.CODE = "aqv"; itemCustom.name = "Rusted Arrows"; itemCustom.NAME = "Rusted Arrows"; }
+					else { itemCustom.CODE = "aq2" }
+				} else if (base == "Bolts") {
+					if (rarity == "Regular") { itemCustom.CODE = "cqv"; itemCustom.name = "Rusted Bolts"; itemCustom.NAME = "Rusted Bolts"; }
+					else { itemCustom.CODE = "cq2" }
 				}
 			}
 		}
-	}
-	if (rarity == "Set" || rarity == "Unique") { itemCustom.name = name }
-	else if (rarity == "Regular" || rarity == "Magic") { itemCustom.name = base }
-	else if (rarity == "Rare") {
-		var suffix = "";
-		if (itemCustom.shield == true) { suffix = rare_suffix["shield"][Math.floor(Math.random()*rare_suffix["shield"].length)] }
-		else if (itemCustom.ARMOR == true) { suffix = rare_suffix[group][Math.floor(Math.random()*rare_suffix[group].length)] }
-		else if (typeof(rare_suffix[type]) != 'undefined') { suffix = rare_suffix[type][Math.floor(Math.random()*rare_suffix[type].length)] }
-		else { suffix = rare_suffix["other"][Math.floor(Math.random()*rare_suffix["other"].length)] }
-		itemCustom.name = rare_prefix[Math.floor(Math.random()*rare_prefix.length)] + " " + suffix
+		if (rarity == "Set" || rarity == "Unique") {
+			for (group in equipment) {
+				for (itemNew in equipment[group]) {
+					if (equipment[group][itemNew].name == name) {
+						for (affix in equipment[group][itemNew]) { itemCustom[affix] = equipment[group][itemNew][affix] }
+						// TODO: unique/set affix customization?
+					}
+				}
+			}
+		}
+		if (rarity == "Set" || rarity == "Unique") { itemCustom.name = name }
+		else if (rarity == "Regular" || rarity == "Magic") { itemCustom.name = base }
+		else if (rarity == "Rare") {
+			var suffix = "";
+			if (itemCustom.shield == true) { suffix = rare_suffix["shield"][Math.floor(Math.random()*rare_suffix["shield"].length)] }
+			else if (itemCustom.ARMOR == true) { suffix = rare_suffix[group][Math.floor(Math.random()*rare_suffix[group].length)] }
+			else if (typeof(rare_suffix[type]) != 'undefined') { suffix = rare_suffix[type][Math.floor(Math.random()*rare_suffix[type].length)] }
+			else { suffix = rare_suffix["other"][Math.floor(Math.random()*rare_suffix["other"].length)] }
+			itemCustom.name = rare_prefix[Math.floor(Math.random()*rare_prefix.length)] + " " + suffix
+		}
 	}
 	itemCustom[itemCustom.CODE] = true
 	loadEditing()
 }
-// tidyBaseSelection - hides type/name dropdowns when they're irrelevant
+// tidyBaseSelection - hides type/base/name dropdowns when they're irrelevant
 // ---------------------------------
 function tidyBaseSelection() {
-	//document.getElementById("select_base").style.display = "block"
-	//document.getElementById("select_rarity").style.display = "inline"
-	if (document.getElementById("dropdown_type").length == 1) { document.getElementById("select_type").style.display = "none" }
+	if (document.getElementById("dropdown_type").length <= 1) { document.getElementById("select_type").style.display = "none" }
 	else { document.getElementById("select_type").style.display = "inline" }
-	//if (document.getElementById("dropdown_base").length == 1) { document.getElementById("select_base").style.visibility = "hidden" }
-	//else { document.getElementById("select_base").style.visibility = "visible" }
+	if (document.getElementById("dropdown_base").length <= 1) { document.getElementById("select_base").style.display = "none"; document.getElementById("select_base_placeholder").style.display = "block"; }
+	else { document.getElementById("select_base").style.display = "block"; document.getElementById("select_base_placeholder").style.display = "none"; }
+	//if (document.getElementById("dropdown_rarity").length <= 1) { document.getElementById("select_rarity").style.display = "none" }
+	//else { document.getElementById("select_rarity").style.display = "inline" }
 	if (document.getElementById("dropdown_name").innerHTML == "") { document.getElementById("select_name").style.display = "none" }
 	else { document.getElementById("select_name").style.display = "inline" }
 }
-
-
-
-
-
-// loadMisc - 
-// ---------------------------------
-function loadMisc(value) {
-	var options = "";
-	for (let i = 0; i < premade[value].length; i++) { options += "<option class='gray-all'>"+premade[value][i].name+"</option>" }
-	document.getElementById("dropdown_name").innerHTML = options
-	document.getElementById("select_name").style.display = "block"
-	document.getElementById("select_base").style.display = "none"
-	document.getElementById("select_rarity").style.display = "none"
-	if (document.getElementById("dropdown_type").length == 1) { document.getElementById("select_type").style.display = "none" }
-	else { document.getElementById("select_type").style.display = "inline" }
-	// TODO
-	// ...use a different dropdown than dropdown_name?
-	//loadEditing()
-	//setCustomBase()
-	//itemCustom = {}
-	//for (affix in premade[value][0]) { itemCustom[affix] = premade[value][0][affix] }
-	//setValues()
-}
-
 
 
 
@@ -379,6 +377,8 @@ function getMatch(kind) {
 	if (kind == "corruption" && itemCustom.rarity != "regular" && itemCustom.type_affix != "charm" && itemCustom.type_affix != "jewel" && !(itemCustom.sockets > 0)) { result = true }
 	if (kind == "upgrade" && (itemCustom.rarity == "unique" || itemCustom.rarity == "rare" || itemCustom.rarity == "set") && (itemCustom.tier == 1 || itemCustom.tier == 2)) { result = true }
 	if (kind == "superior" && itemCustom.superior == true) { result = true }
+	if (itemCustom.type_affix == "rune" || itemCustom.type_affix == "gem" || itemCustom.type_affix == "other" || itemCustom.type_affix == "misc") { result = false }
+	if (kind == "identified" && typeof(itemCustom.relic_density) != 'undefined') { result = true }
 	return result
 }
 // getALVL - returns the 'affix level' for the item
@@ -391,7 +391,7 @@ function getALVL() {
 	var x = 0;
 	var alvl = 0;
 	
-	if (type != "amulet" && type != "ring" && type != "quiver" && type != "charm" && type != "jewel") { base_qlvl = bases[itemCustom.base.split(" ").join("_").split("-").join("_").split("'s").join("s")].qlvl; }
+	if (type != "amulet" && type != "ring" && type != "quiver" && type != "charm" && type != "jewel" && type != "rune" && type != "gem" && type != "other" && type != "misc") { base_qlvl = bases[itemCustom.base.split(" ").join("_").split("-").join("_").split("'s").join("s")].qlvl; }
 	else if (itemCustom.base == "Large Charm") { base_qlvl = 14 }
 	else if (itemCustom.base == "Small Charm") { base_qlvl = 28 }
 	
@@ -420,12 +420,13 @@ function loadEditing() {
 	for (let n = 1; n <= 2; n++) { document.getElementById("select_superior_"+n).style.display = "none"; document.getElementById("select_superior_value_"+n).style.display = "none"; }
 	for (let n = 1; n <= 2; n++) { document.getElementById("select_automod_value_"+n).style.display = "none"; };
 	for (let n = 1; n <= 3; n++) { document.getElementById("select_pointmod_"+n).style.display = "none"; document.getElementById("select_pointmod_value_"+n).style.display = "none"; }
-	for (let n = 1; n <= 6; n++) { document.getElementById("select_affix_"+n).style.display = "none"; document.getElementById("dropdown_affix_"+n).selectedIndex = 0; for (let m = 1; m <= 3; m++) { document.getElementById("select_affix_value_"+n+"_"+m).style.display = "none"; }; }
+	for (let n = 1; n <= 6; n++) { document.getElementById("select_affix_"+n).style.display = "none"; for (let m = 1; m <= 3; m++) { document.getElementById("select_affix_value_"+n+"_"+m).style.display = "none"; }; }
 	for (let n = 1; n <= 2; n++) { document.getElementById("select_corruption_value_"+n).style.display = "none"; };
 	if (getMatch("superior") == false) { for (let n = 1; n <= 2; n++) { document.getElementById("dropdown_superior_"+n).selectedIndex = 0; } }
 	if (getMatch("pointmod") == false) { for (let n = 1; n <= 3; n++) { document.getElementById("dropdown_pointmod_"+n).selectedIndex = 0; } }
 	if (getMatch("corruption") == false) { document.getElementById("dropdown_corruption").selectedIndex = 0; }
 	if (getMatch("automod") == false) { document.getElementById("dropdown_automod").selectedIndex = 0; }
+	if (getMatch("affix") == false) { for (let n = 1; n <= 6; n++) { document.getElementById("dropdown_affix_"+n).selectedIndex = 0; } }
 	
 	var selects = ["identified","ethereal","sockets","quality","automod","pointmod","affix","corruption","upgrade"];
 	for (s in selects) {
@@ -480,7 +481,7 @@ function load(kind) {
 		
 		for (a in affixes_automod) {
 			var aff = affixes_automod[a];
-			options += loadDetails(kind,aff,alvl,aff[0],1,aff[2],aff[3],aff[4],aff[6],aff[7],aff[10],"",[aff[13]],[])
+			options += loadDetails(kind,aff,itemCustom.ILVL,aff[0],1,aff[2],aff[3],aff[4],aff[6],aff[7],aff[10],"",[aff[13]],[])
 		}
 		document.getElementById("dropdown_automod").innerHTML = options
 		
@@ -515,7 +516,7 @@ function load(kind) {
 		
 		for (a in affixes_pointmod) {
 			var aff = affixes_pointmod[a];
-			options += loadDetails(kind,aff,alvl,1,1,1,aff[0],aff[1],aff[3],aff[4],"","",[aff[7],aff[8]],[])
+			options += loadDetails(kind,aff,itemCustom.ILVL,1,1,1,aff[0],aff[1],aff[3],aff[4],"","",[aff[7],aff[8]],[])
 		}
 		for (let n = 1; n <= 3; n++) { document.getElementById("dropdown_pointmod_"+n).innerHTML = options }
 		
@@ -553,7 +554,17 @@ function load(kind) {
 			}
 		}
 	} else if (kind == "affix") {
-		// TODO: Preserve affixes if possible when resetting
+		var a_index = ["",0,0,0,0,0,0];
+		var a_value = ["",0,0,0,0,0,0];
+		var a_mod = ["",["",0,0,0],["",0,0,0],["",0,0,0],["",0,0,0],["",0,0,0],["",0,0,0]];
+		for (let n = 1; n <= 6; n++) {
+			a_index[n] = document.getElementById("dropdown_affix_"+n).selectedIndex;
+			a_value[n] = ""; if (a_index[n] > 0) { a_value[n] = document.getElementById("dropdown_affix_"+n).options[a_index[n]].innerHTML };
+			for (let m = 1; m <= 3; m++) {
+				a_mod[n][m] = ~~document.getElementById("affix_value_"+n+"_"+m).innerHTML;
+			}
+		}
+		
 		var options_prefix = options;
 		var options_suffix = options;
 		for (a in affixes) {
@@ -569,6 +580,25 @@ function load(kind) {
 		for (let n = 1; n <= 6; n++) {
 			if (n < 4) { document.getElementById("dropdown_affix_"+n).innerHTML = options_prefix }
 			else { document.getElementById("dropdown_affix_"+n).innerHTML = options_suffix }
+		}
+		
+		for (let n = 1; n <= 6; n++) {
+			if (a_index[n] > 0) {
+				for (let opt = 0; opt < document.getElementById("dropdown_affix_"+n).options.length; opt++) {
+					if (a_value[n] == document.getElementById("dropdown_affix_"+n).options[opt].innerHTML) {
+						document.getElementById("dropdown_affix_"+n).selectedIndex = opt
+						var n_prefix = 0; if (n <= 3) { n_prefix = 1 }
+						doAffix(n,opt,n_prefix)
+						for (let m = 1; m <= 3; m++) {
+							if (a_mod[n][m] < document.getElementById("affix_value_"+n+"_"+m).innerHTML) {
+								document.getElementById("range_affix_"+n+"_"+m).value = a_mod[n][m]
+								document.getElementById("affix_value_"+n+"_"+m).innerHTML = a_mod[n][m]
+								doAffixValue(n,m,a_mod[n][m],n_prefix)
+							}
+						}
+					}
+				}
+			}
 		}
 	} else if (kind == "corruption") {
 		var corruption_index = document.getElementById("dropdown_corruption").selectedIndex;
@@ -1028,6 +1058,12 @@ function doPointmodValue(num, value) {
 // setAffix - handles 'prefix' & 'suffix' dropdowns
 // ---------------------------------
 function setAffix(num, selected, prefix) {
+	doAffix(num,selected,prefix)
+	for (let m = 1; m <= 3; m++) { doAffixValue(num,m,document.getElementById("range_affix_"+num+"_"+m).value,prefix); setValues(); }
+}
+// doAffix - wrapped by setAffix
+// ---------------------------------
+function doAffix(num, selected, prefix) {
 	// tidy ranges
 	var mods = 0;
 	if (selected == 0) {
@@ -1106,11 +1142,17 @@ function setAffix(num, selected, prefix) {
 			}
 		}
 	}
-	for (let m = 1; m <= 3; m++) { setAffixValue(num,m,document.getElementById("range_affix_"+num+"_"+m).value,prefix) }
+	//for (let m = 1; m <= 3; m++) { doAffixValue(num,m,document.getElementById("range_affix_"+num+"_"+m).value,prefix) }
 }
 // setAffixValue - handles 'prefix' & 'suffix' range values
 // ---------------------------------
 function setAffixValue(num, mod, value, prefix) {
+	doAffixValue(num,mod,value,prefix)
+	setValues()
+}
+// doAffixValue - wrapped by setAffixValue
+// ---------------------------------
+function doAffixValue(num, mod, value, prefix) {
 	document.getElementById("affix_value_"+num+"_"+mod).innerHTML = value
 	var selected = document.getElementById("dropdown_affix_"+num).selectedIndex;
 	if (selected > 0) {
@@ -1161,7 +1203,6 @@ function setAffixValue(num, mod, value, prefix) {
 		}
 		data.affix[prefix].categories[cat].info.used = mod_line
 	}
-	setValues()
 }
 // setCorruption - handles 'corruption' dropdown
 // ---------------------------------
