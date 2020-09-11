@@ -1367,6 +1367,13 @@ function setValues() {
 				var code = data.affix[prefix].categories[cat].info["mod"+m];
 				if (typeof(itemCustomAffixes[code]) == 'undefined') { itemCustomAffixes[code] = 0 }
 				itemCustomAffixes[code] += value
+				// add poison bitrate
+				if (code == "pDamage_all") {
+					var pFrames = 25*Number(document.getElementById("range_affix_"+n+"_"+(m+1)).value);
+					var pAmount = (value*256/pFrames + (pFrames-1)/pFrames);
+					if (typeof(itemCustomAffixes["pDamage_all_bitrate"]) == 'undefined') { itemCustomAffixes["pDamage_all_bitrate"] = 0 }
+					itemCustomAffixes["pDamage_all_bitrate"] += pAmount
+				}
 			}
 		}
 	}
@@ -1378,6 +1385,11 @@ function setValues() {
 			if (typeof(itemCustomAffixes[code]) == 'undefined') { itemCustomAffixes[code] = 0 }
 			itemCustomAffixes[code] += value
 		}
+	}
+	if (typeof(itemCustomAffixes["pDamage_all_bitrate"]) != 'undefined') {
+		// TODO: Correct formula (issue with rounding/flooring poison bitrates)
+		var pFrames = 25*itemCustomAffixes["pDamage_duration"];
+		itemCustomAffixes["pDamage_all"] = Math.ceil(0.02+(Math.floor(itemCustomAffixes["pDamage_all_bitrate"])-(pFrames-1)/pFrames)*pFrames/256);
 	}
 	setItemFromCustom()
 }
