@@ -360,10 +360,20 @@ function setCustomBase() {
 			}
 		}
 	} else {
+		if (rarity == "Set" || rarity == "Unique") {
+			for (group in equipment) {
+				for (itemNew in equipment[group]) {
+					if (equipment[group][itemNew].name == name) {
+						if (base == "any") { base = equipment[group][itemNew].base }
+						for (affix in equipment[group][itemNew]) { itemCustom[affix] = equipment[group][itemNew][affix] }
+						// TODO: unique/set affix customization?
+					}
+				}
+			}
+		}
 		document.getElementById("select_rarity").style.display = "inline"
 		itemCustom.base = base;
 		itemCustom.rarity = rarity.toLowerCase();
-		
 		if (type != "amulet" && type != "ring" && type != "quiver" && type != "charm" && type != "jewel") {
 			var base_id = bases[base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
 			for (affix in base_id) { itemCustom[affix] = base_id[affix] }
@@ -387,16 +397,6 @@ function setCustomBase() {
 				} else if (base == "Bolts") {
 					if (rarity == "Regular") { itemCustom.CODE = "cqv"; itemCustom.name = "Rusted Bolts"; itemCustom.NAME = "Rusted Bolts"; }
 					else { itemCustom.CODE = "cq2" }
-				}
-			}
-		}
-		if (rarity == "Set" || rarity == "Unique") {
-			for (group in equipment) {
-				for (itemNew in equipment[group]) {
-					if (equipment[group][itemNew].name == name) {
-						for (affix in equipment[group][itemNew]) { itemCustom[affix] = equipment[group][itemNew][affix] }
-						// TODO: unique/set affix customization?
-					}
 				}
 			}
 		}
