@@ -30,7 +30,7 @@ function startup() {
 	document.getElementById("background_1").src = background
 	document.getElementById("background_2").src = background
 	loadCustomization()
-	/*
+//	/*
 	document.getElementById("original").checked = false
 	toggleOriginalChoices(false)
 	document.getElementById("non_item_custom").checked = true
@@ -39,9 +39,9 @@ function startup() {
 	toggleCustom(true)
 	document.getElementById("custom_format").checked = true
 	toggleCustomFormat(true)
-	//document.getElementById("debug").style.display = "block"
+	document.getElementById("debug").style.display = "block"
 	//document.getElementById("simulate_custom").style.display = "block"
-	*/
+//	*/
 }
 
 // loadItems - adds equipment and other items to the item dropdown menu
@@ -258,6 +258,18 @@ function parseFile(file,num) {
 	var color_new_default = "";
 	var display = "";
 	var name_saved = itemToCompare.NAME;
+	var secondary_line = "";
+	if (!(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {
+		if (typeof(itemToCompare.base) != 'undefined') {
+			if (itemToCompare.ID == true) {
+				name_saved = itemToCompare.NAME;
+				secondary_line = "<br>"+itemToCompare.base
+			} else {
+				name_saved = itemToCompare.base;
+				secondary_line = ""
+			}
+		}
+	}
 	//if (itemToCompare.ID == false) { name_saved = itemToCompare.base }
 	if (itemToCompare.ID == false) {
 		if (typeof(itemToCompare.base) == 'undefined') { name_saved = itemToCompare.NAME }	// TODO: remove after fixing premade items?
@@ -377,7 +389,7 @@ function parseFile(file,num) {
 	else { document.getElementById("output_"+num).style.color = getColor(itemToCompare) }
 	document.getElementById("o"+num).innerHTML += "<br>"
 	if (obscured == false && itemToCompare.ID == true && !(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {
-		if (typeof(itemToCompare.base) != 'undefined') { display += "<br>"+itemToCompare.base }
+		if (typeof(itemToCompare.base) != 'undefined') { display += secondary_line }
 	}
 	return display
 }

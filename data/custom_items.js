@@ -4,7 +4,7 @@
 // TODO: add option to insert socketables into items (also: Runewords)
 // TODO: add option to 'Larzuk'-socket items (mostly just relevant when a non-socket corruption is already applied)
 // TODO: update mutual compatibility of superior mod options (ar_bonus & req)
-// TODO: update relics
+// TODO: update relics and miscellaneous items with quantity (Gold, Key, Tome of Identify, Tome of Town Portal)
 
 var itemCustom = {};
 var itemCustomAffixes = {};
@@ -30,7 +30,7 @@ var data = {
 	corruption:{index:[0],categories:{}},
 };
 
-// TODO: implement dataChoices (will be used to compare selected mods/values to new possible mods/values when data is reset, so choices can be preserved if possible)
+// TODO: simplify similar/duplicated code in load() and implement dataChoices  (will be used to compare selected mods/values to new possible mods/values when data is reset, so choices can be preserved if possible)
 //	dataChoices
 //		.selected[n] = selected category for dropdown #n
 //		.value[n][m] = value of mod #m for dropdown #n
@@ -95,6 +95,7 @@ function toggleCustomFormat(checked) {
 // ---------------------------------
 function loadCustomization() {
 	var options = "";
+	//var options = "<option class='gray-all'>any</option>";
 	for (group in item_groups) { options += "<option class='gray-all'>" + group + "</option>" }
 	document.getElementById("dropdown_group").innerHTML = options
 	// these lines just set the default to a Rare Phase Blade
@@ -102,7 +103,7 @@ function loadCustomization() {
 	setGroup(document.getElementById("dropdown_group").value)
 	document.getElementById("dropdown_type").selectedIndex = 2
 	setType(document.getElementById("dropdown_type").value)
-	document.getElementById("dropdown_base").selectedIndex = 32
+	document.getElementById("dropdown_base").selectedIndex = 33
 	setBase(document.getElementById("dropdown_base").value)
 	document.getElementById("dropdown_rarity").selectedIndex = 2
 	setRarity(document.getElementById("dropdown_base").value)
@@ -120,8 +121,16 @@ function setGroup(value) {
 // ---------------------------------
 function loadType(value) {
 	var options = "";
-	for (type in item_groups[value]) { options += "<option class='gray-all'>" + item_groups[value][type] + "</option>" }
+	if (value == "any") {
+		for (val in item_groups) { for (type in item_groups[val]) { options += "<option class='gray-all'>" + item_groups[val][type] + "</option>" } }
+	} else {
+		for (type in item_groups[value]) { options += "<option class='gray-all'>" + item_groups[value][type] + "</option>" }
+	}
 	document.getElementById("dropdown_type").innerHTML = options
+	//if (document.getElementById("dropdown_type").options.length > 1) {
+	//	options = "<option class='gray-all'>any</option>" + options
+	//	document.getElementById("dropdown_type").innerHTML = options
+	//}
 	loadBase(document.getElementById("dropdown_type").value)
 }
 // setType - called when 'type' dropdown is used, loads the next dropdown
@@ -133,7 +142,22 @@ function setType(value) {
 // ---------------------------------
 function loadBase(value) {
 	var options = "";
-	if (value == "rune" || value == "gem" || value == "other" || value == "misc") {
+	if (value == "any") {
+		if (document.getElementById("dropdown_group").selectedIndex = 0) {
+			for (val in item_types) { for (base in item_types[val]) { options += "<option class='gray-all'>" + item_types[val][base] + "</option>" } }
+			document.getElementById("dropdown_base").innerHTML = options
+			loadRarity(document.getElementById("dropdown_base").value)
+		} else {
+		//	for (opt in document.getElementById("dropdown_type").options) {
+		//		var item_type_option = document.getElementById("dropdown_type").options[opt].innerHTML;
+		//		if (item_type_option != "any" && typeof(item_types[item_type_option]) != 'undefined') {
+		//			for (base in item_types[item_type_option]) { options += "<option class='gray-all'>" + item_types[val][base] + "</option>" }
+		//		}
+		//	}
+		//	document.getElementById("dropdown_base").innerHTML = options
+		//	loadRarity(document.getElementById("dropdown_base").value)
+		}
+	} else if (value == "rune" || value == "gem" || value == "other" || value == "misc") {
 		for (let i = 0; i < premade[value].length; i++) { options += "<option class='gray-all'>"+premade[value][i].name+"</option>" }
 		document.getElementById("dropdown_base").innerHTML = ""
 		document.getElementById("dropdown_rarity").innerHTML = ""
@@ -145,12 +169,20 @@ function loadBase(value) {
 		value = value.split(" ").join("_")
 		for (base in item_types[value]) { options += "<option class='gray-all'>" + item_types[value][base] + "</option>" }
 		document.getElementById("dropdown_base").innerHTML = options
+		if (document.getElementById("dropdown_base").options.length > 1 && document.getElementById("dropdown_type").value != "charm" && document.getElementById("dropdown_type").value != "quiver") {
+			options = "<option class='gray-all'>any</option>" + options
+			document.getElementById("dropdown_base").innerHTML = options
+		}
 		loadRarity(document.getElementById("dropdown_base").value)
 	}
 }
 // setBase - called when 'base' dropdown is used, loads the next dropdown
 // ---------------------------------
 function setBase(value) {
+	if (value == "any") {
+		document.getElementById("dropdown_rarity").selectedIndex = 3;
+		document.getElementById("dropdown_rarity").value = document.getElementById("dropdown_rarity").options[3].innerHTML;
+	}
 	loadRarity(value)
 }
 // loadRarity - populates the 'rarity' dropdown, subsequent dropdowns
@@ -165,12 +197,18 @@ function loadRarity(value) {
 	var capable_set = false;
 	var options_name_unique = "";
 	var options_name_set = "";
-	for (group in equipment) {
-		for (itemNew in equipment[group]) {
-			var item = equipment[group][itemNew];
-			if (item.base == value) {
-				if (typeof(item.rarity) == 'undefined' || item.rarity == "unique") { capable_unique = true }
-				else if (item.rarity == "set") { capable_set = true }
+	if (value == "any") {
+		capable_unique = true
+		var type = document.getElementById("dropdown_type").value;
+		if (type != "dagger" && type != "throwing weapon" && type != "javelin" && type != "spear" && type != "crossbow") { capable_set = true }
+	} else {
+		for (group in equipment) {
+			for (itemNew in equipment[group]) {
+				var item = equipment[group][itemNew];
+				if (item.base == value) {
+					if (typeof(item.rarity) == 'undefined' || item.rarity == "unique") { capable_unique = true }
+					else if (item.rarity == "set") { capable_set = true }
+				}
 			}
 		}
 	}
@@ -184,10 +222,10 @@ function loadRarity(value) {
 	
 	// keeps the previous rarity if possible
 	var new_index = document.getElementById("dropdown_rarity").length-1;
-	if (typeof(itemCustom.rarity) != 'undefined') {
+	if (typeof(itemCustom.rarity) != 'undefined' && !(value == "any" && itemCustom.rarity != "unique" && itemCustom.rarity != "set")) {
 		for (let i = 0; i < document.getElementById("dropdown_rarity").length; i++) {
 			var i_rarity = document.getElementById("dropdown_rarity").options[i].value;
-			if (itemCustom.rarity == i_rarity.toLowerCase()) { new_index = i }		
+			if (itemCustom.rarity == i_rarity.toLowerCase()) { new_index = i }
 		}
 	}
 	document.getElementById("dropdown_rarity").selectedIndex = new_index
@@ -197,21 +235,53 @@ function loadRarity(value) {
 // setRarity - called when 'rarity' dropdown is used, loads the next dropdown
 // ---------------------------------
 function setRarity(value) {
+	var base = document.getElementById("dropdown_base").value;
+	if (base == "any" && value != "Unique" && value != "Set") {
+		var new_index = -1;
+		for (opt in document.getElementById("dropdown_base").options) {
+			var group = document.getElementById("dropdown_group").value;
+			var type = document.getElementById("dropdown_type").value;
+			var base_option = document.getElementById("dropdown_base").options[opt].innerHTML;
+			for (itemNew in equipment[group]) {
+				var item = equipment[group][itemNew];
+				if (item.base == base_option) {
+					if (value == "Unique") { if (typeof(item.rarity) == 'undefined' || item.rarity == "unique") { new_index = opt } }
+					else { if (item.rarity == "set") { new_index = opt } }
+				}
+			}
+		}
+		document.getElementById("dropdown_base").selectedIndex = new_index;
+	}
 	loadName(value)
 }
 // loadName - populates the 'name' dropdown
 // ---------------------------------
 function loadName(value) {
 	var options = "";
+	var base = document.getElementById("dropdown_base").value;
 	if (value == "Unique" || value == "Set") {
-		for (group in equipment) {
+		var group = document.getElementById("dropdown_group").value;
+		var type = document.getElementById("dropdown_type").value;
+		if (base == "any") {
 			for (itemNew in equipment[group]) {
 				var item = equipment[group][itemNew];
-				var base = document.getElementById("dropdown_base").value;
-				var type = document.getElementById("dropdown_type").value;
-				if (item.base == base || (itemNew != 0 && item.special != 1 && ((base == "Amulet" && group == "amulet") || (base == "Ring" && group == "ring") || (base == "Jewel" && item.type == "jewel") || (type == "charm" && group == "charms" && base.toLowerCase().split(" ")[0] == item.size) || (type == "quiver" && item.type == "quiver")))) {
+				var toLoad = false;
+				if (itemNew != 0 && (group == "armor" || group == "gloves" || group == "boots" || group == "belt")) { toLoad = true }
+				if (group == "helm" || group == "offhand") { for (item_base in item_types[type.split(" ").join("_")]) { if (item.base == item_types[type.split(" ").join("_")][item_base]) { toLoad = true } } }
+				if (itemNew != 0 && item.special != 1 && group == "weapon" && (item.type == type || (item.type == "thrown" && type == "throwing weapon") || (item.type == "club" && type == "mace") || (item.type == "hammer" && type == "mace"))) { toLoad = true }
+				if (toLoad == true) {
 					if (value == "Unique") { if (typeof(item.rarity) == 'undefined' || item.rarity == "unique") { options += "<option class='gray-all'>" + item.name + "</option>" } }
 					else { if (item.rarity == "set") { options += "<option class='gray-all'>" + item.name + "</option>" } }
+				}
+			}
+		} else {
+			for (group in equipment) {
+				for (itemNew in equipment[group]) {
+					var item = equipment[group][itemNew];
+					if (item.base == base || (itemNew != 0 && item.special != 1 && ((base == "Amulet" && group == "amulet") || (base == "Ring" && group == "ring") || (base == "Jewel" && item.type == "jewel") || (type == "charm" && group == "charms" && base.toLowerCase().split(" ")[0] == item.size) || (type == "quiver" && item.type == "quiver")))) {
+						if (value == "Unique") { if (typeof(item.rarity) == 'undefined' || item.rarity == "unique") { options += "<option class='gray-all'>" + item.name + "</option>" } }
+						else { if (item.rarity == "set") { options += "<option class='gray-all'>" + item.name + "</option>" } }
+					}
 				}
 			}
 		}
@@ -369,7 +439,7 @@ function getMatch(kind) {
 	var result = false;
 	if (kind == "identified" && itemCustom.rarity != "regular") { result = true }
 	if (kind == "ethereal" && !((itemCustom.WEAPON != true && itemCustom.ARMOR != true) || itemCustom.rarity == "set" || itemCustom.WP9 == true || itemCustom["7cr"] == true || itemCustom.name == "Crown of Ages" || itemCustom.name == "Leviathan" || itemCustom.name == "Tyrael's Might" || itemCustom.name == "The Gavel of Pain" || itemCustom.name == "Schaefer's Hammer" || itemCustom.name == "Butcher's Pupil" || itemCustom.name == "Doombringer" || itemCustom.name == "The Grandfather" || itemCustom.name == "Wizardspike" || itemCustom.name == "Stormspire" || itemCustom.name == "Steel Pillar" || itemCustom.name == "Stormshield")) { result = true }
-	if (kind == "sockets" && itemCustom.rarity == "regular" && typeof(itemCustom.max_sockets) != 'undefined') { result = true }
+	if (kind == "sockets" && typeof(itemCustom.max_sockets) != 'undefined' && itemCustom.rarity == "regular") { result = true }
 	if (kind == "quality" && itemCustom.rarity == "regular" && itemCustom.affix_type != "quiver") { result = true }
 	if (kind == "automod" && itemCustom.rarity != "unique" && itemCustom.rarity != "set" && (itemCustom.CL3 || itemCustom.CL4 || itemCustom.CL6 || itemCustom.CL7)) { result = true }
 	if (kind == "pointmod" && itemCustom.rarity != "unique" && itemCustom.rarity != "set" && (itemCustom.CL1 || itemCustom.CL2 || itemCustom.CL4 || itemCustom.CL5 || itemCustom.CL6 || itemCustom.WP11 || itemCustom.WP12 || itemCustom.WP13) && !(itemCustom.CL5 == true && (itemCustom.tier == 1 || itemCustom["9ar"] == true || itemCustom["9wb"] == true || itemCustom["9xf"] == true))) { result = true }
@@ -407,8 +477,9 @@ function getALVL() {
 	x = Math.max(ilvl,base_qlvl)
 	if (magic_lvl > 0) { x = x + magic_lvl }
 	else {
-		if (x < (99 - base_qlvl/2)) { x = x - base_qlvl/2 }
-		else { x = 2*x - 99 }
+		// TODO/TOCHECK: what was this meant to do? it just messes up the affix level
+		//if (x < (99 - base_qlvl/2)) { x = x - base_qlvl/2 }
+		//else { x = 2*x - 99 }
 	}
 	alvl = Math.round(Math.min(x,99))
 	
@@ -454,37 +525,45 @@ function load(kind) {
 	if (kind == "ethereal") {
 		if (document.getElementById("ethereal").checked == true) { itemCustom.ethereal = true }
 	} else if (kind == "sockets") {
+		// set variables for previously selected affix info
 		var sockets_index = document.getElementById("dropdown_sockets").selectedIndex;
+		// set new options
 		var most_sockets = itemCustom.max_sockets;
 		if (itemCustom.ILVL <= 40 && typeof(itemCustom.max_sockets_lvl_40) != 'undefined') { most_sockets = itemCustom.max_sockets_lvl_40 }
 		if (itemCustom.ILVL <= 25 && typeof(itemCustom.max_sockets_lvl_25) != 'undefined') { most_sockets = itemCustom.max_sockets_lvl_25 }
+		if (itemCustom.rarity != "regular") { most_sockets = 1 }
 		for (let i = 1; i <= most_sockets; i++) { options += "<option class='gray-all'>"+i+"</option>" }
 		document.getElementById("dropdown_sockets").innerHTML = options
+		// keep previously selected affix info (if compatible)
 		if (sockets_index > 0 && sockets_index <= most_sockets) {
 			document.getElementById("dropdown_sockets").selectedIndex = sockets_index
 			itemCustom.sockets = sockets_index
 		}
 	} else if (kind == "quality") {
+		// set variables for previously selected affix info
 		var quality_index = document.getElementById("dropdown_quality").selectedIndex;
+		// set new options
 		options += "<option class='gray-all'>" + "Inferior" + "</option>"
 		options += "<option class='gray-all'>" + "Superior" + "</option>"
 		document.getElementById("dropdown_quality").innerHTML = options
+		// keep previously selected affix info (if compatible)
 		if (quality_index > 0) {
 			document.getElementById("dropdown_quality").selectedIndex = quality_index
 			doQuality(quality_index)
 		}
 	} else if (kind == "automod") {
+		// set variables for previously selected affix info
 		var automod_index = document.getElementById("dropdown_automod").selectedIndex;
 		var automod_value = ""; if (automod_index > 0) { automod_value = document.getElementById("dropdown_automod").options[automod_index].innerHTML };
 		var automod_mod_value_1 = document.getElementById("automod_value_1").innerHTML;
 		var automod_mod_value_2 = document.getElementById("automod_value_2").innerHTML;
-		
+		// set new options
 		for (a in affixes_automod) {
 			var aff = affixes_automod[a];
-			options += loadDetails(kind,aff,itemCustom.ILVL,aff[0],1,aff[2],aff[3],aff[4],aff[6],aff[7],aff[10],"",[aff[13]],[])
+			options += loadDetails(kind,aff,alvl,aff[0],1,aff[2],aff[3],aff[4],aff[6],aff[7],aff[10],"",[aff[13]],[])
 		}
 		document.getElementById("dropdown_automod").innerHTML = options
-		
+		// keep previously selected affix info (if compatible)
 		if (automod_index > 0) {
 			for (opt in document.getElementById("dropdown_automod").options) {
 				if (automod_value == document.getElementById("dropdown_automod").options[opt].innerHTML) {
@@ -504,6 +583,7 @@ function load(kind) {
 			}
 		}
 	} else if (kind == "pointmod") {
+		// set variables for previously selected affix info
 		var pointmod_index_1 = document.getElementById("dropdown_pointmod_1").selectedIndex;
 		var pointmod_value_1 = ""; if (pointmod_index_1 > 0) { pointmod_value_1 = document.getElementById("dropdown_pointmod_1").options[pointmod_index_1].innerHTML };
 		var pointmod_mod_value_1 = document.getElementById("pointmod_value_1").innerHTML;
@@ -513,13 +593,13 @@ function load(kind) {
 		var pointmod_index_3 = document.getElementById("dropdown_pointmod_3").selectedIndex;
 		var pointmod_value_3 = ""; if (pointmod_index_3 > 0) { pointmod_value_3 = document.getElementById("dropdown_pointmod_3").options[pointmod_index_3].innerHTML };
 		var pointmod_mod_value_3 = document.getElementById("pointmod_value_3").innerHTML;
-		
+		// set new options
 		for (a in affixes_pointmod) {
 			var aff = affixes_pointmod[a];
-			options += loadDetails(kind,aff,itemCustom.ILVL,1,1,1,aff[0],aff[1],aff[3],aff[4],"","",[aff[7],aff[8]],[])
+			options += loadDetails(kind,aff,alvl,1,1,1,aff[0],aff[1],aff[3],aff[4],"","",[aff[7],aff[8]],[])
 		}
 		for (let n = 1; n <= 3; n++) { document.getElementById("dropdown_pointmod_"+n).innerHTML = options }
-		
+		// keep previously selected affix info (if compatible)
 		if (pointmod_index_1 > 0) {
 			for (opt in document.getElementById("dropdown_pointmod_1").options) {
 				if (pointmod_value_1 == document.getElementById("dropdown_pointmod_1").options[opt].innerHTML) {
@@ -554,6 +634,7 @@ function load(kind) {
 			}
 		}
 	} else if (kind == "affix") {
+		// set variables for previously selected affix info
 		var a_index = ["",0,0,0,0,0,0];
 		var a_value = ["",0,0,0,0,0,0];
 		var a_mod = ["",["",0,0,0],["",0,0,0],["",0,0,0],["",0,0,0],["",0,0,0],["",0,0,0]];
@@ -564,7 +645,7 @@ function load(kind) {
 				a_mod[n][m] = ~~document.getElementById("affix_value_"+n+"_"+m).innerHTML;
 			}
 		}
-		
+		// set new options
 		var options_prefix = options;
 		var options_suffix = options;
 		for (a in affixes) {
@@ -581,7 +662,7 @@ function load(kind) {
 			if (n < 4) { document.getElementById("dropdown_affix_"+n).innerHTML = options_prefix }
 			else { document.getElementById("dropdown_affix_"+n).innerHTML = options_suffix }
 		}
-		
+		// keep previously selected affix info (if compatible)
 		for (let n = 1; n <= 6; n++) {
 			if (a_index[n] > 0) {
 				for (let opt = 0; opt < document.getElementById("dropdown_affix_"+n).options.length; opt++) {
@@ -589,8 +670,10 @@ function load(kind) {
 						document.getElementById("dropdown_affix_"+n).selectedIndex = opt
 						var n_prefix = 0; if (n <= 3) { n_prefix = 1 }
 						doAffix(n,opt,n_prefix)
-						for (let m = 1; m <= 3; m++) {
-							if (a_mod[n][m] < document.getElementById("affix_value_"+n+"_"+m).innerHTML) {
+						var mods = data.affix[n_prefix].categories[data.affix[n_prefix].index[opt]].info.mods;
+						for (let m = 1; m <= mods; m++) {
+							if (a_mod[n][m] <= document.getElementById("affix_value_"+n+"_"+m).innerHTML) {
+								// TODO: Find the broken code that prevents proper execution when the above condition is equal (only happens once per scenario before fixing itself... undefined variable somewhere?)
 								document.getElementById("range_affix_"+n+"_"+m).value = a_mod[n][m]
 								document.getElementById("affix_value_"+n+"_"+m).innerHTML = a_mod[n][m]
 								doAffixValue(n,m,a_mod[n][m],n_prefix)
@@ -601,17 +684,18 @@ function load(kind) {
 			}
 		}
 	} else if (kind == "corruption") {
+		// set variables for previously selected affix info
 		var corruption_index = document.getElementById("dropdown_corruption").selectedIndex;
 		var corruption_value = ""; if (corruption_index > 0) { corruption_value = document.getElementById("dropdown_corruption").options[corruption_index].innerHTML };
 		var corruption_mod_value_1 = document.getElementById("corruption_value_1").innerHTML;
 		var corruption_mod_value_2 = document.getElementById("corruption_value_2").innerHTML;
-		
+		// set new options
 		for (a in affixes_corruption) {
 			var aff = affixes_corruption[a];
 			options += loadDetails(kind,aff,alvl,1,1,1,1,99,1,aff[0],aff[3],"",[aff[6]],[])
 		}
 		document.getElementById("dropdown_corruption").innerHTML = options
-
+		// keep previously selected affix info (if compatible)
 		if (corruption_index > 0) {
 			for (opt in document.getElementById("dropdown_corruption").options) {
 				if (corruption_value == document.getElementById("dropdown_corruption").options[opt].innerHTML) {
@@ -631,31 +715,34 @@ function load(kind) {
 			}
 		}
 	} else if (kind == "upgrade") {
+		// set variables for previously selected affix info
 		var upgrade_index = document.getElementById("dropdown_upgrade").selectedIndex;
 		var upgrade_value = ""; if (upgrade_index > 0) { upgrade_value = document.getElementById("dropdown_upgrade").options[upgrade_index].innerHTML };
+		// set new options
 		if (typeof(itemCustom.upgrade) != 'undefined') { options += "<option class='gray-all'>" + itemCustom.upgrade + "</option>" }
 		if (typeof(itemCustom.upgrade2) != 'undefined') { options += "<option class='gray-all'>" + itemCustom.upgrade2 + "</option>" }
 		document.getElementById("dropdown_upgrade").innerHTML = options
+		// keep previously selected affix info (if compatible)
 		if (upgrade_index > 0 && upgrade_value == document.getElementById("dropdown_upgrade").options[upgrade_index].innerHTML) {
 			document.getElementById("dropdown_upgrade").selectedIndex = upgrade_index
 			doUpgrade(upgrade_index)
 		}
 	} else if (kind == "superior") {
-		// TODO: reduce duplicated code
+		// set variables for previously selected affix info
 		var superior_index_1 = document.getElementById("dropdown_superior_1").selectedIndex;
 		var superior_value_1 = ""; if (superior_index_1 > 0) { superior_value_1 = document.getElementById("dropdown_superior_1").options[superior_index_1].innerHTML };
 		var superior_mod_value_1 = document.getElementById("superior_value_1").innerHTML;
 		var superior_index_2 = document.getElementById("dropdown_superior_2").selectedIndex;
 		var superior_value_2 = ""; if (superior_index_2 > 0) { superior_value_2 = document.getElementById("dropdown_superior_2").options[superior_index_2].innerHTML };
 		var superior_mod_value_2 = document.getElementById("superior_value_2").innerHTML;
-		
+		// set new options
 		for (a in affixes_superior) {
 			var aff = affixes_superior[a];
 			options += loadDetails(kind,aff,alvl,1,1,1,1,99,aff[0],aff[1],"","",[aff[4]],[])
 		}
 		document.getElementById("dropdown_superior_1").innerHTML = options
 		document.getElementById("dropdown_superior_2").innerHTML = options
-		
+		// keep previously selected affix info (if compatible)
 		if (superior_index_1 > 0) {
 			for (opt in document.getElementById("dropdown_superior_1").options) {
 				if (superior_value_1 == document.getElementById("dropdown_superior_1").options[opt].innerHTML) {
