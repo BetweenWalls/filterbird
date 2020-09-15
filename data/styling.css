@@ -1,9 +1,9 @@
 @font-face {
-	font-family: AvQuest;
-	src: url(Avqest.ttf);
+	font-family: AvQest;
+	src: url(AvQest.ttf);
 }
 .item {
-	font-family: AvQuest;
+	font-family: AvQest;
 	font-style: normal;
 	font-weight: 400;
 	text-align: center;
