@@ -442,12 +442,13 @@ function equipmentHover(num) {
 	document.getElementById("item_affixes").innerHTML = affixes
 	if (main_affixes != "" || affixes != "") { document.getElementById("tooltip_inventory").style.display = "block" }
 	
+	var original_choices_height = 47; if (document.getElementById("original_choices").style.display == "none") { original_choices_height = 0 }
 	var item = document.getElementById("output_"+num).getBoundingClientRect();
 	var tooltip_width = document.getElementById("tooltip_inventory").getBoundingClientRect().width;
 	var textbox_height = document.getElementById("filter_text_1").getBoundingClientRect().height + document.getElementById("filter_text_2").getBoundingClientRect().height
-	var editing_height = document.getElementById("item_editing").getBoundingClientRect().height + document.getElementById("non_item_editing").getBoundingClientRect().height
+	var editing_height = document.getElementById("item_editing").getBoundingClientRect().height + document.getElementById("non_item_editing").getBoundingClientRect().height + original_choices_height
 	var offset_x = Math.floor(item.left + item.width/2 - tooltip_width/2);
-	var offset_y = Math.floor(117 + textbox_height + editing_height + 100*num + item.height/2);
+	var offset_y = Math.floor(63 + textbox_height + editing_height + 100*num + item.height/2);
 	document.getElementById("tooltip_inventory").style.left = offset_x+"px"
 	document.getElementById("tooltip_inventory").style.top = offset_y+"px"
 	var extra_height = Math.max(0,(document.getElementById("tooltip_inventory").getBoundingClientRect().height - 50 - document.getElementById("output_processing_info").getBoundingClientRect().height))
