@@ -884,6 +884,14 @@ radius_FreezingArrow:{index:["radius_FreezingArrow"], format:["+","% to Freezing
 reset_cooldown_on_kill:{index:["reset_cooldown_on_kill"], format:["","% Chance to Reset Skill Cooldown on Kill"]},
 cdr_on_striking:{index:["cdr_on_striking"], format:["","% Reduced Skill Cooldown For 4 Seconds On Striking"]},
 reanimate:{index:["reanimate"], format:["","% reanimate as: Returned"]},
+half_Battle_Orders:{index:[], format:["Battle Order's life and mana bonuses are halved"]},
+extra_Bone_Spears:{index:["extra_Bone_Spears"], format:["Bone Spear fires "," Additional Projectiles"]},
+bonus_sanctuary_rate:{index:["bonus_sanctuary_rate"], format:["+","% Increased Sanctuary Area Damage Rate"]},
+extra_arrows_Cold_Arrow:{index:["extra_arrows_Cold_Arrow"], format:["Cold Arrow Fires "," Additional Projectiles"]},
+extra_arrows_Magic_Arrow:{index:["extra_arrows_Magic_Arrow"], format:["Magic Arrow Fires "," Additional Arrows"]},
+extra_arrows_Fire_Arrow:{index:["extra_arrows_Fire_Arrow"], format:["Fire Arrow Fires "," Additional Arrows"]},
+extra_arrows_Ice_Arrow:{index:["extra_arrows_Ice_Arrow"], format:["Ice Arrow Fires "," Additional Arrows"]},
+extra_conversion_Magic_Arrow:{index:["extra_conversion_Magic_Arrow"], format:["+","% Magic Arrow Damage Converted to Magic"]},
 
 flamme:{index:["flamme"], format:["","% of Life dealt per second as fire"]},
 ias_skill:{index:["ias_skill"], format:["+","% Increased Attack Speed"]},
@@ -891,7 +899,7 @@ ar_shrine_bonus:{index:["ar_shrine_bonus"], format:["Attack Rating: +","%"]},
 charge_ember:{index:["charge_ember"], format:[""," Ember Charges"]},
 charge_thunder:{index:["charge_thunder"], format:[""," Thunder Charges"]},
 charge_ice:{index:["charge_ice"], format:[""," Ice Charges"]},
-skeleton_bonus:{index:["skeleton_bonus"], format:["Raised Skeleton Damage: +","%"]},
+summon_damage_bonus:{index:["summon_damage_bonus"], format:["Summon Damage: +","%"]},
 hammer_bonus:{index:["hammer_bonus"], format:["Blessed Hammer Magic Damage: +","%"]},
 hammer_on_hit:{index:["hammer_on_hit"], format:["Chance for you to cast Blessed Hammer on hit: ","%"]},
 redeem_chance:{index:["redeem_chance"], format:["Chance to redeem soul: ","%"]},
@@ -1225,10 +1233,10 @@ oskill_Fire_Wall:{index:["oskill_Fire_Wall"], format:["+"," to Fire Wall"]},
 oskill_Meteor:{index:["oskill_Meteor"], format:["+"," to Meteor"]},
 oskill_Fire_Mastery:{index:["oskill_Fire_Mastery"], format:["+"," to Fire Mastery"]},
 
-skills_class:{index:["skills_class"], format:["+"," to Class Skills"]},
-skills_tree1:{index:["skills_tree1"], format:["+"," to Tree #1 Skills"]},
-skills_tree2:{index:["skills_tree2"], format:["+"," to Tree #2 Skills"]},
-skills_tree3:{index:["skills_tree3"], format:["+"," to Tree #3 Skills"]},
+skills_class:{index:["skills_class"], format:["+"," to Class Skills"]},		// unneeded once item customization gets implemented
+skills_tree1:{index:["skills_tree1"], format:["+"," to Tree #1 Skills"]},	// unused
+skills_tree2:{index:["skills_tree2"], format:["+"," to Tree #2 Skills"]},	// unused
+skills_tree3:{index:["skills_tree3"], format:["+"," to Tree #3 Skills"]},	// unused
 
 stamina_skillup:{index:["stamina_skillup"], format:["+","% Stamina"]},
 frw_skillup:{index:["frw_skillup"], format:["+","% Faster Run/Walk"]},
@@ -1266,9 +1274,13 @@ summon_damage:{index:["summon_damage"], format:["Summons deal +","% Increased Da
 summon_defense:{index:["summon_defense"], format:["Summons have +","% Enhanced Defense"]},
 all_skills_per_level:{index:["all_skills_per_level"], format:["+"," to All Skills (based on character level)"], mult:["level"]},
 reset_on_kill:{index:["reset_on_kill"], format:["Chance to Reset Duration on Kill: ","%"]},
-bonus_sanctuary_rate:{index:["bonus_sanctuary_rate"], format:["+","% Increased Sanctuary Area Damage Rate"]},
+
+ctc_temp1:{index:[], format:["10% chance to cast level 15 Nova on striking"]},			// temporary  (M'avina's Caster)
+ctc_temp2:{index:[], format:["25% chance to cast level 5 Static Field when struck"]},	// temporary  (Cow King's Leathers)
+
 relic_experience:{index:["relic_experience"], format:["Experience: +","%"]},
 relic_density:{index:["relic_density"], format:["Monster Density: +","%"]},
+skill:1,	// unimplemented  (multiple skills possible for uniques: Ormus' Robes, Marrowwalk, Hellfire Torch)
 
 inferior:1,//{index:[""], format:["Inferior"]},
 REQ_DEX:1,
@@ -1283,7 +1295,7 @@ QUANTITY:{index:["QUANTITY"], format:["Quantity: ",""]},
 	dmg_cold:{index:[""], format:["+"," Cold Damage"]},
 	dmg_fire:{index:[""], format:["+"," Fire Damage"]},
 	dmg_ltng:{index:[""], format:["+"," Lightning Damage"]},
-	//cold_len:{index:[], format:[""]},
+	cold_len:1,//{index:[], format:[""]},
 	hit_skill:{index:[""], format:["Chance to cast Level "," [skill] on striking"]},
 	att_skill:{index:[""], format:["Chance to cast Level "," [skill] on attack"]},
 	gethit_skill:{index:[""], format:["Chance to cast Level "," [skill] when struck"]},
@@ -1293,13 +1305,6 @@ QUANTITY:{index:["QUANTITY"], format:["Quantity: ",""]},
 	//ac_time:{index:[], format:["(ac-time)"]},
 	//skilltab:{index:[""], format:["+"," to [skill tree]"]},
 	//pacifism:{index:[], format:[""]},
-	
-skill:1,
-extra_arrows_Cold_Arrow:{index:["extra_arrows_Cold_Arrow"], format:["Cold Arrow Fires "," Additional Projectiles"]},
-extra_arrows_Magic_Arrow:{index:["extra_arrows_Magic_Arrow"], format:["Magic Arrow Fires "," Additional Arrows"]},
-extra_arrows_Fire_Arrow:{index:["extra_arrows_Fire_Arrow"], format:["Fire Arrow Fires "," Additional Arrows"]},
-extra_arrows_Ice_Arrow:{index:["extra_arrows_Ice_Arrow"], format:["Ice Arrow Fires "," Additional Arrows"]},
-extra_conversion_Magic_Arrow:{index:["extra_conversion_Magic_Arrow"], format:["+","% Magic Arrow Damage Converted to Magic"]},
 };
 
 var stats_alternate = {

@@ -555,10 +555,10 @@ var affixes = [
 [	1,	"Eagleeye",	0,	0,	50,	99,	37,	"",	0,	111,	"att_lvl",	16,	0,	0,	"",	0,	0,	0,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"staf",	"wand",	"orb",	"",	""	],
 [	1,	"Visionary",	1,	1,	25,	99,	18,	"",	0,	111,	"attP_lvl",	2,	1,	1,	"",	0,	0,	0,	"",	0,	0,	0,	"helm",	"miss",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// amount per level added (param / 2)
 [	1,	"Mnemonic",	1,	1,	25,	99,	18,	"",	0,	115,	"mana_lvl",	6,	0,	0,	"",	0,	0,	0,	"",	0,	0,	0,	"helm",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	1,	"Snowflake",	1,	1,	25,	99,	18,	"",	0,	137,	"cold_min",	0,	6,	9,	"cold_max",	0,	19,	30,	"cold_len",	0,	25,	25,	"weap",	"circ",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
-[	1,	"Shivering",	1,	1,	35,	99,	26,	"",	0,	137,	"cold_min",	0,	10,	15,	"cold_max",	0,	31,	45,	"cold_len",	0,	50,	50,	"weap",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
-[	1,	"Boreal",	1,	1,	50,	99,	40,	"",	0,	137,	"cold_min",	0,	16,	23,	"cold_max",	0,	46,	90,	"cold_len",	0,	75,	75,	"weap",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
-[	1,	"Hibernal",	1,	1,	70,	99,	60,	"",	0,	137,	"cold_min",	0,	24,	45,	"cold_max",	0,	91,	140,	"cold_len",	0,	100,	100,	"weap",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
+[	1,	"Snowflake",	1,	1,	25,	99,	18,	"",	0,	137,	"cold_min",	0,	6,	9,	"cold_max",	0,	19,	30,	"cold_len",	0,	1,	1,	"weap",	"circ",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
+[	1,	"Shivering",	1,	1,	35,	99,	26,	"",	0,	137,	"cold_min",	0,	10,	15,	"cold_max",	0,	31,	45,	"cold_len",	0,	2,	2,	"weap",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
+[	1,	"Boreal",	1,	1,	50,	99,	40,	"",	0,	137,	"cold_min",	0,	16,	23,	"cold_max",	0,	46,	90,	"cold_len",	0,	3,	3,	"weap",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
+[	1,	"Hibernal",	1,	1,	70,	99,	60,	"",	0,	137,	"cold_min",	0,	24,	45,	"cold_max",	0,	91,	140,	"cold_len",	0,	4,	4,	"weap",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
 [	1,	"Ember",	1,	1,	25,	99,	18,	"",	0,	138,	"fire_min",	0,	16,	25,	"fire_max",	0,	31,	60,	"",	0,	0,	0,	"weap",	"circ",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	1,	"Smoldering",	1,	1,	35,	99,	26,	"",	0,	138,	"fire_min",	0,	26,	50,	"fire_max",	0,	61,	90,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	1,	"Smoking",	1,	1,	47,	99,	37,	"",	0,	138,	"fire_min",	0,	51,	80,	"fire_max",	0,	91,	130,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
@@ -628,18 +628,18 @@ var affixes = [
 [	1,	"Jagged",	1,	1,	22,	99,	16,	"",	0,	104,	"dmg_max",	0,	1,	1,	"",	0,	0,	0,	"",	0,	0,	0,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	1,	"Forked",	1,	0,	52,	99,	44,	"",	0,	104,	"dmg_max",	0,	2,	2,	"",	0,	0,	0,	"",	0,	0,	0,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	1,	"Jagged",	1,	1,	81,	99,	73,	"",	0,	104,	"dmg_max",	0,	1,	1,	"",	0,	0,	0,	"",	0,	0,	0,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	1,	"Snowflake",	1,	1,	9,	99,	6,	"",	0,	137,	"cold_min",	0,	1,	1,	"cold_max",	0,	2,	3,	"cold_len",	0,	25,	25,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
-[	1,	"Shivering",	1,	1,	15,	99,	11,	"",	0,	137,	"cold_min",	0,	2,	4,	"cold_max",	0,	4,	8,	"cold_len",	0,	25,	25,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
-[	1,	"Boreal",	1,	1,	30,	99,	22,	"",	0,	137,	"cold_min",	0,	5,	7,	"cold_max",	0,	9,	15,	"cold_len",	0,	25,	25,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
-[	1,	"Hibernal",	1,	0,	45,	99,	38,	"",	0,	137,	"cold_min",	0,	8,	13,	"cold_max",	0,	16,	25,	"cold_len",	0,	25,	25,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
-[	1,	"Snowflake",	1,	1,	18,	99,	13,	"",	0,	137,	"cold_min",	0,	2,	3,	"cold_max",	0,	3,	5,	"cold_len",	0,	25,	25,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
-[	1,	"Shivering",	1,	1,	29,	99,	21,	"",	0,	137,	"cold_min",	0,	4,	5,	"cold_max",	0,	6,	10,	"cold_len",	0,	25,	25,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
-[	1,	"Boreal",	1,	1,	49,	99,	41,	"",	0,	137,	"cold_min",	0,	6,	10,	"cold_max",	0,	11,	20,	"cold_len",	0,	25,	25,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
-[	1,	"Hibernal",	1,	0,	69,	99,	61,	"",	0,	137,	"cold_min",	0,	11,	15,	"cold_max",	0,	21,	30,	"cold_len",	0,	25,	25,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
-[	1,	"Snowflake",	1,	1,	27,	99,	20,	"",	0,	137,	"cold_min",	0,	1,	2,	"cold_max",	0,	2,	4,	"cold_len",	0,	25,	25,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
-[	1,	"Shivering",	1,	1,	42,	99,	34,	"",	0,	137,	"cold_min",	0,	3,	4,	"cold_max",	0,	5,	8,	"cold_len",	0,	25,	25,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
-[	1,	"Boreal",	1,	1,	66,	99,	58,	"",	0,	137,	"cold_min",	0,	5,	7,	"cold_max",	0,	9,	14,	"cold_len",	0,	25,	25,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
-[	1,	"Hibernal",	1,	0,	91,	99,	83,	"",	0,	137,	"cold_min",	0,	8,	10,	"cold_max",	0,	15,	20,	"cold_len",	0,	25,	25,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3
+[	1,	"Snowflake",	1,	1,	9,	99,	6,	"",	0,	137,	"cold_min",	0,	1,	1,	"cold_max",	0,	2,	3,	"cold_len",	0,	1,	1,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
+[	1,	"Shivering",	1,	1,	15,	99,	11,	"",	0,	137,	"cold_min",	0,	2,	4,	"cold_max",	0,	4,	8,	"cold_len",	0,	1,	1,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
+[	1,	"Boreal",	1,	1,	30,	99,	22,	"",	0,	137,	"cold_min",	0,	5,	7,	"cold_max",	0,	9,	15,	"cold_len",	0,	1,	1,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
+[	1,	"Hibernal",	1,	0,	45,	99,	38,	"",	0,	137,	"cold_min",	0,	8,	13,	"cold_max",	0,	16,	25,	"cold_len",	0,	1,	1,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
+[	1,	"Snowflake",	1,	1,	18,	99,	13,	"",	0,	137,	"cold_min",	0,	2,	3,	"cold_max",	0,	3,	5,	"cold_len",	0,	1,	1,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
+[	1,	"Shivering",	1,	1,	29,	99,	21,	"",	0,	137,	"cold_min",	0,	4,	5,	"cold_max",	0,	6,	10,	"cold_len",	0,	1,	1,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
+[	1,	"Boreal",	1,	1,	49,	99,	41,	"",	0,	137,	"cold_min",	0,	6,	10,	"cold_max",	0,	11,	20,	"cold_len",	0,	1,	1,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
+[	1,	"Hibernal",	1,	0,	69,	99,	61,	"",	0,	137,	"cold_min",	0,	11,	15,	"cold_max",	0,	21,	30,	"cold_len",	0,	1,	1,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
+[	1,	"Snowflake",	1,	1,	27,	99,	20,	"",	0,	137,	"cold_min",	0,	1,	2,	"cold_max",	0,	2,	4,	"cold_len",	0,	1,	1,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
+[	1,	"Shivering",	1,	1,	42,	99,	34,	"",	0,	137,	"cold_min",	0,	3,	4,	"cold_max",	0,	5,	8,	"cold_len",	0,	1,	1,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
+[	1,	"Boreal",	1,	1,	66,	99,	58,	"",	0,	137,	"cold_min",	0,	5,	7,	"cold_max",	0,	9,	14,	"cold_len",	0,	1,	1,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
+[	1,	"Hibernal",	1,	0,	91,	99,	83,	"",	0,	137,	"cold_min",	0,	8,	10,	"cold_max",	0,	15,	20,	"cold_len",	0,	1,	1,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len moved to mod3 and given in seconds (divided by 25)
 [	1,	"Ember",	1,	1,	5,	99,	3,	"",	0,	138,	"fire_min",	0,	1,	1,	"fire_max",	0,	2,	3,	"",	0,	0,	0,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	1,	"Smoldering",	1,	1,	15,	99,	11,	"",	0,	138,	"fire_min",	0,	2,	3,	"fire_max",	0,	4,	7,	"",	0,	0,	0,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	1,	"Smoking",	1,	1,	28,	99,	21,	"",	0,	138,	"fire_min",	0,	4,	7,	"fire_max",	0,	8,	19,	"",	0,	0,	0,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
@@ -864,12 +864,12 @@ var affixes = [
 [	0,	"of Deflecting",	1,	1,	11,	99,	8,	"",	0,	8,	"block",	0,	20,	20,	"block2",	0,	30,	30,	"",	0,	0,	0,	"shld",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of the Apprentice",	1,	1,	5,	99,	3,	"",	0,	9,	"cast",	0,	10,	10,	"",	0,	0,	0,	"",	0,	0,	0,	"rod",	"ring",	"amul",	"orb",	"circ",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of the Magus",	1,	1,	29,	99,	21,	"",	0,	9,	"cast",	0,	20,	20,	"",	0,	0,	0,	"",	0,	0,	0,	"rod",	"orb",	"circ",	"",	"",	"",	"",	"scep",	"",	"",	"",	""	],
-[	0,	"of Frost",	1,	1,	4,	99,	3,	"",	0,	10,	"cold_min",	0,	1,	1,	"cold_max",	0,	1,	2,	"cold_len",	0,	50,	50,	"weap",	"",	"",	"",	"",	"",	"",	"wand",	"orb",	"",	"",	""	],
-[	0,	"of the Icicle",	1,	1,	13,	99,	9,	"",	0,	10,	"cold_min",	0,	1,	1,	"cold_max",	0,	3,	4,	"cold_len",	0,	75,	75,	"weap",	"",	"",	"",	"",	"",	"",	"wand",	"orb",	"",	"",	""	],
-[	0,	"of the Glacier",	1,	1,	27,	99,	20,	"",	0,	10,	"cold_min",	0,	2,	4,	"cold_max",	0,	4,	15,	"cold_len",	0,	100,	100,	"weap",	"",	"",	"",	"",	"",	"",	"wand",	"orb",	"",	"",	""	],
-[	0,	"of Winter",	1,	1,	45,	99,	37,	"",	0,	10,	"cold_min",	0,	5,	9,	"cold_max",	0,	16,	50,	"cold_len",	0,	150,	150,	"mele",	"",	"",	"",	"",	"",	"",	"wand",	"orb",	"",	"",	""	],
-[	0,	"of Frost",	1,	1,	55,	99,	41,	"",	0,	10,	"cold_min",	0,	1,	1,	"cold_max",	0,	3,	6,	"cold_len",	0,	50,	50,	"belt",	"amul",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of Frigidity",	1,	1,	16,	99,	12,	"",	0,	10,	"cold_min",	0,	1,	1,	"cold_max",	0,	3,	5,	"cold_len",	0,	50,	50,	"jewl",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
+[	0,	"of Frost",	1,	1,	4,	99,	3,	"",	0,	10,	"cold_min",	0,	1,	1,	"cold_max",	0,	1,	2,	"cold_len",	0,	2,	2,	"weap",	"",	"",	"",	"",	"",	"",	"wand",	"orb",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of the Icicle",	1,	1,	13,	99,	9,	"",	0,	10,	"cold_min",	0,	1,	1,	"cold_max",	0,	3,	4,	"cold_len",	0,	3,	3,	"weap",	"",	"",	"",	"",	"",	"",	"wand",	"orb",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of the Glacier",	1,	1,	27,	99,	20,	"",	0,	10,	"cold_min",	0,	2,	4,	"cold_max",	0,	4,	15,	"cold_len",	0,	4,	4,	"weap",	"",	"",	"",	"",	"",	"",	"wand",	"orb",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of Winter",	1,	1,	45,	99,	37,	"",	0,	10,	"cold_min",	0,	5,	9,	"cold_max",	0,	16,	50,	"cold_len",	0,	6,	6,	"mele",	"",	"",	"",	"",	"",	"",	"wand",	"orb",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of Frost",	1,	1,	55,	99,	41,	"",	0,	10,	"cold_min",	0,	1,	1,	"cold_max",	0,	3,	6,	"cold_len",	0,	2,	2,	"belt",	"amul",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of Frigidity",	1,	1,	16,	99,	12,	"",	0,	10,	"cold_min",	0,	1,	1,	"cold_max",	0,	3,	5,	"cold_len",	0,	2,	2,	"jewl",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
 [	0,	"of Warmth",	1,	1,	10,	99,	7,	"",	0,	11,	"half_freeze",	0,	1,	1,	"",	0,	0,	0,	"",	0,	0,	0,	"shld",	"boot",	"glov",	"ring",	"amul",	"circ",	"orb",	"",	"",	"",	"",	""	],
 [	0,	"of Flame",	1,	1,	4,	99,	3,	"",	0,	12,	"fire_min",	0,	1,	1,	"fire_max",	0,	2,	5,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"wand",	"orb",	"",	"",	""	],
 [	0,	"of Fire",	1,	1,	15,	99,	11,	"",	0,	12,	"fire_min",	0,	1,	4,	"fire_max",	0,	6,	11,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"wand",	"orb",	"",	"",	""	],
@@ -1351,8 +1351,8 @@ var affixes = [
 [	0,	"of Hurricane",	0,	0,	36,	99,	36,	"dru",	30,	44,	"charged",	250,	-30,	-3,	"",	0,	0,	0,	"",	0,	0,	0,	"club",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Hurricane",	0,	0,	72,	99,	72,	"dru",	30,	44,	"charged",	250,	-20,	-1,	"",	0,	0,	0,	"",	0,	0,	0,	"amul",	"circ",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Damage Amplification",	1,	1,	3,	99,	0,	"",	0,	44,	"hit_skill",	66,	5,	1,	"",	0,	0,	0,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"orb",	"",	"",	"",	""	],
-[	0,	"of the Icicle",	1,	1,	37,	99,	29,	"",	0,	10,	"cold_min",	0,	2,	3,	"cold_max",	0,	6,	10,	"cold_len",	0,	50,	50,	"jewl",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of the Glacier",	1,	0,	58,	99,	50,	"",	0,	10,	"cold_min",	0,	4,	5,	"cold_max",	0,	11,	15,	"cold_len",	0,	50,	50,	"jewl",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
+[	0,	"of the Icicle",	1,	1,	37,	99,	29,	"",	0,	10,	"cold_min",	0,	2,	3,	"cold_max",	0,	6,	10,	"cold_len",	0,	2,	2,	"jewl",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of the Glacier",	1,	0,	58,	99,	50,	"",	0,	10,	"cold_min",	0,	4,	5,	"cold_max",	0,	11,	15,	"cold_len",	0,	2,	2,	"jewl",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
 [	0,	"of Fire",	1,	1,	36,	99,	28,	"",	0,	12,	"fire_min",	0,	4,	10,	"fire_max",	0,	11,	30,	"",	0,	0,	0,	"jewl",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Burning",	1,	1,	57,	99,	49,	"",	0,	12,	"fire_min",	0,	11,	25,	"fire_max",	0,	31,	50,	"",	0,	0,	0,	"jewl",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Lightning",	1,	1,	36,	99,	28,	"",	0,	13,	"ltng_min",	0,	1,	1,	"ltng_max",	0,	21,	60,	"",	0,	0,	0,	"jewl",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
@@ -1382,18 +1382,18 @@ var affixes = [
 [	0,	"of Venom",	1,	1,	20,	99,	15,	"",	0,	16,	"dmg_pois",	100,	15,	15,	"pois_len",	0,	4,	4,	"",	0,	0,	0,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// added poison duration (mod 1 param / 25), value: 39 or 15
 [	0,	"of Pestilence",	1,	1,	32,	99,	24,	"",	0,	16,	"dmg_pois",	125,	25,	25,	"pois_len",	0,	5,	5,	"",	0,	0,	0,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// added poison duration (mod 1 param / 25), value: 52 or 25
 [	0,	"of Anthrax",	1,	0,	44,	99,	36,	"",	0,	16,	"dmg_pois",	150,	50,	50,	"pois_len",	0,	6,	6,	"",	0,	0,	0,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// added poison duration (mod 1 param / 25), value: 86 or 50
-[	0,	"of Frost",	1,	1,	5,	99,	3,	"",	0,	10,	"cold_min",	0,	1,	1,	"cold_max",	0,	2,	2,	"cold_len",	0,	25,	25,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of the Icicle",	1,	1,	8,	99,	6,	"",	0,	10,	"cold_min",	0,	2,	2,	"cold_max",	0,	3,	4,	"cold_len",	0,	25,	25,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of the Glacier",	1,	1,	15,	99,	11,	"",	0,	10,	"cold_min",	0,	3,	3,	"cold_max",	0,	5,	7,	"cold_len",	0,	25,	25,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of Winter",	1,	0,	23,	99,	17,	"",	0,	10,	"cold_min",	0,	4,	6,	"cold_max",	0,	8,	11,	"cold_len",	0,	25,	25,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of Frost",	1,	1,	9,	99,	6,	"",	0,	10,	"cold_min",	0,	1,	1,	"cold_max",	0,	2,	3,	"cold_len",	0,	25,	25,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of the Icicle",	1,	1,	15,	99,	11,	"",	0,	10,	"cold_min",	0,	2,	2,	"cold_max",	0,	4,	5,	"cold_len",	0,	25,	25,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of the Glacier",	1,	1,	25,	99,	18,	"",	0,	10,	"cold_min",	0,	3,	3,	"cold_max",	0,	6,	8,	"cold_len",	0,	25,	25,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of Winter",	1,	0,	35,	99,	27,	"",	0,	10,	"cold_min",	0,	4,	6,	"cold_max",	0,	9,	12,	"cold_len",	0,	25,	25,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of Frost",	1,	1,	14,	99,	10,	"",	0,	10,	"cold_min",	0,	1,	1,	"cold_max",	0,	2,	2,	"cold_len",	0,	25,	25,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of the Icicle",	1,	1,	21,	99,	15,	"",	0,	10,	"cold_min",	0,	2,	2,	"cold_max",	0,	3,	4,	"cold_len",	0,	25,	25,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of the Glacier",	1,	1,	33,	99,	25,	"",	0,	10,	"cold_min",	0,	3,	3,	"cold_max",	0,	5,	6,	"cold_len",	0,	25,	25,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of Winter",	1,	0,	46,	99,	38,	"",	0,	10,	"cold_min",	0,	4,	5,	"cold_max",	0,	7,	9,	"cold_len",	0,	25,	25,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
+[	0,	"of Frost",	1,	1,	5,	99,	3,	"",	0,	10,	"cold_min",	0,	1,	1,	"cold_max",	0,	2,	2,	"cold_len",	0,	1,	1,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of the Icicle",	1,	1,	8,	99,	6,	"",	0,	10,	"cold_min",	0,	2,	2,	"cold_max",	0,	3,	4,	"cold_len",	0,	1,	1,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of the Glacier",	1,	1,	15,	99,	11,	"",	0,	10,	"cold_min",	0,	3,	3,	"cold_max",	0,	5,	7,	"cold_len",	0,	1,	1,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of Winter",	1,	0,	23,	99,	17,	"",	0,	10,	"cold_min",	0,	4,	6,	"cold_max",	0,	8,	11,	"cold_len",	0,	1,	1,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of Frost",	1,	1,	9,	99,	6,	"",	0,	10,	"cold_min",	0,	1,	1,	"cold_max",	0,	2,	3,	"cold_len",	0,	1,	1,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of the Icicle",	1,	1,	15,	99,	11,	"",	0,	10,	"cold_min",	0,	2,	2,	"cold_max",	0,	4,	5,	"cold_len",	0,	1,	1,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of the Glacier",	1,	1,	25,	99,	18,	"",	0,	10,	"cold_min",	0,	3,	3,	"cold_max",	0,	6,	8,	"cold_len",	0,	1,	1,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of Winter",	1,	0,	35,	99,	27,	"",	0,	10,	"cold_min",	0,	4,	6,	"cold_max",	0,	9,	12,	"cold_len",	0,	1,	1,	"mcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of Frost",	1,	1,	14,	99,	10,	"",	0,	10,	"cold_min",	0,	1,	1,	"cold_max",	0,	2,	2,	"cold_len",	0,	1,	1,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of the Icicle",	1,	1,	21,	99,	15,	"",	0,	10,	"cold_min",	0,	2,	2,	"cold_max",	0,	3,	4,	"cold_len",	0,	1,	1,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of the Glacier",	1,	1,	33,	99,	25,	"",	0,	10,	"cold_min",	0,	3,	3,	"cold_max",	0,	5,	6,	"cold_len",	0,	1,	1,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
+[	0,	"of Winter",	1,	0,	46,	99,	38,	"",	0,	10,	"cold_min",	0,	4,	5,	"cold_max",	0,	7,	9,	"cold_len",	0,	1,	1,	"scha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
 [	0,	"of Flame",	1,	1,	3,	99,	2,	"",	0,	12,	"fire_min",	0,	1,	1,	"fire_max",	0,	2,	2,	"",	0,	0,	0,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Fire",	1,	1,	8,	99,	6,	"",	0,	12,	"fire_min",	0,	1,	2,	"fire_max",	0,	3,	3,	"",	0,	0,	0,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Burning",	1,	1,	14,	99,	10,	"",	0,	12,	"fire_min",	0,	2,	3,	"fire_max",	0,	4,	7,	"",	0,	0,	0,	"lcha",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
