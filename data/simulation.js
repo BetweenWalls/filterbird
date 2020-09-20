@@ -174,7 +174,7 @@ function setItem(value) {
 			if (itemToCompare.RW == true) {
 				var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
 				var s = 0;
-				for (let i = 0; i < runewords[rw_name].length; i++) { s+=1; }
+				for (let i = 0; i < runewords[rw_name].runes.length; i++) { s+=1; }
 				itemToCompare.sockets = s
 			}
 			itemToCompare[itemToCompare.CODE] = true
@@ -433,7 +433,7 @@ function equipmentHover(num) {
 	if (itemToCompare.RW == true) {
 		var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
 		var runes = "";
-		for (let i = 0; i < runewords[rw_name].length; i++) { runes += runewords[rw_name][i]; }
+		for (let i = 0; i < runewords[rw_name].runes.length; i++) { runes += runewords[rw_name].runes[i]; }
 		name += "<br>"+"<font color='"+colors.Gold+"'>'"+runes+"'</font>"
 	}
 	document.getElementById("item_name").innerHTML = name
@@ -554,7 +554,7 @@ function setItemFromCustom() {
 		for (affix in item) { itemToCompare[affix] = item[affix] }	// some base affixes are overridden by regular affixes
 		for (affix in itemCustomAffixes) {
 			if (typeof(itemToCompare[affix]) == 'undefined') { itemToCompare[affix] = 0 }
-			if (isNaN(Number(itemCustomAffixes[affix])) == false && affix != "req_level" && affix != "req_strength" && affix != "req_dexterity") {
+			if (isNaN(Number(itemCustomAffixes[affix])) == false && affix != "req_level" && affix != "req_strength" && affix != "req_dexterity" && affix != "qlvl") {
 				itemToCompare[affix] += itemCustomAffixes[affix]
 			} else {
 				itemToCompare[affix] = itemCustomAffixes[affix]
@@ -572,7 +572,7 @@ function setItemFromCustom() {
 		if (itemToCompare.RW == true) {
 			var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
 			var s = 0;
-			for (let i = 0; i < runewords[rw_name].length; i++) { s+=1; }
+			for (let i = 0; i < runewords[rw_name].runes.length; i++) { s+=1; }
 			itemToCompare.sockets = s
 		}
 		itemToCompare[itemToCompare.CODE] = true

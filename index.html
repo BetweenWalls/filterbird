@@ -99,7 +99,9 @@
 				<!--	automods & common affixes	-->
 				<div id="select_identified"><label class="label" for="identified">Identified </label><input id="identified" type="checkbox" name="identified" onchange="setIdentified(this.checked)"></div>
 				<div id="select_ethereal"><label class="label" for="ethereal">Ethereal </label><input id="ethereal" type="checkbox" name="ethereal" onchange="setEthereal(this.checked)"></div>
+				<div id="select_armor"><label class="label" for="armor">Armor: </label><input id="armor" name="armor" class="num-input" style="max-width:42px;" type="number" min="0" max="600" value="600" onChange="setArmor(this.value)"></div>
 				<div id="select_sockets"><label class="label">Sockets: </label><select id="dropdown_sockets" class="new-dropdown" onChange="setSockets(this.selectedIndex)"></select></div>
+				<div id="select_runeword"><label class="label">Runeword: </label><select id="dropdown_runeword" class="new-dropdown" onChange="setRuneword(this.selectedIndex)"></select></div>
 				<div id="select_quality"><label class="label">Quality: </label><select id="dropdown_quality" class="new-dropdown" onChange="setQuality(this.selectedIndex)"></select></div>
 				<div id="select_superior_1"><label class="label">Superior: </label><select id="dropdown_superior_1" class="new-dropdown" onChange="setSuperior(1,this.selectedIndex)"></select></div>
 				<div id="select_superior_value_1" style="display:none;"><label class="label2">Superior: </label><input id="range_superior_1" type="range" class="range" onChange="setSuperiorValue(1,this.value)"></input><div id="superior_value_1" class="label"></div></div>
@@ -140,6 +142,13 @@
 				<div id="select_affix_value_6_1" style="display:none;"><label class="label2">Suffix: </label><input id="range_affix_6_1" type="range" class="range" onChange="setAffixValue(6,1,this.value,0)"></input><div id="affix_value_6_1" class="label"></div></div>
 				<div id="select_affix_value_6_2" style="display:none;"><label class="label2">Suffix: </label><input id="range_affix_6_2" type="range" class="range" onChange="setAffixValue(6,2,this.value,0)"></input><div id="affix_value_6_2" class="label"></div></div>
 				<div id="select_affix_value_6_3" style="display:none;"><label class="label2">Suffix: </label><input id="range_affix_6_3" type="range" class="range" onChange="setAffixValue(6,3,this.value,0)"></input><div id="affix_value_6_3" class="label"></div></div>
+				<!--	affixes for unique/set/runeword items	-->
+				<div id="editing_2_uniques" style="display:none;">
+					<div id="select_uncommon_1"><label class="label">Affix: </label><select id="dropdown_uncommon_1" class="new-dropdown" onChange="setUncommon(1,this.selectedIndex)"></select></div>
+					<div id="select_uncommon_value_1_1" style="display:none;"><label class="label2">Affix: </label><input id="range_uncommon_1_1" type="range" class="range" onChange="setUncommonValue(1,1,this.value)"></input><div id="uncommon_value_1_1" class="label"></div></div>
+					<div id="select_uncommon_value_1_2" style="display:none;"><label class="label2">Affix: </label><input id="range_uncommon_1_2" type="range" class="range" onChange="setUncommonValue(1,2,this.value)"></input><div id="uncommon_value_1_2" class="label"></div></div>
+					<div id="select_uncommon_value_1_3" style="display:none;"><label class="label2">Affix: </label><input id="range_uncommon_1_3" type="range" class="range" onChange="setUncommonValue(1,3,this.value)"></input><div id="uncommon_value_1_3" class="label"></div></div>
+				</div>
 				<!--	other changes	-->
 				<div id="select_corruption"><label class="label">Corruption: </label><select id="dropdown_corruption" class="new-dropdown" onChange="setCorruption(this.selectedIndex)"></select></div>
 				<div id="select_corruption_value_1" style="display:none;"><label class="label2">Corruption: </label><input id="range_corruption_1" type="range" class="range" onChange="setCorruptionValue(1,this.value)"></input><div id="corruption_value_1" class="label"></div></div>

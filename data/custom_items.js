@@ -237,20 +237,38 @@ function loadRarity(value) {
 function setRarity(value) {
 	var base = document.getElementById("dropdown_base").value;
 	if (base == "any" && value != "Unique" && value != "Set") {
-		var new_index = -1;
-		for (opt in document.getElementById("dropdown_base").options) {
-			var group = document.getElementById("dropdown_group").value;
-			var type = document.getElementById("dropdown_type").value;
-			var base_option = document.getElementById("dropdown_base").options[opt].innerHTML;
-			for (itemNew in equipment[group]) {
-				var item = equipment[group][itemNew];
-				if (item.base == base_option) {
-					if (value == "Unique") { if (typeof(item.rarity) == 'undefined' || item.rarity == "unique") { new_index = opt } }
-					else { if (item.rarity == "set") { new_index = opt } }
-				}
+		// set base to match the previously selected unique/set item
+		var group = document.getElementById("dropdown_group").value;
+		var new_index = 1;
+		var new_base = "";
+		for (itemNew in equipment[group]) {
+			if (equipment[group][itemNew].name == document.getElementById("dropdown_name").value) {
+				new_base = equipment[group][itemNew].base
 			}
 		}
+		for (opt in document.getElementById("dropdown_base").options) {
+			var base_option = document.getElementById("dropdown_base").options[opt].innerHTML;
+			if (base_option == new_base) { new_index = opt }
+		}
 		document.getElementById("dropdown_base").selectedIndex = new_index;
+		// set rarity options to match the new base
+		var options = "";
+		var rarities = ["Regular","Magic","Rare"];
+		for (rarity in rarities) {
+			options += "<option class='gray-all'>" + rarities[rarity] + "</option>"
+		}
+		var capable_unique = false;
+		var capable_set = false;
+		for (itemNew in equipment[group]) {
+			var item = equipment[group][itemNew];
+			if (item.base == document.getElementById("dropdown_base").value) {
+				if (typeof(item.rarity) == 'undefined' || item.rarity == "unique") { capable_unique = true }
+				else if (item.rarity == "set") { capable_set = true }
+			}
+		}
+		if (capable_unique == true) { options += "<option class='gray-all'>" + "Unique" + "</option>" }
+		if (capable_set == true) { options += "<option class='gray-all'>" + "Set" + "</option>" }
+		document.getElementById("dropdown_rarity").innerHTML = options
 	}
 	loadName(value)
 }
@@ -335,6 +353,7 @@ function setILVL2(value) {
 //	dropdowns for possible affixes are then populated
 // ---------------------------------
 function setCustomBase() {
+	var old_base = itemCustom.base;
 	var group = document.getElementById("dropdown_group").value;
 	var type = document.getElementById("dropdown_type").value;
 	var base = document.getElementById("dropdown_base").value;
@@ -365,8 +384,6 @@ function setCustomBase() {
 				for (itemNew in equipment[group]) {
 					if (equipment[group][itemNew].name == name) {
 						if (base == "any") { base = equipment[group][itemNew].base }
-						for (affix in equipment[group][itemNew]) { itemCustom[affix] = equipment[group][itemNew][affix] }
-						// TODO: unique/set affix customization?
 					}
 				}
 			}
@@ -410,8 +427,33 @@ function setCustomBase() {
 			else { suffix = rare_suffix["other"][Math.floor(Math.random()*rare_suffix["other"].length)] }
 			itemCustom.name = rare_prefix[Math.floor(Math.random()*rare_prefix.length)] + " " + suffix
 		}
+		if (rarity == "Set" || rarity == "Unique") {
+			for (group in equipment) {
+				for (itemNew in equipment[group]) {
+					if (equipment[group][itemNew].name == name) {
+						for (affix in equipment[group][itemNew]) {
+							if (affix == "damage_vs_undead") {
+								if (typeof(itemCustom[affix]) == 'undefined') { itemCustom[affix] = 0 }
+								itemCustom[affix] += equipment[group][itemNew][affix]
+							} else {
+								itemCustom[affix] = equipment[group][itemNew][affix]
+							}
+						}
+						// TODO: unique/set affix customization?
+					}
+				}
+			}
+		}
 	}
 	itemCustom[itemCustom.CODE] = true
+	// keep previous armor value for same bases, otherwise use max value
+	if (itemCustom.ARMOR == true) {
+		var armor_value = document.getElementById("armor").value;
+		if (base != old_base) { armor_value = 600 }
+		document.getElementById("select_armor").style.display = "block"; setArmor(armor_value);
+	} else {
+		document.getElementById("select_armor").style.display = "none"
+	}
 	loadEditing()
 }
 // tidyBaseSelection - hides type/base/name dropdowns when they're irrelevant
@@ -498,6 +540,8 @@ function loadEditing() {
 	if (getMatch("corruption") == false) { document.getElementById("dropdown_corruption").selectedIndex = 0; }
 	if (getMatch("automod") == false) { document.getElementById("dropdown_automod").selectedIndex = 0; }
 	if (getMatch("affix") == false) { for (let n = 1; n <= 6; n++) { document.getElementById("dropdown_affix_"+n).selectedIndex = 0; } }
+	document.getElementById("select_runeword").style.display = "none"
+	if (getMatch("runeword") == false) { document.getElementById("dropdown_runeword").selectedIndex = 0; }
 	
 	var selects = ["identified","ethereal","sockets","quality","automod","pointmod","affix","corruption","upgrade"];
 	for (s in selects) {
@@ -539,6 +583,7 @@ function load(kind) {
 			document.getElementById("dropdown_sockets").selectedIndex = sockets_index
 			itemCustom.sockets = sockets_index
 		}
+		doRuneword(~~document.getElementById("dropdown_runeword").selectedIndex)
 	} else if (kind == "quality") {
 		// set variables for previously selected affix info
 		var quality_index = document.getElementById("dropdown_quality").selectedIndex;
@@ -847,6 +892,18 @@ function loadDetails(kind,aff,alvl,prefix,spawnable,rare,lvl,maxlvl,group,mod1,m
 
 
 
+// setArmor - handles 'armor' input
+// ---------------------------------
+function setArmor(value) {
+	var min = itemCustom.def_low;
+	var max = itemCustom.def_high;
+	if (isNaN(value) == true) { value = itemCustom.base_defense }
+	if (value < min) { value = min }
+	if (value > max) { value = max }
+	document.getElementById("armor").value = value
+	itemCustom.base_defense = Number(value)
+	setItemFromCustom()
+}
 
 
 
@@ -871,8 +928,32 @@ function setEthereal(checked) {
 // ---------------------------------
 function setSockets(selected) {
 	itemCustom.sockets = selected
-	//setValues()
+	doRuneword(~~document.getElementById("dropdown_runeword").selectedIndex)
 	setItemFromCustom()
+}
+// setRuneword - handles 'runeword' dropdown
+// ---------------------------------
+function setRuneword(selected) {
+	doRuneword(selected)
+	setItemFromCustom()
+}
+// doRuneword - wrapped by setRuneword
+// ---------------------------------
+function doRuneword(selected) {
+	var shown = "none";
+	var sockets = document.getElementById("dropdown_sockets").selectedIndex;
+	//if (sockets > 1) { shown = "block" }
+	// TODO: only show if runewords are available
+	for (rw in runewords) {
+		var rw_length = runewords[rw].runes.length;
+		var rw_items = [];
+		for (itype in runewords[rw].itypes) {
+			//
+		}
+	}
+	document.getElementById("select_runeword").style.display = shown
+	var options = "<option class='gray-all'>" + "None" + "</option>";
+	document.getElementById("dropdown_runeword").innerHTML = options
 }
 // setQuality - handles 'quality' dropdown, sets superior/inferior info and shows/hides 'superior' dropdowns
 // ---------------------------------
@@ -1358,12 +1439,18 @@ function doUpgrade(selected) {
 	itemCustom[itemCustom.CODE] = false
 	var old_max_sockets = itemCustom.max_sockets;
 	var old_base_id = bases[itemCustom.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
-	for (affix in old_base_id) { itemCustom[affix] = 0 }	// TODO: it might be better to just reset the data structure for base info (but it would need to be separate from other info in itemCustom)
+	for (affix in old_base_id) {
+		// TODO: it might be better to just reset the data structure for base info (but it would need to be separate from other info in itemCustom)
+		itemCustom[affix] = 0
+	}
 	// add new base affixes
 	var base = itemCustom.original_base;
 	if (selected > 0) { base = document.getElementById("dropdown_upgrade").options[selected].value }
 	var base_id = bases[base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
-	for (affix in base_id) { itemCustom[affix] = base_id[affix] }
+	for (affix in base_id) {
+		// TODO: don't rewrite qlvl? ...or make Level dropdown range based on ilvl instead of qlvl? is a new original_qlvl variable necessary?
+		itemCustom[affix] = base_id[affix]
+	}
 	itemCustom[itemCustom.CODE] = true
 	itemCustom.base = base
 	// reset corruption if it would change
@@ -1386,6 +1473,9 @@ function doUpgrade(selected) {
 // ---------------------------------
 function setValues() {
 	itemCustomAffixes = {}
+	//if (document.getElementById("dropdown_sockets").selectedIndex > 1) {
+	//	
+	//}
 	if (document.getElementById("dropdown_quality").selectedIndex == 2) {
 		itemCustomAffixes.SUP = true
 		for (let n = 1; n <= 2; n++) {
