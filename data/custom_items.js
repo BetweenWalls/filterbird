@@ -8,6 +8,7 @@
 
 var itemCustom = {};
 var itemCustomAffixes = {};
+var itemCustomPremade = {};
 
 //	data
 //		.index[i] = cat for #i element in dropdown list, where cat is a unique identifier for that group and mod combination  (mod1+mod2+mod3+group)
@@ -269,6 +270,12 @@ function setRarity(value) {
 		if (capable_unique == true) { options += "<option class='gray-all'>" + "Unique" + "</option>" }
 		if (capable_set == true) { options += "<option class='gray-all'>" + "Set" + "</option>" }
 		document.getElementById("dropdown_rarity").innerHTML = options
+		var new_index = 0;
+		for (opt in document.getElementById("dropdown_rarity").options) {
+			var rarity_option = document.getElementById("dropdown_rarity").options[opt].innerHTML;
+			if (rarity_option == value) { new_index = opt }
+		}
+		document.getElementById("dropdown_rarity").selectedIndex = new_index
 	}
 	loadName(value)
 }
@@ -541,7 +548,8 @@ function loadEditing() {
 	if (getMatch("automod") == false) { document.getElementById("dropdown_automod").selectedIndex = 0; }
 	if (getMatch("affix") == false) { for (let n = 1; n <= 6; n++) { document.getElementById("dropdown_affix_"+n).selectedIndex = 0; } }
 	document.getElementById("select_runeword").style.display = "none"
-	if (getMatch("runeword") == false) { document.getElementById("dropdown_runeword").selectedIndex = 0; }
+	itemCustomPremade = {}
+	if (getMatch("sockets") == false) { document.getElementById("dropdown_runeword").selectedIndex = 0; }
 	
 	var selects = ["identified","ethereal","sockets","quality","automod","pointmod","affix","corruption","upgrade"];
 	for (s in selects) {
@@ -928,7 +936,7 @@ function setEthereal(checked) {
 // ---------------------------------
 function setSockets(selected) {
 	itemCustom.sockets = selected
-	doRuneword(~~document.getElementById("dropdown_runeword").selectedIndex)
+	doRuneword(0)
 	setItemFromCustom()
 }
 // setRuneword - handles 'runeword' dropdown
@@ -940,20 +948,49 @@ function setRuneword(selected) {
 // doRuneword - wrapped by setRuneword
 // ---------------------------------
 function doRuneword(selected) {
+	itemCustomPremade = {}
 	var shown = "none";
 	var sockets = document.getElementById("dropdown_sockets").selectedIndex;
-	//if (sockets > 1) { shown = "block" }
-	// TODO: only show if runewords are available
+	var rw_items = [];
+	if (sockets > 1) { shown = "block" }
 	for (rw in runewords) {
 		var rw_length = runewords[rw].runes.length;
-		var rw_items = [];
-		for (itype in runewords[rw].itypes) {
-			//
+		if (rw_length == sockets) {
+			for (itype in runewords[rw].itypes) {
+				var i = runewords[rw].itypes[itype];
+				var ait = affix_item_types[i];
+				var match = false;
+				if (i != "mele" && i != "shld") {
+					if (itemCustom[ait] == true) { match = true }
+				} else {
+					for (code in ait) { if (itemCustom[ait[code]] == true) { match = true } }
+				}
+				if (match == true) { rw_items[rw_items.length] = rw.split("_").join(" ") }
+			}
 		}
 	}
-	document.getElementById("select_runeword").style.display = shown
 	var options = "<option class='gray-all'>" + "None" + "</option>";
+	for (rw in rw_items) { options += "<option class='gray-all'>" + rw_items[rw] + "</option>" }
+	//if (selected > rw_items.length) { selected = 0 }
 	document.getElementById("dropdown_runeword").innerHTML = options
+	document.getElementById("dropdown_runeword").selectedIndex = selected
+	document.getElementById("select_runeword").style.display = shown
+	if (selected > 0) {
+		var group = document.getElementById("dropdown_group").value;
+		for (itemNew in runeword_stats[group]) {
+			if (runeword_stats[group][itemNew].name == document.getElementById("dropdown_runeword").value) {
+				for (affix in runeword_stats[group][itemNew]) {
+					var statNew = runeword_stats[group][itemNew][affix];
+					if (typeof(statNew) == 'string' || typeof(statNew) == 'number' || affix == "ctc" || affix == "cskill") {
+						itemCustomPremade[affix] = statNew
+					} else {
+						itemCustomPremade[affix] = statNew[1]
+					}
+					itemCustomPremade.rarity = "rw"
+				}
+			}
+		}
+	}
 }
 // setQuality - handles 'quality' dropdown, sets superior/inferior info and shows/hides 'superior' dropdowns
 // ---------------------------------

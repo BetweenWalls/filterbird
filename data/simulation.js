@@ -529,92 +529,105 @@ function setItemFromCustom() {
 	// TODO: Some of this is now done in setCustomBase() instead
 	var item = itemCustom;
 	var group = document.getElementById("dropdown_group").value
-	var valid = true;
-	var premade = false;
-	if (item.type_affix == "rune" || item.type_affix == "gem" || item.type_affix == "other" || item.type_affix == "misc") { premade = true }
-	if (valid == true) {
-		if (item.rarity == "Regular") { item.rarity = "regular" }
-		else if (item.rarity == "Magic") { item.rarity = "magic" }
-		else if (item.rarity == "Rare") { item.rarity = "rare" }
-		else if (item.rarity == "Set") { item.rarity = "set" }
-		else if (item.rarity == "Unique") { item.rarity = "unique" }
-		else if (item.rarity == "Craft") { item.rarity = "craft" }
-		itemToCompare = {}
-		for (affix in item) { itemToCompare[affix] = item[affix] }
-		itemToCompare.NAME = item.name_prefix + item.name.split(" (")[0].split(" ­ ")[0] + item.name_suffix
-		itemToCompare.PRICE = 35000
-		itemToCompare.ID = true
-		if (premade == false && item.base != "Amulet" && item.base != "Ring" && item.base != "Arrows" && item.base != "Bolts" && item.base != "Small Charm" && item.base != "Large Charm" && item.base != "Grand Charm" && item.base != "Jewel") {
-			var base = bases[item.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
-			for (affix in base) { itemToCompare[affix] = base[affix] }
-			if (base.tier == 1) { itemToCompare.NORM = true }
-			else if (base.tier == 2) { itemToCompare.EXC = true }
-			else if (base.tier == 3) { itemToCompare.ELT = true }
-		}
-		for (affix in item) { itemToCompare[affix] = item[affix] }	// some base affixes are overridden by regular affixes
-		for (affix in itemCustomAffixes) {
-			if (typeof(itemToCompare[affix]) == 'undefined') { itemToCompare[affix] = 0 }
-			if (isNaN(Number(itemCustomAffixes[affix])) == false && affix != "req_level" && affix != "req_strength" && affix != "req_dexterity" && affix != "qlvl") {
-				itemToCompare[affix] += itemCustomAffixes[affix]
-			} else {
-				itemToCompare[affix] = itemCustomAffixes[affix]
-			}
-		}
-		if (typeof(itemToCompare.rarity) != 'undefined') {
-			if (itemToCompare.rarity == "set") { itemToCompare.SET = true }
-			else if (itemToCompare.rarity == "rare") { itemToCompare.RARE = true }
-			else if (itemToCompare.rarity == "magic") { itemToCompare.MAG = true }
-			else if (itemToCompare.rarity == "regular") { itemToCompare.NMAG = true; itemToCompare.always_id = true; }
-			else if (itemToCompare.rarity == "unique") { itemToCompare.UNI = true }
-			else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; }
-			else if (itemToCompare.rarity == "craft") { itemToCompare.always_id = true }
-		} else { itemToCompare.UNI = true }
-		if (itemToCompare.RW == true) {
-			var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
-			var s = 0;
-			for (let i = 0; i < runewords[rw_name].runes.length; i++) { s+=1; }
-			itemToCompare.sockets = s
-		}
-		itemToCompare[itemToCompare.CODE] = true
-		if (typeof(itemToCompare.velocity) != 'undefined') { if (itemToCompare.velocity < 0) { itemToCompare.velocity += 100000 } }	// negative values overflow for this in-game code
-		if (typeof(itemToCompare.always_id) == 'undefined') { itemToCompare.always_id = false }
-		if (itemToCompare.always_id == false && item_settings.ID == false) { itemToCompare.ID = false }
-		if (itemToCompare.ID == true) {
-			// affix codes translated to in-game codes
-			for (affix in itemToCompare) { for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = itemToCompare[affix] } } }
-			if (typeof(itemToCompare.sup) != 'undefined') { if (itemToCompare.sup > 0) { if (typeof(itemToCompare.ED) == 'undefined') { itemToCompare.ED = 0 }; itemToCompare.ED += itemToCompare.sup; } }
-			if (typeof(itemToCompare.ethereal) != 'undefined' && itemToCompare.ethereal == 1) { itemToCompare.ETH = true }
-			if (itemToCompare.CODE == "aq2" || itemToCompare.CODE == "cq2" || itemToCompare.CODE == "aqv" || itemToCompare.CODE == "cqv") { itemToCompare.QUANTITY = 500; character.CHARSTAT70 = 500; }
-			if (typeof(itemToCompare.sockets) != 'undefined') { itemToCompare.SOCK = itemToCompare.sockets }
-			itemToCompare.DEF = Math.ceil((~~itemToCompare.base_defense * (1+~~item.ethereal*0.5) * (1+~~item.e_def/100+~~item.sup/100)) + ~~item.defense + Math.floor(~~item.defense_per_level*character.CLVL))
-			itemToCompare.REQ_STR = Math.ceil(~~itemToCompare.req_strength * (1+(~~itemToCompare.req/100)) - ~~itemToCompare.ethereal*10)
-			itemToCompare.REQ_DEX = Math.ceil(~~itemToCompare.req_dexterity * (1+(~~itemToCompare.req/100)) - ~~itemToCompare.ethereal*10)
-			itemToCompare.BLOCK = ~~itemToCompare.block + ~~itemToCompare.ibc
-			itemToCompare.ITEMSTAT17 = ~~itemToCompare.e_damage + ~~itemToCompare.damage_bonus
-			// TODO: Add more codes that aren't handled properly by codes[code]
-		} else {
-			itemToCompare.SUP = false
-			itemToCompare.ETH = false
-			for (affix in itemToCompare) {
-				for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = 0 } }
-				if (typeof(unequipped[affix]) != 'undefined') { if (affix != "base_damage_min" && affix != "base_damage_max" && affix != "base_defense" && affix != "req_level" && affix != "req_strength" && affix != "req_dexterity" && affix != "durability" && affix != "baseSpeed" && affix != "range" && affix != "throw_min"  && affix != "throw_max" && affix != "base_min_alternate" && affix != "base_max_alternate" && affix != "block" && affix != "velocity") { itemToCompare[affix] = unequipped[affix] } }
-			}
-			//character.CHARSTAT70 = 0;
-			itemToCompare.DEF = ~~itemToCompare.base_defense
-			itemToCompare.REQ_STR = ~~itemToCompare.req_strength
-			itemToCompare.REQ_DEX = ~~itemToCompare.req_dexterity
-			itemToCompare.BLOCK = ~~itemToCompare.block
-			itemToCompare.ITEMSTAT17 = 0
-		}
-		itemToCompare.ITEMSTAT31 = itemToCompare.DEF
-		itemToCompare.ITEMSTAT18 = itemToCompare.ITEMSTAT17
-		// TODO: Validate ILVL
-		if (typeof(itemToCompare.RW) == 'undefined') { itemToCompare.RW = false }
-		if (typeof(itemToCompare.NMAG) == 'undefined') { itemToCompare.NMAG = false }
-		if (typeof(itemToCompare.ETH) == 'undefined') { itemToCompare.ETH = false }
-		if (typeof(itemToCompare.SOCK) == 'undefined') { itemToCompare.SOCK = 0 }
-		simulate()
+	var premade = false; if (item.type_affix == "rune" || item.type_affix == "gem" || item.type_affix == "other" || item.type_affix == "misc") { premade = true };
+	if (item.rarity == "Regular") { item.rarity = "regular" }
+	else if (item.rarity == "Magic") { item.rarity = "magic" }
+	else if (item.rarity == "Rare") { item.rarity = "rare" }
+	else if (item.rarity == "Set") { item.rarity = "set" }
+	else if (item.rarity == "Unique") { item.rarity = "unique" }
+	else if (item.rarity == "Craft") { item.rarity = "craft" }
+	itemToCompare = {}
+	for (affix in item) { itemToCompare[affix] = item[affix] }
+	if (typeof(itemCustomPremade.name) != 'undefined') {
+		item.name = itemCustomPremade.name
+		item.name_prefix = ""
 	}
+	if (typeof(itemCustomPremade.name) == 'undefined' && item.rarity == "regular" && typeof(itemCustom.base) != 'undefined') {	// TODO: fix name before it gets to this point
+		item.name = itemCustom.base
+		if (item.superior == true) { item.name_prefix = "Superior " }
+		if (item.inferior == true) { item.name_prefix = "Crude " }
+	}
+	itemToCompare.NAME = item.name_prefix + item.name.split(" (")[0].split(" ­ ")[0] + item.name_suffix
+	itemToCompare.PRICE = 35000
+	itemToCompare.ID = true
+	if (premade == false && item.base != "Amulet" && item.base != "Ring" && item.base != "Arrows" && item.base != "Bolts" && item.base != "Small Charm" && item.base != "Large Charm" && item.base != "Grand Charm" && item.base != "Jewel") {
+		var base = bases[item.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
+		for (affix in base) { itemToCompare[affix] = base[affix] }
+		if (base.tier == 1) { itemToCompare.NORM = true }
+		else if (base.tier == 2) { itemToCompare.EXC = true }
+		else if (base.tier == 3) { itemToCompare.ELT = true }
+	}
+	for (affix in item) { itemToCompare[affix] = item[affix] }	// some base affixes are overridden by regular affixes
+	for (affix in itemCustomAffixes) {
+		if (typeof(itemToCompare[affix]) == 'undefined') { itemToCompare[affix] = 0 }
+		if (isNaN(Number(itemCustomAffixes[affix])) == false && affix != "req_level" && affix != "req_strength" && affix != "req_dexterity" && affix != "qlvl") {
+			itemToCompare[affix] += itemCustomAffixes[affix]
+		} else {
+			itemToCompare[affix] = itemCustomAffixes[affix]
+		}
+	}
+	for (affix in itemCustomPremade) {
+		if (typeof(itemToCompare[affix]) == 'undefined') { itemToCompare[affix] = 0 }
+		if (isNaN(Number(itemCustomPremade[affix])) == false && affix != "req_level" && affix != "req_strength" && affix != "req_dexterity" && affix != "qlvl") {
+			itemToCompare[affix] += itemCustomPremade[affix]
+		} else {
+			itemToCompare[affix] = itemCustomPremade[affix]
+		}
+	}
+	if (typeof(itemToCompare.rarity) != 'undefined') {
+		if (itemToCompare.rarity == "set") { itemToCompare.SET = true }
+		else if (itemToCompare.rarity == "rare") { itemToCompare.RARE = true }
+		else if (itemToCompare.rarity == "magic") { itemToCompare.MAG = true }
+		else if (itemToCompare.rarity == "regular") { itemToCompare.NMAG = true; itemToCompare.always_id = true; }
+		else if (itemToCompare.rarity == "unique") { itemToCompare.UNI = true }
+		else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; }
+		else if (itemToCompare.rarity == "craft") { itemToCompare.always_id = true }
+	} else { itemToCompare.UNI = true }
+	if (itemToCompare.RW == true) {
+		var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
+		var s = 0;
+		for (let i = 0; i < runewords[rw_name].runes.length; i++) { s+=1; }
+		itemToCompare.sockets = s
+	}
+	itemToCompare[itemToCompare.CODE] = true
+	if (typeof(itemToCompare.velocity) != 'undefined') { if (itemToCompare.velocity < 0) { itemToCompare.velocity += 100000 } }	// negative values overflow for this in-game code
+	if (typeof(itemToCompare.always_id) == 'undefined') { itemToCompare.always_id = false }
+	if (itemToCompare.always_id == false && item_settings.ID == false) { itemToCompare.ID = false }
+	if (itemToCompare.ID == true) {
+		// affix codes translated to in-game codes
+		for (affix in itemToCompare) { for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = itemToCompare[affix] } } }
+		if (typeof(itemToCompare.sup) != 'undefined') { if (itemToCompare.sup > 0) { if (typeof(itemToCompare.ED) == 'undefined') { itemToCompare.ED = 0 }; itemToCompare.ED += itemToCompare.sup; } }
+		if (typeof(itemToCompare.ethereal) != 'undefined' && itemToCompare.ethereal == 1) { itemToCompare.ETH = true }
+		if (itemToCompare.CODE == "aq2" || itemToCompare.CODE == "cq2" || itemToCompare.CODE == "aqv" || itemToCompare.CODE == "cqv") { itemToCompare.QUANTITY = 500; character.CHARSTAT70 = 500; }
+		if (typeof(itemToCompare.sockets) != 'undefined') { itemToCompare.SOCK = itemToCompare.sockets }
+		itemToCompare.DEF = Math.ceil((~~itemToCompare.base_defense * (1+~~item.ethereal*0.5) * (1+~~item.e_def/100+~~item.sup/100)) + ~~item.defense + Math.floor(~~item.defense_per_level*character.CLVL))
+		itemToCompare.REQ_STR = Math.ceil(~~itemToCompare.req_strength * (1+(~~itemToCompare.req/100)) - ~~itemToCompare.ethereal*10)
+		itemToCompare.REQ_DEX = Math.ceil(~~itemToCompare.req_dexterity * (1+(~~itemToCompare.req/100)) - ~~itemToCompare.ethereal*10)
+		itemToCompare.BLOCK = ~~itemToCompare.block + ~~itemToCompare.ibc
+		itemToCompare.ITEMSTAT17 = ~~itemToCompare.e_damage + ~~itemToCompare.damage_bonus
+		// TODO: Add more codes that aren't handled properly by codes[code]
+	} else {
+		itemToCompare.SUP = false
+		itemToCompare.ETH = false
+		for (affix in itemToCompare) {
+			for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = 0 } }
+			if (typeof(unequipped[affix]) != 'undefined') { if (affix != "base_damage_min" && affix != "base_damage_max" && affix != "base_defense" && affix != "req_level" && affix != "req_strength" && affix != "req_dexterity" && affix != "durability" && affix != "baseSpeed" && affix != "range" && affix != "throw_min"  && affix != "throw_max" && affix != "base_min_alternate" && affix != "base_max_alternate" && affix != "block" && affix != "velocity") { itemToCompare[affix] = unequipped[affix] } }
+		}
+		//character.CHARSTAT70 = 0;
+		itemToCompare.DEF = ~~itemToCompare.base_defense
+		itemToCompare.REQ_STR = ~~itemToCompare.req_strength
+		itemToCompare.REQ_DEX = ~~itemToCompare.req_dexterity
+		itemToCompare.BLOCK = ~~itemToCompare.block
+		itemToCompare.ITEMSTAT17 = 0
+	}
+	itemToCompare.ITEMSTAT31 = itemToCompare.DEF
+	itemToCompare.ITEMSTAT18 = itemToCompare.ITEMSTAT17
+	// TODO: Validate ILVL
+	if (typeof(itemToCompare.RW) == 'undefined') { itemToCompare.RW = false }
+	if (typeof(itemToCompare.NMAG) == 'undefined') { itemToCompare.NMAG = false }
+	if (typeof(itemToCompare.ETH) == 'undefined') { itemToCompare.ETH = false }
+	if (typeof(itemToCompare.SOCK) == 'undefined') { itemToCompare.SOCK = 0 }
+	simulate()
 }
 
 // debug

@@ -744,7 +744,7 @@ var equipment_new1 = {
 };
 
 // all runeword stats with affix ranges noted
-var runeword_stats_new2 = {
+var runeword_stats = {
     helm: [
 {name:"Delirium", req_level:51, ctc:[[1,50,"Delirium","when struck"],[6,14,"Mind Blast","when struck"],[14,13,"Terror","when struck"],[11,18,"Confuse","on striking"]], all_skills:2, defense:261, vitality:10, gf:50, mf:25, cskill:[[17,"Attract",60]]},
 {name:"Lore", req_level:27, all_skills:1, energy:10, lRes:30, damage_reduced:7, mana_per_kill:2, light_radius:2},

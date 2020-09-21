@@ -13,7 +13,7 @@ var runewords = {
 	Faith:{runes:["Ohm","Jah","Lem","Eld"], itypes:["miss"]},
 	Famine:{runes:["Fal","Ohm","Ort","Jah"], itypes:["axe","hamm"]},
 	Fury:{runes:["Jah","Gul","Eth"], itypes:["mele"]},
-	Dream:{runes:["Io","Jah","Pul"], itypes:["helm,shld"]},
+	Dream:{runes:["Io","Jah","Pul"], itypes:["helm","shld"]},
 	Ice:{runes:["Amn","Shael","Jah","Lo"], itypes:["miss"]},
 	Infinity:{runes:["Ber","Mal","Ber","Ist"], itypes:["pole","spea"]},
 	Chains_of_Honor:{runes:["Dol","Um","Ber","Ist"], itypes:["tors"]},
@@ -1307,6 +1307,17 @@ QUANTITY:{index:["QUANTITY"], format:["Quantity: ",""]},
 	//ac_time:{index:[], format:["(ac-time)"]},
 	//skilltab:{index:[""], format:["+"," to [skill tree]"]},
 	//pacifism:{index:[], format:[""]},
+	
+	hit_skill_Fire_Bolt:{index:["hit_skill_Fire_Bolt","hit_skill_Fire_Bolt_lvl"], format:["","% chance to cast Level "," Fire Bolt on striking"]},
+	att_skill_Fire_Bolt:{index:["att_skill_Fire_Bolt","att_skill_Fire_Bolt_lvl"], format:["","% chance to cast Level "," Fire Bolt on attack"]},
+	gethit_skill_Charged_Bolt:{index:["gethit_skill_Charged_Bolt","gethit_skill_Charged_Bolt_lvl"], format:["","% chance to cast Level "," Charged Bolt when struck"]},
+	att_skill_Ice_Bolt:{index:["att_skill_Ice_Bolt","att_skill_Ice_Bolt_lvl"], format:["","% chance to cast Level "," Ice Bolt on attack"]},
+	gethit_skill_Frost_Nova:{index:["gethit_skill_Frost_Nova","gethit_skill_Frost_Nova_lvl"], format:["","% chance to cast Level "," Frost Nova when struck"]},
+	hit_skill_Nova:{index:["hit_skill_Nova","hit_skill_Nova_lvl"], format:["","% chance to cast Level "," Nova on striking"]},
+	gethit_skill_Nova:{index:["gethit_skill_Nova","gethit_skill_Nova_lvl"], format:["","% chance to cast Level "," Nova when struck"]},
+	att_skill_Lightning_Surge:{index:["att_skill_Lightning_Surge","att_skill_Lightning_Surge_lvl"], format:["","% chance to cast Level "," Lightning Surge on attack"]},
+	att_skill_Chain_Lightning:{index:["att_skill_Chain_Lightning","att_skill_Chain_Lightning_lvl"], format:["","% chance to cast Level "," Chain Lightning on attack"]},
+	gethit_skill_Hydra:{index:["gethit_skill_Hydra","gethit_skill_Hydra_lvl"], format:["","% chance to cast Level "," Hydra when struck"]},
 };
 
 var stats_alternate = {
