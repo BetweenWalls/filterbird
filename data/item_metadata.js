@@ -1318,6 +1318,7 @@ QUANTITY:{index:["QUANTITY"], format:["Quantity: ",""]},
 	att_skill_Lightning_Surge:{index:["att_skill_Lightning_Surge","att_skill_Lightning_Surge_lvl"], format:["","% chance to cast Level "," Lightning Surge on attack"]},
 	att_skill_Chain_Lightning:{index:["att_skill_Chain_Lightning","att_skill_Chain_Lightning_lvl"], format:["","% chance to cast Level "," Chain Lightning on attack"]},
 	gethit_skill_Hydra:{index:["gethit_skill_Hydra","gethit_skill_Hydra_lvl"], format:["","% chance to cast Level "," Hydra when struck"]},
+	hit_skill_Amplify_Damage:{index:["hit_skill_Amplify_Damage","hit_skill_Amplify_Damage_lvl"], format:["","% chance to cast Level "," Amplify Damage when on striking"]},
 };
 
 var stats_alternate = {

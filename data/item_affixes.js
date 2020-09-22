@@ -1106,33 +1106,33 @@ var affixes = [
 [	0,	"of the Efreeti",	0,	0,	1,	99,	1,	"",	0,	43,	"res_ltng_lvl",	3,	0,	0,	"",	0,	0,	0,	"",	0,	0,	0,	"glov",	"boot",	"ring",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of the Cobra",	0,	0,	1,	99,	1,	"",	0,	43,	"res_pois_lvl",	3,	0,	0,	"",	0,	0,	0,	"",	0,	0,	0,	"belt",	"ring",	"amul",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of the Elements",	0,	0,	1,	99,	1,	"",	0,	43,	"res_cold_lvl",	1,	0,	0,	"res_fire_lvl",	1,	0,	0,	"res_ltng_lvl",	1,	0,	0,	"circ",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of Firebolts",	1,	1,	16,	99,	12,	"",	0,	44,	"hit_skill_Fire_Bolt",	36,	10,	10,	"hit_skill_Fire_Bolt_lvl",	0,	8,	8,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	//
-[	0,	"of Firebolts",	1,	1,	6,	99,	4,	"",	0,	44,	"att_skill_Fire_Bolt",	36,	5,	5,	"att_skill_Fire_Bolt_lvl",	0,	3,	3,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	//
-[	0,	"of Firebolts",	1,	1,	20,	99,	15,	"",	0,	44,	"att_skill_Fire_Bolt",	36,	10,	10,	"att_skill_Fire_Bolt_lvl",	0,	4,	4,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	//
-[	0,	"of Charged Shield",	1,	1,	6,	99,	4,	"",	0,	44,	"gethit_skill_Charged_Bolt",	38,	10,	10,	"gethit_skill_Charged_Bolt_lvl",	0,	3,	3,	"",	0,	0,	0,	"armo",	"ring",	"amul",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	//
-[	0,	"of Charged Shield",	1,	1,	16,	99,	12,	"",	0,	44,	"gethit_skill_Charged_Bolt",	38,	12,	12,	"gethit_skill_Charged_Bolt_lvl",	0,	4,	4,	"",	0,	0,	0,	"armo",	"ring",	"amul",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	//
-[	0,	"of Charged Shield",	1,	1,	26,	99,	19,	"",	0,	44,	"gethit_skill_Charged_Bolt",	38,	14,	14,	"gethit_skill_Charged_Bolt_lvl",	0,	5,	5,	"",	0,	0,	0,	"armo",	"ring",	"amul",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	//
-[	0,	"of Icebolt",	1,	1,	6,	99,	4,	"",	0,	44,	"att_skill_Ice_Bolt",	39,	5,	5,	"att_skill_Ice_Bolt_lvl",	0,	3,	3,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	//
+[	0,	"of Firebolts",	1,	1,	16,	99,	12,	"",	0,	44,	"hit_skill_Fire_Bolt",	36,	10,	10,	"hit_skill_Fire_Bolt_lvl",	0,	8,	8,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	// renamed and split
+[	0,	"of Firebolts",	1,	1,	6,	99,	4,	"",	0,	44,	"att_skill_Fire_Bolt",	36,	5,	5,	"att_skill_Fire_Bolt_lvl",	0,	3,	3,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	// renamed and split
+[	0,	"of Firebolts",	1,	1,	20,	99,	15,	"",	0,	44,	"att_skill_Fire_Bolt",	36,	10,	10,	"att_skill_Fire_Bolt_lvl",	0,	4,	4,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	// renamed and split
+[	0,	"of Charged Shield",	1,	1,	6,	99,	4,	"",	0,	44,	"gethit_skill_Charged_Bolt",	38,	10,	10,	"gethit_skill_Charged_Bolt_lvl",	0,	3,	3,	"",	0,	0,	0,	"armo",	"ring",	"amul",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// renamed and split
+[	0,	"of Charged Shield",	1,	1,	16,	99,	12,	"",	0,	44,	"gethit_skill_Charged_Bolt",	38,	12,	12,	"gethit_skill_Charged_Bolt_lvl",	0,	4,	4,	"",	0,	0,	0,	"armo",	"ring",	"amul",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// renamed and split
+[	0,	"of Charged Shield",	1,	1,	26,	99,	19,	"",	0,	44,	"gethit_skill_Charged_Bolt",	38,	14,	14,	"gethit_skill_Charged_Bolt_lvl",	0,	5,	5,	"",	0,	0,	0,	"armo",	"ring",	"amul",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// renamed and split
+[	0,	"of Icebolt",	1,	1,	6,	99,	4,	"",	0,	44,	"att_skill_Ice_Bolt",	39,	5,	5,	"att_skill_Ice_Bolt_lvl",	0,	3,	3,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	// renamed and split
 [	0,	"of Frozen Armor",	0,	0,	0,	99,	0,	"",	0,	44,	"",	0,	0,	0,	"",	0,	0,	0,	"",	0,	0,	0,	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Static Field",	0,	0,	0,	99,	0,	"",	0,	44,	"",	0,	0,	0,	"",	0,	0,	0,	"",	0,	0,	0,	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Telekinesis",	0,	1,	0,	99,	0,	"",	0,	44,	"",	0,	0,	0,	"",	0,	0,	0,	"",	0,	0,	0,	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// spawnable changed from 1 to 0
-[	0,	"of Frost Shield",	1,	1,	12,	99,	9,	"",	0,	44,	"gethit_skill_Frost_Nova",	44,	5,	5,	"gethit_skill_Frost_Nova_lvl",	0,	3,	3,	"",	0,	0,	0,	"armo",	"amul",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	//
+[	0,	"of Frost Shield",	1,	1,	12,	99,	9,	"",	0,	44,	"gethit_skill_Frost_Nova",	44,	5,	5,	"gethit_skill_Frost_Nova_lvl",	0,	3,	3,	"",	0,	0,	0,	"armo",	"amul",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// renamed and split
 [	0,	"of Ice Blast",	0,	0,	0,	99,	0,	"",	0,	44,	"",	0,	0,	0,	"",	0,	0,	0,	"",	0,	0,	0,	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Blaze",	0,	0,	0,	99,	0,	"",	0,	44,	"",	0,	0,	0,	"",	0,	0,	0,	"",	0,	0,	0,	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Fire Ball",	0,	0,	0,	99,	0,	"",	0,	44,	"",	0,	0,	0,	"",	0,	0,	0,	"",	0,	0,	0,	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of Nova",	1,	1,	18,	99,	13,	"",	0,	44,	"hit_skill_Nova",	48,	10,	10,	"hit_skill_Nova_lvl",	0,	3,	3,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	//
-[	0,	"of Nova",	1,	1,	28,	99,	21,	"",	0,	44,	"hit_skill_Nova",	48,	12,	12,	"hit_skill_Nova_lvl",	0,	4,	4,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	//
-[	0,	"of Nova Shield",	1,	1,	18,	99,	13,	"",	0,	44,	"gethit_skill_Nova",	48,	10,	10,	"gethit_skill_Nova_lvl",	0,	3,	3,	"",	0,	0,	0,	"armo",	"ring ",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	//
-[	0,	"of Nova Shield",	1,	1,	28,	99,	21,	"",	0,	44,	"gethit_skill_Nova",	48,	12,	12,	"gethit_skill_Nova_lvl",	0,	4,	4,	"",	0,	0,	0,	"armo",	"ring ",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	//
-[	0,	"of Nova Shield",	1,	1,	38,	99,	28,	"",	0,	44,	"gethit_skill_Nova",	48,	14,	14,	"gethit_skill_Nova_lvl",	0,	5,	5,	"",	0,	0,	0,	"armo",	"ring ",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	//
-[	0,	"of Lightning",	1,	1,	18,	99,	13,	"",	0,	44,	"att_skill_Lightning_Surge",	49,	5,	5,	"att_skill_Lightning_Surge_lvl",	0,	3,	3,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	//
+[	0,	"of Nova",	1,	1,	18,	99,	13,	"",	0,	44,	"hit_skill_Nova",	48,	10,	10,	"hit_skill_Nova_lvl",	0,	3,	3,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	// renamed and split
+[	0,	"of Nova",	1,	1,	28,	99,	21,	"",	0,	44,	"hit_skill_Nova",	48,	12,	12,	"hit_skill_Nova_lvl",	0,	4,	4,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	// renamed and split
+[	0,	"of Nova Shield",	1,	1,	18,	99,	13,	"",	0,	44,	"gethit_skill_Nova",	48,	10,	10,	"gethit_skill_Nova_lvl",	0,	3,	3,	"",	0,	0,	0,	"armo",	"ring ",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// renamed and split
+[	0,	"of Nova Shield",	1,	1,	28,	99,	21,	"",	0,	44,	"gethit_skill_Nova",	48,	12,	12,	"gethit_skill_Nova_lvl",	0,	4,	4,	"",	0,	0,	0,	"armo",	"ring ",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// renamed and split
+[	0,	"of Nova Shield",	1,	1,	38,	99,	28,	"",	0,	44,	"gethit_skill_Nova",	48,	14,	14,	"gethit_skill_Nova_lvl",	0,	5,	5,	"",	0,	0,	0,	"armo",	"ring ",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// renamed and split
+[	0,	"of Lightning",	1,	1,	18,	99,	13,	"",	0,	44,	"att_skill_Lightning_Surge",	49,	5,	5,	"att_skill_Lightning_Surge_lvl",	0,	3,	3,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	// renamed and split
 [	0,	"of Lightning",	0,	0,	12,	99,	18,	"sor",	9,	44,	"charged",	49,	50,	1,	"",	0,	0,	0,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Shiver Armor",	0,	0,	0,	99,	0,	"",	0,	44,	"",	0,	0,	0,	"",	0,	0,	0,	"",	0,	0,	0,	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Fire Wall",	0,	0,	0,	99,	0,	"",	0,	44,	"",	0,	0,	0,	"",	0,	0,	0,	"",	0,	0,	0,	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Enchant",	0,	0,	0,	99,	0,	"",	0,	44,	"",	0,	0,	0,	"",	0,	0,	0,	"",	0,	0,	0,	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of Chain Lightning",	1,	1,	25,	99,	18,	"",	0,	44,	"att_skill_Chain_Lightning",	53,	5,	5,	"att_skill_Chain_Lightning_lvl",	0,	3,	3,	"",	0,	0,	0,	"weap",	"ring",	"amul",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	//
-[	0,	"of Chain Lightning",	1,	1,	35,	99,	26,	"",	0,	44,	"att_skill_Chain_Lightning",	53,	8,	8,	"att_skill_Chain_Lightning_lvl",	0,	3,	3,	"",	0,	0,	0,	"weap",	"ring",	"amul",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	//
-[	0,	"of Chain Lightning",	1,	1,	45,	99,	33,	"",	0,	44,	"att_skill_Chain_Lightning",	53,	8,	8,	"att_skill_Chain_Lightning_lvl",	0,	5,	5,	"",	0,	0,	0,	"weap",	"ring",	"amul",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	//
+[	0,	"of Chain Lightning",	1,	1,	25,	99,	18,	"",	0,	44,	"att_skill_Chain_Lightning",	53,	5,	5,	"att_skill_Chain_Lightning_lvl",	0,	3,	3,	"",	0,	0,	0,	"weap",	"ring",	"amul",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	// renamed and split
+[	0,	"of Chain Lightning",	1,	1,	35,	99,	26,	"",	0,	44,	"att_skill_Chain_Lightning",	53,	8,	8,	"att_skill_Chain_Lightning_lvl",	0,	3,	3,	"",	0,	0,	0,	"weap",	"ring",	"amul",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	// renamed and split
+[	0,	"of Chain Lightning",	1,	1,	45,	99,	33,	"",	0,	44,	"att_skill_Chain_Lightning",	53,	8,	8,	"att_skill_Chain_Lightning_lvl",	0,	5,	5,	"",	0,	0,	0,	"weap",	"ring",	"amul",	"",	"",	"",	"",	"miss",	"",	"",	"",	""	],	// renamed and split
 [	0,	"of Teleport Shield",	0,	0,	25,	99,	18,	"",	0,	44,	"gethit_skill",	54,	10,	3,	"",	0,	0,	0,	"",	0,	0,	0,	"armo",	"ring",	"amul",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Teleport Shield",	0,	0,	35,	99,	26,	"",	0,	44,	"gethit_skill",	54,	14,	3,	"",	0,	0,	0,	"",	0,	0,	0,	"armo",	"ring",	"amul",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Teleport Shield",	0,	0,	45,	99,	33,	"",	0,	44,	"gethit_skill",	54,	18,	3,	"",	0,	0,	0,	"",	0,	0,	0,	"armo",	"ring",	"amul",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
@@ -1350,7 +1350,7 @@ var affixes = [
 [	0,	"of Armageddon",	0,	0,	72,	99,	72,	"dru",	30,	44,	"charged",	249,	-20,	-1,	"",	0,	0,	0,	"",	0,	0,	0,	"staf",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Hurricane",	0,	0,	36,	99,	36,	"dru",	30,	44,	"charged",	250,	-30,	-3,	"",	0,	0,	0,	"",	0,	0,	0,	"club",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Hurricane",	0,	0,	72,	99,	72,	"dru",	30,	44,	"charged",	250,	-20,	-1,	"",	0,	0,	0,	"",	0,	0,	0,	"amul",	"circ",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of Damage Amplification",	1,	1,	3,	99,	0,	"",	0,	44,	"hit_skill",	66,	5,	1,	"",	0,	0,	0,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"orb",	"",	"",	"",	""	],
+[	0,	"of Damage Amplification",	1,	1,	3,	99,	0,	"",	0,	44,	"hit_skill_Amplify_Damage",	66,	5,	5,	"hit_skill_Amplify_Damage_lvl",	0,	1,	1,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"orb",	"",	"",	"",	""	],	// renamed and split
 [	0,	"of the Icicle",	1,	1,	37,	99,	29,	"",	0,	10,	"cold_min",	0,	2,	3,	"cold_max",	0,	6,	10,	"cold_len",	0,	2,	2,	"jewl",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
 [	0,	"of the Glacier",	1,	0,	58,	99,	50,	"",	0,	10,	"cold_min",	0,	4,	5,	"cold_max",	0,	11,	15,	"cold_len",	0,	2,	2,	"jewl",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],	// cold_len given in seconds (divided by 25)
 [	0,	"of Fire",	1,	1,	36,	99,	28,	"",	0,	12,	"fire_min",	0,	4,	10,	"fire_max",	0,	11,	30,	"",	0,	0,	0,	"jewl",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
@@ -2092,6 +2092,7 @@ var affix_item_mods = {
 	att_skill_Lightning_Surge:"att_skill_Lightning_Surge",
 	att_skill_Chain_Lightning:"att_skill_Chain_Lightning",
 	gethit_skill_Hydra:"gethit_skill_Hydra",
+	hit_skill_Amplify_Damage:"hit_skill_Amplify_Damage",
 	
 	hit_skill_Fire_Bolt_lvl:"hit_skill_Fire_Bolt_lvl",
 	att_skill_Fire_Bolt_lvl:"att_skill_Fire_Bolt_lvl",
@@ -2103,4 +2104,84 @@ var affix_item_mods = {
 	att_skill_Lightning_Surge_lvl:"att_skill_Lightning_Surge_lvl",
 	att_skill_Chain_Lightning_lvl:"att_skill_Chain_Lightning_lvl",
 	gethit_skill_Hydra_lvl:"gethit_skill_Hydra_lvl",
+	hit_skill_Amplify_Damage_lvl:"hit_skill_Amplify_Damage_lvl",
 };
+
+
+//	cskill/ctc notes:
+
+/*	cskill affixes in equipment
+
+	"Attract","Cloak of Shadows","Venom","Spirit of Barbs","Molten Boulder",
+	"Clay Golem","Weaken","Desecrate","Life Tap","Iron Golem","Iron Maiden",
+	"Poison Creeper","Oak Sage","Heart of Wolverine","Revive","Twister","Blood Golem",
+	"Poison Nova","Summon Spirit Wolf","Cyclone Armor","Summon Grizzly","Corpse Explosion",
+	"Teleport","Frozen Orb","Meteor","Nova","Amplify Damage","Blizzard","Enflame","Volcano",
+	"Firestorm","Holy Bolt","Raven","Hydra","Plague Javelin","Immolation Arrow",
+	// other possible cskills (copied from wiki):
+	"Inner Sight","Magic Arrow","Fire Arrow","Cold Arrow","Multiple Shot","Exploding Arrow","Ice Arrow","Freezing Arrow","Power Strike","Power Strike","Charged Strike",
+	"Bash","Stun","Concentration","Grim Ward",
+	"Firestorm","Fissure","Twister","Volcano","Tornado",
+	"Teeth","Deadly Poison","Bone Spear","Poison Nova","Bone Spirit","Dim Vision","Weaken","Terror","Confusion","Life Tap","Attraction","Lower Resist",
+	"Sacrifice","Holy Bolt","Zeal","Vengeance","Blessed Hammer",
+	"Ice Bolt","Ice Blast","Frost Nova","Glacial Spike","Blizzard","Frozen Orb","Charged Bolt","Telekinesis","Nova","Lightning Surge","Chain Lightning","Teleport","Fire Bolt","Fire Ball","Enflame","Meteor",
+*/
+/*	ctc affixes in equipment
+
+  // Non-Class
+	Ball Lightning		on striking, on attack
+	Delirium			when struck
+  // Assassin
+	Venom				when struck, on striking, when you level up
+	Fade				when struck
+	Mind Blast			when struck
+  // Barbarian
+	Howl				when struck
+	Taunt				on striking
+  // Druid
+	Tornado				on striking, when struck
+	Fissure				on striking, when struck
+	Cyclone Armor		when struck
+	Firestorm			on striking
+	Volcano				on striking
+	Molten Boulder		on striking
+	Twister				on striking
+  // Necromancer 
+	Flesh Offering		when struck
+	Poison Nova			when struck, on striking, when you die
+	Bone Spirit			on striking, when struck
+	Bone Spear			on striking, on attack
+	Desecrate			on attack
+	Confuse				when struck, on striking
+	Lower Resist		when struck, on striking
+	Amplify Damage		when struck, on striking
+	Terror				when struck, on striking
+	Dim Vision			when struck 
+	Iron Maiden			when struck
+	Weaken				on striking
+	Life Tap			on striking
+	Decrepify			on striking, when you kill an enemy
+  // Paladin
+	Holy Bolt			on striking, when struck
+	Fist of the Heavens	when struck, on striking
+  // Sorceress 
+	Blizzard			when struck, when you level-up, on striking, when you die
+	Frost Nova			when hit, on striking, when struck, when you level up
+	Frozen Orb			on attack, on striking
+	Chilling Armor		when struck
+	Ice Blast			on striking
+	Glacial Spike		on attack, when struck
+	Chain Lightning		when struck, on striking, on kill, on death, on attack, when you die
+	Charged Bolt		on striking, on attack, when struck
+	Nova				when struck, on attack, on striking, when you level up
+	Static Field		when struck, on striking
+	Discharge			on striking
+	Lightning Surge		on striking
+	Teleport			when struck
+	Blaze				when struck, when you level-up, on level-up, when you level up
+	Meteor				on striking, when struck, when you die
+	Fire Ball			on striking, on attack
+	Fire Wall			when struck
+	Hydra				on striking
+	Enflame				when struck, on kill
+*/

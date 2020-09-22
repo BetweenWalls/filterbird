@@ -634,12 +634,12 @@ function setItemFromCustom() {
 function printAffixes() {
 	document.getElementById("print").innerHTML = ""
 	var output = "---------------------------<br>";
-	for (affix in itemCustom) {
-		output += affix+" "+itemCustom[affix]+"<br>"
-	}
-	//for (affix in itemToCompare) {
-	//	output += affix+" "+itemToCompare[affix]+"<br>"
+	//for (affix in itemCustom) {
+	//	output += affix+" "+itemCustom[affix]+"<br>"
 	//}
+	for (affix in itemToCompare) {
+		output += affix+" "+itemToCompare[affix]+"<br>"
+	}
 	output += "---------------------------<br>"
 	document.getElementById("print").innerHTML += output
 	
