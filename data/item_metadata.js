@@ -1293,10 +1293,10 @@ QUANTITY:{index:["QUANTITY"], format:["Quantity: ",""]},
 
 // temporary implementation
 	max_durability:{index:["max_durability"], format:["Increase Maximum Durability ","%"]},
-	dmg_lvl:{index:["",""], format:["+"," Damage ("," per level)"], mult:["CLVL",1]},
-	dmg_cold:{index:[""], format:["+"," Cold Damage"]},
-	dmg_fire:{index:[""], format:["+"," Fire Damage"]},
-	dmg_ltng:{index:[""], format:["+"," Lightning Damage"]},
+	dmg_lvl:{index:["dmg_lvl","dmg_lvl"], format:["+"," Damage ("," per level)"], mult:["CLVL",1]},
+	dmg_cold:{index:["dmg_cold"], format:["+"," Cold Damage"]},
+	dmg_fire:{index:["dmg_fire"], format:["+"," Fire Damage"]},
+	dmg_ltng:{index:["dmg_ltng"], format:["+"," Lightning Damage"]},
 	cold_len:1,//{index:[], format:[""]},
 	hit_skill:{index:[""], format:["Chance to cast Level "," [skill] on striking"]},
 	att_skill:{index:[""], format:["Chance to cast Level "," [skill] on attack"]},
@@ -1318,7 +1318,7 @@ QUANTITY:{index:["QUANTITY"], format:["Quantity: ",""]},
 	att_skill_Lightning_Surge:{index:["att_skill_Lightning_Surge","att_skill_Lightning_Surge_lvl"], format:["","% chance to cast Level "," Lightning Surge on attack"]},
 	att_skill_Chain_Lightning:{index:["att_skill_Chain_Lightning","att_skill_Chain_Lightning_lvl"], format:["","% chance to cast Level "," Chain Lightning on attack"]},
 	gethit_skill_Hydra:{index:["gethit_skill_Hydra","gethit_skill_Hydra_lvl"], format:["","% chance to cast Level "," Hydra when struck"]},
-	hit_skill_Amplify_Damage:{index:["hit_skill_Amplify_Damage","hit_skill_Amplify_Damage_lvl"], format:["","% chance to cast Level "," Amplify Damage when on striking"]},
+	hit_skill_Amplify_Damage:{index:["hit_skill_Amplify_Damage","hit_skill_Amplify_Damage_lvl"], format:["","% chance to cast Level "," Amplify Damage on striking"]},
 };
 
 var stats_alternate = {

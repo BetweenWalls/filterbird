@@ -33,7 +33,7 @@ var unequipped = {			strength:0, dexterity:0, vitality:0, energy:0, life:0, mana
 
 							durability_extra:0, experience:0, skills_class:0, skills_tree1:0, skills_tree2:0, skills_tree3:0, weapon:"", armor:"", shield:"", item_defense:0, block_skillup:0, velocity_skillup:0, dodge:0, avoid:0, evade:0, edged_damage:0, edged_ar:0, edged_cstrike:0, pole_damage:0, pole_ar:0, pole_cstrike:0, blunt_damage:0, blunt_ar:0, blunt_cstrike:0, thrown_damage:0, thrown_ar:0, thrown_pierce:0, claw_damage:0, claw_ar:0, claw_cstrike:0, 
 							summon_damage:0, summon_defense:0, all_skills_per_level:0, reset_on_kill:0, max_durability:0, relic_experience:0, relic_density:0, cold_len:0, 
-							skill:"", ctc_temp1:0, ctc_temp2:0, 
+							skill:"", ctc_temp1:0, ctc_temp2:0, dmg_lvl:0, dmg_cold:0, dmg_fire:0, dmg_ltng:0, 
 };
 
 // all unique/set items with affix ranges noted... some affixes (e.g. ctc) may need to be restructured

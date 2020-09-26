@@ -1423,7 +1423,7 @@ var affixes = [
 [	0,	"of Strength",	1,	1,	1,	11,	1,	"",	0,	31,	"str",	0,	1,	1,	"",	0,	0,	0,	"",	0,	0,	0,	"glov",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Strength",	1,	1,	1,	4,	1,	"",	0,	31,	"str",	0,	1,	1,	"",	0,	0,	0,	"",	0,	0,	0,	"ring",	"",	"",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
 [	0,	"of Thorns",	1,	1,	1,	13,	1,	"",	0,	6,	"thorns",	0,	1,	1,	"",	0,	0,	0,	"",	0,	0,	0,	"tors",	"belt",	"shld",	"",	"",	"",	"",	"",	"",	"",	"",	""	],
-[	0,	"of Frost",	1,	1,	1,	3,	1,	"",	0,	10,	"dmg_cold",	25,	1,	1,	"",	0,	0,	0,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"staf",	"wand",	"orb",	"",	""	],
+[	0,	"of Frost",	1,	1,	1,	3,	1,	"",	0,	10,	"dmg_cold",	25,	1,	1,	"cold_len",	0,	1,	1,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"staf",	"wand",	"orb",	"",	""	],	// added cold length of 1 second
 [	0,	"of Flame",	1,	1,	1,	3,	1,	"",	0,	12,	"dmg_fire",	0,	1,	2,	"",	0,	0,	0,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"staf",	"wand",	"orb",	"",	""	],
 [	0,	"of Blight",	1,	1,	1,	4,	1,	"",	0,	16,	"dmg_pois",	50,	8,	8,	"pois_len",	0,	2,	2,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"scep",	"staf",	"orb",	"",	""	],	// added poison duration (mod 1 param / 25), value: 8 or 2
 [	0,	"of Shock",	1,	1,	1,	3,	1,	"",	0,	13,	"dmg_ltng",	0,	1,	3,	"",	0,	0,	0,	"",	0,	0,	0,	"weap",	"",	"",	"",	"",	"",	"",	"staf",	"wand",	"orb",	"",	""	],
@@ -1931,7 +1931,7 @@ var affix_item_mods = {
 	att_skill:"att_skill",	// ctc
 	gethit_skill:"gethit_skill",	// ctc
 	charged:"charged",	// cskill
-	dmg_lvl:"dmg_lvl",	// "Trump" is "Fool's"?
+	dmg_lvl:"dmg_lvl",
 	acP:"e_def",	// defense_bonus?
 	dmgP:"e_damage",	// damage_bonus?
 	attP:"ar_bonus",
