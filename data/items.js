@@ -34,9 +34,13 @@ var unequipped = {			strength:0, dexterity:0, vitality:0, energy:0, life:0, mana
 							durability_extra:0, experience:0, skills_class:0, skills_tree1:0, skills_tree2:0, skills_tree3:0, weapon:"", armor:"", shield:"", item_defense:0, block_skillup:0, velocity_skillup:0, dodge:0, avoid:0, evade:0, edged_damage:0, edged_ar:0, edged_cstrike:0, pole_damage:0, pole_ar:0, pole_cstrike:0, blunt_damage:0, blunt_ar:0, blunt_cstrike:0, thrown_damage:0, thrown_ar:0, thrown_pierce:0, claw_damage:0, claw_ar:0, claw_cstrike:0, 
 							summon_damage:0, summon_defense:0, all_skills_per_level:0, reset_on_kill:0, max_durability:0, relic_experience:0, relic_density:0, cold_len:0, 
 							skill:"", ctc_temp1:0, ctc_temp2:0, dmg_lvl:0, dmg_cold:0, dmg_fire:0, dmg_ltng:0, 
+							hit_skill_Fire_Bolt:0, att_skill_Fire_Bolt:0, gethit_skill_Charged_Bolt:0, att_skill_Ice_Bolt:0, gethit_skill_Frost_Nova:0, hit_skill_Nova:0, gethit_skill_Nova:0, att_skill_Lightning_Surge:0, att_skill_Chain_Lightning:0, gethit_skill_Hydra:0, hit_skill_Amplify_Damage:0, 
+							hit_skill_Fire_Bolt_lvl:0, att_skill_Fire_Bolt_lvl:0, gethit_skill_Charged_Bolt_lvl:0, att_skill_Ice_Bolt_lvl:0, gethit_skill_Frost_Nova_lvl:0, hit_skill_Nova_lvl:0, gethit_skill_Nova_lvl:0, att_skill_Lightning_Surge_lvl:0, att_skill_Chain_Lightning_lvl:0, gethit_skill_Hydra_lvl:0, hit_skill_Amplify_Damage_lvl:0, 
 };
 
-// all unique/set items with affix ranges noted... some affixes (e.g. ctc) may need to be restructured
+/*
+// TODO: implement affix customization for unique/set items
+// all unique/set items with affix ranges noted... some complex affixes (e.g. ctc) may need to be restructured
 var equipment_new1 = {
     helm: [
 {qlvl:50, not:["amazon","assassin","druid","necromancer","paladin","sorceress","Rogue Scout","Desert Guard","Iron Wolf"], name:"Arreat's Face", req_level:42, skills_combat_barbarian:2, skills_barbarian:2, fhr:30, ar_bonus:20, life_leech:[3,6], e_def:[150,200], strength:20, dexterity:20, all_res:30, base:"Slayer Guard"},
@@ -742,7 +746,9 @@ var equipment_new1 = {
 {CODE:"tr2", name:"Scroll of Resistance", rarity:"unique", always_id:true},
 	],
 };
+*/
 
+// TODO: implement affix customization for runeword items
 // all runeword stats with affix ranges noted
 var runeword_stats = {
     helm: [
