@@ -1,4 +1,4 @@
-//Anirml's Loot filter //Updated for Patch 19 Zincite. Last updated 17-08-2020
+//Anirml's Loot filter //Updated for Patch 19 Zincite. Last updated 07-09-2020
 //OBS autoupdate will remove any changes made to filter!
 //Find item codes at: https://pathofdiablo.com/wiki/index.php?title=Loot_Filtration_Codes
 
@@ -39,18 +39,18 @@ ItemDisplay[cx5]: %PURPLE%Orb of Corruption
 ItemDisplay[cx6]: %PURPLE%Diablo's Soulstone
 ItemDisplay[cx7]: %PURPLE%¤¤¤ KEY OF CHAOS ¤¤¤
 ItemDisplay[cx8]: %PURPLE%Enchantment Orb
-ItemDisplay[cx9]: %NAME%
-ItemDisplay[ma1]: %NAME%
-ItemDisplay[ma2]: %NAME%
-ItemDisplay[ma3]: %NAME%
-ItemDisplay[ma4]: %NAME%
-ItemDisplay[ma5]: %NAME%
-ItemDisplay[ma6]: %NAME%
-ItemDisplay[ma7]: %NAME%
-ItemDisplay[ma8]: %NAME%
-ItemDisplay[ma9]: %NAME%
-ItemDisplay[ma10]: %NAME%
-ItemDisplay[maz]: %NAME%
+ItemDisplay[cx9]: %RED%%NAME%
+ItemDisplay[ma1]: %RED%%NAME%
+ItemDisplay[ma2]: %RED%%NAME%
+ItemDisplay[ma3]: %RED%%NAME%
+ItemDisplay[ma4]: %RED%%NAME%
+ItemDisplay[ma5]: %RED%%NAME%
+ItemDisplay[ma6]: %RED%%NAME%
+ItemDisplay[ma7]: %RED%%NAME%
+ItemDisplay[ma8]: %RED%%NAME%
+ItemDisplay[ma9]: %RED%%NAME%
+ItemDisplay[ma10]: %RED%%NAME%
+ItemDisplay[maz]: %RED%%NAME%
 ItemDisplay[UNI !ID cm4]: %RED%  ¤ Horadrim Sigil ¤  %RED%
 //Wirt's Leg
 ItemDisplay[leg]: %NAME%
@@ -75,7 +75,7 @@ ItemDisplay[wms CLVL>59]:
 ItemDisplay[yps (CLVL<20 OR CLVL>79)]: %GREEN%!%WHITE%A
 ItemDisplay[yps (CLVL>19 AND CLVL<80)]:
 //Keys for Locked Chests
-ItemDisplay[key]: %WHITE%Key
+ItemDisplay[key]: %GRAY%Key
 //Tomes
 ItemDisplay[tbk]: %WHITE%Tome of Town Portal
 ItemDisplay[ibk]: %WHITE%Tome of Identify
@@ -567,14 +567,9 @@ ItemDisplay[UNI !ID uld ETH]: %RED%O ETH Leviathan %RED%O
 ItemDisplay[UNI !ID uul !ETH]: %TAN%Steel Carapace
 //Steel Carapace
 ItemDisplay[UNI !ID uul ETH]: %RED%ETH Steel Carapace
-//Templar's Might
-ItemDisplay[UNI !ID uar !ETH]: %RED%O Templar's Might %RED%O
-//Templar's Might
-ItemDisplay[UNI !ID uar ETH]: %RED%ETH Templar's Might
-//Tyrael's Might
-ItemDisplay[UNI !ID uar !ETH]: %RED%O %PURPLE%Tyrael's Might %RED%O
-//Tyrael's Might
-ItemDisplay[UNI !ID uar ETH]: %RED%O %PURPLE%ETH Tyrael's Might %RED%O
+//Tyrael's Might or Templar's Might
+ItemDisplay[UNI !ID uar !ETH]: %RED%O %PURPLE%Tyrael's or Templar's Might %RED%O
+ItemDisplay[UNI !ID uar ETH]: %RED%O %PURPLE%ETH Tyrael's or Templar's Might %RED%O
 
 ////Unique Shields
 //
@@ -3707,7 +3702,7 @@ ItemDisplay[7st ETH !RW NMAG (SOCK=0 OR SOCK>3) ED=15]: %DGREEN%ETH %NAME%%BLUE%
 ItemDisplay[7st ETH !RW NMAG SOCK=4]: %GRAY%ETH %NAME% %YELLOW%[%SOCKETS%]
 
 //War Pike +ED zero sox or 4 or more sox
-ItemDisplay[7p7 !ETH !RW NMAG SOCK=5]: %GRAY%%NAME% %YELLOW%[%SOCKETS%]
+ItemDisplay[7p7 !ETH !RW NMAG SOCK=5]: %DGREEN%%NAME%%BLUE% OBEDIENCE BASE %YELLOW%[%SOCKETS%]
 ItemDisplay[7p7 !ETH !RW NMAG SOCK=5 ED>0]: %DGREEN%%NAME%%BLUE% +%ED OBEDIENCE BASE %PURPLE%[%SOCKETS%]
 ItemDisplay[7p7 !ETH !RW NMAG (SOCK=0 OR SOCK>3) ED>0 ED<10]: %GRAY%%NAME%%BLUE% +ED %YELLOW%[%SOCKETS%]
 ItemDisplay[7p7 !ETH !RW NMAG (SOCK=0 OR SOCK>3) ED=10]: %GRAY%%NAME%%BLUE% +10%ED %RED%[%SOCKETS%]
@@ -3823,7 +3818,6 @@ ItemDisplay[7ws !ETH !RW NMAG ED=15 !SOCK=1 !SOCK=2]: %DGREEN%%NAME%%BLUE% +15%E
 ItemDisplay[7ws !ETH NMAG]: %NAME% %WHITE%[%SOCKETS%]
 //Holy Thunder Runeword Bases (60 teleport charges)
 ItemDisplay[wsp NMAG !ETH !RW SOCK=4]: %NAME% %ORANGE%Holy Thunder RW Base %WHITE%[%SOCKETS%]
-ItemDisplay[wsp NMAG !ETH !SUP !INF !RW SOCK=0]: %NAME% %ORANGE%Cube for 4os (Holy Thunder) %WHITE%[%SOCKETS%]
 
 ////Crossbows////
 //
@@ -3877,6 +3871,7 @@ ItemDisplay[(amb OR amc) NMAG TABSK0>2 SOCK=4]: %DGREEN%%NAME% %YELLOW%[%SOCKETS
 ItemDisplay[(amb OR amc) NMAG ED=15 TABSK0>2 SOCK=0]: %DGREEN%%NAME%%BLUE% +15%ED %RED%[%SOCKETS%]
 ItemDisplay[(amb OR amc) NMAG ED>0 ED<15 TABSK0>2 SOCK=0]: %NAME%%BLUE% +ED %WHITE%[%SOCKETS%]
 ItemDisplay[(amb OR amc) NMAG TABSK0>2 SOCK=0]: %DGREEN%%NAME% %WHITE%[%SOCKETS%]
+ItemDisplay[amc NMAG TABSK0>2 SOCK=3]: %NAME% %WHITE%[%SOCKETS%]
 
 ////Bows(non ama)////
 //

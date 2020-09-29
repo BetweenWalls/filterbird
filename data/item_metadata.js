@@ -1276,6 +1276,7 @@ summon_damage:{index:["summon_damage"], format:["Summons deal +","% Increased Da
 summon_defense:{index:["summon_defense"], format:["Summons have +","% Enhanced Defense"]},
 all_skills_per_level:{index:["all_skills_per_level"], format:["+"," to All Skills (based on character level)"], mult:["level"]},
 reset_on_kill:{index:["reset_on_kill"], format:["Chance to Reset Duration on Kill: ","%"]},
+explosive_attack:{index:[], format:["Fires Explosive Arrows or Bolts"]},
 
 ctc_temp1:{index:[], format:["10% chance to cast level 15 Nova on striking"]},			// temporary  (M'avina's Caster)
 ctc_temp2:{index:[], format:["25% chance to cast level 5 Static Field when struck"]},	// temporary  (Cow King's Leathers)
@@ -1319,6 +1320,7 @@ QUANTITY:{index:["QUANTITY"], format:["Quantity: ",""]},
 	att_skill_Chain_Lightning:{index:["att_skill_Chain_Lightning","att_skill_Chain_Lightning_lvl"], format:["","% chance to cast Level "," Chain Lightning on attack"]},
 	gethit_skill_Hydra:{index:["gethit_skill_Hydra","gethit_skill_Hydra_lvl"], format:["","% chance to cast Level "," Hydra when struck"]},
 	hit_skill_Amplify_Damage:{index:["hit_skill_Amplify_Damage","hit_skill_Amplify_Damage_lvl"], format:["","% chance to cast Level "," Amplify Damage on striking"]},
+	//hit_skill_Fire_Bolt_lvl:1, att_skill_Fire_Bolt_lvl:1, gethit_skill_Charged_Bolt_lvl:1, att_skill_Ice_Bolt_lvl:1, gethit_skill_Frost_Nova_lvl:1, hit_skill_Nova_lvl:1, gethit_skill_Nova_lvl:1, att_skill_Lightning_Surge_lvl:1, att_skill_Chain_Lightning_lvl:1, gethit_skill_Hydra_lvl:1, hit_skill_Amplify_Damage_lvl:1, 
 };
 
 var stats_alternate = {

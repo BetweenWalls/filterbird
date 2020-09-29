@@ -5,7 +5,7 @@
 //╠═╬═══════════════════════════════════════════════════════════════════════════════════════════╬═╣
 //║█║███████████████████████████████████████████████████████████████████████████████████████████║█║
 //╚═╩═══════════════════════════════════════════════════════════════════════════════════════════╩═╝
-// Last Updated: 2020-08-17
+// Last Updated: 2020-08-22
 // To Be Used with Patch: #19 - Zincite
 //╔═══════════════════════════════════════════════════════════════════════════════════════════════╗
 //║ ///////////////////////////////////  ▬▬▬▬▬ WARNING ▬▬▬▬▬ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ ║
@@ -332,6 +332,7 @@ ItemDisplay[std]: %NAME% //Standard of Heroes
 ItemDisplay[cx5]: %NAME% //Orb of Corruption
 ItemDisplay[cx6]: %NAME% //Diablo's Soulstone
 ItemDisplay[cx7]: %NAME% //Key of Chaos
+ItemDisplay[maz]: %NAME% //Infernal Trial
 //─────────────────────────────────────────────────────────────────────────────────────────────────
 // Relics
 //─────────────────────────────────────────────────────────────────────────────────────────────────
@@ -769,7 +770,7 @@ ItemDisplay[RW ETH]: %GRAY%E.%NAME%%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 //─────────────────────────────────────────────────────────────────────────────────────────────────
 // Diadems (Only inferior diadems are enabled by default.)
 //─────────────────────────────────────────────────────────────────────────────────────────────────
-//ItemDisplay[INF ci3]: %RED%Diadem%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[INF ci3]: %RED%Diadem%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 //─────────────────────────────────────────────────────────────────────────────────────────────────
 // Assassin Katars
 //─────────────────────────────────────────────────────────────────────────────────────────────────
@@ -1338,7 +1339,7 @@ ItemDisplay[!ETH SUP ED>0 SOCK=0 (ush OR xrn OR urn OR usk OR uh9) ILVL>40]: %NA
 ItemDisplay[ETH SOCK=0 (uui OR uea OR ula OR utu) DEF>674 ILVL>25]: %NAME%%BLUE%[%WHITE%0%YELLOW%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[ETH SOCK=0 (ung OR urs OR uhn) DEF>711 ILVL>25]: %NAME%%BLUE%[%WHITE%0%YELLOW%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[ETH SOCK=0 (upl OR utp OR uld) DEF>749 ILVL>25]: %NAME%%BLUE%[%WHITE%0%YELLOW%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
-ItemDisplay[!ETH SOCK=0 uit ILVL>40]: %NAME%%BLUE%[%WHITE%0%YELLOW%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[!ETH SOCK=0 SUP ITEMSTAT91<-7 uit ILVL>40]: %NAME%%BLUE%[%WHITE%0%YELLOW%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[!SUP ((am6 OR am7 OR amb OR amc) AND TABSK0>2) ILVL>40 SOCK=0]: %NAME%%BLUE%[%WHITE%0%RED%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[!ETH pab RES>39 ILVL>25 SOCK=0]: %NAME%%BLUE%[%WHITE%0%YELLOW%»4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 //─────────────────────────────────────────────────────────────────────────────────────────────────
@@ -1347,7 +1348,8 @@ ItemDisplay[!ETH pab RES>39 ILVL>25 SOCK=0]: %NAME%%BLUE%[%WHITE%0%YELLOW%»4%BL
 ItemDisplay[ETH SOCK=3 (uui OR uea OR ula OR utu) DEF>674]: %NAME%%BLUE%[%GREEN%3%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[ETH SOCK=3 (ung OR urs OR uhn) DEF>711]: %NAME%%BLUE%[%GREEN%3%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[ETH SOCK=3 (upl OR utp OR uld) DEF>749]: %NAME%%BLUE%[%GREEN%3%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
-ItemDisplay[!ETH SOCK=3 (uit OR ush OR xrn OR urn OR usk OR uh9)]: %NAME%%BLUE%[%GREEN%3%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[!ETH SOCK=3 (ush OR xrn OR urn OR usk OR uh9)]: %NAME%%BLUE%[%GREEN%3%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[!ETH SOCK=3 SUP ITEMSTAT91<-7 uit]: %NAME%%BLUE%[%GREEN%3%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[!ETH SOCK=3 pab RES>39]: %NAME%%BLUE%[%GREEN%3%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[!ETH SUP ED=15 SOCK=3 (ci2 OR ci3 OR brs OR ltp OR xtp)]: %NAME%%BLUE%[%GREEN%3%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 //─────────────────────────────────────────────────────────────────────────────────────────────────
@@ -1358,7 +1360,8 @@ ItemDisplay[ETH SOCK=4 (ung OR urs OR uhn) DEF>711]: %NAME%%BLUE%[%GREEN%4%BLUE%
 ItemDisplay[ETH SOCK=4 (upl OR utp OR uld) DEF>749]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[SOCK=4 (crs OR bsd OR 7cr OR 9wc OR 9br OR 7s8 OR 7wc OR 7br OR 8cb OR 8rx OR 6hb OR 6cb OR 6rx)]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[ETH SOCK=4 (7mp OR 7wa OR 7fb OR 7gd OR wsc OR brn OR 9s8)]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
-ItemDisplay[!ETH SOCK=4 (fla OR uit)]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[!ETH SOCK=4 fla]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
+ItemDisplay[!ETH SOCK=4 SUP ITEMSTAT91<-7 uit]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[SOCK=4 ((am6 OR am7 OR amb OR amc) AND TABSK0>2)]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 ItemDisplay[!ETH SOCK=4 pab RES>39]: %NAME%%BLUE%[%GREEN%4%BLUE%]%WHITE%[%GRAY%Lv.%ILVL%%WHITE%]
 //─────────────────────────────────────────────────────────────────────────────────────────────────

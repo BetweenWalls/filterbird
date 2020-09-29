@@ -16,14 +16,16 @@ ItemDisplay[CLVL>19 GOLD<250]:
 ItemDisplay[CLVL<20 GOLD<1]:
 ItemDisplay[cx5]: %GREEN%¤¤¤¤¤¤ %PURPLE%Orb of Corruption %GREEN%¤¤¤¤¤¤
 ItemDisplay[maz]: %GREEN%¤¤¤¤¤¤ %RED%Infernal Trial %GREEN%¤¤¤¤¤¤
-ItemDisplay[ma2]: %GREEN%¤¤¤¤¤¤ %PURPLE%Forgotten Desert %TAN%[T4]
-ItemDisplay[ma4]: %GREEN%¤¤¤¤¤¤ %PURPLE%Desecrated Temple %TAN%[T1]
-ItemDisplay[ma5]: %GREEN%¤¤¤¤¤¤ %PURPLE%Frigid Plateau %TAN%[T2]
-ItemDisplay[ma6]: %GREEN%¤¤¤¤¤¤ %PURPLE%Runed Chapel %TAN%[T3]
-ItemDisplay[ma7]: %GREEN%¤¤¤¤¤¤ %PURPLE%T5 Relic Test 1 %TAN%[T5]
-ItemDisplay[ma8]: %GREEN%¤¤¤¤¤¤ %PURPLE%T5 Relic Test 2 %TAN%[T5]
-ItemDisplay[ma9]: %GREEN%¤¤¤¤¤¤ %PURPLE%T5 Relic Test 3 %TAN%[T5]
-ItemDisplay[ma10]: %GREEN%¤¤¤¤¤¤ %PURPLE%T5 Relic Test 4 %TAN%[T5]
+ItemDisplay[ma1]: %GREEN%¤¤¤¤¤¤ %PURPLE%%NAME% %GREEN%¤¤¤¤¤¤
+ItemDisplay[ma2]: %GREEN%¤¤¤¤¤¤ %PURPLE%%NAME% %GREEN%¤¤¤¤¤¤
+ItemDisplay[ma3]: %GREEN%¤¤¤¤¤¤ %PURPLE%%NAME% %GREEN%¤¤¤¤¤¤
+ItemDisplay[ma4]: %GREEN%¤¤¤¤¤¤ %PURPLE%%NAME% %GREEN%¤¤¤¤¤¤
+ItemDisplay[ma5]: %GREEN%¤¤¤¤¤¤ %PURPLE%%NAME% %GREEN%¤¤¤¤¤¤
+ItemDisplay[ma6]: %GREEN%¤¤¤¤¤¤ %PURPLE%%NAME% %GREEN%¤¤¤¤¤¤
+ItemDisplay[ma7]: %GREEN%¤¤¤¤¤¤ %PURPLE%%NAME% %GREEN%¤¤¤¤¤¤
+ItemDisplay[ma8]: %GREEN%¤¤¤¤¤¤ %PURPLE%%NAME% %GREEN%¤¤¤¤¤¤
+ItemDisplay[ma9]: %GREEN%¤¤¤¤¤¤ %PURPLE%%NAME% %GREEN%¤¤¤¤¤¤
+ItemDisplay[ma10]: %GREEN%¤¤¤¤¤¤ %PURPLE%%NAME% %GREEN%¤¤¤¤¤¤
 ItemDisplay[tes]: %RED%¤¤ %ORANGE%Suffering %RED%[Andariel]
 ItemDisplay[ceh]: %RED%¤¤ %ORANGE%Hatred %RED%[Mephisto]
 ItemDisplay[bet]: %RED%¤¤ %ORANGE%Terror %RED%[Diablo]
@@ -381,6 +383,8 @@ ItemDisplay[MAG !ID ci3 !ETH]: %NAME% %TAN%[%ILVL%]
 ItemDisplay[MAG !ID jew]: %RED%¤¤¤¤¤¤ %BLUE%%NAME% %RED%¤¤¤¤¤¤ %TAN%[%ILVL%]
 ItemDisplay[MAG !ID CL1]: %RED%¤¤ %BLUE%%NAME% %RED%¤¤ %TAN%[%ILVL%]
 ItemDisplay[MAG !ID CL2]: %RED%¤¤ %BLUE%%NAME% %RED%¤¤ %TAN%[%ILVL%]
+ItemDisplay[MAG !ID ama]: %RED%¤¤ %BLUE%%NAME% %RED%¤¤ %TAN%[%ILVL%]
+ItemDisplay[MAG !ID amf]: %RED%¤¤ %BLUE%%NAME% %RED%¤¤ %TAN%[%ILVL%]
 // MAG Filter
 ItemDisplay[MAG !ID aq2]:
 ItemDisplay[MAG !ID cq2]:

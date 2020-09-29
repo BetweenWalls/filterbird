@@ -1,0 +1,551 @@
+// 2020/09/11 23:30
+// 版本: #19 Zincite(紅鋅礦)
+// By: MarsFlyPig
+// 過濾器說明 http://pathofdiablo.com/wiki/index.php/Loot_Filtration
+// 過濾器代碼 https://pathofdiablo.com/wiki/index.php?title=Loot_Filtration_Codes
+
+//===================================
+
+// ItemDisplay[]: [L%ILVL%]%NAME%<$%PRICE%$>[%CODE%] // 查看代碼用
+
+// 任務物品
+ItemDisplay[vip OR bks OR bkd OR j34 OR g34 OR bbb OR tr1 OR mss OR ass OR qey OR qhr OR qbr OR qf1 OR qf2 OR tr2 OR xyz OR hdm OR hfh OR hst OR msf OR ice OR g33]: %NAME%【任務】
+
+// 特殊物品
+ItemDisplay[pk1]: %WHITE%※※%ORANGE%%NAME% (女伯爵)%WHITE%※※ //恐懼之鑰
+ItemDisplay[pk2]: %WHITE%※※%ORANGE%%NAME% (召喚者)%WHITE%※※ //憎恨之鑰
+ItemDisplay[pk3]: %WHITE%※※%ORANGE%%NAME% (尼拉塞克)%WHITE%※※ //毀滅之鑰
+ItemDisplay[dhn]: %WHITE%※※%DGREEN%%NAME%%WHITE%※※ //暗黑破壞神之角
+ItemDisplay[bey]: %WHITE%※※%DGREEN%%NAME%%WHITE%※※ //巴爾之眼
+ItemDisplay[mbr]: %WHITE%※※%DGREEN%%NAME%%WHITE%※※ //墨菲斯托之腦
+ItemDisplay[toa]: %NAME% //赦免徽章
+ItemDisplay[tes]: %NAME% (A1.A2) //扭曲的苦痛精華
+ItemDisplay[ceh]: %NAME% (A3) //充盈的憎恨精華
+ItemDisplay[bet]: %NAME% (A4) //燃燒的恐懼精華
+ItemDisplay[fed]: %NAME% (A5) //潰爛的毀滅精華
+ItemDisplay[std]: %NAME% //英雄旗幟
+ItemDisplay[cm4]: %NAME% //Grand Charm (超大護身符?)
+ItemDisplay[leg]: %WHITE%※%NAME%※ //維特之腳
+ItemDisplay[cx5]: ※%NAME% (ooc)%WHITE%※ //腐化寶珠
+ItemDisplay[cx6]: %WHITE%※※%DGREEN%%NAME% (三王)%WHITE%※※ //暗黑破壞神的靈魂石
+ItemDisplay[cx7]: %WHITE%※※%DGREEN%%NAME% (遺物)%WHITE%※※ //混沌之鑰
+ItemDisplay[cx8]: %WHITE%※※%DGREEN%%NAME%%WHITE%※※ //附魔寶珠
+
+// 遺物地圖(Relic)
+ItemDisplay[ma1 !ID]: 『%NAME%』<T1-Lv86> %GRAY%(未鑑定)%YELLOW% //寒霜洞窟 (Icy Cavern)
+ItemDisplay[ma2 !ID]: 『%NAME%』<T3-Lv88> %GRAY%(未鑑定)%YELLOW% //蜃景荒漠 (Forgotten Desert)
+ItemDisplay[ma3 !ID]: 『%NAME%』<T?-Lv??> %GRAY%(未鑑定)%YELLOW% //遺棄之地 (Abandoned Precinct)
+ItemDisplay[ma4 !ID]: 『%NAME%』<T2-Lv87> %GRAY%(未鑑定)%YELLOW% //褻瀆教堂 (Desecrated Temple)
+ItemDisplay[ma5 !ID]: 『%NAME%』<T1-Lv86> %GRAY%(未鑑定)%YELLOW% //凜冬高原 (Frigid Plateau)
+ItemDisplay[ma6 !ID]: 『%NAME%』<T3-Lv88> %GRAY%(未鑑定)%YELLOW% //崩壞堡壘 (Ruined Citadel)
+ItemDisplay[ma7 !ID]: 『%NAME%』<T3-Lv88> %GRAY%(未鑑定)%YELLOW% //焚燒森林 (Burnt Forest)
+ItemDisplay[ma8 !ID]: 『%NAME%』<T2-Lv87> %GRAY%(未鑑定)%YELLOW% //發霉地穴 (Musty Crypt)
+ItemDisplay[ma9 !ID]: 『%NAME%』<T2-Lv87> %GRAY%(未鑑定)%YELLOW% //昏暗地窖 (Dim Cellar)
+ItemDisplay[ma10 !ID]: 『%NAME%』<T0-Lv86> %GRAY%(未鑑定)%YELLOW% //悅心農場 (Pleasant Pasture) BUG無法顯示
+ItemDisplay[ma1]: 『%NAME%』<T1-Lv86> //寒霜洞窟 (Icy Cavern)
+ItemDisplay[ma2]: 『%NAME%』<T3-Lv88> //蜃景荒漠 (Forgotten Desert)
+ItemDisplay[ma3]: 『%NAME%』<T?-Lv??> //遺棄之地 (Abandoned Precinct)
+ItemDisplay[ma4]: 『%NAME%』<T2-Lv87> //褻瀆教堂 (Desecrated Temple)
+ItemDisplay[ma5]: 『%NAME%』<T1-Lv86> //凜冬高原 (Frigid Plateau)
+ItemDisplay[ma6]: 『%NAME%』<T3-Lv88> //崩壞堡壘 (Ruined Citadel)
+ItemDisplay[ma7]: 『%NAME%』<T3-Lv88> //焚燒森林 (Burnt Forest)
+ItemDisplay[ma8]: 『%NAME%』<T2-Lv87> //發霉地穴 (Musty Crypt)
+ItemDisplay[ma9]: 『%NAME%』<T2-Lv87> //昏暗地窖 (Dim Cellar)
+ItemDisplay[ma10]: 『%NAME%』<T0-Lv86> //悅心農場 (Pleasant Pasture) BUG無法顯示
+ItemDisplay[maz]: 『%NAME%』//地獄審判
+
+// 捲 書
+ItemDisplay[(tsc OR isc) CLVL>19]: //20等後不顯示傳送鑑定卷軸
+ItemDisplay[tsc]: %BLUE%傳送%WHITE%卷軸
+ItemDisplay[isc]: %GREEN%鑑定%WHITE%卷軸
+ItemDisplay[tbk]: %GOLD%傳送之書
+ItemDisplay[ibk]: %GOLD%鑑定之書
+
+// 根據玩家等級隱藏金錢顯示
+ItemDisplay[CLVL>89 GOLD<8000]: //90等後不顯示8000元以下
+ItemDisplay[CLVL>79 GOLD<4000]: //80等後不顯示4000元以下
+ItemDisplay[CLVL>59 GOLD<2500]: //60等後不顯示2500元以下
+ItemDisplay[CLVL>44 GOLD<1000]: //45等後不顯示1000元以下
+ItemDisplay[CLVL>24 GOLD<250]: //25等後不顯示250元以下
+ItemDisplay[GOLD<100]: //不顯示100元以下
+
+// 藥水
+ItemDisplay[hp1 CLVL<14]: %RED%[%GRAY%H%RED%]%WHITE%
+ItemDisplay[hp2 CLVL<14]: %RED%[%WHITE%H%RED%]%WHITE%
+ItemDisplay[mp1 CLVL<14]: %BLUE%[%GRAY%M%BLUE%]%WHITE%
+ItemDisplay[mp2 CLVL<14]: %BLUE%[%WHITE%M%BLUE%]%WHITE%
+ItemDisplay[hp1 OR mp1]:
+
+ItemDisplay[hp2 CLVL<24]: %RED%[%GRAY%H%RED%]%WHITE%
+ItemDisplay[hp3 CLVL<24]: %RED%[%WHITE%H%RED%]%WHITE%
+ItemDisplay[mp2 CLVL<24]: %BLUE%[%GRAY%M%BLUE%]%WHITE%
+ItemDisplay[mp3 CLVL<24]: %BLUE%[%WHITE%M%BLUE%]%WHITE%
+ItemDisplay[hp2 OR mp2]:
+
+ItemDisplay[hp3 CLVL<39]: %RED%[%GRAY%H%RED%]%WHITE%
+ItemDisplay[hp4 CLVL<39]: %RED%[%WHITE%H%RED%]%WHITE%
+ItemDisplay[mp3 CLVL<39]: %BLUE%[%GRAY%M%BLUE%]%WHITE%
+ItemDisplay[mp4 CLVL<39]: %BLUE%[%WHITE%M%BLUE%]%WHITE%
+ItemDisplay[hp3 OR mp3]:
+
+ItemDisplay[(hp4 OR mp4) CLVL>59]:
+
+ItemDisplay[hp4]: %RED%[%GRAY%H%RED%]%WHITE%
+ItemDisplay[hp5]: %RED%[%WHITE%H%RED%]%WHITE%
+ItemDisplay[mp4]: %BLUE%[%GRAY%M%BLUE%]%WHITE%
+ItemDisplay[mp5]: %BLUE%[%WHITE%M%BLUE%]%WHITE%
+
+ItemDisplay[rvs CLVL<70]: %RED%[%BLUE%[%GRAY%H+M%BLUE%]%RED%]%WHITE%
+ItemDisplay[rvl]: %RED%[%BLUE%[%WHITE%H+M%BLUE%]%RED%]%WHITE%
+ItemDisplay[rvs CLVL>69]:
+
+// 10等後沒用的藥水隱藏起來
+ItemDisplay[gpm OR opm OR opl OR ops OR gps OR gpl AND CLVL>9]:
+
+// 10等後隱藏特殊藥水跟鑰匙
+ItemDisplay[vps CLVL>9]:
+ItemDisplay[wms CLVL>9]:
+ItemDisplay[yps CLVL>9]:
+ItemDisplay[key CLVL>9]:
+
+// 寶石
+ItemDisplay[gpv OR gpy OR gpb OR gpg OR gpr OR gpw OR skz]: %RED%★%WHITE%%NAME%%RED%★%WHITE% // 完美
+ItemDisplay[gzv OR gly OR glb OR glg OR glr OR glw OR skl]: %RED%★%WHITE%%NAME%%RED%★%WHITE% // 無瑕疵
+ItemDisplay[(gsv OR gsy OR gsb OR gsg OR gsr OR gsw OR sku) CLVL<16]: ★%NAME%★ // 一般
+ItemDisplay[(gfv OR gfy OR gfb OR gfg OR gfr OR gfw OR skf) CLVL<16]: ★%NAME%★ // 缺陷
+ItemDisplay[(gcv OR gcy OR gcb OR gcg OR gcr OR gcw OR skc) CLVL<16]: ★%NAME%★ // 碎裂
+ItemDisplay[gsv OR gsy OR gsb OR gsg OR gsr OR gsw OR sku]: // 一般
+ItemDisplay[gfv OR gfy OR gfb OR gfg OR gfr OR gfw OR skf]: // 缺陷
+ItemDisplay[gcv OR gcy OR gcb OR gcg OR gcr OR gcw OR skc]: // 碎裂
+
+// 珠寶
+ItemDisplay[jew UNI]: ●%NAME%【暗金】●
+ItemDisplay[jew]: ●[L%ILVL%]%NAME%●
+
+// 小中大護身符
+ItemDisplay[cm1 UNI ID]: 《毀滅 Annihilus【暗金】》
+ItemDisplay[cm2 UNI ID]: 《煉獄火炬 Hellfire Torch【暗金】》
+ItemDisplay[cm3 UNI ID]: 《基德的運氣 Gheed's Fortune【暗金】》
+ItemDisplay[(cm1 OR cm2 OR cm3) UNI]: 《%NAME%【暗金】》
+ItemDisplay[cm3 ILVL>90]: 《《《%ORANGE%[L%ILVL%]%BLUE%%NAME%》》》 // 91LV 技能+45命
+ItemDisplay[cm1]: 《[L%ILVL%]%NAME%》
+ItemDisplay[cm2]: 《《[L%ILVL%]%NAME%》》
+ItemDisplay[cm3]: 《《《[L%ILVL%]%NAME%》》》
+
+// 符文
+ItemDisplay[r01]: [#01-%NAME%]
+ItemDisplay[r02]: [#02-%NAME%]
+ItemDisplay[r03]: [#03-%NAME%]
+ItemDisplay[r04]: [#04-%NAME%]
+ItemDisplay[r05]: [#05-%NAME%]
+ItemDisplay[r06]: [#06-%NAME%]
+ItemDisplay[r07]: [#07-%NAME%]
+ItemDisplay[r08]: [#08-%NAME%]
+ItemDisplay[r09]: [#09-%NAME%]
+ItemDisplay[r10]: [#10-%NAME%]
+ItemDisplay[r11]: [#11-%NAME%]
+ItemDisplay[r12]: [#12-%NAME%]
+ItemDisplay[r13]: [#13-%NAME%]
+ItemDisplay[r14]: [#14-%NAME%]
+ItemDisplay[r15]: [##15-%NAME%##]
+ItemDisplay[r16]: [#16-%NAME%]
+ItemDisplay[r17]: [#17-%NAME%]
+ItemDisplay[r18]: [#18-%NAME%]
+ItemDisplay[r19]: [#19-%NAME%]
+ItemDisplay[r20]: [#######20-%NAME%#######]
+ItemDisplay[r21]: [#######21-%NAME%#######]
+ItemDisplay[r22]: [#######22-%NAME%#######]
+ItemDisplay[r23]: [#######23-%NAME%#######]
+ItemDisplay[r24]: [#######24-%NAME%#######]
+ItemDisplay[r25]: [#######25-%NAME%#######]
+ItemDisplay[r26]: [%PURPLE%#########################%ORANGE%26-%NAME%%PURPLE%#########################%ORANGE%]
+ItemDisplay[r27]: [%PURPLE%#########################%ORANGE%27-%NAME%%PURPLE%#########################%ORANGE%]
+ItemDisplay[r28]: [%PURPLE%#########################%ORANGE%28-%NAME%%PURPLE%#########################%ORANGE%]
+ItemDisplay[r29]: [%PURPLE%#########################%ORANGE%29-%NAME%%PURPLE%#########################%ORANGE%]
+ItemDisplay[r30]: [%PURPLE%#########################%ORANGE%30-%NAME%%PURPLE%#########################%ORANGE%]
+ItemDisplay[r31]: [%PURPLE%#########################%ORANGE%31-%NAME%%PURPLE%#########################%ORANGE%]
+ItemDisplay[r32]: [%PURPLE%#########################%ORANGE%32-%NAME%%PURPLE%#########################%ORANGE%]
+ItemDisplay[r33]: [%PURPLE%#########################%ORANGE%33-%NAME%%PURPLE%#########################%ORANGE%]
+
+
+// 頭盔
+ItemDisplay[(uh9 OR usk) !ETH NMAG !RW SOCK=3]: %NAME%【夢境】(%SOCKETS%) //骸骨面罩、惡魔頭蓋骨面具3 - 夢境
+
+// 頭冠
+ItemDisplay[EQ7 MAG ETH SOCK=0 ILVL>89]: %ORANGE%[L%ILVL%]%BLUE%◎%NAME%【頭冠】
+ItemDisplay[EQ7 MAG ETH SOCK>0 ILVL>89]: %ORANGE%[L%ILVL%]%BLUE%◎%NAME%【頭冠】(%SOCKETS%)
+ItemDisplay[EQ7 RARE ETH SOCK=0 ILVL>89]: %ORANGE%[L%ILVL%]%YELLOW%◎%NAME%【頭冠】
+ItemDisplay[EQ7 RARE ETH SOCK>0 ILVL>89]: %ORANGE%[L%ILVL%]%YELLOW%◎%NAME%【頭冠】(%SOCKETS%)
+ItemDisplay[EQ7 MAG SOCK=0 ILVL>89]: %ORANGE%[L%ILVL%]%BLUE%%NAME%【頭冠】
+ItemDisplay[EQ7 MAG SOCK>0 ILVL>89]: %ORANGE%[L%ILVL%]%BLUE%%NAME%【頭冠】(%SOCKETS%)
+ItemDisplay[EQ7 RARE SOCK=0 ILVL>89]: %ORANGE%[L%ILVL%]%YELLOW%%NAME%【頭冠】
+ItemDisplay[EQ7 RARE SOCK>0 ILVL>89]: %ORANGE%[L%ILVL%]%YELLOW%%NAME%【頭冠】(%SOCKETS%)
+
+// 盾牌
+ItemDisplay[ush !ETH NMAG !RW SOCK=3]: %NAME%【聖堂│夢境】(%SOCKETS%) //洞穴巨魔巢穴骨盾3 - 聖堂/夢境
+ItemDisplay[uit !ETH NMAG !RW SOCK=0 DEF>144]: %NAME%%RED%(145防↑)%WHITE%【菁英】 //145防以上0s統治者大盾
+ItemDisplay[uit !ETH NMAG !RW SOCK=0]: %NAME%【打4孔】 //0s統治者大盾
+ItemDisplay[uit !ETH NMAG !RW SOCK=4]: %NAME%【精神│鳳凰】(%SOCKETS%) //統治者大盾4 - 精神/鳳凰
+
+// 盔甲
+ItemDisplay[(uui OR uea OR ula OR utu OR urs OR utp) !ETH NMAG SOCK=0 ED=11]: %NAME%%RED%(11%ED)%WHITE%<輕>【菁英】 //11%ED
+ItemDisplay[(uui OR uea OR ula OR utu OR urs OR utp) !ETH NMAG SOCK=0 ED=12]: %NAME%%RED%(12%ED)%WHITE%<輕>【菁英】 //12%ED
+ItemDisplay[(uui OR uea OR ula OR utu OR urs OR utp) !ETH NMAG SOCK=0 ED=13]: %NAME%%RED%(13%ED)%WHITE%<輕>【菁英】 //13%ED
+ItemDisplay[(uui OR uea OR ula OR utu OR urs OR utp) !ETH NMAG SOCK=0 ED=14]: %NAME%%RED%(14%ED)%WHITE%<輕>【菁英】 //14%ED
+ItemDisplay[(uui OR uea OR ula OR utu OR urs OR utp) !ETH NMAG SOCK=0 ED=15]: %NAME%%RED%(15%ED)%WHITE%<輕>【菁英】 //15%ED
+ItemDisplay[(ung OR uhn OR upl OR uld OR uth OR uar) !ETH NMAG SOCK=0 ED=11]: %NAME%%RED%(11%ED)%WHITE%<中>【菁英】 //11%ED
+ItemDisplay[(ung OR uhn OR upl OR uld OR uth OR uar) !ETH NMAG SOCK=0 ED=12]: %NAME%%RED%(12%ED)%WHITE%<中>【菁英】 //12%ED
+ItemDisplay[(ung OR uhn OR upl OR uld OR uth OR uar) !ETH NMAG SOCK=0 ED=13]: %NAME%%RED%(13%ED)%WHITE%<中>【菁英】 //13%ED
+ItemDisplay[(ung OR uhn OR upl OR uld OR uth OR uar) !ETH NMAG SOCK=0 ED=14]: %NAME%%RED%(14%ED)%WHITE%<中>【菁英】 //14%ED
+ItemDisplay[(ung OR uhn OR upl OR uld OR uth OR uar) !ETH NMAG SOCK=0 ED=15]: %NAME%%RED%(15%ED)%WHITE%<中>【菁英】 //15%ED
+ItemDisplay[(ucl OR ult OR uul) !ETH NMAG SOCK=0 ED=11]: %NAME%%RED%(11%ED)<重>%WHITE%【菁英】 //11%ED
+ItemDisplay[(ucl OR ult OR uul) !ETH NMAG SOCK=0 ED=12]: %NAME%%RED%(12%ED)<重>%WHITE%【菁英】 //12%ED
+ItemDisplay[(ucl OR ult OR uul) !ETH NMAG SOCK=0 ED=13]: %NAME%%RED%(13%ED)<重>%WHITE%【菁英】 //13%ED
+ItemDisplay[(ucl OR ult OR uul) !ETH NMAG SOCK=0 ED=14]: %NAME%%RED%(14%ED)<重>%WHITE%【菁英】 //14%ED
+ItemDisplay[(ucl OR ult OR uul) !ETH NMAG SOCK=0 ED=15]: %NAME%%RED%(15%ED)<重>%WHITE%【菁英】 //15%ED
+
+ItemDisplay[(uui OR uea OR ula OR utu OR urs OR utp) ETH DEF>749 NMAG !RW SOCK=0]: ◎%NAME%%RED%(750防↑)%GRAY%<輕>【打孔】 //無形高防
+ItemDisplay[(ung OR uhn OR upl OR uld OR uth OR uar) ETH DEF>749 NMAG !RW SOCK=0]: ◎%NAME%%RED%(750防↑)%GRAY%<中>【打孔】 //無形高防
+ItemDisplay[(ucl OR ult OR uul) ETH DEF>749 NMAG !RW SOCK=0]: ◎%NAME%%RED%(750防↑)%GRAY%<重>【打孔】 //無形高防
+
+ItemDisplay[xtp DEF>259 !ETH NMAG !RW SOCK=0]: %NAME%%RED%(260防↑)%WHITE%<輕>【打孔】 //260防以上法師鎧甲
+ItemDisplay[xtp DEF>259 !ETH NMAG !RW SOCK=3]: %NAME%%RED%(260防↑)%GRAY%<輕>【謎團】(%SOCKETS%) //260防以上法師鎧甲3 - 謎團
+
+ItemDisplay[(uui OR uea OR ula OR utu OR urs OR utp) !ETH NMAG !RW SOCK=3]: %NAME%<輕>【謎團】(%SOCKETS%) //輕甲3 - 謎團
+ItemDisplay[utp !ETH NMAG !RW SOCK=4]: %NAME%<輕>【剛毅│榮耀之鏈】(%SOCKETS%) //執政官鎧甲4 - 剛毅/榮耀之鏈
+ItemDisplay[(uui OR uea OR ula OR utu OR urs) !ETH DEF>499 NMAG !RW SOCK=4]: %NAME%<輕>%RED%(500防↑)%GRAY%【剛毅│榮耀之鏈】(%SOCKETS%) //輕甲4 - 剛毅/榮耀之鏈
+
+ItemDisplay[(uui OR uea OR ula OR utu OR urs OR utp) ETH DEF>749 NMAG !RW SOCK=3]: ◎%NAME%%RED%(750防↑)%GRAY%<輕>【強制】(%SOCKETS%) //700防以上 輕甲(無)3 - 強制
+ItemDisplay[(ung OR uhn OR upl OR uld OR uth OR uar) ETH DEF>749 NMAG !RW SOCK=3]: ◎%NAME%%RED%(750防↑)%GRAY%<中>【強制】(%SOCKETS%) //700防以上 中甲(無)3 - 強制
+ItemDisplay[(ucl OR ult OR uul) ETH DEF>749 NMAG !RW SOCK=3]: ◎%NAME%%RED%(750防↑)%GRAY%<重>【強制】(%SOCKETS%) //700防以上 重甲(無)3 - 強制
+ItemDisplay[(uui OR uea OR ula OR utu OR urs OR utp) ETH DEF>749 NMAG !RW SOCK=4]: ◎%NAME%%RED%(750防↑)%GRAY%<輕>【石塊│剛毅】(%SOCKETS%) //700防以上 輕甲(無)4 - 石塊/剛毅
+ItemDisplay[(ung OR uhn OR upl OR uld OR uth OR uar) ETH DEF>749 NMAG !RW SOCK=4]: ◎%NAME%%RED%(750防↑)%GRAY%<中>【石塊│剛毅】(%SOCKETS%) //700防以上 中甲(無)4 - 石塊/剛毅
+ItemDisplay[(ucl OR ult OR uul) ETH DEF>749 NMAG !RW SOCK=4]: ◎%NAME%%RED%(750防↑)%GRAY%<重>【石塊│剛毅】(%SOCKETS%) //700防以上 重甲(無)4 - 石塊/剛毅
+
+ItemDisplay[(uui OR uea OR ula OR utu OR urs OR utp) !ETH DEF>549 NMAG !RW SOCK=3]: %NAME%%RED%(550防↑)%GRAY%<輕>【強制】(%SOCKETS%) //550防以上 輕甲3 - 強制
+ItemDisplay[(ung OR uhn OR upl OR uld OR uth OR uar) !ETH DEF>549 NMAG !RW SOCK=3]: %NAME%%RED%(550防↑)%GRAY%<中>【強制】(%SOCKETS%) //550防以上 中甲3 - 強制
+ItemDisplay[(ucl OR ult OR uul) !ETH DEF>549 NMAG !RW SOCK=3]: %NAME%%RED%(550防↑)%GRAY%【強制】(%SOCKETS%)<重> //550防以上 重甲3 - 強制
+ItemDisplay[(uui OR uea OR ula OR utu OR urs OR utp) !ETH DEF>549 NMAG !RW SOCK=4]: %NAME%%RED%(550防↑)%GRAY%<輕>【石塊│剛毅】(%SOCKETS%) //550防以上 輕甲4 - 石塊/剛毅
+ItemDisplay[(ung OR uhn OR upl OR uld OR uth OR uar) !ETH DEF>549 NMAG !RW SOCK=4]: %NAME%%RED%(550防↑)%GRAY%<中>【石塊│剛毅】(%SOCKETS%) //550防以上 中甲4 - 石塊/剛毅
+ItemDisplay[(ucl OR ult OR uul) !ETH DEF>549 NMAG !RW SOCK=4]: %NAME%%RED%(550防↑)%GRAY%<重>【石塊│剛毅】(%SOCKETS%) //550防以上 重甲4 - 石塊/剛毅
+
+// (uui OR uea OR ula OR utu OR urs OR utp) 灰暮壽衣、古龍皮、聖甲蟲殼皮甲、線羊毛皮甲、巨型鱗鎧胸甲、執政官鎧甲
+// (ung OR uhn OR upl OR uld OR uth OR uar) 鑽石鎖子甲、骸骨鏈甲、炎魔皮板甲、海妖殼甲、漆甲、神聖盔甲
+// (ucl OR ult OR uul) 甲殼鎧鱗甲、地獄鍛甲、陰影鎧甲
+
+// 武器-劍
+ItemDisplay[crs NMAG !RW !INF SOCK=3]: %NAME%【新月】(%SOCKETS%) //水晶劍3 - 新月
+ItemDisplay[crs NMAG !RW !ETH SOCK=4]: %NAME%【精神】(%SOCKETS%) //水晶劍4 - 精神
+ItemDisplay[crs NMAG !RW SOCK=5]: %NAME%【戰爭召喚】(%SOCKETS%) //水晶劍5 - 戰爭召喚
+ItemDisplay[7cr NMAG !RW SOCK=3]: %NAME%【執法者】(%SOCKETS%) //幻化之刃4 - 執法者
+ItemDisplay[7cr NMAG !RW SOCK=4]: %NAME%【熱情】(%SOCKETS%) //幻化之刃4 - 熱情
+ItemDisplay[7cr NMAG !RW SOCK=5]: %NAME%【悔恨】(%SOCKETS%) //幻化之刃5 - 悔恨
+ItemDisplay[7cr NMAG !RW SOCK=6]: %NAME%【最後希望】(%SOCKETS%) //幻化之刃6 - 最後希望
+ItemDisplay[(7gd OR 7gs OR 7cm) NMAG !RW SOCK=3]: %NAME%【執法者】(%SOCKETS%) //巨神之刃、炎魔之刃、高地之劍3 - 執法者
+ItemDisplay[(7gd OR 7gs OR 7cm) ETH NMAG !RW SOCK=4]: ◎%NAME%【誓約】(%SOCKETS%) //巨神之刃、炎魔之刃、高地之劍(無)4 - 誓約
+ItemDisplay[7gd ETH NMAG !RW SOCK=5]: ◎%NAME%【永恒│死神】(%SOCKETS%) //巨神之刃(無)5 - 永恒/死神
+ItemDisplay[7gd ETH NMAG !RW SOCK=6]: ◎%NAME%【死亡呼吸】(%SOCKETS%) //巨神之刃(無)6 - 死亡呼吸
+ItemDisplay[7gd NMAG !RW SOCK=6]: %NAME%【寂靜】(%SOCKETS%) //巨神之刃6 - 寂靜
+
+// 武器-斧
+ItemDisplay[7wa ETH NMAG ED>10 SOCK=0]: ◎%NAME%%RED%(11%ED↑)%GRAY%【打6孔】 //狂戰士斧(無) - 打6孔
+ItemDisplay[7wa ETH NMAG !SUP SOCK=0]: ◎%NAME%【拼4-6孔】 //狂戰士斧(無) - 拼打孔
+ItemDisplay[7wa !ETH NMAG !RW SOCK=4]: %NAME%【熱情】(%SOCKETS%) //狂戰士斧4 - 熱情
+ItemDisplay[7wa !ETH NMAG !RW SOCK=5]: %NAME%【野獸│悔恨】(%SOCKETS%) //狂戰士斧5 - 野獸/悔恨
+ItemDisplay[7wa !ETH NMAG !RW SOCK=6]: %NAME%【最後希望】(%SOCKETS%) //狂戰士斧6 - 最後希望
+ItemDisplay[7wa ETH NMAG !RW SOCK=4]: ◎%NAME%【誓约】(%SOCKETS%) //狂戰士斧(無)4 - 誓约
+ItemDisplay[7wa ETH NMAG !RW SOCK=5]: ◎%NAME%【永恒│死神】(%SOCKETS%) //狂戰士斧(無)5 - 永恒/死神
+ItemDisplay[7wa ETH NMAG !RW SOCK=6]: ◎%NAME%【死亡呼吸】(%SOCKETS%) //狂戰士斧(無)6 - 死亡呼吸
+ItemDisplay[wax NMAG !RW SOCK=5]: %NAME%【末日】(%SOCKETS%) //巨戰斧5 - 末日
+
+// 武器-長斧
+ItemDisplay[7s8 ETH NMAG ED>10 SOCK=0]: ◎%NAME%%RED%(11%ED↑)%GRAY%【打5孔】 //銳利之斧(無) - 打5孔
+ItemDisplay[7s8 ETH NMAG !SUP SOCK=0]: ◎%NAME%【打4-5孔】 //銳利之斧(無) - 拼打孔
+ItemDisplay[scy ETH NMAG !RW SOCK=4]: ◎%NAME%【無限】(%SOCKETS%) //鐮刀(無)4 - 無限
+ItemDisplay[(7vo OR 7s8 OR 7pa OR 7h7 OR 7wc) ETH NMAG !RW SOCK=4]: ◎%NAME%【眼光│無限│驕傲】(%SOCKETS%) //巨神之斧、銳利之斧、神秘之斧、巨長斧、鮫尾巨斧(無)4 - 眼光/無限/驕傲
+ItemDisplay[(7vo OR 7s8 OR 7pa OR 7h7 OR 7wc) ETH NMAG !RW SOCK=5]: ◎%NAME%【遵從│末日】(%SOCKETS%) //巨神之斧、銳利之斧、神秘之斧、巨長斧、鮫尾巨斧(無)5 - 遵從/末日
+ItemDisplay[(7h7 OR 7wc) ETH NMAG !RW SOCK=6]: ◎%NAME%【寂靜】(%SOCKETS%) //巨長斧、鮫尾巨斧6 - 寂靜
+ItemDisplay[(7vo OR 7s8 OR 7pa OR 7h7 OR 7wc) NMAG !RW SOCK=4]: %NAME%【眼光│無限│驕傲】(%SOCKETS%) //巨神之斧、銳利之斧、神秘之斧、巨長斧、鮫尾巨斧4 - 眼光/無限/驕傲
+ItemDisplay[(7vo OR 7s8 OR 7pa OR 7h7 OR 7wc) NMAG !RW SOCK=5]: %NAME%【遵從│末日】(%SOCKETS%) //巨神之斧、銳利之斧、神秘之斧、巨長斧、鮫尾巨斧5 - 遵從/末日
+ItemDisplay[(7h7 OR 7wc) NMAG !RW SOCK=6]: %NAME%【寂靜】(%SOCKETS%) //巨長斧、鮫尾巨斧6 - 寂靜
+
+// 武器-長槍
+ItemDisplay[7br ETH NMAG ED>10 SOCK=0]: ◎%NAME%%RED%(11%ED↑)%GRAY%【打5孔】 //刺人槍(無) - 打5孔
+ItemDisplay[7br ETH NMAG !SUP SOCK=0]: ◎%NAME%【打4-5孔】 //刺人槍(無) - 拼打孔
+ItemDisplay[7br ETH NMAG !RW SOCK=4]: ◎%NAME%【無限】(%SOCKETS%) //刺人槍(無)4 - 無限
+ItemDisplay[(7tr OR 7br OR 7st) ETH NMAG !RW SOCK=4]: ◎%NAME%【眼光│無限│驕傲】(%SOCKETS%) //冥河之槍、刺人槍、鬼魂之矛(無)4 - 眼光/無限/驕傲
+ItemDisplay[(7br OR 7st) ETH NMAG !RW SOCK=5]: ◎%NAME%【遵從│末日】(%SOCKETS%) //刺人槍、鬼魂之矛(無)5 - 遵從/末日
+ItemDisplay[7st ETH NMAG !RW SOCK=6]: %NAME%【寂靜】(%SOCKETS%) //鬼魂之矛6 - 寂靜
+ItemDisplay[(7tr OR 7br OR 7st) NMAG !RW SOCK=4]: %NAME%【眼光│無限│驕傲】(%SOCKETS%) //冥河之槍、刺人槍、鬼魂之矛4 - 眼光/無限/驕傲
+ItemDisplay[(7br OR 7st) NMAG !RW SOCK=5]: %NAME%【遵從│末日】(%SOCKETS%) //刺人槍、鬼魂之矛5 - 遵從/末日
+ItemDisplay[7st NMAG !RW SOCK=6]: %NAME%【寂靜】(%SOCKETS%) //鬼魂之矛6 - 寂靜
+
+// 武器-棍棒
+ItemDisplay[fla NMAG !RW SOCK=4]: %NAME%【橡樹之心】(%SOCKETS%) //連枷4 - 橡樹之心
+ItemDisplay[7gm ETH NMAG !RW SOCK=6]: ◎%NAME%【死亡呼吸】(%SOCKETS%) //雷鎚(無)6 - 死亡呼吸
+
+// 武器-弓
+ItemDisplay[(6hb OR 6cb OR 6s7) NMAG !RW SOCK=4 ED>10]: %NAME%%RED%(11%ED↑)%GRAY%【信心】(%SOCKETS%) //刀鋒弓、巨弓、鑽石弓(11%ED以上)4 - 信心
+ItemDisplay[(6l7 OR 6lw) NMAG !RW SOCK=6 ED>10]: %NAME%%RED%(11%ED↑)%GRAY%【寂靜│死亡呼吸】(%SOCKETS%) //十字軍之弓、九頭蛇弓(11%ED以上)6 - 寂靜/死亡呼吸
+ItemDisplay[(6hb OR 6cb OR 6s7) NMAG !RW SOCK=4]: %NAME%【信心】(%SOCKETS%) //刀鋒弓、巨弓、鑽石弓4 - 信心
+
+// 德魯伊
+ItemDisplay[CL1 !ETH NMAG !RW SK250=3 SOCK>1 ILVL>25]: <德>%NAME%%RED%【+3暴風】%GRAY%(%SOCKETS%)
+ItemDisplay[CL1 !ETH NMAG !RW SK245=3 SOCK>1 ILVL>25]: <德>%NAME%%RED%【+3龍捲風】%GRAY%(%SOCKETS%)
+ItemDisplay[CL1 !ETH NMAG !RW SK244=3 SOCK>1 ILVL>25]: <德>%NAME%%RED%【+3火山】%GRAY%(%SOCKETS%)
+ItemDisplay[CL1 !ETH NMAG !RW SK229=3 SOCK>1 ILVL>25]: <德>%NAME%%RED%【+3熔漿巨岩】%GRAY%(%SOCKETS%)
+ItemDisplay[CL1 !ETH NMAG !RW SK249=3 SOCK>1 ILVL>25]: <德>%NAME%%RED%【+3毀天滅地】%GRAY%(%SOCKETS%)
+ItemDisplay[CL1 !ETH NMAG !RW SK238=3 SOCK>1 ILVL>25]: <德>%NAME%%RED%【+3狂犬病】%GRAY%(%SOCKETS%)
+ItemDisplay[CL1 !ETH NMAG !RW SK243=3 SOCK>1 ILVL>25]: <德>%NAME%%RED%【+3震波】%GRAY%(%SOCKETS%)
+ItemDisplay[CL1 !ETH NMAG !RW SK239=3 SOCK>1 ILVL>25]: <德>%NAME%%RED%【+3焰爪】%GRAY%(%SOCKETS%)
+ItemDisplay[CL1 !ETH NMAG !RW SK221=3 SOCK>1 ILVL>25]: <德>%NAME%%RED%【+3烏鴉】%GRAY%(%SOCKETS%)
+ItemDisplay[CL1 !ETH NMAG !RW SK247=3 SOCK>1 ILVL>25]: <德>%NAME%%RED%【+3召喚灰熊】%GRAY%(%SOCKETS%)
+ItemDisplay[CL1 !ETH NMAG !RW SK250=3 SOCK=0 ILVL>25]: <德>%NAME%%RED%【+3暴風】%WHITE%
+ItemDisplay[CL1 !ETH NMAG !RW SK245=3 SOCK=0 ILVL>25]: <德>%NAME%%RED%【+3龍捲風】%WHITE%
+ItemDisplay[CL1 !ETH NMAG !RW SK244=3 SOCK=0 ILVL>25]: <德>%NAME%%RED%【+3火山】%WHITE%
+ItemDisplay[CL1 !ETH NMAG !RW SK229=3 SOCK=0 ILVL>25]: <德>%NAME%%RED%【+3熔漿巨岩】%WHITE%
+ItemDisplay[CL1 !ETH NMAG !RW SK249=3 SOCK=0 ILVL>25]: <德>%NAME%%RED%【+3毀天滅地】%WHITE%
+ItemDisplay[CL1 !ETH NMAG !RW SK238=3 SOCK=0 ILVL>25]: <德>%NAME%%RED%【+3狂犬病】%WHITE%
+ItemDisplay[CL1 !ETH NMAG !RW SK243=3 SOCK=0 ILVL>25]: <德>%NAME%%RED%【+3震波】%WHITE%
+ItemDisplay[CL1 !ETH NMAG !RW SK239=3 SOCK=0 ILVL>25]: <德>%NAME%%RED%【+3焰爪】%WHITE%
+ItemDisplay[CL1 !ETH NMAG !RW SK221=3 SOCK=0 ILVL>25]: <德>%NAME%%RED%【+3烏鴉】%WHITE%
+ItemDisplay[CL1 !ETH NMAG !RW SK247=3 SOCK=0 ILVL>25]: <德>%NAME%%RED%【+3召喚灰熊】%WHITE%
+
+// 野蠻人 
+ItemDisplay[CL2 !ETH NMAG !RW SK138=3 SOCK>1 ILVL>25]: <蠻>%NAME%%RED%【+3大叫】%GRAY%(%SOCKETS%)
+ItemDisplay[CL2 !ETH NMAG !RW SK149=3 SOCK>1 ILVL>25]: <蠻>%NAME%%RED%【+3戰鬥體制】%GRAY%(%SOCKETS%)
+ItemDisplay[CL2 !ETH NMAG !RW SK154=3 SOCK>1 ILVL>25]: <蠻>%NAME%%RED%【+3戰鬥狂嗥】%GRAY%(%SOCKETS%)
+ItemDisplay[CL2 !ETH NMAG !RW SK142=3 SOCK>1 ILVL>25]: <蠻>%NAME%%RED%【+3找尋物品】%GRAY%(%SOCKETS%)
+ItemDisplay[CL2 !ETH NMAG !RW SK138=3 SOCK=0 ILVL>25]: <蠻>%NAME%%RED%【+3大叫】%WHITE%
+ItemDisplay[CL2 !ETH NMAG !RW SK149=3 SOCK=0 ILVL>25]: <蠻>%NAME%%RED%【+3戰鬥體制】%WHITE%
+ItemDisplay[CL2 !ETH NMAG !RW SK154=3 SOCK=0 ILVL>25]: <蠻>%NAME%%RED%【+3戰鬥狂嗥】%WHITE%
+ItemDisplay[CL2 !ETH NMAG !RW SK142=3 SOCK=0 ILVL>25]: <蠻>%NAME%%RED%【+3找尋物品】%WHITE%
+ItemDisplay[WEAPON !RW TABSK34>2]: %RED%<<<%NAME%【+3戰嚎武器】>>>
+ItemDisplay[CL2 TABSK34>2 SK149>2]: %RED%<<<%NAME%【+6戰鬥體制】>>>
+ItemDisplay[CL2 CLSK4>1 SK149>2]: %RED%<<<%NAME%【+5戰鬥體制】>>>
+
+// 聖騎士
+ItemDisplay[CL3 ELT !ETH NMAG !RW RES>39 SOCK=0]: <聖>%NAME%【菁英】%RED%(40抗↑)%WHITE% //聖騎盾(40抗以上)
+ItemDisplay[CL3 ELT !ETH NMAG !RW RES>39 SOCK=3]: <聖>%NAME%【聖堂│夢境│飛龍】%RED%(40抗↑)%GRAY%(%SOCKETS%) //聖騎盾(40抗以上)3 - 聖堂/夢境/飛龍
+ItemDisplay[CL3 ELT !ETH NMAG !RW RES>39 SOCK=4]: <聖>%NAME%【精神】%RED%(40抗↑)%GRAY%(%SOCKETS%) //聖騎盾(40抗以上)4 - 精神
+ItemDisplay[CL3 ELT ETH NMAG !RW RES>39 SOCK=4]: <聖>◎%NAME%【流亡】%RED%(40抗↑)%GRAY%(%SOCKETS%) //聖騎盾(40抗以上)4(無) - 流亡
+
+// 死靈
+ItemDisplay[WP12 !ETH NMAG !RW SK84=3 (SK68>0 OR SK74>0 OR SK79>0 OR SK83>0) SOCK>1 !wnd !ywn !9wn]: %NAME%%RED%【+3骨矛│白骨裝甲-屍體爆炸-號召-褻瀆】%GRAY%(%SOCKETS%) // 骨矛84 白骨裝甲68 屍體爆炸74 號召79 褻瀆83
+ItemDisplay[WP12 !ETH NMAG !RW SK83=3 (SK68>0 OR SK74>0 OR SK79>0) SOCK>1 !wnd !ywn !9wn]: %NAME%%RED%【+3褻瀆│白骨裝甲-屍體爆炸-號召】%GRAY%(%SOCKETS%) // 褻瀆83 白骨裝甲68 屍體爆炸74 號召79
+ItemDisplay[WP12 !ETH NMAG !RW SK84=3 (SK68>0 OR SK74>0 OR SK79>0 OR SK83>0) SOCK=0 !wnd !ywn !9wn]: %NAME%%RED%【+3骨矛│白骨裝甲-屍體爆炸-號召-褻瀆】%WHITE%// 骨矛84 白骨裝甲68 屍體爆炸74 號召79 褻瀆83
+ItemDisplay[WP12 !ETH NMAG !RW SK83=3 (SK68>0 OR SK74>0 OR SK79>0) SOCK=0 !wnd !ywn !9wn]: %NAME%%RED%【+3褻瀆│白骨裝甲-屍體爆炸-號召】%WHITE%// 褻瀆83 白骨裝甲68 屍體爆炸74 號召79
+ItemDisplay[WP12 !ETH NMAG !RW SK84=3 SOCK>1 !wnd !ywn !9wn]: %NAME%%RED%【+3骨矛】%GRAY%(%SOCKETS%)
+ItemDisplay[WP12 !ETH NMAG !RW SK83=3 SOCK>1 !wnd !ywn !9wn]: %NAME%%RED%【+3褻瀆】%GRAY%(%SOCKETS%)
+ItemDisplay[WP12 !ETH NMAG !RW SK84=3 SOCK=0 !wnd !ywn !9wn]: %NAME%%RED%【+3骨矛】%WHITE%
+ItemDisplay[WP12 !ETH NMAG !RW SK83=3 SOCK=0 !wnd !ywn !9wn]: %NAME%%RED%【+3褻瀆】%WHITE%
+
+// 刺客
+ItemDisplay[CL5 NMAG !RW SK274>0 SK275>0 SOCK>2 !9cs !7xf !7cs]: <刺>%NAME%%RED%【寒霜刀雨│飛龍在天】%GRAY%(%SOCKETS%)
+ItemDisplay[CL5 NMAG !RW SK274>0 SK278=3 SOCK>2 !9cs !7xf !7cs]: <刺>%NAME%%RED%【寒霜刀雨│+3毒牙】%GRAY%(%SOCKETS%)
+ItemDisplay[CL5 NMAG !RW SK274>0 SK277=3 SOCK>2 !9cs !7xf !7cs]: <刺>%NAME%%RED%【寒霜刀雨│+3刀刃之盾】%GRAY%(%SOCKETS%)
+ItemDisplay[CL5 NMAG !RW SK274>0 SK275>0 SOCK=0 !9cs !7xf !7cs]: <刺>%NAME%%RED%【寒霜刀雨│飛龍在天】%WHITE%
+ItemDisplay[CL5 NMAG !RW SK274>0 SK278=3 SOCK=0 !9cs !7xf !7cs]: <刺>%NAME%%RED%【寒霜刀雨│+3毒牙】%WHITE%
+ItemDisplay[CL5 NMAG !RW SK274>0 SK277=3 SOCK=0 !9cs !7xf !7cs]: <刺>%NAME%%RED%【寒霜刀雨│+3刀刃之盾】%WHITE%
+---
+ItemDisplay[CL5 NMAG !RW SK253=3 SOCK>2 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3心靈戰鎚】%GRAY%(%SOCKETS%)
+ItemDisplay[CL5 NMAG !RW SK273=3 SOCK>2 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3心靈爆震】%GRAY%(%SOCKETS%)
+ItemDisplay[CL5 NMAG !RW SK278=3 SOCK>2 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3毒牙】%GRAY%(%SOCKETS%)
+ItemDisplay[CL5 NMAG !RW SK261=3 SOCK>2 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3電能守衛】%GRAY%(%SOCKETS%)
+ItemDisplay[CL5 NMAG !RW SK262=3 SOCK>2 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3火焰復甦】%GRAY%(%SOCKETS%)
+ItemDisplay[CL5 NMAG !RW SK271=3 SOCK>2 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3雷光守衛】%GRAY%(%SOCKETS%)
+ItemDisplay[CL5 NMAG !RW SK272=3 SOCK>2 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3復甦獄火】%GRAY%(%SOCKETS%)
+ItemDisplay[CL5 NMAG !RW SK276=3 SOCK>2 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3亡者守衛】%GRAY%(%SOCKETS%)
+ItemDisplay[CL5 NMAG !RW SK277=3 SOCK>2 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3刀刃之盾】%GRAY%(%SOCKETS%)
+ItemDisplay[CL5 NMAG !RW SK253=3 SOCK=0 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3心靈戰鎚】%WHITE%
+ItemDisplay[CL5 NMAG !RW SK273=3 SOCK=0 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3心靈爆震】%WHITE%
+ItemDisplay[CL5 NMAG !RW SK278=3 SOCK=0 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3毒牙】%WHITE%
+ItemDisplay[CL5 NMAG !RW SK261=3 SOCK=0 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3電能守衛】%WHITE%
+ItemDisplay[CL5 NMAG !RW SK262=3 SOCK=0 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3火焰復甦】%WHITE%
+ItemDisplay[CL5 NMAG !RW SK271=3 SOCK=0 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3雷光守衛】%WHITE%
+ItemDisplay[CL5 NMAG !RW SK272=3 SOCK=0 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3復甦獄火】%WHITE%
+ItemDisplay[CL5 NMAG !RW SK276=3 SOCK=0 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3亡者守衛】%WHITE%
+ItemDisplay[CL5 NMAG !RW SK277=3 SOCK=0 !9cs !7xf !7cs]: <刺>%NAME%%RED%【+3刀刃之盾】%WHITE%
+
+// 法師
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK56=3 SOCK>2]: <法>%NAME%%RED%【+3隕石】%GRAY%(%SOCKETS%)
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK62=3 SOCK>2]: <法>%NAME%%RED%【+3九頭海蛇】%GRAY%(%SOCKETS%)
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK61=3 SOCK>2]: <法>%NAME%%RED%【+3支配火焰】%GRAY%(%SOCKETS%)
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK59=3 SOCK>2]: <法>%NAME%%RED%【+3暴風雪】%GRAY%(%SOCKETS%)
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK64=3 SOCK>2]: <法>%NAME%%RED%【+3冰封球】%GRAY%(%SOCKETS%)
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK65=3 SOCK>2]: <法>%NAME%%RED%【+3支配冰冷】%GRAY%(%SOCKETS%)
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK58=3 SOCK>2]: <法>%NAME%%RED%【+3能量護盾】%GRAY%(%SOCKETS%)
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK49=3 SOCK>2]: <法>%NAME%%RED%【+3雷霆浪湧】%GRAY%(%SOCKETS%)
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK53=3 SOCK>2]: <法>%NAME%%RED%【+3連鎖閃電】%GRAY%(%SOCKETS%)
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK57=3 SOCK>2]: <法>%NAME%%RED%【+3雷雲風暴】%GRAY%(%SOCKETS%)
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK63=3 SOCK>2]: <法>%NAME%%RED%【+3支配閃電】%GRAY%(%SOCKETS%)
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK56=3 SOCK=0]: <法>%NAME%%RED%【+3隕石】%WHITE%
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK62=3 SOCK=0]: <法>%NAME%%RED%【+3九頭海蛇】%WHITE%
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK61=3 SOCK=0]: <法>%NAME%%RED%【+3支配火焰】%WHITE%
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK59=3 SOCK=0]: <法>%NAME%%RED%【+3暴風雪】%WHITE%
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK64=3 SOCK=0]: <法>%NAME%%RED%【+3冰封球】%WHITE%
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK65=3 SOCK=0]: <法>%NAME%%RED%【+3支配冰冷】%WHITE%
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK58=3 SOCK=0]: <法>%NAME%%RED%【+3能量護盾】%WHITE%
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK49=3 SOCK=0]: <法>%NAME%%RED%【+3雷霆浪湧】%WHITE%
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK53=3 SOCK=0]: <法>%NAME%%RED%【+3連鎖閃電】%WHITE%
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK57=3 SOCK=0]: <法>%NAME%%RED%【+3雷雲風暴】%WHITE%
+ItemDisplay[(ob5 OR oba OR obf) NMAG !RW SK63=3 SOCK=0]: <法>%NAME%%RED%【+3支配閃電】%WHITE%
+
+// 亞馬遜
+ItemDisplay[(amb OR amc) NMAG !RW TABSK0=3 SOCK=4]: <亞>%NAME%%RED%(+3技)%GRAY%【信心】(%SOCKETS%) //女族長之弓、大院長之弓(+3技)4 - 信心
+ItemDisplay[(amb OR amc) NMAG !RW TABSK0=3 SOCK=0 !SUP]: <亞>%NAME%%RED%(+3技)%WHITE%【拚4孔】 //女族長之弓、大院長之弓(+3技) - 信心
+
+// ===>>> 其他 <<<===
+
+// 手工基底
+ItemDisplay[(vgl OR xvg OR uvg) !ETH MAG ILVL>79]: [L%ILVL%]%NAME%%ORANGE%【壓碎:4那夫+紅+珠寶】 // 重手套、鯊皮手套、吸血鬼骸骨手套
+ItemDisplay[(mgl OR xmg OR umg) !ETH MAG ILVL>79]: [L%ILVL%]%NAME%%ORANGE%【擊退:9歐特+藍+珠寶】 // 鎖鍊手套、重型手鐲、吸血鬼手套
+ItemDisplay[(lgl OR xlg OR ulg) !ETH MAG ILVL>79]: [L%ILVL%]%NAME%%ORANGE%【回魔:9歐特+紫+珠寶】 // 皮手套、魔皮手套、荊棘連指手套
+
+// 過度
+ItemDisplay[crs NMAG !RW !INF !ETH SOCK=0 ILVL>25 ILVL<41 CLVL<60]: %NAME%【精神-劍】//60等前顯示 0s水晶劍
+ItemDisplay[bsd NMAG !RW !INF !ETH SOCK=0 ILVL>25 ILVL<41 CLVL<50]: %NAME%【精神-劍】//50等前顯示 0s闊劍
+ItemDisplay[bsd NMAG !RW !INF !ETH SOCK=4 ILVL>25 ILVL<41 CLVL<50]: %NAME%【精神-劍】(%SOCKETS%)//50等前顯示 4s闊劍
+ItemDisplay[WP8 NMAG !RW SOCK=4 CLVL<60]: %NAME%【眼光-長斧】(%SOCKETS%) //60等前顯示 4s長斧
+ItemDisplay[WP7 NMAG !RW SOCK=4 CLVL<60]: %NAME%【眼光-長槍】(%SOCKETS%) //60等前顯示 4s長槍
+
+ItemDisplay[(wsp OR 9ws) NMAG !RW SOCK=4]: %NAME%【神聖雷擊-單手傳送】(%SOCKETS%) //巨戰權杖、神屬權杖-5897
+
+// 缺錢
+ItemDisplay[EQ2 ELT (NMAG OR MAG) !RW !uea !uui]: $%PRICE%$ // 顯示菁英盔甲賣錢
+ItemDisplay[CL6 MAG !RW ID ILVL>50]: $%PRICE%$ // 顯示法師寶珠賣錢
+ItemDisplay[WP12 MAG !RW ID ILVL>50]: $%PRICE%$ // 顯示死靈魔杖賣錢
+ItemDisplay[CL6 MAG !RW ILVL>50]: $$$$ // 顯示法師寶珠賣錢
+ItemDisplay[WP12 MAG !RW ILVL>50]: $$$$ // 顯示死靈魔杖賣錢
+
+// ===>>> 裝備 <<<===
+
+// 刪除垃圾
+ItemDisplay[NMAG INF !RW]: // 刪除破碎等垃圾
+ItemDisplay[NMAG SOCK=1]: // 刪除白色1s裝備
+
+ItemDisplay[NMAG (WP4 OR WP5 OR WP10 OR WP11) CLVL>9]: // 10等後刪除白色匕首、投擲武器、十字弓、長杖
+ItemDisplay[NMAG (EQ4 OR EQ5 OR EQ6 OR aq2 OR cq2) CLVL>5]: // 6等後刪除手套、鞋子、腰帶、箭矢、十字箭白裝
+ItemDisplay[(WEAPON OR ARMOR) NORM NMAG !RW CLVL>19 SOCK=0]: // 20等後刪除0s普通白裝
+ItemDisplay[(WEAPON OR ARMOR) NORM NMAG !RW CLVL>29]: // 30等後刪除普通白裝
+ItemDisplay[(WEAPON OR ARMOR) EXC NMAG !RW CLVL>39 SOCK=0]: // 40等後刪除0s進階白裝
+ItemDisplay[(WEAPON OR ARMOR) EXC NMAG !RW CLVL>59]: // 60等後刪除進階白裝
+ItemDisplay[(WEAPON OR ARMOR) ELT NMAG !RW CLVL>79]: // 80等後刪除菁英白裝
+
+ItemDisplay[(aq2 OR cq2) MAG CLVL>29]: // 30等後刪除箭矢十字箭藍裝
+ItemDisplay[(WEAPON OR ARMOR) !EQ7 NORM MAG CLVL>29]: // 30等後刪除頭冠外普通藍裝
+ItemDisplay[(WEAPON OR ARMOR) !EQ7 MAG CLVL>49]: // 50等後刪除頭冠以外所有藍裝
+
+// 職業專用裝備
+ItemDisplay[CL1 NORM ETH SOCK=0]: <德>◎%NAME%【普通】
+ItemDisplay[CL1 NORM ETH SOCK>0]: <德>◎%NAME%【普通】(%SOCKETS%)
+ItemDisplay[CL1 EXC ETH SOCK=0]: <德>◎%NAME%【進階】
+ItemDisplay[CL1 EXC ETH SOCK>0]: <德>◎%NAME%【進階】(%SOCKETS%)
+ItemDisplay[CL1 ELT ETH SOCK=0]: <德>◎%NAME%【菁英】 
+ItemDisplay[CL1 ELT ETH SOCK>0]: <德>◎%NAME%【菁英】(%SOCKETS%)
+ItemDisplay[CL1 NORM SOCK=0]: <德>%NAME%【普通】
+ItemDisplay[CL1 NORM SOCK>0]: <德>%NAME%【普通】(%SOCKETS%)
+ItemDisplay[CL1 EXC SOCK=0]: <德>%NAME%【進階】
+ItemDisplay[CL1 EXC SOCK>0]: <德>%NAME%【進階】(%SOCKETS%)
+ItemDisplay[CL1 ELT SOCK=0]: <德>%NAME%【菁英】 
+ItemDisplay[CL1 ELT SOCK>0]: <德>%NAME%【菁英】(%SOCKETS%)
+
+ItemDisplay[CL2 NORM ETH SOCK=0]: <蠻>◎%NAME%【普通】
+ItemDisplay[CL2 NORM ETH SOCK>0]: <蠻>◎%NAME%【普通】(%SOCKETS%)
+ItemDisplay[CL2 EXC ETH SOCK=0]: <蠻>◎%NAME%【進階】
+ItemDisplay[CL2 EXC ETH SOCK>0]: <蠻>◎%NAME%【進階】(%SOCKETS%)
+ItemDisplay[CL2 ELT ETH SOCK=0]: <蠻>◎%NAME%【菁英】 
+ItemDisplay[CL2 ELT ETH SOCK>0]: <蠻>◎%NAME%【菁英】(%SOCKETS%)
+ItemDisplay[CL2 NORM SOCK=0]: <蠻>%NAME%【普通】
+ItemDisplay[CL2 NORM SOCK>0]: <蠻>%NAME%【普通】(%SOCKETS%)
+ItemDisplay[CL2 EXC SOCK=0]: <蠻>%NAME%【進階】
+ItemDisplay[CL2 EXC SOCK>0]: <蠻>%NAME%【進階】(%SOCKETS%)
+ItemDisplay[CL2 ELT SOCK=0]: <蠻>%NAME%【菁英】 
+ItemDisplay[CL2 ELT SOCK>0]: <蠻>%NAME%【菁英】(%SOCKETS%)
+
+ItemDisplay[CL3 NORM ETH SOCK=0]: <聖>◎%NAME%【普通】
+ItemDisplay[CL3 NORM ETH SOCK>0]: <聖>◎%NAME%【普通】(%SOCKETS%)
+ItemDisplay[CL3 EXC ETH SOCK=0]: <聖>◎%NAME%【進階】
+ItemDisplay[CL3 EXC ETH SOCK>0]: <聖>◎%NAME%【進階】(%SOCKETS%)
+ItemDisplay[CL3 ELT ETH SOCK=0]: <聖>◎%NAME%【菁英】 
+ItemDisplay[CL3 ELT ETH SOCK>0]: <聖>◎%NAME%【菁英】(%SOCKETS%)
+ItemDisplay[CL3 NORM SOCK=0]: <聖>%NAME%【普通】
+ItemDisplay[CL3 NORM SOCK>0]: <聖>%NAME%【普通】(%SOCKETS%)
+ItemDisplay[CL3 EXC SOCK=0]: <聖>%NAME%【進階】
+ItemDisplay[CL3 EXC SOCK>0]: <聖>%NAME%【進階】(%SOCKETS%)
+ItemDisplay[CL3 ELT SOCK=0]: <聖>%NAME%【菁英】 
+ItemDisplay[CL3 ELT SOCK>0]: <聖>%NAME%【菁英】(%SOCKETS%)
+
+ItemDisplay[CL4 NORM ETH SOCK=0]: <死>◎%NAME%【普通】
+ItemDisplay[CL4 NORM ETH SOCK>0]: <死>◎%NAME%【普通】(%SOCKETS%)
+ItemDisplay[CL4 EXC ETH SOCK=0]: <死>◎%NAME%【進階】
+ItemDisplay[CL4 EXC ETH SOCK>0]: <死>◎%NAME%【進階】(%SOCKETS%)
+ItemDisplay[CL4 ELT ETH SOCK=0]: <死>◎%NAME%【菁英】 
+ItemDisplay[CL4 ELT ETH SOCK>0]: <死>◎%NAME%【菁英】(%SOCKETS%)
+ItemDisplay[CL4 NORM SOCK=0]: <死>%NAME%【普通】
+ItemDisplay[CL4 NORM SOCK>0]: <死>%NAME%【普通】(%SOCKETS%)
+ItemDisplay[CL4 EXC SOCK=0]: <死>%NAME%【進階】
+ItemDisplay[CL4 EXC SOCK>0]: <死>%NAME%【進階】(%SOCKETS%)
+ItemDisplay[CL4 ELT SOCK=0]: <死>%NAME%【菁英】 
+ItemDisplay[CL4 ELT SOCK>0]: <死>%NAME%【菁英】(%SOCKETS%)
+
+ItemDisplay[CL5 NORM ETH SOCK=0]: <刺>◎%NAME%【普通】
+ItemDisplay[CL5 NORM ETH SOCK>0]: <刺>◎%NAME%【普通】(%SOCKETS%)
+ItemDisplay[CL5 EXC ETH SOCK=0]: <刺>◎%NAME%【進階】
+ItemDisplay[CL5 EXC ETH SOCK>0]: <刺>◎%NAME%【進階】(%SOCKETS%)
+ItemDisplay[CL5 ELT ETH SOCK=0]: <刺>◎%NAME%【菁英】 
+ItemDisplay[CL5 ELT ETH SOCK>0]: <刺>◎%NAME%【菁英】(%SOCKETS%)
+ItemDisplay[CL5 NORM SOCK=0]: <刺>%NAME%【普通】
+ItemDisplay[CL5 NORM SOCK>0]: <刺>%NAME%【普通】(%SOCKETS%)
+ItemDisplay[CL5 EXC SOCK=0]: <刺>%NAME%【進階】
+ItemDisplay[CL5 EXC SOCK>0]: <刺>%NAME%【進階】(%SOCKETS%)
+ItemDisplay[CL5 ELT SOCK=0]: <刺>%NAME%【菁英】 
+ItemDisplay[CL5 ELT SOCK>0]: <刺>%NAME%【菁英】(%SOCKETS%)
+
+ItemDisplay[CL6 NORM ETH SOCK=0]: <法>◎%NAME%【普通】
+ItemDisplay[CL6 NORM ETH SOCK>0]: <法>◎%NAME%【普通】(%SOCKETS%)
+ItemDisplay[CL6 EXC ETH SOCK=0]: <法>◎%NAME%【進階】
+ItemDisplay[CL6 EXC ETH SOCK>0]: <法>◎%NAME%【進階】(%SOCKETS%)
+ItemDisplay[CL6 ELT ETH SOCK=0]: <法>◎%NAME%【菁英】 
+ItemDisplay[CL6 ELT ETH SOCK>0]: <法>◎%NAME%【菁英】(%SOCKETS%)
+ItemDisplay[CL6 NORM SOCK=0]: <法>%NAME%【普通】
+ItemDisplay[CL6 NORM SOCK>0]: <法>%NAME%【普通】(%SOCKETS%)
+ItemDisplay[CL6 EXC SOCK=0]: <法>%NAME%【進階】
+ItemDisplay[CL6 EXC SOCK>0]: <法>%NAME%【進階】(%SOCKETS%)
+ItemDisplay[CL6 ELT SOCK=0]: <法>%NAME%【菁英】 
+ItemDisplay[CL6 ELT SOCK>0]: <法>%NAME%【菁英】(%SOCKETS%)
+
+ItemDisplay[CL7 NORM ETH SOCK=0]: <亞>◎%NAME%【普通】
+ItemDisplay[CL7 NORM ETH SOCK>0]: <亞>◎%NAME%【普通】(%SOCKETS%)
+ItemDisplay[CL7 EXC ETH SOCK=0]: <亞>◎%NAME%【進階】
+ItemDisplay[CL7 EXC ETH SOCK>0]: <亞>◎%NAME%【進階】(%SOCKETS%)
+ItemDisplay[CL7 ELT ETH SOCK=0]: <亞>◎%NAME%【菁英】 
+ItemDisplay[CL7 ELT ETH SOCK>0]: <亞>◎%NAME%【菁英】(%SOCKETS%)
+ItemDisplay[CL7 NORM SOCK=0]: <亞>%NAME%【普通】
+ItemDisplay[CL7 NORM SOCK>0]: <亞>%NAME%【普通】(%SOCKETS%)
+ItemDisplay[CL7 EXC SOCK=0]: <亞>%NAME%【進階】
+ItemDisplay[CL7 EXC SOCK>0]: <亞>%NAME%【進階】(%SOCKETS%)
+ItemDisplay[CL7 ELT SOCK=0]: <亞>%NAME%【菁英】 
+ItemDisplay[CL7 ELT SOCK>0]: <亞>%NAME%【菁英】(%SOCKETS%)
+
+// 戒指 項鍊 箭矢 十字箭
+ItemDisplay[(rin OR amu) SET]: [L%ILVL%]%NAME%【套裝】 //戒指 項鍊
+ItemDisplay[(rin OR amu) UNI]: [L%ILVL%]%NAME%【暗金】 //戒指 項鍊
+ItemDisplay[amu MAG ILVL>89]: %ORANGE%[L%ILVL%]%BLUE%%NAME%【飾品】 //項鍊 90LV +2技能
+ItemDisplay[amu RARE ILVL>89]: %ORANGE%[L%ILVL%]%YELLOW%%NAME%【飾品】 //項鍊 90LV +2技能
+ItemDisplay[rin OR amu]: [L%ILVL%]%NAME%【飾品】 //戒指 項鍊
+ItemDisplay[aq2 OR cq2]: %NAME%【箭袋】//箭矢 十字箭
+
+// 普通 進階 菁英
+ItemDisplay[NORM ETH SOCK=0]: ◎%NAME%【普通】
+ItemDisplay[NORM ETH SOCK>0]: ◎%NAME%【普通】(%SOCKETS%)
+ItemDisplay[EXC ETH SOCK=0]: ◎%NAME%【進階】
+ItemDisplay[EXC ETH SOCK>0]: ◎%NAME%【進階】(%SOCKETS%)
+ItemDisplay[ELT ETH SOCK=0]: ◎%NAME%【菁英】 
+ItemDisplay[ELT ETH SOCK>0]: ◎%NAME%【菁英】(%SOCKETS%)
+ItemDisplay[NORM SOCK=0]: %NAME%【普通】
+ItemDisplay[NORM SOCK>0]: %NAME%【普通】(%SOCKETS%)
+ItemDisplay[EXC SOCK=0]: %NAME%【進階】
+ItemDisplay[EXC SOCK>0]: %NAME%【進階】(%SOCKETS%)
+ItemDisplay[ELT SOCK=0]: %NAME%【菁英】 
+ItemDisplay[ELT SOCK>0]: %NAME%【菁英】(%SOCKETS%)
