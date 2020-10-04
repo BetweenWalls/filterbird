@@ -1685,6 +1685,7 @@ function setItemCodes() {
 		else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; }
 		else if (itemToCompare.rarity == "craft") { itemToCompare.always_id = true }
 	} else {itemToCompare.UNI = true }
+	if (itemToCompare.type == "rune") { itemToCompare.RUNENAME = itemToCompare.name.split(" ")[0] }
 	itemToCompare[itemToCompare.CODE] = true
 	if (typeof(itemToCompare.velocity) != 'undefined') { if (itemToCompare.velocity < 0) { itemToCompare.velocity += 100000 } }	// negative values overflow for this in-game code
 	if (typeof(itemToCompare.always_id) == 'undefined') { itemToCompare.always_id = false }

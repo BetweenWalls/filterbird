@@ -224,7 +224,7 @@ function setItem(value) {
 function simulate() {
 	for (let num = 1; num <= 2; num++) { if (document.getElementById("filter_text_"+num).value != "") {
 		document.getElementById("output_"+num).innerHTML = ""
-		result = parseFile(document.getElementById("filter_text_"+num).value,num)
+		var result = parseFile(document.getElementById("filter_text_"+num).value,num)
 		document.getElementById("output_"+num).innerHTML = result
 		var wid = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().width/2 - document.getElementById("output_"+num).getBoundingClientRect().width/2);
 		var hei = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().height/2 - document.getElementById("output_"+num).getBoundingClientRect().height/2);
@@ -364,13 +364,13 @@ function parseFile(file,num) {
 					if (name_added == true && color != "") { colorize = true }
 					if (name_added == false && (color_current_rule == true || o == " ")) { colorize = true }
 					if (o == "ref_NAME" && itemToCompare.RW == true) { color = colors["Gold"]; revert_color = true; }
-					if (colorize == true || (o == "ref_NAME" && itemToCompare.RW == true)) { display += "<font color='"+color+"'>"+temp+"</font>" }
+					if (colorize == true || (o == "ref_NAME" && itemToCompare.RW == true)) { display += "<l style='color:"+color+"'>"+temp+"</l>" }
 					else { display += temp }
 					if (revert_color == true) { color = prev_color }
 					if (name_current_rule == true) { name_added = true }
 				}
 				if (done == false) { name_saved = display }
-				document.getElementById("o"+num).innerHTML += "#"+num+" Match found at line "+line_num+" after checking "+rules_checked+" rules ... "+"<font color='#aaa'>"+file.split("­").join("•").split("\n")[line]+"</font>"
+				document.getElementById("o"+num).innerHTML += "#"+num+" Match found at line "+line_num+" after checking "+rules_checked+" rules ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l>"
 				if (output == "") { document.getElementById("o"+num).innerHTML += " /hidden"; obscured = true; }
 				document.getElementById("o"+num).innerHTML += "<br>"
 			}
@@ -382,7 +382,7 @@ function parseFile(file,num) {
 	if (done == false) {
 		obscured = false
 		display = name_saved
-		if (itemToCompare.RW == true) { display = "<font color='"+colors.Gold+"'>"+display+"</font>" }
+		if (itemToCompare.RW == true) { display = "<l style='color:"+colors.Gold+"'>"+display+"</l>" }
 		document.getElementById("o"+num).innerHTML += "#"+num+" No match found after checking "+rules_checked+" rules ... (default display)<br>"
 	}
 	if (color_new_default != "") { document.getElementById("output_"+num).style.color = color_new_default }
@@ -434,7 +434,7 @@ function equipmentHover(num) {
 		var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
 		var runes = "";
 		for (let i = 0; i < runewords[rw_name].runes.length; i++) { runes += runewords[rw_name].runes[i]; }
-		name += "<br>"+"<font color='"+colors.Gold+"'>'"+runes+"'</font>"
+		name += "<br>"+"<l style='color:"+colors.Gold+"'>'"+runes+"'</l>"
 	}
 	document.getElementById("item_name").innerHTML = name
 	document.getElementById("item_name").style.color = document.getElementById("output_"+num).style.color
