@@ -334,6 +334,7 @@ function parseFile(file,num) {
 				var out_format = output.split(",").join("/").split(" ").join(", ,").split("%WHITE%").join(",color_White,").split("%GRAY%").join(",color_Gray,").split("%BLUE%").join(",color_Blue,").split("%YELLOW%").join(",color_Yellow,").split("%GOLD%").join(",color_Gold,").split("%GREEN%").join(",color_Green,").split("%DGREEN%").join(",color_DarkGreen,").split("%BLACK%").join(",color_Black,").split("%TAN%").join(",color_Tan,").split("%PURPLE%").join(",color_Purple,").split("%ORANGE%").join(",color_Orange,").split("%RED%").join(",color_Red,").split("%NAME%").join(",ref_NAME,").split("%CLVL%").join(",ref_CLVL,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("%CONTINUE%").join(",misc_CONTINUE,")
 				var out_list = out_format.split(",");
 				for (out in out_list) {
+					var space = false;
 					var prev_color = color;
 					var o = out_list[out].split("/").join(",");
 					var temp = o;
@@ -357,6 +358,7 @@ function parseFile(file,num) {
 						color = colors["Black"]
 						temp = "_"
 						revert_color = true
+						space = true
 					} else {
 						obscured = false
 					}
@@ -364,7 +366,10 @@ function parseFile(file,num) {
 					if (name_added == true && color != "") { colorize = true }
 					if (name_added == false && (color_current_rule == true || o == " ")) { colorize = true }
 					if (o == "ref_NAME" && itemToCompare.RW == true) { color = colors["Gold"]; revert_color = true; }
-					if (colorize == true || (o == "ref_NAME" && itemToCompare.RW == true)) { display += "<l style='color:"+color+"'>"+temp+"</l>" }
+					if (colorize == true || (o == "ref_NAME" && itemToCompare.RW == true)) {
+						if (space == true) { display += "<l style='color:"+color+"; opacity:0%;'>"+temp+"</l>" }
+						else { display += "<l style='color:"+color+"'>"+temp+"</l>" }
+					}
 					else { display += temp }
 					if (revert_color == true) { color = prev_color }
 					if (name_current_rule == true) { name_added = true }

@@ -19,3 +19,5 @@ Path of Diablo Filter Simulation
 [Reddit](https://www.reddit.com/r/pathofdiablo/comments/hstnii/filterbird_lootfilter_simulation_program/)
 
 [Github](https://github.com/BetweenWalls/filterbird/wiki/Feedback)
+
+Send me a message ([BetweenWalls](https://www.reddit.com/message/compose/?to=BetweenWalls) on reddit, @BetweenWalls#2390 on discord)
