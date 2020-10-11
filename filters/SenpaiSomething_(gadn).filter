@@ -30,21 +30,24 @@ ItemDisplay[std]: %NAME%
 ItemDisplay[cx5]: %PURPLE%Orb of Corruption
 ItemDisplay[cx6]: %PURPLE%%NAME%
 ItemDisplay[cx7]: %PURPLE%¤¤¤¤ KEY OF CHAOS ¤¤¤¤
-ItemDisplay[ma4]: %PURPLE%%NAME% %GOLD%[T1]
-ItemDisplay[ma5]: %PURPLE%%NAME% %GOLD%[T2]
-ItemDisplay[ma6]: %PURPLE%%NAME% %GOLD%[T3]
-ItemDisplay[ma2]: %PURPLE%%NAME% %GOLD%[T4]
+//Maps
+ItemDisplay[ma1 !ID]: %PURPLE%¤¤¤ %WHITE%%NAME% %PURPLE%¤¤¤
+ItemDisplay[ma2 !ID]: %PURPLE%¤¤¤ %RED%%NAME% %PURPLE%¤¤¤
+ItemDisplay[ma3 !ID]: %PURPLE%¤¤¤ %NAME% %PURPLE%¤¤¤
+ItemDisplay[ma4 !ID]: %PURPLE%¤¤¤ %YELLOW%%NAME% %PURPLE%¤¤¤
+ItemDisplay[ma5 !ID]: %PURPLE%¤¤¤ %WHITE%%NAME% %PURPLE%¤¤¤
+ItemDisplay[ma6 !ID]: %PURPLE%¤¤¤ %RED%%NAME% %PURPLE%¤¤¤
+ItemDisplay[ma7 !ID]: %PURPLE%¤¤¤ %RED%%NAME% %PURPLE%¤¤¤
+ItemDisplay[ma8 !ID]: %PURPLE%¤¤¤ %YELLOW%%NAME% %PURPLE%¤¤¤
+ItemDisplay[ma9 !ID]: %PURPLE%¤¤¤ %YELLOW%%NAME% %PURPLE%¤¤¤
+ItemDisplay[ma10 !ID]: %PURPLE%¤¤¤ %NAME% %PURPLE%¤¤¤
 //ItemDisplay[(ma1 OR ma3 OR maz)]: %NAME%
 //Dclone relic?
 ItemDisplay[maz]: %PURPLE%%NAME%
-//Looking for T5
-ItemDisplay[ma1]: %PURPLE%%NAME% %GOLD%[Report %CODE% to Gadn]
-ItemDisplay[ma3]: %PURPLE%%NAME% %GOLD%[Report %CODE% to Gadn]
-ItemDisplay[ma7]: %PURPLE%%NAME% %GOLD%[Report %CODE% to Gadn]
-ItemDisplay[ma8]: %PURPLE%%NAME% %GOLD%[Report %CODE% to Gadn]
-ItemDisplay[ma9]: %PURPLE%%NAME% %GOLD%[Report %CODE% to Gadn]
+//Looking for codes
 ItemDisplay[maa]: %PURPLE%%NAME% %GOLD%[Report %CODE% to Gadn]
 ItemDisplay[mab]: %PURPLE%%NAME% %GOLD%[Report %CODE% to Gadn]
+ItemDisplay[NMAG (WP7 OR WP8) CLVL<81 SOCK>3]: %NAME% [%SOCKETS%]
 //Uber Keys
 ItemDisplay[pk1]: %GOLD%Terror %PURPLE%¤%GOLD%Countess%PURPLE%¤
 ItemDisplay[pk2]: %GOLD%Hate %RED%¤%GOLD%Summoner%RED%¤
@@ -1824,16 +1827,19 @@ ItemDisplay[7gd NMAG ETH !SOCK=1 !SOCK=2]: %GRAY%ETH %DGREEN%%NAME% %RED%[%SOCKE
 ItemDisplay[7br NMAG ETH (SOCK=0 OR SOCK>3) ED=15]: %GRAY%ETH %DGREEN%%NAME%%BLUE% +15ED %RED%[%SOCKETS%]
 ItemDisplay[7br NMAG ETH (SOCK=0 OR SOCK>3) ED>0 ED<15]: %GRAY%ETH %DGREEN%%NAME%%BLUE% +ED %RED%[%SOCKETS%]
 ItemDisplay[7br NMAG !ETH (SOCK=0 OR SOCK>3) ED=15]: %DGREEN%%NAME%%BLUE% +15ED %RED%[%SOCKETS%]
+ItemDisplay[7br NMAG ETH (SOCK=0 OR SOCK>3)]: %GRAY%ETH %DGREEN%%NAME% %WHITE%[%SOCKETS%]
 //Ghost Spear
 ItemDisplay[7st NMAG ETH (SOCK=0 OR SOCK>3) ED=15]: %GRAY%ETH %DGREEN%%NAME%%BLUE% +15ED %RED%[%SOCKETS%]
 ItemDisplay[7st NMAG ETH (SOCK=0 OR SOCK>3) ED>0 ED<15]: %GRAY%ETH %DGREEN%%NAME%%BLUE% +ED %RED%[%SOCKETS%]
 ItemDisplay[7st NMAG !ETH (SOCK=0 OR SOCK>3) ED=15]: %DGREEN%%NAME%%BLUE% +15ED %RED%[%SOCKETS%]
+ItemDisplay[7st NMAG (SOCK=0 OR SOCK=4)]: %NAME% [%SOCKETS%]
 //War Pike
 ItemDisplay[7p7 NMAG ETH (SOCK=0 OR SOCK>4) ED=15]: %GRAY%ETH %DGREEN%%NAME%%BLUE% +15ED %PURPLE%[%SOCKETS%]
 ItemDisplay[7p7 NMAG ETH (SOCK=0 OR SOCK>4) ED>0 ED<15]: %GRAY%ETH %DGREEN%%NAME%%BLUE% +ED %PURPLE%[%SOCKETS%]
 ItemDisplay[7p7 NMAG !ETH (SOCK=0 OR SOCK>3) ED=15]: %DGREEN%%NAME%%BLUE% +15ED %RED%[%SOCKETS%]
 ItemDisplay[7p7 NMAG !ETH (SOCK=0 OR SOCK>3) ED>0 ED<15]: %GRAY%%NAME%%BLUE% +ED %RED%[%SOCKETS%]
 ItemDisplay[7p7 NMAG ETH (SOCK=0 OR SOCK=6)]: %GRAY%ETH %DGREEN%%NAME% %PURPLE%[%SOCKETS%]
+ItemDisplay[7p7 NMAG (SOCK=0 OR SOCK=4)]: %NAME% [%SOCKETS%]
 ///WP8 POLEARMS
 //Thresher+Giant Thresher
 ItemDisplay[7wc NMAG ETH (SOCK=0 OR SOCK>2)]: %GRAY%ETH %DGREEN%%NAME% %PURPLE%[%SOCKETS%]
@@ -1879,6 +1885,10 @@ ItemDisplay[(wst OR 8ws OR 6ws) NMAG !SUP SOCK=0 SK58>2]: %WHITE%%NAME% %ORANGE%
 ItemDisplay[WP11 NMAG SOCK=4 SK58=2 CLVL<86]: %NAME% %ORANGE%+2 Energy Shield%RED%[%SOCKETS%]
 ItemDisplay[(cst OR bst OR 8cs OR 8bs OR 6cs OR 6bs) NMAG !SUP SOCK=0 SK58=2 CLVL<86]: %NAME% %ORANGE%+2 Energy Shield%RED%[%SOCKETS%]
 ItemDisplay[(wst OR 8ws OR 6ws) NMAG !SUP SOCK=0 SK58=2 CLVL<86]: %NAME% %ORANGE%+2 Energy Shield (Cube for 4sox)%RED%[%SOCKETS%]
+//+1 ES = Memory - Early ladder
+ItemDisplay[WP11 NMAG SOCK=4 SK58=1]: %NAME% %ORANGE%+1 Energy Shield%RED%[%SOCKETS%]
+ItemDisplay[(cst OR bst OR 8cs OR 8bs OR 6cs OR 6bs) NMAG !SUP SOCK=0 SK58=1]: %NAME% %ORANGE%+1 Energy Shield%RED%[%SOCKETS%]
+ItemDisplay[(wst OR 8ws OR 6ws) NMAG !SUP SOCK=0 SK58=1]: %NAME% %ORANGE%+1 Energy Shield (Cube for 4sox)%RED%[%SOCKETS%]
 //+3 Lightning Surge = Memory
 ItemDisplay[WP11 NMAG (SOCK=0 OR SOCK=4) SK49>2]: %DGREEN%%NAME% %ORANGE%+3 Lightning Surge%WHITE%[%SOCKETS%]
 ItemDisplay[(cst OR bst OR 8cs OR 8bs OR 6cs OR 6bs) NMAG (SOCK=0 OR SOCK=4) SK49>2]: %DGREEN%%NAME% %ORANGE%+3 Lightning Surge%WHITE%[%SOCKETS%]

@@ -828,6 +828,20 @@ ItemDisplay[NMAG CL7 SOCK=0]:
 //╔══════════════╗
 //║ Runeword EQX ║
 //╚══════════════╝
+// EQ7
+ItemDisplay[NMAG ci0 SOCK=0 !ETH !SUP]: %NAME%
+ItemDisplay[NMAG ci1 SOCK=0 !ETH !SUP]: %NAME%
+ItemDisplay[NMAG ci2 SOCK=0 !ETH !SUP]: %NAME%
+ItemDisplay[NMAG ci2 SOCK=3 !ETH !SUP]: %NAME% %BLUE%(%SOCKETS%)
+ItemDisplay[NMAG ci3 SOCK=0 !ETH !SUP]: %NAME%
+ItemDisplay[NMAG ci3 SOCK=3 !ETH !SUP]: %NAME% %BLUE%(%SOCKETS%)
+ItemDisplay[NMAG EQ7 (SOCK=3 OR SOCK=0) !ETH ED=15]: %PURPLE%+ %GRAY%%NAME% %PURPLE%+ %BLUE%15ED (%SOCKETS%)
+ItemDisplay[NMAG EQ7 (SOCK=3 OR SOCK=0) !ETH (ED>0 AND ED<15)]: %PURPLE%+ %GRAY%%NAME% %PURPLE%+ %BLUE%ED (%SOCKETS%)
+ItemDisplay[NMAG ci3 SOCK=0 !ETH]: %PURPLE%[i] %WHITE%%NAME%
+ItemDisplay[NMAG EQ7 SOCK=0 !ETH ILVL<67]: %NAME% %BLUE%(%SOCKETS%)
+ItemDisplay[NMAG EQ7 SOCK=0 ETH ILVL<67]: %NAME% %BLUE%eth (%SOCKETS%)
+ItemDisplay[NMAG EQ7 SOCK>1 ILVL>66]:
+ItemDisplay[NMAG EQ7 SOCK=0]:
 // EQ1
 ItemDisplay[NMAG msk SOCK>1 !ETH !SUP ILVL<50]: %NAME% %BLUE%(%SOCKETS%)
 ItemDisplay[NMAG xsk SOCK>1 !ETH !SUP ILVL<67]: %NAME% %BLUE%(%SOCKETS%)
@@ -952,19 +966,6 @@ ItemDisplay[NMAG EQ3 SOCK>1 !ETH ILVL<67]: %NAME% %BLUE%(%SOCKETS%)
 ItemDisplay[NMAG EQ3 SOCK>1 ETH ILVL<67]: %NAME% %BLUE%eth (%SOCKETS%)
 ItemDisplay[NMAG EQ3 SOCK>1 ILVL>66]:
 ItemDisplay[NMAG EQ3 SOCK=0]:
-// EQ7
-ItemDisplay[NMAG ci0 SOCK=0 !ETH !SUP]: %NAME%
-ItemDisplay[NMAG ci1 SOCK=0 !ETH !SUP]: %NAME%
-ItemDisplay[NMAG ci2 SOCK=0 !ETH !SUP]: %NAME%
-ItemDisplay[NMAG ci2 SOCK=3 !ETH !SUP]: %NAME% %BLUE%(%SOCKETS%)
-ItemDisplay[NMAG ci3 SOCK=0 !ETH !SUP]: %NAME%
-ItemDisplay[NMAG ci3 SOCK=3 !ETH !SUP]: %NAME% %BLUE%(%SOCKETS%)
-ItemDisplay[NMAG EQ7 (SOCK=3 OR SOCK=0) !ETH ED=15]: %PURPLE%+ %GRAY%%NAME% %PURPLE%+ %BLUE%15ED (%SOCKETS%)
-ItemDisplay[NMAG EQ7 (SOCK=3 OR SOCK=0) !ETH (ED>4 AND ED<15)]: %PURPLE%+ %GRAY%%NAME% %PURPLE%+ %BLUE%ED (%SOCKETS%)
-ItemDisplay[NMAG EQ7 SOCK=0 !ETH ILVL<67]: %NAME% %BLUE%(%SOCKETS%)
-ItemDisplay[NMAG EQ7 SOCK=0 ETH ILVL<67]: %NAME% %BLUE%eth (%SOCKETS%)
-ItemDisplay[NMAG EQ7 SOCK>1 ILVL>66]:
-ItemDisplay[NMAG EQ7 SOCK=0]:
 //╔══════════════╗
 //║ Runeword WPX ║
 //╚══════════════╝

@@ -1613,7 +1613,6 @@ function setValues() {
 // ---------------------------------
 function setItemFromCustom() {
 	itemTemp = itemCustom;
-	var group = document.getElementById("dropdown_group").value
 	var premade = false; if (itemTemp.type_affix == "rune" || itemTemp.type_affix == "gem" || itemTemp.type_affix == "other" || itemTemp.type_affix == "misc") { premade = true };
 	if (itemTemp.rarity == "Regular") { itemTemp.rarity = "regular" }
 	else if (itemTemp.rarity == "Magic") { itemTemp.rarity = "magic" }
@@ -1664,12 +1663,13 @@ function setItemFromCustom() {
 	simulate()
 }
 
-// setItemCodes - 
+// setItemCodes - sets item codes
 // ---------------------------------
 function setItemCodes() {
 	itemToCompare.NAME = itemTemp.name_prefix + itemTemp.name.split(" (")[0].split(" ­ ")[0] + itemTemp.name_suffix
 	itemToCompare.PRICE = 35000
 	itemToCompare.ID = true
+	var premade = false; if (itemTemp.type_affix == "rune" || itemTemp.type_affix == "gem" || itemTemp.type_affix == "other" || itemTemp.type_affix == "misc") { premade = true };
 	if (premade == false && itemTemp.base != "Amulet" && itemTemp.base != "Ring" && itemTemp.base != "Arrows" && itemTemp.base != "Bolts" && itemTemp.base != "Small Charm" && itemTemp.base != "Large Charm" && itemTemp.base != "Grand Charm" && itemTemp.base != "Jewel") {
 		var base = bases[itemTemp.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
 		if (base.tier == 1) { itemToCompare.NORM = true }
@@ -1690,7 +1690,7 @@ function setItemCodes() {
 	if (typeof(itemToCompare.velocity) != 'undefined') { if (itemToCompare.velocity < 0) { itemToCompare.velocity += 100000 } }	// negative values overflow for this in-game code
 	if (typeof(itemToCompare.always_id) == 'undefined') { itemToCompare.always_id = false }
 	if (itemToCompare.always_id == false && item_settings.ID == false) { itemToCompare.ID = false }
-	if (typeof(itemTemp.ethereal) != 'undefined') { if (itemTemp.ethereal == 1) { itemToCompare.ETH = true } }
+	if (typeof(itemTemp.ethereal) != 'undefined') { if (itemTemp.ethereal == 1) { itemToCompare.ETH = true } }	// TODO: fix so that this line isn't needed twice in this function
 	if (itemToCompare.ID == true) {
 		// affix codes translated to in-game codes
 		for (affix in itemToCompare) { for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = itemToCompare[affix] } } }
@@ -1707,7 +1707,12 @@ function setItemCodes() {
 		itemToCompare.SUP = false
 		for (affix in itemToCompare) {
 			for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = 0 } }
-			if (typeof(unequipped[affix]) != 'undefined') { if (affix != "base_damage_min" && affix != "base_damage_max" && affix != "base_defense" && affix != "req_level" && affix != "req_strength" && affix != "req_dexterity" && affix != "durability" && affix != "baseSpeed" && affix != "range" && affix != "throw_min"  && affix != "throw_max" && affix != "base_min_alternate" && affix != "base_max_alternate" && affix != "block" && affix != "velocity") { itemToCompare[affix] = unequipped[affix] } }
+			if (typeof(unequipped[affix]) != 'undefined') {
+				var ignored_affixes = ["base_damage_min","base_damage_max","base_defense","req_level","req_strength","req_dexterity","durability","baseSpeed","range","throw_min" ,"throw_max","base_min_alternate","base_max_alternate","block","velocity","tier","group","type","rarity","downgrade","upgrade","subtype","def_low","def_high","max_sockets","max_sockets_lvl_25","max_sockets_lvl_40","nonmetal","smite_min","smite_max","kick_min","twoHands","only","shield","qlvl"];	// affixes from 'bases' (except damage_vs_undead)
+				var ignored = false;
+				for (i in ignored_affixes) { if (affix == ignored_affixes[i]) { ignored = true } }
+				if (ignored == false) { itemToCompare[affix] = unequipped[affix] }
+			}
 		}
 		//character.CHARSTAT70 = 0;
 		itemToCompare.DEF = ~~itemToCompare.base_defense
@@ -1716,7 +1721,7 @@ function setItemCodes() {
 		itemToCompare.BLOCK = ~~itemToCompare.block
 		itemToCompare.ITEMSTAT17 = 0
 	}
-	if (typeof(itemTemp.ethereal) != 'undefined') { if (itemTemp.ethereal == 1) { itemToCompare.ETH = true } }	// TODO: fix so that this line isn't needed twice
+	if (typeof(itemTemp.ethereal) != 'undefined') { if (itemTemp.ethereal == 1) { itemToCompare.ETH = true } }	// TODO: fix so that this line isn't needed twice in this function
 	itemToCompare.ITEMSTAT31 = itemToCompare.DEF
 	itemToCompare.ITEMSTAT18 = itemToCompare.ITEMSTAT17
 	// TODO: Validate ILVL
