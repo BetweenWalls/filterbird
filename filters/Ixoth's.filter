@@ -1,16 +1,27 @@
 // Ixoth's POD item loot filter
 // "`-._,-'"`-._,-'"`-._,-'"`-.
 // Version 1.13
-// Last time updated: 11.10.2020
+// Last time updated: 13.10.2020
 // Feedback on the filter: send message to ixoth72 @ reddit, or Ixoth#1431 @ discord
 //
+// This loot filter has following features:
+// - All magical and rare items shows item level (in brackets)
+// - Items are shown with [e], [s] or [e, s] suffix (if item is ethereal and/or superior)
+// - Items with sockets are shown with socket count (in curly braces), some items show even max socket count as well (in brackets)
+// - Orb of corruption, unique and set jewelry (unid) are clearly shown in ground with "pick it up" text
+// - Runes are clearly shown (so they are not lost in ground)
+// - Imbuable items (currently coronas are only supported) are shown in the ground
+// - Normal Armors (which have enhanced armor class) are shown clearly in the ground
+// - Some selected normal items with +3 skills are shown clearly in the ground
 // This loot filter hides following things:
 // - Inferior items (i.e. low quality items)
 // - Potions (not full rejuv, nor best healing or mana potions) after level 80
 // - Blue normal and exceptional unid items (including arrows and bolts)
 // - All other items (not runeword, set or uniques) which are not matched by the filter (elite/normal/exceptional items which are not weapons or armors)
 // - Id scrolls after level 80
-// - Small gold stacks (under 5k) are hidden (this starts after level 80)
+// - Small gold stacks (under 5k) are hidden (after level 80)
+// - Ethereal belts, boots and gloves
+// - Weapons and armor with 1 socket
 //
 // items with +3 skills section (and some other things such as runes and gems) below are based on Kryszard's Loot Filter ver 1.9 (credits on those sections goes to him/her)
 //
@@ -33,11 +44,15 @@ ItemDisplay[(mp1 OR mp2 OR mp3 OR mp4 OR hp5) CLVL<80]: %BLUE%!%WHITE%Mp
 // Don't show low quality items
 ItemDisplay[INF !leg]:
 // Don't show magical normal and exceptional unid weapons or armors (worthless in general (this filter is aimed more to the end game)
-ItemDisplay[(WEAPON OR ARMOR) MAG !ELT !ID !leg]:
+ItemDisplay[(WEAPON OR ARMOR) MAG !ELT !ID]:
 // Don't show normal superior or ethereal elite items (excluding RW items) which can't be used in runewords
 ItemDisplay[NMAG !RW ELT (EQ4 OR EQ5 OR EQ6) !leg]:
 // Don't show superior or ethereal items (normal or exceptional)
 ItemDisplay[(WEAPON OR ARMOR) !ELT NMAG !RW !leg]:
+// Hide weapons or armors with only one socket
+ItemDisplay[(WEAPON OR ARMOR) NMAG SOCK=1 !leg]:
+// Hide ethereal belts, gloves, boots
+ItemDisplay[(EQ4 OR EQ5 OR EQ6) ETH]:
 // Hide lower quality healing and mana potions afte level 80
 ItemDisplay[(hp1 OR hp2 OR hp3 OR hp4 OR mp1 OR mp2 OR mp3 OR mp4) CLVL>79]:
 // Hide id scrolls after lvl 80
@@ -71,6 +86,16 @@ ItemDisplay[glb]:
 ItemDisplay[gly]:
 ItemDisplay[skl]: %WHITE%Skull %ORANGE%[%GRAY%O%ORANGE%]
 // <- Modify these to your own focuses
+// Hide regular bows/xbows without +3 amazon bow & crossbow skills
+ItemDisplay[(WP9 OR WP10) NMAG TABSK0<3]:
+// Hide regular paladin shields without ED less than 60 or all res of 40+
+ItemDisplay[CL3 NMAG (RES<40 AND ITEMSTAT17<60)]:
+// Hide regular necro heads (without proper skills)
+ItemDisplay[CL4 NMAG (SK74<3 AND SK80<3 AND SK70<3 AND SK69<3 AND SK67<3 AND SK83<3 AND SK84<3 AND SK92<3 AND SK74<2 AND SK93<3 AND SK91<3 AND SK87<3 AND SK86<3 AND SK82<3 AND SK81<3 AND SK77<3 AND SK76<3 AND SK78<3 AND SK95<3 AND SK94<3 AND SK90<3 AND SK85<3)]:
+// Hide regular druid pelts (without proper skills)
+ItemDisplay[CL1 NMAG (SK244<3 AND SK249<3 AND SK250<3 AND SK240<3 AND SK245<3 AND SK237<3 AND SK247<3 AND SK227<3 AND SK243<3 AND SK238<3 AND SK239<3 AND SK221<3 AND SK221<2 AND SK221<1 AND SK225<3 AND SK225<2 AND SK225<1 AND SK246<3 AND SK236<3 AND SK248<3 AND SK242<3 AND SK233<3 AND SK232<3 AND SK235<3)]:
+// Hide regular barbarian helms (without proper skills)
+ItemDisplay[CL2 NMAG (SK154<3 AND SK149<3 AND SK154<1 AND SK149<1 AND SK153<1 AND SK150<1 AND SK142<1 AND SK138<1 AND SK151<3 AND SK143<3 AND SK139<3 AND SK144<3 AND SK147<3 AND SK148<3 AND SK145<3 AND SK141<3 AND SK155<3 AND SK146<3 AND SK137<3)]:
 // "`-._,-'"`-._,-'"`-._,-'"`-._,-' <- Hide items section "`-._,-'"`-._,-'"`-._,-'"`-._,-'
 
 // "`-._,-'"`-._,-'"`-._,-'"`-._,-' Gems -> "`-._,-'"`-._,-'"`-._,-'"`-._,-'
@@ -256,8 +281,7 @@ ItemDisplay[r28]: %PURPLE%»» »» »» »» »» »» %RED%%RUNENAME% %GREEN%[
 ItemDisplay[r29 OR r33]: %PURPLE%»» »» »» »» %RED%%RUNENAME% %GREEN%[%RUNENUM%]%PURPLE% «« «« «« ««
 ItemDisplay[r30]: %PURPLE%o==[]:::::::::::::::::> %RED%%RUNENAME% %GREEN%[%RUNENUM%]%PURPLE% <:::::::::::::::::[]==o
 ItemDisplay[r31]: %PURPLE%o==[]::::::::::::::::::::::::::::::::> %RED%%RUNENAME% %GREEN%[%RUNENUM%]%PURPLE% <::::::::::::::::::::::::::::::::[]==o
-ItemDisplay[(ARMOR OR WEAPON) MAG !ID]: %BLUE%%NAME%
-ItemDisplay[(ARMOR OR WEAPON) MAG]: %BLUE%%NAME%
+ItemDisplay[(ARMOR OR WEAPON) MAG]: %BLUE%%NAME%%CONTINUE%
 // Rare weapons and armors
 ItemDisplay[(ARMOR OR WEAPON) RARE !ID]: %YELLOW%%NAME%
 // Jewels

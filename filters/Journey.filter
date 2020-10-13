@@ -1,6 +1,6 @@
 /⃓═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 /	"Journey" Item Filter for Diablo II: Path of Diablo
-/		Date Updated:	27 AUG 2020
+/		Date Updated:	13 OCT 2020
 /		Info:		https://github.com/BetweenWalls/Journey
 /		Download:	https://drive.google.com/uc?id=1jAXM-MkmWBtPZBJ40SqAmBrWv4xLKAD9
 /		Direct URL:	https://raw.githubusercontent.com/BetweenWalls/Journey/master/item.filter
@@ -427,8 +427,8 @@ ItemDisplay[!(ARMOR OR WEAPON OR rin OR amu OR aq2 OR cq2 OR aqv OR cqv OR (UNI 
 /ItemDisplay[NMAG !ID (rin OR amu OR EQ7)]:	  %BLUE%%NAME%  %DGREEN%
 ItemDisplay[NMAG !ID]:	  %NAME%  %GRAY%
 
-/⃓̲ Hidden: Regular Non-Elite Non-Superior Non-Class-Related Items (except those with level 70+ rules in the Regular Items category) - level 70
-ItemDisplay[NMAG !RW CLVL>69 ((NORM OR EXC) ED=0 !(ILVL=12 OR ILVL=20)) !(CL1 OR CL2 OR CL4 OR CL6 OR WP11 OR WP12 OR WP13 OR (WP5 EXC) OR (CL3 (RES>34 OR ITEMSTAT18>49)) OR (CL5 !(NORM OR 9ar OR 9wb OR 9xf)) OR (CL7 (TABSK0>2 OR TABSK2>2 OR WP6)) OR ci2 OR (WP8 ETH SOCK>2) OR bsd OR crs OR 9cr OR fla OR 2ax OR xh9 OR xtp OR xsh OR 8rx OR xar)]:
+/⃓̲ Hidden: Regular Non-Elite Non-Superior Non-Class-Related Items (except those with level 70+ rules in the Regular Items category) - level 70			...Note: these would be hidden by other rules further down; this rule just helps optimize performance
+ItemDisplay[NMAG !RW CLVL>69 ((NORM OR EXC) ED=0 !(ILVL=12 OR ILVL=20)) !(CL1 OR CL2 OR CL4 OR CL6 OR WP11 OR WP12 OR WP13 OR (WP5 EXC) OR (CL3 (RES>34 OR ITEMSTAT18>49)) OR (CL5 !(NORM OR 9ar OR 9wb OR 9xf)) OR (CL7 (TABSK0>2 OR TABSK2>2 OR WP6)) OR ci2 OR ((WP8 OR WP7) ETH SOCK>2) OR bsd OR crs OR 9cr OR fla OR 2ax OR xh9 OR xtp OR xsh OR 8rx OR xar)]:
 
 /⃓̲ Modification: Equipment Quality Tier  (normal, exceptional, elite)
 /⃓̲    style - subtle "upgrade" marks  (signifies how many times the item can be upgraded)
