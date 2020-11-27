@@ -280,7 +280,7 @@ function parseFile(file,num) {
 	var lines = file.split("\t").join("").split("­").join("•").split("\n");
 	for (line in lines) { if (done == false) {
 		var line_num = Number(line)+1;
-		document.getElementById("o3").innerHTML += "#"+num+" Processing line "+line_num+" (rule "+(rules_checked+1)+") ... "
+		document.getElementById("o3").innerHTML += "ERROR: Cannot Evaluate<br>"+"#"+num+" Invalid formatting found at line "+line_num+" (rule "+(rules_checked+1)+") ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l>"
 		var rule = lines[line].split("/")[0];
 		var index = rule.indexOf("ItemDisplay[");
 		var index_end = rule.indexOf("]:");
@@ -392,7 +392,6 @@ function parseFile(file,num) {
 	}
 	if (color_new_default != "") { document.getElementById("output_"+num).style.color = color_new_default }
 	else { document.getElementById("output_"+num).style.color = getColor(itemToCompare) }
-	document.getElementById("o"+num).innerHTML += "<br>"
 	if (obscured == false && itemToCompare.ID == true && !(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {
 		if (typeof(itemToCompare.base) != 'undefined') { display += secondary_line }
 	}

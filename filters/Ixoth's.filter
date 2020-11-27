@@ -1,7 +1,7 @@
 // Ixoth's POD item loot filter
 // "`-._,-'"`-._,-'"`-._,-'"`-.
-// Version 1.13
-// Last time updated: 13.10.2020
+// Version 1.14
+// Last time updated: 18.10.2020
 // Feedback on the filter: send message to ixoth72 @ reddit, or Ixoth#1431 @ discord
 //
 // This loot filter has following features:
@@ -13,17 +13,28 @@
 // - Imbuable items (currently coronas are only supported) are shown in the ground
 // - Normal Armors (which have enhanced armor class) are shown clearly in the ground
 // - Some selected normal items with +3 skills are shown clearly in the ground
+// - Shows with ED suffix normal items with enchanted damage/-defense
 // This loot filter hides following things:
 // - Inferior items (i.e. low quality items)
 // - Potions (not full rejuv, nor best healing or mana potions) after level 80
 // - Blue normal and exceptional unid items (including arrows and bolts)
-// - All other items (not runeword, set or uniques) which are not matched by the filter (elite/normal/exceptional items which are not weapons or armors)
 // - Id scrolls after level 80
 // - Small gold stacks (under 5k) are hidden (after level 80)
 // - Ethereal belts, boots and gloves
 // - Weapons and armor with 1 socket
+// - items that aren't useful for runewords (1-socket, gloves, boots, belts, 1x2 daggers, 5-socket bows)
+// - 2-socket (except non-eth light armors with high defense) Armor
+// - Non-eth body armor with less than 450 defense (light) or without high defense (medium/heavy)
+// * Eth body armor with less than 650 defense (600 defense if it has sockets)
+// * Shields (except Monarch, Hyperion, or Troll Nest with either high defense or max sockets)
+// * Non-circlet helms without sockets and high defense and either capable of 3 sockets, or Shako (i.e. not Hydraskull, Armet, Giant Conch)
+// - Polearms and spears that aren't eth, 3+ socket with ED, or 4-socket
+// - Bows/crossbows except 4-socket or 3-socket with ED or 0-socket with ED and capable of 4 sockets (i.e. Blade Bow & Great Bow)
+// - Axes - Tomahawk, any eth non-ED (except 0/4+s Berserker Axe & Glorious Axe, 4+s Ettin Axe & Champion Axe, 5s Silver-Edged Axe), any non-eth // non-ED (except 3+s Berserker Axe)
+// - Maces - Reinforced Mace, Devil Star, Truncheon, Tyrant Club, any eth non-ED (except 0/6s Thunder Maul, 4+s Scourge), any non-eth non-ED // (except 3+s Scourge)
+// - Swords - Falcata, Ataghan, Elegant Blade, Hydra Edge, any eth non-ED (except 0s Legend Sword & Colossus Sword & Colossus Blade, any 3s, any 2-handed 4+s), any non-eth non-ED (except 3+s Phase Blade & Colossus Blade)
 //
-// items with +3 skills section (and some other things such as runes and gems) below are based on Kryszard's Loot Filter ver 1.9 (credits on those sections goes to him/her)
+// Runes and gems below are based on Kryszard's Loot Filter ver 1.9 (credits on those sections goes to him/her)
 //
 // Notes:
 // - It was not possible to get rid of superior text (on superior quality item), to replace superior with [s]. Feature request has been issued to the respective ppl of POD team, but such feature (that quality of superior could be replaced with custom text) will never likely happen.
@@ -43,18 +54,60 @@ ItemDisplay[(mp1 OR mp2 OR mp3 OR mp4 OR hp5) CLVL<80]: %BLUE%!%WHITE%Mp
 // "`-._,-'"`-._,-'"`-._,-'"`-._,-' Hide items section -> "`-._,-'"`-._,-'"`-._,-'"`-._,-'
 // Don't show low quality items
 ItemDisplay[INF !leg]:
-// Don't show magical normal and exceptional unid weapons or armors (worthless in general (this filter is aimed more to the end game)
-ItemDisplay[(WEAPON OR ARMOR) MAG !ELT !ID]:
-// Don't show normal superior or ethereal elite items (excluding RW items) which can't be used in runewords
-ItemDisplay[NMAG !RW ELT (EQ4 OR EQ5 OR EQ6) !leg]:
-// Don't show superior or ethereal items (normal or exceptional)
-ItemDisplay[(WEAPON OR ARMOR) !ELT NMAG !RW !leg]:
+// Don't show weapons or armors which are magical or rare, which are normal and exceptional in quality and are also unid (worthless in general (this filter is aimed more to the end game) after lvl 80
+ItemDisplay[(WEAPON OR ARMOR) (MAG OR RARE) !ELT !ID CLVL>79 !leg]:
+// Don't show regular (in quality of normal, exceptional or elite items (excluding RW items)), which can't be used in runewords
+ItemDisplay[NMAG !RW (EQ4 OR EQ5 OR EQ6) !leg ETH]:
 // Hide weapons or armors with only one socket
 ItemDisplay[(WEAPON OR ARMOR) NMAG SOCK=1 !leg]:
+// Hide 1x2 daggers
+ItemDisplay[(7dg OR 7di) NMAG]:
+// Hide 5 socket non-RW bows
+ItemDisplay[(WP9 OR WP10) NMAG !RW SOCK=5]:
+// Hide 2 socket non-RW armors (except high defense non-ethereal ones)
+ItemDisplay[EQ2 !ETH !RW NMAG ED<10 SOCK=2]:
+// Hide non-eth non-RW elite light or medium body armor with less than 450 defense (or without high defense)
+ItemDisplay[(uui OR uea OR ula OR utu OR urs OR utp OR ung OR uhn OR upl OR uld OR uth) !ETH (DEF<450 ED<10) !RW NMAG]:
+// Hide non-eth non-RW elite heavy body armor without high defense
+ItemDisplay[(ucl OR ult OR uul) !ETH ED<10 !RW NMAG]:
+// Hide eth armors with less than 650 defense (600 defense if it has sockets)
+ItemDisplay[EQ2 ETH DEF<650 NMAG !RW SOCK=0]:
+ItemDisplay[EQ2 ETH DEF<600 NMAG !RW SOCK>0]:
+// Hide shields (except Monarch, Hyperion, or Troll Nest with either high defense or max sockets)
+ItemDisplay[EQ3 NMAG !RW !(uit OR ush OR urg)]:
+ItemDisplay[EQ3 NMAG !RW ((ush OR urg) SOCK<3 ED<10)]:
+ItemDisplay[EQ3 NMAG !RW (uit SOCK<4 ED<10)]:
+// Hide non-circlet helms without sockets and high defense and either capable of 3 sockets, or Shako (i.e. not Hydraskull, Armet, Giant Conch)
+ItemDisplay[EQ1 NMAG !RW !(ci0 OR ci1 OR ci2 OR ci3 OR uhm OR usk OR urn OR uh9) (SOCK=0 ED<10)]:
+// Hide polearms and spears that aren't eth, 3+ socket with ED, or 4-socket
+ItemDisplay[(WP7 OR WP8) NMAG !RW (!ETH OR (ETH SOCK<3 ED) OR (ETH SOCK=4 !ED<15))]:
+// Hide javelins which are not ethereal and have no ED
+ItemDisplay[NMAG !RW WP6 !(ETH ED>0)]:
+// Hide normal bows/xbows without +3 amazon bow & crossbow skills and except 4-socket or 3-socket with ED or 0-socket with ED and capable of 4 sockets (i.e. Blade Bow & Great Bow)
+ItemDisplay[(WP9 OR WP10) NMAG SOCK=4 !ED]:
+ItemDisplay[(WP9 OR WP10) NMAG (((amc OR amb OR am7 OR am6 OR am2 OR am1) TABSK0<3) OR (SOCK>2 SOCK<5 !ED=15) OR ((6hb OR 6cb) SOCK=0))]:
+// Hide axes: Tomahawk, any eth non-ED (except 0/4+s Berserker Axe & Glorious Axe, 4+s Ettin Axe & Champion Axe, 5s Silver-Edged Axe), any non-eth non-ED (except 3+s Berserker Axe)
+ItemDisplay[7ha NMAG !RW]:
+ItemDisplay[(7wa OR 7gi) NMAG !RW (ETH ED<15) (!SOCK=0 AND !SOCK>3)]:
+ItemDisplay[(72a OR 7ga OR 7ba) NMAG !RW SOCK>3 (ETH !ED<15)]:
+ItemDisplay[7wa NMAG !RW (!ETH ED<15) (!SOCK=3)]:
+ItemDisplay[WP1 !7wa !RW NMAG !ETH]:
+ItemDisplay[WP1 !(7wa OR 7gi OR 72a OR 7ga OR 7ba) NMAG !RW (!ETH OR (ETH ED<15))]:
+// Hide maces: Reinforced Mace, Devil Star, Truncheon, Tyrant Club, any eth non-ED (except 0/6s Thunder Maul, 4+s Scourge), any non-eth non-ED (except 3+s Scourge)
+ItemDisplay[(7ma OR 7mt OR 7cl OR 7sp) !RW NMAG]:
+ItemDisplay[7fl !RW NMAG ((SOCK<3 !ETH ED<15) OR (SOCK<4 ETH ED<15))]:
+ItemDisplay[7gm !RW NMAG (!SOCK=0 !SOCK=6 ETH ED<15)]:
+ItemDisplay[WP2 !RW NMAG ETH ED<15]:
+// Hide swords: Falcata, Ataghan, Elegant Blade, Hydra Edge, any eth non-ED (except 0s Legend Sword & Colossus Sword & Colossus Blade, any 3s, any 2-handed 4+s), any non-eth non-ED (except 3+s Phase Blade & Colossus Blade)
+ItemDisplay[NMAG (7ss OR 7sm OR 7sb OR 7fc)]:
+ItemDisplay[NMAG ETH WP3 !(ED>0 OR (SOCK=0 (72h OR 7fb OR 7gd)) OR SOCK=3 OR (SOCK>3 !7bs !7ls))]:
+ItemDisplay[NMAG !ETH WP3 !(ED>0 OR (SOCK>2 (7cr OR 7gd)))]:
 // Hide ethereal belts, gloves, boots
 ItemDisplay[(EQ4 OR EQ5 OR EQ6) ETH]:
 // Hide lower quality healing and mana potions afte level 80
 ItemDisplay[(hp1 OR hp2 OR hp3 OR hp4 OR mp1 OR mp2 OR mp3 OR mp4) CLVL>79]:
+// Hide normal weapons or armor which can't get skills (which are not elite and are not RW)
+// ItemDisplay[(WEAPON OR ARMOR) !ELT NMAG !RW !(CL4 OR CL1 OR CL2 OR WP11 OR CL6 OR WP12 OR WP13 OR CL5 OR leg)]:
 // Hide id scrolls after lvl 80
 ItemDisplay[isc CLVL>79]:
 // Hide stamina potions after lvl 40
@@ -86,16 +139,22 @@ ItemDisplay[glb]:
 ItemDisplay[gly]:
 ItemDisplay[skl]: %WHITE%Skull %ORANGE%[%GRAY%O%ORANGE%]
 // <- Modify these to your own focuses
-// Hide regular bows/xbows without +3 amazon bow & crossbow skills
-ItemDisplay[(WP9 OR WP10) NMAG TABSK0<3]:
-// Hide regular paladin shields without ED less than 60 or all res of 40+
-ItemDisplay[CL3 NMAG (RES<40 AND ITEMSTAT17<60)]:
-// Hide regular necro heads (without proper skills)
-ItemDisplay[CL4 NMAG (SK74<3 AND SK80<3 AND SK70<3 AND SK69<3 AND SK67<3 AND SK83<3 AND SK84<3 AND SK92<3 AND SK74<2 AND SK93<3 AND SK91<3 AND SK87<3 AND SK86<3 AND SK82<3 AND SK81<3 AND SK77<3 AND SK76<3 AND SK78<3 AND SK95<3 AND SK94<3 AND SK90<3 AND SK85<3)]:
-// Hide regular druid pelts (without proper skills)
-ItemDisplay[CL1 NMAG (SK244<3 AND SK249<3 AND SK250<3 AND SK240<3 AND SK245<3 AND SK237<3 AND SK247<3 AND SK227<3 AND SK243<3 AND SK238<3 AND SK239<3 AND SK221<3 AND SK221<2 AND SK221<1 AND SK225<3 AND SK225<2 AND SK225<1 AND SK246<3 AND SK236<3 AND SK248<3 AND SK242<3 AND SK233<3 AND SK232<3 AND SK235<3)]:
-// Hide regular barbarian helms (without proper skills)
-ItemDisplay[CL2 NMAG (SK154<3 AND SK149<3 AND SK154<1 AND SK149<1 AND SK153<1 AND SK150<1 AND SK142<1 AND SK138<1 AND SK151<3 AND SK143<3 AND SK139<3 AND SK144<3 AND SK147<3 AND SK148<3 AND SK145<3 AND SK141<3 AND SK155<3 AND SK146<3 AND SK137<3)]:
+// Hide normal paladin shields without ED less than 60 or all res of 40+
+ItemDisplay[CL3 NMAG (RES<40 ITEMSTAT17<60)]:
+// Hide normal necro heads (without proper skills)
+ItemDisplay[CL4 NMAG (SK74<3 SK80<3 SK70<3 SK69<3 SK67<3 SK83<3 SK84<3 SK92<3 SK74<2 SK93<3 SK91<3 SK87<3 SK86<3 SK82<3 SK81<3 SK77<3 SK76<3 SK78<3 SK95<3 SK94<3 SK90<3 SK85<3 SK89<3 SK88<3 SK80<3 SK79<3)]:
+// Hide normal druid pelts (without proper skills)
+ItemDisplay[CL1 NMAG (SK244<3 SK249<3 SK250<3 SK240<3 SK245<3 SK237<3 SK247<3 SK227<3 SK243<3 SK238<3 SK239<3 SK221<3 SK221<2 SK221<1 SK225<3 SK225<2 SK225<1 SK246<3 SK236<3 SK248<3 SK242<3 SK233<3 SK232<3 SK235<3 SK234<3 SK231<3 SK241<3)]:
+// Hide normal barbarian helms (without proper skills)
+ItemDisplay[CL2 NMAG (SK154<3 SK149<3 SK154<1 SK149<1 SK153<1 SK150<1 SK142<1 SK138<1 SK151<3 SK143<3 SK139<3 SK144<3 SK147<3 SK148<3 SK145<3 SK141<3 SK155<3 SK146<3 SK137<3 SK152<3 SK140<3)]:
+// Hide normal staves and orbs (without proper sorceress skills)
+ItemDisplay[(WP11 OR CL6) NMAG (SK50<3 SK55<3 SK59<3 SK60<3 SK64<3 SK65<3 SK48<3 SK49<3 SK54<3 SK53<3 SK57<3 SK58<3 SK63<3 SK46<3 SK47<3 SK51<3 SK52<3 SK56<3 SK61<3 SK62<3)]:
+// Hide normal wands (without proper skills)
+ItemDisplay[WP12 NMAG (SK74<3 SK80<3 SK70<3 SK69<3 SK67<3 SK83<3 SK84<3 SK92<3 SK74<2 SK93<3 SK91<3 SK87<3 SK86<3 SK82<3 SK81<3 SK77<3 SK76<3 SK78<3 SK95<3 SK94<3 SK90<3 SK85<3 SK89<3 SK88<3 SK80<3 SK79<3)]:
+// Hide normal scepters (without propel skills)
+ItemDisplay[WP13 NMAG (SK109<3 SK110<3 SK115<3 SK120<3 SK124<3 SK125<3 SK108<3 SK113<3 SK114<3 SK118<3 SK119<3 SK122<3 SK123<3 SK106<3 SK107<3 SK111<3 SK112<3 SK116<3 SK117<3 SK121<3 SK112<3)]:
+// Hide normal claws (without proper skills)
+ItemDisplay[CL5 NMAG (SK261<3 SK262<3 SK263<3 SK264<3 SK265<3 SK266<3 SK267<3 SK268<3 SK269<3 SK271<3 SK272<3 SK273<3 SK274<3 SK275<3 SK276<3 SK277<3 SK278<3 SK279<3 SK280<3)]:
 // "`-._,-'"`-._,-'"`-._,-'"`-._,-' <- Hide items section "`-._,-'"`-._,-'"`-._,-'"`-._,-'
 
 // "`-._,-'"`-._,-'"`-._,-'"`-._,-' Gems -> "`-._,-'"`-._,-'"`-._,-'"`-._,-'
@@ -118,13 +177,16 @@ ItemDisplay[skz]: %ORANGE%P %WHITE%Skull %ORANGE%[%GRAY%O%ORANGE%]
 // "`-._,-'"`-._,-'"`-._,-'"`-._,-' <- Gems "`-._,-'"`-._,-'"`-._,-'"`-._,-'
 
 // "`-._,-'"`-._,-'"`-._,-'"`-._,-' Runeword items "`-._,-'"`-._,-'"`-._,-'"`-._,-'
-ItemDisplay[(WEAPON OR ARMOR) RW ETH SUP]: %GRAY%[%WHITE%e, s%GRAY%] %NAME%%CONTINUE%
-ItemDisplay[(WEAPON OR ARMOR) RW ETH !SUP]: %GRAY%[%WHITE%e%GRAY%] %NAME%%CONTINUE%
-ItemDisplay[(WEAPON OR ARMOR) RW !ETH SUP]: %GRAY%[%WHITE%s%GRAY%] %NAME%%CONTINUE%
+ItemDisplay[(WEAPON OR ARMOR) RW ETH SUP]: %GRAY%[%WHITE%e, s%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(WEAPON OR ARMOR) RW ETH !SUP]: %GRAY%[%WHITE%e%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(WEAPON OR ARMOR) RW !ETH SUP]: %GRAY%[%WHITE%s%GRAY%]%NAME%%CONTINUE%
 ItemDisplay[(WEAPON OR ARMOR) RW]: %NAME% %GRAY%{%WHITE%%SOCKETS%%GRAY%}%CONTINUE%
 ItemDisplay[(WEAPON OR ARMOR) RW NORM]: %NAME%
+// Enchanted damage/-armor
+ItemDisplay[(ARMOR OR WEAPON) RW ED>0]: %NAME%%GREEN%ED%CONTINUE%
 ItemDisplay[(WEAPON OR ARMOR) RW EXC]: %NAME%%RED%*
 ItemDisplay[(WEAPON OR ARMOR) RW ELT]: %NAME%%RED%**
+
 // "`-._,-'"`-._,-'"`-._,-'"`-._,-' Utility "`-._,-'"`-._,-'"`-._,-'"`-._,-'
 ItemDisplay[cx8]: ooe%TAN% <- pick it up%CONTINUE%
 ItemDisplay[cx5]: ooc%TAN% <- pick it up%CONTINUE%
@@ -155,6 +217,9 @@ ItemDisplay[(WEAPON OR ARMOR) ETH !SUP SET]: %GRAY%[%WHITE%e%GRAY%] %GREEN%%NAME
 ItemDisplay[(WEAPON OR ARMOR) !SUP ETH SET]: %GRAY%[%WHITE%s%GRAY%] %GREEN%%NAME%%CONTINUE%
 // "`-._,-'"`-._,-'"`-._,-'"`-._,-' Item level information "`-._,-'"`-._,-'"`-._,-'"`-._,-'
 ItemDisplay[(WEAPON OR ARMOR OR jew OR amu OR rin OR cm1 OR cm2 OR cm3) (MAG OR RARE OR UNI OR SET)]: %NAME% %GRAY%[%WHITE%i%ILVL%%GRAY%]%CONTINUE%
+// "`-._,-'"`-._,-'"`-._,-'"`-._,-' Enchanted damage/-armor "`-._,-'"`-._,-'"`-.
+ItemDisplay[(ARMOR OR WEAPON) ED>0]: %NAME%%GREEN%ED%CONTINUE%
+
 // "`-._,-'"`-._,-'"`-._,-'"`-._,-' Item tier (* for exceptional, ** for elite) "`-._,-'"`-._,-'"`-._,-'"`-._,-'
 ItemDisplay[(WEAPON OR ARMOR) EXC]: %NAME%%RED%*%CONTINUE%
 ItemDisplay[(WEAPON OR ARMOR) ELT]: %NAME%%RED%**%CONTINUE%
@@ -189,86 +254,180 @@ ItemDisplay[NMAG 7ls SOCK=4 !RW ETH]: %GOLD%%NAME% %GOLD%<- HYPE
 ItemDisplay[NMAG (7fb OR 7gd OR 7p7 OR 7m7 OR 7gm OR 7wc OR 7vo OR 7o7 OR 72a OR 7bt OR 7wa OR 7gi) (SOCK=5 OR SOCK=6) !RW ETH]: %NAME% %GOLD%<- HYPE
 // "`-._,-'"`-._,-'"`-._,-'"`-._,-' <- Weapons "`-._,-'"`-._,-'"`-._,-'"`-._,-'
 
+// "`-._,-'"`-._,-'"`-._,-'"`-._,-' Runeword base items with skills -> "`-._,-'"`-._,-'"`-._,-'"`-._,-'
+ItemDisplay[(WP9 OR WP10) NMAG TABSK0=3]: %GRAY%[%WHITE%3bow skills%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[CL3 NMAG RES>40]: %GRAY%[%WHITE%40+ res%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[CL3 NMAG ITEMSTAT17>60]: %GRAY%[%WHITE%60+ ED%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK36=3]: %GRAY%[%WHITE%3Fire bolt%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK37=3]: %GRAY%[%WHITE%3Warmth%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK38=3]: %GRAY%[%WHITE%3Charged Bolt%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK39=3]: %GRAY%[%WHITE%3Ice Bolt%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK40=3]: %GRAY%[%WHITE%3Frigerate%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK41=3]: %GRAY%[%WHITE%3Blaze%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK42=3]: %GRAY%[%WHITE%3Static Field%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK43=3]: %GRAY%[%WHITE%3Telekinesis%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK44=3]: %GRAY%[%WHITE%3Frost Nova%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK45=3]: %GRAY%[%WHITE%3Ice Blast%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK46=3]: %GRAY%[%WHITE%3Immolate%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK47=3]: %GRAY%[%WHITE%3Fire Ball%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK48=3]: %GRAY%[%WHITE%3Nova%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK49=3]: %GRAY%[%WHITE%3Lightning Surge%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK50=3]: %GRAY%[%WHITE%3Shiver Armor%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK51=3]: %GRAY%[%WHITE%3Fire Wall%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK52=3]: %GRAY%[%WHITE%3Enflame%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK53=3]: %GRAY%[%WHITE%3Teleport%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK54=3]: %GRAY%[%WHITE%3Chain Lightning%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK55=3]: %GRAY%[%WHITE%3Glacial Spike%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK56=3]: %GRAY%[%WHITE%3Meteor%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK57=3]: %GRAY%[%WHITE%3Discharge%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK58=3]: %GRAY%[%WHITE%3Energy Shield%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK59=3]: %GRAY%[%WHITE%3Blizzard%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK60=3]: %GRAY%[%WHITE%3Chilling Armor%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK61=3]: %GRAY%[%WHITE%3Fire Mastery%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK62=3]: %GRAY%[%WHITE%3Hydra%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK63=3]: %GRAY%[%WHITE%3Lightning Mastery%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK64=3]: %GRAY%[%WHITE%3Frozen Orb%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK65=3]: %GRAY%[%WHITE%3Cold Mastery%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK66=3]: %GRAY%[%WHITE%3Amplify Damage%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK67=3]: %GRAY%[%WHITE%3Teeth%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK68=3]: %GRAY%[%WHITE%3Bone Armor%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK69=3]: %GRAY%[%WHITE%3Summon Mastery%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK70=3]: %GRAY%[%WHITE%3Skeleton Warrior%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK71=3]: %GRAY%[%WHITE%3Dim Vision%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK72=3]: %GRAY%[%WHITE%3Weaken%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK73=3]: %GRAY%[%WHITE%3Deadly Poison%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK74=3]: %GRAY%[%WHITE%3Corpse Explosion%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK75=3]: %GRAY%[%WHITE%3Clay Golem%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK76=3]: %GRAY%[%WHITE%3Iron Maiden%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK77=3]: %GRAY%[%WHITE%3Terror%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK78=3]: %GRAY%[%WHITE%3Bone Wall%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK79=3]: %GRAY%[%WHITE%3Convocation%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK80=3]: %GRAY%[%WHITE%3Skeletal Mage%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK81=3]: %GRAY%[%WHITE%3Confuse%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK82=3]: %GRAY%[%WHITE%3Life Tap%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK83=3]: %GRAY%[%WHITE%3Desecrate%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK84=3]: %GRAY%[%WHITE%3Bone Spear%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK85=3]: %GRAY%[%WHITE%3Blood Golem%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK86=3]: %GRAY%[%WHITE%3Attract%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK87=3]: %GRAY%[%WHITE%3Decrepify%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK88=3]: %GRAY%[%WHITE%3Flesh Offering%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK89=3]: %GRAY%[%WHITE%3Bone Offering%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK90=3]: %GRAY%[%WHITE%3Iron Golem%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK91=3]: %GRAY%[%WHITE%3Lower Resist%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK92=3]: %GRAY%[%WHITE%3Poison Nova%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK93=3]: %GRAY%[%WHITE%3Bone Spirit%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK94=3]: %GRAY%[%WHITE%3Fire Golem%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK95=3]: %GRAY%[%WHITE%3Revive%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK96=3]: %GRAY%[%WHITE%3Sacrifice%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK97=3]: %GRAY%[%WHITE%3Smite%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK98=3]: %GRAY%[%WHITE%3Might%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK99=3]: %GRAY%[%WHITE%3Prayer%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK100=3]: %GRAY%[%WHITE%3Resist Fire%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK101=3]: %GRAY%[%WHITE%3Holy Bolt%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK102=3]: %GRAY%[%WHITE%3Holy Fire%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK103=3]: %GRAY%[%WHITE%3Precision%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK104=3]: %GRAY%[%WHITE%3Defiance%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK105=3]: %GRAY%[%WHITE%3Resist Cold%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK106=3]: %GRAY%[%WHITE%3Zeal%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK107=3]: %GRAY%[%WHITE%3Charge%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK108=3]: %GRAY%[%WHITE%3Blessed Aim%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK109=3]: %GRAY%[%WHITE%3Cleansing%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK110=3]: %GRAY%[%WHITE%3Resist Lightning%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK111=3]: %GRAY%[%WHITE%3Vengeance%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK112=3]: %GRAY%[%WHITE%3Blessed Hammer%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK113=3]: %GRAY%[%WHITE%3Concentration%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK114=3]: %GRAY%[%WHITE%3Holy Freeze%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK115=3]: %GRAY%[%WHITE%3Vigor%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK116=3]: %GRAY%[%WHITE%3Conversion%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK117=3]: %GRAY%[%WHITE%3Holy Shield%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK118=3]: %GRAY%[%WHITE%3Holy Shock%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK119=3]: %GRAY%[%WHITE%3Sanctuary%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK120=3]: %GRAY%[%WHITE%3Meditation%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK121=3]: %GRAY%[%WHITE%3Fist of the Heavens%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK122=3]: %GRAY%[%WHITE%3Fanaticism%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK123=3]: %GRAY%[%WHITE%3Conviction%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK124=3]: %GRAY%[%WHITE%3Redemption%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK125=3]: %GRAY%[%WHITE%3Salvation%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK126=3]: %GRAY%[%WHITE%3Bash%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK127=3]: %GRAY%[%WHITE%3Edged Mastery%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK128=3]: %GRAY%[%WHITE%3Pole Mastery%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK129=3]: %GRAY%[%WHITE%3Blunt Mastery%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK130=3]: %GRAY%[%WHITE%3Howl%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK131=3]: %GRAY%[%WHITE%3Find Potion%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK132=3]: %GRAY%[%WHITE%3Leap%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK133=3]: %GRAY%[%WHITE%3Ethereal Throw%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK135=3]: %GRAY%[%WHITE%3Thrown Mastery%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK137=3]: %GRAY%[%WHITE%3Taunt%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK138=3]: %GRAY%[%WHITE%3Shout%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK139=3]: %GRAY%[%WHITE%3Stun%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK140=3]: %GRAY%[%WHITE%3Power Throw%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK141=3]: %GRAY%[%WHITE%3Increased Stamina%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK142=3]: %GRAY%[%WHITE%3Find Item%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK143=3]: %GRAY%[%WHITE%3Leap Attack%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK144=3]: %GRAY%[%WHITE%3Concentrate%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK145=3]: %GRAY%[%WHITE%3Iron Skin%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK146=3]: %GRAY%[%WHITE%3Battle Cry%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK147=3]: %GRAY%[%WHITE%3Frenzy%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK148=3]: %GRAY%[%WHITE%3Increased Speed%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK149=3]: %GRAY%[%WHITE%3Battle Orders%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK150=3]: %GRAY%[%WHITE%3Grim Ward%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK151=3]: %GRAY%[%WHITE%3Whirlwind%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK152=3]: %GRAY%[%WHITE%3Cleave%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK153=3]: %GRAY%[%WHITE%3Natural Resistance%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK154=3]: %GRAY%[%WHITE%3War Cry%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK155=3]: %GRAY%[%WHITE%3Battle Command%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK221=3]: %GRAY%[%WHITE%3Raven%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK222=3]: %GRAY%[%WHITE%3Poison Creeper%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK223=3]: %GRAY%[%WHITE%3Werewolf%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK224=3]: %GRAY%[%WHITE%3Lycanthropy%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK225=3]: %GRAY%[%WHITE%3Firestorm%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK226=3]: %GRAY%[%WHITE%3Oak Sage%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK227=3]: %GRAY%[%WHITE%3Summon Spirit Wolf%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK228=3]: %GRAY%[%WHITE%3Werebear%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK229=3]: %GRAY%[%WHITE%3Molten Boulder%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK230=3]: %GRAY%[%WHITE%3Arctic Blast%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK231=3]: %GRAY%[%WHITE%3Carrion Vine%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK232=3]: %GRAY%[%WHITE%3Feral Rage%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK233=3]: %GRAY%[%WHITE%3Maul%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK234=3]: %GRAY%[%WHITE%3Fissure%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK235=3]: %GRAY%[%WHITE%3Cyclone Armor%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK236=3]: %GRAY%[%WHITE%3Heart of Wolverine%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK237=3]: %GRAY%[%WHITE%3Summon Dire Wolf%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK238=3]: %GRAY%[%WHITE%3Rabies%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK239=3]: %GRAY%[%WHITE%3Fire Claws%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK240=3]: %GRAY%[%WHITE%3Twister%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK241=3]: %GRAY%[%WHITE%3Solar Creeper%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK242=3]: %GRAY%[%WHITE%3Hunger%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK243=3]: %GRAY%[%WHITE%3Shock Wave%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK244=3]: %GRAY%[%WHITE%3Volcano%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK245=3]: %GRAY%[%WHITE%3Tornado%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK246=3]: %GRAY%[%WHITE%3Spirit of Barbs%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK247=3]: %GRAY%[%WHITE%3Summon Grizzly%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK248=3]: %GRAY%[%WHITE%3Fury%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK249=3]: %GRAY%[%WHITE%3Armageddon%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK250=3]: %GRAY%[%WHITE%3Hurricane%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK261=3]: %GRAY%[%WHITE%3Charged Bolt Sentry%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK262=3]: %GRAY%[%WHITE%3Wake of Fire%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK263=3]: %GRAY%[%WHITE%3Weapon Block%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK264=3]: %GRAY%[%WHITE%3Cloak of Shadows%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK265=3]: %GRAY%[%WHITE%3Fists of Ice%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK266=3]: %GRAY%[%WHITE%3Blade Fury%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK267=3]: %GRAY%[%WHITE%3Fade%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK268=3]: %GRAY%[%WHITE%3Shadow Warrior%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK269=3]: %GRAY%[%WHITE%3Emberstorm%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK271=3]: %GRAY%[%WHITE%3Lightning Sentry%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK272=3]: %GRAY%[%WHITE%3Wake of Inferno%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK273=3]: %GRAY%[%WHITE%3Mind Blast%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK274=3]: %GRAY%[%WHITE%3Blades of Ice%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK275=3]: %GRAY%[%WHITE%3Dragon Flight%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK276=3]: %GRAY%[%WHITE%3Death Sentry%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK277=3]: %GRAY%[%WHITE%3Blade Shield%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK278=3]: %GRAY%[%WHITE%3Venom%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK279=3]: %GRAY%[%WHITE%3Shadow Master%GRAY%]%NAME%%CONTINUE%
+ItemDisplay[(ARMOR OR WEAPON) (NMAG OR RW) SK280=3]: %GRAY%[%WHITE%3Static Strike%GRAY%]%NAME%%CONTINUE%
+// "`-._,-'"`-._,-'"`-._,-'"`-._,-' <- Runeword base items with skills "`-._,-'"`-._,-'"`-._,-'"`-._,-'
+
 // "`-._,-'"`-._,-'"`-._,-'"`-._,-' Kryszard V1.9 -> "`-._,-'"`-._,-'"`-._,-'"`-._,-'
-//RuneWord Bases (I did some simplifications of item filtering rules were unnecessarily eseretoric at times))
-//Spirit Swords
-ItemDisplay[(crs OR bsd OR lsd) (ETH (NMAG OR RW)) SOCK=4]: %NAME%
-ItemDisplay[(crs OR bsd OR lsd) (NMAG OR RW) SOCK=4]: %NAME%
-// Holy Thunder/Rift
-ItemDisplay[wsp !ETH (NMAG OR RW) SOCK=4]: %NAME%
-// HOTO AND CTA
-ItemDisplay[fla (ETH (NMAG OR RW)) SOCK>3]: %NAME%
-ItemDisplay[fla (NMAG OR RW) SOCK>3]: %NAME%
-ItemDisplay[crs (ETH (NMAG OR RW)) SOCK=5]: %NAME%
-ItemDisplay[crs (NMAG OR RW) SOCK=5]: %NAME%
-// White
-ItemDisplay[WP12 SK84>2 (SOCK=0 OR SOCK=2) (NMAG OR RW)]: %GRAY%[%WHITE%3bsr%GRAY%] %NAME%
-ItemDisplay[WP12 SK83>2 (SOCK=0 OR SOCK=2) (NMAG OR RW)]: %GRAY%[%WHITE%3d%GRAY%] %NAME%
-ItemDisplay[WP12 SK92>2 (SOCK=0 OR SOCK=2) (NMAG OR RW)]: %GRAY%[%WHITE%3pn%GRAY%] %NAME%
-ItemDisplay[WP12 SK93>2 (SOCK=0 OR SOCK=2) (NMAG OR RW)]: %GRAY%[%WHITE%3bst%GRAY%] %NAME%
-// Memory
-ItemDisplay[(cst OR bst OR 8cs OR 8bs OR 6cs OR 6bs) (NMAG OR RW) SK58>2 (SOCK=0 OR SOCK=4)]: %GRAY%[%WHITE%3es%GRAY%] %NAME%
-ItemDisplay[(wst OR 8ws OR 6ws) (NMAG OR RW) SK58>2 SOCK=0 !SUP]: %GRAY%[%WHITE%3es%GRAY%] %NAME%
-ItemDisplay[(wst OR 8ws OR 6ws) (NMAG OR RW) SK58>2 SOCK=4]: %GRAY%[%WHITE%3es%GRAY%] %NAME%
-// Faith
-ItemDisplay[amc (NMAG OR RW) TABSK0>2 SOCK=4]: %GRAY%[%WHITE%3bow%GRAY%] %NAME%
-ItemDisplay[amc (NMAG OR RW) TABSK0>2 SOCK=0 !SUP]: %GRAY%[%WHITE%3bow%GRAY%] %NAME%
-ItemDisplay[6cb SOCK=4]: %NAME%
-// Infi/Insi/Pride and Obedience/Doom
-ItemDisplay[(7wc OR 7pa OR 7s8 OR 7vo OR 7h7 OR 7tr OR 7br OR 7st OR 7p7) (ETH (NMAG OR RW)) (SOCK=4 OR SOCK=5)]: %NAME%
-ItemDisplay[(7vo OR 7tr) ETH (NMAG OR RW) SOCK=0]: %NAME%
-ItemDisplay[(7wc OR 7pa OR 7s8 OR 7h7 OR 7br OR 7st) (ETH AND !SUP) (NMAG OR RW) SOCK=0]: %NAME%
-// Grief/Beast/Passion
-ItemDisplay[(7cr OR 7wa) (!ETH AND NMAG OR RW) (SOCK=4 OR SOCK=5)]: %NAME%
-ItemDisplay[(7cr OR 7wa) (!ETH AND !SUP) (NMAG OR RW) SOCK=0]: %GRAY%%NAME%
-// Death/Oath
-ItemDisplay[(7wa OR 7fb OR 7gd) (ETH AND NMAG OR RW) (SOCK=4 OR SOCK=5)]: %NAME%
-ItemDisplay[7fb ETH (NMAG OR RW) SOCK=0]: %NAME%
-ItemDisplay[(7wa OR 7gd) (ETH AND !SUP)  (NMAG OR RW) SOCK=0]: %NAME%
-// Breath of the Dying/Last Wish
-ItemDisplay[7cr (NMAG OR RW) (SOCK=0 OR SOCK=6)]: %NAME%
-ItemDisplay[(7wa OR 7gd OR 7p7) ETH (NMAG OR RW) (SOCK=0 OR SOCK=6)]: %NAME%
-// Lawbringer
-ItemDisplay[72h ETH (NMAG OR RW) (SOCK=0 OR SOCK=3)]: %NAME%
-// Chaos
-ItemDisplay[9tw !ETH (NMAG OR RW) (SK274>0 AND SK275>0) (SOCK=0 OR SOCK=3)]: %GRAY%[%WHITE%chaos%GRAY%] %NAME%
-// Plague
-ItemDisplay[(clw OR btl OR skr OR 9ar OR 9lw OR 9tw OR 9qr OR 7ar OR 7wb OR 7lw OR 7tw OR 7qr) !ETH (NMAG OR RW) SK277>2 (SOCK=0 OR SOCK=3)]: %GRAY%[%WHITE%3bs%GRAY%] %NAME%
-ItemDisplay[(clw OR btl OR skr OR 9ar OR 9lw OR 9tw OR 9qr OR 7ar OR 7wb OR 7lw OR 7tw OR 7qr) !ETH (NMAG OR RW) SK278>2 (SOCK=0 OR SOCK=3)]: %GRAY%[%WHITE%3vnm%GRAY%] %NAME%
-ItemDisplay[(clw OR btl OR skr OR 9ar OR 9lw OR 9tw OR 9qr OR 7ar OR 7wb OR 7lw OR 7tw OR 7qr) !ETH (NMAG OR RW) SK276>2 (SOCK=0 OR SOCK=3)]: %GRAY%[%WHITE%3ds%GRAY%] %NAME%
-ItemDisplay[(clw OR btl OR skr OR 9ar OR 9lw OR 9tw OR 9qr OR 7ar OR 7wb OR 7lw OR 7tw OR 7qr) !ETH (NMAG OR RW) SK271>2 (SOCK=0 OR SOCK=3)]: %GRAY%[%WHITE%3ls%GRAY%] %NAME%
-ItemDisplay[(clw OR btl OR skr OR 9ar OR 9lw OR 9tw OR 9qr OR 7ar OR 7wb OR 7lw OR 7tw OR 7qr) !ETH (NMAG OR RW) SK272>2 (SOCK=0 OR SOCK=3)]: %GRAY%[%WHITE%3woi%GRAY%] %NAME%
-ItemDisplay[(clw OR btl OR skr OR 9ar OR 9lw OR 9tw OR 9qr OR 7ar OR 7wb OR 7lw OR 7tw OR 7qr) !ETH (NMAG OR RW) SK266>2 (SOCK=0 OR SOCK=3)]: %GRAY%[%WHITE%3bf%GRAY%] %NAME%
-ItemDisplay[(clw OR btl OR skr OR 9ar OR 9lw OR 9tw OR 9qr OR 7ar OR 7wb OR 7lw OR 7tw OR 7qr) !ETH (NMAG OR RW) SK262>2 (SOCK=0 OR SOCK=3)]: %GRAY%[%WHITE%3wof%GRAY%] %NAME%
-// Armors
-ItemDisplay[xtp !ETH (NMAG OR RW) SOCK=2]: %NAME%
-ItemDisplay[(xtp OR utp OR uui) !ETH (NMAG OR RW) (SOCK=0 OR SOCK>2)]: %GRAY%%NAME%
-ItemDisplay[EQ2 ELT ETH (NMAG OR RW) (SOCK=0 OR SOCK>2)]: %NAME%
-// Helmets
-ItemDisplay[(ci3 OR uh9) !ETH (NMAG OR RW) SOCK=3]: %NAME%
-ItemDisplay[CL2 !ETH (NMAG OR RW) SK149>2 !SOCK=1]: %GRAY%[%WHITE%3bo%GRAY%] %NAME%
-ItemDisplay[CL2 !ETH (NMAG OR RW) SK154>2 !SOCK=1]: %GRAY%[%WHITE%3wc%GRAY%] %NAME%
-ItemDisplay[CL1 !ETH (NMAG OR RW) SK221>2 !SOCK=1]: %GRAY%[%WHITE%3rvn%GRAY%] %NAME%
-ItemDisplay[CL1 !ETH (NMAG OR RW) SK227>2 !SOCK=1]: %GRAY%[%WHITE%3swf%GRAY%] %NAME%
-ItemDisplay[CL1 !ETH (NMAG OR RW) SK237>2 !SOCK=1]: %GRAY%[%WHITE%3dwf%GRAY%] %NAME%
-ItemDisplay[CL1 !ETH (NMAG OR RW) SK238>2 !SOCK=1]: %GRAY%[%WHITE%3rbs%GRAY%] %NAME%
-ItemDisplay[CL1 !ETH (NMAG OR RW) SK247>2 !SOCK=1]: %GRAY%[%WHITE%3gzy%GRAY%] %NAME%
-ItemDisplay[CL1 !ETH (NMAG OR RW) SK250>2 !SOCK=1]: %GRAY%[%WHITE%3hur%GRAY%] %NAME%
-ItemDisplay[CL1 !ETH (NMAG OR RW) SK249>2 !SOCK=1]: %GRAY%[%WHITE%3agn%GRAY%] %NAME%
-ItemDisplay[CL1 !ETH (NMAG OR RW) SK245>2 !SOCK=1]: %GRAY%[%WHITE%3tno%GRAY%] %NAME%
-ItemDisplay[CL1 !ETH (NMAG OR RW) SK244>2 !SOCK=1]: %GRAY%[%WHITE%3vno%GRAY%] %NAME%
-ItemDisplay[CL1 !ETH (NMAG OR RW) SK240>2 !SOCK=1]: %GRAY%[%WHITE%3tsr%GRAY%] %NAME%
-ItemDisplay[CL1 !ETH (NMAG OR RW) SK243>2 !SOCK=1]: %GRAY%[%WHITE%3swv%GRAY%] %NAME%
-ItemDisplay[CL1 !ETH (NMAG OR RW) SK238>2 !SOCK=1]: %GRAY%[%WHITE%3rbs%GRAY%] %NAME%
-ItemDisplay[CL1 !ETH (NMAG OR RW) SK239>2 !SOCK=1]: %GRAY%[%WHITE%3fcw%GRAY%] %NAME%
-ItemDisplay[CL1 !ETH (NMAG OR RW) SK225>2 !SOCK=1]: %GRAY%[%WHITE%3fst%GRAY%] %NAME%
-// Shields
-ItemDisplay[pab ETH (NMAG OR RW) (SOCK=0 OR SOCK=4) RES>34]: %GRAY%[%WHITE%res%GRAY%] %NAME%
-ItemDisplay[pab !ETH (NMAG OR RW) (SOCK=0 OR SOCK>2) RES>34]: %GRAY%[%WHITE%res%GRAY%] %NAME%
-ItemDisplay[CL3 !ETH (NMAG OR RW) (SOCK=0 OR SOCK>2) (RES>34 AND CLVL<81)]: %GRAY%[%WHITE%res%GRAY%] %NAME%
-ItemDisplay[ush !ETH (NMAG OR RW) SOCK>1]: %NAME%
-ItemDisplay[uit ETH (NMAG OR RW) (SOCK=0 OR SOCK=4)]: %NAME%
-ItemDisplay[uit !ETH (NMAG OR RW) (SOCK=0 OR SOCK=4)]: %GRAY%%NAME%
 // Runes (some small modifications done by me)
 ItemDisplay[r01 OR r02 OR r03 OR r07 OR r10 OR r14 OR r16 OR r17]: %ORANGE%%RUNENAME% %GRAY%[%WHITE%%RUNENUM%%GRAY%]
 ItemDisplay[r04 OR r05 OR r06 OR r08 OR r09 OR r11 OR r12 OR r13 OR r15]: %ORANGE%%RUNENAME% %TAN%[%WHITE%%RUNENUM%%TAN%]
@@ -334,7 +493,7 @@ ItemDisplay[(EQ4 OR EQ5 OR EQ6) RARE]: %NAME%
 // +3bo weapons and +3/20 gloves and +6foh scpeters
 ItemDisplay[WEAPON TABSK34>2]: %RED%»» »» »» %GREEN%3bo weapon%RED% «« «« ««
 ItemDisplay[EQ4 (TABSK0>2 OR TABSK2>2 OR TABSK50>2) IAS>19]: %RED%»» »» »» %GREEN%3/20 Gloves%RED% «« «« ««
-ItemDisplay[WP13 (TABSK24>2 AND SK119>2)]: %RED%»» »» »» %GREEN%FoH Scepter%RED% «« «« ««
+ItemDisplay[WP13 (TABSK24>2 SK119>2)]: %RED%»» »» »» %GREEN%FoH Scepter%RED% «« «« ««
 // "`-._,-'"`-._,-'"`-._,-'"`-._,-' <- Kryszard V1.9 "`-._,-'"`-._,-'"`-._,-'"`-._,-'
 
 // "`-._,-'"`-._,-'"`-._,-'"`-._,-' Imbuables "`-._,-'"`-._,-'"`-._,-'"`-._,-'

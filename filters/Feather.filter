@@ -1,12 +1,12 @@
 //═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 /	"Feather" Item Filter for Diablo II: Path of Diablo
-/		Date Updated:	22 AUG 2020
+/		Date Updated:	17 OCT 2020
 /		Info:		https://github.com/BetweenWalls/Feather
 /		Direct URL:     https://raw.githubusercontent.com/BetweenWalls/Feather/master/item.filter
 //═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 / Notes:
 /	All hidden items are preceded by "hidden" and a short description
-/	This file was created in Notepad++, and may display incorrectly with other programs or settings  (8-space tabs, UTF-8 encoding, Courier New)
+/	This file was created in Notepad++, and may display incorrectly with other programs or settings  (8-space tabs, UTF-8 encoding, Courier New, no line wrapping)
 //═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 
 
@@ -16,8 +16,13 @@
 // └──────────────────┘
 // Hidden: smaller gold piles - levels 10, 20, 30, 50, 70, 80, 90
 ItemDisplay[((GOLD<5000 CLVL>89 CHARSTAT15>500000) OR (GOLD<3000 CLVL>79 CHARSTAT15>350000) OR (GOLD<1800 CLVL>69 CHARSTAT15>200000) OR (GOLD<1200 CLVL>49) OR (GOLD<600 CLVL>29) OR (GOLD<300 CLVL>19) OR (GOLD<100 CLVL>9) OR GOLD<30)]:
+ItemDisplay[GOLD>0]: %NAME%
 
-// Hidden: minor, lesser, standard, & greater potions - levels 18, 30, 40, 75
+// Hidden: Super Life/Mana Potions when life/mana is nearly full - level 80		...Note: Potions that are already loaded won't be entirely hidden (they'll have a blank name instead)
+ItemDisplay[hp5 CLVL>79 ((CHARSTAT6>20000 CHARSTAT7<25000) OR (CHARSTAT6>40000 CHARSTAT7<50000) OR (CHARSTAT6>60000 CHARSTAT7<75000) OR (CHARSTAT6>80000 CHARSTAT7<100000) OR (CHARSTAT6>100000 CHARSTAT7<125000) OR (CHARSTAT6>140000 CHARSTAT7<175000) OR (CHARSTAT6>180000 CHARSTAT7<225000) OR (CHARSTAT6>240000 CHARSTAT7<300000) OR (CHARSTAT6>300000 CHARSTAT7<375000) OR (CHARSTAT6>380000 CHARSTAT7<475000) OR (CHARSTAT6>480000 CHARSTAT7<600000) OR (CHARSTAT6>600000 CHARSTAT7<750000) OR (CHARSTAT6>760000 CHARSTAT7<950000) OR (CHARSTAT6>960000 CHARSTAT7<1200000) OR (CHARSTAT6>1200000 CHARSTAT7<1500000) OR (CHARSTAT6>1500000 CHARSTAT7<1875000) OR (CHARSTAT6>1880000 CHARSTAT7<2350000) OR (CHARSTAT6>2360000 CHARSTAT7<2950000))]:
+ItemDisplay[mp5 CLVL>79 ((CHARSTAT8>20000 CHARSTAT9<25000) OR (CHARSTAT8>40000 CHARSTAT9<50000) OR (CHARSTAT8>60000 CHARSTAT9<75000) OR (CHARSTAT8>80000 CHARSTAT9<100000) OR (CHARSTAT8>100000 CHARSTAT9<125000) OR (CHARSTAT8>140000 CHARSTAT9<175000) OR (CHARSTAT8>180000 CHARSTAT9<225000) OR (CHARSTAT8>240000 CHARSTAT9<300000) OR (CHARSTAT8>300000 CHARSTAT9<375000) OR (CHARSTAT8>380000 CHARSTAT9<475000) OR (CHARSTAT8>480000 CHARSTAT9<600000) OR (CHARSTAT8>600000 CHARSTAT9<750000) OR (CHARSTAT8>760000 CHARSTAT9<950000) OR (CHARSTAT8>960000 CHARSTAT9<1200000) OR (CHARSTAT8>1200000 CHARSTAT9<1500000))]:
+
+// Hidden: Minor, Lesser, standard, & Greater potions - levels 18, 30, 40, 75
 ItemDisplay[(hp1 OR mp1) CLVL>17]:
 ItemDisplay[(hp2 OR mp2) CLVL>29]:
 ItemDisplay[(hp3 OR mp3) CLVL>39]:
@@ -44,6 +49,9 @@ ItemDisplay[ops]:	%DGREEN%[] %GRAY%f³			// Oil
 ItemDisplay[gpl]:	%DGREEN%[] %GRAY%p¹			// Strangling
 ItemDisplay[gpm]:	%DGREEN%[] %GRAY%p²			// Choking
 ItemDisplay[gps]:	%DGREEN%[] %GRAY%p³			// Rancid
+
+// Hidden: Antidote Potion - 90
+ItemDisplay[yps CLVL>89]:
 
 // Other Potions
 ItemDisplay[hp5]:	%RED%[] %WHITE%H			// Super Healing
@@ -85,8 +93,8 @@ ItemDisplay[maz]: %TAN%%NAME%%RED%				// Infernal Trial	("DClone")
 /ItemDisplay[ma8]: %NAME%					// Musty Crypt		(tier 2, yellow)
 /ItemDisplay[ma9]: %NAME%					// Dim Cellar		(tier 2, yellow)
 /ItemDisplay[ma2]: %NAME%					// Forgotten Desert	(tier 3, red)
-/ItemDisplay[ma7]: %NAME%					// Burnt Forest		(tier 3, red)
 /ItemDisplay[ma6]: %NAME%					// Ruined Citadel	(tier 3, red)
+/ItemDisplay[ma7]: %NAME%					// Burnt Forest		(tier 3, red)
 ItemDisplay[ma1 OR ma2 OR ma3 OR ma4 OR ma5 OR ma6 OR ma7 OR ma8 OR ma9 OR ma10]: %TAN%%NAME%
 // Legacy Items 
 /ItemDisplay[cm4]:	  Horadrim Sigil  			// Horadrim Sigil Grand Charm	(non-ladder only)
@@ -106,8 +114,9 @@ ItemDisplay[(hdm OR msf OR vip OR hst OR g33 OR qf1 OR qf2 OR hfh) SOCK=0]: %NAM
 // ┌──────┐
 //═╡ Gems ╞══════════════════════════════════════════════════════════════════════════════════════════════════════════════
 // └──────┘
-// Hidden: Chipped, Flawed & Standard gems - levels 30, 40, 60
-ItemDisplay[((GEMLEVEL=1 CLVL>29) OR (GEMLEVEL=2 CLVL>39) OR (GEMLEVEL=3 CLVL>59))]:
+// Hidden: Chipped, Flawed & standard gems - levels 30, 40, 60
+ItemDisplay[((GEMLEVEL=1 CLVL>29) OR (GEMLEVEL=2 CLVL>39) OR (GEMLEVEL=3 CLVL>59))]:	// no other conditions
+/ItemDisplay[((GEMLEVEL=1 !skc CLVL>29) OR (GEMLEVEL=2 !skf CLVL>39))]:			// don't hide Chipped/Flawed skulls (for recharging items) or standard gems (for creating Full Rejuvenation potions)
 
 // Gem Colors & Quality Differentiation
 ItemDisplay[GEMLEVEL=1]: *%ORANGE%]  %GRAY%%NAME%%CONTINUE%
@@ -188,8 +197,8 @@ ItemDisplay[(cm1 OR cm2 OR cm3) MAG]: %PURPLE%%NAME%%CONTINUE%
 // Show ilvl for Charm rerolling
 ItemDisplay[(cm1 OR cm3) MAG !ID (ILVL>90 OR (cm1 (ILVL=47 OR (ILVL>56 ILVL<63))))]:	  %NAME%  	
 ItemDisplay[((cm1 ILVL>46) OR (cm3 ILVL>49)) MAG !ID]:					 %NAME% 	
-ItemDisplay[(cm1 OR cm3) MAG (ILVL>90 OR (cm1 (ILVL=47 OR (ILVL>56 ILVL<63))))]: %NAME% %TAN%[L%ILVL%]		// Tan ilvl = best for rerolling
-ItemDisplay[((cm1 ILVL>46) OR (cm3 ILVL>49)) MAG]: %NAME% %GRAY%[L%ILVL%]					// Gray ilvl = okay for rerolling
+ItemDisplay[(cm1 OR cm3) MAG (ILVL>90 OR (cm1 (ILVL=47 OR (ILVL>56 ILVL<63))))]: %NAME% %TAN%[l%ILVL%]		// Tan ilvl = best for rerolling
+ItemDisplay[((cm1 ILVL>46) OR (cm3 ILVL>49)) MAG]: %NAME% %GRAY%[l%ILVL%]					// Gray ilvl = okay for rerolling
 
 
 // ┌───────────────────┐
@@ -221,7 +230,7 @@ ItemDisplay[(aq2 OR cq2) MAG !ID ((CLVL>39 !CHARSTAT70=500) OR CLVL>69)]:
 ItemDisplay[(aq2 OR cq2) !UNI]: %NAME%
 
 // Jewelry
-ItemDisplay[MAG ID ((amu ILVL>81) OR (rin ILVL>61))]: %NAME% %GRAY%[L%ILVL%]	// ilvl for crafting
+ItemDisplay[MAG ID ((amu ILVL>81) OR (rin ILVL>61))]: %NAME% %GRAY%[l%ILVL%]	// ilvl for crafting
 ItemDisplay[(amu OR rin) RARE !ID]:	  %NAME%  				// rare jewelry highlighted
 ItemDisplay[(amu OR rin) (MAG OR RARE)]: %NAME%
 
@@ -239,7 +248,7 @@ ItemDisplay[RARE ID]: %NAME%
 ItemDisplay[RW]: %NAME%
 
 // Crafted Items
-ItemDisplay[ID !(NMAG OR MAG OR RARE) (ILVL<71 OR (amu ILVL<90) OR (rin (ILVL<78 OR ITEMSTAT62>5)) OR (WEAPON ILVL<77) OR (EQ2 ILVL<74))]: %NAME% %GRAY%[L%ILVL%]
+ItemDisplay[ID !(NMAG OR MAG OR RARE) (ILVL<71 OR (amu ILVL<90) OR (rin (ILVL<78 OR ITEMSTAT62>5)) OR (WEAPON ILVL<77) OR (EQ2 ILVL<74))]: %NAME% %GRAY%[l%ILVL%]
 ItemDisplay[ID !(NMAG OR MAG OR RARE)]: %NAME%
 
 
@@ -249,9 +258,15 @@ ItemDisplay[ID !(NMAG OR MAG OR RARE)]: %NAME%
 // Popular Recipe Ingredients
 ItemDisplay[MAG !ID ILVL>47 (vgl OR xvg OR uvg OR tbt OR xtb OR utb OR zmb OR umc OR lgl OR xlg OR ulg OR lbt OR xlb OR ulb OR zvb OR uvc OR mgl OR xmg OR umg OR ztb OR utc OR uit)]: %NAME% %ORANGE%*
 
-// Hidden: Normal & Exceptional (not recipe ingredients or class items or exceptional throwing weapons) - level 40 & 70
+// Hidden: Normal & Exceptional non-class non-circlet items from maps - level 80
+ItemDisplay[MAG !ID (NORM OR EXC) CLVL>80 ILVL>85 !(CL1 OR CL2 OR CL3 OR CL4 OR CL5 OR CL6 OR CL7 OR WP11 OR WP12 OR WP13 OR EQ7)]:
+
+// Hidden: Unworthy elite items from maps (not class items, recipe ingredients, circlets, or high-price throwables) - level 80
+ItemDisplay[MAG !ID ELT CLVL>80 ILVL>85 ((WEAPON !(WP1 OR WP2 OR (WP5 !7b8) OR WP11 OR WP12 OR WP13 OR CL5 OR CL6 OR CL7)) OR (ARMOR !(CL1 OR CL2 OR CL3 OR CL4 OR EQ7 OR (upk OR uml OR uts OR uit) OR (ulm OR usk OR uhl OR urn) OR (ult OR utp OR uld OR urs) OR (uvg OR ulg OR umg OR uhg) OR (utb OR ulb OR umb OR uhb) OR (umc OR uvc OR utc OR ulc))))]:
+
+// Hidden: Unworthy normal & exceptional items (not class items, recipe ingredients, circlets, or high-price throwables) - level 40 & 70
 ItemDisplay[MAG !ID (NORM CLVL>39) ((WEAPON (WP3 OR WP4 OR WP8 OR ((WP5 OR WP7 OR WP9) !CL7))) OR (ARMOR !(CL1 OR CL2 OR CL3 OR CL4 OR EQ7 OR (spk OR sml OR gts OR kit) OR (hlm OR msk OR fhl OR crn) OR (plt OR ltp OR fld OR brs) OR (vgl OR lgl OR mgl OR hgl) OR (tbt OR lbt OR mbt OR hbt) OR (mbl OR vbl OR tbl OR lbl))))]:
-ItemDisplay[MAG !ID (EXC CLVL>69)  ((WEAPON (WP3 OR (WP4 !WP5) OR WP8 OR ((WP7 OR WP9) !CL7))) OR (ARMOR !(CL1 OR CL2 OR CL3 OR CL4 OR EQ7 OR (xpk OR xml OR xts OR xit) OR (xlm OR xsk OR xhl OR xrn) OR (xlt OR xtp OR xld OR xrs) OR (xvg OR xlg OR xmg OR xhg) OR (xtb OR xlb OR xmb OR xhb) OR (zmb OR zvb OR ztb OR zlb))))]:
+ItemDisplay[MAG !ID (EXC CLVL>69) ((WEAPON (WP3 OR (WP4 !WP5) OR WP8 OR ((WP7 OR WP9) !CL7))) OR (ARMOR !(CL1 OR CL2 OR CL3 OR CL4 OR EQ7 OR (xpk OR xml OR xts OR xit) OR (xlm OR xsk OR xhl OR xrn) OR (xlt OR xtp OR xld OR xrs) OR (xvg OR xlg OR xmg OR xhg) OR (xtb OR xlb OR xmb OR xhb) OR (zmb OR zvb OR ztb OR zlb))))]:
 
 // Modification: Ethereal
 ItemDisplay[MAG ETH]: %GRAY%eth %BLUE%%NAME%%CONTINUE%
@@ -284,11 +299,18 @@ ItemDisplay[RARE !ID]: %NAME%
 //    gloves, boots, belts
 //    1-socket
 //    daggers/shields incapable of 2 sockets, 5 socket bows
-//    normal throwing weapons
+//    low-value throwing weapons
+//    inferior
 ItemDisplay[NMAG CLVL>14 (EQ4 OR EQ5 OR EQ6)]:
 ItemDisplay[NMAG CLVL>14 !(CL1 OR CL2 OR CL4 OR CL5 OR CL6 OR WP11 OR WP12 OR WP13) SOCK=1]:
 ItemDisplay[NMAG CLVL>14 (dgr OR 9dg OR 7dg OR dir OR 9di OR 7di OR buc OR xuc OR (WP9 (SOCK=5 OR (SOCK=0 ILVL>40 SUP (CL7 OR lbw OR 8lb OR 6lb OR sbb OR 8s8 OR 6s7 OR swb OR 8sw OR 6sw OR rxb OR 8rx OR 6rx)))))]:
-ItemDisplay[NMAG CLVL>14 NORM (WP5 !CL7)]:
+ItemDisplay[NMAG CLVL>14 (NORM OR 9b8 OR 7b8) (WP5 !CL7)]:
+ItemDisplay[NMAG CLVL>14 INF !(CL1 OR CL2 OR CL3 OR CL4 OR CL5 OR CL6 OR CL7 OR WP11 OR WP12 OR WP13)]:
+
+// Hidden: Non-superior non-class items from maps (low/zero-socket normal, non-eth 0-socket exceptional, non-eth 0-socket elites that cannot have more than 2 sockets) - level 80
+ItemDisplay[NMAG NORM !SUP SOCK<3 CLVL>80 ILVL>85 !(CL1 OR CL2 OR CL3 OR CL4 OR CL5 OR CL6 OR CL7 OR WP11 OR WP12 OR WP13 OR EQ7)]:
+ItemDisplay[NMAG EXC !SUP !(SOCK>0 OR ETH) CLVL>80 ILVL>85 !(CL1 OR CL2 OR CL3 OR CL4 OR CL5 OR CL6 OR CL7 OR WP11 OR WP12 OR WP13 OR EQ7)]:
+ItemDisplay[NMAG ELT !SUP !(SOCK>0 OR ETH) CLVL>80 ILVL>85 (uap OR ukp OR ulm OR uhl OR uuc OR uml OR 7ha OR 7cl OR 7sp OR 7ma OR 7ss OR 7sm OR 7sb OR 7fc OR 7bl)]:
 
 // Hidden: Skill-Capable Items without skills  (ilvl 10+)
 //    GROUP			EXCEPTIONS							LEVEL
@@ -326,7 +348,7 @@ ItemDisplay[ITEMSTAT91=-5 NMAG]: %NAME% %BLUE%-5%CONTINUE%
 ItemDisplay[NMAG SOCK>0]: %NAME% %GRAY%[%SOCKETS%]%CONTINUE%
 
 // Show ilvl for 0-socket swords that will get 4-sockets via Larzuk's quest (Spirit RW) - until level 60
-ItemDisplay[NMAG CLVL<60 SOCK=0 ILVL>25 ((crs ILVL<41) OR (bsd OR lsd))]: %NAME% %GRAY%[L%ILVL%]
+ItemDisplay[NMAG CLVL<60 SOCK=0 ILVL>25 ((crs ILVL<41) OR (bsd OR lsd))]: %NAME% %GRAY%[l%ILVL%]
 
 // Highlighting
 //    eth armor with high defense: heavy 800+, medium 750+, light 700+
@@ -481,15 +503,15 @@ ItemDisplay[(MAG (WEAPON !(WP8 OR (WP7 !WP6))) TABSK34>2)]: %NAME% %ORANGE%+3 Wa
 ItemDisplay[MAG (WP2 TABSK40>2)]: %NAME% %TAN%+3 Summoning
 
 // Popular Crafting Ingredients  (identified)
-ItemDisplay[MAG ILVL>47 (vgl OR xvg OR uvg)]:	%NAME% %TAN%(%WHITE%4%TAN%)%GRAY%±%ORANGE%[%RED%@%ORANGE%] %GRAY%[L%ILVL%]		// Blood Gloves
-ItemDisplay[MAG ILVL>47 (tbt OR xtb OR utb)]:	%NAME% %TAN%(%WHITE%5%TAN%)%GRAY%±%ORANGE%[%RED%@%ORANGE%] %GRAY%[L%ILVL%]		// Blood Boots
-ItemDisplay[MAG ILVL>47 (zmb OR umc)]:		%NAME% %TAN%(%WHITE%7%TAN%)%GRAY%±%ORANGE%[%RED%@%ORANGE%] %GRAY%[L%ILVL%]		// Blood Belt
-ItemDisplay[MAG ILVL>47 (lgl OR xlg OR ulg)]:	%NAME% %TAN%(%WHITE%9%TAN%)%GRAY%±%ORANGE%[%PURPLE%@%ORANGE%] %GRAY%[L%ILVL%]		// Caster Gloves
-ItemDisplay[MAG ILVL>47 (lbt OR xlb OR ulb)]:	%NAME% %TAN%(%WHITE%10%TAN%)%GRAY%±%ORANGE%[%PURPLE%@%ORANGE%] %GRAY%[L%ILVL%]		// Caster Boots
-ItemDisplay[MAG ILVL>47 (zvb OR uvc)]:		%NAME% %TAN%(%WHITE%6%TAN%)%GRAY%±%ORANGE%[%PURPLE%@%ORANGE%] %GRAY%[L%ILVL%]		// Caster Belt
-ItemDisplay[MAG ILVL>47 (mgl OR xmg OR umg)]:	%NAME% %TAN%(%WHITE%9%TAN%)%GRAY%±%ORANGE%[%BLUE%@%ORANGE%] %GRAY%[L%ILVL%]		// Hitpower Gloves
-ItemDisplay[MAG ILVL>47 (ztb OR utc)]:		%NAME% %TAN%(%WHITE%7%TAN%)%GRAY%±%ORANGE%[%BLUE%@%ORANGE%] %GRAY%[L%ILVL%]		// Hitpower Belt
-ItemDisplay[MAG ILVL>47 uit]:			%NAME% %TAN%(%WHITE%4%TAN%)%GRAY%±%ORANGE%[%GREEN%@%ORANGE%] %GRAY%[L%ILVL%]		// Safety Shield
+ItemDisplay[MAG ILVL>47 (vgl OR xvg OR uvg)]:	%NAME% %TAN%(%WHITE%4%TAN%)%GRAY%±%ORANGE%[%RED%@%ORANGE%] %GRAY%[l%ILVL%]		// Blood Gloves
+ItemDisplay[MAG ILVL>47 (tbt OR xtb OR utb)]:	%NAME% %TAN%(%WHITE%5%TAN%)%GRAY%±%ORANGE%[%RED%@%ORANGE%] %GRAY%[l%ILVL%]		// Blood Boots
+ItemDisplay[MAG ILVL>47 (zmb OR umc)]:		%NAME% %TAN%(%WHITE%7%TAN%)%GRAY%±%ORANGE%[%RED%@%ORANGE%] %GRAY%[l%ILVL%]		// Blood Belt
+ItemDisplay[MAG ILVL>47 (lgl OR xlg OR ulg)]:	%NAME% %TAN%(%WHITE%9%TAN%)%GRAY%±%ORANGE%[%PURPLE%@%ORANGE%] %GRAY%[l%ILVL%]		// Caster Gloves
+ItemDisplay[MAG ILVL>47 (lbt OR xlb OR ulb)]:	%NAME% %TAN%(%WHITE%10%TAN%)%GRAY%±%ORANGE%[%PURPLE%@%ORANGE%] %GRAY%[l%ILVL%]		// Caster Boots
+ItemDisplay[MAG ILVL>47 (zvb OR uvc)]:		%NAME% %TAN%(%WHITE%6%TAN%)%GRAY%±%ORANGE%[%PURPLE%@%ORANGE%] %GRAY%[l%ILVL%]		// Caster Belt
+ItemDisplay[MAG ILVL>47 (mgl OR xmg OR umg)]:	%NAME% %TAN%(%WHITE%9%TAN%)%GRAY%±%ORANGE%[%BLUE%@%ORANGE%] %GRAY%[l%ILVL%]		// Hitpower Gloves
+ItemDisplay[MAG ILVL>47 (ztb OR utc)]:		%NAME% %TAN%(%WHITE%7%TAN%)%GRAY%±%ORANGE%[%BLUE%@%ORANGE%] %GRAY%[l%ILVL%]		// Hitpower Belt
+ItemDisplay[MAG ILVL>47 uit]:			%NAME% %TAN%(%WHITE%4%TAN%)%GRAY%±%ORANGE%[%GREEN%@%ORANGE%] %GRAY%[l%ILVL%]		// Safety Shield
 
 // Catchall - Magic Items
 ItemDisplay[MAG]: %NAME%
