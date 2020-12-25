@@ -4,7 +4,7 @@
 var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"common"};
 var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:90,CHARSTAT70:0,CHARSTAT13:1000};
 var item_settings = {ID:false};
-var settings = {auto_difficulty:true};
+var settings = {auto_difficulty:true,pd2_option:1};
 var colors = {
 	White:"#dddddd",
 	Gray:"#707070",
@@ -30,7 +30,8 @@ function startup() {
 	document.getElementById("background_1").src = background
 	document.getElementById("background_2").src = background
 	loadCustomization()
-	/*
+	
+	// TODO: Add URL parameters for these options
 	document.getElementById("original").checked = false
 	toggleOriginalChoices(false)
 	document.getElementById("non_item_custom").checked = true
@@ -39,9 +40,11 @@ function startup() {
 	toggleCustom(true)
 	document.getElementById("custom_format").checked = true
 	toggleCustomFormat(true)
-	document.getElementById("debug").style.display = "block"
+	document.getElementById("pd2_option").checked = false
+	togglePD2Option(false)
+	
+	//document.getElementById("debug").style.display = "block"
 	//document.getElementById("simulate_custom").style.display = "block"
-	*/
 }
 
 // loadItems - adds equipment and other items to the item dropdown menu
@@ -332,6 +335,10 @@ function parseFile(file,num) {
 				display = "";
 				done = true;
 				var out_format = output.split(",").join("/").split(" ").join(", ,").split("%WHITE%").join(",color_White,").split("%GRAY%").join(",color_Gray,").split("%BLUE%").join(",color_Blue,").split("%YELLOW%").join(",color_Yellow,").split("%GOLD%").join(",color_Gold,").split("%GREEN%").join(",color_Green,").split("%DGREEN%").join(",color_DarkGreen,").split("%BLACK%").join(",color_Black,").split("%TAN%").join(",color_Tan,").split("%PURPLE%").join(",color_Purple,").split("%ORANGE%").join(",color_Orange,").split("%RED%").join(",color_Red,").split("%NAME%").join(",ref_NAME,").split("%CLVL%").join(",ref_CLVL,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("%CONTINUE%").join(",misc_CONTINUE,")
+				if (settings.pd2_option == 1) {
+					// TODO: disable %DGREEN%?
+					out_format = out_format.split("%DARK_GREEN%").join(",color_DarkGreen,").split("%QTY%").join(",ignore_Quantity,").split("%RANGE%").join(",ignore_range,").split("%WPNSPD%").join(",ignore_baseSpeed,").split("%ALVL%").join(",ignore_ALVL,").split("%NL%").join(",ignore_NL,").split("%MAP%").join(",ignore_MAP,")
+				}
 				var out_list = out_format.split(",");
 				for (out in out_list) {
 					var space = false;
@@ -352,6 +359,8 @@ function parseFile(file,num) {
 						else if (o == "ref_NAME") { temp = name_saved; name_current_rule = true; if (color_new_default == "" && color_current_rule != false && color != "") { color_new_default = color; } }
 						else { temp = itemToCompare[o.split("_")[1]]; }
 						obscured = false
+					} else if (key == "ignore" && settings.pd2_option == 1) {
+						temp = ""
 					} else if (o == " " && Number(out) <= 1 && output_with_tabs[0] == " ") {
 						temp = ""
 					} else if (o == " " && Number(out) > 0) {
@@ -361,6 +370,11 @@ function parseFile(file,num) {
 						space = true
 					} else {
 						obscured = false
+						if (settings.pd2_option == 1) {
+							if (o.slice(-1) == "%" && o.slice(-4,-3) == "-" && (o.slice(0,4) == "%PX-" || o.slice(0,5) == "%DOT-" || o.slice(0,5) == "%MAP-" || o.slice(0,8) == "%BORDER-")) {		// TODO: Make conditions stricter (check that length is correct and that 2-digit code is hexadecimal)
+								temp = ""
+							}
+						}
 					}
 					var colorize = false;
 					if (name_added == true && color != "") { colorize = true }
@@ -623,4 +637,11 @@ function setGoldChar(value) {
 function toggleOriginalChoices(checked)  {
 	if (checked == true) { document.getElementById("original_choices").style.display = "block" }
 	else { document.getElementById("original_choices").style.display = "none" }
+}
+
+// togglePD2Option - 
+// ---------------------------------
+function togglePD2Option(checked)  {
+	if (checked == true) { settings.pd2_option = 1 }
+	else { settings.pd2_option = 0 }
 }

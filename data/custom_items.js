@@ -1660,6 +1660,7 @@ function setItemFromCustom() {
 	}
 	//printAffixes()
 	setItemCodes()
+	setPD2Codes()
 	simulate()
 }
 
@@ -1730,3 +1731,52 @@ function setItemCodes() {
 	if (typeof(itemToCompare.ETH) == 'undefined') { itemToCompare.ETH = false }
 	if (typeof(itemToCompare.SOCK) == 'undefined') { itemToCompare.SOCK = 0 }
 }
+
+// setPD2Codes - sets item codes for Project D2
+// ---------------------------------
+function setPD2Codes() {
+	var code_originals = ["EQ1","EQ2","EQ3","EQ4","EQ5","EQ6","EQ7","WP1","WP2","WP3","WP4","WP5","WP6","WP7","WP8","WP9","WP10","WP11","WP12","WP13","CL1","CL2","CL3","CL4","CL5","CL6","CL7"];
+	var code_alternates = ["HELM","CHEST","SHIELD","GLOVES","BOOTS","BELT","CIRC","AXE","MACE","SWORD","DAGGER","THROWING","JAV","SPEAR","POLEARM","BOW","XBOW","STAFF","WAND","SCEPTER","DRU","BAR","DIN","NEC","SIN","SOR","ZON"];
+	if (settings.pd2_option == 1) { 
+		if (itemToCompare.WP5 == true || itemToCompare.WP7 == true) { itemToCompare.WP6 = true }
+		if (itemToCompare.CL3 == true || itemToCompare.CL4 == true) { itemToCompare.EQ3 = true }
+		if (itemToCompare.WP10 == true) { itemToCompare.WP9 = false }
+		if (itemToCompare.EQ7 == true) { itemToCompare.EQ1 = false }
+		for (let i = 0; i < code_originals.length; i++) {
+			if (itemToCompare[code_originals[i]] == true) { itemToCompare[code_alternates[i]] = true }
+		}
+	} else {
+		for (let i = 0; i < code_alternates.length; i++) {
+			if (itemToCompare[code_alternatives[i]] == true) { itemToCompare[code_alternates[i]] = false }
+		}
+		if ((itemToCompare.WP5 == true && itemToCompare.WP6 == true && itemToCompare.WP7 != true) || (itemToCompare.WP7 == true && itemToCompare.WP6 == true && itemToCompare.WP5 != true)) { itemToCompare.WP6 = false }
+		if ((itemToCompare.CL3 == true || itemToCompare.CL4 == true) && itemToCompare.EQ3 == true) { itemToCompare.EQ3 = false }
+		if (itemToCompare.WP10 == true) { itemToCompare.WP9 = true }
+		if (itemToCompare.EQ7 == true) { itemToCompare.EQ1 = true }
+	}
+}
+
+/* Notes about PD2 changes:
+	Implemented
+		* alternate codes for item groups
+		* item group difference: all WP5/WP7 items (throwing/spears) are also considered part of WP6 (javelins)
+		* item group difference: WP10 items (crossbows) are not included in WP9 (bows)
+		* item group difference: EQ7 items (circlets) are not included in EQ1 (helms)
+		* item group difference: all CL3/CL4 items (paladin/necromancer shields) are also considered part of EQ3 (shields)
+		* %DARK_GREEN% instead of %DGREEN%
+	Not Implemented
+		* CRAFT
+		* new keywords: %QTY%, %RANGE%, %WPNSPD%, %ALVL%, %NL%, %BORDER-00%, %MAP-00%, %DOT-00%, %PX-00%		// Currently ignored (instead of creating errors)
+		* {} used for item descriptions
+		* new codes for stacked gems (flawless/perfect) and stacked runes: normal code + s
+		* aqv & cqv for regular quivers, aq2 & cq2 removed
+		* new codes for PD2 items: wss, lbox, dcma, dcbl, dcho, dcso, imra, imma, scou, rera, upma, t11, t12, t13, t14, t15, t16, t17, t18
+		* new affix codes: AR, RES, FRES, CRES, LRES, PRES, FRW, MINDMG, MAXDMG, STR, DEX, MFIND, GFIND, MAEK, DTM, REPLIFE, REPAIR, ARPER, FOOLS
+		* Bul-Kathos' Death Band (new set ring)
+		* Infernal Torch (set wand) changed to Infernal Spike (set dagger)
+		* unique items with Indestructible changed to Repair-over-Time (can be ethereal now): The Gavel of Pain, Schaefer's Hammer, Doombringer, The Grandfather, Steel Pillar
+		* old codes for PoD items removed: cx5, cx6, cx7, maz, ma1, ma2, ma3, ma4, ma5, ma6, ma7, ma8, ma9, cm4, cx8
+		* numbered stats (ITEMSTAT, CHARSTAT) removed
+		* many unique/set/runeword item changes
+		* many skilltree changes
+*/
