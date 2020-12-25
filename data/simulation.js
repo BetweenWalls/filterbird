@@ -338,6 +338,20 @@ function parseFile(file,num) {
 				if (settings.pd2_option == 1) {
 					// TODO: disable %DGREEN%?
 					out_format = out_format.split("%DARK_GREEN%").join(",color_DarkGreen,").split("%QTY%").join(",ignore_Quantity,").split("%RANGE%").join(",ignore_range,").split("%WPNSPD%").join(",ignore_baseSpeed,").split("%ALVL%").join(",ignore_ALVL,").split("%NL%").join(",ignore_NL,").split("%MAP%").join(",ignore_MAP,")
+					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
+					for (n in notifs) {									// TODO: implement more efficient way to split notification keywords
+						if (out_format.includes(notifs[n])) {
+							for (let a = 0; a < 16; a++) {
+								for (let b = 0; b < 16; b++) {
+									var av = a.toString(16);
+									var bv = b.toString(16);
+									if (out_format.includes(notifs[n]+av+bv+"%") || out_format.includes(notifs[n]+av.toUpperCase()+bv.toUpperCase()+"%")) {
+										out_format = out_format.split(notifs[n]+av+bv+"%").join(",ignore_notif").split(notifs[n]+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,")
+									}
+								}
+							}
+						}
+					}
 				}
 				var out_list = out_format.split(",");
 				for (out in out_list) {
@@ -370,12 +384,17 @@ function parseFile(file,num) {
 						space = true
 					} else {
 						obscured = false
-						if (settings.pd2_option == 1) {
-							if (o.slice(-1) == "%" && o.slice(-4,-3) == "-" && (o.slice(0,4) == "%PX-" || o.slice(0,5) == "%DOT-" || o.slice(0,5) == "%MAP-" || o.slice(0,8) == "%BORDER-")) {		// TODO: Make conditions stricter (check that length is correct and that 2-digit code is hexadecimal)
-								temp = ""
+				/*		if (settings.pd2_option == 1) {
+							var o_length = o.length;
+							var valid_notification = false;
+							if (o_length == 7) { if (o.slice(-1) == "%" && o.slice(-4,-3) == "-" && o.slice(0,4) == "%PX-") { valid_notification = true } }
+							else if (o_length == 8) { if (o.slice(-1) == "%" && o.slice(-4,-3) == "-" && (o.slice(0,5) == "%DOT-" || o.slice(0,5) == "%MAP-")) { valid_notification = true } }
+							else if (o_length == 11) { if (o.slice(-1) == "%" && o.slice(-4,-3) == "-" && o.slice(0,8) == "%BORDER-") { valid_notification = true } }
+							if (valid_notification == true) {
+								temp = ""	// TODO: Make conditions stricter (check that 2-digit code is hexadecimal)
 							}
 						}
-					}
+				*/	}
 					var colorize = false;
 					if (name_added == true && color != "") { colorize = true }
 					if (name_added == false && (color_current_rule == true || o == " ")) { colorize = true }
