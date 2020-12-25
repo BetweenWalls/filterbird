@@ -979,7 +979,9 @@ function doRuneword(selected) {
 	if (selected > 0) {
 		var group = document.getElementById("dropdown_group").value;
 		for (itemNew in runeword_stats[group]) {
-			if (runeword_stats[group][itemNew].name == document.getElementById("dropdown_runeword").value) {
+			var rw_name = runeword_stats[group][itemNew].name;
+		//	if (rw_name == "Infinity") { rw_name = "infinity" }
+			if (rw_name == document.getElementById("dropdown_runeword").value) {
 				for (affix in runeword_stats[group][itemNew]) {
 					var statNew = runeword_stats[group][itemNew][affix];
 					if (typeof(statNew) == 'string' || typeof(statNew) == 'number' || affix == "ctc" || affix == "cskill") {
@@ -1654,6 +1656,7 @@ function setItemFromCustom() {
 	}
 	if (itemToCompare.rarity == "rw") {
 		var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
+	//	if (rw_name == "Infinity") { rw_name = "infinity" }
 		var s = 0;
 		for (let i = 0; i < runewords[rw_name].runes.length; i++) { s+=1; }
 		itemToCompare.sockets = s
@@ -1738,21 +1741,21 @@ function setPD2Codes() {
 	var code_originals = ["EQ1","EQ2","EQ3","EQ4","EQ5","EQ6","EQ7","WP1","WP2","WP3","WP4","WP5","WP6","WP7","WP8","WP9","WP10","WP11","WP12","WP13","CL1","CL2","CL3","CL4","CL5","CL6","CL7"];
 	var code_alternates = ["HELM","CHEST","SHIELD","GLOVES","BOOTS","BELT","CIRC","AXE","MACE","SWORD","DAGGER","THROWING","JAV","SPEAR","POLEARM","BOW","XBOW","STAFF","WAND","SCEPTER","DRU","BAR","DIN","NEC","SIN","SOR","ZON"];
 	if (settings.pd2_option == 1) { 
-		if (itemToCompare.WP5 == true || itemToCompare.WP7 == true) { itemToCompare.WP6 = true }
-		if (itemToCompare.CL3 == true || itemToCompare.CL4 == true) { itemToCompare.EQ3 = true }
-		if (itemToCompare.WP10 == true) { itemToCompare.WP9 = false }
-		if (itemToCompare.EQ7 == true) { itemToCompare.EQ1 = false }
+		if (typeof(itemToCompare.WP5) != 'undefined' || typeof(itemToCompare.WP7) != 'undefined') { if (itemToCompare.WP5 == true || itemToCompare.WP7 == true) { itemToCompare.WP6 = true } }
+		if (typeof(itemToCompare.CL3) != 'undefined' || typeof(itemToCompare.CL4) != 'undefined') { if (itemToCompare.CL3 == true || itemToCompare.CL4 == true) { itemToCompare.EQ3 = true } }
+		if (typeof(itemToCompare.WP10) != 'undefined') { if (itemToCompare.WP10 == true) { itemToCompare.WP9 = false } }
+		if (typeof(itemToCompare.EQ7) != 'undefined') { if (itemToCompare.EQ7 == true) { itemToCompare.EQ1 = false } }
 		for (let i = 0; i < code_originals.length; i++) {
-			if (itemToCompare[code_originals[i]] == true) { itemToCompare[code_alternates[i]] = true }
+			if (typeof(itemToCompare[code_originals[i]]) != 'undefined') { if (itemToCompare[code_originals[i]] == true) { itemToCompare[code_alternates[i]] = true } }
 		}
 	} else {
 		for (let i = 0; i < code_alternates.length; i++) {
-			if (itemToCompare[code_alternatives[i]] == true) { itemToCompare[code_alternates[i]] = false }
+			if (typeof(itemToCompare[code_alternates[i]]) != 'undefined') { if (itemToCompare[code_alternatives[i]] == true) { itemToCompare[code_alternates[i]] = false } }
 		}
-		if ((itemToCompare.WP5 == true && itemToCompare.WP6 == true && itemToCompare.WP7 != true) || (itemToCompare.WP7 == true && itemToCompare.WP6 == true && itemToCompare.WP5 != true)) { itemToCompare.WP6 = false }
-		if ((itemToCompare.CL3 == true || itemToCompare.CL4 == true) && itemToCompare.EQ3 == true) { itemToCompare.EQ3 = false }
-		if (itemToCompare.WP10 == true) { itemToCompare.WP9 = true }
-		if (itemToCompare.EQ7 == true) { itemToCompare.EQ1 = true }
+		if (typeof(itemToCompare.WP5) != 'undefined' && typeof(itemToCompare.WP6) != 'undefined' && typeof(itemToCompare.WP7) != 'undefined') { if ((itemToCompare.WP5 == true && itemToCompare.WP6 == true && itemToCompare.WP7 != true) || (itemToCompare.WP7 == true && itemToCompare.WP6 == true && itemToCompare.WP5 != true)) { itemToCompare.WP6 = false } }
+		if ((typeof(itemToCompare.CL3) != 'undefined' || typeof(itemToCompare.CL4) != 'undefined') && typeof(itemToCompare.EQ3) != 'undefined') { if ((itemToCompare.CL3 == true || itemToCompare.CL4 == true) && itemToCompare.EQ3 == true) { itemToCompare.EQ3 = false } }
+		if (typeof(itemToCompare.WP10) != 'undefined') { if (itemToCompare.WP10 == true) { itemToCompare.WP9 = true } }
+		if (typeof(itemToCompare.EQ7) != 'undefined') { if (itemToCompare.EQ7 == true) { itemToCompare.EQ1 = true } }
 	}
 }
 
@@ -1765,6 +1768,7 @@ function setPD2Codes() {
 		* item group difference: all CL3/CL4 items (paladin/necromancer shields) are also considered part of EQ3 (shields)
 		* %DARK_GREEN% instead of %DGREEN%
 	Not Implemented
+		* DIFF instead of DIFFICULTY
 		* CRAFT
 		* new keywords: %QTY%, %RANGE%, %WPNSPD%, %ALVL%, %NL%, %BORDER-00%, %MAP-00%, %DOT-00%, %PX-00%		// Currently ignored (instead of creating errors)
 		* {} used for item descriptions

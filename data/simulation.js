@@ -176,6 +176,7 @@ function setItem(value) {
 			} else { itemToCompare.UNI = true }
 			if (itemToCompare.RW == true) {
 				var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
+			//	if (rw_name == "Infinity") { rw_name = "infinity" }
 				var s = 0;
 				for (let i = 0; i < runewords[rw_name].runes.length; i++) { s+=1; }
 				itemToCompare.sockets = s
@@ -469,6 +470,7 @@ function equipmentHover(num) {
 	}
 	if (itemToCompare.RW == true) {
 		var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
+	//	if (rw_name == "Infinity") { rw_name = "infinity" }
 		var runes = "";
 		for (let i = 0; i < runewords[rw_name].runes.length; i++) { runes += runewords[rw_name].runes[i]; }
 		name += "<br>"+"<l style='color:"+colors.Gold+"'>'"+runes+"'</l>"
