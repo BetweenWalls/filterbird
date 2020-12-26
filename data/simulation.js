@@ -285,8 +285,8 @@ function parseFile(file,num) {
 	}
 	var done = false;
 	var rules_checked = 0;
-	//var lines = file.split("\t").join("").split("­").join("•").split("\n");
-	var lines = file.split("­").join("•").split("\n");
+	var lines = file.split("\t").join("").split("­").join("•").split("\n");
+	var lines_with_tabs = file.split("­").join("•").split("\n");
 	for (line in lines) { if (done == false) {
 		var line_num = Number(line)+1;
 		document.getElementById("o3").innerHTML += "ERROR: Cannot Evaluate<br>"+"#"+num+" Invalid formatting found at line "+line_num+" (rule "+(rules_checked+1)+") ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l>"
@@ -299,7 +299,8 @@ function parseFile(file,num) {
 			var formula = "";
 			var rulesub = rule.substr(0,index)+rule.substr(index+12);
 			var conditions = rulesub.split("]:")[0];
-			var output = rulesub.split("]:")[1];
+			var output = lines_with_tabs[line].substr(0,index)+lines_with_tabs[line].substr(index+12);
+			output = output.split("]:")[1]
 			if (conditions[conditions.length-1] == " ") { conditions = conditions.substr(0,conditions.length-1) }
 			if (index_end > index+12) {
 				var cond_format = conditions.split("  ").join(" ").split("(").join(",(,").split(")").join(",),").split("!").join(",!,").split("<=").join(",≤,").split(">=").join(",≥,").split(">").join(",>,").split("<").join(",<,").split("=").join(",=,").split(" AND ").join(" ").split(" OR ").join(",|,").split("+").join(",+,").split(" ").join(",&,").split(",,").join(",");
@@ -344,7 +345,7 @@ function parseFile(file,num) {
 				if (settings.pd2_option == 1) { if (output.includes("{") == true && output.includes("}") == true) { if (output.indexOf("{") < output.lastIndexOf("}")) { description_active = true } } }
 				display = "";
 				done = true;
-				var out_format = output.split(",").join("/").split(" ").join(", ,").split("%WHITE%").join(",color_White,").split("%GRAY%").join(",color_Gray,").split("%BLUE%").join(",color_Blue,").split("%YELLOW%").join(",color_Yellow,").split("%GOLD%").join(",color_Gold,").split("%GREEN%").join(",color_Green,").split("%DGREEN%").join(",color_DarkGreen,").split("%BLACK%").join(",color_Black,").split("%TAN%").join(",color_Tan,").split("%PURPLE%").join(",color_Purple,").split("%ORANGE%").join(",color_Orange,").split("%RED%").join(",color_Red,").split("%NAME%").join(",ref_NAME,").split("%CLVL%").join(",ref_CLVL,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("%CONTINUE%").join(",misc_CONTINUE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},")
+				var out_format = output.split(",").join("‾").split(" ").join(", ,").split("%WHITE%").join(",color_White,").split("%GRAY%").join(",color_Gray,").split("%BLUE%").join(",color_Blue,").split("%YELLOW%").join(",color_Yellow,").split("%GOLD%").join(",color_Gold,").split("%GREEN%").join(",color_Green,").split("%DGREEN%").join(",color_DarkGreen,").split("%BLACK%").join(",color_Black,").split("%TAN%").join(",color_Tan,").split("%PURPLE%").join(",color_Purple,").split("%ORANGE%").join(",color_Orange,").split("%RED%").join(",color_Red,").split("%NAME%").join(",ref_NAME,").split("%CLVL%").join(",ref_CLVL,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("%CONTINUE%").join(",misc_CONTINUE,").split("\t").join(",\t,").split("/").join(",/,").split("{").join(",{,").split("}").join(",},")
 				if (settings.pd2_option == 1) {
 					// TODO: disable %DGREEN%?
 					out_format = out_format.split("%DARK_GREEN%").join(",color_DarkGreen,").split("%QTY%").join(",ignore_Quantity,").split("%RANGE%").join(",ignore_range,").split("%WPNSPD%").join(",ignore_baseSpeed,").split("%ALVL%").join(",ignore_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,")
@@ -367,6 +368,20 @@ function parseFile(file,num) {
 				var out_list = out_format.split(",");
 				if (out_list[0] == "") { out_list.shift() }
 				if (out_list[out_list.length-1] == "") { out_list.pop() }
+				for (out in out_list) {
+					var o = out_list[out];
+					if (description_active == true && ((o == "{" && description_braces == 0) || (o == "}" && description_braces == 1))) { description_braces = description_braces+1 }
+					if (description_braces == 1) { if (o == "/") { out_list[out] = "‡" } }
+				}
+				description_braces = 0
+				for (let i = 0; i < out_list.length; i++) {
+					if (out_list[i] == "/") {
+						for (let j = out_list.length-1; j >= i; j--) {
+							out_list.pop()
+						}
+						i = out_list.length
+					}
+				}
 				var trailingTabs = false;
 				for (let i = out_list.length-1; i > 0; i--) {
 					if (out_list[i] == " " && trailingTabs == false) { out_list.pop() }
@@ -382,7 +397,7 @@ function parseFile(file,num) {
 				for (out in out_list) {
 					var space = false;
 					var prev_color = color;
-					var o = out_list[out].split("/").join(",");
+					var o = out_list[out].split("‾").join(",");
 					var temp = o;
 					var key = o.split("_")[0];
 					if (key == "misc") {
@@ -408,6 +423,8 @@ function parseFile(file,num) {
 						space = true
 					} else if (o == "\t") {
 						temp = ""
+					} else if (o == "‡") {
+						temp = "/"
 					} else {
 						obscured = false
 						if (description_active == true) {

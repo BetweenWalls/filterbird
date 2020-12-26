@@ -1778,7 +1778,7 @@ function setPD2Codes() {
 		* {} used for item descriptions
 		* %NL% allows multiple lines
 	Not Implemented
-		* new codes: CRAFT, PRICE, QTY, ALVL, QLVL, CRAFTALVL
+		* new codes: LVLREQ, PRICE, QTY, ALVL, QLVL, CRAFTALVL, CRAFT
 		* new keywords: %QTY%, %RANGE%, %WPNSPD%, %ALVL%, %BORDER-00%, %MAP-00%, %DOT-00%, %PX-00%		// Currently ignored (instead of erroneously being displayed in the item name)
 		* new codes for stacked gems (flawless/perfect) and stacked runes: normal code + s
 		* aqv & cqv for regular quivers, aq2 & cq2 removed
