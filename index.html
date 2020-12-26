@@ -22,7 +22,7 @@
 			<button class="nav-dropbtn">Options</button>
 			<div class="nav-dropdown-content">
 				<div class="nav-dropdown-content-item"><div class="nav-option">
-					<input id="original" type="checkbox" name="original" onclick="toggleOriginalChoices(this.checked);" checked=true>
+					<input id="original" type="checkbox" name="original" onclick="toggleOriginalChoices(this.checked);" checked>
 					<label for="original">Original Options</label>
 				</div></div>
 				<div class="nav-dropdown-content-item"><div class="nav-option">
@@ -38,7 +38,7 @@
 					<label for="custom_format">Alternate Format</label>
 				</div></div>
 				<div class="nav-dropdown-content-item"><div class="nav-option">
-					<input id="pd2_option" type="checkbox" name="pd2_option" onclick="togglePD2Option(this.checked);" checked=true>
+					<input id="pd2_option" type="checkbox" name="pd2_option" onclick="togglePD2Option(this.checked);" checked>
 					<label for="pd2_option">Allow PD2 Codes</label>
 				</div></div>
 			</div>
@@ -52,6 +52,8 @@
 	  <div class ="hover" style="position:absolute;" id="tooltip_inventory">
 		<a id="item_name" style="display:block;"></a>
 		<a id="item_info" style="display:block; color:#dddddd;"></a>
+		<a id="item_desc1" style="display:none;"></a>
+		<a id="item_desc2" style="display:none;"></a>
 		<a id="item_affixes" style="display:block; color:#6666bb;"></a>
 	  </div>
 	</div>

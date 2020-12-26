@@ -41,7 +41,7 @@ function startup() {
 	document.getElementById("custom_format").checked = true
 	toggleCustomFormat(true)
 	document.getElementById("pd2_option").checked = false
-	togglePD2Option(false)
+	settings.pd2_option = 0
 	
 	//document.getElementById("debug").style.display = "block"
 	//document.getElementById("simulate_custom").style.display = "block"
@@ -130,7 +130,7 @@ function setItem(value) {
 			for (affix in item) { itemToCompare[affix] = item[affix] }
 			itemToCompare.NAME = value.split(" (")[0].split(" ­ ")[0]
 			itemToCompare.ILVL = character.ILVL
-			itemToCompare.PRICE = 35000
+			itemToCompare.PRICE = 29999
 			itemToCompare.ID = true
 			if (typeof(itemToCompare.base) != 'undefined') {
 				var base = bases[itemToCompare.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
@@ -176,7 +176,7 @@ function setItem(value) {
 			} else { itemToCompare.UNI = true }
 			if (itemToCompare.RW == true) {
 				var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
-			//	if (rw_name == "Infinity") { rw_name = "infinity" }
+				if (rw_name == "Infinity") { rw_name = "infinity" }
 				var s = 0;
 				for (let i = 0; i < runewords[rw_name].runes.length; i++) { s+=1; }
 				itemToCompare.sockets = s
@@ -227,9 +227,12 @@ function setItem(value) {
 // ---------------------------------
 function simulate() {
 	for (let num = 1; num <= 2; num++) { if (document.getElementById("filter_text_"+num).value != "") {
+		//document.getElementById("print").innerHTML = ""
 		document.getElementById("output_"+num).innerHTML = ""
+		document.getElementById("item_desc"+num).innerHTML = ""
 		var result = parseFile(document.getElementById("filter_text_"+num).value,num)
-		document.getElementById("output_"+num).innerHTML = result
+		document.getElementById("output_"+num).innerHTML = result[0]
+		document.getElementById("item_desc"+num).innerHTML = result[1]
 		var wid = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().width/2 - document.getElementById("output_"+num).getBoundingClientRect().width/2);
 		var hei = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().height/2 - document.getElementById("output_"+num).getBoundingClientRect().height/2);
 		document.getElementById("output_"+num).style.left = wid+"px"
@@ -261,6 +264,7 @@ function parseFile(file,num) {
 	var color = "";
 	var color_new_default = "";
 	var display = "";
+	var description = "";
 	var name_saved = itemToCompare.NAME;
 	var secondary_line = "";
 	if (!(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {
@@ -281,7 +285,8 @@ function parseFile(file,num) {
 	}
 	var done = false;
 	var rules_checked = 0;
-	var lines = file.split("\t").join("").split("­").join("•").split("\n");
+	//var lines = file.split("\t").join("").split("­").join("•").split("\n");
+	var lines = file.split("­").join("•").split("\n");
 	for (line in lines) { if (done == false) {
 		var line_num = Number(line)+1;
 		document.getElementById("o3").innerHTML += "ERROR: Cannot Evaluate<br>"+"#"+num+" Invalid formatting found at line "+line_num+" (rule "+(rules_checked+1)+") ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l>"
@@ -303,6 +308,7 @@ function parseFile(file,num) {
 				for (cond in cond_list) {
 					cond = Number(cond)
 					var c = cond_list[cond];
+					if (settings.pd2_option == 1) { if (c == "DIFF") { c = "DIFFICULTY" } }
 					var number = false;
 					if (isNaN(Number(c)) == false) { cond_list[cond] = Number(c); number = true; }
 					if (number == false && c != "(" && c != ")" && c != "≤" && c != "≥" && c != "<" && c != ">" && c != "=" && c != "|" && c != "&" && c != "+" && c != "!") {
@@ -328,17 +334,20 @@ function parseFile(file,num) {
 			}
 			document.getElementById("o3").innerHTML += match
 			if (match == true) {
-				var output_with_tabs = file.split("­").join("•").split("\n")[line].split("]:")[1];
 				var color_current_rule = false;
 				var name_current_rule = false;
 				var name_added = false;
 				var revert_color = false;
+				var new_line = false;
+				var description_active = false;
+				var description_braces = 0;
+				if (settings.pd2_option == 1) { if (output.includes("{") == true && output.includes("}") == true) { if (output.indexOf("{") < output.lastIndexOf("}")) { description_active = true } } }
 				display = "";
 				done = true;
-				var out_format = output.split(",").join("/").split(" ").join(", ,").split("%WHITE%").join(",color_White,").split("%GRAY%").join(",color_Gray,").split("%BLUE%").join(",color_Blue,").split("%YELLOW%").join(",color_Yellow,").split("%GOLD%").join(",color_Gold,").split("%GREEN%").join(",color_Green,").split("%DGREEN%").join(",color_DarkGreen,").split("%BLACK%").join(",color_Black,").split("%TAN%").join(",color_Tan,").split("%PURPLE%").join(",color_Purple,").split("%ORANGE%").join(",color_Orange,").split("%RED%").join(",color_Red,").split("%NAME%").join(",ref_NAME,").split("%CLVL%").join(",ref_CLVL,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("%CONTINUE%").join(",misc_CONTINUE,")
+				var out_format = output.split(",").join("/").split(" ").join(", ,").split("%WHITE%").join(",color_White,").split("%GRAY%").join(",color_Gray,").split("%BLUE%").join(",color_Blue,").split("%YELLOW%").join(",color_Yellow,").split("%GOLD%").join(",color_Gold,").split("%GREEN%").join(",color_Green,").split("%DGREEN%").join(",color_DarkGreen,").split("%BLACK%").join(",color_Black,").split("%TAN%").join(",color_Tan,").split("%PURPLE%").join(",color_Purple,").split("%ORANGE%").join(",color_Orange,").split("%RED%").join(",color_Red,").split("%NAME%").join(",ref_NAME,").split("%CLVL%").join(",ref_CLVL,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("%CONTINUE%").join(",misc_CONTINUE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},")
 				if (settings.pd2_option == 1) {
 					// TODO: disable %DGREEN%?
-					out_format = out_format.split("%DARK_GREEN%").join(",color_DarkGreen,").split("%QTY%").join(",ignore_Quantity,").split("%RANGE%").join(",ignore_range,").split("%WPNSPD%").join(",ignore_baseSpeed,").split("%ALVL%").join(",ignore_ALVL,").split("%NL%").join(",ignore_NL,").split("%MAP%").join(",ignore_MAP,")
+					out_format = out_format.split("%DARK_GREEN%").join(",color_DarkGreen,").split("%QTY%").join(",ignore_Quantity,").split("%RANGE%").join(",ignore_range,").split("%WPNSPD%").join(",ignore_baseSpeed,").split("%ALVL%").join(",ignore_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,")
 					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
 					for (n in notifs) {									// TODO: implement more efficient way to split notification keywords
 						if (out_format.includes(notifs[n])) {
@@ -354,16 +363,32 @@ function parseFile(file,num) {
 						}
 					}
 				}
+				out_format = out_format.split(",,").join(",")
 				var out_list = out_format.split(",");
+				if (out_list[0] == "") { out_list.shift() }
+				if (out_list[out_list.length-1] == "") { out_list.pop() }
+				var trailingTabs = false;
+				for (let i = out_list.length-1; i > 0; i--) {
+					if (out_list[i] == " " && trailingTabs == false) { out_list.pop() }
+					else if (out_list[i] == "\t") { out_list.pop(); trailingTabs = true; }
+					else { i = 0 }
+				}
+				var leadingTabs = false;
+				for (let i = 0; i < out_list.length; i++) {
+					if (out_list[i] == " " && leadingTabs == false) { out_list.shift(); i--; }
+					else if (out_list[i] == "\t") { out_list.shift(); leadingTabs = true; i--; }
+					else { i = out_list.length }
+				}
 				for (out in out_list) {
 					var space = false;
 					var prev_color = color;
 					var o = out_list[out].split("/").join(",");
 					var temp = o;
 					var key = o.split("_")[0];
-					if (key == "misc" && o == "misc_CONTINUE") {
+					if (key == "misc") {
 						temp = ""
-						done = false;
+						if (o == "misc_CONTINUE") { done = false }
+						else if (o == "misc_NL") { new_line = true }
 					} else if (key == "color") {
 						temp = ""
 						color = colors[o.split("_")[1]]
@@ -376,40 +401,44 @@ function parseFile(file,num) {
 						obscured = false
 					} else if (key == "ignore" && settings.pd2_option == 1) {
 						temp = ""
-					} else if (o == " " && Number(out) <= 1 && output_with_tabs[0] == " ") {
-						temp = ""
-					} else if (o == " " && Number(out) > 0) {
+					} else if (o == " ") {
 						color = colors["Black"]
 						temp = "_"
 						revert_color = true
 						space = true
+					} else if (o == "\t") {
+						temp = ""
 					} else {
 						obscured = false
-				/*		if (settings.pd2_option == 1) {
-							var o_length = o.length;
-							var valid_notification = false;
-							if (o_length == 7) { if (o.slice(-1) == "%" && o.slice(-4,-3) == "-" && o.slice(0,4) == "%PX-") { valid_notification = true } }
-							else if (o_length == 8) { if (o.slice(-1) == "%" && o.slice(-4,-3) == "-" && (o.slice(0,5) == "%DOT-" || o.slice(0,5) == "%MAP-")) { valid_notification = true } }
-							else if (o_length == 11) { if (o.slice(-1) == "%" && o.slice(-4,-3) == "-" && o.slice(0,8) == "%BORDER-") { valid_notification = true } }
-							if (valid_notification == true) {
-								temp = ""	// TODO: Make conditions stricter (check that 2-digit code is hexadecimal)
-							}
+						if (description_active == true) {
+							if (o == "{" && description_braces == 0) { description_braces = description_braces+1; temp = ""; }
+							if (o == "}" && description_braces == 1) { description_braces = description_braces+1; temp = ""; }
 						}
-				*/	}
+					}
 					var colorize = false;
 					if (name_added == true && color != "") { colorize = true }
 					if (name_added == false && (color_current_rule == true || o == " ")) { colorize = true }
 					if (o == "ref_NAME" && itemToCompare.RW == true) { color = colors["Gold"]; revert_color = true; }
-					if (colorize == true || (o == "ref_NAME" && itemToCompare.RW == true)) {
-						if (space == true) { display += "<l style='color:"+color+"; opacity:0%;'>"+temp+"</l>" }
-						else { display += "<l style='color:"+color+"'>"+temp+"</l>" }
+					if (description_braces != 1) {
+						if (new_line == true) { display += "<br>"; new_line = false; }
+						if (colorize == true || (o == "ref_NAME" && itemToCompare.RW == true)) {
+							if (space == true) { display += "<l style='color:"+color+"; opacity:0%;'>"+temp+"</l>" }
+							else { display += "<l style='color:"+color+"'>"+temp+"</l>" }
+						}
+						else { display += temp }
+					} else {
+						if (new_line == true) { description += "<br>"; new_line = false; }
+						if (colorize == true || (o == "ref_NAME" && itemToCompare.RW == true)) {
+							if (space == true) { description += "<l style='color:"+color+"; opacity:0%;'>"+temp+"</l>" }
+							else { description += "<l style='color:"+color+"'>"+temp+"</l>" }
+						}
+						else { description += temp }
 					}
-					else { display += temp }
 					if (revert_color == true) { color = prev_color }
 					if (name_current_rule == true) { name_added = true }
 				}
 				if (done == false) { name_saved = display }
-				document.getElementById("o"+num).innerHTML += "#"+num+" Match found at line "+line_num+" after checking "+rules_checked+" rules ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l>"
+				document.getElementById("o"+num).innerHTML += "#"+num+" Match found at line "+line_num+" after checking "+rules_checked+" rules ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l>"
 				if (output == "") { document.getElementById("o"+num).innerHTML += " /hidden"; obscured = true; }
 				document.getElementById("o"+num).innerHTML += "<br>"
 			}
@@ -426,10 +455,21 @@ function parseFile(file,num) {
 	}
 	if (color_new_default != "") { document.getElementById("output_"+num).style.color = color_new_default }
 	else { document.getElementById("output_"+num).style.color = getColor(itemToCompare) }
+	if (display.includes("<br>") == true) {
+		var display_multi = display.split("<br>");
+		display = ""
+		for (dline in display_multi) { display = display_multi[dline] + "<br>" + display }
+	}
+	if (description.includes("<br>") == true) {
+		var description_multi = description.split("<br>");
+		description = ""
+		for (dline in description_multi) { description = description_multi[dline] + "<br>" + description }
+	}
 	if (obscured == false && itemToCompare.ID == true && !(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {
 		if (typeof(itemToCompare.base) != 'undefined') { display += secondary_line }
 	}
-	return display
+	
+	return [display,description]
 }
 
 // getColor - gets the default color for a given item
@@ -470,7 +510,7 @@ function equipmentHover(num) {
 	}
 	if (itemToCompare.RW == true) {
 		var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
-	//	if (rw_name == "Infinity") { rw_name = "infinity" }
+		if (rw_name == "Infinity") { rw_name = "infinity" }
 		var runes = "";
 		for (let i = 0; i < runewords[rw_name].runes.length; i++) { runes += runewords[rw_name].runes[i]; }
 		name += "<br>"+"<l style='color:"+colors.Gold+"'>'"+runes+"'</l>"
@@ -479,6 +519,7 @@ function equipmentHover(num) {
 	document.getElementById("item_name").style.color = document.getElementById("output_"+num).style.color
 	document.getElementById("item_info").innerHTML = main_affixes
 	document.getElementById("item_affixes").innerHTML = affixes
+	document.getElementById("item_desc"+num).style.display = "block"
 	if (main_affixes != "" || affixes != "") { document.getElementById("tooltip_inventory").style.display = "block" }
 	
 	var original_choices_height = 47; if (document.getElementById("original_choices").style.display == "none") { original_choices_height = 0 }
@@ -499,6 +540,8 @@ function equipmentHover(num) {
 function equipmentOut() {
 	document.getElementById("tooltip_inventory").style.left = "820px"
 	document.getElementById("tooltip_inventory").style.display = "none"
+	document.getElementById("item_desc1").style.display = "none"
+	document.getElementById("item_desc2").style.display = "none"
 }
 
 // getAffixLine - determines how an affix should be displayed
@@ -665,4 +708,6 @@ function toggleOriginalChoices(checked)  {
 function togglePD2Option(checked)  {
 	if (checked == true) { settings.pd2_option = 1 }
 	else { settings.pd2_option = 0 }
+	setPD2Codes()
+	simulate()
 }

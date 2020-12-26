@@ -15,7 +15,7 @@ var runewords = {
 	Fury:{runes:["Jah","Gul","Eth"], itypes:["mele"]},
 	Dream:{runes:["Io","Jah","Pul"], itypes:["helm","shld"]},
 	Ice:{runes:["Amn","Shael","Jah","Lo"], itypes:["miss"]},
-	Infinity:{runes:["Ber","Mal","Ber","Ist"], itypes:["pole","spea"]},
+	infinity:{runes:["Ber","Mal","Ber","Ist"], itypes:["pole","spea"]},
 	Chains_of_Honor:{runes:["Dol","Um","Ber","Ist"], itypes:["tors"]},
 	Beast:{runes:["Ber","Tir","Um","Mal","Lum"], itypes:["axe","hamm","scep"]},
 	Wrath:{runes:["Pul","Lum","Ber","Mal"], itypes:["miss"]},
