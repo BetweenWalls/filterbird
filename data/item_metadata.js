@@ -1323,6 +1323,8 @@ QUANTITY:{index:["QUANTITY"], format:["Quantity: ",""]},
 	gethit_skill_Hydra:{index:["gethit_skill_Hydra","gethit_skill_Hydra_lvl"], format:["","% chance to cast Level "," Hydra when struck"]},
 	hit_skill_Amplify_Damage:{index:["hit_skill_Amplify_Damage","hit_skill_Amplify_Damage_lvl"], format:["","% chance to cast Level "," Amplify Damage on striking"]},
 	//hit_skill_Fire_Bolt_lvl:1, att_skill_Fire_Bolt_lvl:1, gethit_skill_Charged_Bolt_lvl:1, att_skill_Ice_Bolt_lvl:1, gethit_skill_Frost_Nova_lvl:1, hit_skill_Nova_lvl:1, gethit_skill_Nova_lvl:1, att_skill_Lightning_Surge_lvl:1, att_skill_Chain_Lightning_lvl:1, gethit_skill_Hydra_lvl:1, hit_skill_Amplify_Damage_lvl:1, 
+
+map_tier:{index:["map_tier"], format:["Tier: ",""]},
 };
 
 var stats_alternate = {

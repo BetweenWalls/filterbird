@@ -1837,6 +1837,7 @@ var premade = {
 {CODE:"r31", RUNE:31, name:"Jah Rune", type:"rune", rarity:"craft", req_level:65, weapon:{itd:1}, armor:{max_life:5}, shield:{life:50}},
 {CODE:"r32", RUNE:32, name:"Cham Rune", type:"rune", rarity:"craft", req_level:67, weapon:{freezes_target:3}, armor:{cbf:1}},
 {CODE:"r33", RUNE:33, name:"Zod Rune", type:"rune", rarity:"craft", req_level:69, weapon:{indestructible:1}, armor:{indestructible:1}},	// same
+// TODO: add stacked runes
 	],
 	gem:[
 {CODE:"gpb", GEMLEVEL:5, GEMTYPE:5, name:"Perfect Sapphire", type:"gem", rarity:"regular", req_level:18, weapon:{cDamage_min:10,cDamage_max:14}, armor:{mana:38}, shield:{cRes:40}},
@@ -1874,6 +1875,7 @@ var premade = {
 {CODE:"gcv", GEMLEVEL:1, GEMTYPE:1, name:"Chipped Amethyst", type:"gem", rarity:"regular", req_level:0, weapon:{ar:40}, armor:{strength:3}, shield:{defense:8}},
 {CODE:"gcw", GEMLEVEL:1, GEMTYPE:2, name:"Chipped Diamond", type:"gem", rarity:"regular", req_level:0, weapon:{damage_min:1,damage_max:2}, armor:{ar:20}, shield:{all_res:6}},
 {CODE:"skc", GEMLEVEL:1, GEMTYPE:7, name:"Chipped Skull", type:"gem", rarity:"regular", req_level:0, weapon:{life_leech:2,mana_leech:1}, armor:{life_replenish:2,mana_regen:8}, shield:{damage_reduced:2}},
+// TODO: add stacked gems (flawless and perfect only)
 	],
 	other:[
 {CODE:"std", name:"Standard of Heroes", type:"other", rarity:"unique", req_level:90, glow:1, always_id:true},
@@ -1945,5 +1947,25 @@ var premade = {
 {CODE:"mss", name:"Mephisto's Soulstone", rarity:"unique", always_id:true},
 {CODE:"ice", name:"Malah's Potion", rarity:"unique", always_id:true},
 {CODE:"tr2", name:"Scroll of Resistance", rarity:"unique", always_id:true},
+// pd2
+{CODE:"wss", name:"Worldstone Shard", rarity:"pod", QUANTITY:1, always_id:true},
+{CODE:"lbox", name:"Larzuk's Puzzlebox", rarity:"unique", QUANTITY:1, always_id:true},
+{CODE:"imra", name:"Zakarum Orb", rarity:"unique", QUANTITY:1, always_id:true},
+{CODE:"imma", name:"Arcane Orb", rarity:"unique", QUANTITY:1, always_id:true},
+{CODE:"scou", name:"Orb of Destruction", rarity:"unique", QUANTITY:1, always_id:true},
+{CODE:"rera", name:"Horadrim Orb", rarity:"unique", QUANTITY:1, always_id:true},
+{CODE:"upma", name:"Angelic Orb", rarity:"unique", QUANTITY:1, always_id:true},
+{CODE:"dcma", name:"Vision of Terror", rarity:"craft", map_tier:666, always_id:true},
+{CODE:"dcbl", name:"Pure Demonic Essence", rarity:"craft", QUANTITY:1, always_id:true},
+{CODE:"dcho", name:"Black Soulstone", rarity:"craft", QUANTITY:1, always_id:true},
+{CODE:"dcso", name:"Prime Evil Soul", rarity:"craft", QUANTITY:1, always_id:true},
+{CODE:"t16", name:"Ruins of Viz-Jun Map", rarity:"common", map_tier:1, always_id:true},
+{CODE:"t18", name:"Phlegethon Map", rarity:"magic", map_tier:2, always_id:true},
+{CODE:"t17", name:"River of Blood Map", rarity:"rare", map_tier:3, always_id:true},
+//{CODE:"t11", name:"Sewers of Harrogath Map", rarity:"common", map_tier:4, always_id:true},
+//{CODE:"t12", name:"Mesa Map", rarity:"common", map_tier:4, always_id:true},
+//{CODE:"t13", name:"Palace Map", rarity:"common", map_tier:4, always_id:true},
+//{CODE:"t14", name:"Ice Caves Map", rarity:"common", map_tier:4, always_id:true},
+//{CODE:"t15", name:"Horazon's Memory Map", rarity:"common", map_tier:4, always_id:true},
 	]
 };

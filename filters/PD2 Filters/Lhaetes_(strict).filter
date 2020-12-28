@@ -1,0 +1,220 @@
+// Lhaetes Filter 2020-2021---------------------------------------------
+//***** STRICT FILTER v1.1 *******--------------------------------------
+//Hides Normal and Magic Crafting Bases --------------------------------
+
+//Change Log -----------------------------------------------------------
+//- v 1.1 --------------------------------------------------------------
+//		*Add, Show Player Ears
+//		*Add, Prefix Class names to Torches and Skill Charms!
+//		*Add, Horadric Scroll 
+//		*Change, Edited colors and descriptions of Map Recipes from Shop
+//----------------------------------------------------------------------
+
+
+//Project Diablo 2 Items -----------------------------------------------
+
+ItemDisplay[imma]: %NAME%{%GRAY%Normal Map + Jewel%NL%%BLUE%Upgrades a Normal Map to a Magic Map}
+ItemDisplay[imra]: %NAME%{%GRAY%Normal Map + Jewel + Thul Rune%NL%%BLUE%Upgrades a Normal Map to a Rare Map}
+ItemDisplay[rera]: %NAME%{%GRAY%Rare Map + Perfect Gem + Thul Rune%NL%%BLUE%Reforges a rare map with new random modifiers}
+ItemDisplay[scou]: %NAME%{%GRAY%Any Map + Hel Rune%NL%%BLUE%Removes all modifiers from a Map}
+ItemDisplay[upma]: %NAME%{%GRAY%Magic Map + Thul Rune + Perfect Skull%NL%%BLUE%Upgrades a Magic Map to a Rare Map}
+ItemDisplay[lbox]: %NAME%%DOT-20%
+ItemDisplay[RUNE>0]: %RUNENAME% Rune [%RUNENUM%]{%GRAY%Cube to swap between stackable and socketable version}
+
+
+//General --------------------------------------------------------------
+
+//Prefix Class Name to Torches
+ItemDisplay[cm2 CLSK0>0]: %NAME%%NL%Amazon's
+ItemDisplay[cm2 CLSK1>0]: %NAME%%NL%Sorceress'
+ItemDisplay[cm2 CLSK2>0]: %NAME%%NL%Necromancer's
+ItemDisplay[cm2 CLSK3>0]: %NAME%%NL%Paladin's
+ItemDisplay[cm2 CLSK4>0]: %NAME%%NL%Barbarian's
+ItemDisplay[cm2 CLSK5>0]: %NAME%%NL%Druid's
+ItemDisplay[cm2 CLSK6>0]: %NAME%%NL%Assassin's
+
+//Prefix Class Name to Skillers
+ItemDisplay[cm3 (TABSK0>0 OR TABSK1>0 OR TABSK2>0)]: %NAME%%NL%Amazon's
+ItemDisplay[cm3 (TABSK8>0 OR TABSK9>0 OR TABSK10>0)]: %NAME%%NL%Sorceress'
+ItemDisplay[cm3 (TABSK16>0 OR TABSK17>0 OR TABSK18>0)]: %NAME%%NL%Necromancer's
+ItemDisplay[cm3 (TABSK24>0 OR TABSK25>0 OR TABSK26>0)]: %NAME%%NL%Paladin's
+ItemDisplay[cm3 (TABSK32>0 OR TABSK33>0 OR TABSK34>0)]: %NAME%%NL%Barbarian's
+ItemDisplay[cm3 (TABSK40>0 OR TABSK41>0 OR TABSK42>0)]: %NAME%%NL%Druid's
+ItemDisplay[cm3 (TABSK48>0 OR TABSK49>0 OR TABSK50>0)]: %NAME%%NL%Assassin's
+
+//Show Item Notifications
+ItemDisplay[RARE]: %NAME%%DOT-0C%%CONTINUE%//Rares
+ItemDisplay[RUNE>0]: %NAME%%DOT-62%//Runes
+ItemDisplay[cm1 OR cm2 OR cm3 OR jew]: %NAME%%DOT-97%//Charms & Jewels
+ItemDisplay[wss]: %NAME%%DOT-9B%{Corrupts an item, modifying it unpredictably}//WorldStone
+ItemDisplay[UNI]: %NAME%%DOT-63%%CONTINUE%//Uniques
+ItemDisplay[SET]: %NAME%%DOT-7D%%CONTINUE%//Set Items
+ItemDisplay[leg]: %GOLD%%NAME%%PX-63%//Wirts Leg
+ItemDisplay[ear]: %GOLD%%NAME%%PX-63%//Players Ear
+
+//Quest Items
+ItemDisplay[bks OR bkd OR hdm OR tr1 OR ass OR box OR msf OR vip OR hst OR j34 OR g34 OR xyz OR g33 OR bbb OR qbr OR qey OR qhr OR qf1 OR qf2 OR mss OR hfh OR ice OR tr2]: %GOLD%%NAME%%PX-63%
+
+//Special Quest Item Notifications
+ItemDisplay[tes OR ceh OR bet OR fed OR toa OR pk1 OR pk2 OR pk3 OR dhn OR bey OR mbr OR dcma OR dcbl OR dcho OR dcso]: %ORANGE%%NAME%%DOT-62%
+
+//Map Notifications
+ItemDisplay[t11 OR t12 OR t13 OR t14 OR t15 OR t16 OR t17 OR t18]: %NAME%%DOT-62%
+
+//Hide Junk Potions
+ItemDisplay[wms OR vps OR opl OR opm OR ops OR gpl OR gpm OR gps]:
+
+//Hide Arrows, Bolts, and Scrolls after lvl 29
+ItemDisplay[tsc OR isc OR aqv OR cqv OR yps CLVL>29]:
+
+//Show Keys, Arrows, Bolts, Tomes
+ItemDisplay[key OR aqv OR cqv OR tbk OR ibk]: %GRAY%%NAME%
+
+//Show Scrolls
+ItemDisplay[isc]: %RED%* %GRAY%Identify
+ItemDisplay[tsc]: %BLUE%* %GRAY%Portal
+
+//Hide all leveling Healing & Mana Potions after lvl 29
+ItemDisplay[hp1 OR mp1 OR hp2 OR mp2 OR hp3 OR mp3 OR hp4 OR mp4 CLVL>29]:
+
+//Show Rejuvination, Health & Mana Potions
+ItemDisplay[hp1 OR hp2 OR hp3 OR hp4 OR hp5]: %RED%* %WHITE%HP
+ItemDisplay[mp1 OR mp2 OR mp3 OR mp4 OR mp5]: %BLUE%* %WHITE%MP
+ItemDisplay[rvs]: %PURPLE%* %WHITE%RP
+ItemDisplay[rvl]: %PURPLE%* %WHITE%FP
+ItemDisplay[yps]: %GREEN%* %GRAY%AP
+
+//Hide Smaller Piles of Gold
+ItemDisplay[GOLD<500 DIFF=1]:
+ItemDisplay[GOLD<5000 DIFF=2]:
+
+
+//Gems ----------------------------------------------------------------
+
+//Show Only Flawless & Perfect Gems
+//1:Amethyst
+ItemDisplay[GEM>3 AND GEMTYPE=1]: %PURPLE%%NAME%%PX-9B%{%GRAY%%NL%Shields: +(8-24) to Defense%NL%Armor: +(3-10) to Strength%NL%Weapons: +(40-150) to Attack Rating%NL%}
+ItemDisplay[GEM=0 AND GEMTYPE=1]: %PURPLE%%NAME%%PX-9B%// Perfect & Flawless
+ItemDisplay[GEMTYPE=1 DIFF<1]: %PURPLE%%NAME%// Chipped & Normal, Only Normal
+
+//2:Diamond
+ItemDisplay[GEM>3 AND GEMTYPE=2]: %WHITE%%NAME%%PX-20%{%GRAY%%NL%Shields: All Resistances (6-19%)%NL%Armor: +(20-100) to Attack Rating%NL%Weapons: +(28-68%) Damage to Undead%NL%}
+ItemDisplay[GEM=0 AND GEMTYPE=2]: %WHITE%%NAME%%PX-20%
+ItemDisplay[GEMTYPE=2 DIFF<1]: %WHITE%%NAME%
+
+//3:Emerald
+ItemDisplay[GEM>3 AND GEMTYPE=3]: %GREEN%%NAME%%PX-84%{%GRAY%%NL%Shields: Poison Resist (12-40%)%NL%Armor: +(3-10) to Dexterity%NL%Weapons: +(10-100) Poison Damage over (3-7) Seconds%NL%}
+ItemDisplay[GEM=0 AND GEMTYPE=3]: %GREEN%%NAME%%PX-84%
+ItemDisplay[GEMTYPE=3 DIFF<1]: %GREEN%%NAME%
+
+//4:Ruby
+ItemDisplay[GEM>3 AND GEMTYPE=4]: %RED%%NAME%%PX-0A%{%GRAY%%NL%Shields: Fire Resist (12-40%)%NL%Armor: +(10-38) to Life%NL%Weapons: +(3-20) Fire Damage%NL%}
+ItemDisplay[GEM=0 AND GEMTYPE=4]: %RED%%NAME%%PX-0A%
+ItemDisplay[GEMTYPE=4 DIFF<1]: %RED%%NAME%
+
+//5:Sapphire
+ItemDisplay[GEM>3 AND GEMTYPE=5]: %BLUE%%NAME%%PX-97%{%GRAY%%NL%Shields: Cold Resist (12-40%)%NL%Armor: +(10-38) to Mana%NL%Weapons: +(1-14) Cold Damage%NL%}
+ItemDisplay[GEM=0 AND GEMTYPE=5]: %BLUE%%NAME%%PX-97%
+ItemDisplay[GEMTYPE=5 DIFF<1]: %BLUE%%NAME%
+
+//6:Topaz
+ItemDisplay[GEM>3 AND GEMTYPE=6]: %YELLOW%%NAME%%PX-0C%{%GRAY%%NL%Shields: Lightning Resist (12-40%)%NL%Armor: (9-24%) Better Chance of Getting Magic Items%NL%Weapons: +(1-40) Lightning Damage%NL%}
+ItemDisplay[GEM=0 AND GEMTYPE=6]: %YELLOW%%NAME%%PX-0C%
+ItemDisplay[GEMTYPE=6 DIFF<1]: %YELLOW%%NAME%
+
+//7:Skull
+ItemDisplay[GEM>3 AND GEMTYPE=7]: %GRAY%%NAME%%PX-20%{%GRAY%%NL%Shields: Attacker Takes (4-20) Damage%NL%Armor: Regen Mana (8-19%) & Life +(2-5) %NL%Weapons: (1-4%) Life & Mana Stolen Per Hit%NL%}
+ItemDisplay[GEM=0 AND GEMTYPE=7]: %GRAY%%NAME%%PX-20%
+ItemDisplay[GEMTYPE=7 DIFF<1]: %GRAY%%NAME%
+
+
+//Weapons & Armor -----------------------------------------------------
+
+//Show Socketed Items
+ItemDisplay[SOCK>0]: %NAME% [%SOCKETS%] %CONTINUE%
+
+//Show Completed RuneWord Gear
+ItemDisplay[RW]: %NAME%
+
+//Hide Single Socketed Items except uniques/set etc
+ItemDisplay[SOCK=1 !MAG !RARE !UNI !SET !CRAFT]:
+
+//Hide Low ILVL Socketed Gear
+ItemDisplay[SOCK>0 ILVL<41]: 
+
+//Show Crafted Gear 
+ItemDisplay[CRAFT]: %NAME%%DOT-63%
+
+//Show Ethereal
+ItemDisplay[ETH]: %NAME%%NL%%GRAY%Ethereal%CONTINUE%
+
+//Magic Amulets
+ItemDisplay[MAG AND amu]: %NAME%{%GRAY%Safe:Jewel+Thul+PerfectEmerald%NL%Power:Jewel+Thul+PerfectSapphire%NL%Caster:Jewel+Ral+PerfectAmethyst%NL%Blood:Jewel+Amn+PerfectRuby}
+//Magic Rings
+ItemDisplay[MAG AND rin]: %NAME%{%GRAY%Safe:Jewel+Amn+PerfectEmerald%NL%Power:Jewel+Amn+PerfectSapphire%NL%Caster:Jewel+Amn+PerfectAmethyst%NL%Blood:Jewel+Sol+PerfectRuby}
+
+//Hide Inferior Armor and Weapons (Crude, Damaged, Cracked etc)
+ItemDisplay[INF (ARMOR OR WEAPON)]:
+
+//Append Upgrade Recipes to Set, Unique & Rare Items
+//Rare Armor
+ItemDisplay[NORM AND ARMOR AND RARE]: %NAME%{%GRAY%Ral Rune + Thul Rune + Perfect Amethyst}
+ItemDisplay[EXC AND ARMOR AND RARE]: %NAME%{%GRAY%Ko Rune + Pul Rune + Perfect Amethyst}
+//Rare Weapons
+ItemDisplay[NORM AND WEAPON AND RARE]: %NAME%{%GRAY%Ort Rune + Amn Rune + Perfect Sapphire}
+ItemDisplay[EXC AND WEAPON AND RARE]: %NAME%{%GRAY%Fal Rune + Um Rune + Perfect Sapphire}
+//Unique/Set Armor
+ItemDisplay[NORM AND ARMOR AND (UNI OR SET)]: %NAME%{%GRAY%Tal Rune + Shael Rune + Perfect Diamond}
+ItemDisplay[EXC AND ARMOR AND (UNI OR SET)]: %NAME%{%GRAY%Ko Rune + Lem Rune + Perfect Diamond}
+//Unique/Set Weapons
+ItemDisplay[NORM AND WEAPON AND (UNI OR SET)]: %NAME%{%GRAY%Ral Rune + Sol Rune + Perfect Emerald}
+ItemDisplay[EXC AND WEAPON AND (UNI OR SET)]: %NAME%{%GRAY%Lum Rune + Pul Rune + Perfect Emerald}
+
+//Show RuneWord Recipes on Socketed Items
+//Helms
+ItemDisplay[HELM AND SOCK=2 !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Lore: Ort*Sol%NL%Stealth: Tal*Eth%NL%Nadir: Nef*Tir}
+ItemDisplay[HELM AND SOCK=3 !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Radiance: Nef*Sol*Ith%NL%Delirium: Lem*Ist*Io%NL%Dream: Io*Jah*Pul}
+
+//Chests
+ItemDisplay[CHEST AND SOCK=2 !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Prudence: Mal*Tir%NL%Stealth: Tal*Eth%NL%Smoke: Nef*Lum}
+ItemDisplay[CHEST AND SOCK=3 !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Enigma: Jah*Ith*Ber%NL%Duress: Shael*Um*Thul%NL%Lionheart: Hel*Lum*Fal%NL%Wealth: Lem*Ko*Tir}
+ItemDisplay[CHEST AND SOCK=4 !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Chains of Honor: Dol*Um*Ber*Ist%NL%Stone: Shael*Um*Pul*Lum%NL%Fortitude: El*Sol*Dol*Lo}
+
+//Shields 
+ItemDisplay[SHIELD AND SOCK=2 !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Rhyme: Shael*Eth%NL%Splendor: Eth*Lum}
+ItemDisplay[SHIELD AND SOCK=3 !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Ancient's Pledge: Ral*Ort*Tal%NL%Dream: Io*Jah*Pul%NL%Dragon: Sur*Lo*Sol%NL%Sanctuary: Ko*Ko*Mal}
+ItemDisplay[SHIELD AND SOCK=4 !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Exile: Vex*Ohm*Ist*Dol%NL%Phoenix: Vex*Vex*Lo*Jah%NL%Spirit: Tal*Thul*Ort*Amn}
+
+//Weapons 
+ItemDisplay[WEAPON AND SOCK=2 AND (AXE OR SWORD OR POLEARM OR SPEAR OR DAGGER OR MACE OR STAFF OR SCEPTER) !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Strength: Amn*Tir}%CONTINUE%
+ItemDisplay[WEAPON AND SOCK=2 AND (AXE OR SWORD OR MACE) !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Steel: Tir*El%NL%Strength: Amn*Tir}
+ItemDisplay[WEAPON AND SOCK=2 AND WAND !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%White: Dol*Io}
+ItemDisplay[WEAPON AND SOCK=2 AND (JAV OR BOW OR XBOW) !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Zephyr: Ort*Eth}
+ItemDisplay[WEAPON AND SOCK=2 AND STAFF !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Leaf: Tir*Ral%NL%Strength: Amn*Tir}
+//-----------------------
+ItemDisplay[WEAPON AND SOCK=3 !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Plague: Cham*Fal*Um%NL%Venom: Tal*Dol*Mal}%CONTINUE%
+ItemDisplay[WEAPON AND SOCK=3 AND (AXE OR SWORD OR POLEARM OR SPEAR OR DAGGER OR MACE OR STAFF OR SCEPTER) !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Fury: Jah*Gul*Eth%NL%Malice: Ith*El*Eth%NL%Wind: Sur*Sur*El%NL%Plague: Cham*Fal*Um%NL%Venom: Tal*Dol*Mal}
+ItemDisplay[WEAPON AND SOCK=3 AND (JAV OR BOW OR XBOW) !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Melody: Shael*Ko*Nef%NL%Edge: Tir*Tal*Amn%NL%Plague: Cham*Fal*Um%NL%Venom: Tal*Dol*Mal}
+//----------------------
+ItemDisplay[WEAPON AND SOCK=4 !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Fortitude: El*Sol*Dol*Lo%NL%Passion: Dol*Ort*Eld*Lem}%CONTINUE%
+ItemDisplay[WEAPON AND SOCK=4 AND SCEPTER !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Holy Thunder: Eth*Ral*Ort*Tal%NL%Rift: Hel*Ko*Lem*Gul%NL%Fortitude: El*Sol*Dol*Lo%NL%Passion: Dol*Ort*Eld*Lem}
+ItemDisplay[WEAPON AND SOCK=4 AND MACE !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Heart of the Oak: Ko*Vex*Pul*Thul%NL%Voice of Reason: Lem*Ko*El*Eld%NL%Fortitude: El*Sol*Dol*Lo%NL%Passion: Dol*Ort*Eld*Lem}
+ItemDisplay[WEAPON AND SOCK=4 AND AXE !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Famine: Fal*Ohm*Ort*Jah%NL%Kingslayer: Mal*Um*Gul*Fal%NL%Fortitude: El*Sol*Dol*Lo%NL%Passion: Dol*Ort*Eld*Lem}
+ItemDisplay[WEAPON AND SOCK=4 AND SWORD !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Voice of Reason: Lem*Ko*El*Eld%NL%Famine: Fal*Ohm*Ort*Jah%NL%Kingslayer: Mal*Um*Gul*Fal%NL%Spirit: Tal*Thul*Ort*Amn}
+ItemDisplay[WEAPON AND SOCK=4 AND (POLEARM OR SPEAR) !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Insight: Ral*Tir*Tal*Sol%NL%Pride: Cham*Sur*Io*Lo%NL%Rift: Hel*Ko*Lem*Gul}
+ItemDisplay[WEAPON AND SOCK=4 AND STAFF !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Heart of the Oak: Ko*Vex*Pul*Thul%NL%Insight: Ral*Tir*Tal*Sol%NL%Memory: Lum*Io*Sol*Eth}
+ItemDisplay[WEAPON AND SOCK=4 AND (JAV OR BOW OR XBOW) !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Harmony: Tir*Ith*Sol*Ko%NL%Wrath: Pul*Lum*Ber*Mal%NL%Brand: Jah*Lo*Mal*Gul%NL%Faith: Ohm*Jah*Lem*Eld%NL%Ice: Amn*Shael*Jah*Lo}
+//------------------------
+ItemDisplay[WEAPON AND SOCK=5 AND (AXE OR MACE OR SWORD OR SPEAR OR POLEARM OR STAFF) !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Eternity: Amn*Ber*Ist*Sol*Sur%NL%Honor: Amn*El*Ith*Tir*Sol}%CONTINUE%
+ItemDisplay[WEAPON AND SOCK=5 AND AXE !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Beast: Ber*Tir*Um*Mal*Lum%NL%Death: Hel*El*Vex*Ort*Gul%NL%Eternity: Amn*Ber*Ist*Sol*Sur%NL%Grief: Eth*Tir*Lo*Mal*Ral}
+ItemDisplay[WEAPON AND SOCK=5 AND SWORD !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Destruction: Vex*Lo*Ber*Jah*Ko%NL%Death: Hel*El*Vex*Ort*Gul%NL%Eternity: Amn*Ber*Ist*Sol*Sur%NL%Grief: Eth*Tir*Lo*Mal*Ral}
+ItemDisplay[WEAPON AND SOCK=5 AND SCEPTER !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Beast: Ber*Tir*Um*Mal*Lum%NL%Eternity: Amn*Ber*Ist*Sol*Sur%NL%Honor: Amn*El*Ith*Tir*Sol}
+ItemDisplay[WEAPON AND SOCK=5 AND (SPEAR OR POLEARM) !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Destruction: Vex*Lo*Ber*Jah*Ko%NL%Obedience: Hel*Ko*Thul*Eth*Fal%NL%Eternity: Amn*Ber*Ist*Sol*Sur%NL%Honor: Amn*El*Ith*Tir*Sol}
+//-------------------------
+ItemDisplay[WEAPON AND SOCK=6 !MAG !RARE !UNI !SET !CRAFT !RW]: %NAME%{%GRAY%Breath of the Dying: Vex*Hel*El*Eld*Zod*Eth%NL%Silence: Dol*Eld*Hel*Ist*Tir*Vex}
+
+
+//Reset -----------------------------------------------------------------
+
+//Hide Regular and Magic Items
+ItemDisplay[NMAG OR MAG]:

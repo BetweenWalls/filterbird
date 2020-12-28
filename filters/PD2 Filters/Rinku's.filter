@@ -1,0 +1,200 @@
+// +----------------------------------------------------------------------------+
+// |                                                                            |
+// |     Rinku's Basic Project Diablo 2 Loot Filter                             |
+// |     https://github.com/Rinkusan/Rinku-s-Filter                             |
+// |                                                                            |
+// +----------------------------------------------------------------------------+
+//
+// Hey everyone, this filter is fairly basic.
+// It removes clutter that you don't usually need.
+// I don't like heavily customized content, so I don't include any custom texts or descriptions, I merely mark items.
+// Things that are hidden:
+// * Low amounts of gold (progressively)
+// * Throwing poison / fulmination potions (at level 7)
+// * Healing, Mana and Rejuvination Potions with low regen (progressively)
+// * Antidotes (at level 20, you should have gotten past Andariel by then)
+// * Thawing Potions (at level 25, some might want them for Duriel)
+// * Stamina Potions (at level 10, in PD2 you don't really experience stamina issues) 
+// * Inferior Items (Always hidden)
+// * Arrows and Bolts (Always hidden, go to line 145 to change)
+// * Regular Non-Superior Normal Items with one or no sockets, Magic Normal Items (at level 30)
+// * All Regular Normal Items except Superior Items with 3 Sockets or more (level 45)
+// * Regular Non-Superior Exceptional Items with one or no sockets, Magic Exceptional Items (at level 60)
+// * All regular Exceptional Items except for Superior Items with 2 Sockets or more (at level 75)
+// Things that give information:
+// * All shown Item drops (Weapons or Armor) show in order: ItemName[!exc or !!!elt][#Sockets][eth?][itemlvl]RW-base?
+// * Runes show their Rune Number and Stacks show Quantity
+// * Gems are stylised to be more recognizable, none are hidden (this was copied from another filter)
+// * Starting with mid-tier runes, all runes, unique items, set items and potentially decent runeword bases trigger a notification and show on the minimap
+
+// Hiding Gold Clutter
+ItemDisplay[GOLD<250 CLVL>19]:
+ItemDisplay[GOLD<1000 CLVL>49]:
+ItemDisplay[GOLD<2500 CLVL>74]:
+
+/// Potions, thrown chemicals and scrolls
+// Rename and hide low regen pots at certain Character Level thresholds
+// Minor at level 10
+ItemDisplay[hp1 CLVL>9]:
+ItemDisplay[hp1]:	%RED%**%WHITE%Min Heal
+ItemDisplay[mp1 CLVL>9]:
+ItemDisplay[mp1]:	%BLUE%**%WHITE%Min Mana
+
+// Light at level 15
+ItemDisplay[hp2 CLVL>14]:
+ItemDisplay[hp2]:	%RED%**%WHITE%Lt Heal
+ItemDisplay[mp2 CLVL>17]:
+ItemDisplay[mp2]:	%BLUE%**%WHITE%Lt Mana
+
+// Normal at level 20
+ItemDisplay[hp3 CLVL>19]:
+ItemDisplay[hp3]:	%RED%**%WHITE%Heal
+ItemDisplay[mp3 CLVL>24]:
+ItemDisplay[mp3]:	%BLUE%**%WHITE%Mana
+
+// Great at level 35
+ItemDisplay[hp4 CLVL>34]:
+ItemDisplay[hp4]:	%RED%**%WHITE%Gt Heal
+ItemDisplay[mp4 CLVL>34]:
+ItemDisplay[mp4]:	%BLUE%**%WHITE%Gt Mana
+
+// Superior Pot's will never be hidden
+ItemDisplay[hp5]:	%RED%**%WHITE%Sup Heal
+ItemDisplay[mp5]:	%BLUE%**%WHITE%Sup Mana
+
+// Rejuv's will be hidden at level 50
+ItemDisplay[rvs CLVL>49]:
+ItemDisplay[rvs]:	%PURPLE%**%WHITE%Rejuv
+
+// Full Rejuv's will never be hidden
+ItemDisplay[rvl]:	%PURPLE%**%WHITE%Full
+
+// Antidotes will be hidden at level 20
+ItemDisplay[yps CLVL>19]:
+ItemDisplay[yps]:	Anti
+
+// Thawing Pots will be hidden from level 25
+ItemDisplay[wms CLVL>24]:
+ItemDisplay[wms]:	Thaw
+
+// Stamina Pots will be hidden from level 10
+ItemDisplay[vps CLVL>9]:
+ItemDisplay[vps]:	Stam
+
+// All throwing pots will be hidden at level 7
+ItemDisplay[opl (CLVL>6)]:
+ItemDisplay[opm (CLVL>6)]:
+ItemDisplay[ops (CLVL>6)]:
+ItemDisplay[gpl (CLVL>6)]:
+ItemDisplay[gpm (CLVL>6)]:
+ItemDisplay[gps (CLVL>6)]:
+
+// Scrolls of TP and ID are renamed
+ItemDisplay[tsc]:	%GREEN%**%WHITE%TP
+ItemDisplay[isc]:	%GREEN%**%WHITE%ID
+
+/// Runes and Rune Stacks (Coloring doesn't work yet) - Mid-Tier upwards notify and show on minimap
+
+// Low Tier (pretty common)
+ItemDisplay[r01 OR r02 OR r03 OR r04 OR r05 OR r06 OR r07 OR r08 OR r09 OR r10]:	%WHITE%[%RUNENUM%] %TAN%%RUNENAME%
+ItemDisplay[(r01s OR r02s OR r03s OR r04s OR r05s OR r06s OR r07s OR r08s OR r09s OR r10s) QTY>0]: %WHITE%[%RUNENUM%] %TAN%%RUNENAME% %WHITE%[x%QTY%]
+
+// Mid Tier (less common)
+ItemDisplay[r11 OR r12 OR r13 OR r14 OR r15 OR r16 OR r17 OR r18 OR r19]:	%WHITE%[%RUNENUM%] %ORANGE%%RUNENAME%%CONTINUE%%MAP-9B%
+ItemDisplay[r11s OR r12s OR r13s OR r14s OR r15s OR r16s OR r17s OR r18s OR r19s]:	%WHITE%[%RUNENUM%] %ORANGE%%RUNENAME%%CONTINUE% %WHITE%[x%QTY%]%MAP-9B%
+
+// Weird Tier (uncommon)
+ItemDisplay[r20 OR r21 OR r22]:	%PURPLE%> %WHITE%[%RUNENUM%] %ORANGE%%RUNENAME%%MAP-9B%
+ItemDisplay[r20s OR r21s OR r22s]:	%PURPLE%> %WHITE%[%RUNENUM%] %ORANGE%%RUNENAME% %WHITE%[x%QTY%]%MAP-9B%
+
+// High Tier (Rare as fuck)
+ItemDisplay[r23 OR r24 OR r25 OR r26 OR r27 OR r28 OR r29 OR r30 OR r31 OR r32 OR r33]:	%PURPLE%>>> %RED%[%RUNENUM%] %ORANGE%%RUNENAME% %PURPLE%<<<%MAP-9B%
+ItemDisplay[r23s OR r24s OR r25s OR r26s OR r27s OR r28s OR r29s OR r30s OR r31s OR r32s OR r33s]:	%PURPLE%>>> %RED%[%RUNENUM%] %ORANGE%%RUNENAME% %RED%[x%QTY%] %PURPLE%<<<%MAP-9B%
+
+
+/// Gems
+
+// Copied some Gem Stuff - Tier
+ItemDisplay[gcv OR gcw OR gcg OR gcr OR gcb OR skc OR gcy]: %GRAY%Ch. %CONTINUE%
+ItemDisplay[gfv OR gfw OR gfg OR gfr OR gfb OR skf OR gfy]: %TAN%Fl. %CONTINUE%
+ItemDisplay[gsv OR gsw OR gsg OR gsr OR gsb OR sku OR gsy]: %YELLOW%St. %CONTINUE%
+ItemDisplay[(gzv OR glw OR glg OR glr OR glb OR skl OR gly) OR GEM=4]: %GREEN%F+ %CONTINUE%
+ItemDisplay[(gpv OR gpw OR gpg OR gpr OR gpb OR skz OR gpy) OR GEM=5]: %ORANGE%P+ %CONTINUE%
+
+// Copied some Gem Stuff - Type
+ItemDisplay[GEMTYPE=1]: %NAME%%PURPLE%Amethyst %CONTINUE%
+ItemDisplay[GEMTYPE=2]: %NAME%%WHITE%Diamond %CONTINUE%
+ItemDisplay[GEMTYPE=3]: %NAME%%GREEN%Emerald %CONTINUE%
+ItemDisplay[GEMTYPE=4]: %NAME%%RED%Ruby %CONTINUE%
+ItemDisplay[GEMTYPE=5]: %NAME%%BLUE%Sapphire %CONTINUE%
+ItemDisplay[GEMTYPE=6]: %NAME%%YELLOW%Topaz %CONTINUE%
+ItemDisplay[GEMTYPE=7]: %NAME%%TAN%Skull %CONTINUE%
+
+// Copied some Gem Stuff - Stack
+ItemDisplay[GEM>0 QTY>1]: %NAME% %WHITE%[x%QTY%]
+
+//// Handling Weapons, Armor and other items
+
+///First some basics
+// Making sure Wirt's Leg always shows
+ItemDisplay[leg]: > > > %NAME% < < <
+
+// Hiding all Inferior Items
+ItemDisplay[INF]:
+
+// Hiding arrows and bolts
+ItemDisplay[aqv OR cqv]:
+
+/// Progressively removing clutter / likely unneeded items
+// Hiding Normal, Regular, Non-Superior, Armors and Weapons with less than 2 Sockets as well as Normal Magic Armors and Weapons starting at level 30
+ItemDisplay[(ARMOR OR WEAPON) NORM (MAG OR (NMAG SOCK<2 !SUP !leg)) CLVL>29 !RW !CIRC]:
+
+// Hiding all Normal, Regular Weapons and Armor except for Superior items with 3 sockets or more starting at level 45 
+ItemDisplay[(ARMOR OR WEAPON) NORM NMAG !(SOCK>2 SUP) CLVL>44 !RW !CIRC]:
+
+// Hiding all Exceptional, Regular, Non-Superior, Armors and Weapons with less than 2 Sockets as well as Exceptional Magic Armors and Weapons starting at Character level 60
+ItemDisplay[(ARMOR OR WEAPON) EXC (MAG OR (NMAG SOCK<2 !SUP)) CLVL>59 !RW !CIRC]:
+
+// Hiding all Exceptional, Regular Armors and Weapons except for Superior items with 2 sockets or more starting at level 75
+ItemDisplay[(ARMOR OR WEAPON) EXC NMAG !(SOCK>1 SUP) CLVL>74 !RW !CIRC]:
+
+/// Markings for everything that still shows
+// Starting a new line after %NAME% if we can expect many markings
+ItemDisplay[(ARMOR OR WEAPON) SOCK>0 OR ETH]:	%NAME%%NL%%CONTINUE%
+
+// Marking Circlets for Imbue
+ItemDisplay[NMAG SOCK=0 CIRC]: %RED%[%YELLOW%Imbue%RED%]%YELLOW%->%WHITE%%NAME%%CONTINUE%
+
+// Marking Exceptional and Elite Items
+ItemDisplay[EXC]:	%NAME%%RED%[%PURPLE%exc%RED%]%CONTINUE%
+ItemDisplay[ELT]:	%NAME%%PURPLE%[%RED%elt%PURPLE%]%CONTINUE%
+
+// Marking Ethereal and Socketed Items
+ItemDisplay[SOCK>0 SOCK<3]:	%NAME%%WHITE%[%GRAY%%SOCKETS%os%WHITE%]%CONTINUE%
+ItemDisplay[SOCK>2 SOCK<5]:	%NAME%%WHITE%[%DARK_GREEN%%SOCKETS%os%WHITE%]%CONTINUE%
+ItemDisplay[SOCK>4]:	%NAME%%WHITE%[%ORANGE%%SOCKETS%os%WHITE%]%CONTINUE%
+ItemDisplay[ETH]:	%NAME%%WHITE%[%GRAY%ETH%WHITE%]%CONTINUE%
+
+// Showing Item Levels for pretty much everything
+ItemDisplay[WEAPON OR ARMOR OR cm1 OR cm2 OR cm3 OR jew OR aq2 OR cq2 OR rin OR amu ILVL>0]]:	%NAME%%WHITE%[l%ILVL%%WHITE%]%CONTINUE%
+
+// Marking Exceptional and Elite possible Runeword Bases
+ItemDisplay[EXC SOCK>1 !RW]:	%NAME%%YELLOW%rwb%CONTINUE%
+ItemDisplay[ELT SOCK>1 !RW]:	%NAME%%ORANGE%rwb%CONTINUE%
+
+// Marking Elite Crafting bases for popular crafts (according to d2jsp)
+ItemDisplay[MAG (uvg OR umg OR umc OR uvc OR ulb OR (ELT AXE))]: %NAME%%GREEN%[%ORANGE%craft%GREEN%]%CONTINUE%
+
+// Making sure Uniques, Set items and potentially decent bases always notify and show on the minimap
+ItemDisplay[UNI OR SET OR (SOCK>1 ELT)]: %NAME%%MAP-9B%/(reformatted for FilterBird)
+
+/// PD2 Item Handling
+// Showing Item as is, with Notificaction and some visual appeal
+ItemDisplay[wss OR lbox OR imra OR imma OR scou OR rera OR upma OR t11 OR t12 OR t13 OR t14 OR t15 OR t16 OR t17 OR t18]: %NAME%%ORANGE%[%PURPLE%pd2%ORANGE%]%MAP%
+
+/// EndGame Stuff Handling
+// Showing Item as is, wich Notification and some visual appeal
+ItemDisplay[tes OR ceh OR bet OR fed OR toa OR pk1 OR pk2 OR pk3 OR dhn OR bey OR mbr OR dcma OR dcbl OR dcho OR dcso]: %NAME%%ORANGE%[%PURPLE%eg%ORANGE%]%MAP%
+
+// Default Display
+ItemDisplay[]:	%NAME%

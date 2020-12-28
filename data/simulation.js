@@ -42,8 +42,9 @@ function startup() {
 	toggleCustomFormat(true)
 	document.getElementById("pd2_option").checked = false
 	settings.pd2_option = 0
+	document.getElementById("select_price").style.display = "none"
 	
-	//document.getElementById("debug").style.display = "block"
+	document.getElementById("debug").style.display = "block"
 	//document.getElementById("simulate_custom").style.display = "block"
 }
 
@@ -130,7 +131,7 @@ function setItem(value) {
 			for (affix in item) { itemToCompare[affix] = item[affix] }
 			itemToCompare.NAME = value.split(" (")[0].split(" ­ ")[0]
 			itemToCompare.ILVL = character.ILVL
-			itemToCompare.PRICE = 29999
+			itemToCompare.PRICE = Number(document.getElementById("price").value)
 			itemToCompare.ID = true
 			if (typeof(itemToCompare.base) != 'undefined') {
 				var base = bases[itemToCompare.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
@@ -228,6 +229,7 @@ function setItem(value) {
 function simulate() {
 	for (let num = 1; num <= 2; num++) { if (document.getElementById("filter_text_"+num).value != "") {
 		//document.getElementById("print").innerHTML = ""
+		if (settings.pd2_option == 0 || document.getElementById("dropdown_group").selectedIndex > 8) { document.getElementById("select_price").style.display = "none" }
 		document.getElementById("output_"+num).innerHTML = ""
 		document.getElementById("item_desc"+num).innerHTML = ""
 		var result = parseFile(document.getElementById("filter_text_"+num).value,num)
@@ -309,6 +311,7 @@ function parseFile(file,num) {
 				for (cond in cond_list) {
 					cond = Number(cond)
 					var c = cond_list[cond];
+					if (c == "GEM") { c = "GEMLEVEL" }
 					if (settings.pd2_option == 1) { if (c == "DIFF") { c = "DIFFICULTY" } }
 					var number = false;
 					if (isNaN(Number(c)) == false) { cond_list[cond] = Number(c); number = true; }
@@ -348,7 +351,7 @@ function parseFile(file,num) {
 				var out_format = output.split(",").join("‾").split(" ").join(", ,").split("%WHITE%").join(",color_White,").split("%GRAY%").join(",color_Gray,").split("%BLUE%").join(",color_Blue,").split("%YELLOW%").join(",color_Yellow,").split("%GOLD%").join(",color_Gold,").split("%GREEN%").join(",color_Green,").split("%DGREEN%").join(",color_DarkGreen,").split("%BLACK%").join(",color_Black,").split("%TAN%").join(",color_Tan,").split("%PURPLE%").join(",color_Purple,").split("%ORANGE%").join(",color_Orange,").split("%RED%").join(",color_Red,").split("%NAME%").join(",ref_NAME,").split("%CLVL%").join(",ref_CLVL,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("%CONTINUE%").join(",misc_CONTINUE,").split("\t").join(",\t,").split("/").join(",/,").split("{").join(",{,").split("}").join(",},")
 				if (settings.pd2_option == 1) {
 					// TODO: disable %DGREEN%?
-					out_format = out_format.split("%DARK_GREEN%").join(",color_DarkGreen,").split("%QTY%").join(",ignore_Quantity,").split("%RANGE%").join(",ignore_range,").split("%WPNSPD%").join(",ignore_baseSpeed,").split("%ALVL%").join(",ignore_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,")
+					out_format = out_format.split("%DARK_GREEN%").join(",color_DarkGreen,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,")
 					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
 					for (n in notifs) {									// TODO: implement more efficient way to split notification keywords
 						if (out_format.includes(notifs[n])) {
@@ -368,12 +371,14 @@ function parseFile(file,num) {
 				var out_list = out_format.split(",");
 				if (out_list[0] == "") { out_list.shift() }
 				if (out_list[out_list.length-1] == "") { out_list.pop() }
-				for (out in out_list) {
-					var o = out_list[out];
-					if (description_active == true && ((o == "{" && description_braces == 0) || (o == "}" && description_braces == 1))) { description_braces = description_braces+1 }
-					if (description_braces == 1) { if (o == "/") { out_list[out] = "‡" } }
+				if (settings.pd2_option == 1) {
+					for (out in out_list) {
+						var o = out_list[out];
+						if (description_active == true && ((o == "{" && description_braces == 0) || (o == "}" && description_braces == 1))) { description_braces = description_braces+1 }
+						if (description_braces == 1) { if (o == "/") { out_list[out] = "‡" } }
+					}
+					description_braces = 0
 				}
-				description_braces = 0
 				for (let i = 0; i < out_list.length; i++) {
 					if (out_list[i] == "/") {
 						for (let j = out_list.length-1; j >= i; j--) {
@@ -504,7 +509,7 @@ function getColor(item) {
 	else if (item.rarity == "craft") { color = "Orange" }
 	else if ((item.ARMOR == true || item.WEAPON == true || item.CODE == "rin" || item.CODE == "amu") && item.NMAG != true  && item.MAG != true  && item.RARE != true  && item.UNI != true  && item.SET != true ) { color = "Orange" }
 	else if (item.RUNE > 0) { color = "Orange" }
-	else if (item.CODE == "cx5" || item.CODE == "cx6" || item.CODE == "cx7" || item.CODE == "maz" || item.CODE == "ma4" || item.CODE == "ma5" || item.CODE == "ma6" || item.CODE == "ma2" || item.CODE == "cx8") { color = "Purple" }
+	else if (item.CODE == "cx5" || item.CODE == "cx6" || item.CODE == "cx7" || item.CODE == "maz" || item.CODE == "ma4" || item.CODE == "ma5" || item.CODE == "ma6" || item.CODE == "ma2" || item.CODE == "cx8" || item.CODE == "wss") { color = "Purple" }
 	return colors[color]
 }
 
@@ -520,7 +525,7 @@ function equipmentHover(num) {
 		if (typeof(stats[affix]) != 'undefined') { if (itemToCompare[affix] != unequipped[affix] && stats[affix] != unequipped[affix] && stats[affix] != 1 && affix != "velocity" && affix != "smite_min") {
 			var affix_info = getAffixLine(affix);
 			if (affix_info[1] != 0) {
-				if (affix == "base_damage_min" || affix == "base_defense" || affix == "req_level" || affix == "req_strength" || affix == "req_dexterity" || affix == "durability" || affix == "baseSpeed" || affix == "range" || affix == "throw_min" || affix == "base_min_alternate" || affix == "block" || affix == "velocity" || affix == "QUANTITY" || affix == "relic_experience" || affix == "relic_density") { main_affixes += affix_info[0]+"<br>" }
+				if (affix == "base_damage_min" || affix == "base_defense" || affix == "req_level" || affix == "req_strength" || affix == "req_dexterity" || affix == "durability" || affix == "baseSpeed" || affix == "range" || affix == "throw_min" || affix == "base_min_alternate" || affix == "block" || affix == "velocity" || affix == "QUANTITY" || affix == "relic_experience" || affix == "relic_density" || affix == "map_tier") { main_affixes += affix_info[0]+"<br>" }
 				else { affixes += affix_info[0]+"<br>" }
 			}
 		} }
@@ -670,6 +675,7 @@ function setCLVL2(value) {
 	document.getElementById("clvl").value = value
 	document.getElementById("dropdown_clvl").value = value
 	character.CLVL = Number(value)
+	if (settings.pd2_option == 1) { itemCustom.CRAFTALVL = Math.floor(character.CLVL/2) + Math.floor(ilvl/2) }
 	if (character.CHARSTAT14 > (character.CLVL * 10000)) {
 		character.CHARSTAT14 = character.CLVL * 10000
 		document.getElementById("gold_char").value = character.CHARSTAT14

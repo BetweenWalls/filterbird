@@ -1,0 +1,292 @@
+// +----------------------------------------------------------------------------+
+// |                                                                            |
+// |     DETHKLOK1637's GENERAL ITEM FILTER          				            |
+// |     Made By:  @Dethklok#8947 // Dethklok1637                               |
+// |     Twitch: https://twitch.tv/dethklok1637                                 |
+// |     Last updated: 16/11/2020                                               |
+// |                                                                            |
+// +----------------------------------------------------------------------------+
+
+
+// This filter will be medium strictness mostly hiding some especially useless items.
+
+// Hide Useless Items
+ItemDisplay[INF CLVL>1]: // Hide all Low Quality, Cracked, Crude, & Damaged items past character level 10
+
+// Eth & Sockets in Item Name. Shows sockets more prominently with dark green.
+ItemDisplay[ETH]: %NAME% %PURPLE%[Eth]%CONTINUE% // Add "[Eth]" to ethereal item's names (eg "Quilted Armor [Eth]")
+ItemDisplay[!RW !ETH SOCK>0]: %NAME%%DARK_GREEN% [%SOCKETS%os]%CONTINUE% // Add number of sockets to the end of socketed items' names (eg "Quilted Armor [2]")
+ItemDisplay[!RW ETH SOCK>0]: %NAME%%DARK_GREEN%[%SOCKETS%os]%CONTINUE% // No space between eth and socket display if item is eth (eg "Quilted Armor [Eth][2]")
+ItemDisplay[NORM]: %NAME%%ORANGE%[N]%CONTINUE% // Add Quality marker to items
+ItemDisplay[EXC]: %NAME%%ORANGE%[X]%CONTINUE% // Add Quality marker to items
+ItemDisplay[ELT]: %NAME%%ORANGE%[E]%CONTINUE% // Add Quality marker to items
+
+// Quest Items
+ItemDisplay[hdm]: %NAME%%MAP-00%{%TAN%Give to Charsi in Act 1} // Horadric Malus
+ItemDisplay[bks]: %NAME%%MAP-00%{%TAN%Talk to Akara in Act 1%NL%} // Scroll of Inifuss
+ItemDisplay[bkd]: %NAME%%MAP-00%{%TAN%Go to Act 1: Stony Field%NL%} // Scroll of Inifuss, deciphered
+ItemDisplay[leg]: %GOLD%%NAME%%MAP-00%{%TAN%Cube w/ Tome of Town Portal in Act 1 to open Cow Level} // Wirt's Leg
+ItemDisplay[ass]: %NAME%%MAP-00%{%TAN%Right click for +1 Skill Point%NL%} // Book of Skill
+ItemDisplay[tr1]: %NAME%{%TAN%Not required%NL%} // Horadric Scroll
+ItemDisplay[box]: %NAME%%MAP-00% // Horadric Cube
+ItemDisplay[hst]: %NAME%%MAP-00%{%TAN%Use in Tomb Orifice in Act 2: Tal Rashas Tomb} // Horadric Staff
+ItemDisplay[msf]: %NAME%%MAP-00%{%TAN%Cube w/ Amulet of the Viper} // Staff of Kings
+ItemDisplay[vip]: %NAME%%MAP-00%{%TAN%Cube w/ Staff of Kings} // Amulet of the Viper
+ItemDisplay[j34]: %NAME%%MAP-00%{%TAN%Give to Meshif in Act 3%NL%} // A Jade Figurine
+ItemDisplay[g33]: %NAME%%MAP-00%{%TAN%Give to Ormus in Act 3%NL%} // Gidbinn
+ItemDisplay[qbr]: %NAME%%MAP-00%{%TAN%Cube w/ Eye, Flail, & Heart%NL%} // Khalim's Brain
+ItemDisplay[qey]: %NAME%%MAP-00%{%TAN%Cube w/ Brain, Flail, & Heart%NL%} // Khalim's Eye
+ItemDisplay[qf1]: %NAME%%MAP-00%{%TAN%Cube w/ Brain, Eye, & Heart} // Khalim's Flail
+ItemDisplay[qhr]: %NAME%%MAP-00%{%TAN%Cube w/ Brain, Eye, & Flail%NL%} // Khalim's Heart
+ItemDisplay[qf2]: %NAME%%MAP-00%{%TAN%Hit Compelling Orb in Act 3: Travincal} // Khalim's Will
+ItemDisplay[bbb]: %NAME%%MAP-00%{%TAN%Give to Alkor for +5 Stat Points%NL%} // Lam Esen's Tome
+ItemDisplay[mss]: %NAME%%MAP-00%{%TAN%Take to the Hellforge in Act 4: River of Flame%NL%} // Mephisto's Soulstone
+ItemDisplay[xyz]: %NAME%%MAP-00%{%TAN%Right click for a permanent +20 to Life%NL%} // Potion of Life
+ItemDisplay[g34]: %NAME%%MAP-00%{%TAN%Give to Alkor in Act 3%NL%} // The Golden Bird
+ItemDisplay[hfh]: %NAME%%MAP-00%{%TAN%Hit Hellforge in Act 4: River of Flame} // Hellforge Hammer
+ItemDisplay[ice]: %NAME%%MAP-00%{%TAN%Touch Anya in Act 5: Frozen River%NL%} // Malah's Potion
+ItemDisplay[tr2]: %NAME%%MAP-00%{%TAN%Right click for a permanent All Resistances +10%NL%} // Scroll of Resistance
+
+// Essences & Tokens
+ItemDisplay[bet]: %ORANGE%%NAME%%MAP-00%{%TAN%Cube w/ Charged, Festering, & Twisted essences%NL%} // Burning Essence of Terror
+ItemDisplay[ceh]: %ORANGE%%NAME%%MAP-00%{%TAN%Cube w/ Burning, Festering, & Twisted essences%NL%} // Charged Essence of Hatred
+ItemDisplay[fed]: %ORANGE%%NAME%%MAP-00%{%TAN%Cube w/ Burning, Charged, & Twisted essences%NL%} // Festering Essence of Destruction
+ItemDisplay[tes]: %ORANGE%%NAME%%MAP-00%{%TAN%Cube w/ Burning, Charged, & Festering essences%NL%} // Twisted Essence of Suffering
+ItemDisplay[toa]: %ORANGE%%NAME%%MAP-68%{%TAN%Right click to reset stats & skills%NL%} // Token of Absolution
+
+// Keys & Organs
+ItemDisplay[pk3]: %ORANGE%%NAME%%MAP-68%{%TAN%Cube w/ Hate + Terror keys in Act 5%NL%} // Key of Destruction
+ItemDisplay[pk2]: %ORANGE%%NAME%%MAP-68%{%TAN%Cube w/ Destruction + Terror keys in Act 5%NL%} // Key of Hate
+ItemDisplay[pk1]: %ORANGE%%NAME%%MAP-68%{%TAN%Cube w/ Destruction + Hate keys in Act 5%NL%} // Key of Terror
+ItemDisplay[bey]: %ORANGE%%NAME%%MAP-68%{%TAN%Cube any 3 organs in Act 5 to open Uber Trist%NL%} // Baal's Eye
+ItemDisplay[dhn]: %ORANGE%%NAME%%MAP-68%{%TAN%Cube any 3 organs in Act 5 to open Uber Trist%NL%} // Diablo's Horn
+ItemDisplay[mbr]: %ORANGE%%NAME%%MAP-68%{%TAN%Cube any 3 organs in Act 5 to open Uber Trist%NL%} // Mephisto's Brain
+
+// PD2 Items
+ItemDisplay[wss]: %PURPLE%+%RED%%NAME%%MAP-62% // Worldstone Shard
+ItemDisplay[lbox]: %PURPLE%+%RED%%NAME%%MAP-62% // Larzuk's Box
+ItemDisplay[rera]: %NAME%{%TAN%Cube w/ Perfect Gem, Thul Rune or Greater, & Rare Map}%DOT-80% // Reroll Rare Map (Horadrim Orb)
+ItemDisplay[imra]: %NAME%{%TAN%Cube w/ Jewel, Thul Rune or Greater, & White Map}%DOT-80% // Imbue Rare Map (Zakarum Orb)
+ItemDisplay[upma]: %NAME%{%TAN%Cube w/ Perfect Skull, Thul Rune or Greater, & Magic Map}%DOT-80% // Upgrade Magic Map to Rare Map (Angelic Orb)
+ItemDisplay[imma]: %NAME%{%TAN%Cube w/ Jewel, Any Rune, & White Map}%DOT-80% // Imbue Magic Map (Arcane Orb)
+ItemDisplay[scou]: %NAME%{%TAN%Cube w/ Hel Rune & Magic or Rare Map}%DOT-80% // Purge Map (Removes Mods and Reverts back to a White Map) (Orb of Destruction)
+ItemDisplay[t11]: %NAME% [T1]%MAP-87% // Map
+ItemDisplay[t12]: %NAME% [T2]%MAP-87% // Map
+ItemDisplay[t13]: %NAME% [T3]%MAP-87% // Map
+ItemDisplay[t14]: %NAME% [T4]%MAP-87% // Map
+ItemDisplay[t15]: %NAME% [T5]%MAP-87% // Map
+ItemDisplay[t16]: %NAME% [T6]%MAP-87% // Ruins of Viz-jun
+ItemDisplay[t17]: %NAME% [T7]%MAP-87% // River of Blood
+ItemDisplay[t18]: %NAME% [T8]%MAP-87% // Lava Map
+
+// GEMS
+// REFERENCE PAGE: https://projectdiablo2.miraheze.org/wiki/Item_Filtering#Gems 
+// Showing every tier with a shorter name and a map icon with stacks.			
+
+
+// Amethyst
+ItemDisplay[gcv]: %PURPLE%+%WHITE%C-Amethyst%MAP-9B%
+ItemDisplay[gfv]: %PURPLE%+%WHITE%Fl-Amethyst%MAP-9B%
+ItemDisplay[gsv]: %PURPLE%+%WHITE%Amethyst%MAP-9B%
+ItemDisplay[gzv]: %PURPLE%+%WHITE%F-Amethyst%MAP-9B%
+ItemDisplay[gpv]: %PURPLE%+%WHITE%PAmethyst%MAP-9B%
+
+ItemDisplay[gzvs]: %PURPLE%*+%WHITE%FAmethyst%MAP-9B%
+ItemDisplay[gpvs]: %PURPLE%**+%WHITE%PAmethyst%MAP-9B%
+
+// Topaz
+ItemDisplay[gcy]: %YELLOW%+%WHITE%C-Topaz%MAP-EC%
+ItemDisplay[gfy]: %YELLOW%+%WHITE%Fl-Topaz%MAP-EC%
+ItemDisplay[gsy]: %YELLOW%+%WHITE%Topaz%MAP-EC%
+ItemDisplay[gzy]: %YELLOW%+%WHITE%F-Topaz%MAP-EC%
+ItemDisplay[gpy]: %YELLOW%+%WHITE%PTopaz%MAP-EC%
+
+ItemDisplay[glys]: %YELLOW%*+%WHITE%F-Topaz%MAP-EC%
+ItemDisplay[gpys]: %YELLOW%**+%WHITE%F-Topaz%MAP-EC%
+
+// Sapphire
+ItemDisplay[gcb]: %BLUE%+%WHITE%C-Sapphire%MAP-97%
+ItemDisplay[gfb]: %BLUE%+%WHITE%Fl-Sapphire%MAP-97%
+ItemDisplay[gsb]: %BLUE%+%WHITE%Sapphire%MAP-97%
+ItemDisplay[glb]: %BLUE%+%WHITE%F-Sapphire%MAP-97%
+ItemDisplay[gpb]: %BLUE%+%WHITE%PSapphire%MAP-97%
+
+ItemDisplay[glbs]: %BLUE%*+%WHITE%F-Sapphire%MAP-97%
+ItemDisplay[gpbs]: %BLUE%**+%WHITE%PSapphire%MAP-97%
+
+// Emerald
+ItemDisplay[gcg]: %DARK_GREEN%+%WHITE%C-Emerald%MAP-EA%
+ItemDisplay[gfg]: %DARK_GREEN%+%WHITE%Fl-Emerald%MAP-EA%
+ItemDisplay[gsg]: %DARK_GREEN%+%WHITE%Emerald%MAP-EA%
+ItemDisplay[glg]: %DARK_GREEN%+%WHITE%F-Emerald%MAP-EA%
+ItemDisplay[gpg]: %DARK_GREEN%+%WHITE%PEmerald%MAP-EA%
+
+ItemDisplay[glgs]: %DARK_GREEN%*+%WHITE%F-Emerald%MAP-EA%
+ItemDisplay[gpgs]: %DARK_GREEN%**+%WHITE%PEmerald%MAP-EA%
+
+// Ruby
+ItemDisplay[gcr]: %RED%+%WHITE%C-Ruby%MAP-62%
+ItemDisplay[gfr]: %RED%+%WHITE%Fl-Ruby%MAP-62%
+ItemDisplay[gsr]: %RED%+%WHITE%Ruby%MAP-62%
+ItemDisplay[glr]: %RED%+%WHITE%F-Ruby%MAP-62%
+ItemDisplay[gpr]: %RED%+%WHITE%PRuby%MAP-62%
+
+ItemDisplay[glrs]: %RED%*+%WHITE%F-Ruby%MAP-62%
+ItemDisplay[gprs]: %RED%**+%WHITE%PRuby%MAP-62%
+
+// Diamond
+ItemDisplay[gcw]: %GRAY%+%WHITE%C-Diamond%MAP-20%
+ItemDisplay[gfw]: %GRAY%+%WHITE%Fl-Diamond%MAP-20%
+ItemDisplay[gsw]: %GRAY%+%WHITE%Diamond%MAP-20%
+ItemDisplay[glw]: %GRAY%+%WHITE%F-Diamond%MAP-20%
+ItemDisplay[gpw]: %GRAY%+%WHITE%PDiamond%MAP-20%
+
+ItemDisplay[glws]: %GRAY%*+%WHITE%F-Diamond%MAP-20%
+ItemDisplay[gpws]: %GRAY%**+%WHITE%PDiamond%MAP-20%
+
+// Skull
+ItemDisplay[skc]: %BLACK%+%WHITE%C-Skull%MAP-D0%
+ItemDisplay[skf]: %BLACK%+%WHITE%Fl-Skull%MAP-D0%
+ItemDisplay[sku]: %BLACK%+%WHITE%Skull%MAP-D0%
+ItemDisplay[skl]: %BLACK%+%WHITE%F-Skull%MAP-D0%
+ItemDisplay[skz]: %BLACK%+%WHITE%PSkull%MAP-D0%
+
+ItemDisplay[skls]: %BLACK%*+%WHITE%F-Skull%MAP-D0%
+ItemDisplay[skzs]: %BLACK%**+%WHITE%PSkull%MAP-D0%
+
+
+// Runes
+ItemDisplay[RUNE<11 RUNE>0]: %DARK_GREEN%%RUNENAME% (%RUNENUM%)%DOT-76%%CONTINUE% // El-Thul/(reformatted for FilterBird)
+ItemDisplay[RUNE>10 RUNE<24]: %ORANGE%%RUNENAME% (%RUNENUM%)%MAP-0B%%CONTINUE% // Amn-Mal
+ItemDisplay[RUNE>23]: %RED%%RUNENAME% (%RUNENUM%)%BORDER-50%%CONTINUE% // Ist-Zod
+ItemDisplay[RUNE>0 QTY>0]: %NAME% x%QTY%%CONTINUE% // Shows the quantity of runes for stacking purposes
+ItemDisplay[RUNE=1]: %NAME%{%TAN%3 El + Key = Eld%NL%} // El Rune
+ItemDisplay[RUNE=2]: %NAME%{%TAN%3 Eld + Key = Tir%NL%} // Eld Rune
+ItemDisplay[RUNE=3]: %NAME%{%TAN%3 Tir + Key = Nef%NL%} // Tir Rune
+ItemDisplay[RUNE=4]: %NAME%{%TAN%3 Nef + Key = Eth%NL%} // Nef Rune
+ItemDisplay[RUNE=5]: %NAME%{%TAN%3 Eth + Key = Ith%NL%} // Eth Rune
+ItemDisplay[RUNE=6]: %NAME%{%TAN%3 Ith + Key = Tal%NL%} // Ith Rune
+ItemDisplay[RUNE=7]: %NAME%{%TAN%3 Tal + Key = Ral%NL%} // Tal Rune
+ItemDisplay[RUNE=8]: %NAME%{%TAN%3 Ral + Key = Ort%NL%} // Ral Rune
+ItemDisplay[RUNE=9]: %NAME%{%TAN%3 Ort + Key = Thul%NL%} // Ort Rune
+ItemDisplay[RUNE=10]: %NAME%{%TAN%3 Thul + Key = Amn%NL%} // Thul Rune
+ItemDisplay[RUNE=11]: %NAME%{%TAN%3 Amn + Key = Sol%NL%} // Amn Rune
+ItemDisplay[RUNE=12]: %NAME%{%TAN%3 Sol + Key = Shael%NL%} // Sol Rune
+ItemDisplay[RUNE=13]: %NAME%{%TAN%3 Shael + Key = Dol%NL%} // Shael Rune
+ItemDisplay[RUNE=14]: %NAME%{%TAN%3 Dol + Key = Hel%NL%} // Dol Rune
+ItemDisplay[RUNE=15]: %NAME%{%TAN%3 Hel + Key = Io%NL%} // Hel Rune
+ItemDisplay[RUNE=16]: %NAME%{%TAN%3 Io + Key = Lum%NL%} // Io Rune
+ItemDisplay[RUNE=17]: %NAME%{%TAN%3 Lum + Key = Ko%NL%} // Lum Rune
+ItemDisplay[RUNE=18]: %NAME%{%TAN%3 Ko + Key = Fal%NL%} // Ko Rune
+ItemDisplay[RUNE=19]: %NAME%{%TAN%3 Fal + Key = Lem%NL%} // Fal Rune
+ItemDisplay[RUNE=20]: %NAME%{%TAN%3 Lem + Key = Pul%NL%} // Lem Rune
+ItemDisplay[RUNE=21]: %NAME%{%TAN%2 Pul + Key = Pul%NL%} // Pul Rune
+ItemDisplay[RUNE=22]: %NAME%{%TAN%2 Um + Key = Mal%NL%} // Um Rune
+ItemDisplay[RUNE=23]: %NAME%{%TAN%2 Mal + Key = Ist%NL%} // Mal Rune
+ItemDisplay[RUNE=24]: %NAME%{%TAN%2 Ist + Key = Gul%NL%} // Ist Rune
+ItemDisplay[RUNE=25]: %NAME%{%TAN%2 Gul + Key = Vex%NL%} // Gul Rune
+ItemDisplay[RUNE=26]: %NAME%{%TAN%2 Vex + Key = Ohm%NL%} // Vex Rune
+ItemDisplay[RUNE=27]: %NAME%{%TAN%2 Ohm + Key = Lo%NL%} // Ohm Rune
+ItemDisplay[RUNE=28]: %NAME%{%TAN%2 Lo + Key = Sur%NL%} // Lo Rune
+ItemDisplay[RUNE=29]: %NAME%{%TAN%2 Sur + Key = Ber%NL%} // Sur Rune
+ItemDisplay[RUNE=30]: %NAME%{%TAN%2 Ber + Key= Jah%NL%} // Ber Rune
+ItemDisplay[RUNE=31]: %NAME%{%TAN%2 Jah + Key = Cham%NL%} // Jah Rune
+ItemDisplay[RUNE=32]: %NAME%{%TAN%2 Cham + Key = Zod%NL%} // Cham Rune
+ItemDisplay[RUNE=33]: %NAME%{%TAN%POGGERS%NL%}// Zod Rune
+
+// Gold
+ItemDisplay[GOLD<2500]: // Hide 2500 gold and less
+
+//Global Price Filters -- Magic & Rare
+ItemDisplay[MAG OR RARE PRICE>0 AND PRICE<5000]:%NAME%+%GREEN%T1$
+ItemDisplay[MAG OR RARE PRICE>5000 AND PRICE<10000]:%NAME%+%GREEN%T2$
+ItemDisplay[MAG OR RARE PRICE>10000 AND PRICE<20000]:%NAME%+%GREEN%T3$
+ItemDisplay[MAG OR RARE PRICE>20000 AND PRICE<30000]:%NAME%+%GREEN%T4$
+ItemDisplay[MAG OR RARE PRICE>30000]:%NAME%+%GREEN%T5$
+
+// Potions
+ItemDisplay[hp1 CLVL<25]: %RED%+%WHITE%[H1] // Minor Healing Potion
+ItemDisplay[hp1 CLVL>24]: // Hides Minor Healing Potions after level 24
+ItemDisplay[hp2 CLVL<25]: %RED%+%WHITE%[H2] // Light Healing Potion
+ItemDisplay[hp2 CLVL>24]: // Hides Light Healing Potions after level 24
+ItemDisplay[hp3 CLVL<40]: %RED%+%WHITE%[H3] // Healing Potion
+ItemDisplay[hp3 CLVL>39]: // Hides Healing Potions after level 39
+ItemDisplay[hp4]: %RED%+%WHITE%[H4] // Greater Healing Potion
+ItemDisplay[hp5]: %RED%+%WHITE%[H5] // Super Healing Potion
+ItemDisplay[mp1 CLVL<25]: %BLUE%+%WHITE%[M1] // Minor Mana Potion
+ItemDisplay[mp1 CLVL>24]: // Hides Minor Mana Potions after level 24
+ItemDisplay[mp2 CLVL<25]: %BLUE%+%WHITE%[M2] // Light Mana Potion
+ItemDisplay[mp2 CLVL>24]: // Hides Light Mana Potions after level 24
+ItemDisplay[mp3 CLVL<40]: %BLUE%+%WHITE%[M3] // Mana Potion
+ItemDisplay[mp3 CLVL>39]: // Hides Mana Potions after level 39
+ItemDisplay[mp4]: %BLUE%+%WHITE%[M4] // Greater Mana Potion
+ItemDisplay[mp5]: %BLUE%+%WHITE%[M5] // Super Mana Potion
+ItemDisplay[rvs]: %PURPLE%+%WHITE%35% // Rejuv Potion
+ItemDisplay[rvl]: %PURPLE%+%WHITE%65%%PURPLE%+ // Full Rejuv Potion
+ItemDisplay[vps]: %WHITE%+%WHITE%Stamina // Stamina Potion
+ItemDisplay[yps]: %GREEN%+%WHITE%Anti // Antidote Potion
+ItemDisplay[wms]: %BLUE%+%WHITE%Thaw // Thawing Potion
+ItemDisplay[gpl]: %GREEN%+%WHITE%Stran // Strangling Potion
+ItemDisplay[gpm]: %GREEN%+%WHITE%Chok // Choking Potion
+ItemDisplay[gps]: %GREEN%+%WHITE%Ranc // Rancid Potion
+ItemDisplay[opl]: %ORANGE%+%WHITE%Fulm // Fulminating Potion
+ItemDisplay[opm]: %ORANGE%+%WHITE%Expl // Exploding Potion
+ItemDisplay[ops]: %ORANGE%+%WHITE%Oil // Oil Potion
+
+// Scrolls & Tomes
+ItemDisplay[isc]: ID%RED%+%WHITE% // Scroll of Identify
+ItemDisplay[tsc]: TP%BLUE%+%WHITE% // Scroll of Town Portal
+ItemDisplay[ibk]: %RED%+%WHITE%ID%RED%+%WHITE% // Tome of Identify
+ItemDisplay[tbk]: %BLUE%+%WHITE%TP%BLUE%+%WHITE% // Tome of Town Portal
+
+// Filters for some high-tier items.
+
+//Monarchs
+ItemDisplay[NMAG !INF !RW !ETH SOCK=0 uit]: %NAME%%DOT-20%%PX-00% // 0os
+ItemDisplay[NMAG !INF !RW !ETH SOCK=4 uit]: %GRAY%%NAME%%DOT-1E%%PX-00% // 4os
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 uit]: %NAME%%DOT-20%%PX-00% // Superior, 0os
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=4 uit]: %GRAY%%NAME%%DOT-1E%%PX-00% // Superior, 4os
+ItemDisplay[NMAG !INF !RW ETH SOCK=0 uit]: %GRAY%%NAME%%DOT-1E%%PX-00% // Eth, 0os
+ItemDisplay[NMAG !INF !RW ETH SOCK=4 uit]: %GRAY%%NAME%%DOT-1E%%PX-00% // Eth, 4os
+ItemDisplay[NMAG !INF !RW SUP ETH SOCK=0 uit]: %GRAY%%NAME%%DOT-1E%%PX-00% // Superior, Eth, 0os
+ItemDisplay[NMAG !INF !RW SUP ETH SOCK=4 uit]: %GRAY%%NAME%%DOT-1E%%PX-00% // Superior, Eth, 4os
+
+//Berserker Axe
+ItemDisplay[NMAG !INF !RW !ETH SOCK=0 7wa]: %NAME%%DOT-20%%PX-00% // 0os
+ItemDisplay[NMAG !INF !RW !ETH SOCK=5 7wa]: %GRAY%%NAME%%DOT-20%%PX-00% // 5os
+ItemDisplay[NMAG !INF !RW !ETH SOCK=6 7wa]: %GRAY%%NAME%%DOT-20%%PX-00% // 6os
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 7wa]: %NAME%%DOT-20%%PX-00% // 0os, Superior
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=5 7wa]: %GRAY%%NAME%%DOT-20%%PX-00% // 5os, Superior
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=6 7wa]: %GRAY%%NAME%%DOT-20%%PX-00% // 6os, Superior
+ItemDisplay[NMAG !INF !RW ETH SOCK=0 7wa]: %GRAY%%NAME%%DOT-20%%PX-00% // 0os, Eth
+ItemDisplay[NMAG !INF !RW ETH SOCK=6 7wa]: %GRAY%%NAME%%DOT-20%%PX-00% // 6os, Eth
+ItemDisplay[NMAG !INF !RW SUP ETH SOCK=0 7wa]: %GRAY%%NAME%%DOT-20%%PX-00% // 0os, Superior, Eth
+ItemDisplay[NMAG !INF !RW SUP ETH SOCK=6 7wa]: %GRAY%%NAME%%DOT-20%%PX-00% // 6os, Superior, Eth
+
+//Archon Plate
+ItemDisplay[NMAG !INF !RW !ETH SOCK=0 utp]: %NAME%%DOT-20%%PX-00% // 0os
+ItemDisplay[NMAG !INF !RW !ETH SOCK=3 utp]: %GRAY%%NAME%%DOT-1E%%PX-00% // 3os
+ItemDisplay[NMAG !INF !RW !ETH SOCK=4 utp]: %GRAY%%NAME%%DOT-1E%%PX-00% // 4os
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 utp]: %NAME%%DOT-20%%PX-00% // Superior, 0os
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=3 utp]: %GRAY%%NAME%%DOT-1E%%PX-00% // Superior, 3os
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=4 utp]: %GRAY%%NAME%%DOT-1E%%PX-00% // Superior, 4os
+ItemDisplay[NMAG !INF !RW ETH SOCK=0 utp]: %GRAY%%NAME%%DOT-1E%%PX-00% // Eth, 0os
+ItemDisplay[NMAG !INF !RW ETH SOCK=4 utp]: %GRAY%%NAME%%DOT-1E%%PX-00% // Eth, 4os
+ItemDisplay[NMAG !INF !RW SUP ETH SOCK=0 utp]: %GRAY%%NAME%%DOT-1E%%PX-00% // Superior, Eth, 0os
+ItemDisplay[NMAG !INF !RW SUP ETH SOCK=4 utp]: %GRAY%%NAME%%DOT-1E%%PX-00% // Superior, Eth, 4os
+
+//Mage Plate
+ItemDisplay[NMAG !INF !RW !ETH SOCK=0 xtp]: %NAME%%DOT-20%%PX-00% // 0os
+ItemDisplay[NMAG !INF !RW !ETH SOCK=3 xtp]: %GRAY%%NAME%%DOT-1E%%PX-00% // 3os
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 xtp]: %NAME%%DOT-20%%PX-00% // Superior, 0os
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=3 xtp]: %GRAY%%NAME%%DOT-1E%%PX-00% // Superior, 3os
+
+//Pala Shields
+ItemDisplay[NMAG !INF !RW !ETH SOCK=0 RES>34 ELT PAL]: %WHITE%%NAME%%DOT-20%%PX-00% // All Elite tiers, 0os
+ItemDisplay[NMAG !INF !RW !ETH SOCK=4 RES>34 ELT PAL]: %GRAY%%NAME%%DOT-20%%PX-00% // All Elite tiers, 4os
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 RES>34 ELT PAL]: %WHITE%%NAME%%DOT-20%%PX-00% // All Elite tiers, 0os, Superior
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=4 RES>34 ELT PAL]: %GRAY%%NAME%%DOT-20%%PX-00% // All Elite tiers, 4os, Superior
+ItemDisplay[NMAG !INF !RW ETH SOCK=0 RES>34 ELT PAL]: %GRAY%%NAME%%DOT-20%%PX-00% // All Elite tiers, 0os, Eth
+ItemDisplay[NMAG !INF !RW ETH SOCK=4 RES>34 ELT PAL]: %GRAY%%NAME%%DOT-20%%PX-00% // All Elite tiers, 4os, Eth
+ItemDisplay[NMAG !INF !RW SUP ETH SOCK=0 RES>34 ELT PAL]: %GRAY%%NAME%%DOT-20%%PX-00% // All Elite tiers, 0os, Superior, Eth
+ItemDisplay[NMAG !INF !RW SUP ETH SOCK=4 RES>34 ELT PAL]: %GRAY%%NAME%%DOT-20%%PX-00% // All Elite tiers, 4os, Superior, Eth

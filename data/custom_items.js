@@ -5,6 +5,7 @@
 // TODO: add option to 'Larzuk'-socket items (mostly just relevant when a non-socket corruption is already applied)
 // TODO: update mutual compatibility of superior mod options (ar_bonus & req)
 // TODO: update relics and miscellaneous items with quantity (Gold, Key, Tome of Identify, Tome of Town Portal)
+// TODO: add known item prices?
 
 var itemTemp = {};
 var itemCustom = {};
@@ -533,6 +534,11 @@ function getALVL() {
 	}
 	alvl = Math.round(Math.min(x,99))
 	
+	if (settings.pd2_option == 1) {
+		itemCustom.CRAFTALVL = Math.floor(character.CLVL/2) + Math.floor(ilvl/2)
+		itemCustom.QLVL = base_qlvl
+		itemCustom.ALVL = alvl
+	}
 	return alvl
 }
 // loadEditing - disables all affix options, then enables any that are relevant to the item
@@ -1673,7 +1679,7 @@ function setItemCodes() {
 	var name_stripped = itemTemp.name.split(" (")[0].split(" ­ ")[0];
 	if (name_stripped == "infinity") { name_stripped = "Infinity" }
 	itemToCompare.NAME = itemTemp.name_prefix + name_stripped + itemTemp.name_suffix
-	itemToCompare.PRICE = 29999
+	itemToCompare.PRICE = Number(document.getElementById("price").value)
 	itemToCompare.ID = true
 	var premade = false; if (itemTemp.type_affix == "rune" || itemTemp.type_affix == "gem" || itemTemp.type_affix == "other" || itemTemp.type_affix == "misc") { premade = true };
 	if (premade == false && itemTemp.base != "Amulet" && itemTemp.base != "Ring" && itemTemp.base != "Arrows" && itemTemp.base != "Bolts" && itemTemp.base != "Small Charm" && itemTemp.base != "Large Charm" && itemTemp.base != "Grand Charm" && itemTemp.base != "Jewel") {
@@ -1743,7 +1749,8 @@ function setPD2Codes() {
 	var code_originals = ["EQ1","EQ2","EQ3","EQ4","EQ5","EQ6","EQ7","WP1","WP2","WP3","WP4","WP5","WP6","WP7","WP8","WP9","WP10","WP11","WP12","WP13","CL1","CL2","CL3","CL4","CL5","CL6","CL7"];
 	var code_alternates = ["HELM","CHEST","SHIELD","GLOVES","BOOTS","BELT","CIRC","AXE","MACE","SWORD","DAGGER","THROWING","JAV","SPEAR","POLEARM","BOW","XBOW","STAFF","WAND","SCEPTER","DRU","BAR","DIN","NEC","SIN","SOR","ZON"];
 	var code_affixes = {ar:"AR",fRes:"FRES",cRes:"CRES",lRes:"LRES",pRes:"PRES",frw:"FRW",damage_min:"MINDMG",damage_max:"MAXDMG",strength:"STR",dexterity:"DEX",mf:"MFIND",gf:"GFIND",damage_to_mana:"DTM",life_replenish:"REPLIFE"};
-	if (settings.pd2_option == 1) { 
+	var code_other = {req_level:"LVLREQ",QUANTITY:"QTY",mana_per_kill:"MAEK",autorepair:"REPAIR",ar_per_level:"ARPER"};
+	if (settings.pd2_option == 1) {
 		if (typeof(itemToCompare.WP5) != 'undefined' || typeof(itemToCompare.WP7) != 'undefined') { if (itemToCompare.WP5 == true || itemToCompare.WP7 == true) { itemToCompare.WP6 = true } }
 		if (typeof(itemToCompare.CL3) != 'undefined' || typeof(itemToCompare.CL4) != 'undefined') { if (itemToCompare.CL3 == true || itemToCompare.CL4 == true) { itemToCompare.EQ3 = true } }
 		if (typeof(itemToCompare.WP10) != 'undefined') { if (itemToCompare.WP10 == true) { itemToCompare.WP9 = false } }
@@ -1754,7 +1761,27 @@ function setPD2Codes() {
 		for (aff in code_affixes) {
 			if (typeof(itemToCompare[codes[aff]]) != 'undefined') { itemToCompare[code_affixes[aff]] = itemToCompare[codes[aff]] }
 		}
+		for (aff in code_other) {
+			if (typeof(itemToCompare[aff]) != 'undefined') { itemToCompare[code_other[aff]] = itemToCompare[aff] }
+		}
+		if (document.getElementById("dropdown_group").selectedIndex < 9) { document.getElementById("select_price").style.display = "block" }
+		if (document.getElementById("dropdown_group").selectedIndex == 11) {
+			var opt = document.getElementById("dropdown_name").options;
+			for (let i = 0; i < opt.length; i++) {
+				if (opt[i].innerHTML == "Worldstone Shard") {
+					for (let j = i; j < opt.length; j++) {
+						opt[j].style.display = "block"
+					}
+				}
+			}
+		}
 	} else {
+		for (aff in code_other) {
+			if (typeof(itemToCompare[code_other[aff]]) != 'undefined') { if (itemToCompare[code_other[aff]] != 0) { itemToCompare[code_other[aff]] = 0 } }
+		}
+		for (aff in code_affixes) {
+			if (typeof(itemToCompare[code_affixes[aff]]) != 'undefined') { if (itemToCompare[code_affixes[aff]] != 0) { itemToCompare[code_affixes[aff]] = 0 } }
+		}
 		for (let i = 0; i < code_alternates.length; i++) {
 			if (typeof(itemToCompare[code_alternates[i]]) != 'undefined') { if (itemToCompare[code_alternates[i]] == true) { itemToCompare[code_alternates[i]] = false } }
 		}
@@ -1763,12 +1790,27 @@ function setPD2Codes() {
 		if (typeof(itemToCompare.CL4) != 'undefined' && typeof(itemToCompare.EQ3) != 'undefined') { if (itemToCompare.CL4 == true && itemToCompare.EQ3 == true) { itemToCompare.EQ3 = false } }
 		if (typeof(itemToCompare.WP10) != 'undefined') { if (itemToCompare.WP10 == true) { itemToCompare.WP9 = true } }
 		if (typeof(itemToCompare.EQ7) != 'undefined') { if (itemToCompare.EQ7 == true) { itemToCompare.EQ1 = true } }
+		document.getElementById("select_price").style.display = "none"
+		if (document.getElementById("dropdown_group").selectedIndex == 11) {
+			var opt = document.getElementById("dropdown_name").options;
+			for (let i = 0; i < opt.length; i++) {
+				if (opt[i].innerHTML == "Worldstone Shard") {
+					for (let j = i; j < opt.length; j++) {
+						opt[j].style.display = "none"
+					}
+					if (document.getElementById("dropdown_name").selectedIndex >= i) {
+						document.getElementById("dropdown_name").selectedIndex = 0
+						setName(opt[0].innerHTML)
+					}
+				}
+			}
+		}
 	}
 }
 
 /* Notes about PD2 changes:
 	Implemented
-		* alternate codes for item groups
+		* alternate codes for item groups (HELM, CHEST, SHIELD, GLOVES, BOOTS, BELT, CIRC, AXE, MACE, SWORD, DAGGER, THROWING, JAV, SPEAR, POLEARM, BOW, XBOW, STAFF, WAND, SCEPTER, DRU, BAR, DIN, NEC, SIN, SOR, ZON)
 		* item group difference: all WP5/WP7 items (throwing/spears) are also considered part of WP6 (javelins)
 		* item group difference: WP10 items (crossbows) are not included in WP9 (bows)
 		* item group difference: EQ7 items (circlets) are not included in EQ1 (helms)
@@ -1777,13 +1819,16 @@ function setPD2Codes() {
 		* DIFF instead of DIFFICULTY
 		* {} used for item descriptions
 		* %NL% allows multiple lines
+		* new info codes: LVLREQ, PRICE, QTY, ALVL, QLVL, CRAFTALVL																				// Note: PRICE is not calculated, so the user may enter impossible values (calculation formula is unknown)
+		* new affix codes: AR, FRES, CRES, LRES, PRES, FRW, MINDMG, MAXDMG, STR, DEX, MFIND, GFIND, DTM, REPLIFE, MAEK, REPAIR, ARPER
+		* new codes for PD2 items: wss, lbox, dcma, dcbl, dcho, dcso, imra, imma, scou, rera, upma, t11, t12, t13, t14, t15, t16, t17, t18		// Not currently in the game: t11, t12, t13, t14, t15
+		* new keywords: %QTY%, %RANGE%, %WPNSPD%, %ALVL%
 	Not Implemented
-		* new codes: LVLREQ, PRICE, QTY, ALVL, QLVL, CRAFTALVL, CRAFT
-		* new keywords: %QTY%, %RANGE%, %WPNSPD%, %ALVL%, %BORDER-00%, %MAP-00%, %DOT-00%, %PX-00%		// Currently ignored (instead of erroneously being displayed in the item name)
+		* new boolean code: CRAFT
+		* new keywords: %BORDER-00%, %MAP-00%, %DOT-00%, %PX-00%			// Currently ignored (instead of erroneously being displayed in the item name)
 		* new codes for stacked gems (flawless/perfect) and stacked runes: normal code + s
 		* aqv & cqv for regular quivers, aq2 & cq2 removed
-		* new codes for PD2 items: wss, lbox, dcma, dcbl, dcho, dcso, imra, imma, scou, rera, upma, t11, t12, t13, t14, t15, t16, t17, t18
-		* new affix codes: AR, FRES, CRES, LRES, PRES, FRW, MINDMG, MAXDMG, STR, DEX, MFIND, GFIND, MAEK, DTM, REPLIFE, REPAIR, ARPER, FOOLS		// partially implemented (missing MAEK, REPAIR, ARPER, FOOLS)
+		* new affix code: FOOLS
 		* Bul-Kathos' Death Band (new set ring)
 		* Infernal Torch (set wand) changed to Infernal Spike (set dagger)
 		* unique items with Indestructible changed to Repair-over-Time (can be ethereal now): The Gavel of Pain, Schaefer's Hammer, Doombringer, The Grandfather, Steel Pillar
@@ -1792,3 +1837,10 @@ function setPD2Codes() {
 		* many unique/set/runeword item changes
 		* many skilltree changes
 */
+
+// setPrice - 
+// ---------------------------------
+function setPrice(val) {
+	itemToCompare.PRICE = Number(val)
+	simulate()
+}

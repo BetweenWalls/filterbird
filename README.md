@@ -1,5 +1,5 @@
 # [FilterBird](https://betweenwalls.github.io/filterbird/)
-Path of Diablo Filter Simulation
+Diablo II Filter Simulation (Path of Diablo & Project Diablo II)
 
 ### [Download](https://github.com/BetweenWalls/filterbird/archive/master.zip)
 
@@ -16,8 +16,9 @@ Path of Diablo Filter Simulation
 * Make item tooltips better match in-game tooltips
 
 ### Feedback:
-[Reddit](https://www.reddit.com/r/pathofdiablo/comments/hstnii/filterbird_lootfilter_simulation_program/)
+Feel free to message me ([BetweenWalls](https://www.reddit.com/message/compose/?to=BetweenWalls) on reddit, @BetweenWalls#2390 on discord)
 
-[Github](https://github.com/BetweenWalls/filterbird/wiki/Feedback)
-
-Send me a message ([BetweenWalls](https://www.reddit.com/message/compose/?to=BetweenWalls) on reddit, @BetweenWalls#2390 on discord)
+FilterBird is open-source, so improvements can be contributed by anyone through github. Here are the basic steps:
+* Create a duplicate version of this repository (fork)
+* Edit the files
+* Submit a pull request (i.e. request your changes be pulled into this version)
