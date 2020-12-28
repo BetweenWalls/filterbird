@@ -305,6 +305,7 @@ function parseFile(file,num) {
 			output = output.split("]:")[1]
 			if (conditions[conditions.length-1] == " ") { conditions = conditions.substr(0,conditions.length-1) }
 			if (index_end > index+12) {
+				var match_override = false;
 				var cond_format = conditions.split("  ").join(" ").split("(").join(",(,").split(")").join(",),").split("!").join(",!,").split("<=").join(",≤,").split(">=").join(",≥,").split(">").join(",>,").split("<").join(",<,").split("=").join(",=,").split(" AND ").join(" ").split(" OR ").join(",|,").split("+").join(",+,").split(" ").join(",&,").split(",,").join(",");
 				var cond_list = cond_format.split(",");
 				var neg_paren_close = 0;
@@ -316,6 +317,7 @@ function parseFile(file,num) {
 					var number = false;
 					if (isNaN(Number(c)) == false) { cond_list[cond] = Number(c); number = true; }
 					if (number == false && c != "(" && c != ")" && c != "≤" && c != "≥" && c != "<" && c != ">" && c != "=" && c != "|" && c != "&" && c != "+" && c != "!") {
+						if (((c == "GEMLEVEL" || c == "GEMTYPE") && itemToCompare.type != "gem") || (c == "RUNE" && itemToCompare.type != "rune")) { match_override = true }
 						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { if (typeof(character[c]) == 'undefined') { character[c] = 0 } }
 						else if (typeof(itemToCompare[c]) == 'undefined' && c != "GOLD") { itemToCompare[c] = false }
 						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { formula += character[c]+" " }
@@ -333,6 +335,7 @@ function parseFile(file,num) {
 					if (c == "!" && cond_list.length > cond+3) { if ((isNaN(Number(cond_list[cond+1])) == false || isNaN(Number(cond_list[cond+3])) == false) && (cond_list[cond+2] == "=" || cond_list[cond+2] == ">" || cond_list[cond+2] == "<" || cond_list[cond+2] == "≤" || cond_list[cond+2] == "≥")) { formula += "( "; neg_paren_close = cond+3; } }
 				}
 				match = eval(formula)
+				if (match_override == true) { match = false }
 			} else {
 				match = true
 			}
