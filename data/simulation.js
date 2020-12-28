@@ -44,7 +44,7 @@ function startup() {
 	settings.pd2_option = 0
 	document.getElementById("select_price").style.display = "none"
 	
-	document.getElementById("debug").style.display = "block"
+	//document.getElementById("debug").style.display = "block"
 	//document.getElementById("simulate_custom").style.display = "block"
 }
 
