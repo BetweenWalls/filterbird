@@ -1,4 +1,5 @@
 
+// TODO: fix prefix/suffix values sometimes not being removed properly when switching from rare to magic
 // TODO: reduce similar/duplicated code for setSuperior/setSuperiorValue, setAutomod/setAutomodValue, setPointmod/setPointmodValue, setAffix/setAffixValue, setCorruption/setCorruptionValue
 // TODO: add crafted items
 // TODO: add option to insert socketables into items (also: Runewords)

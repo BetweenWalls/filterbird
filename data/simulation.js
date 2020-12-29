@@ -236,9 +236,13 @@ function simulate() {
 		document.getElementById("output_"+num).innerHTML = ""
 		document.getElementById("item_desc"+num).innerHTML = ""
 		var result = ["",""];
-		if (document.getElementById("filter_text_"+num).value != "") { if (num == 1 || document.getElementById("o3").innerHTML == "") {
-			result = parseFile(document.getElementById("filter_text_"+num).value,num)
-		} }
+		if (document.getElementById("filter_text_"+num).value != "") {
+			if (num == 1 || document.getElementById("o3").innerHTML == "") {
+				result = parseFile(document.getElementById("filter_text_"+num).value,num)
+			} else {
+				document.getElementById("o"+num).innerHTML = ""
+			}
+		}
 		document.getElementById("output_"+num).innerHTML = result[0]
 		document.getElementById("item_desc"+num).innerHTML = result[1]
 		var wid = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().width/2 - document.getElementById("output_"+num).getBoundingClientRect().width/2);
@@ -275,6 +279,7 @@ function parseFile(file,num) {
 	var all_conditions = [];
 	var all_line_nums = [];
 	var messageAboutDuplicates = false;
+	var messageAboutPD2 = false;
 	var name_saved = itemToCompare.NAME;
 	var secondary_line = "";
 	if (!(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {	// setup variables to accomodate item names that use multiple lines
@@ -299,7 +304,7 @@ function parseFile(file,num) {
 	var line_num = 0;
 	for (line in lines) { if (done == false) {
 		line_num = Number(line)+1;
-		document.getElementById("o3").innerHTML += "ERROR: Cannot Evaluate<br>"+"#"+num+" Invalid formatting on line "+line_num+" (rule "+(rules_checked+1)+") ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l>"	// gets displayed if the function halts unexpectedly at any point
+		document.getElementById("o3").innerHTML += "ERROR: Cannot Evaluate<br>"+"#"+num+" Invalid formatting on line "+line_num+" (rule "+(rules_checked+1)+") ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br><br>"	// gets displayed if the function halts unexpectedly at any point
 		var rule = lines[line].split("/")[0];
 		var rule_with_tabs = lines_with_tabs[line].split("/")[0];
 		var index = rule.indexOf("ItemDisplay[");
@@ -346,6 +351,7 @@ function parseFile(file,num) {
 							if (isNaN(Number(cr[0])) == false) { cr = "_"+cr }
 							if (typeof(all_codes[cr]) != 'undefined') {
 								if (all_codes[cr] == 3 || (settings.pd2_option == 0 && all_codes[cr] == 1) || (settings.pd2_option == 1 && all_codes[cr] == 2)) { recognized = true }
+								if (settings.pd2_option == 0 && all_codes[cr] == 2) { messageAboutPD2 = true }
 							}
 							if (settings.pd2_option == 0) {
 								if (cr.substr(0,8) == "CHARSTAT" || cr.substr(0,8) == "ITEMSTAT") { if (Number(cr.slice(8)) >= 0 && Number(cr.slice(8)) <= 500) { recognized = true } }
@@ -353,8 +359,9 @@ function parseFile(file,num) {
 							if (recognized == false) {
 								document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized condition on line "+line_num+": <l style='color:#c55'>"+c+"</l> ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"
 							}
+							if (settings.pd2_option == 0) { if (c == "PRICE") { c = "invalid_"+c } }
 						}
-						if (((c == "GEMLEVEL" || c == "GEMTYPE") && itemToCompare.type != "gem") || (c == "RUNE" && itemToCompare.type != "rune")) { match_override = true }	// TODO/TOCHECK: Can these conditions (RUNE, GEMLEVEL, GEMTYPE) be used in a way that the rule will match with other items? For example: ItemDisplay[!RUNE>0]: %NAME%
+						if (((c == "GEMLEVEL" || c == "GEMTYPE") && itemToCompare.type != "gem") || (c == "RUNE" && itemToCompare.type != "rune")) { match_override = true }	// TODO/TOCHECK: Can these conditions (RUNE, GEMLEVEL, GEMTYPE) be used in a way that the rule will match with other items? For example: ItemDisplay[!RUNE>0]: %NAME%		...TODO: also include others (DIFF)
 						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { if (typeof(character[c]) == 'undefined') { character[c] = 0 } }
 						else if (typeof(itemToCompare[c]) == 'undefined' && c != "GOLD") {
 							itemToCompare[c] = false
@@ -374,7 +381,10 @@ function parseFile(file,num) {
 					if (c == "!" && cond_list.length > cond+3) { if ((isNaN(Number(cond_list[cond+1])) == false || isNaN(Number(cond_list[cond+3])) == false) && (cond_list[cond+2] == "=" || cond_list[cond+2] == ">" || cond_list[cond+2] == "<" || cond_list[cond+2] == "≤" || cond_list[cond+2] == "≥")) { formula += "( "; neg_paren_close = cond+3; } }
 				}
 				match = eval(formula)
-				if (match_override == true) { match = false }
+				if (match_override == true && match == true) {
+					document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (unbounded condition) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"	// display an error if the rule has unbounded conditions at zero
+					match = false
+				}
 			} else {
 				match = true
 			}
@@ -532,8 +542,9 @@ function parseFile(file,num) {
 	if (obscured == false && itemToCompare.ID == true && !(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {
 		if (typeof(itemToCompare.base) != 'undefined') { display += secondary_line }
 	}
-	if (messageAboutDuplicates == true) { document.getElementById("o4").innerHTML = "When two rules have identical conditions, the first rule gets checked twice instead of both rules being checked" }
-	
+	if (messageAboutDuplicates == true) { document.getElementById("o4").innerHTML += "When two rules have identical conditions, the first rule gets checked twice instead of both rules being checked." }
+	if (messageAboutDuplicates == true && messageAboutPD2 == true) { document.getElementById("o4").innerHTML += "<br>" }	// TODO: Improve logic for when to display errors/messages and how to handle spacing for them
+	if (messageAboutPD2 == true) { document.getElementById("o4").innerHTML += "A PD2 condition was detected, but PD2 codes are currently disabled. They can be enabled from the options menu." }
 	return [display,description]
 }
 
