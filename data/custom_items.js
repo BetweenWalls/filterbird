@@ -1,5 +1,4 @@
 
-// TODO: fix prefix/suffix values sometimes not being removed properly when switching from rare to magic
 // TODO: reduce similar/duplicated code for setSuperior/setSuperiorValue, setAutomod/setAutomodValue, setPointmod/setPointmodValue, setAffix/setAffixValue, setCorruption/setCorruptionValue
 // TODO: add crafted items
 // TODO: add option to insert socketables into items (also: Runewords)
@@ -730,16 +729,18 @@ function load(kind) {
 			if (a_index[n] > 0) {
 				for (let opt = 0; opt < document.getElementById("dropdown_affix_"+n).options.length; opt++) {
 					if (a_value[n] == document.getElementById("dropdown_affix_"+n).options[opt].innerHTML) {
-						document.getElementById("dropdown_affix_"+n).selectedIndex = opt
-						var n_prefix = 0; if (n <= 3) { n_prefix = 1 }
-						doAffix(n,opt,n_prefix)
-						var mods = data.affix[n_prefix].categories[data.affix[n_prefix].index[opt]].info.mods;
-						for (let m = 1; m <= mods; m++) {
-							if (a_mod[n][m] <= document.getElementById("affix_value_"+n+"_"+m).innerHTML) {
-								// TODO: Find the broken code that prevents proper execution when the above condition is equal (only happens once per scenario before fixing itself... undefined variable somewhere?)
-								document.getElementById("range_affix_"+n+"_"+m).value = a_mod[n][m]
-								document.getElementById("affix_value_"+n+"_"+m).innerHTML = a_mod[n][m]
-								doAffixValue(n,m,a_mod[n][m],n_prefix)
+						if (itemCustom.rarity == "rare" || itemCustom.rarity == "craft" || (itemCustom.rarity == "magic" && (n == 1 || n == 4))) {
+							document.getElementById("dropdown_affix_"+n).selectedIndex = opt
+							var n_prefix = 0; if (n <= 3) { n_prefix = 1 }
+							doAffix(n,opt,n_prefix)
+							var mods = data.affix[n_prefix].categories[data.affix[n_prefix].index[opt]].info.mods;
+							for (let m = 1; m <= mods; m++) {
+								if (a_mod[n][m] <= document.getElementById("affix_value_"+n+"_"+m).innerHTML) {
+									// TODO: Find the broken code that prevents proper execution when the above condition is equal (only happens once per scenario before fixing itself... undefined variable somewhere?)
+									document.getElementById("range_affix_"+n+"_"+m).value = a_mod[n][m]
+									document.getElementById("affix_value_"+n+"_"+m).innerHTML = a_mod[n][m]
+									doAffixValue(n,m,a_mod[n][m],n_prefix)
+								}
 							}
 						}
 					}

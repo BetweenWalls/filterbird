@@ -4,7 +4,8 @@
 var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"common"};
 var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:90,CHARSTAT70:0,CHARSTAT13:1000};
 var item_settings = {ID:false};
-var settings = {auto_difficulty:true,pd2_option:1,validation:1};
+var settings = {auto_difficulty:true,pd2_option:1,validation:1,auto_simulate:1};
+var notices = {duplicates:0,pd2_conditions:0};
 var colors = {
 	White:"#dddddd",
 	Gray:"#707070",
@@ -226,30 +227,38 @@ function setItem(value) {
 
 // simulate - begins the filter simulation process
 // ---------------------------------
-function simulate() {
-	//document.getElementById("print").innerHTML = ""
-	if (settings.pd2_option == 0 || document.getElementById("dropdown_group").selectedIndex > 8) { document.getElementById("select_price").style.display = "none" }
-	document.getElementById("o3").innerHTML = ""
+function simulate(manual) {
+	if (settings.auto_simulate == 0) { document.getElementById("o5").innerHTML = "<br>Auto-Simulate is disabled" }
+	else { document.getElementById("o5").innerHTML = "" }
 	document.getElementById("o4").innerHTML = ""
-	for (let num = 1; num <= 2; num++) {
-		document.getElementById("o"+num).innerHTML = ""
-		document.getElementById("output_"+num).innerHTML = ""
-		document.getElementById("item_desc"+num).innerHTML = ""
-		var result = ["",""];
-		if (document.getElementById("filter_text_"+num).value != "") {
-			if (num == 1 || document.getElementById("o3").innerHTML == "") {
-				result = parseFile(document.getElementById("filter_text_"+num).value,num)
-			} else {
-				document.getElementById("o"+num).innerHTML = ""
+	if (settings.auto_simulate == 1 || manual == 1) {
+		if (settings.pd2_option == 0 || document.getElementById("dropdown_group").selectedIndex > 8) { document.getElementById("select_price").style.display = "none" }
+		for (n in notices) { notices[n] = 0 }
+		document.getElementById("o3").innerHTML = ""
+		for (let num = 1; num <= 2; num++) {
+			document.getElementById("o"+num).innerHTML = ""
+			document.getElementById("output_"+num).innerHTML = ""
+			document.getElementById("item_desc"+num).innerHTML = ""
+			var result = ["",""];
+			if (document.getElementById("filter_text_"+num).value != "") {
+				if (num == 1 || document.getElementById("o3").innerHTML == "") {
+					result = parseFile(document.getElementById("filter_text_"+num).value,num)	// TODO: Is there a way to handle crashes, so that Filter #2 can still be evaluated even if #1 fails? Would also help reduce duplicated code for error/notification messages as well
+				} else {
+					document.getElementById("o"+num).innerHTML = ""
+				}
 			}
+			document.getElementById("output_"+num).innerHTML = result[0]
+			document.getElementById("item_desc"+num).innerHTML = result[1]
+			var wid = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().width/2 - document.getElementById("output_"+num).getBoundingClientRect().width/2);
+			var hei = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().height/2 - document.getElementById("output_"+num).getBoundingClientRect().height/2);
+			document.getElementById("output_"+num).style.left = wid+"px"
+			document.getElementById("output_"+num).style.top = hei+"px"
 		}
-		document.getElementById("output_"+num).innerHTML = result[0]
-		document.getElementById("item_desc"+num).innerHTML = result[1]
-		var wid = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().width/2 - document.getElementById("output_"+num).getBoundingClientRect().width/2);
-		var hei = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().height/2 - document.getElementById("output_"+num).getBoundingClientRect().height/2);
-		document.getElementById("output_"+num).style.left = wid+"px"
-		document.getElementById("output_"+num).style.top = hei+"px"
 	}
+	var messages = ""
+	if (notices.duplicates == 1) { messages += "<br>When two rules have identical conditions, the first rule gets checked twice instead of both rules being checked." }
+	if (notices.pd2_conditions == 1) { messages += "<br>A PD2 condition was detected, but PD2 codes are currently disabled. They can be enabled from the options menu." }
+	document.getElementById("o4").innerHTML = messages
 }
 
 // loadFileAsText - loads text from a file
@@ -278,8 +287,6 @@ function parseFile(file,num) {
 	var description = "";
 	var all_conditions = [];
 	var all_line_nums = [];
-	var messageAboutDuplicates = false;
-	var messageAboutPD2 = false;
 	var name_saved = itemToCompare.NAME;
 	var secondary_line = "";
 	if (!(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {	// setup variables to accomodate item names that use multiple lines
@@ -304,7 +311,7 @@ function parseFile(file,num) {
 	var line_num = 0;
 	for (line in lines) { if (done == false) {
 		line_num = Number(line)+1;
-		document.getElementById("o3").innerHTML += "ERROR: Cannot Evaluate<br>"+"#"+num+" Invalid formatting on line "+line_num+" (rule "+(rules_checked+1)+") ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br><br>"	// gets displayed if the function halts unexpectedly at any point
+		document.getElementById("o3").innerHTML += "<br>ERROR: Cannot Evaluate<br>"+"#"+num+" Invalid formatting on line "+line_num+" (rule "+(rules_checked+1)+") ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"	// gets displayed if the function halts unexpectedly at any point
 		var rule = lines[line].split("/")[0];
 		var rule_with_tabs = lines_with_tabs[line].split("/")[0];
 		var index = rule.indexOf("ItemDisplay[");
@@ -329,7 +336,11 @@ function parseFile(file,num) {
 				var duplicateConditions = all_conditions.includes(conditions);
 				all_conditions[all_conditions.length] = conditions
 				all_line_nums[all_line_nums.length] = line_num
-				if (duplicateConditions == true) { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting (lines "+all_line_nums[all_conditions.indexOf(conditions)]+" and "+line_num+" have identical conditions) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; messageAboutDuplicates = true; }	// display an error if the rule's conditions exactly match a previous line
+				if (duplicateConditions == true) {
+					document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting (lines "+all_line_nums[all_conditions.indexOf(conditions)]+" and "+line_num+" have identical conditions) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"	// display an error if the rule's conditions exactly match a previous line
+					if (notices.duplicates == 0) { document.getElementById("o4").innerHTML += "<br>When two rules have identical conditions, the first rule gets checked twice instead of both rules being checked." }	// unnecessary if parseFile() errors can be handled better
+					notices.duplicates = 1
+				}
 			}
 			if (index_end > index+12 && rule.substr(0,index).length == 0) {
 				var match_override = false;
@@ -351,7 +362,10 @@ function parseFile(file,num) {
 							if (isNaN(Number(cr[0])) == false) { cr = "_"+cr }
 							if (typeof(all_codes[cr]) != 'undefined') {
 								if (all_codes[cr] == 3 || (settings.pd2_option == 0 && all_codes[cr] == 1) || (settings.pd2_option == 1 && all_codes[cr] == 2)) { recognized = true }
-								if (settings.pd2_option == 0 && all_codes[cr] == 2) { messageAboutPD2 = true }
+								if (settings.pd2_option == 0 && all_codes[cr] == 2) {
+									if (notices.pd2_conditions == 0) { document.getElementById("o4").innerHTML += "<br>A PD2 condition was detected, but PD2 codes are currently disabled. They can be enabled from the options menu." }	// unnecessary if parseFile() errors can be handled better
+									notices.pd2_conditions = 1
+								}
 							}
 							if (settings.pd2_option == 0) {
 								if (cr.substr(0,8) == "CHARSTAT" || cr.substr(0,8) == "ITEMSTAT") { if (Number(cr.slice(8)) >= 0 && Number(cr.slice(8)) <= 500) { recognized = true } }
@@ -542,9 +556,6 @@ function parseFile(file,num) {
 	if (obscured == false && itemToCompare.ID == true && !(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {
 		if (typeof(itemToCompare.base) != 'undefined') { display += secondary_line }
 	}
-	if (messageAboutDuplicates == true) { document.getElementById("o4").innerHTML += "When two rules have identical conditions, the first rule gets checked twice instead of both rules being checked." }
-	if (messageAboutDuplicates == true && messageAboutPD2 == true) { document.getElementById("o4").innerHTML += "<br>" }	// TODO: Improve logic for when to display errors/messages and how to handle spacing for them
-	if (messageAboutPD2 == true) { document.getElementById("o4").innerHTML += "A PD2 condition was detected, but PD2 codes are currently disabled. They can be enabled from the options menu." }
 	return [display,description]
 }
 
@@ -789,10 +800,18 @@ function togglePD2Option(checked) {
 	simulate()
 }
 
-// togglePD2Option - 
+// toggleConditionValidation - 
 // ---------------------------------
 function toggleConditionValidation(checked) {
 	if (checked == true) { settings.validation = 1 }
 	else { settings.validation = 0 }
+	simulate()
+}
+
+// toggleAutoSimulation - 
+// ---------------------------------
+function toggleAutoSimulation(checked) {
+	if (checked == true) { settings.auto_simulate = 1 }
+	else { settings.auto_simulate = 0 }
 	simulate()
 }

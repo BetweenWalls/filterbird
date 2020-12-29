@@ -52,6 +52,10 @@
 					<input id="cond_validation" type="checkbox" name="cond_validation" onclick="toggleConditionValidation(this.checked);" checked>
 					<label for="cond_validation">Error Checking</label>
 				</div></div>
+				<div class="nav-dropdown-content-item"><div class="nav-option">
+					<input id="auto_simulate" type="checkbox" name="auto_simulate" onclick="toggleAutoSimulation(this.checked);" checked>
+					<label for="auto_simulate">Auto-Simulate</label>
+				</div></div>
 			</div>
 		</div>
 		<div class="nav-dropdown">
@@ -72,7 +76,7 @@
 	<div id="full_interface">
 		<div id="original_choices" style="width:800px;">
 			<br>
-			<button style="height:29px;" onClick="simulate()">Simulate</button>
+			<button style="height:29px;" onClick="simulate(1)">Simulate</button>
 			<div class="dropdown" style="width:200px; height:20px; position:relative; z-index:6; display:inline;">
 				<select class="dropdown" id="dropdown_item" onChange="setItem(this.value)"></select>
 				<select class="dropdown" id="dropdown_id" style="width:34px; padding-left:0px;" onChange="setID(this.value)"></select>
@@ -199,9 +203,10 @@
 		
 		<div id="output_processing_info">
 			<div id="o1" style="color:white;"></div><br>
-			<div id="o2" style="color:white;"></div><br>
+			<div id="o2" style="color:white;"></div>
 			<div id="o3" style="color:white;"></div>
 			<div id="o4" style="color:white;"></div>
+			<div id="o5" style="color:white;"></div>
 		</div>
 		
 		<div id="extra_space"></div>

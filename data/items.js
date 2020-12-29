@@ -36,6 +36,9 @@ var unequipped = {			strength:0, dexterity:0, vitality:0, energy:0, life:0, mana
 							skill:"", ctc_temp1:0, ctc_temp2:0, dmg_lvl:0, dmg_cold:0, dmg_fire:0, dmg_ltng:0, 
 							hit_skill_Fire_Bolt:0, att_skill_Fire_Bolt:0, gethit_skill_Charged_Bolt:0, att_skill_Ice_Bolt:0, gethit_skill_Frost_Nova:0, hit_skill_Nova:0, gethit_skill_Nova:0, att_skill_Lightning_Surge:0, att_skill_Chain_Lightning:0, gethit_skill_Hydra:0, hit_skill_Amplify_Damage:0, 
 							hit_skill_Fire_Bolt_lvl:0, att_skill_Fire_Bolt_lvl:0, gethit_skill_Charged_Bolt_lvl:0, att_skill_Ice_Bolt_lvl:0, gethit_skill_Frost_Nova_lvl:0, hit_skill_Nova_lvl:0, gethit_skill_Nova_lvl:0, att_skill_Lightning_Surge_lvl:0, att_skill_Chain_Lightning_lvl:0, gethit_skill_Hydra_lvl:0, hit_skill_Amplify_Damage_lvl:0, 
+
+/* Vanilla skills		*/	skill_Critical_Strike:0, skill_Tiger_Strike:0, skill_Cobra_Strike:0, skill_Phoenix_Strike:0, skill_Dragon_Claw:0, skill_Fists_of_Fire:0, skill_Claws_of_Thunder:0, skill_Blade_Sentinel:0, skill_Double_Throw:0, skill_Berserk:0, skill_Skeleton_Mastery:0, skill_Golem_Mastery:0, skill_Poison_Dagger:0, skill_Bone_Prison:0, skill_Thorns:0, skill_Lightning:0, skill_Inferno:0, 
+/* PD2 skills			*/	skill_Javelin_and_Spear_Mastery:0, skill_Slow_Movement:0, skill_Claw_and_Dagger_Mastery:0, skill_Chain_Lightning_Sentry:0, skill_General_Mastery:0, skill_Throwing_Mastery:0, skill_Polearm_and_Spear_Mastery:0, skill_Combat_Reflexes:0, skill_Gust:0, skill_Blood_Warp:0, skill_Curse_Mastery:0, skill_Dark_Pact:0, skill_Holy_Light:0, skill_Joust:0, skill_Holy_Nova:0, skill_Cold_Enchant:0, skill_Ice_Barrage:0, skill_Lesser_Hydra:0, skill_Enchant_Fire:0, skill_Combustion:0, 
 };
 
 /*
