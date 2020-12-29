@@ -32,7 +32,7 @@ ItemDisplay[SOCK>0]: %NAME%(%SOCKETS%)%CONTINUE%
 // replaces "Show Ethereal", "Show iLvl", "Show Rune #"
 ItemDisplay[ETH]: Eth %NAME%%CONTINUE%
 ItemDisplay[ILVL>1]: %NAME% L%ILVL%
-ItemDisplay[RUNENAME>0]: %RUNENUM% - %NAME%%CONTINUE%
+ItemDisplay[RUNENUM>0]: %RUNENUM% - %NAME%%CONTINUE%
 
 // Show Ethereal
 /ItemDisplay[ETH]: %NAME%(Eth)%CONTINUE%
@@ -41,13 +41,13 @@ ItemDisplay[RUNENAME>0]: %RUNENUM% - %NAME%%CONTINUE%
 /ItemDisplay[ILVL>0]: %NAME%(L%ILVL%)%CONTINUE%
 
 // Show Rune #
-/ItemDisplay[RUNENAME>0]: [%RUNENUM%]%NAME%%CONTINUE%
+/ItemDisplay[RUNENUM>0]: [%RUNENUM%]%NAME%%CONTINUE%
 
 // Color Mod
-ItemDisplay[RUNENAME>0 RUNENAME<10]: %WHITE%%NAME%
-ItemDisplay[RUNENAME>9 RUNENAME<17]: %GOLD%%NAME%
-ItemDisplay[RUNENAME>16 RUNENAME<11]: %ORANGE%%NAME%
-ItemDisplay[RUNENAME>22]: %RED%%NAME%
+ItemDisplay[RUNENUM>0 RUNENUM<10]: %WHITE%%NAME%
+ItemDisplay[RUNENUM>9 RUNENUM<17]: %GOLD%%NAME%
+ItemDisplay[RUNENUM>16 RUNENUM<23]: %ORANGE%%NAME%
+ItemDisplay[RUNENUM>22]: %RED%%NAME%
 
 
 // Default

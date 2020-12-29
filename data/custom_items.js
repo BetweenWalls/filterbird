@@ -654,8 +654,10 @@ function load(kind) {
 		var pointmod_value_3 = ""; if (pointmod_index_3 > 0) { pointmod_value_3 = document.getElementById("dropdown_pointmod_3").options[pointmod_index_3].innerHTML };
 		var pointmod_mod_value_3 = document.getElementById("pointmod_value_3").innerHTML;
 		// set new options
-		for (a in affixes_pointmod) {
-			var aff = affixes_pointmod[a];
+		var aff_pointmod = affixes_pointmod;
+		if (settings.pd2_option == 1) { aff_pointmod = affixes_pointmod_pd2 }
+		for (a in aff_pointmod) {
+			var aff = aff_pointmod[a];
 			options += loadDetails(kind,aff,alvl,1,1,1,aff[0],aff[1],aff[3],aff[4],"","",[aff[7],aff[8]],[])
 		}
 		for (let n = 1; n <= 3; n++) { document.getElementById("dropdown_pointmod_"+n).innerHTML = options }
@@ -1621,7 +1623,7 @@ function setValues() {
 // ---------------------------------
 function setItemFromCustom() {
 	itemTemp = itemCustom;
-	var premade = false; if (itemTemp.type_affix == "rune" || itemTemp.type_affix == "gem" || itemTemp.type_affix == "other" || itemTemp.type_affix == "misc") { premade = true };
+	var is_premade = false; if (itemTemp.type_affix == "rune" || itemTemp.type_affix == "gem" || itemTemp.type_affix == "other" || itemTemp.type_affix == "misc") { is_premade = true };
 	if (itemTemp.rarity == "Regular") { itemTemp.rarity = "regular" }
 	else if (itemTemp.rarity == "Magic") { itemTemp.rarity = "magic" }
 	else if (itemTemp.rarity == "Rare") { itemTemp.rarity = "rare" }
@@ -1639,7 +1641,7 @@ function setItemFromCustom() {
 		if (itemTemp.superior == true) { itemTemp.name_prefix = "Superior " }
 		if (itemTemp.inferior == true) { itemTemp.name_prefix = "Crude " }
 	}
-	if (premade == false && itemTemp.base != "Amulet" && itemTemp.base != "Ring" && itemTemp.base != "Arrows" && itemTemp.base != "Bolts" && itemTemp.base != "Small Charm" && itemTemp.base != "Large Charm" && itemTemp.base != "Grand Charm" && itemTemp.base != "Jewel") {
+	if (is_premade == false && itemTemp.base != "Amulet" && itemTemp.base != "Ring" && itemTemp.base != "Arrows" && itemTemp.base != "Bolts" && itemTemp.base != "Small Charm" && itemTemp.base != "Large Charm" && itemTemp.base != "Grand Charm" && itemTemp.base != "Jewel") {
 		var base = bases[itemTemp.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
 		for (affix in base) { itemToCompare[affix] = base[affix] }
 	}
@@ -1669,8 +1671,8 @@ function setItemFromCustom() {
 	}
 	//printAffixes()
 	setItemCodes()
-	setPD2Codes()
-	simulate()
+	var reset_simulation = setPD2Codes()
+	if (reset_simulation == false) { simulate() }
 }
 
 // setItemCodes - sets item codes
@@ -1681,8 +1683,8 @@ function setItemCodes() {
 	itemToCompare.NAME = itemTemp.name_prefix + name_stripped + itemTemp.name_suffix
 	itemToCompare.PRICE = Number(document.getElementById("price").value)
 	itemToCompare.ID = true
-	var premade = false; if (itemTemp.type_affix == "rune" || itemTemp.type_affix == "gem" || itemTemp.type_affix == "other" || itemTemp.type_affix == "misc") { premade = true };
-	if (premade == false && itemTemp.base != "Amulet" && itemTemp.base != "Ring" && itemTemp.base != "Arrows" && itemTemp.base != "Bolts" && itemTemp.base != "Small Charm" && itemTemp.base != "Large Charm" && itemTemp.base != "Grand Charm" && itemTemp.base != "Jewel") {
+	var is_premade = false; if (itemTemp.type_affix == "rune" || itemTemp.type_affix == "gem" || itemTemp.type_affix == "other" || itemTemp.type_affix == "misc") { is_premade = true };
+	if (is_premade == false && itemTemp.base != "Amulet" && itemTemp.base != "Ring" && itemTemp.base != "Arrows" && itemTemp.base != "Bolts" && itemTemp.base != "Small Charm" && itemTemp.base != "Large Charm" && itemTemp.base != "Grand Charm" && itemTemp.base != "Jewel") {
 		var base = bases[itemTemp.base.split(" ").join("_").split("-").join("_").split("s'").join("s").split("'s").join("s")];
 		if (base.tier == 1) { itemToCompare.NORM = true }
 		else if (base.tier == 2) { itemToCompare.EXC = true }
@@ -1744,12 +1746,15 @@ function setItemCodes() {
 }
 
 // setPD2Codes - sets item codes for Project D2
+//	return: false, or true if a higher-level function was called
 // ---------------------------------
 function setPD2Codes() {
 	var code_originals = ["EQ1","EQ2","EQ3","EQ4","EQ5","EQ6","EQ7","WP1","WP2","WP3","WP4","WP5","WP6","WP7","WP8","WP9","WP10","WP11","WP12","WP13","CL1","CL2","CL3","CL4","CL5","CL6","CL7"];
 	var code_alternates = ["HELM","CHEST","SHIELD","GLOVES","BOOTS","BELT","CIRC","AXE","MACE","SWORD","DAGGER","THROWING","JAV","SPEAR","POLEARM","BOW","XBOW","STAFF","WAND","SCEPTER","DRU","BAR","DIN","NEC","SIN","SOR","ZON"];
 	var code_affixes = {ar:"AR",fRes:"FRES",cRes:"CRES",lRes:"LRES",pRes:"PRES",frw:"FRW",damage_min:"MINDMG",damage_max:"MAXDMG",strength:"STR",dexterity:"DEX",mf:"MFIND",gf:"GFIND",damage_to_mana:"DTM",life_replenish:"REPLIFE"};
 	var code_other = {req_level:"LVLREQ",QUANTITY:"QTY",mana_per_kill:"MAEK",autorepair:"REPAIR",ar_per_level:"ARPER"};
+	var selected_group_index = document.getElementById("dropdown_group").selectedIndex;
+	var reset_selected = false;
 	if (settings.pd2_option == 1) {
 		if (typeof(itemToCompare.WP5) != 'undefined' || typeof(itemToCompare.WP7) != 'undefined') { if (itemToCompare.WP5 == true || itemToCompare.WP7 == true) { itemToCompare.WP6 = true } }
 		if (typeof(itemToCompare.CL3) != 'undefined' || typeof(itemToCompare.CL4) != 'undefined') { if (itemToCompare.CL3 == true || itemToCompare.CL4 == true) { itemToCompare.EQ3 = true } }
@@ -1764,16 +1769,10 @@ function setPD2Codes() {
 		for (aff in code_other) {
 			if (typeof(itemToCompare[aff]) != 'undefined') { itemToCompare[code_other[aff]] = itemToCompare[aff] }
 		}
-		if (document.getElementById("dropdown_group").selectedIndex < 9) { document.getElementById("select_price").style.display = "block" }
-		if (document.getElementById("dropdown_group").selectedIndex == 11) {
-			var opt = document.getElementById("dropdown_name").options;
-			for (let i = 0; i < opt.length; i++) {
-				if (opt[i].innerHTML == "Worldstone Shard") {
-					for (let j = i; j < opt.length; j++) {
-						opt[j].style.display = "block"
-					}
-				}
-			}
+		if (selected_group_index < 9) { document.getElementById("select_price").style.display = "block" }
+		else if (selected_group_index > 9) {
+			var premade_type = itemToCompare.type_affix;
+			for (i in premade[premade_type]) { if (typeof(premade[premade_type][i].pd2) != 'undefined') { if (premade[premade_type][i].pd2 == 1) { document.getElementById("dropdown_name").options[i].style.display = "block" } } }
 		}
 	} else {
 		for (aff in code_other) {
@@ -1791,21 +1790,22 @@ function setPD2Codes() {
 		if (typeof(itemToCompare.WP10) != 'undefined') { if (itemToCompare.WP10 == true) { itemToCompare.WP9 = true } }
 		if (typeof(itemToCompare.EQ7) != 'undefined') { if (itemToCompare.EQ7 == true) { itemToCompare.EQ1 = true } }
 		document.getElementById("select_price").style.display = "none"
-		if (document.getElementById("dropdown_group").selectedIndex == 11) {
-			var opt = document.getElementById("dropdown_name").options;
-			for (let i = 0; i < opt.length; i++) {
-				if (opt[i].innerHTML == "Worldstone Shard") {
-					for (let j = i; j < opt.length; j++) {
-						opt[j].style.display = "none"
-					}
-					if (document.getElementById("dropdown_name").selectedIndex >= i) {
-						document.getElementById("dropdown_name").selectedIndex = 0
-						setName(opt[0].innerHTML)
-					}
-				}
+		if (selected_group_index > 9) {
+			var premade_type = itemToCompare.type_affix;
+			var selected_name_index = document.getElementById("dropdown_name").selectedIndex;
+			reset_selected = false;
+			for (i in premade[premade_type]) { if (typeof(premade[premade_type][i].pd2) != 'undefined') { if (premade[premade_type][i].pd2 == 1) {
+				if (selected_name_index == i) { reset_selected = true }
+				document.getElementById("dropdown_name").options[i].style.display = "none"
+			} } }
+			if (reset_selected == true) {
+				document.getElementById("dropdown_name").selectedIndex = 0
+				setName(document.getElementById("dropdown_name").options[0].innerHTML)
 			}
 		}
+		// TODO: update pointmod options if necessary
 	}
+	return reset_selected
 }
 
 /* Notes about PD2 changes:
@@ -1823,10 +1823,10 @@ function setPD2Codes() {
 		* new affix codes: AR, FRES, CRES, LRES, PRES, FRW, MINDMG, MAXDMG, STR, DEX, MFIND, GFIND, DTM, REPLIFE, MAEK, REPAIR, ARPER
 		* new codes for PD2 items: wss, lbox, dcma, dcbl, dcho, dcso, imra, imma, scou, rera, upma, t11, t12, t13, t14, t15, t16, t17, t18		// Not currently in the game: t11, t12, t13, t14, t15
 		* new keywords: %QTY%, %RANGE%, %WPNSPD%, %ALVL%
+		* new codes for stacked gems (flawless/perfect) and stacked runes: normal code + s
 	Not Implemented
 		* new boolean code: CRAFT
 		* new keywords: %BORDER-00%, %MAP-00%, %DOT-00%, %PX-00%			// Currently ignored (instead of erroneously being displayed in the item name)
-		* new codes for stacked gems (flawless/perfect) and stacked runes: normal code + s
 		* aqv & cqv for regular quivers, aq2 & cq2 removed
 		* new affix code: FOOLS
 		* Bul-Kathos' Death Band (new set ring)
@@ -1835,7 +1835,7 @@ function setPD2Codes() {
 		* old codes for PoD items removed: cx5, cx6, cx7, maz, ma1, ma2, ma3, ma4, ma5, ma6, ma7, ma8, ma9, cm4, cx8
 		* numbered stats (ITEMSTAT, CHARSTAT) removed
 		* many unique/set/runeword item changes
-		* many skilltree changes
+		* many skilltree changes											// pointmods are implemented, but their availability hasn't been checked
 */
 
 // setPrice - 

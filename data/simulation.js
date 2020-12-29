@@ -4,7 +4,7 @@
 var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"common"};
 var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:90,CHARSTAT70:0,CHARSTAT13:1000};
 var item_settings = {ID:false};
-var settings = {auto_difficulty:true,pd2_option:1};
+var settings = {auto_difficulty:true,pd2_option:1,validation:1};
 var colors = {
 	White:"#dddddd",
 	Gray:"#707070",
@@ -227,19 +227,25 @@ function setItem(value) {
 // simulate - begins the filter simulation process
 // ---------------------------------
 function simulate() {
-	for (let num = 1; num <= 2; num++) { if (document.getElementById("filter_text_"+num).value != "") {
-		//document.getElementById("print").innerHTML = ""
-		if (settings.pd2_option == 0 || document.getElementById("dropdown_group").selectedIndex > 8) { document.getElementById("select_price").style.display = "none" }
+	//document.getElementById("print").innerHTML = ""
+	if (settings.pd2_option == 0 || document.getElementById("dropdown_group").selectedIndex > 8) { document.getElementById("select_price").style.display = "none" }
+	document.getElementById("o3").innerHTML = ""
+	document.getElementById("o4").innerHTML = ""
+	for (let num = 1; num <= 2; num++) {
+		document.getElementById("o"+num).innerHTML = ""
 		document.getElementById("output_"+num).innerHTML = ""
 		document.getElementById("item_desc"+num).innerHTML = ""
-		var result = parseFile(document.getElementById("filter_text_"+num).value,num)
+		var result = ["",""];
+		if (document.getElementById("filter_text_"+num).value != "") { if (num == 1 || document.getElementById("o3").innerHTML == "") {
+			result = parseFile(document.getElementById("filter_text_"+num).value,num)
+		} }
 		document.getElementById("output_"+num).innerHTML = result[0]
 		document.getElementById("item_desc"+num).innerHTML = result[1]
 		var wid = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().width/2 - document.getElementById("output_"+num).getBoundingClientRect().width/2);
 		var hei = Math.floor(document.getElementById("output_area_"+num).getBoundingClientRect().height/2 - document.getElementById("output_"+num).getBoundingClientRect().height/2);
 		document.getElementById("output_"+num).style.left = wid+"px"
 		document.getElementById("output_"+num).style.top = hei+"px"
-	} }
+	}
 }
 
 // loadFileAsText - loads text from a file
@@ -261,15 +267,17 @@ function loadFileAsText(num) {
 //	num: filter number (1 or 2)
 // ---------------------------------
 function parseFile(file,num) {
-	document.getElementById("o"+num).innerHTML = ""
 	var obscured = true;
 	var color = "";
 	var color_new_default = "";
 	var display = "";
 	var description = "";
+	var all_conditions = [];
+	var all_line_nums = [];
+	var messageAboutDuplicates = false;
 	var name_saved = itemToCompare.NAME;
 	var secondary_line = "";
-	if (!(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {
+	if (!(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {	// setup variables to accomodate item names that use multiple lines
 		if (typeof(itemToCompare.base) != 'undefined') {
 			if (itemToCompare.ID == true) {
 				name_saved = itemToCompare.NAME;
@@ -280,7 +288,6 @@ function parseFile(file,num) {
 			}
 		}
 	}
-	//if (itemToCompare.ID == false) { name_saved = itemToCompare.base }
 	if (itemToCompare.ID == false) {
 		if (typeof(itemToCompare.base) == 'undefined') { name_saved = itemToCompare.NAME }	// TODO: remove after fixing premade items?
 		else { name_saved = itemToCompare.base }
@@ -289,13 +296,19 @@ function parseFile(file,num) {
 	var rules_checked = 0;
 	var lines = file.split("\t").join("").split("­").join("•").split("\n");
 	var lines_with_tabs = file.split("­").join("•").split("\n");
+	var line_num = 0;
 	for (line in lines) { if (done == false) {
-		var line_num = Number(line)+1;
-		document.getElementById("o3").innerHTML += "ERROR: Cannot Evaluate<br>"+"#"+num+" Invalid formatting found at line "+line_num+" (rule "+(rules_checked+1)+") ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l>"
+		line_num = Number(line)+1;
+		document.getElementById("o3").innerHTML += "ERROR: Cannot Evaluate<br>"+"#"+num+" Invalid formatting on line "+line_num+" (rule "+(rules_checked+1)+") ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l>"	// gets displayed if the function halts unexpectedly at any point
 		var rule = lines[line].split("/")[0];
+		var rule_with_tabs = lines_with_tabs[line].split("/")[0];
 		var index = rule.indexOf("ItemDisplay[");
+		var index_with_tabs = rule_with_tabs.indexOf("ItemDisplay[");
 		var index_end = rule.indexOf("]:");
-		if (index >= 0) {
+		if (settings.validation == 1) {
+			if (!(index >= 0 && rule_with_tabs.substr(0,index_with_tabs).length == 0) && rule_with_tabs.length > 0) { document.getElementById("o"+num).innerHTML += "#"+num+" Improper formatting on line "+line_num+" ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>" }	// display an error if the line is not a rule and has other characters prior to any "/" characters
+		}
+		if (index >= 0 && rule_with_tabs.substr(0,index_with_tabs).length == 0) {
 			rules_checked += 1
 			var match = false;
 			var formula = "";
@@ -303,8 +316,17 @@ function parseFile(file,num) {
 			var conditions = rulesub.split("]:")[0];
 			var output = lines_with_tabs[line].substr(0,index)+lines_with_tabs[line].substr(index+12);
 			output = output.split("]:")[1]
-			if (conditions[conditions.length-1] == " ") { conditions = conditions.substr(0,conditions.length-1) }
-			if (index_end > index+12) {
+			if (conditions[0] == " " || conditions[conditions.length-1] == " ") {
+				if (settings.validation == 1) { document.getElementById("o"+num).innerHTML += "#"+num+" Irregular formatting on line "+line_num+" ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>" }	// display an error if the rule's conditions have space on either side
+				conditions = conditions.trim()
+			}
+			if (settings.validation == 1) {
+				var duplicateConditions = all_conditions.includes(conditions);
+				all_conditions[all_conditions.length] = conditions
+				all_line_nums[all_line_nums.length] = line_num
+				if (duplicateConditions == true) { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting (lines "+all_line_nums[all_conditions.indexOf(conditions)]+" and "+line_num+" have identical conditions) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; messageAboutDuplicates = true; }	// display an error if the rule's conditions exactly match a previous line
+			}
+			if (index_end > index+12 && rule.substr(0,index).length == 0) {
 				var match_override = false;
 				var cond_format = conditions.split("  ").join(" ").split("(").join(",(,").split(")").join(",),").split("!").join(",!,").split("<=").join(",≤,").split(">=").join(",≥,").split(">").join(",>,").split("<").join(",<,").split("=").join(",=,").split(" AND ").join(" ").split(" OR ").join(",|,").split("+").join(",+,").split(" ").join(",&,").split(",,").join(",");
 				var cond_list = cond_format.split(",");
@@ -313,13 +335,30 @@ function parseFile(file,num) {
 					cond = Number(cond)
 					var c = cond_list[cond];
 					if (c == "GEM") { c = "GEMLEVEL" }
+					if (c == "RUNENUM") { c = "RUNE" }
 					if (settings.pd2_option == 1) { if (c == "DIFF") { c = "DIFFICULTY" } }
 					var number = false;
 					if (isNaN(Number(c)) == false) { cond_list[cond] = Number(c); number = true; }
 					if (number == false && c != "(" && c != ")" && c != "≤" && c != "≥" && c != "<" && c != ">" && c != "=" && c != "|" && c != "&" && c != "+" && c != "!") {
-						if (((c == "GEMLEVEL" || c == "GEMTYPE") && itemToCompare.type != "gem") || (c == "RUNE" && itemToCompare.type != "rune")) { match_override = true }
+						if (settings.validation == 1) {
+							var recognized = false;
+							var cr = c;
+							if (isNaN(Number(cr[0])) == false) { cr = "_"+cr }
+							if (typeof(all_codes[cr]) != 'undefined') {
+								if (all_codes[cr] == 3 || (settings.pd2_option == 0 && all_codes[cr] == 1) || (settings.pd2_option == 1 && all_codes[cr] == 2)) { recognized = true }
+							}
+							if (settings.pd2_option == 0) {
+								if (cr.substr(0,8) == "CHARSTAT" || cr.substr(0,8) == "ITEMSTAT") { if (Number(cr.slice(8)) >= 0 && Number(cr.slice(8)) <= 500) { recognized = true } }
+							}
+							if (recognized == false) {
+								document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized condition on line "+line_num+": <l style='color:#c55'>"+c+"</l> ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"
+							}
+						}
+						if (((c == "GEMLEVEL" || c == "GEMTYPE") && itemToCompare.type != "gem") || (c == "RUNE" && itemToCompare.type != "rune")) { match_override = true }	// TODO/TOCHECK: Can these conditions (RUNE, GEMLEVEL, GEMTYPE) be used in a way that the rule will match with other items? For example: ItemDisplay[!RUNE>0]: %NAME%
 						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { if (typeof(character[c]) == 'undefined') { character[c] = 0 } }
-						else if (typeof(itemToCompare[c]) == 'undefined' && c != "GOLD") { itemToCompare[c] = false }
+						else if (typeof(itemToCompare[c]) == 'undefined' && c != "GOLD") {
+							itemToCompare[c] = false
+						}
 						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { formula += character[c]+" " }
 						else { formula += itemToCompare[c]+" " }
 					} else {
@@ -476,7 +515,7 @@ function parseFile(file,num) {
 		obscured = false
 		display = name_saved
 		if (itemToCompare.RW == true) { display = "<l style='color:"+colors.Gold+"'>"+display+"</l>" }
-		document.getElementById("o"+num).innerHTML += "#"+num+" No match found after checking "+rules_checked+" rules ... (default display)<br>"
+		document.getElementById("o"+num).innerHTML += "#"+num+" No match found after checking all "+line_num+" lines ("+rules_checked+" rules) ... (default display)<br>"
 	}
 	if (color_new_default != "") { document.getElementById("output_"+num).style.color = color_new_default }
 	else { document.getElementById("output_"+num).style.color = getColor(itemToCompare) }
@@ -493,6 +532,7 @@ function parseFile(file,num) {
 	if (obscured == false && itemToCompare.ID == true && !(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {
 		if (typeof(itemToCompare.base) != 'undefined') { display += secondary_line }
 	}
+	if (messageAboutDuplicates == true) { document.getElementById("o4").innerHTML = "When two rules have identical conditions, the first rule gets checked twice instead of both rules being checked" }
 	
 	return [display,description]
 }
@@ -724,16 +764,24 @@ function setGoldChar(value) {
 
 // toggleOriginalChoices - 
 // ---------------------------------
-function toggleOriginalChoices(checked)  {
+function toggleOriginalChoices(checked) {
 	if (checked == true) { document.getElementById("original_choices").style.display = "block" }
 	else { document.getElementById("original_choices").style.display = "none" }
 }
 
 // togglePD2Option - 
 // ---------------------------------
-function togglePD2Option(checked)  {
+function togglePD2Option(checked) {
 	if (checked == true) { settings.pd2_option = 1 }
 	else { settings.pd2_option = 0 }
 	setPD2Codes()
+	simulate()
+}
+
+// togglePD2Option - 
+// ---------------------------------
+function toggleConditionValidation(checked) {
+	if (checked == true) { settings.validation = 1 }
+	else { settings.validation = 0 }
 	simulate()
 }

@@ -1,6 +1,6 @@
 /⃓═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 /	"Journey" Item Filter for Diablo II: Path of Diablo
-/		Date Updated:	20 OCT 2020
+/		Date Updated:	28 DEC 2020
 /		Info:		https://github.com/BetweenWalls/Journey
 /		Direct URL:	https://raw.githubusercontent.com/BetweenWalls/Journey/master/item.filter
 /⃓═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -630,7 +630,7 @@ ItemDisplay[MAG !ID ILVL>85 CLVL>89]:
 ItemDisplay[((MAG !(ID OR ETH)) CHARSTAT15<2500000) (ELT WP5 !(WP6 OR 7b8))]: %NAME%%DGREEN%
 ItemDisplay[((MAG !(ID OR ETH)) !(CHARSTAT15>600000 OR CHARSTAT14>600000)) (7ja OR 7pi OR 7s7)]: %NAME%%DGREEN%
 ItemDisplay[((MAG !(ID OR ETH)) !(CHARSTAT15>300000 OR CHARSTAT14>300000)) (WP5 !(NORM OR CL7 OR 9b8 OR 7b8))]: %NAME%%DGREEN%
-ItemDisplay[((MAG !(ID OR ETH)) !(CHARSTAT15>200000 OR CHARSTAT14>200000)) (WP12 OR CL6 OR (WP13 !(wps OR 9ws OR 7ws)) OR sst OR 8ss OR 6ss)]: %NAME%%DGREEN%
+ItemDisplay[((MAG !(ID OR ETH)) !(CHARSTAT15>200000 OR CHARSTAT14>200000)) (WP12 OR CL6 OR (WP13 !(wsp OR 9ws OR 7ws)) OR sst OR 8ss OR 6ss)]: %NAME%%DGREEN%
 ItemDisplay[((MAG !(ID OR ETH)) !(CHARSTAT15>100000 OR CHARSTAT14>100000)) (CL1 OR CL2 OR CL4 OR (WP11 !(wst OR 8ws OR 6ws)) OR (CL5 !(NORM OR 9ar OR 9wb OR 9xf)) OR (EQ2 !NORM))]: %NAME%%DGREEN%
 
 /⃓̲ Hidden: Unidentified Magic Items
@@ -1767,7 +1767,7 @@ ItemDisplay[MAG]: %NAME%%DGREEN%
 /ItemDisplay[cm2 UNI]:		%GOLD%         %NAME% %DGREEN%Hellfire Torch         	// Large Charm
 /ItemDisplay[cm3 UNI]:		%GOLD%     %NAME% %DGREEN%Gheed's Fortune     		// Grand Charm
 /⃓̲    Other
-/ItemDisplay[jew UNI]:		%GOLD%         %NAME% %DGREEN%Rainbow Facet         	// Jewel
+/ItemDisplay[jew !(MAG OR RARE)]: %GOLD%         %NAME% %DGREEN%Rainbow Facet         	// Jewel
 /ItemDisplay[aq2 UNI]:		%GOLD%%NAME%%DGREEN%					// Arrows  -  Hailstorm, Dragonbreath, Moonfire, Ice Shards
 /ItemDisplay[cq2 UNI]:		%GOLD%%NAME%%DGREEN%					// Bolts   -  Hailstorm, Dragonbreath, Moonfire, Ice Shards
 
