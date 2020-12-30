@@ -405,7 +405,7 @@ function parseFile(file,num) {
 				}
 				match = eval(formula)
 				if (match_override == true && match == true) {
-					if (skip_warning == false) { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (unbounded condition) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>" }	// display an error if the rule has unbounded conditions at zero
+					if (settings.validation == 1 && skip_warning == false) { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (unbounded condition) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>" }	// display an error if the rule has unbounded conditions at zero
 					match = false
 				}
 			} else {
