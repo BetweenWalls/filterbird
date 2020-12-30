@@ -4,7 +4,6 @@
 //Add set name to set items
 //Refine the Good Unique Hyping line (GUH)
 //Display good skills on good class items
-//Fix essence "Description too long" - should be fixed-untested
 
 
 
@@ -27,11 +26,12 @@ ItemDisplay[mp3 CLVL>25]:
 ItemDisplay[mp4 CLVL>35]:
 
 //Shorten item names, ignore junk
-ItemDisplay[tsc CLVL>29]:
-ItemDisplay[isc CLVL>29]:
+ItemDisplay[tsc CLVL>24]:
+ItemDisplay[isc CLVL>24]:
 ItemDisplay[tsc]: %DARK_GREEN%-%WHITE%TP%DARK_GREEN%-
 ItemDisplay[isc]: %DARK_GREEN%-%WHITE%ID%DARK_GREEN%-
-ItemDisplay[key]: %YELLOW%-%WHITE%Key%YELLOW%-
+ItemDisplay[key]: //Ignore keys
+//ItemDisplay[key]: %YELLOW%-%WHITE%Key%YELLOW%-
 ItemDisplay[vps CLVL<12]: %NAME% //Show stamina below lvl 12
 ItemDisplay[vps]: //Ignore stamina potions
 ItemDisplay[yps]: %DARK_GREEN%-%WHITE%A%DARK_GREEN%-
@@ -64,15 +64,16 @@ ItemDisplay[cqv]:
 
 
 //Grand charms and small charms - Map marker+notification+sexier name.
-ItemDisplay[MAG !ID (cm1 OR cm3)]: %RED%Ø %BLUE%%NAME% %RED%Ø%MAP-97%%NOTIFY-3%%CONTINUE%
+ItemDisplay[MAG !ID (cm1 OR cm3)]: %RED%? %BLUE%%NAME% %RED%?%MAP-97%%NOTIFY-3%%CONTINUE%
 
 
 //Ignore small gold stacks, progressive system.
-ItemDisplay[CLVL>19 CLVL<40 GOLD<20]:
-ItemDisplay[CLVL>39 CLVL<60 GOLD<50]:
-ItemDisplay[CLVL>59 CLVL<80 GOLD<1000]:
+ItemDisplay[CLVL>19 GOLD<300]:
+ItemDisplay[CLVL>39 GOLD<800]:
+ItemDisplay[CLVL>59 GOLD<1000]:
 ItemDisplay[CLVL>79 GOLD<2500]:
 ItemDisplay[CLVL>84 GOLD<3000]:
+ItemDisplay[CLVL>89 GOLD<3500]:
 
 
 // ---------------------------
@@ -80,9 +81,10 @@ ItemDisplay[CLVL>84 GOLD<3000]:
 // ---------------------------
 
 //Gems - Hide low gems depending on your character lvl and make gems name shorter
-ItemDisplay[GEM=1 CLVL>14]:
-ItemDisplay[GEM=2 CLVL>23]:
-ItemDisplay[GEM=3 CLVL>29]:
+ItemDisplay[GEM=1 CLVL>9]:
+ItemDisplay[GEM=2 CLVL>11]:
+ItemDisplay[GEM=3 CLVL>17]:
+
 
 //Add gem tier at begining
 ItemDisplay[gcv OR gcw OR gcg OR gcr OR gcb OR skc OR gcy]: %WHITE%C- %CONTINUE%
@@ -92,25 +94,23 @@ ItemDisplay[(gzv OR glw OR glg OR glr OR glb OR skl OR gly) OR GEM=4]: %GREEN%F+
 ItemDisplay[(gpv OR gpw OR gpg OR gpr OR gpb OR skz OR gpy) OR GEM=5]: %PURPLE%P+%DOT-A9% %CONTINUE%
 
 //add gem type after the gem tier
-ItemDisplay[GEMTYPE=1]: %NAME%%ORANGE%Amethyst //Amethysts
-ItemDisplay[GEMTYPE=2]: %NAME%%ORANGE%Diamond //Diamonds
-ItemDisplay[GEMTYPE=3]: %NAME%%ORANGE%Emerald //Emeralds
-ItemDisplay[GEMTYPE=4]: %NAME%%ORANGE%Ruby //Rubies
-ItemDisplay[GEMTYPE=5]: %NAME%%ORANGE%Sapphire //Sapphires
-ItemDisplay[GEMTYPE=6]: %NAME%%ORANGE%Topaz //Topazes
-ItemDisplay[GEMTYPE=7]: %NAME%%ORANGE%Skull //Skulls
-
+ItemDisplay[GEMTYPE=1]: %NAME%%ORANGE%Amethyst%CONTINUE% //Amethysts
+ItemDisplay[GEMTYPE=2]: %NAME%%ORANGE%Diamond%CONTINUE% //Diamonds
+ItemDisplay[GEMTYPE=3]: %NAME%%ORANGE%Emerald%CONTINUE% //Emeralds
+ItemDisplay[GEMTYPE=4]: %NAME%%ORANGE%Ruby%CONTINUE% //Rubies
+ItemDisplay[GEMTYPE=5]: %NAME%%ORANGE%Sapphire%CONTINUE% //Sapphires
+ItemDisplay[GEMTYPE=6]: %NAME%%ORANGE%Topaz%CONTINUE% //Topazes
+ItemDisplay[GEMTYPE=7]: %NAME%%ORANGE%Skull%CONTINUE% //Skulls
 //Append quantity after stacks
-ItemDisplay[GEM>0 QTY>1]: %NAME% %WHITE%x%QTY%%CONTINUE% // Shows the quantity of gems in a stack
+ItemDisplay[RUNE>0 QTY>1]: %NAME% %GOLD%x%RED%%QTY%
+ItemDisplay[GEM>3 QTY>1]: %NAME% %GOLD%x%RED%%QTY%
+
 
 //Display prettier runes with rune number in name
-ItemDisplay[RUNE<14 RUNE>0]: %GOLD%[%LIGHT_GRAY%%RUNENUM%%GOLD%] %RUNENAME%%BORDER-00%%MAP-1D%%NOTIFY-F%																//el-shael/(reformatted for FilterBird)
-ItemDisplay[RUNE>13 RUNE<20]: %RED%¤ %ORANGE%[%WHITE%%RUNENUM%%ORANGE%] %RUNENAME% %RED%¤%BORDER-00%%MAP-60%%NOTIFY-8%											//dol-fal
-ItemDisplay[RUNE>19 RUNE<23]: %PURPLE%¥%RED%¤ %RED%[%WHITE%%RUNENUM%%RED%] %RUNENAME% %RED%¤%PURPLE%¥%BORDER-00%%MAP-62%%NOTIFY-1%								//lem, pul, um
-ItemDisplay[RUNE>22]: %WHITE%[%DARK_GREEN%Holy shit%WHITE%]%NL%%PURPLE%ØØ %PURPLE%[%WHITE%%RUNENUM%%PURPLE%] %ORANGE%%RUNENAME% %PURPLE%[%WHITE%%RUNENUM%%PURPLE%] %PURPLE%ØØ%NL%%WHITE%[%DARK_GREEN%Holy shit%WHITE%]%BORDER-9B%%MAP-60%%NOTIFY-B%		//mal-zod
-
-//Append quantity after stacks
-ItemDisplay[RUNE>0 QTY>0]: %NAME% %WHITE%x%QTY%%CONTINUE% 																										// Shows the quantity of runes in a stack
+ItemDisplay[RUNE<14]: %GOLD%[%LIGHT_GRAY%%RUNENUM%%GOLD%] %RUNENAME%%BORDER-00%%MAP-1D%%NOTIFY-F%																//el-shael
+ItemDisplay[RUNE>13 RUNE<20]: %RED%? %ORANGE%[%WHITE%%RUNENUM%%ORANGE%] %RUNENAME% %RED%?%BORDER-00%%MAP-60%%NOTIFY-8%											//dol-fal
+ItemDisplay[RUNE>19 RUNE<23]: %PURPLE%?%RED%? %RED%[%WHITE%%RUNENUM%%RED%] %RUNENAME% %RED%?%PURPLE%?%BORDER-00%%MAP-62%%NOTIFY-1%								//lem, pul, um
+ItemDisplay[RUNE>22]: %WHITE%[%DARK_GREEN%Holy shit%WHITE%]%NL%%PURPLE%?? %PURPLE%[%WHITE%%RUNENUM%%PURPLE%] %ORANGE%%RUNENAME% %PURPLE%[%WHITE%%RUNENUM%%PURPLE%] %PURPLE%??%NL%%WHITE%[%DARK_GREEN%Holy shit%WHITE%]%BORDER-9B%%MAP-60%%NOTIFY-B%		//mal-zod																										// Shows the quantity of runes in a stack
 
 
 // ---------------------------
@@ -156,18 +156,18 @@ ItemDisplay[NMAG ED=14]: %NAME% %BLUE%ED%WHITE%-%RED%14%CONTINUE%
 ItemDisplay[NMAG ED=15]: %NAME% %BLUE%ED%WHITE%-%RED%15%CONTINUE%
 
 //Append $ if the item has a value higher than 10k and player is below lvl 24, 20k and player below 45, 30k always
-ItemDisplay[NMAG CLVL<24 PRICE>9999 !pk1 !pk2 !pk3]: %DARK_GREEN%$ %WHITE%%NAME%%CONTINUE%
-ItemDisplay[NMAG (ETH OR SOCK>0) CLVL<24 PRICE>9999 !pk1 !pk2 !pk3]: %DARK_GREEN%$ %GRAY%%NAME%%CONTINUE%
+ItemDisplay[NMAG CLVL<24 PRICE>9999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %WHITE%%NAME%%CONTINUE%
+ItemDisplay[NMAG (ETH OR SOCK>0) CLVL<24 PRICE>9999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %GRAY%%NAME%%CONTINUE%
 ItemDisplay[MAG CLVL<24 PRICE>9999]: %DARK_GREEN%$ %BLUE%%NAME%%CONTINUE%
 ItemDisplay[RARE CLVL<24 PRICE>9999]: %DARK_GREEN%$ %YELLOW%%NAME%%CONTINUE%
 
-ItemDisplay[NMAG CLVL>23 CLVL<45 PRICE>19999 !pk1 !pk2 !pk3]: %DARK_GREEN%$ %WHITE%%NAME%%CONTINUE%
-ItemDisplay[NMAG (ETH OR SOCK>0) CLVL>23 CLVL<45 PRICE>19999 !pk1 !pk2 !pk3]: %DARK_GREEN%$ %GRAY%%NAME%%CONTINUE%
+ItemDisplay[NMAG CLVL>23 CLVL<45 PRICE>19999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %WHITE%%NAME%%CONTINUE%
+ItemDisplay[NMAG (ETH OR SOCK>0) CLVL>23 CLVL<45 PRICE>19999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %GRAY%%NAME%%CONTINUE%
 ItemDisplay[MAG CLVL>23 CLVL<45 PRICE>19999]: %DARK_GREEN%$ %BLUE%%NAME%%CONTINUE%
 ItemDisplay[RARE CLVL>23 CLVL<45 PRICE>19999]: %DARK_GREEN%$ %YELLOW%%NAME%%CONTINUE%
 
-ItemDisplay[NMAG CLVL>44 PRICE>34999 !pk1 !pk2 !pk3]: %DARK_GREEN%$ %WHITE%%NAME%%CONTINUE%
-ItemDisplay[NMAG (ETH OR SOCK>0) CLVL>44 PRICE>34999 !pk1 !pk2 !pk3]: %DARK_GREEN%$ %GRAY%%NAME%%CONTINUE%
+ItemDisplay[NMAG CLVL>44 PRICE>34999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %WHITE%%NAME%%CONTINUE%
+ItemDisplay[NMAG (ETH OR SOCK>0) CLVL>44 PRICE>34999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %GRAY%%NAME%%CONTINUE%
 ItemDisplay[MAG CLVL>44 PRICE>34999]: %DARK_GREEN%$ %BLUE%%NAME%%CONTINUE%
 ItemDisplay[RARE CLVL>44 PRICE>34999]: %DARK_GREEN%$ %YELLOW%%NAME%%CONTINUE%
 
@@ -178,7 +178,7 @@ ItemDisplay[MAG (rin OR amu OR jew OR cm1 OR cm2 OR cm3)]: %NAME% %WHITE%[%BLUE%
 // ---------------------------
 
 //Makes good uniques more visible and easier to click on (incomplete list - to improve)
-ItemDisplay[UNI !ID (rin OR amu OR jew OR cm1 OR cm2 OR cm3 OR uap OR usk OR urn OR xea OR uld OR ult OR uul OR uar OR uhn OR uit OR ush OR xsh OR uvg OR umg OR utg OR uhg OR ulb OR uvb OR utb OR uhb OR xhb OR xtb OR ulc OR uvc OR umc OR zhb OR zmb OR ci1 OR ci3 OR pa9 OR pae OR 7cs OR obf OR obc OR oba OR 7cr)]: %RED%ØØØ%ORANGE%¤¤¤¤¤%RED%ØØØ%NL%%GOLD%---- %NAME% %GOLD%----%NL%%RED%ØØØ%ORANGE%¤¤¤¤¤%RED%ØØØ
+ItemDisplay[UNI !ID (rin OR amu OR jew OR cm1 OR cm2 OR cm3 OR uap OR usk OR urn OR xea OR uld OR ult OR uul OR uar OR uhn OR uit OR ush OR xsh OR uvg OR umg OR utg OR uhg OR ulb OR uvb OR utb OR uhb OR xhb OR xtb OR ulc OR uvc OR umc OR zhb OR zmb OR ci1 OR ci3 OR pa9 OR pae OR 7cs OR obf OR obc OR oba OR 7cr)]: %RED%???%ORANGE%?????%RED%???%NL%%GOLD%---- %NAME% %GOLD%----%NL%%RED%???%ORANGE%?????%RED%???
 
 //Leveling Axes
 //ItemDisplay[UNI !ID (hax OR 2ax OR btx OR gax OR 9ha OR 9ax OR 9mp OR 9wa OR 9la OR 9bt OR 9ga OR 7ha OR 72a OR 7mp OR 7wa OR 7ba OR 7bt OR 7ga OR )]:
@@ -266,6 +266,7 @@ ItemDisplay[tr2]: %NAME%%MAP-00%{%TAN%Right click for a permanent All Resistance
 // ---------------------------
 // [QIES] Essences
 // ---------------------------
+ItemDisplay[(tes OR ceh OR bet OR fed) QTY>1]: %NAME% %WHITE%[%ORANGE%%QTY%%WHITE%]%CONTINUE%
 ItemDisplay[tes]: %ORANGE%%NAME%%MAP-62%{%TAN%This is Andy/Duriel's essence.%NL%%TAN%Cube with essences from Meph, Diablo and Baal.%NL%} // Twisted Essence of Suffering
 ItemDisplay[ceh]: %ORANGE%%NAME%%MAP-62%{%TAN%This is Meph's essence.%NL%%TAN%Cube with essences from Andy/Duriel, Diablo and Baal.%NL%} // Charged Essence of Hatred
 ItemDisplay[bet]: %ORANGE%%NAME%%MAP-62%{%TAN%This is Diablo's essence.%NL%%TAN%Cube with essences from Andy/Duriel, Meph and Baal.%NL%} // Burning Essence of Terror
@@ -275,6 +276,7 @@ ItemDisplay[fed]: %ORANGE%%NAME%%MAP-62%{%TAN%This is Baal's essence.%NL%%TAN%Cu
 // ---------------------------
 // [QITO] Tokens
 // ---------------------------
+ItemDisplay[toa QTY>1]: %NAME% %WHITE%[%ORANGE%%QTY%%WHITE%]%CONTINUE%
 ItemDisplay[toa]: %ORANGE%%NAME%%MAP-62%%PX-68%{%TAN%Right click to reset stats & skills%NL%} // Token of Absolution
 
 
@@ -290,6 +292,7 @@ ItemDisplay[pk1]: %ORANGE%+++ %RED%%NAME% %ORANGE%+++%MAP-62%%PX-68%{%TAN%Cube w
 // ---------------------------
 // [QIOR] Pandemonium Organs
 // ---------------------------
+ItemDisplay[(bey OR dhn OR mbr) QTY>1]: %NAME% %WHITE%[%RED%%QTY%%WHITE%]%CONTINUE%
 ItemDisplay[bey]: %ORANGE%+++ %RED%%NAME% %ORANGE%+++%MAP-62%%PX-68%{%TAN%Cube any 3 organs in Act 5 to open Uber Trist%NL%} // Baal's Eye
 ItemDisplay[dhn]: %ORANGE%+++ %RED%%NAME% %ORANGE%+++%MAP-62%%PX-68%{%TAN%Cube any 3 organs in Act 5 to open Uber Trist%NL%} // Diablo's Horn
 ItemDisplay[mbr]: %ORANGE%+++ %RED%%NAME% %ORANGE%+++%MAP-62%%PX-68%{%TAN%Cube any 3 organs in Act 5 to open Uber Trist%NL%} // Mephisto's Brain
@@ -298,6 +301,7 @@ ItemDisplay[mbr]: %ORANGE%+++ %RED%%NAME% %ORANGE%+++%MAP-62%%PX-68%{%TAN%Cube a
 // ---------------------------
 // [QICR] Diablo Clone
 // ---------------------------
+ItemDisplay[(dcma OR dcbl OR dcho OR dcso) QTY>1]: %NAME% %WHITE%[%RED%%QTY%%WHITE%]%CONTINUE%
 ItemDisplay[dcma]: %PURPLE%+++ %RED%%NAME% %PURPLE%+++{%PURPLE%Used to spawn diablo clone}
 ItemDisplay[dcbl]: %PURPLE%+++ %RED%%NAME% %PURPLE%+++{%PURPLE%Used to spawn diablo clone}
 ItemDisplay[dcho]: %PURPLE%+++ %RED%%NAME% %PURPLE%+++{%PURPLE%Used to spawn diablo clone}
@@ -310,6 +314,8 @@ ItemDisplay[dcso]: %PURPLE%+++ %RED%%NAME% %PURPLE%+++{%PURPLE%Used to spawn dia
 // ---------------------------
 // [CORR] Corruption Items
 // ---------------------------
+ItemDisplay[wss QTY>1]: %NAME% %WHITE%[%PURPLE%%QTY%%WHITE%]%CONTINUE%
+ItemDisplay[lbox QTY>1]: %NAME% %WHITE%[%RED%%QTY%%WHITE%]%CONTINUE%
 ItemDisplay[wss]: %PURPLE%++ %NAME% %PURPLE%++{%TAN%If item has or cant have sockets, 1/2 brick%NL%1/4 to roll sockets%NL%1/4 to brick%NL%1/2 to roll modifier}%MAP-9B%%PX-62% // Worldstone Shard
 ItemDisplay[lbox]: %PURPLE%++%RED%+ %NAME% %RED%+%PURPLE%++%MAP-62% // Larzuk's Box
 
@@ -371,53 +377,66 @@ ItemDisplay[MAG ID BOOTS]: %BLUE%%NAME%{%ORANGE%Caster %LIGHT_GRAY%Magic/Rare %B
 // --      Class items      --
 // ---------------------------
 //Paladin shields
-ItemDisplay[DIN NMAG RES>29 RES<36]: %NAME% %RED%@%DARK_GREEN%res%WHITE%(%GRAY%30-35%WHITE%)
-ItemDisplay[DIN NMAG RES>35 RES<41]: %NAME% %RED%@%DARK_GREEN%res%WHITE%(%RED%36-40%WHITE%)%MAP%%NOTIFY-8%
-ItemDisplay[DIN NMAG RES>40 RES<45]: %NAME% %RED%@%DARK_GREEN%res%WHITE%(%RED%41-44%WHITE%)%MAP%%NOTIFY-1%
-ItemDisplay[DIN NMAG RES=45]: %NAME% %RED%@%DARK_GREEN%res%WHITE%(%GRAY%45%WHITE%)%MAP%%NOTIFY-1%
+// ItemDisplay[DIN NMAG RES=35]: %NAME% %RED%@res%WHITE%(%GRAY%35%WHITE%)
+// ItemDisplay[DIN NMAG RES=36]: %NAME% %RED%@res%WHITE%(%GRAY%36%WHITE%)
+// ItemDisplay[DIN NMAG RES=37]: %NAME% %RED%@res%WHITE%(%GRAY%37%WHITE%)
+// ItemDisplay[DIN NMAG RES=38]: %NAME% %RED%@res%WHITE%(%GRAY%38%WHITE%)
+// ItemDisplay[DIN NMAG RES=39]: %NAME% %RED%@res%WHITE%(%GRAY%39%WHITE%)
+ItemDisplay[DIN NMAG RES=40]: %NAME% %RED%@res%WHITE%(%GRAY%40%WHITE%)
+ItemDisplay[DIN NMAG RES=41]: %NAME% %RED%@res%WHITE%(%GRAY%41%WHITE%)
+ItemDisplay[DIN NMAG RES=42]: %NAME% %RED%@res%WHITE%(%GRAY%42%WHITE%)
+ItemDisplay[DIN NMAG RES=43]: %NAME% %RED%@res%WHITE%(%GRAY%43%WHITE%)%DOT-1D%%NOTIFY-1%
+ItemDisplay[DIN NMAG RES=44]: %NAME% %RED%@res%WHITE%(%GRAY%44%WHITE%)%DOT-1D%%NOTIFY-1%
+ItemDisplay[DIN NMAG RES=45]: %NAME% %RED%@res%WHITE%(%GRAY%45%WHITE%)%DOT-1D%%NOTIFY-1%
+
 
 // ---------------------------
 // --      Skill Items      --
 // ---------------------------
 
 //Zon bows +bow skills
-ItemDisplay[NMAG ZON BOW TABSK0=1]: %NAME% %WHITE%+%DARK_GREEN%BOW%WHITE%(%RED%1%WHITE%)%CONTINUE%
-ItemDisplay[NMAG ZON BOW TABSK0=2]: %NAME% %WHITE%+%DARK_GREEN%BOW%WHITE%(%RED%2%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG ZON BOW TABSK0=1]: %NAME% %WHITE%+%DARK_GREEN%BOW%WHITE%(%RED%1%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG ZON BOW TABSK0=2]: %NAME% %WHITE%+%DARK_GREEN%BOW%WHITE%(%RED%2%WHITE%)%CONTINUE%
 ItemDisplay[NMAG ZON BOW TABSK0=3]: %NAME% %WHITE%+%DARK_GREEN%BOW%WHITE%(%RED%3%WHITE%)%CONTINUE%
 
+//Zon java/spear +java skills
+// ItemDisplay[NMAG ZON SPEAR TABSK2=1]: %NAME% %WHITE%+%DARK_GREEN%BOW%WHITE%(%RED%1%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG ZON SPEAR TABSK2=2]: %NAME% %WHITE%+%DARK_GREEN%BOW%WHITE%(%RED%2%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG ZON SPEAR TABSK2=3]: %NAME% %WHITE%+%DARK_GREEN%BOW%WHITE%(%RED%3%WHITE%)%CONTINUE%
+
 //teeth
-ItemDisplay[NMAG NEC SK67=1]: %NAME% %WHITE%+%DARK_GREEN%Teeth%WHITE%(%RED%1%WHITE%)%CONTINUE%
-ItemDisplay[NMAG NEC SK67=2]: %NAME% %WHITE%+%DARK_GREEN%Teeth%WHITE%(%RED%2%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG NEC SK67=1]: %NAME% %WHITE%+%DARK_GREEN%Teeth%WHITE%(%RED%1%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG NEC SK67=2]: %NAME% %WHITE%+%DARK_GREEN%Teeth%WHITE%(%RED%2%WHITE%)%CONTINUE%
 ItemDisplay[NMAG NEC SK67=3]: %NAME% %WHITE%+%DARK_GREEN%Teeth%WHITE%(%RED%3%WHITE%)%CONTINUE%
 
 //bonespear
-ItemDisplay[NMAG NEC SK84=1]: %NAME% %WHITE%+%DARK_GREEN%BSpear%WHITE%(%RED%1%WHITE%)%CONTINUE%
-ItemDisplay[NMAG NEC SK84=2]: %NAME% %WHITE%+%DARK_GREEN%BSpear%WHITE%(%RED%2%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG NEC SK84=1]: %NAME% %WHITE%+%DARK_GREEN%BSpear%WHITE%(%RED%1%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG NEC SK84=2]: %NAME% %WHITE%+%DARK_GREEN%BSpear%WHITE%(%RED%2%WHITE%)%CONTINUE%
 ItemDisplay[NMAG NEC SK84=3]: %NAME% %WHITE%+%DARK_GREEN%BSpear%WHITE%(%RED%3%WHITE%)%CONTINUE%
 
 //Bone Spirit
-ItemDisplay[NMAG NEC SK93=1]: %NAME% %WHITE%+%DARK_GREEN%BSpirit%WHITE%(%RED%1%WHITE%)%CONTINUE%
-ItemDisplay[NMAG NEC SK93=2]: %NAME% %WHITE%+%DARK_GREEN%BSpirit%WHITE%(%RED%2%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG NEC SK93=1]: %NAME% %WHITE%+%DARK_GREEN%BSpirit%WHITE%(%RED%1%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG NEC SK93=2]: %NAME% %WHITE%+%DARK_GREEN%BSpirit%WHITE%(%RED%2%WHITE%)%CONTINUE%
 ItemDisplay[NMAG NEC SK93=3]: %NAME% %WHITE%+%DARK_GREEN%BSpirit%WHITE%(%RED%3%WHITE%)%CONTINUE%
 
 //Clay golem
-ItemDisplay[NMAG NEC SK75=1]: %NAME% %WHITE%+%DARK_GREEN%ClayG%WHITE%(%RED%1%WHITE%)%CONTINUE%
-ItemDisplay[NMAG NEC SK75=2]: %NAME% %WHITE%+%DARK_GREEN%ClayG%WHITE%(%RED%2%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG NEC SK75=1]: %NAME% %WHITE%+%DARK_GREEN%ClayG%WHITE%(%RED%1%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG NEC SK75=2]: %NAME% %WHITE%+%DARK_GREEN%ClayG%WHITE%(%RED%2%WHITE%)%CONTINUE%
 ItemDisplay[NMAG NEC SK75=3]: %NAME% %WHITE%+%DARK_GREEN%ClayG%WHITE%(%RED%3%WHITE%)%CONTINUE%
 
 //Blood golem
-ItemDisplay[NMAG NEC SK85=1]: %NAME% %WHITE%+%DARK_GREEN%BloodG%WHITE%(%RED%1%WHITE%)%CONTINUE%
-ItemDisplay[NMAG NEC SK85=2]: %NAME% %WHITE%+%DARK_GREEN%BloodG%WHITE%(%RED%2%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG NEC SK85=1]: %NAME% %WHITE%+%DARK_GREEN%BloodG%WHITE%(%RED%1%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG NEC SK85=2]: %NAME% %WHITE%+%DARK_GREEN%BloodG%WHITE%(%RED%2%WHITE%)%CONTINUE%
 ItemDisplay[NMAG NEC SK85=3]: %NAME% %WHITE%+%DARK_GREEN%BloodG%WHITE%(%RED%3%WHITE%)%CONTINUE%
 
 //Golem mastery
-ItemDisplay[NMAG NEC SK79=1]: %NAME% %WHITE%+%DARK_GREEN%GMastery%WHITE%(%RED%1%WHITE%)%CONTINUE%
-ItemDisplay[NMAG NEC SK79=2]: %NAME% %WHITE%+%DARK_GREEN%GMastery%WHITE%(%RED%2%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG NEC SK79=1]: %NAME% %WHITE%+%DARK_GREEN%GMastery%WHITE%(%RED%1%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG NEC SK79=2]: %NAME% %WHITE%+%DARK_GREEN%GMastery%WHITE%(%RED%2%WHITE%)%CONTINUE%
 ItemDisplay[NMAG NEC SK79=3]: %NAME% %WHITE%+%DARK_GREEN%GMastery%WHITE%(%RED%3%WHITE%)%CONTINUE%
 
 //Poison nova
-ItemDisplay[NMAG NEC SK92=1]: %NAME% %WHITE%+%DARK_GREEN%PNova%WHITE%(%RED%1%WHITE%)%CONTINUE%
-ItemDisplay[NMAG NEC SK92=2]: %NAME% %WHITE%+%DARK_GREEN%PNova%WHITE%(%RED%2%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG NEC SK92=1]: %NAME% %WHITE%+%DARK_GREEN%PNova%WHITE%(%RED%1%WHITE%)%CONTINUE%
+// ItemDisplay[NMAG NEC SK92=2]: %NAME% %WHITE%+%DARK_GREEN%PNova%WHITE%(%RED%2%WHITE%)%CONTINUE%
 ItemDisplay[NMAG NEC SK92=3]: %NAME% %WHITE%+%DARK_GREEN%PNova%WHITE%(%RED%3%WHITE%)%CONTINUE%
 
 
@@ -591,11 +610,9 @@ ItemDisplay[(DRU OR BAR OR DIN OR NEC OR SIN OR SOR OR ZON) MAG NORM CLVL>44]:
 ItemDisplay[(DRU OR BAR OR DIN OR NEC OR SIN OR SOR OR ZON) MAG EXC CLVL>54]:
 ItemDisplay[(DRU OR BAR OR DIN OR NEC OR SIN OR SOR OR ZON) MAG ELT CLVL>64]:
 
-
 //Hide rare weapons from normal and nightmare
 ItemDisplay[RARE !ID (NORM OR EXC) WEAPON !WAND !STAFF !SIN !SOR !ZON CLVL>64]:
 ItemDisplay[RARE !ID (NORM OR EXC) (HELM OR CHEST OR SHIELD) !DRU !BAR !NEC CLVL>64]:
-
 
 ItemDisplay[CLVL>9 !RW INF]:
 ItemDisplay[(WEAPON OR ARMOR OR DRU OR BAR OR DIN OR NEC OR SIN OR SOR OR ZON) NMAG SOCK=1 CLVL>23]:
@@ -603,4 +620,4 @@ ItemDisplay[(WEAPON OR ARMOR OR DRU OR BAR OR DIN OR NEC OR SIN OR SOR OR ZON) N
 
 
 
-//ItemDisplay[]: §   ©   µ   Ø   ×   ¶   ¥   ¤   ~
+//ItemDisplay[]: ?   ?   ?   ?   ?   ?   ?   ?   ~

@@ -332,14 +332,22 @@ function parseFile(file,num) {
 				if (settings.validation == 1) { document.getElementById("o"+num).innerHTML += "#"+num+" Irregular formatting on line "+line_num+" ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>" }	// display an error if the rule's conditions have space on either side
 				conditions = conditions.trim()
 			}
+			// check duplicate conditions
 			if (settings.validation == 1) {
-				var duplicateConditions = all_conditions.includes(conditions);
+				var duplicateConditions = false;
+				var duplicateConditionsContinue = false;
+				if (all_conditions.includes(conditions) == true) {
+					duplicateConditions = true
+					duplicateConditionsContinue = lines[all_line_nums[all_conditions.indexOf(conditions)]-1].includes("%CONTINUE%");
+				}
 				all_conditions[all_conditions.length] = conditions
 				all_line_nums[all_line_nums.length] = line_num
 				if (duplicateConditions == true) {
 					document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting (lines "+all_line_nums[all_conditions.indexOf(conditions)]+" and "+line_num+" have identical conditions) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"	// display an error if the rule's conditions exactly match a previous line
-					if (notices.duplicates == 0) { document.getElementById("o4").innerHTML += "<br>When two rules have identical conditions, the first rule gets checked twice instead of both rules being checked." }	// unnecessary if parseFile() errors can be handled better
-					notices.duplicates = 1
+					if (duplicateConditionsContinue == true) {
+						if (notices.duplicates == 0) { document.getElementById("o4").innerHTML += "<br>When two rules have identical conditions, the first rule gets checked twice instead of both rules being checked." }	// unnecessary if parseFile() errors can be handled better
+						notices.duplicates = 1
+					}
 				}
 			}
 			if (index_end > index+12 && rule.substr(0,index).length == 0) {
@@ -347,15 +355,16 @@ function parseFile(file,num) {
 				var cond_format = conditions.split("  ").join(" ").split("(").join(",(,").split(")").join(",),").split("!").join(",!,").split("<=").join(",≤,").split(">=").join(",≥,").split(">").join(",>,").split("<").join(",<,").split("=").join(",=,").split(" AND ").join(" ").split(" OR ").join(",|,").split("+").join(",+,").split(" ").join(",&,").split(",,").join(",");
 				var cond_list = cond_format.split(",");
 				var neg_paren_close = 0;
+				var skip_warning = false;
 				for (cond in cond_list) {
 					cond = Number(cond)
 					var c = cond_list[cond];
 					if (c == "GEM") { c = "GEMLEVEL" }
 					if (c == "RUNENUM") { c = "RUNE" }
-					if (settings.pd2_option == 1) { if (c == "DIFF") { c = "DIFFICULTY" } }
 					var number = false;
 					if (isNaN(Number(c)) == false) { cond_list[cond] = Number(c); number = true; }
 					if (number == false && c != "(" && c != ")" && c != "≤" && c != "≥" && c != "<" && c != ">" && c != "=" && c != "|" && c != "&" && c != "+" && c != "!") {
+						// check valid conditions
 						if (settings.validation == 1) {
 							var recognized = false;
 							var cr = c;
@@ -373,13 +382,13 @@ function parseFile(file,num) {
 							if (recognized == false) {
 								document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized condition on line "+line_num+": <l style='color:#c55'>"+c+"</l> ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"
 							}
-							if (settings.pd2_option == 0) { if (c == "PRICE") { c = "invalid_"+c } }
 						}
-						if (((c == "GEMLEVEL" || c == "GEMTYPE") && itemToCompare.type != "gem") || (c == "RUNE" && itemToCompare.type != "rune")) { match_override = true }	// TODO/TOCHECK: Can these conditions (RUNE, GEMLEVEL, GEMTYPE) be used in a way that the rule will match with other items? For example: ItemDisplay[!RUNE>0]: %NAME%		...TODO: also include others (DIFF)
+						if (c == "DIFF") { c = "DIFFICULTY" }
+						if (settings.pd2_option == 0) { if (c == "PRICE") { c = "invalid_"+c } }
+						if (((c == "GEMLEVEL" || c == "GEMTYPE") && itemToCompare.type != "gem") || (c == "RUNE" && itemToCompare.type != "rune") || (c == "GOLD" && itemToCompare.CODE != "GOLD")) { match_override = true; if (c == "GOLD") { skip_warning = true }; }	// TODO/TOCHECK: Can these conditions (RUNE, GEMLEVEL, GEMTYPE, GOLD) be used in a way that the rule will match with other items? For example: ItemDisplay[!RUNE>0]: %NAME%
 						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { if (typeof(character[c]) == 'undefined') { character[c] = 0 } }
-						else if (typeof(itemToCompare[c]) == 'undefined' && c != "GOLD") {
-							itemToCompare[c] = false
-						}
+						else if (typeof(itemToCompare[c]) == 'undefined' && (c == "GOLD" || c == "RUNE" || c == "GEMLEVEL" || c == "GEMTYPE")) { itemToCompare[c] = 0 }		// TODO: Even though '0' and 'false' seem to be equivalent here, it might be useful to only have boolean conditions be set to false
+						else if (typeof(itemToCompare[c]) == 'undefined') { itemToCompare[c] = false }
 						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { formula += character[c]+" " }
 						else { formula += itemToCompare[c]+" " }
 					} else {
@@ -396,12 +405,13 @@ function parseFile(file,num) {
 				}
 				match = eval(formula)
 				if (match_override == true && match == true) {
-					document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (unbounded condition) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"	// display an error if the rule has unbounded conditions at zero
+					if (skip_warning == false) { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (unbounded condition) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>" }	// display an error if the rule has unbounded conditions at zero
 					match = false
 				}
 			} else {
 				match = true
 			}
+			if (itemToCompare.CODE == "GOLD" && conditions.includes("GOLD") == false) { match = false }		// prevents GOLD from matching on random irrelevant rules... not sure how it's executed in-game
 			document.getElementById("o3").innerHTML += match
 			if (match == true) {
 				var color_current_rule = false;
@@ -555,6 +565,11 @@ function parseFile(file,num) {
 	}
 	if (obscured == false && itemToCompare.ID == true && !(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {
 		if (typeof(itemToCompare.base) != 'undefined') { display += secondary_line }
+	}
+	if (itemToCompare.CODE == "GOLD") {
+		if (obscured == true) { display = "" }
+		else { display = itemToCompare.money+" Gold" }
+		description = ""
 	}
 	return [display,description]
 }

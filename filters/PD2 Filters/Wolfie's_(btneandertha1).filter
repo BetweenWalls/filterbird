@@ -96,8 +96,9 @@ ItemDisplay[gfv]: %PURPLE%+%WHITE%Flawed %PURPLE%Amethyst%WHITE%{%TAN%3 Flawed A
 ItemDisplay[gsv]: %PURPLE%+%PURPLE%Amethyst%WHITE%{%TAN%3 Amethyst = Flawless Amethyst} // Amethyst ("Normal")
 ItemDisplay[gzv]: %PURPLE%+%WHITE%Flawless %PURPLE%Amethyst%WHITE%%DOT-20%{%TAN%3 Flawless Amethyst + Key = Perfect Amethyst} // Flawless Amethyst
 ItemDisplay[gzvs]: %PURPLE%+%WHITE%Flawless %PURPLE%Amethyst x%QTY%%DOT-20%{%TAN%3 Flawless Amethyst + Key = Perfect Amethyst%NL%%NL%%WHITE%Shields: +24 Defense%NL%Armor/Helms: +8 Strength%NL%Weapons: +100 Attack Rating%NL%} // Stacked Flawless Amethyst 2x+
-ItemDisplay[gpv]: %PURPLE%+%WHITE%Perfect %PURPLE%Amethyst%WHITE%%DOT-20%{%TAN%Used in Caster crafting} // Flawless Amethyst
-ItemDisplay[gpvs]: %PURPLE%+%WHITE%Perfect %PURPLE%Amethyst x%QTY%%DOT-20%{%TAN%Used in Caster crafting%NL%%NL%%WHITE%Shields: +30 Defense%NL%Armor/Helms: +10 Strength%NL%Weapons: +150 Attack Rating%NL%} // Stacked Flawless Amethyst 2x+
+ItemDisplay[gpv]: %PURPLE%+%WHITE%Perfect %PURPLE%Amethyst%WHITE%{%TAN%Used in Caster crafting} // Perfect Amethyst
+ItemDisplay[gpvs QTY=1]: %PURPLE%+%WHITE%Perfect %PURPLE%Amethyst x%QTY%{%TAN%Used in Caster crafting%NL%%NL%%WHITE%Shields: +30 Defense%NL%Armor/Helms: +10 Strength%NL%Weapons: +150 Attack Rating%NL%} // Stacked Perfect Amethyst 2x+
+ItemDisplay[gpvs QTY>1]: %PURPLE%+%WHITE%Perfect %PURPLE%Amethyst x%QTY%%DOT-20%{%TAN%Used in Caster crafting%NL%%NL%%WHITE%Shields: +30 Defense%NL%Armor/Helms: +10 Strength%NL%Weapons: +150 Attack Rating%NL%} // Stacked Perfect Amethyst 2x+
 
 //      Diamond
 ItemDisplay[gcw]: %WHITE%+%WHITE%Chipped %WHITE%Diamond%WHITE%{%TAN%3 Chipped Diamond = Flawed Diamond} // Chipped Diamond
@@ -105,8 +106,9 @@ ItemDisplay[gfw]: %WHITE%+%WHITE%Flawed %WHITE%Diamond%WHITE%{%TAN%3 Flawed Diam
 ItemDisplay[gsw]: %WHITE%+%WHITE%Diamond%WHITE%{%TAN%3 Diamond = Flawless Diamond} // Diamond ("Normal")
 ItemDisplay[glw]: %WHITE%+%WHITE%Flawless %WHITE%Diamond%WHITE%%DOT-20%{%TAN%3 Flawless Diamond + Key = Perfect Diamond} // Flawless Diamond
 ItemDisplay[glws]: %WHITE%+%WHITE%Flawless %WHITE%Diamond x%QTY%%DOT-20%{%TAN%3 Flawless Diamond + Key = Perfect Diamond%NL%%NL%%WHITE%Shield: Res +14%NL%Armor/Helm: +80 Attack Rating%NL%Weapon: +54% Dmg to Undead%NL%} // Stacked Flawless Diamond 2x+
-ItemDisplay[gpw]: %WHITE%+%WHITE%Perfect %WHITE%Diamond%WHITE%%DOT-20% // Perfect Diamond
-ItemDisplay[gpws]: %WHITE%+%WHITE%Perfect %WHITE%Diamond x%QTY%%DOT-20%{%WHITE%Shields: All Resist +19%NL%Armor/Helms: +100 Attack Rating%NL%Weapons: +68% Damage to Undead%NL%} // Stacked Perfect Diamond 2x+
+ItemDisplay[gpw]: %WHITE%+%WHITE%Perfect %WHITE%Diamond%WHITE% // Perfect Diamond
+ItemDisplay[gpws QTY=1]: %WHITE%+%WHITE%Perfect %WHITE%Diamond x%QTY%{%WHITE%Shields: All Resist +19%NL%Armor/Helms: +100 Attack Rating%NL%Weapons: +68% Damage to Undead%NL%} // Stacked Perfect Diamond 2x+
+ItemDisplay[gpws QTY>1]: %WHITE%+%WHITE%Perfect %WHITE%Diamond x%QTY%%DOT-20%{%WHITE%Shields: All Resist +19%NL%Armor/Helms: +100 Attack Rating%NL%Weapons: +68% Damage to Undead%NL%} // Stacked Perfect Diamond 2x+
 
 //      Emerald
 ItemDisplay[gcg]: %GREEN%+%WHITE%Chipped %GREEN%Emerald%WHITE%{%TAN%3 Chipped Emerald = Flawed Emerald} // Chipped Emerald
@@ -114,8 +116,9 @@ ItemDisplay[gfg]: %GREEN%+%WHITE%Flawed %GREEN%Emerald%WHITE%{%TAN%3 Flawed Emer
 ItemDisplay[gsg]: %GREEN%+%GREEN%Emerald%WHITE%{%TAN%3 Emerald = Flawless Emerald} // Emerald ("Normal")
 ItemDisplay[glg]: %GREEN%+%WHITE%Flawless %GREEN%Emerald%WHITE%%DOT-20%{%TAN%3 Flawless Emerald + Key = Perfect Emerald} // Flawless Emerald
 ItemDisplay[glgs]: %GREEN%+%WHITE%Flawless %GREEN%Emerald x%QTY%%DOT-20%{%TAN%3 Flawless Emerald + Key = Perfect Emerald%NL%%NL%%WHITE%Shields: Psn Res +28%%NL%Armor/Helms: +8 Dexterity%NL%Weapons: +60 psn over 6 secs%NL%} // Stacked Flawless Emerald 2x+
-ItemDisplay[gpg]: %GREEN%+%WHITE%Perfect %GREEN%Emerald%WHITE%%DOT-20%{%TAN%Used in Safety crafting} // Perfect Emerald
-ItemDisplay[gpgs]: %GREEN%+%WHITE%Perfect %GREEN%Emerald x%QTY%%DOT-20%{%TAN%Used in Safety crafting%NL%%NL%%WHITE%Shields: Poison Resist +40%%NL%Armor/Helms: +10 Dexterity%NL%Weapons: +100 poison damage over 7 secs%NL%} // Stacked Perfect Emerald 2x+
+ItemDisplay[gpg]: %GREEN%+%WHITE%Perfect %GREEN%Emerald%WHITE%{%TAN%Used in Safety crafting} // Perfect Emerald
+ItemDisplay[gpgs QTY=1]: %GREEN%+%WHITE%Perfect %GREEN%Emerald x%QTY%{%TAN%Used in Safety crafting%NL%%NL%%WHITE%Shields: Poison Resist +40%%NL%Armor/Helms: +10 Dexterity%NL%Weapons: +100 poison damage over 7 secs%NL%} // Stacked Perfect Emerald 2x+
+ItemDisplay[gpgs QTY>1]: %GREEN%+%WHITE%Perfect %GREEN%Emerald x%QTY%%DOT-20%{%TAN%Used in Safety crafting%NL%%NL%%WHITE%Shields: Poison Resist +40%%NL%Armor/Helms: +10 Dexterity%NL%Weapons: +100 poison damage over 7 secs%NL%} // Stacked Perfect Emerald 2x+
 
 //      Ruby
 ItemDisplay[gcr]: %RED%+%WHITE%Chipped %RED%Ruby%WHITE%{%TAN%3 Chipped Ruby = Flawed Ruby} // Chipped Ruby
@@ -123,8 +126,9 @@ ItemDisplay[gfr]: %RED%+%WHITE%Flawed %RED%Ruby%WHITE%{%TAN%3 Flawed Ruby = Ruby
 ItemDisplay[gsr]: %RED%+%RED%Ruby%WHITE%{%TAN%3 Ruby = Flawless Ruby} // Ruby ("Normal")
 ItemDisplay[glr]: %RED%+%WHITE%Flawless %RED%Ruby%WHITE%%DOT-20%{%TAN%3 Flawless Ruby + Key = Perfect Ruby} // Flawless Ruby
 ItemDisplay[glrs]: %RED%+%WHITE%Flawless %RED%Ruby x%QTY%%DOT-20%{%TAN%3 Flawless Ruby + Key = Perfect Ruby%NL%%NL%%WHITE%Shields: Fire Resist +28%%NL%Armor/Helms: +31 Life%NL%Weapons: Adds 10-16 fire damage%NL%} // Stacked Flawless Ruby 2x+
-ItemDisplay[gpr]: %RED%+%WHITE%Perfect %RED%Ruby%WHITE%%DOT-20%{%TAN%Used in Blood crafting} // Perfect Ruby
-ItemDisplay[gprs]: %RED%+%WHITE%Perfect %RED%Ruby x%QTY%%DOT-20%{%TAN%Used in Blood crafting%NL%%NL%%WHITE%Shields: Fire Resist +40%%NL%Armor/Helms: +38 Life%NL%Weapons: Adds 15-20 fire damage%NL%} // Stacked Perfect Ruby 2x+
+ItemDisplay[gpr]: %RED%+%WHITE%Perfect %RED%Ruby%WHITE%{%TAN%Used in Blood crafting} // Perfect Ruby
+ItemDisplay[gprs QTY=1]: %RED%+%WHITE%Perfect %RED%Ruby x%QTY%{%TAN%Used in Blood crafting%NL%%NL%%WHITE%Shields: Fire Resist +40%%NL%Armor/Helms: +38 Life%NL%Weapons: Adds 15-20 fire damage%NL%} // Stacked Perfect Ruby 2x+
+ItemDisplay[gprs QTY>1]: %RED%+%WHITE%Perfect %RED%Ruby x%QTY%%DOT-20%{%TAN%Used in Blood crafting%NL%%NL%%WHITE%Shields: Fire Resist +40%%NL%Armor/Helms: +38 Life%NL%Weapons: Adds 15-20 fire damage%NL%} // Stacked Perfect Ruby 2x+
 
 //      Sapphire
 ItemDisplay[gcb]: %BLUE%+%WHITE%Chipped %BLUE%Sapphire%WHITE%{%TAN%3 Chipped Sapphire = Flawed Sapphire} // Chipped Sapphire
@@ -132,8 +136,9 @@ ItemDisplay[gfb]: %BLUE%+%WHITE%Flawed %BLUE%Sapphire%WHITE%{%TAN%3 Flawed Sapph
 ItemDisplay[gsb]: %BLUE%+%BLUE%Sapphire%WHITE%{%TAN%3 Sapphire = Flawless Sapphire} // Sapphire ("Normal")
 ItemDisplay[glb]: %BLUE%+%WHITE%Flawless %BLUE%Sapphire%WHITE%%DOT-20%{%TAN%3 Flawless Sapphire + Key = Perfect Sapphire} // Flawless Sapphire
 ItemDisplay[glbs]: %BLUE%+%WHITE%Flawless %BLUE%Sapphire x%QTY%%DOT-20%{%TAN%3 Flawless Sapphire + Key = Perfect Sapphire%NL%%NL%%WHITE%Shields: Cold Res +28%%NL%Armor/Helms: +31 Mana%NL%Weapons: Adds 6-10 cold dmg%NL%} // Stacked Flawless Sapphire 2x+
-ItemDisplay[gpb]: %BLUE%+%WHITE%Perfect %BLUE%Sapphire%WHITE%%DOT-20%{%TAN%Used in Hit Power crafting} // Perfect Sapphire
-ItemDisplay[gpbs]: %BLUE%+%WHITE%Perfect %BLUE%Sapphire x%QTY%%DOT-20%{%TAN%Used in Hit Power crafting%NL%%NL%%WHITE%Shields: Cold Resist +40%%NL%Armor/Helms: +38 Mana%NL%Weapons: Adds 10-14 cold damage%NL%} // Stacked Perfect Sapphire 2x+
+ItemDisplay[gpb]: %BLUE%+%WHITE%Perfect %BLUE%Sapphire%WHITE%{%TAN%Used in Hit Power crafting} // Perfect Sapphire
+ItemDisplay[gpbs QTY=1]: %BLUE%+%WHITE%Perfect %BLUE%Sapphire x%QTY%{%TAN%Used in Hit Power crafting%NL%%NL%%WHITE%Shields: Cold Resist +40%%NL%Armor/Helms: +38 Mana%NL%Weapons: Adds 10-14 cold damage%NL%} // Stacked Perfect Sapphire 2x+
+ItemDisplay[gpbs QTY>1]: %BLUE%+%WHITE%Perfect %BLUE%Sapphire x%QTY%%DOT-20%{%TAN%Used in Hit Power crafting%NL%%NL%%WHITE%Shields: Cold Resist +40%%NL%Armor/Helms: +38 Mana%NL%Weapons: Adds 10-14 cold damage%NL%} // Stacked Perfect Sapphire 2x+
 
 //      Skull
 ItemDisplay[skc]: %GRAY%+%WHITE%Chipped %GRAY%Skull%WHITE%{%TAN%3 Chipped Skull = Flawed Skull} // Chipped Skull
@@ -141,8 +146,9 @@ ItemDisplay[skf]: %GRAY%+%WHITE%Flawed %GRAY%Skull%WHITE%{%TAN%3 Flawed Skull = 
 ItemDisplay[sku]: %GRAY%+%GRAY%Skull%WHITE%{%TAN%3 Skull = Flawless Skull} // Skull ("Normal")
 ItemDisplay[skl]: %GRAY%+%WHITE%Flawless %GRAY%Skull%WHITE%%DOT-20%{%TAN%3 Flawless Skull + Key = Perfect Skull} // Flawless Skull
 ItemDisplay[skls]: %GRAY%+%WHITE%Flawless %GRAY%Skull x%QTY%%DOT-20%{%TAN%3 Flawless Skull + Key = Perfect Skull%NL%%NL%%WHITE%Shield: ATDO 16%NL%Armor/Helm: Mana Reg 12%, Rep Life +4%NL%Wep: 3% Life & Mana steal%NL%} // Stacked Flawless Skull 2x+
-ItemDisplay[skz]: %GRAY%+%WHITE%Perfect %GRAY%Skull%WHITE%%DOT-20% // Perfect Skull
-ItemDisplay[skzs]: %GRAY%+%WHITE%Perfect %GRAY%Skull x%QTY%%DOT-20%{%WHITE%Shields: Attacker Takes Damage of 20%NL%Armor/Helms: Regen Mana 19%, Rep Life +5%NL%Weapons: 4% Life & 3% Mana steal%NL%} // Stacked Perfect Skull 2x+
+ItemDisplay[skz]: %GRAY%+%WHITE%Perfect %GRAY%Skull%WHITE% // Perfect Skull
+ItemDisplay[skzs QTY=1]: %GRAY%+%WHITE%Perfect %GRAY%Skull x%QTY%{%WHITE%Shields: Attacker Takes Damage of 20%NL%Armor/Helms: Regen Mana 19%, Rep Life +5%NL%Weapons: 4% Life & 3% Mana steal%NL%} // Stacked Perfect Skull 2x+
+ItemDisplay[skzs QTY>1]: %GRAY%+%WHITE%Perfect %GRAY%Skull x%QTY%%DOT-20%{%WHITE%Shields: Attacker Takes Damage of 20%NL%Armor/Helms: Regen Mana 19%, Rep Life +5%NL%Weapons: 4% Life & 3% Mana steal%NL%} // Stacked Perfect Skull 2x+
 
 //      Topaz
 ItemDisplay[gcy]: %YELLOW%+%WHITE%Chipped %YELLOW%Topaz%WHITE%{%TAN%3 Chipped Topaz = Flawed Topaz} // Chipped Topaz
@@ -150,11 +156,12 @@ ItemDisplay[gfy]: %YELLOW%+%WHITE%Flawed %YELLOW%Topaz%WHITE%{%TAN%3 Flawed Topa
 ItemDisplay[gsy]: %YELLOW%+%YELLOW%Topaz%WHITE%{%TAN%3 Topaz = Flawless Topaz} // Topaz ("Normal")
 ItemDisplay[gly]: %YELLOW%+%WHITE%Flawless %YELLOW%Topaz%WHITE%%DOT-20%{%TAN%3 Flawless Topaz + Key = Perfect Topaz} // Flawless Topaz
 ItemDisplay[glys]: %YELLOW%+%WHITE%Flawless %YELLOW%Topaz x%QTY%%DOT-20%{%TAN%3 Flawless Topaz + Key = Perfect Topaz%NL%%NL%%WHITE%Shields: Light Res +28%%NL%Armor/Helms: 20% Magic Find%NL%Weps: Add 1-30 lightning dmg%NL%} // Stacked Flawless Topaz 2x+
-ItemDisplay[gpy]: %YELLOW%+%WHITE%Perfect %YELLOW%Topaz%WHITE%%DOT-20% // Perfect Topaz
-ItemDisplay[gpys]: %YELLOW%+%WHITE%Perfect %YELLOW%Topaz x%QTY%%DOT-20%{%WHITE%Shields: Lightning Resist +40%%NL%Armor/Helms: 24% Better Chance of Getting Magic Items%NL%Weapons: Adds 1-40 lightning damage%NL%} // Stacked Perfect Topaz 2x+
+ItemDisplay[gpy]: %YELLOW%+%WHITE%Perfect %YELLOW%Topaz%WHITE% // Perfect Topaz
+ItemDisplay[gpys QTY=1]: %YELLOW%+%WHITE%Perfect %YELLOW%Topaz x%QTY%{%WHITE%Shields: Lightning Resist +40%%NL%Armor/Helms: 24% Better Chance of Getting Magic Items%NL%Weapons: Adds 1-40 lightning damage%NL%} // Stacked Perfect Topaz 2x+
+ItemDisplay[gpys QTY>1]: %YELLOW%+%WHITE%Perfect %YELLOW%Topaz x%QTY%%DOT-20%{%WHITE%Shields: Lightning Resist +40%%NL%Armor/Helms: 24% Better Chance of Getting Magic Items%NL%Weapons: Adds 1-40 lightning damage%NL%} // Stacked Perfect Topaz 2x+
 
 // Runes ------------------------------------------------------------------------
-ItemDisplay[RUNE<11 RUNE>0]: %DARK_GREEN%%RUNENAME% %DARK_GREEN%(%RUNENUM%)%PX-76%%CONTINUE% // El-Thul/(reformatted for FilterBird)
+ItemDisplay[RUNE<11]: %DARK_GREEN%%RUNENAME% %DARK_GREEN%(%RUNENUM%)%PX-76%%CONTINUE% // El-Thul
 ItemDisplay[RUNE>10 RUNE<20]: %ORANGE%%RUNENAME% %ORANGE%(%RUNENUM%)%DOT-0B%%CONTINUE% // Amn-Fal
 ItemDisplay[RUNE>19 RUNE<24]: %RED%%RUNENAME% %RED%(%RUNENUM%)%MAP-50%%CONTINUE% // Lem-Mal
 ItemDisplay[RUNE>23]: %PURPLE%>>%RED%%RUNENAME% %RED%(%RUNENUM%)%PURPLE%<<%BORDER-50%%CONTINUE% // Ist-Zod
@@ -273,7 +280,7 @@ ItemDisplay[MAG CHSK72>0 WAND]: %NAME% %GREEN%(Weaken)%WHITE% // Weaken charges
 
 // Other Items ------------------------------------------------------------------
 ItemDisplay[ear]: %NAME% // Show player ears, add "//" before "%NAME%" to hide all ears
-ItemDisplay[INF ID (ARMOR OR WEAPON) CLVL>5]: // Hide all Low Quality, Cracked, Crude, & Damaged items past character level 5
+ItemDisplay[INF ID (ARMOR OR WEAPON) CLVL>65]: // Hide all Low Quality, Cracked, Crude, & Damaged items past character level 65
 ItemDisplay[aqv CLVL>5]: // Hides Arrow quivers past character level 5
 ItemDisplay[cqv CLVL>5]: // Hides Bolt quivers past character level 5
 
@@ -342,7 +349,8 @@ ItemDisplay[RARE !RW PRICE>20000 DIFF=1]: %DARK_GREEN%$ %YELLOW%%NAME% // Nightm
 ItemDisplay[RARE !RW PRICE>10000 DIFF=0]: %DARK_GREEN%$ %YELLOW%%NAME% // Normal difficulty
 
 //      Hide all other rares
-ItemDisplay[RARE !ID]: // Hide all other Rare items
+ItemDisplay[RARE !ID CLVL<75]: %NAME% // Show all other Rare items until level 75
+ItemDisplay[RARE !ID CLVL>74]: // Hide all other Rare items past level 74
 
 // Crafted Items ----------------------------------------------------------------
 //      Amulets for crafting
@@ -399,7 +407,8 @@ ItemDisplay[MAG !RW PRICE>20000 DIFF=1]: %DARK_GREEN%$ %BLUE%%NAME% // Adding $ 
 ItemDisplay[MAG !RW PRICE>10000 DIFF=0]: %DARK_GREEN%$ %BLUE%%NAME% // Adding $ to 10k+ Magic items for Normal difficulty
 
 //      Hide all other magics
-ItemDisplay[MAG !ID]: // Hide all other Magic items
+ItemDisplay[MAG !ID CLVL<75]: %NAME% // Show all other Magic items until level 75
+ItemDisplay[MAG !ID]: // Hide all other Magic items past level 74
 
 // Base Items -------------------------------------------------------------------
 //      Gold
@@ -422,16 +431,16 @@ ItemDisplay[hp1 DIFF<1]: %RED%+%WHITE%H1 // Minor Healing Potion
 ItemDisplay[hp1 DIFF>0]: // Hides Minor Healing Potions after Normal difficulty
 ItemDisplay[hp2 DIFF<1]: %RED%+%WHITE%H2 // Light Healing Potion
 ItemDisplay[hp2 DIFF>0]: // Hides Light Healing Potions after Normal difficulty
-ItemDisplay[hp3 DIFF<1]: %RED%+%WHITE%H3 // Healing Potion
-ItemDisplay[hp3 DIFF>0]: // Hides Healing Potions after after Normal difficulty
+ItemDisplay[hp3 DIFF<2]: %RED%+%WHITE%H3 // Healing Potion
+ItemDisplay[hp3 DIFF>1]: // Hides Healing Potions after after Nightmare difficulty
 ItemDisplay[hp4]: %RED%-%WHITE%H4%RED%-%WHITE% // Greater Healing Potion
 ItemDisplay[hp5]: %RED%+%WHITE%H5%RED%+%WHITE% // Super Healing Potion
 ItemDisplay[mp1 DIFF<1]: %BLUE%+%WHITE%M1 // Minor Mana Potion
 ItemDisplay[mp1 DIFF>0]: // Hides Minor Mana Potions after Normal difficulty
 ItemDisplay[mp2 DIFF<1]: %BLUE%+%WHITE%M2 // Light Mana Potion
 ItemDisplay[mp2 DIFF>0]: // Hides Light Mana Potions after Normal difficulty
-ItemDisplay[mp3 DIFF<1]: %BLUE%+%WHITE%M3 // Mana Potion
-ItemDisplay[mp3 DIFF>0]: // Hides Mana Potions after after Normal difficulty
+ItemDisplay[mp3 DIFF<2]: %BLUE%+%WHITE%M3 // Mana Potion
+ItemDisplay[mp3 DIFF>1]: // Hides Mana Potions after after Nightmare difficulty
 ItemDisplay[mp4]: %BLUE%-%WHITE%M4%BLUE%-%WHITE% // Greater Mana Potion
 ItemDisplay[mp5]: %BLUE%+%WHITE%M5%BLUE%+%WHITE% // Super Mana Potion
 
@@ -465,9 +474,10 @@ ItemDisplay[ibk]: %RED%!%WHITE%ID%RED%!%WHITE% // Tome of Identify
 ItemDisplay[tbk]: %BLUE%!%WHITE%TP%BLUE%!%WHITE% // Tome of Town Portal
 
 //      Base Items Misc
-ItemDisplay[NMAG (ARMOR OR WEAPON) SOCK=1 CLVL>30]: // Hides all 1 socket base items after level 30
+ItemDisplay[NMAG (ARMOR OR WEAPON) SOCK=1 CLVL>65]: // Hides all 1 socket base items after level 65
 
 //      Showing 10-15% on Armors/Weapons (eg "Sacred Armor [13%]")
+ItemDisplay[NMAG !INF !RW SUP ED>0 ED<10]: %NAME% %GRAY%[%BLUE%ED%GRAY%]%CONTINUE%
 ItemDisplay[NMAG !INF !RW SUP ED=10]: %NAME% %GRAY%[%BLUE%10%%GRAY%]%CONTINUE%
 ItemDisplay[NMAG !INF !RW SUP ED=11]: %NAME% %GRAY%[%BLUE%11%%GRAY%]%CONTINUE%
 ItemDisplay[NMAG !INF !RW SUP ED=12]: %NAME% %GRAY%[%BLUE%12%%GRAY%]%CONTINUE%
@@ -476,7 +486,7 @@ ItemDisplay[NMAG !INF !RW SUP ED=14]: %NAME% %GRAY%[%BLUE%14%%GRAY%]%CONTINUE%
 ItemDisplay[NMAG !INF !RW SUP ED=15]: %NAME% %GRAY%[%BLUE%15%%GRAY%]%CONTINUE%
 
 //      Base Circlets
-ItemDisplay[NMAG !INF !RW !SUP !ETH SOCK=0 ILVL>25 ci3]: %NAME%{%TAN%& Perfect Sapphire for sockets%NL%Larzuk or cube w/ Ral Rune, Thul Rune,} // All tiers, 0os, Non-Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW !SUP !ETH SOCK=0 ILVL>25 ci3]: %NAME%{%TAN%or imbue at Charsi in Act 1%NL%& Perfect Sapphire for sockets%NL%Larzuk or cube w/ Ral Rune, Thul Rune,} // All tiers, 0os, Non-Superior, Non-Eth
 ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 ILVL>25 ci3]: %NAME%%DOT-1E%{%TAN%Larzuk for sockets} // All tiers, 0os, Superior, Non-Eth
 ItemDisplay[NMAG !INF !RW !SUP ETH SOCK=0 ILVL>25 ci3]: %GRAY%%NAME%%DOT-1E%{%TAN%& Perfect Sapphire for sockets%NL%Larzuk or cube w/ Ral Rune, Thul Rune,} // All tiers, 0os, Non-Superior, Eth
 ItemDisplay[NMAG !INF !RW SUP ETH SOCK=0 ILVL>25 ci3]: %GRAY%%NAME%%DOT-1E%{%TAN%Larzuk for sockets} // All tiers, 0os, Superior, Eth
@@ -506,7 +516,7 @@ ItemDisplay[NMAG !INF !RW ETH SOCK=6 TABSK2>2 ELT SPEAR !THROWING ZON]: %GRAY%%N
 
 //      Base Amazon Javelins
 ItemDisplay[NMAG TABSK2>2 ELT (am5 OR ama OR amf)]: %NAME% %GRAY%[%BLUE%+3 Jav%GRAY%]%WHITE%%DOT-1E% // Show +3 Elite tier Amazon Javelins
-ItemDisplay[NMAG CLVL>30 TABSK2<3 (am5 OR ama OR amf)]: // This will completely hide all white Amazon Javelins that are +0-2 Jav skills past character level 30
+ItemDisplay[NMAG CLVL>65 TABSK2<3 (am5 OR ama OR amf)]: // This will completely hide all white Amazon Javelins that are +0-2 Jav skills past character level 65
 
 //      Base Assassin Katars
 //          Martial Arts
@@ -1218,6 +1228,16 @@ ItemDisplay[NMAG !INF !RW RES=43 DIN]: %NAME%%GRAY% [%BLUE%+43%GRAY%]%CONTINUE%
 ItemDisplay[NMAG !INF !RW RES=44 DIN]: %NAME%%GRAY% [%BLUE%+44%GRAY%]%CONTINUE%
 ItemDisplay[NMAG !INF !RW RES=45 DIN]: %NAME%%GRAY% [%BLUE%+45%GRAY%]%CONTINUE%
 
+// Showing any Paladin Shield with any amount of res until cLvl 75
+ItemDisplay[NMAG !INF !RW !SUP !ETH SOCK=0 RES>0 CLVL<75 DIN]: %NAME%{%TAN%& Perfect Ruby for sockets%NL%Larzuk or cube w/ Tal Rune, Amn Rune,} // All tiers, 0os, Non-Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 RES>0 CLVL<75 DIN]: %NAME%%DOT-1E%{%TAN%Larzuk for sockets} // All tiers, 0os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW !SUP ETH SOCK=0 RES>0 CLVL<75 DIN]: %GRAY%%NAME%%DOT-1E%{%TAN%& Perfect Ruby for sockets%NL%Larzuk or cube w/ Tal Rune, Amn Rune,} // All tiers, 0os, Non-Superior, Eth
+ItemDisplay[NMAG !INF !RW SUP ETH SOCK=0 RES>0 CLVL<75 DIN]: %GRAY%%NAME%%DOT-1E%{%TAN%Larzuk for sockets} // All tiers, 0os, Superior, Eth
+ItemDisplay[NMAG !INF !RW SOCK=2 RES>0 CLVL<75 DIN]: %GRAY%%NAME%%DOT-1E%{%ORANGE%Rhyme, Splendor%NL%%TAN%Possible RWs:} // All tiers, 2os
+ItemDisplay[NMAG !INF !RW SOCK=3 RES>0 CLVL<75 DIN]: %GRAY%%NAME%%DOT-1E%{%ORANGE%Dream, Sanctuary%NL%Ancients Pledge, Dragon,%NL%%TAN%Possible RWs:} // All tiers, 3os
+ItemDisplay[NMAG !INF !RW SOCK=4 RES>0 CLVL<75 DIN]: %GRAY%%NAME%%DOT-1E%{%ORANGE%Exile, Phoenix, Spirit%NL%%TAN%Possible RWs:} // All tiers, 4os
+
+// After cLvl 75 only show Paladin Shields with 35+ res
 ItemDisplay[NMAG !INF !RW !SUP !ETH SOCK=0 RES>34 DIN]: %NAME%{%TAN%& Perfect Ruby for sockets%NL%Larzuk or cube w/ Tal Rune, Amn Rune,} // All tiers, 0os, Non-Superior, Non-Eth
 ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 RES>34 DIN]: %NAME%%DOT-1E%{%TAN%Larzuk for sockets} // All tiers, 0os, Superior, Non-Eth
 ItemDisplay[NMAG !INF !RW !SUP ETH SOCK=0 RES>34 DIN]: %GRAY%%NAME%%DOT-1E%{%TAN%& Perfect Ruby for sockets%NL%Larzuk or cube w/ Tal Rune, Amn Rune,} // All tiers, 0os, Non-Superior, Eth
@@ -1227,7 +1247,7 @@ ItemDisplay[NMAG !INF !RW SOCK=3 RES>34 DIN]: %GRAY%%NAME%%DOT-1E%{%ORANGE%Dream
 ItemDisplay[NMAG !INF !RW SOCK=4 RES>34 DIN]: %GRAY%%NAME%%DOT-1E%{%ORANGE%Exile, Phoenix, Spirit%NL%%TAN%Possible RWs:} // All tiers, 4os
 
 //      Base Armor
-ItemDisplay[NMAG !INF !RW !ETH (SOCK=2 OR SOCK=3) CLVL<30 CHEST]: %GRAY%%NAME%%DOT-1E%%CONTINUE% // Show and notify all 2 and 3 socket armors until character level 30
+ItemDisplay[NMAG !INF !RW !ETH (SOCK=2 OR SOCK=3) CLVL<65 CHEST]: %GRAY%%NAME%%DOT-1E%%CONTINUE% // Show and notify all 2 and 3 socket armors until character level 65
 
 ItemDisplay[NMAG !INF !RW !SUP !ETH SOCK=0 (xtp OR ELT) DEF>749 CHEST]: %NAME%%DOT-1E%{%TAN%& Perfect Topaz for sockets%NL%Larzuk or cube w/ Tal Rune, Thul Rune,} // Exceptional and Elite tiers, 0os, Non-Superior, Non-Eth
 ItemDisplay[NMAG !INF !RW !SUP !ETH SOCK=0 (xtp OR ELT) CHEST]: %NAME%{%TAN%& Perfect Topaz for sockets%NL%Larzuk or cube w/ Tal Rune, Thul Rune,} // Exceptional and Elite tiers, 0os, Non-Superior, Non-Eth

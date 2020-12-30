@@ -1671,6 +1671,12 @@ function setItemFromCustom() {
 		for (let i = 0; i < runewords[rw_name].runes.length; i++) { s+=1; }
 		itemToCompare.sockets = s
 	}
+	
+	if (itemCustom.CODE == "GOLD") { document.getElementById("select_amount").style.display = "block"; setAmount(document.getElementById("amount").value) }
+	else { document.getElementById("select_amount").style.display = "none" }
+	if (typeof(itemCustom.QUANTITY) != 'undefined') { document.getElementById("select_quantity").style.display = "block"; setQuantity(itemCustom.QUANTITY) }
+	else { document.getElementById("select_quantity").style.display = "none" }
+	
 	//printAffixes()
 	setItemCodes()
 	var reset_simulation = setPD2Codes()
@@ -1774,7 +1780,20 @@ function setPD2Codes() {
 		if (selected_group_index < 9) { document.getElementById("select_price").style.display = "block" }
 		else if (selected_group_index > 9) {
 			var premade_type = itemToCompare.type_affix;
-			for (i in premade[premade_type]) { if (typeof(premade[premade_type][i].pd2) != 'undefined') { if (premade[premade_type][i].pd2 == 1) { document.getElementById("dropdown_name").options[i].style.display = "block" } } }
+			var selected_name_index = document.getElementById("dropdown_name").selectedIndex;
+			reset_selected = false;
+			for (i in premade[premade_type]) { if (typeof(premade[premade_type][i].pd2) != 'undefined') {
+				if (premade[premade_type][i].pd2 == 1) {
+					document.getElementById("dropdown_name").options[i].style.display = "block"
+				} else if (premade[premade_type][i].pd2 == 0) {
+					if (selected_name_index == i) { reset_selected = true }
+					document.getElementById("dropdown_name").options[i].style.display = "none"
+				}
+			} }
+			if (reset_selected == true) {
+				document.getElementById("dropdown_name").selectedIndex = 0
+				setName(document.getElementById("dropdown_name").options[0].innerHTML)
+			}
 		}
 	} else {
 		for (aff in code_other) {
@@ -1796,10 +1815,14 @@ function setPD2Codes() {
 			var premade_type = itemToCompare.type_affix;
 			var selected_name_index = document.getElementById("dropdown_name").selectedIndex;
 			reset_selected = false;
-			for (i in premade[premade_type]) { if (typeof(premade[premade_type][i].pd2) != 'undefined') { if (premade[premade_type][i].pd2 == 1) {
-				if (selected_name_index == i) { reset_selected = true }
-				document.getElementById("dropdown_name").options[i].style.display = "none"
-			} } }
+			for (i in premade[premade_type]) { if (typeof(premade[premade_type][i].pd2) != 'undefined') {
+				if (premade[premade_type][i].pd2 == 1) {
+					if (selected_name_index == i) { reset_selected = true }
+					document.getElementById("dropdown_name").options[i].style.display = "none"
+				} else if (premade[premade_type][i].pd2 == 0) {
+					document.getElementById("dropdown_name").options[i].style.display = "block"
+				}
+			} }
 			if (reset_selected == true) {
 				document.getElementById("dropdown_name").selectedIndex = 0
 				setName(document.getElementById("dropdown_name").options[0].innerHTML)
@@ -1844,5 +1867,39 @@ function setPD2Codes() {
 // ---------------------------------
 function setPrice(val) {
 	itemToCompare.PRICE = Number(val)
+	simulate()
+}
+
+// setAmount - 
+// ---------------------------------
+function setAmount(val) {
+	if (itemCustom.CODE == "GOLD") {
+		val = Number(val)
+		var min = document.getElementById("amount").min;
+		var max = document.getElementById("amount").max;
+		if (val < min) { val = min }
+		if (val > max) { val = max }
+		document.getElementById("amount").value = val
+		itemToCompare.money = val
+		itemToCompare.GOLD = val
+	}
+	simulate()
+}
+
+// setQuantity - 
+// ---------------------------------
+function setQuantity(val) {
+	if (typeof(itemCustom.QUANTITY) != 'undefined') {
+		val = Number(val)
+		var min = document.getElementById("quantity").min;
+		var max = document.getElementById("quantity").max;
+		if (min < itemToCompare.quant_min) { min = itemToCompare.quant_min }
+		if (max > itemToCompare.quant_max) { max = itemToCompare.quant_max }
+		if (settings.pd2_option == 1) { if (itemToCompare.CODE == "key" || itemToCompare.CODE == "tbk" || itemToCompare.CODE == "ibk") { max = 50 } }
+		if (val < min) { val = min }
+		if (val > max) { val = max }
+		document.getElementById("quantity").value = val
+		itemToCompare.QUANTITY = val
+	}
 	simulate()
 }

@@ -176,6 +176,8 @@
 				<div id="select_corruption_value_2" style="display:none;"><label class="label2">Corruption: </label><input id="range_corruption_2" type="range" class="range" onChange="setCorruptionValue(2,this.value)"></input><div id="corruption_value_2" class="label"></div></div>
 				<div id="select_upgrade"><label class="label">Upgraded: </label><select id="dropdown_upgrade" class="new-dropdown" onChange="setUpgrade(this.selectedIndex)"></select></div>
 				<div id="select_price" style="display:none;"><label class="label" for="price">Price: </label><input id="price" name="price" class="num-input" style="max-width:60px" type="number" min="0" max="35000" value="499" onchange="setPrice(this.value)"></div>
+				<div id="select_quantity" style="display:none;"><label class="label" for="quantity">Quantity: </label><input id="quantity" name="quantity" class="num-input" style="max-width:60px" type="number" min="0" max="511" value="1" onchange="setQuantity(this.value)"></div>
+				<div id="select_amount" style="display:none;"><label class="label" for="amount">Amount: </label><input id="amount" name="amount" class="num-input" style="max-width:70px" type="number" min="1" max="990000" value="5000" onchange="setAmount(this.value)"></div>
 				
 				<div id="simulate_custom" style="display:none;"><button onClick="setItemFromCustom()" style="float:right; margin-top:-22px;">Simulate this Item</button></div>
 			</div>
