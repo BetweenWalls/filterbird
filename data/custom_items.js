@@ -4,7 +4,6 @@
 // TODO: add option to insert socketables into items (also: Runewords)
 // TODO: add option to 'Larzuk'-socket items (mostly just relevant when a non-socket corruption is already applied)
 // TODO: update mutual compatibility of superior mod options (ar_bonus & req)
-// TODO: update relics and miscellaneous items with quantity (Gold, Key, Tome of Identify, Tome of Town Portal)
 // TODO: add known item prices?
 
 var itemTemp = {};
@@ -125,7 +124,7 @@ function setGroup(value) {
 function loadType(value) {
 	var options = "";
 	if (value == "any") {
-		for (val in item_groups) { for (type in item_groups[val]) { options += "<option class='gray-all'>" + item_groups[val][type] + "</option>" } }
+		for (val in item_groups) { for (type in item_groups[val]) { options += "<option class='gray-all'>" + item_groups[val][type] + "</option>" } }	// unused
 	} else {
 		for (type in item_groups[value]) { options += "<option class='gray-all'>" + item_groups[value][type] + "</option>" }
 	}
@@ -260,6 +259,7 @@ function setRarity(value) {
 		for (rarity in rarities) {
 			options += "<option class='gray-all'>" + rarities[rarity] + "</option>"
 		}
+		// TODO: add "Crafted" rarity
 		var capable_unique = false;
 		var capable_set = false;
 		for (itemNew in equipment[group]) {
@@ -380,7 +380,7 @@ function setCustomBase() {
 				for (affix in premade[type][itemNew]) { itemCustom[affix] = premade[type][itemNew][affix] }
 			}
 		}
-		if (typeof(itemCustom.relic_density) != 'undefined') {
+		if (typeof(itemCustom.relic_experience) != 'undefined') {
 			//if (rarity == "Magic") { itemCustom.base =  }
 			if (itemCustom.rarity == "rare") {
 				itemCustom.base = itemCustom.name
@@ -489,7 +489,7 @@ function tidyBaseSelection() {
 function getMatch(kind) {
 	var result = false;
 	if (kind == "identified" && itemCustom.rarity != "regular") { result = true }
-	if (kind == "ethereal" && !((itemCustom.WEAPON != true && itemCustom.ARMOR != true) || itemCustom.rarity == "set" || itemCustom.WP9 == true || itemCustom["7cr"] == true || itemCustom.name == "Crown of Ages" || itemCustom.name == "Leviathan" || itemCustom.name == "Tyrael's Might" || itemCustom.name == "The Gavel of Pain" || itemCustom.name == "Schaefer's Hammer" || itemCustom.name == "Butcher's Pupil" || itemCustom.name == "Doombringer" || itemCustom.name == "The Grandfather" || itemCustom.name == "Wizardspike" || itemCustom.name == "Stormspire" || itemCustom.name == "Steel Pillar" || itemCustom.name == "Stormshield")) { result = true }
+	if (kind == "ethereal" && !((itemCustom.WEAPON != true && itemCustom.ARMOR != true) || itemCustom.rarity == "set" || itemCustom.WP9 == true || itemCustom["7cr"] == true || itemCustom.name == "Crown of Ages" || itemCustom.name == "Leviathan" || itemCustom.name == "Tyrael's Might" || itemCustom.name == "The Cranium Basher" || itemCustom.name == "Butcher's Pupil" || itemCustom.name == "Wizardspike" || itemCustom.name == "Stormspire" || itemCustom.name == "Stormshield" || (settings.pd2_option == 0 && (itemCustom.name == "The Gavel of Pain" || itemCustom.name == "Schaefer's Hammer" || itemCustom.name == "Doombringer" || itemCustom.name == "The Grandfather" || itemCustom.name == "Steel Pillar")) || itemCustom.name == "Ethereal Edge" || itemCustom.name == "Ghostflame" || itemCustom.name == "Wraith Flight" || itemCustom.name == "Shadow Killer")) { result = true }
 	if (kind == "sockets" && typeof(itemCustom.max_sockets) != 'undefined' && itemCustom.rarity == "regular") { result = true }
 	if (kind == "quality" && itemCustom.rarity == "regular" && itemCustom.affix_type != "quiver") { result = true }
 	if (kind == "automod" && itemCustom.rarity != "unique" && itemCustom.rarity != "set" && (itemCustom.CL3 || itemCustom.CL4 || itemCustom.CL6 || itemCustom.CL7)) { result = true }
@@ -499,7 +499,7 @@ function getMatch(kind) {
 	if (kind == "upgrade" && (itemCustom.rarity == "unique" || itemCustom.rarity == "rare" || itemCustom.rarity == "set") && (itemCustom.tier == 1 || itemCustom.tier == 2)) { result = true }
 	if (kind == "superior" && itemCustom.superior == true) { result = true }
 	if (itemCustom.type_affix == "rune" || itemCustom.type_affix == "gem" || itemCustom.type_affix == "other" || itemCustom.type_affix == "misc") { result = false }
-	if (kind == "identified" && typeof(itemCustom.relic_density) != 'undefined') { result = true }
+	if (kind == "identified" && typeof(itemCustom.relic_experience) != 'undefined') { result = true }
 	return result
 }
 // getALVL - returns the 'affix level' for the item
@@ -534,10 +534,10 @@ function getALVL() {
 	}
 	alvl = Math.round(Math.min(x,99))
 	
+	itemCustom.ALVL = alvl
 	if (settings.pd2_option == 1) {
 		itemCustom.CRAFTALVL = Math.floor(character.CLVL/2) + Math.floor(ilvl/2)
 		itemCustom.QLVL = base_qlvl
-		itemCustom.ALVL = alvl
 	}
 	return alvl
 }
@@ -1751,6 +1751,15 @@ function setItemCodes() {
 	if (typeof(itemToCompare.NMAG) == 'undefined') { itemToCompare.NMAG = false }
 	if (typeof(itemToCompare.ETH) == 'undefined') { itemToCompare.ETH = false }
 	if (typeof(itemToCompare.SOCK) == 'undefined') { itemToCompare.SOCK = 0 }
+	if (typeof(itemToCompare.RUNE) == 'undefined') { itemToCompare.RUNE = 0 }
+	if (typeof(itemToCompare.RUNENAME) == 'undefined') { itemToCompare.RUNENAME = "" }
+	if (typeof(itemToCompare.GLEVEL) == 'undefined') { itemToCompare.GLEVEL = "" }
+	if (typeof(itemToCompare.GTYPE) == 'undefined') { itemToCompare.GTYPE = "" }
+	if (typeof(itemToCompare.ILVL) == 'undefined') { itemToCompare.ILVL = 0 }
+	if (typeof(itemToCompare.ALVL) == 'undefined') { itemToCompare.ALVL = 0 }
+	if (typeof(itemToCompare.QUANTITY) == 'undefined') { itemToCompare.QUANTITY = 0 }
+	if (typeof(itemToCompare.range) == 'undefined') { itemToCompare.range = 0 }
+	if (typeof(itemToCompare.baseSpeed) == 'undefined') { itemToCompare.baseSpeed = 0 }
 }
 
 // setPD2Codes - sets item codes for Project D2
@@ -1777,8 +1786,9 @@ function setPD2Codes() {
 		for (aff in code_other) {
 			if (typeof(itemToCompare[aff]) != 'undefined') { itemToCompare[code_other[aff]] = itemToCompare[aff] }
 		}
+		document.getElementById("character_gold").style.display = "none"
 		if (selected_group_index < 9) { document.getElementById("select_price").style.display = "block" }
-		else if (selected_group_index > 9) {
+		if (selected_group_index > 9) {
 			var premade_type = itemToCompare.type_affix;
 			var selected_name_index = document.getElementById("dropdown_name").selectedIndex;
 			reset_selected = false;
@@ -1810,6 +1820,7 @@ function setPD2Codes() {
 		if (typeof(itemToCompare.CL4) != 'undefined' && typeof(itemToCompare.EQ3) != 'undefined') { if (itemToCompare.CL4 == true && itemToCompare.EQ3 == true) { itemToCompare.EQ3 = false } }
 		if (typeof(itemToCompare.WP10) != 'undefined') { if (itemToCompare.WP10 == true) { itemToCompare.WP9 = true } }
 		if (typeof(itemToCompare.EQ7) != 'undefined') { if (itemToCompare.EQ7 == true) { itemToCompare.EQ1 = true } }
+		document.getElementById("character_gold").style.display = "inline-table"
 		document.getElementById("select_price").style.display = "none"
 		if (selected_group_index > 9) {
 			var premade_type = itemToCompare.type_affix;
@@ -1849,6 +1860,9 @@ function setPD2Codes() {
 		* new codes for PD2 items: wss, lbox, dcma, dcbl, dcho, dcso, imra, imma, scou, rera, upma, t11, t12, t13, t14, t15, t16, t17, t18		// Not currently in the game: t11, t12, t13, t14, t15
 		* new keywords: %QTY%, %RANGE%, %WPNSPD%, %ALVL%
 		* new codes for stacked gems (flawless/perfect) and stacked runes: normal code + s
+		* unique items with Indestructible changed to Repair-over-Time (can be ethereal now): The Gavel of Pain, Schaefer's Hammer, Doombringer, The Grandfather, Steel Pillar
+		* old codes for PoD items removed: cx5, cx6, cx7, maz, ma1, ma2, ma3, ma4, ma5, ma6, ma7, ma8, ma9, cm4, cx8
+		* numbered stats (ITEMSTAT, CHARSTAT) removed
 	Not Implemented
 		* new boolean code: CRAFT
 		* new keywords: %BORDER-00%, %MAP-00%, %DOT-00%, %PX-00%			// Currently ignored (instead of erroneously being displayed in the item name)
@@ -1856,9 +1870,6 @@ function setPD2Codes() {
 		* new affix code: FOOLS
 		* Bul-Kathos' Death Band (new set ring)
 		* Infernal Torch (set wand) changed to Infernal Spike (set dagger)
-		* unique items with Indestructible changed to Repair-over-Time (can be ethereal now): The Gavel of Pain, Schaefer's Hammer, Doombringer, The Grandfather, Steel Pillar
-		* old codes for PoD items removed: cx5, cx6, cx7, maz, ma1, ma2, ma3, ma4, ma5, ma6, ma7, ma8, ma9, cm4, cx8
-		* numbered stats (ITEMSTAT, CHARSTAT) removed
 		* many unique/set/runeword item changes
 		* many skilltree changes											// pointmods are implemented, but their availability hasn't been checked
 */
@@ -1866,7 +1877,13 @@ function setPD2Codes() {
 // setPrice - 
 // ---------------------------------
 function setPrice(val) {
-	itemToCompare.PRICE = Number(val)
+	val = Number(val)
+	var min = document.getElementById("price").min;
+	var max = document.getElementById("price").max;
+	if (val < min) { val = min }
+	if (val > max) { val = max }
+	document.getElementById("price").value = val
+	itemToCompare.PRICE = val
 	simulate()
 }
 

@@ -2,7 +2,7 @@
 //TalRasha's PD2 Item Filter//
 //++++++++++++++++++++++++++//
 //Version 2.0
-//Updated 12/29/2020
+//Updated 12/20/2020
 //
 //╔══════╗
 //║ Gold ║
@@ -368,7 +368,7 @@ ItemDisplay[UNI !ID xhb]: %RED%* %PURPLE%Gore Rider %RED%*%MAP-84%%BORDER-50%
 //Weapons//
 ///////////
 //Gavel of Pain
-ItemDisplay[UNI !ETH !ID 9gm]: %PURPLE%Gavel of Pain%MAP-84%%BORDER-50%
+ItemDisplay[UNI !ETH !ID 9gm]: %RED%* %PURPLE%Gavel of Pain %RED%*%MAP-84%%BORDER-50%
 //Gavel of Pain Eth
 ItemDisplay[UNI ETH !ID 9gm]: %RED%¤ %PURPLE%Eth Gavel of Pain %RED%¤%MAP-84%%BORDER-50%
 //Gull
@@ -378,7 +378,7 @@ ItemDisplay[UNI !ID 7wa]: %RED%¤ %PURPLE%Death Cleaver%RED% *%MAP-84%%BORDER-50
 //Horizon's Tornado/Stormlash
 ItemDisplay[UNI !ID 7fl]: %RED%¤ %PURPLE%Stormlash or Horizon's Tornado%RED% *%MAP-84%%BORDER-50%
 //Windhammer
-//ItemDisplay[UNI !ID 7m7]: %PURPLE%Windhammer%MAP-84%%BORDER-50%
+//ItemDisplay[UNI !ID 7m7]: %RED%* %PURPLE%Windhammer %RED%*%MAP-84%%BORDER-50%
 //The Cranium Basher/Earth shifter
 ItemDisplay[UNI !ID 7gm]: %RED%¤ %PURPLE%Earth Shifter or The Cranium Basher%RED% ¤%MAP-84%%BORDER-50%
 //Hand of Blessed Light
@@ -386,7 +386,7 @@ ItemDisplay[UNI !ID 9ws]: %RED%¤ %PURPLE%Hand of Blessed Light%RED% ¤%MAP-84%%
 //Astreon's Iron Ward
 ItemDisplay[UNI !ID 7ws]: %RED%¤ %PURPLE%Astreon's Iron Ward%RED% ¤%MAP-84%%BORDER-50%
 //Steel Pillar
-ItemDisplay[UNI !ID 7p7]: %PURPLE%Steel Pillar%MAP-84%%BORDER-50%
+ItemDisplay[UNI !ID 7p7]: %RED%* %PURPLE%Steel Pillar %RED%*%MAP-84%%BORDER-50%
 //Eth Steel Pillar
 ItemDisplay[UNI !ID 7p7]: %RED%¤ %PURPLE%Eth Steel Pillar%RED% ¤%MAP-84%%BORDER-50%
 //Skull Collector
@@ -396,11 +396,11 @@ ItemDisplay[UNI !ID 6ws]: %RED%¤ %PURPLE%Mang Song's Lesson%RED% ¤%MAP-84%%BOR
 //The Grandfather
 ItemDisplay[UNI !ID 7gd]: %RED%¤ %PURPLE%The Grandfather%RED% ¤%MAP-84%%BORDER-50%
 //Boneshade
-ItemDisplay[UNI !ID 7bw]: %PURPLE%Boneshade%MAP-84%%BORDER-50%
+ItemDisplay[UNI !ID 7bw]: %RED%* %PURPLE%Boneshade %RED%*%MAP-84%%BORDER-50%
 //Jade Talon
-ItemDisplay[UNI !ID 7wb]: %PURPLE%Jade Talon%MAP-84%%BORDER-50%
+ItemDisplay[UNI !ID 7wb]: %RED%* %PURPLE%Jade Talon %RED%*%MAP-84%%BORDER-50%
 //Firelizard's Talons
-ItemDisplay[UNI !ID 7lw]: %PURPLE%Firelizard's Talons%MAP-84%%BORDER-50%
+ItemDisplay[UNI !ID 7lw]: %RED%* %PURPLE%Firelizard's Talons %RED%*%MAP-84%%BORDER-50%
 //The Oculus
 ItemDisplay[UNI !ID oba]: %RED%¤ %PURPLE%The Oculus%RED% ¤%MAP-84%%BORDER-50%
 //Shadow Killer
@@ -535,24 +535,24 @@ ItemDisplay[SET !ID xtg]: %GREEN%M'avina's Gloves%MAP-84%%BORDER-50%
 //ItemDisplay[SET !ID tbt]: %GREEN%Vidala's Fetlock%MAP-84%%BORDER-50% 
 //
 //UNIQUE&SET Eth/Socket Catchall
+ItemDisplay[UNI !ID]: %GOLD%* %NAME% *%MAP-84%
+ItemDisplay[SET !ID]: %GREEN%* %NAME% *%MAP-84%
+ItemDisplay[UNI ETH !ID]: %GOLD%* Eth %NAME% *%MAP-84%
+ItemDisplay[SET ETH !ID]: %GREEN%* Eth %NAME% *%MAP-84%
+ItemDisplay[UNI]: %NAME%%MAP-84%
+ItemDisplay[SET]: %NAME%%MAP-84%
+ItemDisplay[UNI ETH]: ETH %NAME%%MAP-84%
+ItemDisplay[SET ETH]: ETH %NAME%%MAP-84%
 ItemDisplay[UNI ETH SOCK>0 !ID]: ETH %NAME%%MAP-84% [%SOCKETS%]
 ItemDisplay[SET ETH SOCK>0 !ID]: ETH %NAME%%MAP-84% [%SOCKETS%]
 ItemDisplay[UNI ETH !ID]: ETH %NAME%%MAP-84%
 ItemDisplay[SET ETH !ID]: ETH %NAME%%MAP-84%
 ItemDisplay[UNI SOCK>0 !ID]: %NAME%%MAP-84% [%SOCKETS%]
 ItemDisplay[SET SOCK>0 !ID]: %NAME%%MAP-84% [%SOCKETS%]	
-//ItemDisplay[UNI !ID]: %NAME%%MAP-84%
-//ItemDisplay[SET !ID]: %NAME%%MAP-84%
 ItemDisplay[UNI ETH SOCK>0]: ETH %NAME%%MAP-84% [%SOCKETS%]
 ItemDisplay[SET ETH SOCK>0]: ETH %NAME%%MAP-84% [%SOCKETS%]
-ItemDisplay[UNI ETH]: ETH %NAME%%MAP-84%
-ItemDisplay[SET ETH]: ETH %NAME%%MAP-84%
 ItemDisplay[UNI SOCK>0]: %NAME%%MAP-84% [%SOCKETS%]
 ItemDisplay[SET SOCK>0]: %NAME%%MAP-84% [%SOCKETS%]
-ItemDisplay[UNI !ID]: %GOLD%* %NAME% *%MAP-84%
-ItemDisplay[SET !ID]: %GREEN%* %NAME% *%MAP-84%
-ItemDisplay[UNI]: %NAME%%MAP-84%
-ItemDisplay[SET]: %NAME%%MAP-84%
 //╔══════════════╗
 //║ Vendor Items ║
 //╚══════════════╝

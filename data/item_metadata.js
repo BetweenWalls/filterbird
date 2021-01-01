@@ -1325,9 +1325,12 @@ QUANTITY:{index:["QUANTITY"], format:["Quantity: ",""]},
 	//hit_skill_Fire_Bolt_lvl:1, att_skill_Fire_Bolt_lvl:1, gethit_skill_Charged_Bolt_lvl:1, att_skill_Ice_Bolt_lvl:1, gethit_skill_Frost_Nova_lvl:1, hit_skill_Nova_lvl:1, gethit_skill_Nova_lvl:1, att_skill_Lightning_Surge_lvl:1, att_skill_Chain_Lightning_lvl:1, gethit_skill_Hydra_lvl:1, hit_skill_Amplify_Damage_lvl:1, 
 
 map_tier:{index:["map_tier"], format:["Tier: ",""]},
+map_mf_gf:{index:["map_mf_gf"], format:["Magic and Gold Find: +","%"]},
 pd2:1,
 quant_min:1,
 quant_max:1,
+static_ILVL:1,	// TODO: implement (for items with unchanging ILVL)
+color_stuck:1,	// TODO: implement (for items that can't have their original %NAME% color changed)
 
 skill_Cold_Enchant:{index:["skill_Cold_Enchant"], format:["+"," to Cold Enchant (Sorceress only)"]},
 skill_Inferno:{index:["skill_Inferno"], format:["+"," to Inferno (Sorceress only)"]},

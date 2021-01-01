@@ -64,7 +64,7 @@ ItemDisplay[cqv]:
 
 
 //Grand charms and small charms - Map marker+notification+sexier name.
-ItemDisplay[MAG !ID (cm1 OR cm3)]: %RED%? %BLUE%%NAME% %RED%?%MAP-97%%NOTIFY-3%%CONTINUE%
+ItemDisplay[MAG !ID (cm1 OR cm3)]: %RED%Ø %BLUE%%NAME% %RED%Ø%MAP-97%%NOTIFY-3%%CONTINUE%
 
 
 //Ignore small gold stacks, progressive system.
@@ -108,9 +108,9 @@ ItemDisplay[GEM>3 QTY>1]: %NAME% %GOLD%x%RED%%QTY%
 
 //Display prettier runes with rune number in name
 ItemDisplay[RUNE<14]: %GOLD%[%LIGHT_GRAY%%RUNENUM%%GOLD%] %RUNENAME%%BORDER-00%%MAP-1D%%NOTIFY-F%																//el-shael
-ItemDisplay[RUNE>13 RUNE<20]: %RED%? %ORANGE%[%WHITE%%RUNENUM%%ORANGE%] %RUNENAME% %RED%?%BORDER-00%%MAP-60%%NOTIFY-8%											//dol-fal
-ItemDisplay[RUNE>19 RUNE<23]: %PURPLE%?%RED%? %RED%[%WHITE%%RUNENUM%%RED%] %RUNENAME% %RED%?%PURPLE%?%BORDER-00%%MAP-62%%NOTIFY-1%								//lem, pul, um
-ItemDisplay[RUNE>22]: %WHITE%[%DARK_GREEN%Holy shit%WHITE%]%NL%%PURPLE%?? %PURPLE%[%WHITE%%RUNENUM%%PURPLE%] %ORANGE%%RUNENAME% %PURPLE%[%WHITE%%RUNENUM%%PURPLE%] %PURPLE%??%NL%%WHITE%[%DARK_GREEN%Holy shit%WHITE%]%BORDER-9B%%MAP-60%%NOTIFY-B%		//mal-zod																										// Shows the quantity of runes in a stack
+ItemDisplay[RUNE>13 RUNE<20]: %RED%¤ %ORANGE%[%WHITE%%RUNENUM%%ORANGE%] %RUNENAME% %RED%¤%BORDER-00%%MAP-60%%NOTIFY-8%											//dol-fal
+ItemDisplay[RUNE>19 RUNE<23]: %PURPLE%¥%RED%¤ %RED%[%WHITE%%RUNENUM%%RED%] %RUNENAME% %RED%¤%PURPLE%¥%BORDER-00%%MAP-62%%NOTIFY-1%								//lem, pul, um
+ItemDisplay[RUNE>22]: %WHITE%[%DARK_GREEN%Holy shit%WHITE%]%NL%%PURPLE%ØØ %PURPLE%[%WHITE%%RUNENUM%%PURPLE%] %ORANGE%%RUNENAME% %PURPLE%[%WHITE%%RUNENUM%%PURPLE%] %PURPLE%ØØ%NL%%WHITE%[%DARK_GREEN%Holy shit%WHITE%]%BORDER-9B%%MAP-60%%NOTIFY-B%		//mal-zod																										// Shows the quantity of runes in a stack
 
 
 // ---------------------------
@@ -178,7 +178,7 @@ ItemDisplay[MAG (rin OR amu OR jew OR cm1 OR cm2 OR cm3)]: %NAME% %WHITE%[%BLUE%
 // ---------------------------
 
 //Makes good uniques more visible and easier to click on (incomplete list - to improve)
-ItemDisplay[UNI !ID (rin OR amu OR jew OR cm1 OR cm2 OR cm3 OR uap OR usk OR urn OR xea OR uld OR ult OR uul OR uar OR uhn OR uit OR ush OR xsh OR uvg OR umg OR utg OR uhg OR ulb OR uvb OR utb OR uhb OR xhb OR xtb OR ulc OR uvc OR umc OR zhb OR zmb OR ci1 OR ci3 OR pa9 OR pae OR 7cs OR obf OR obc OR oba OR 7cr)]: %RED%???%ORANGE%?????%RED%???%NL%%GOLD%---- %NAME% %GOLD%----%NL%%RED%???%ORANGE%?????%RED%???
+ItemDisplay[UNI !ID (rin OR amu OR jew OR cm1 OR cm2 OR cm3 OR uap OR usk OR urn OR xea OR uld OR ult OR uul OR uar OR uhn OR uit OR ush OR xsh OR uvg OR umg OR utg OR uhg OR ulb OR uvb OR utb OR uhb OR xhb OR xtb OR ulc OR uvc OR umc OR zhb OR zmb OR ci1 OR ci3 OR pa9 OR pae OR 7cs OR obf OR obc OR oba OR 7cr)]: %RED%ØØØ%ORANGE%¤¤¤¤¤%RED%ØØØ%NL%%GOLD%---- %NAME% %GOLD%----%NL%%RED%ØØØ%ORANGE%¤¤¤¤¤%RED%ØØØ
 
 //Leveling Axes
 //ItemDisplay[UNI !ID (hax OR 2ax OR btx OR gax OR 9ha OR 9ax OR 9mp OR 9wa OR 9la OR 9bt OR 9ga OR 7ha OR 72a OR 7mp OR 7wa OR 7ba OR 7bt OR 7ga OR )]:
@@ -620,4 +620,4 @@ ItemDisplay[(WEAPON OR ARMOR OR DRU OR BAR OR DIN OR NEC OR SIN OR SOR OR ZON) N
 
 
 
-//ItemDisplay[]: ?   ?   ?   ?   ?   ?   ?   ?   ~
+//ItemDisplay[]: §   ©   µ   Ø   ×   ¶   ¥   ¤   ~

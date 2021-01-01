@@ -97,7 +97,7 @@
 						<option class="gray-all">Normal</option><option class="gray-all">Nightmare</option><option class="gray-all">Hell</option><option class="gray-all" selected>Auto (ilvl-based)</option>
 					</select></div>
 				</div>
-				<div style="display:inline-table;">
+				<div id="character_gold" style="display:inline-table;">
 					<div><label class="label" for="gold_stash">Gold in Stash: </label><input id="gold_stash" name="gold_stash" class="num-input" style="max-width:72px;" type="number" min="0" max="2500000" value="199000" onchange="setGoldStash(this.value)"></div>
 					<div><label class="label" for="gold_char">Gold Carried: </label><input id="gold_char" name="gold_char" class="num-input" style="max-width:66px;" type="number" min="0" max="900000" value="199000" onchange="setGoldChar(this.value)"></div>
 				</div>
@@ -193,18 +193,18 @@
 
 		<div id="output_area_1" style="height:100px; width:800px; position:relative;">
 			<div style="color:white; position:absolute;">Filter #1</div>
-			<img id="background_1" src="">
+			<img id="background_1" src="" onClick="simulate(1)">
 			<div id="output_1" class="item" onmouseover="equipmentHover(1)" onmouseout="equipmentOut()"></div>
 		</div>
 		<div id="output_area_2" style="height:100px; width:800px; position:relative;">
 			<div style="color:white; position:absolute;">Filter #2</div>
-			<img id="background_2" src="">
+			<img id="background_2" src="" onClick="simulate(1)">
 			<div id="output_2" class="item" onmouseover="equipmentHover(2)" onmouseout="equipmentOut()"></div>
 		</div>
 		<br>
 		
 		<div id="output_processing_info">
-			<div id="o1" style="color:white;"></div><br>
+			<div id="o1" style="color:white;"></div><div id="output_spacing"></div>
 			<div id="o2" style="color:white;"></div>
 			<div id="o3" style="color:white;"></div>
 			<div id="o4" style="color:white;"></div>
