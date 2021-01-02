@@ -1,7 +1,6 @@
 
 // TODO: Some items have a static ILVL and shouldn't have the ILVL dropdown...	ILVL=1 for: Vision of Terror, potions, unstacked runes/gems, Khalim's Flail, Horadric Staff, most non-equipment quest items		...different for PD2 vs POD?
 // TODO: For some items, the default color for %NAME% is built-in and can't be changed...		...may be different for PD2 vs PoD
-// TODO: items with multiple lines should have pre-NAME modifications shown at the start of the second line
 
 var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"common"};
 var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:90,CHARSTAT70:0,CHARSTAT13:1000};
@@ -272,8 +271,8 @@ function simulate(manual) {
 	}
 	var messages = ""
 	if (notices.duplicates == 1) { messages += "<br>When two rules have identical conditions, the first rule gets checked twice instead of both rules being checked." }
-	if (notices.pd2_conditions == 1) { messages += "<br>A PD2 condition was detected, but PD2 codes are currently disabled. They can be enabled from the options menu." }
-	if (notices.pod_conditions == 1) { messages += "<br>A PoD condition was detected, but incompatible PD2 codes are currently enabled. They can be disabled from the options menu." }
+	if (notices.pd2_conditions == 1) { messages += "<br>A PD2 code was detected, but PD2 codes are currently disabled. They can be enabled from the options menu." }
+	if (notices.pod_conditions == 1) { messages += "<br>A PoD code was detected, but incompatible PD2 codes are currently enabled. They can be disabled from the options menu." }
 	//if (notices.colors == 1) {messages += "<br>Unsupported color keywords detected. Keywords such as %LIGHT_GRAY% just default to %GRAY% in PD2." }
 	
 	document.getElementById("o4").innerHTML = messages
@@ -306,15 +305,12 @@ function parseFile(file,num) {
 	var all_conditions = [];
 	var all_line_nums = [];
 	var name_saved = itemToCompare.NAME;
-	var secondary_line = "";
 	if (!(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {	// setup variables to accomodate item names that use multiple lines
 		if (typeof(itemToCompare.base) != 'undefined') {
 			if (itemToCompare.ID == true) {
-				name_saved = itemToCompare.NAME;
-				secondary_line = "<br>"+itemToCompare.base
+				name_saved = itemToCompare.base+"<br>"+itemToCompare.NAME
 			} else {
 				name_saved = itemToCompare.base;
-				secondary_line = ""
 			}
 		}
 	}
@@ -391,7 +387,7 @@ function parseFile(file,num) {
 							if (typeof(all_codes[cr]) != 'undefined') {
 								if (all_codes[cr] == 3 || (settings.pd2_option == 0 && all_codes[cr] == 1) || (settings.pd2_option == 1 && all_codes[cr] == 2)) { recognized = true }
 								if (settings.pd2_option == 0 && all_codes[cr] == 2) {
-									if (notices.pd2_conditions == 0) { document.getElementById("o4").innerHTML += "<br>A PD2 condition was detected, but PD2 codes are currently disabled. They can be enabled from the options menu." }	// unnecessary if parseFile() errors can be handled better
+									if (notices.pd2_conditions == 0) { document.getElementById("o4").innerHTML += "<br>A PD2 code was detected, but PD2 codes are currently disabled. They can be enabled from the options menu." }	// unnecessary if parseFile() errors can be handled better
 									notices.pd2_conditions = 1
 								}
 								if (settings.pd2_option == 1 && all_codes[cr] == 1) { pod_conditions = true }
@@ -401,7 +397,7 @@ function parseFile(file,num) {
 								else { pod_conditions = true }
 							} }
 							if (pod_conditions == true) {
-								if (notices.pod_conditions == 0) { document.getElementById("o4").innerHTML += "<br>A PoD condition was detected, but incompatible PD2 codes are currently enabled. They can be disabled from the options menu." }	// unnecessary if parseFile() errors can be handled better
+								if (notices.pod_conditions == 0) { document.getElementById("o4").innerHTML += "<br>A PoD code was detected, but incompatible PD2 codes are currently enabled. They can be disabled from the options menu." }	// unnecessary if parseFile() errors can be handled better
 								notices.pod_conditions = 1
 							}
 							if (recognized == false) {
@@ -512,7 +508,16 @@ function parseFile(file,num) {
 							var ok_list = o.substring(o.indexOf("%"),o.lastIndexOf("%")+1).split("%");
 							var o_keyword = -1;
 							for (ok in ok_list) {
-								if (o_keyword == 1) { document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized keyword on line "+line_num+": <l style='color:#cc5'>"+"%"+ok_list[ok]+"%"+"</l> ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>" }
+								if (o_keyword == 1) {
+									document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized keyword on line "+line_num+": <l style='color:#cc5'>"+"%"+ok_list[ok]+"%"+"</l> ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"
+									if (settings.pd2_option == 0) {
+										if (notices.pd2_conditions == 0) { document.getElementById("o4").innerHTML += "<br>A PD2 code was detected, but PD2 codes are currently disabled. They can be enabled from the options menu." }	// unnecessary if parseFile() errors can be handled better
+										notices.pd2_conditions = 1
+									} else {
+										if (notices.pod_conditions == 0) { document.getElementById("o4").innerHTML += "<br>A PoD code was detected, but incompatible PD2 codes are currently enabled. They can be disabled from the options menu." }	// unnecessary if parseFile() errors can be handled better
+										notices.pod_conditions = 1
+									}
+								}
 								o_keyword *= -1
 							}
 							//if (ok == "%LIGHT_GRAY%" || ok == "CORAL" || ok == "SAGE" || ok == "TEAL") {
@@ -641,7 +646,7 @@ function parseFile(file,num) {
 						else { display += temp }
 					} else {
 						if (new_line == true) { description += "<br>"; new_line = false; }
-						if (colorize == true || (o == "ref_NAME" && itemToCompare.RW == true)) {
+						if (colorize == true || (o == "ref_NAME" && itemToCompare.RW == true)) {		// TODO: %NAME% doesn't work within the item description
 							if (space == true) { description += "<l style='color:"+color+"; opacity:0%;'>"+temp+"</l>" }
 							else { description += "<l style='color:"+color+"'>"+temp+"</l>" }
 						}
@@ -677,9 +682,6 @@ function parseFile(file,num) {
 		var description_multi = description.split("<br>");
 		description = ""
 		for (dline in description_multi) { description = description_multi[dline] + "<br>" + description }
-	}
-	if (obscured == false && itemToCompare.ID == true && !(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {
-		if (typeof(itemToCompare.base) != 'undefined') { display += secondary_line }
 	}
 	if (itemToCompare.CODE == "GOLD") {
 		if (obscured == true) { display = "" }
@@ -737,7 +739,7 @@ function equipmentHover(num) {
 	document.getElementById("item_info").innerHTML = main_affixes
 	document.getElementById("item_affixes").innerHTML = affixes
 	document.getElementById("item_desc"+num).style.display = "block"
-	if (main_affixes != "" || affixes != "") { document.getElementById("tooltip_inventory").style.display = "block" }
+	if (main_affixes != "" || affixes != "" || document.getElementById("item_desc"+num).innerHTML != "") { document.getElementById("tooltip_inventory").style.display = "block" }
 	
 	var original_choices_height = 47; if (document.getElementById("original_choices").style.display == "none") { original_choices_height = 0 }
 	var item = document.getElementById("output_"+num).getBoundingClientRect();
