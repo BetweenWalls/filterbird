@@ -347,7 +347,7 @@ function parseFile(file,num) {
 				conditions = conditions.trim()
 			}
 			// check duplicate conditions
-			if (settings.validation == 1) {
+			if (settings.validation == 1 && settings.pd2_option == 0) {
 				var duplicateConditions = false;
 				var duplicateConditionsContinue = false;
 				if (all_conditions.includes(conditions) == true) {
@@ -369,7 +369,7 @@ function parseFile(file,num) {
 				var cond_format = conditions.split("  ").join(" ").split("(").join(",(,").split(")").join(",),").split("!").join(",!,").split("<=").join(",≤,").split(">=").join(",≥,").split(">").join(",>,").split("<").join(",<,").split("=").join(",=,").split(" AND ").join(" ").split(" OR ").join(",|,").split("+").join(",+,").split(" ").join(",&,").split(",,").join(",");
 				var cond_list = cond_format.split(",");
 				var neg_paren_close = 0;
-				var skip_warning = false;
+				var c_falsify = false;
 				for (cond in cond_list) {
 					cond = Number(cond)
 					var c = cond_list[cond];
@@ -377,6 +377,7 @@ function parseFile(file,num) {
 					if (c == "RUNENUM" || c == "RUNENAME") { c = "RUNE" }
 					var number = false;
 					if (isNaN(Number(c)) == false) { cond_list[cond] = Number(c); number = true; }
+					if (((c == "GEMLEVEL" || c == "GEMTYPE") && itemToCompare.type != "gem") || (c == "RUNE" && itemToCompare.type != "rune") || (c == "GOLD" && itemToCompare.CODE != "GOLD")) { c_falsify = true }
 					if (number == false && c != "(" && c != ")" && c != "≤" && c != "≥" && c != "<" && c != ">" && c != "=" && c != "|" && c != "&" && c != "+" && c != "!") {
 						// check valid conditions
 						if (settings.validation == 1) {
@@ -404,19 +405,21 @@ function parseFile(file,num) {
 								document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized condition on line "+line_num+": <l style='color:#c55'>"+c+"</l> ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"
 							}
 						}
-						// set condition values and add to formula			...this has become a mess since introducing PD2 stuff
-						if (c == "DIFF") { c = "DIFFICULTY" }				// these would be disabled (i.e. set to 0) for PD2 or PoD, but that wouldn't produce correct behavior since a value of 0 is normal
+						// refactor conditions
+						if (c == "DIFF") { c = "DIFFICULTY" }				// these could be disabled (i.e. set to 0) for PD2 or PoD, but that wouldn't produce correct behavior since a value of 0 is normal
 						if (settings.pd2_option == 0) { if (c == "PRICE") { c = "invalid_"+c } }		// TODO: Should the price dropdown menu be available for PoD? The PRICE condition can still be invalid.
-						if (settings.pd2_option == 1) { if (c.substr(0,8) == "CHARSTAT") { c = "invalid_"+c; itemToCompare[c] = 0; } }
-						if (((c == "GEMLEVEL" || c == "GEMTYPE") && itemToCompare.type != "gem") || (c == "RUNE" && itemToCompare.type != "rune") || (c == "GOLD" && itemToCompare.CODE != "GOLD")) { match_override = true; if (c == "GOLD") { skip_warning = true }; }	// TODO/TOCHECK: Can these conditions (RUNE, GEMLEVEL, GEMTYPE, GOLD) be used in a way that the rule will match with other items? For example: ItemDisplay[!RUNE>0]: %NAME%
-						// ...
+						else { if (c.substr(0,8) == "CHARSTAT") { c = "invalid_"+c; itemToCompare[c] = 0; } }
+						// set condition values
 						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { if (typeof(character[c]) == 'undefined') { character[c] = 0 } }
 						else if (typeof(itemToCompare[c]) == 'undefined' && (c == "GOLD" || c == "RUNE" || c == "GEMLEVEL" || c == "GEMTYPE")) { itemToCompare[c] = 0 }		// TODO: Even though '0' and 'false' seem to be equivalent here, it might be useful to only have boolean conditions be set to false
 						else if (typeof(itemToCompare[c]) == 'undefined') { itemToCompare[c] = false }
-						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { formula += character[c]+" " }
+						// add to formula
+						if (c_falsify == true) { formula += "false " }
+						else if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { formula += character[c]+" " }
 						else { formula += itemToCompare[c]+" " }
 					} else {
-						if (c == "&") { formula += "&& " }
+						if (c_falsify == true) { if (number == true) { c_falsify = false } }
+						else if (c == "&") { formula += "&& " }
 						else if (c == "|") { formula += "|| " }
 						else if (c == "=") { formula += "== " }
 						else if (c == "≤") { formula += "<= " }
@@ -428,14 +431,10 @@ function parseFile(file,num) {
 					if (c == "!" && cond_list.length > cond+3) { if ((isNaN(Number(cond_list[cond+1])) == false || isNaN(Number(cond_list[cond+3])) == false) && (cond_list[cond+2] == "=" || cond_list[cond+2] == ">" || cond_list[cond+2] == "<" || cond_list[cond+2] == "≤" || cond_list[cond+2] == "≥")) { formula += "( "; neg_paren_close = cond+3; } }
 				}
 				match = eval(formula)
-				if (match_override == true && match == true) {
-					if (settings.validation == 1 && skip_warning == false) { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (unbounded condition) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>" }	// display an error if the rule has unbounded conditions at zero
-					match = false
-				}
+				//if (settings.validation == 1 && unbounded_match_at_zero) { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (unbounded condition) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>" }	// display an error if the rule has unbounded conditions at zero	// TODO: Is this worth implementing? Impossible to know without seeing how the BH filter code functions in these cases
 			} else {
 				match = true
 			}
-			if (itemToCompare.CODE == "GOLD" && conditions.includes("GOLD") == false) { match = false }		// prevents GOLD from matching on random irrelevant rules... not sure how it's executed in-game
 			document.getElementById("o3").innerHTML += match
 			
 			//-----------------------------------------------------------------------------------------------------------
@@ -612,7 +611,10 @@ function parseFile(file,num) {
 						color_current_rule = true
 					} else if (key == "ref") {
 						if (o == "ref_CLVL") { temp = character["CLVL"] }
-						else if (o == "ref_NAME") { temp = name_saved; name_current_rule = true; if (color_new_default == "" && color_current_rule != false && color != "") { color_new_default = color; } }
+						else if (o == "ref_NAME") {
+							if (description_braces != 1) { temp = name_saved; name_current_rule = true; if (color_new_default == "" && color_current_rule != false && color != "") { color_new_default = color }; }
+							else { temp = "" }
+						}
 						else { temp = itemToCompare[o.split("_")[1]]; }
 						obscured = false
 					} else if (key == "ignore" && settings.pd2_option == 1) {
@@ -646,7 +648,7 @@ function parseFile(file,num) {
 						else { display += temp }
 					} else {
 						if (new_line == true) { description += "<br>"; new_line = false; }
-						if (colorize == true || (o == "ref_NAME" && itemToCompare.RW == true)) {		// TODO: %NAME% doesn't work within the item description
+						if (colorize == true || (o == "ref_NAME" && itemToCompare.RW == true)) {
 							if (space == true) { description += "<l style='color:"+color+"; opacity:0%;'>"+temp+"</l>" }
 							else { description += "<l style='color:"+color+"'>"+temp+"</l>" }
 						}
@@ -684,8 +686,7 @@ function parseFile(file,num) {
 		for (dline in description_multi) { description = description_multi[dline] + "<br>" + description }
 	}
 	if (itemToCompare.CODE == "GOLD") {
-		if (obscured == true) { display = "" }
-		else { display = itemToCompare.money+" Gold" }
+		if (display != "") { display = itemToCompare.money+" Gold" }
 		description = ""
 	}
 	return [display,description]
