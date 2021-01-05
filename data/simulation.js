@@ -525,7 +525,7 @@ function parseFile(file,num) {
 						if (desc_output.includes("%NAME%") == true) {
 							desc_output_total = desc_output.split("%NAME%").join(desc_output_total)
 						} else {
-							if (desc_output_total != "" && desc_output == "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's description overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's description gets blanked
+							if (desc_output_total != "" && desc_output != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's description overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's description gets overwritten (but not blanked)
 							desc_output_total = desc_output
 						}
 					}
@@ -533,14 +533,16 @@ function parseFile(file,num) {
 				if (output.includes("%NAME%") == true) {
 					output_total = output.split("%NAME%").join(output_total)
 				} else {
-					if (output_total != name_saved && output == "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's non-default name overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's title gets blanked		// TODO: Should also apply if previous rules just output %NAME%
+					if (output_total != name_saved && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's name overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's title gets overwritten (but not blanked)		// TODO: Should this also apply if a previous rule simply displayed %NAME% and nothing else? (default is name_saved rather than nothing)
 					output_total = output
 				}
 				if (output.includes("%CONTINUE%") == false) {
 					done = true
 					if (desc_output_active == false) {
-						if (desc_output_total != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's description overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's description gets blanked (no continuation)
+						if (desc_output_total != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's description overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's description gets overwritten (but not blanked) from lack of continuation
 						desc_output_total = ""
+					} else {
+						if (desc_output_total != "" && output_total == "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item description on hidden item) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item description isn't hidden, but the item is
 					}
 				}
 				document.getElementById("o"+num).innerHTML += "#"+num+" Match found at line "+line_num+" after checking "+rules_checked+" rules ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l>"
