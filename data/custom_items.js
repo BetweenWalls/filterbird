@@ -164,6 +164,22 @@ function loadBase(value) {
 		document.getElementById("dropdown_base").innerHTML = ""
 		document.getElementById("dropdown_rarity").innerHTML = ""
 		document.getElementById("dropdown_name").innerHTML = options
+		// Show/Hide Item Level Input
+		if (typeof(itemCustom.static_ILVL) == 'undefined') { item_settings.ILVL_return = character.ILVL }
+		setCustomBase()
+		validateILVL(document.getElementById("ilvl").value)
+		if (typeof(itemCustom.static_ILVL) != 'undefined') {
+			setILVL2(itemCustom.static_ILVL)
+			if (settings.auto_difficulty == true) {
+				if (item_settings.ILVL_return < 36) { character.DIFFICULTY = 0 }
+				else if (item_settings.ILVL_return > 66) { character.DIFFICULTY = 2 }
+				else { character.DIFFICULTY = 1 }
+			}
+			document.getElementById("select_ilvl").style.display = "none"
+		} else {
+			setILVL2(item_settings.ILVL_return)
+			document.getElementById("select_ilvl").style.display = "block"
+		}
 		setCustomBase()
 		tidyBaseSelection()
 		setValues()
@@ -315,8 +331,22 @@ function loadName(value) {
 		}
 	}
 	document.getElementById("dropdown_name").innerHTML = options
+	if (typeof(itemCustom.static_ILVL) == 'undefined') { item_settings.ILVL_return = character.ILVL }
 	setCustomBase()	// called to set qlvl
 	validateILVL(document.getElementById("ilvl").value)
+	// Show/Hide Item Level Input
+	if (typeof(itemCustom.static_ILVL) != 'undefined') {
+		setILVL2(itemCustom.static_ILVL)
+		if (settings.auto_difficulty == true) {
+			if (item_settings.ILVL_return < 36) { character.DIFFICULTY = 0 }
+			else if (item_settings.ILVL_return > 66) { character.DIFFICULTY = 2 }
+			else { character.DIFFICULTY = 1 }
+		}
+		document.getElementById("select_ilvl").style.display = "none"
+	} else {
+		setILVL2(item_settings.ILVL_return)
+		document.getElementById("select_ilvl").style.display = "block"
+	}
 	setCustomBase()
 	tidyBaseSelection()
 	setValues()
@@ -325,8 +355,22 @@ function loadName(value) {
 // ---------------------------------
 function setName(value) {
 	var type = itemCustom.type_affix;
+	if (typeof(itemCustom.static_ILVL) == 'undefined') { item_settings.ILVL_return = character.ILVL }
 	setCustomBase()	// called to set qlvl
 	validateILVL(document.getElementById("ilvl").value)
+	// Show/Hide Item Level Input
+	if (typeof(itemCustom.static_ILVL) != 'undefined') {
+		setILVL2(itemCustom.static_ILVL)
+		if (settings.auto_difficulty == true) {
+			if (item_settings.ILVL_return < 36) { character.DIFFICULTY = 0 }
+			else if (item_settings.ILVL_return > 66) { character.DIFFICULTY = 2 }
+			else { character.DIFFICULTY = 1 }
+		}
+		document.getElementById("select_ilvl").style.display = "none"
+	} else {
+		setILVL2(item_settings.ILVL_return)
+		document.getElementById("select_ilvl").style.display = "block"
+	}
 	setCustomBase()
 	tidyBaseSelection()
 	setValues()
@@ -490,7 +534,7 @@ function tidyBaseSelection() {
 function getMatch(kind) {
 	var result = false;
 	if (kind == "identified" && itemCustom.rarity != "regular") { result = true }
-	if (kind == "ethereal" && !((itemCustom.WEAPON != true && itemCustom.ARMOR != true) || itemCustom.rarity == "set" || itemCustom.WP9 == true || itemCustom["7cr"] == true || itemCustom.name == "Crown of Ages" || itemCustom.name == "Leviathan" || itemCustom.name == "Tyrael's Might" || itemCustom.name == "The Cranium Basher" || itemCustom.name == "Butcher's Pupil" || itemCustom.name == "Wizardspike" || itemCustom.name == "Stormspire" || itemCustom.name == "Stormshield" || (settings.pd2_option == 0 && (itemCustom.name == "The Gavel of Pain" || itemCustom.name == "Schaefer's Hammer" || itemCustom.name == "Doombringer" || itemCustom.name == "The Grandfather" || itemCustom.name == "Steel Pillar")) || itemCustom.name == "Ethereal Edge" || itemCustom.name == "Ghostflame" || itemCustom.name == "Wraith Flight" || itemCustom.name == "Shadow Killer")) { result = true }
+	if (kind == "ethereal" && !((itemCustom.WEAPON != true && itemCustom.ARMOR != true) || itemCustom.rarity == "set" || itemCustom.WP9 == true || itemCustom["7cr"] == true || itemCustom.name == "Crown of Ages" || itemCustom.name == "Leviathan" || itemCustom.name == "Tyrael's Might" || itemCustom.name == "The Cranium Basher" || itemCustom.name == "Butcher's Pupil" || itemCustom.name == "Wizardspike" || itemCustom.name == "Stormspire" || itemCustom.name == "Stormshield" || (settings.version == 0 && (itemCustom.name == "The Gavel of Pain" || itemCustom.name == "Schaefer's Hammer" || itemCustom.name == "Doombringer" || itemCustom.name == "The Grandfather" || itemCustom.name == "Steel Pillar")) || itemCustom.name == "Ethereal Edge" || itemCustom.name == "Ghostflame" || itemCustom.name == "Wraith Flight" || itemCustom.name == "Shadow Killer")) { result = true }
 	if (kind == "sockets" && typeof(itemCustom.max_sockets) != 'undefined' && itemCustom.rarity == "regular") { result = true }
 	if (kind == "quality" && itemCustom.rarity == "regular" && itemCustom.affix_type != "quiver") { result = true }
 	if (kind == "automod" && itemCustom.rarity != "unique" && itemCustom.rarity != "set" && (itemCustom.CL3 || itemCustom.CL4 || itemCustom.CL6 || itemCustom.CL7)) { result = true }
@@ -536,7 +580,7 @@ function getALVL() {
 	alvl = Math.round(Math.min(x,99))
 	
 	itemCustom.ALVL = alvl
-	if (settings.pd2_option == 1) {
+	if (settings.version == 1) {
 		itemCustom.CRAFTALVL = Math.floor(character.CLVL/2) + Math.floor(ilvl/2)
 		itemCustom.QLVL = base_qlvl
 	}
@@ -656,7 +700,7 @@ function load(kind) {
 		var pointmod_mod_value_3 = document.getElementById("pointmod_value_3").innerHTML;
 		// set new options
 		var aff_pointmod = affixes_pointmod;
-		if (settings.pd2_option == 1) { aff_pointmod = affixes_pointmod_pd2 }
+		if (settings.version == 1) { aff_pointmod = affixes_pointmod_pd2 }
 		for (a in aff_pointmod) {
 			var aff = aff_pointmod[a];
 			options += loadDetails(kind,aff,alvl,1,1,1,aff[0],aff[1],aff[3],aff[4],"","",[aff[7],aff[8]],[])
@@ -977,7 +1021,7 @@ function doRuneword(selected) {
 				} else {
 					for (code in ait) { if (itemCustom[ait[code]] == true) { match = true } }
 				}
-				if (match == true) { rw_items[rw_items.length] = rw.split("_").join(" ") }
+				if (match == true) { rw_items[rw_items.length] = rw.split("_").join(" ").split("'").join("") }
 			}
 		}
 	}
@@ -990,7 +1034,7 @@ function doRuneword(selected) {
 	if (selected > 0) {
 		var group = document.getElementById("dropdown_group").value;
 		for (itemNew in runeword_stats[group]) {
-			var rw_name = runeword_stats[group][itemNew].name;
+			var rw_name = runeword_stats[group][itemNew].name.split("'").join("");
 			if (rw_name == "Infinity") { rw_name = "infinity" }
 			if (rw_name == document.getElementById("dropdown_runeword").value) {
 				for (affix in runeword_stats[group][itemNew]) {
@@ -1773,7 +1817,7 @@ function setPD2Codes() {
 	var code_other = {req_level:"LVLREQ",QUANTITY:"QTY",mana_per_kill:"MAEK",autorepair:"REPAIR",ar_per_level:"ARPER"};
 	var selected_group_index = document.getElementById("dropdown_group").selectedIndex;
 	var reset_selected = false;
-	if (settings.pd2_option == 1) {
+	if (settings.version == 1) {
 		if (typeof(itemToCompare.WP5) != 'undefined' || typeof(itemToCompare.WP7) != 'undefined') { if (itemToCompare.WP5 == true || itemToCompare.WP7 == true) { itemToCompare.WP6 = true } }
 		if (typeof(itemToCompare.CL3) != 'undefined' || typeof(itemToCompare.CL4) != 'undefined') { if (itemToCompare.CL3 == true || itemToCompare.CL4 == true) { itemToCompare.EQ3 = true } }
 		if (typeof(itemToCompare.WP10) != 'undefined') { if (itemToCompare.WP10 == true) { itemToCompare.WP9 = false } }
@@ -1845,35 +1889,6 @@ function setPD2Codes() {
 	return reset_selected
 }
 
-/* Notes about PD2 changes:
-	Implemented
-		* alternate codes for item groups (HELM, CHEST, SHIELD, GLOVES, BOOTS, BELT, CIRC, AXE, MACE, SWORD, DAGGER, THROWING, JAV, SPEAR, POLEARM, BOW, XBOW, STAFF, WAND, SCEPTER, DRU, BAR, DIN, NEC, SIN, SOR, ZON)
-		* item group difference: all WP5/WP7 items (throwing/spears) are also considered part of WP6 (javelins)
-		* item group difference: WP10 items (crossbows) are not included in WP9 (bows)
-		* item group difference: EQ7 items (circlets) are not included in EQ1 (helms)
-		* item group difference: all CL3/CL4 items (paladin/necromancer shields) are also considered part of EQ3 (shields)
-		* %DARK_GREEN% instead of %DGREEN%
-		* DIFF instead of DIFFICULTY
-		* {} used for item descriptions
-		* %NL% allows multiple lines
-		* new info codes: LVLREQ, PRICE, QTY, ALVL, QLVL, CRAFTALVL																				// Note: PRICE is not calculated, so the user may enter impossible values (calculation formula is unknown)
-		* new affix codes: AR, FRES, CRES, LRES, PRES, FRW, MINDMG, MAXDMG, STR, DEX, MFIND, GFIND, DTM, REPLIFE, MAEK, REPAIR, ARPER
-		* new codes for PD2 items: wss, lbox, dcma, dcbl, dcho, dcso, imra, imma, scou, rera, upma, t11, t12, t13, t14, t15, t16, t17, t18		// Not currently in the game: t11, t12, t13, t14, t15
-		* new keywords: %QTY%, %RANGE%, %WPNSPD%, %ALVL%
-		* new codes for stacked gems (flawless/perfect) and stacked runes: normal code + s
-		* unique items with Indestructible changed to Repair-over-Time (can be ethereal now): The Gavel of Pain, Schaefer's Hammer, Doombringer, The Grandfather, Steel Pillar
-		* old codes for PoD items removed: cx5, cx6, cx7, maz, ma1, ma2, ma3, ma4, ma5, ma6, ma7, ma8, ma9, cm4, cx8
-		* numbered stats (ITEMSTAT, CHARSTAT) removed
-	Not Implemented
-		* new boolean code: CRAFT
-		* new keywords: %BORDER-00%, %MAP-00%, %DOT-00%, %PX-00%			// Currently ignored (instead of erroneously being displayed in the item name)
-		* aqv & cqv for regular quivers, aq2 & cq2 removed
-		* new affix code: FOOLS
-		* Bul-Kathos' Death Band (new set ring)
-		* Infernal Torch (set wand) changed to Infernal Spike (set dagger)
-		* many unique/set/runeword item changes
-		* many skilltree changes											// pointmods are implemented, but their availability hasn't been checked
-*/
 
 // setPrice - 
 // ---------------------------------
@@ -1913,11 +1928,42 @@ function setQuantity(val) {
 		var max = document.getElementById("quantity").max;
 		if (min < itemToCompare.quant_min) { min = itemToCompare.quant_min }
 		if (max > itemToCompare.quant_max) { max = itemToCompare.quant_max }
-		if (settings.pd2_option == 1) { if (itemToCompare.CODE == "key" || itemToCompare.CODE == "tbk" || itemToCompare.CODE == "ibk") { max = 50 } }
+		if (settings.version == 1) { if (itemToCompare.CODE == "key" || itemToCompare.CODE == "tbk" || itemToCompare.CODE == "ibk") { max = 50 } }
 		if (val < min) { val = min }
 		if (val > max) { val = max }
 		document.getElementById("quantity").value = val
 		itemToCompare.QUANTITY = val
+		itemToCompare.QTY = val
 	}
 	simulate()
 }
+
+/* Notes about PD2 changes:
+	Implemented
+		* alternate codes for item groups (HELM, CHEST, SHIELD, GLOVES, BOOTS, BELT, CIRC, AXE, MACE, SWORD, DAGGER, THROWING, JAV, SPEAR, POLEARM, BOW, XBOW, STAFF, WAND, SCEPTER, DRU, BAR, DIN, NEC, SIN, SOR, ZON)
+		* item group difference: all WP5/WP7 items (throwing/spears) are also considered part of WP6 (javelins)
+		* item group difference: WP10 items (crossbows) are not included in WP9 (bows)
+		* item group difference: EQ7 items (circlets) are not included in EQ1 (helms)
+		* item group difference: all CL3/CL4 items (paladin/necromancer shields) are also considered part of EQ3 (shields)
+		* %DARK_GREEN% instead of %DGREEN%
+		* DIFF instead of DIFFICULTY
+		* {} used for item descriptions
+		* %NL% allows multiple lines
+		* new info codes: LVLREQ, PRICE, QTY, ALVL, QLVL, CRAFTALVL																				// Note: PRICE is not calculated, so the user may enter impossible values (calculation formula is unknown)
+		* new affix codes: AR, FRES, CRES, LRES, PRES, FRW, MINDMG, MAXDMG, STR, DEX, MFIND, GFIND, DTM, REPLIFE, MAEK, REPAIR, ARPER
+		* new codes for PD2 items: wss, lbox, dcma, dcbl, dcho, dcso, imra, imma, scou, rera, upma, t11, t12, t13, t14, t15, t16, t17, t18		// Not currently in the game: t11, t12, t13, t14, t15
+		* new keywords: %QTY%, %RANGE%, %WPNSPD%, %ALVL%
+		* new codes for stacked gems (flawless/perfect) and stacked runes: normal code + s
+		* unique items with Indestructible changed to Repair-over-Time (can be ethereal now): The Gavel of Pain, Schaefer's Hammer, Doombringer, The Grandfather, Steel Pillar
+		* old codes for PoD items removed: cx5, cx6, cx7, maz, ma1, ma2, ma3, ma4, ma5, ma6, ma7, ma8, ma9, cm4, cx8
+		* numbered stats (ITEMSTAT, CHARSTAT) removed
+	Not Implemented
+		* new boolean code: CRAFT
+		* new keywords: %BORDER-00%, %MAP-00%, %DOT-00%, %PX-00%			// Currently ignored (instead of erroneously being displayed in the item name)
+		* aqv & cqv for regular quivers, aq2 & cq2 removed
+		* new affix code: FOOLS
+		* Bul-Kathos' Death Band (new set ring)
+		* Infernal Torch (set wand) changed to Infernal Spike (set dagger)
+		* many unique/set/runeword item changes
+		* many skilltree changes											// pointmods are implemented, but their availability hasn't been checked
+*/

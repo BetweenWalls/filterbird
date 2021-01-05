@@ -1,5 +1,5 @@
 
-var runewords = {
+var runewords = {		// TODO: change to regular array so to fix name issues (Infinity, King's Grace, Ancient's Pledge)
 	Breath_of_the_Dying:{runes:["Vex","Hel","El","Eld","Zod","Eth"], itypes:["weap"]},
 	Pride:{runes:["Cham","Sur","Io","Lo"], itypes:["pole","spea"]},
 	Hand_of_Justice:{runes:["Sur","Cham","Amn","Lo"], itypes:["weap"]},

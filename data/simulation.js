@@ -1,25 +1,22 @@
 
-// TODO: Some items have a static ILVL and shouldn't have the ILVL dropdown...	ILVL=1 for: Vision of Terror, potions, unstacked runes/gems, Khalim's Flail, Horadric Staff, most non-equipment quest items		...different for PD2 vs POD?
-// TODO: For some items, the default color for %NAME% is built-in and can't be changed...		...may be different for PD2 vs PoD
-
 var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"common"};
-var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:90,CHARSTAT70:0,CHARSTAT13:1000};
-var item_settings = {ID:false};
-var settings = {auto_difficulty:true,pd2_option:1,validation:1,auto_simulate:1};
+var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:85,CHARSTAT70:0,CHARSTAT13:1000};
+var item_settings = {ID:false, ILVL_return:85};
+var settings = {auto_difficulty:true,version:0,validation:1,auto_simulate:1,max_errors:50,error_limit:1};
 var notices = {duplicates:0,pd2_conditions:0,pod_conditions:0,colors:0};
 var colors = {
-	White:"#dddddd",
-	Gray:"#707070",
-	Blue:"#6666bb",	
-	Yellow:"#cccc77",
-	Gold:"#9b885e",
-	Green:"#00f000",
-	DarkGreen:"#255d16",
-	Tan:"#9b8c6d",
-	Black:"Black",
-	Orange:"#c48736",
-	Purple:"#9b2aea",
-	Red:"#a94838"
+	WHITE:"#dddddd",
+	GRAY:"#707070",
+	BLUE:"#6666bb",	
+	YELLOW:"#cccc77",
+	GOLD:"#9b885e",
+	GREEN:"#00f000",
+	DGREEN:"#255d16",
+	TAN:"#9b8c6d",
+	BLACK:"000000",
+	ORANGE:"#c48736",
+	PURPLE:"#9b2aea",
+	RED:"#a94838"
 };
 
 // startup - runs when the page loads
@@ -42,23 +39,15 @@ function startup() {
 	toggleCustom(true)
 	document.getElementById("custom_format").checked = true
 	toggleCustomFormat(true)
-	document.getElementById("pd2_option").checked = false				// TODO: still needed?
-	settings.pd2_option = 0
-	document.getElementById("select_price").style.display = "none"
-	document.getElementById("character_gold").style.display = "inline-table"
 	
 	// check URL parameters
 	params = new URLSearchParams(window.location.search);
 	if (params.has('v') == true) {
-		var v = params.get('v');
-		if (v.toLowerCase() == "pd2") {
-			document.getElementById("pd2_option").checked = true
-			togglePD2Option(true)
-		}
+		if (params.get('v').toLowerCase() == "pd2") { changeVersion(1) }
 	}
+	// TODO: Handle settings if the page is loaded irregularly (i.e. by navigating "back")
 	
 	//document.getElementById("debug").style.display = "block"
-	//document.getElementById("simulate_custom").style.display = "block"
 }
 
 // loadItems - adds equipment and other items to the item dropdown menu
@@ -240,6 +229,7 @@ function setItem(value) {
 // simulate - begins the filter simulation process
 // ---------------------------------
 function simulate(manual) {
+	//document.body.style.cursor = "wait";
 	if (settings.auto_simulate == 0) { document.getElementById("o5").innerHTML = "<br>Auto-Simulate is disabled" }
 	else { document.getElementById("o5").innerHTML = "" }
 	if (document.getElementById("dropdown_group").selectedIndex > 9) { document.getElementById("select_price").style.display = "none" }
@@ -270,12 +260,13 @@ function simulate(manual) {
 		}
 	}
 	var messages = ""
-	if (notices.duplicates == 1) { messages += "<br>When two rules have identical conditions, the first rule gets checked twice instead of both rules being checked." }
-	if (notices.pd2_conditions == 1) { messages += "<br>A PD2 code was detected, but PD2 codes are currently disabled. They can be enabled from the options menu." }
-	if (notices.pod_conditions == 1) { messages += "<br>A PoD code was detected, but incompatible PD2 codes are currently enabled. They can be disabled from the options menu." }
+	if (notices.duplicates == 1) { messages += "<br>When two rules have identical conditions, the first rule gets checked twice instead of both rules being checked. (Not simulated)" }
+	if (notices.pd2_conditions == 1) { messages += "<br>PD2 code(s) detected - the PD2 version of FilterBird can be enabled from the menu." }
+	if (notices.pod_conditions == 1) { messages += "<br>PoD code(s) detected - the PoD version of FilterBird can be enabled from the menu." }
 	//if (notices.colors == 1) {messages += "<br>Unsupported color keywords detected. Keywords such as %LIGHT_GRAY% just default to %GRAY% in PD2." }
 	
 	document.getElementById("o4").innerHTML = messages
+	//document.body.style.cursor = "auto";
 }
 
 // loadFileAsText - loads text from a file
@@ -297,18 +288,22 @@ function loadFileAsText(num) {
 //	num: filter number (1 or 2)
 // ---------------------------------
 function parseFile(file,num) {
-	var obscured = true;
-	var color = "";
-	var color_new_default = "";
+	var errors = 0;
 	var display = "";
 	var description = "";
+	var desc_output = "";
+	var desc_output_total = "";
 	var all_conditions = [];
 	var all_line_nums = [];
 	var name_saved = itemToCompare.NAME;
 	if (!(itemToCompare.NMAG == true && itemToCompare.RW != true) && itemToCompare.MAG != true) {	// setup variables to accomodate item names that use multiple lines
 		if (typeof(itemToCompare.base) != 'undefined') {
 			if (itemToCompare.ID == true) {
-				name_saved = itemToCompare.base+"<br>"+itemToCompare.NAME
+				if (itemToCompare.RW == true) {
+					name_saved = itemToCompare.base+"‗%GOLD%"+itemToCompare.NAME
+				} else {
+					name_saved = itemToCompare.base+"‗"+itemToCompare.NAME
+				}
 			} else {
 				name_saved = itemToCompare.base;
 			}
@@ -318,6 +313,9 @@ function parseFile(file,num) {
 		if (typeof(itemToCompare.base) == 'undefined') { name_saved = itemToCompare.NAME }	// TODO: remove after fixing premade items?
 		else { name_saved = itemToCompare.base }
 	}
+	if (typeof(itemToCompare.color_stuck) != 'undefined') { name_saved = "%"+itemToCompare.color_stuck+"%"+name_saved }
+	if (settings.version == 1 && itemToCompare.type == "rune") { name_saved = "%ORANGE%"+name_saved }
+	var output_total = name_saved;
 	var done = false;
 	var rules_checked = 0;
 	var lines = file.split("\t").join("").split("­").join("•").split("\n");
@@ -331,36 +329,39 @@ function parseFile(file,num) {
 		var index = rule.indexOf("ItemDisplay[");
 		var index_with_tabs = rule_with_tabs.indexOf("ItemDisplay[");
 		var index_end = rule.indexOf("]:");
-		if (settings.validation == 1) {
-			if (!(index >= 0 && rule_with_tabs.substring(0,index_with_tabs).length == 0) && rule_with_tabs.length > 0) { document.getElementById("o"+num).innerHTML += "#"+num+" Improper formatting on line "+line_num+" ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>" }	// display an error if the line is not a rule and has other characters prior to any "/" characters
+		if (settings.validation == 1 && errors < settings.max_errors) {
+			if (!(index >= 0 && rule_with_tabs.substring(0,index_with_tabs).length == 0) && rule_with_tabs.length > 0) { document.getElementById("o"+num).innerHTML += "#"+num+" Improper formatting on line "+line_num+" ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the line is not a rule and has other characters prior to any "/" characters
 		}
 		if (index >= 0 && rule_with_tabs.substring(0,index_with_tabs).length == 0) {	// line begins with ItemDisplay[
 			rules_checked += 1
 			var match = false;
 			var formula = "";
-			var rulesub = rule.substring(0,index)+rule.substring(index+12);
-			var conditions = rulesub.split("]:")[0];
-			var output = lines_with_tabs[line].substring(0,index)+lines_with_tabs[line].substring(index+12);
-			output = output.split("]:")[1]
+			var conditions = rule.substring(0,index).concat(rule.substring(index+12)).split("]:")[0];
+			var output = lines_with_tabs[line].substring(0,index).concat(lines_with_tabs[line].substring(index+12)).split("]:")[1];
 			if (conditions[0] == " " || conditions[conditions.length-1] == " ") {
-				if (settings.validation == 1) { document.getElementById("o"+num).innerHTML += "#"+num+" Irregular formatting on line "+line_num+" ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>" }	// display an error if the rule's conditions have space on either side
+				if (settings.validation == 1 && errors < settings.max_errors) { document.getElementById("o"+num).innerHTML += "#"+num+" Irregular formatting on line "+line_num+" ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the rule's conditions have space on either side (cosmetic only)
 				conditions = conditions.trim()
 			}
 			// check duplicate conditions
-			if (settings.validation == 1 && settings.pd2_option == 0) {
+			if (settings.validation == 1 && errors < settings.max_errors) {
 				var duplicateConditions = false;
 				var duplicateConditionsContinue = false;
 				if (all_conditions.includes(conditions) == true) {
 					duplicateConditions = true
 					duplicateConditionsContinue = lines[all_line_nums[all_conditions.indexOf(conditions)]-1].includes("%CONTINUE%");
+					// TODO: Check others if more than 2 duplicate rules
 				}
 				all_conditions[all_conditions.length] = conditions
 				all_line_nums[all_line_nums.length] = line_num
 				if (duplicateConditions == true) {
-					document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting (lines "+all_line_nums[all_conditions.indexOf(conditions)]+" and "+line_num+" have identical conditions) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"	// display an error if the rule's conditions exactly match a previous line
 					if (duplicateConditionsContinue == true) {
-						if (notices.duplicates == 0) { document.getElementById("o4").innerHTML += "<br>When two rules have identical conditions, the first rule gets checked twice instead of both rules being checked." }	// unnecessary if parseFile() errors can be handled better
-						notices.duplicates = 1
+						if (settings.version == 0) {
+							document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting (lines "+all_line_nums[all_conditions.indexOf(conditions)]+" and "+line_num+" have identical conditions) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++;	// displays an error if the rule's conditions exactly match a previous line		// TODO: Also display for PD2 if the rules are adjacent (i.e. no reason not to just use 1 rule instead)
+							if (notices.duplicates == 0) { document.getElementById("o4").innerHTML += "<br>When two rules have identical conditions, the first rule gets checked twice instead of both rules being checked. (Not simulated)" }
+							notices.duplicates = 1
+						}
+					} else {
+						document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting (lines "+all_line_nums[all_conditions.indexOf(conditions)]+" and "+line_num+" have identical conditions) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++;	// displays an error if the rule's conditions exactly match a previous line (inaccessible)
 					}
 				}
 			}
@@ -380,34 +381,34 @@ function parseFile(file,num) {
 					if (((c == "GEMLEVEL" || c == "GEMTYPE") && itemToCompare.type != "gem") || (c == "RUNE" && itemToCompare.type != "rune") || (c == "GOLD" && itemToCompare.CODE != "GOLD")) { c_falsify = true }
 					if (number == false && c != "(" && c != ")" && c != "≤" && c != "≥" && c != "<" && c != ">" && c != "=" && c != "|" && c != "&" && c != "+" && c != "!") {
 						// check valid conditions
-						if (settings.validation == 1) {
+						if (settings.validation == 1 && errors < settings.max_errors) {
 							var pod_conditions = false;
 							var recognized = false;
 							var cr = c;
 							if (isNaN(Number(cr[0])) == false) { cr = "_"+cr }
 							if (typeof(all_codes[cr]) != 'undefined') {
-								if (all_codes[cr] == 3 || (settings.pd2_option == 0 && all_codes[cr] == 1) || (settings.pd2_option == 1 && all_codes[cr] == 2)) { recognized = true }
-								if (settings.pd2_option == 0 && all_codes[cr] == 2) {
-									if (notices.pd2_conditions == 0) { document.getElementById("o4").innerHTML += "<br>A PD2 code was detected, but PD2 codes are currently disabled. They can be enabled from the options menu." }	// unnecessary if parseFile() errors can be handled better
+								if (all_codes[cr] == 3 || (settings.version == 0 && all_codes[cr] == 1) || (settings.version == 1 && all_codes[cr] == 2)) { recognized = true }
+								if (settings.version == 0 && all_codes[cr] == 2) {
+									if (notices.pd2_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PD2 code(s) detected - the PD2 version of FilterBird can be enabled from the menu." }
 									notices.pd2_conditions = 1
 								}
-								if (settings.pd2_option == 1 && all_codes[cr] == 1) { pod_conditions = true }
+								if (settings.version == 1 && all_codes[cr] == 1) { pod_conditions = true }
 							}
 							if (cr.substr(0,8) == "CHARSTAT" || cr.substr(0,8) == "ITEMSTAT") { if (Number(cr.slice(8)) >= 0 && Number(cr.slice(8)) <= 500) {
-								if (settings.pd2_option == 0) { recognized = true }
+								if (settings.version == 0) { recognized = true }
 								else { pod_conditions = true }
 							} }
 							if (pod_conditions == true) {
-								if (notices.pod_conditions == 0) { document.getElementById("o4").innerHTML += "<br>A PoD code was detected, but incompatible PD2 codes are currently enabled. They can be disabled from the options menu." }	// unnecessary if parseFile() errors can be handled better
+								if (notices.pod_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PoD code(s) detected - the PoD version of FilterBird can be enabled from the menu." }
 								notices.pod_conditions = 1
 							}
 							if (recognized == false) {
-								document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized condition on line "+line_num+": <l style='color:#c55'>"+c+"</l> ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"
+								document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized condition on line "+line_num+": <l style='color:#c55'>"+c+"</l> ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"; errors++;	// displays an error if the rule has an unrecognized/invalid condition
 							}
 						}
 						// refactor conditions
 						if (c == "DIFF") { c = "DIFFICULTY" }				// these could be disabled (i.e. set to 0) for PD2 or PoD, but that wouldn't produce correct behavior since a value of 0 is normal
-						if (settings.pd2_option == 0) { if (c == "PRICE") { c = "invalid_"+c } }		// TODO: Should the price dropdown menu be available for PoD? The PRICE condition can still be invalid.
+						if (settings.version == 0) { if (c == "PRICE") { c = "invalid_"+c } }		// TODO: Should the price dropdown menu be available for PoD? The PRICE condition can still be invalid.
 						else { if (c.substr(0,8) == "CHARSTAT") { c = "invalid_"+c; itemToCompare[c] = 0; } }
 						// set condition values
 						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { if (typeof(character[c]) == 'undefined') { character[c] = 0 } }
@@ -431,23 +432,22 @@ function parseFile(file,num) {
 					if (c == "!" && cond_list.length > cond+3) { if ((isNaN(Number(cond_list[cond+1])) == false || isNaN(Number(cond_list[cond+3])) == false) && (cond_list[cond+2] == "=" || cond_list[cond+2] == ">" || cond_list[cond+2] == "<" || cond_list[cond+2] == "≤" || cond_list[cond+2] == "≥")) { formula += "( "; neg_paren_close = cond+3; } }
 				}
 				match = eval(formula)
-				//if (settings.validation == 1 && unbounded_match_at_zero) { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (unbounded condition) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>" }	// display an error if the rule has unbounded conditions at zero	// TODO: Is this worth implementing? Impossible to know without seeing how the BH filter code functions in these cases
+				//if (settings.validation == 1 && errors < settings.max_errors && unbounded_match_at_zero) { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (unbounded condition) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the rule has unbounded conditions at zero	// TODO: Is this worth implementing? Impossible to know without seeing how the BH filter code functions in these cases
 			} else {
 				match = true
 			}
 			document.getElementById("o3").innerHTML += match
 			
 			//-----------------------------------------------------------------------------------------------------------
-			// check output for invalid keywords ...this could make the validation SLOW
-			if (settings.validation == 1) {
-				var description_active = false;
-				var description_braces = 0;
-				if (settings.pd2_option == 1) { if (output.includes("{") == true && output.includes("}") == true) { if (output.indexOf("{") < output.lastIndexOf("}")) { description_active = true } } }
-				var out_format = output.split(",").join("‾").split(" ").join(", ,").split("%WHITE%").join(",color_White,").split("%GRAY%").join(",color_Gray,").split("%BLUE%").join(",color_Blue,").split("%YELLOW%").join(",color_Yellow,").split("%GOLD%").join(",color_Gold,").split("%GREEN%").join(",color_Green,").split("%BLACK%").join(",color_Black,").split("%TAN%").join(",color_Tan,").split("%PURPLE%").join(",color_Purple,").split("%ORANGE%").join(",color_Orange,").split("%RED%").join(",color_Red,").split("%NAME%").join(",ref_NAME,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("%CONTINUE%").join(",misc_CONTINUE,").split("\t").join(",\t,").split("/").join(",/,").split("{").join(",{,").split("}").join(",},")
-				if (settings.pd2_option == 0) { out_format = out_format.split("%DGREEN%").join(",color_DarkGreen,").split("%CLVL%").join(",ref_CLVL,") }
-				if (settings.pd2_option == 1) {
-					out_format = out_format.split("%DARK_GREEN%").join(",color_DarkGreen,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,")
-					out_format = out_format.split("%LIGHT_GRAY%").join(",color_Gray,")//.split("%CORAL%").join(",color_Gray,").split("%SAGE%").join(",color_Gray,").split("%TEAL%").join(",color_Gray,")
+			// check output for invalid keywords		// TODO: reduce duplicated code
+			if (settings.validation == 1 && errors < settings.max_errors) {
+				var out_format = output.split("//")[0];
+				if (settings.version == 0) { out_format = out_format.split("/")[0] }
+				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
+				if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,") }
+				if (settings.version == 1) {
+					out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,")
+					out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,")//.split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,")
 					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
 					for (n in notifs) {									// TODO: implement more efficient way to split notification keywords
 						if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
@@ -465,62 +465,32 @@ function parseFile(file,num) {
 						out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
 					} }
 				}
-				out_format = out_format.split(",,").join(",")
-				var out_list = out_format.split(",");
-				if (out_list[0] == "") { out_list.shift() }
-				if (out_list[out_list.length-1] == "") { out_list.pop() }
-				if (settings.pd2_option == 1) {
-					for (out in out_list) {
-						var o = out_list[out];
-						if (description_active == true && ((o == "{" && description_braces == 0) || (o == "}" && description_braces == 1))) { description_braces = description_braces+1 }
-						if (description_braces == 1) { if (o == "/") { out_list[out] = "‡" } }
-					}
-					description_braces = 0
-				}
-				for (let i = 0; i < out_list.length; i++) {
-					if (out_list[i] == "/") {
-						for (let j = out_list.length-1; j >= i; j--) {
-							out_list.pop()
-						}
-						i = out_list.length
-					}
-				}
-				var trailingTabs = false;
-				for (let i = out_list.length-1; i > 0; i--) {
-					if (out_list[i] == " " && trailingTabs == false) { out_list.pop() }
-					else if (out_list[i] == "\t") { out_list.pop(); trailingTabs = true; }
-					else { i = 0 }
-				}
-				var leadingTabs = false;
-				for (let i = 0; i < out_list.length; i++) {
-					if (out_list[i] == " " && leadingTabs == false) { out_list.shift(); i--; }
-					else if (out_list[i] == "\t") { out_list.shift(); leadingTabs = true; i--; }
-					else { i = out_list.length }
-				}
+				var out_list = out_format.split(",,").join(",").split(",");
 				for (out in out_list) {
 					var o = out_list[out].split("‾").join(",");
 					var key = o.split("_")[0];
-					if (key == "misc" || key == "color" || key == "ref" || (key == "ignore" && settings.pd2_option == 1) || o == " " || o == "\t" || o == "‡" ) {
-						// do nothing?
+					if (key == "misc" || key == "color" || key == "ref" || (key == "ignore" && settings.version == 1) || o == " " || o == "\t" || o == "‗") {
+						// do nothing
 					} else {
 						if (o.indexOf("%") < o.lastIndexOf("%")) {
 							var ok_list = o.substring(o.indexOf("%"),o.lastIndexOf("%")+1).split("%");
 							var o_keyword = -1;
 							for (ok in ok_list) {
 								if (o_keyword == 1) {
-									document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized keyword on line "+line_num+": <l style='color:#cc5'>"+"%"+ok_list[ok]+"%"+"</l> ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"
-									if (settings.pd2_option == 0) {
-										if (notices.pd2_conditions == 0) { document.getElementById("o4").innerHTML += "<br>A PD2 code was detected, but PD2 codes are currently disabled. They can be enabled from the options menu." }	// unnecessary if parseFile() errors can be handled better
+									var k = ok_list[ok];
+									document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized keyword on line "+line_num+": <l style='color:#cc5'>"+"%"+ok_list[ok]+"%"+"</l> ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"; errors++; // displays an error if the rule has an unrecognized/invalid keyword
+									if (settings.version == 0 && (k == "DARK_GREEN" || k == "NL" || k == "QTY" || k == "RANGE" || k == "WPNSPD" || k == "MAP")) {
+										if (notices.pd2_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PD2 code(s) detected - the PD2 version of FilterBird can be enabled from the menu." }	// TODO: Also notify on the many notifications (BORDER, MAP, DOT, PX, NOTIFY)
 										notices.pd2_conditions = 1
-									} else {
-										if (notices.pod_conditions == 0) { document.getElementById("o4").innerHTML += "<br>A PoD code was detected, but incompatible PD2 codes are currently enabled. They can be disabled from the options menu." }	// unnecessary if parseFile() errors can be handled better
+									} else if (settings.version == 1 && (k == "DGREEN" || k == "CLVL")) {
+										if (notices.pod_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PoD code(s) detected - the PoD version of FilterBird can be enabled from the menu." }
 										notices.pod_conditions = 1
 									}
 								}
 								o_keyword *= -1
 							}
 							//if (ok == "%LIGHT_GRAY%" || ok == "CORAL" || ok == "SAGE" || ok == "TEAL") {
-							//	if (notices.colors == 0) { document.getElementById("o4").innerHTML += "<br>Unsupported color keywords detected. Keywords such as "+ok+" just default to %GRAY% in PD2." }	// unnecessary if parseFile() errors can be handled better
+							//	if (notices.colors == 0) { document.getElementById("o4").innerHTML += "<br>Unsupported color keywords detected. Keywords such as "+ok+" just default to %GRAY% in PD2." }
 							//	notices.colors = 1
 							//}
 						}
@@ -530,136 +500,51 @@ function parseFile(file,num) {
 			//-----------------------------------------------------------------------------------------------------------
 			
 			if (match == true) {
-				var color_current_rule = false;
-				var name_current_rule = false;
-				var name_added = false;
-				var revert_color = false;
-				var new_line = false;
-				var description_active = false;
-				var description_braces = 0;
-				if (settings.pd2_option == 1) { if (output.includes("{") == true && output.includes("}") == true) { if (output.indexOf("{") < output.lastIndexOf("}")) { description_active = true } } }
-				display = "";
-				done = true;
-				var out_format = output.split(",").join("‾").split(" ").join(", ,").split("%WHITE%").join(",color_White,").split("%GRAY%").join(",color_Gray,").split("%BLUE%").join(",color_Blue,").split("%YELLOW%").join(",color_Yellow,").split("%GOLD%").join(",color_Gold,").split("%GREEN%").join(",color_Green,").split("%BLACK%").join(",color_Black,").split("%TAN%").join(",color_Tan,").split("%PURPLE%").join(",color_Purple,").split("%ORANGE%").join(",color_Orange,").split("%RED%").join(",color_Red,").split("%NAME%").join(",ref_NAME,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("%CONTINUE%").join(",misc_CONTINUE,").split("\t").join(",\t,").split("/").join(",/,").split("{").join(",{,").split("}").join(",},")
-				out_format = out_format.split("%DGREEN%").join(",color_DarkGreen,").split("%CLVL%").join(",ref_CLVL,")
-				if (settings.pd2_option == 1) {
-					out_format = out_format.split("%DARK_GREEN%").join(",color_DarkGreen,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,")
-					out_format = out_format.split("%LIGHT_GRAY%").join(",color_Gray,").split("%CORAL%").join(",color_Gray,").split("%SAGE%").join(",color_Gray,").split("%TEAL%").join(",color_Gray,")
-					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
-					for (n in notifs) {
-						if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
-							for (let a = 0; a < 16; a++) {
-								var av = a.toString(16);
-								for (let b = 0; b < 16; b++) {
-									var bv = b.toString(16);
-									out_format = out_format.split(notifs[n]+av+bv+"%").join(",ignore_notif,").split(notifs[n]+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av+bv+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,")
-								}
-							}
-						}
-					}
-					if (out_format.includes("%NOTIFY-") || out_format.includes("%notify-")) { for (let a = 0; a < 16; a++) {
-						var av = a.toString(16);
-						out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
-					} }
-				}
-				out_format = out_format.split(",,").join(",")
-				var out_list = out_format.split(",");
-				if (out_list[0] == "") { out_list.shift() }
-				if (out_list[out_list.length-1] == "") { out_list.pop() }
-				if (settings.pd2_option == 1) {
-					for (out in out_list) {
-						var o = out_list[out];
-						if (description_active == true && ((o == "{" && description_braces == 0) || (o == "}" && description_braces == 1))) { description_braces = description_braces+1 }
-						if (description_braces == 1) { if (o == "/") { out_list[out] = "‡" } }
-					}
-					description_braces = 0
-				}
-				for (let i = 0; i < out_list.length; i++) {
-					if (out_list[i] == "/") {
-						for (let j = out_list.length-1; j >= i; j--) {
-							out_list.pop()
-						}
-						i = out_list.length
-					}
-				}
+				var desc_output_active = false;
+				// Removes comments and leading/trailing tabs and spaces
+				output = output.split("//")[0]
+				if (settings.version == 0) { output = output.split("/")[0] }
 				var trailingTabs = false;
-				for (let i = out_list.length-1; i > 0; i--) {
-					if (out_list[i] == " " && trailingTabs == false) { out_list.pop() }
-					else if (out_list[i] == "\t") { out_list.pop(); trailingTabs = true; }
+				for (let i = output.length-1; i > 0; i--) {
+					if (output[i] == " " && trailingTabs == false) { output = output.substr(0,i) }
+					else if (output[i] == "\t") { output = output.substr(0,i); trailingTabs = true; }
 					else { i = 0 }
 				}
 				var leadingTabs = false;
-				for (let i = 0; i < out_list.length; i++) {
-					if (out_list[i] == " " && leadingTabs == false) { out_list.shift(); i--; }
-					else if (out_list[i] == "\t") { out_list.shift(); leadingTabs = true; i--; }
-					else { i = out_list.length }
+				for (let i = 0; i < output.length; i=i) {
+					if (output[i] == " " && leadingTabs == false) { output = output.substr(1) }
+					else if (output[i] == "\t") { output = output.substr(1); leadingTabs = true; }
+					else { i = output.length }
 				}
-				for (out in out_list) {
-					var space = false;
-					var prev_color = color;
-					var o = out_list[out].split("‾").join(",");
-					var temp = o;
-					var key = o.split("_")[0];
-					if (key == "misc") {
-						temp = ""
-						if (o == "misc_CONTINUE") { done = false }
-						else if (o == "misc_NL") { new_line = true }
-					} else if (key == "color") {
-						temp = ""
-						color = colors[o.split("_")[1]]
-						prev_color = color
-						color_current_rule = true
-					} else if (key == "ref") {
-						if (o == "ref_CLVL") { temp = character["CLVL"] }
-						else if (o == "ref_NAME") {
-							if (description_braces != 1) { temp = name_saved; name_current_rule = true; if (color_new_default == "" && color_current_rule != false && color != "") { color_new_default = color }; }
-							else { temp = "" }
-						}
-						else { temp = itemToCompare[o.split("_")[1]]; }
-						obscured = false
-					} else if (key == "ignore" && settings.pd2_option == 1) {
-						temp = ""
-					} else if (o == " ") {
-						color = colors["Black"]
-						temp = "_"
-						revert_color = true
-						space = true
-					} else if (o == "\t") {
-						temp = ""
-					} else if (o == "‡") {
-						temp = "/"
-					} else {
-						obscured = false
-						if (description_active == true) {
-							if (o == "{" && description_braces == 0) { description_braces = description_braces+1; temp = ""; }
-							if (o == "}" && description_braces == 1) { description_braces = description_braces+1; temp = ""; }
+				if (settings.version == 1) {
+					if (output.includes("{") == true && output.indexOf("{") < output.lastIndexOf("}")) {
+						desc_output_active = true
+						desc_output = output.substring(output.indexOf("{"),output.indexOf("}")+1)
+						output = output.replace(desc_output,"")
+						desc_output = desc_output.substring(1,desc_output.length-1)
+						if (desc_output.includes("%NAME%") == true) {
+							desc_output_total = desc_output.split("%NAME%").join(desc_output_total)
+						} else {
+							if (desc_output_total != "" && desc_output == "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's description overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's description gets blanked
+							desc_output_total = desc_output
 						}
 					}
-					var colorize = false;
-					if (name_added == true && color != "") { colorize = true }
-					if (name_added == false && (color_current_rule == true || o == " ")) { colorize = true }
-					if (o == "ref_NAME" && itemToCompare.RW == true) { color = colors["Gold"]; revert_color = true; }
-					if (description_braces != 1) {
-						if (new_line == true) { display += "<br>"; new_line = false; }
-						if (colorize == true || (o == "ref_NAME" && itemToCompare.RW == true)) {
-							if (space == true) { display += "<l style='color:"+color+"; opacity:0%;'>"+temp+"</l>" }
-							else { display += "<l style='color:"+color+"'>"+temp+"</l>" }
-						}
-						else { display += temp }
-					} else {
-						if (new_line == true) { description += "<br>"; new_line = false; }
-						if (colorize == true || (o == "ref_NAME" && itemToCompare.RW == true)) {
-							if (space == true) { description += "<l style='color:"+color+"; opacity:0%;'>"+temp+"</l>" }
-							else { description += "<l style='color:"+color+"'>"+temp+"</l>" }
-						}
-						else { description += temp }
-					}
-					if (revert_color == true) { color = prev_color }
-					if (name_current_rule == true) { name_added = true }
 				}
-				if (done == false) { name_saved = display }
+				if (output.includes("%NAME%") == true) {
+					output_total = output.split("%NAME%").join(output_total)
+				} else {
+					if (output_total != name_saved && output == "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's non-default name overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's title gets blanked		// TODO: Should also apply if previous rules just output %NAME%
+					output_total = output
+				}
+				if (output.includes("%CONTINUE%") == false) {
+					done = true
+					if (desc_output_active == false) {
+						if (desc_output_total != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's description overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's description gets blanked (no continuation)
+						desc_output_total = ""
+					}
+				}
 				document.getElementById("o"+num).innerHTML += "#"+num+" Match found at line "+line_num+" after checking "+rules_checked+" rules ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l>"
-				if (output == "") { document.getElementById("o"+num).innerHTML += " /hidden"; obscured = true; }
+				if (output == "") { document.getElementById("o"+num).innerHTML += " //hidden" }
 				document.getElementById("o"+num).innerHTML += "<br>"
 			}
 		} else {
@@ -667,28 +552,89 @@ function parseFile(file,num) {
 		}
 		document.getElementById("o3").innerHTML = ""
 	} }
-	if (done == false) {
-		obscured = false
-		display = name_saved
-		if (itemToCompare.RW == true) { display = "<l style='color:"+colors.Gold+"'>"+display+"</l>" }
-		document.getElementById("o"+num).innerHTML += "#"+num+" No match found after checking all "+line_num+" lines ("+rules_checked+" rules) ... (default display)<br>"
+	
+	// All lines have been checked at this point
+	if (done == false) { document.getElementById("o"+num).innerHTML += "#"+num+" No match found after checking all "+line_num+" lines ("+rules_checked+" rules) ... (default display)<br>" }
+	if (itemToCompare.ID == false && itemToCompare.always_id == false) { desc_output_total = "" }
+	if (itemToCompare.CODE == "GOLD" && output_total != "") { output_total = itemToCompare.money+" Gold"; desc_output_total = ""; }
+	if (desc_output_total != "") { desc_output_total = "{%BLUE%"+desc_output_total+"}" }
+	output_total = desc_output_total+"%"+getColor(itemToCompare)+"%"+output_total
+	var description_braces = 0;
+	var description_active = false;
+	if (settings.version == 1) { if (output_total.includes("{") == true && output_total.includes("}") == true) { if (output_total.indexOf("{") < output_total.lastIndexOf("}")) { description_active = true } } }
+	
+	var out_format = output_total.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
+	if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,") }
+	if (settings.version == 1) {
+		out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,")
+		out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,")
+		var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
+		for (n in notifs) {
+			if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
+				for (let a = 0; a < 16; a++) {
+					var av = a.toString(16);
+					for (let b = 0; b < 16; b++) {
+						var bv = b.toString(16);
+						out_format = out_format.split(notifs[n]+av+bv+"%").join(",ignore_notif,").split(notifs[n]+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av+bv+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,")
+					}
+				}
+			}
+		}
+		if (out_format.includes("%NOTIFY-") || out_format.includes("%notify-")) { for (let a = 0; a < 16; a++) {
+			var av = a.toString(16);
+			out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
+		} }
 	}
-	if (color_new_default != "") { document.getElementById("output_"+num).style.color = color_new_default }
-	else { document.getElementById("output_"+num).style.color = getColor(itemToCompare) }
+	var out_list = out_format.split(",,").join(",").split(",");
+	if (out_list[0] == "") { out_list.shift() }
+	if (out_list[out_list.length-1] == "") { out_list.pop() }
+	var color = colors[getColor(itemToCompare)];
+	for (out in out_list) {
+		var o = out_list[out].split("‾").join(",");
+		var temp = o;
+		var key = o.split("_")[0];
+		var blank = false;
+		
+		if (key == "misc" || key == "ignore") {
+			blank = true
+		} else if (key == "color") {
+			blank = true
+			color = colors[o.split("_")[1]]
+		} else if (key == "ref") {
+			if (o == "ref_CLVL") { temp = character.CLVL }
+			else if (o == "ref_NAME") { blank = true }
+			else { temp = itemToCompare[o.split("_")[1]] }
+		} else if (o == " " || o == "\t" || o == "‗") {
+			blank = true
+		} else {
+			if (description_active == true) {
+				if (o == "{" && description_braces == 0) { description_braces = description_braces+1; blank = true; }
+				if (o == "}" && description_braces == 1) { description_braces = description_braces+1; blank = true; }
+			}
+		}
+		
+		if (description_braces != 1) {
+			if (o == "misc_NL" || o == "‗") { display += "<br>" }
+			if (o == " ") { display += "<l style='color:Black; opacity:0%;'>_</l>" }
+			else if (blank == false) { display += "<l style='color:"+color+"'>"+temp+"</l>" }
+		} else {
+			if (o == "misc_NL" || o == "‗") { description += "<br>" }
+			if (o == " ") { description += "<l style='color:Black; opacity:0%;'>_</l>" }
+			else if (blank == false) { description += "<l style='color:"+color+"'>"+temp+"</l>" }
+		}
+	}
+	// Reverses order of lines
 	if (display.includes("<br>") == true) {
 		var display_multi = display.split("<br>");
-		display = ""
-		for (dline in display_multi) { display = display_multi[dline] + "<br>" + display }
+		display = display_multi[display_multi.length-1]
+		for (let d = display_multi.length-2; d >= 0; d--) { display = display + "<br>" + display_multi[d] }
 	}
 	if (description.includes("<br>") == true) {
 		var description_multi = description.split("<br>");
-		description = ""
-		for (dline in description_multi) { description = description_multi[dline] + "<br>" + description }
+		description = description_multi[description_multi.length-1]
+		for (let d = description_multi.length-2; d >= 0; d--) { description = description + "<br>" + description_multi[d] }
 	}
-	if (itemToCompare.CODE == "GOLD") {
-		if (display != "") { display = itemToCompare.money+" Gold" }
-		description = ""
-	}
+	if (errors >= settings.max_errors) { document.getElementById("o"+num).innerHTML += " ... There may be additional errors. The first "+settings.max_errors+" errors were displayed.<br>" }
 	return [display,description]
 }
 
@@ -697,18 +643,18 @@ function parseFile(file,num) {
 //	return: the item's default color
 // ---------------------------------
 function getColor(item) {
-	var color = "White";
-	if (item.UNI == true) { color = "Gold" }
-	else if (item.MAG == true) { color = "Blue" }
-	else if (item.RARE == true) { color = "Yellow" }
-	else if (item.UNI == true) { color = "Gold" }
-	else if (item.SET == true) { color = "Green" }
-	else if (item.NMAG == true && (item.ETH == true || item.SOCK > 0)) { color = "Gray" }
-	else if (item.rarity == "craft") { color = "Orange" }
-	else if ((item.ARMOR == true || item.WEAPON == true || item.CODE == "rin" || item.CODE == "amu") && item.NMAG != true  && item.MAG != true  && item.RARE != true  && item.UNI != true  && item.SET != true ) { color = "Orange" }
-	else if (item.RUNE > 0) { color = "Orange" }
-	else if (item.CODE == "cx5" || item.CODE == "cx6" || item.CODE == "cx7" || item.CODE == "maz" || item.CODE == "ma4" || item.CODE == "ma5" || item.CODE == "ma6" || item.CODE == "ma2" || item.CODE == "cx8" || item.CODE == "wss") { color = "Purple" }
-	return colors[color]
+	var color = "WHITE";
+	if (item.UNI == true) { color = "GOLD" }
+	else if (item.MAG == true) { color = "BLUE" }
+	else if (item.RARE == true) { color = "YELLOW" }
+	else if (item.UNI == true) { color = "GOLD" }
+	else if (item.SET == true) { color = "GREEN" }
+	else if (item.NMAG == true && (item.ETH == true || item.SOCK != 0)) { color = "GRAY" }
+	else if (item.rarity == "craft") { color = "ORANGE" }
+	else if ((item.ARMOR == true || item.WEAPON == true || item.CODE == "rin" || item.CODE == "amu") && item.NMAG != true  && item.MAG != true  && item.RARE != true  && item.UNI != true  && item.SET != true ) { color = "ORANGE" }
+	else if (item.RUNE > 0) { color = "ORANGE" }
+	else if (item.CODE == "cx5" || item.CODE == "cx6" || item.CODE == "cx7" || item.CODE == "maz" || item.CODE == "ma4" || item.CODE == "ma5" || item.CODE == "ma6" || item.CODE == "ma2" || item.CODE == "cx8" || item.CODE == "wss") { color = "PURPLE" }
+	return color
 }
 
 // equipmentHover - shows equipment info (on mouse-over)
@@ -733,7 +679,7 @@ function equipmentHover(num) {
 		if (rw_name == "Infinity") { rw_name = "infinity" }
 		var runes = "";
 		for (let i = 0; i < runewords[rw_name].runes.length; i++) { runes += runewords[rw_name].runes[i]; }
-		name += "<br>"+"<l style='color:"+colors.Gold+"'>'"+runes+"'</l>"
+		name += "<br>"+"<l style='color:"+colors.GOLD+"'>'"+runes+"'</l>"
 	}
 	document.getElementById("item_name").innerHTML = name
 	document.getElementById("item_name").style.color = document.getElementById("output_"+num).style.color
@@ -885,7 +831,7 @@ function setCLVL2(value) {
 	document.getElementById("clvl").value = value
 	document.getElementById("dropdown_clvl").value = value
 	character.CLVL = Number(value)
-	if (settings.pd2_option == 1) { itemCustom.CRAFTALVL = Math.floor(character.CLVL/2) + Math.floor(ilvl/2) }
+	if (settings.version == 1) { itemCustom.CRAFTALVL = Math.floor(character.CLVL/2) + Math.floor(ilvl/2) }
 	else {
 		if (character.CHARSTAT14 > (character.CLVL * 10000)) {
 			character.CHARSTAT14 = character.CLVL * 10000
@@ -938,14 +884,14 @@ function toggleOriginalChoices(checked) {
 	else { document.getElementById("original_choices").style.display = "none" }
 }
 
-// togglePD2Option - 
+// changeVersion - 
+//	v: version (0 = PoD, 1 = PD2)
 // ---------------------------------
-function togglePD2Option(checked) {
-	if (checked == true) { settings.pd2_option = 1 }
-	else { settings.pd2_option = 0 }
-	setPD2Codes()
-	simulate()
-	if (settings.pd2_option == 1) {
+function changeVersion(v) {
+	document.getElementById("version"+v).checked = true
+	v = Number(v)
+	settings.version = v
+	if (settings.version == 1) {
 		params.set('v','PD2')
 		window.history.replaceState({}, '', `${location.pathname}?${params}`)
 	}
@@ -953,13 +899,7 @@ function togglePD2Option(checked) {
 		params.set('v','PoD')
 		window.history.replaceState({}, '', `${location.pathname}`)
 	}
-}
-
-// toggleConditionValidation - 
-// ---------------------------------
-function toggleConditionValidation(checked) {
-	if (checked == true) { settings.validation = 1 }
-	else { settings.validation = 0 }
+	setPD2Codes()
 	simulate()
 }
 
@@ -968,5 +908,32 @@ function toggleConditionValidation(checked) {
 function toggleAutoSimulation(checked) {
 	if (checked == true) { settings.auto_simulate = 1 }
 	else { settings.auto_simulate = 0 }
+	simulate()
+}
+
+// toggleConditionValidation - 
+// ---------------------------------
+function toggleConditionValidation(checked) {
+	if (checked == true) {
+		settings.validation = 1
+		document.getElementById("show_error_limit").style.display = "block"
+	} else {
+		settings.validation = 0
+		document.getElementById("show_error_limit").style.display = "none"
+	}
+	simulate()
+}
+
+// toggleErrorLimit - 
+// ---------------------------------
+function toggleErrorLimit(checked) {
+	if (checked == true) {
+		settings.error_limit = 1
+		settings.max_errors = 50
+	}
+	else {
+		settings.error_limit = 0
+		settings.max_errors = 10000
+	}
 	simulate()
 }

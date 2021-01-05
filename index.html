@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>FilterBird for Path of Diablo</title>
+	<title>FilterBird (D2 Filter Simulation)</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -26,15 +26,26 @@
 	<div class="navbar">
 		<img src="./images/bird.png" style="float:left; margin-left:10px; margin-right:10px; height:25px;">
 		<div class="nav-dropdown">
-			<button class="nav-dropbtn">Options</button>
+			<button class="nav-dropbtn">Version</button>
+			<div class="nav-dropdown-content">
+				<div class="nav-dropdown-content-item"><div class="nav-option">
+					<label for="version" onclick="changeVersion(0);"><input id="version0" type="radio" name="version" checked>Path of Diablo</label>
+				</div></div>
+				<div class="nav-dropdown-content-item"><div class="nav-option">
+					<label for="version" onclick="changeVersion(1);"><input id="version1" type="radio" name="version">Project D2 ­ ­ ­ ­ ­ ­ </label>
+				</div></div>
+			</div>
+		</div>
+		<div class="nav-dropdown">
+			<button class="nav-dropbtn">Menus</button>
 			<div class="nav-dropdown-content">
 				<div class="nav-dropdown-content-item"><div class="nav-option">
 					<input id="original" type="checkbox" name="original" onclick="toggleOriginalChoices(this.checked);" checked>
-					<label for="original">Original Options</label>
+					<label for="original">Original Options ­ ­ </label>
 				</div></div>
 				<div class="nav-dropdown-content-item"><div class="nav-option">
 					<input id="non_item_custom" type="checkbox" name="non_item_custom" onclick="toggleNonItemDetails(this.checked);">
-					<label for="non_item_custom">Character Info</label>
+					<label for="non_item_custom">Character Info ­ ­ ­ ­ ­ </label>
 				</div></div>
 				<div class="nav-dropdown-content-item"><div class="nav-option">
 					<input id="custom" type="checkbox" name="custom" onclick="toggleCustom(this.checked);">
@@ -42,24 +53,29 @@
 				</div></div>
 				<div id="show_custom_format" class="nav-dropdown-content-item" style="display:none;"><div class="nav-option">
 					<input id="custom_format" type="checkbox" name="custom_format" onclick="toggleCustomFormat(this.checked);">
-					<label for="custom_format">Alternate Format</label>
-				</div></div>
-				<div class="nav-dropdown-content-item"><div class="nav-option">
-					<input id="pd2_option" type="checkbox" name="pd2_option" onclick="togglePD2Option(this.checked);" checked>
-					<label for="pd2_option">Allow PD2 Codes</label>
-				</div></div>
-				<div class="nav-dropdown-content-item"><div class="nav-option">
-					<input id="cond_validation" type="checkbox" name="cond_validation" onclick="toggleConditionValidation(this.checked);" checked>
-					<label for="cond_validation">Error Checking</label>
-				</div></div>
-				<div class="nav-dropdown-content-item"><div class="nav-option">
-					<input id="auto_simulate" type="checkbox" name="auto_simulate" onclick="toggleAutoSimulation(this.checked);" checked>
-					<label for="auto_simulate">Auto-Simulate</label>
+					<label for="custom_format">Alternate Format ­ </label>
 				</div></div>
 			</div>
 		</div>
 		<div class="nav-dropdown">
-			<button class="nav-dropbtn" style="cursor:pointer;" onClick="location.href='https://github.com/BetweenWalls/filterbird'"><a href="https://github.com/BetweenWalls/filterbird">About</a></button>
+			<button class="nav-dropbtn">Options</button>
+			<div class="nav-dropdown-content">
+				<div class="nav-dropdown-content-item"><div class="nav-option">
+					<input id="auto_simulate" type="checkbox" name="auto_simulate" onclick="toggleAutoSimulation(this.checked);" checked>
+					<label for="auto_simulate">Auto-Simulate ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ </label>
+				</div></div>
+				<div class="nav-dropdown-content-item"><div class="nav-option">
+					<input id="cond_validation" type="checkbox" name="cond_validation" onclick="toggleConditionValidation(this.checked);" checked>
+					<label for="cond_validation">Error Checking ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ </label>
+				</div></div>
+				<div id="show_error_limit" class="nav-dropdown-content-item" style="display:block;"><div class="nav-option">
+					<input id="error_limit" type="checkbox" name="error_limit" onclick="toggleErrorLimit(this.checked);" checked>
+					<label for="error_limit">Limit Error Messages</label>
+				</div></div>
+			</div>
+		</div>
+		<div class="nav-dropdown">
+			<button class="nav-dropbtn" style="cursor:pointer;" onClick="location.href='https://github.com/BetweenWalls/filterbird'"><a href="https://github.com/BetweenWalls/filterbird">Info</a></button>
 		</div>
 	</div>
 	
@@ -99,7 +115,7 @@
 				</div>
 				<div id="character_gold" style="display:inline-table;">
 					<div><label class="label" for="gold_stash">Gold in Stash: </label><input id="gold_stash" name="gold_stash" class="num-input" style="max-width:72px;" type="number" min="0" max="2500000" value="199000" onchange="setGoldStash(this.value)"></div>
-					<div><label class="label" for="gold_char">Gold Carried: </label><input id="gold_char" name="gold_char" class="num-input" style="max-width:66px;" type="number" min="0" max="900000" value="199000" onchange="setGoldChar(this.value)"></div>
+					<div><label class="label" for="gold_char">Gold Carried: </label><input id="gold_char" name="gold_char" class="num-input" style="max-width:66px;" type="number" min="0" max="990000" value="199000" onchange="setGoldChar(this.value)"></div>
 				</div>
 			</div>
 		</div>
@@ -112,7 +128,7 @@
 				<div id="select_base"><label class="label">Base: </label><select id="dropdown_base" class="new-dropdown" onChange="setBase(this.value)"></select></div><div id="select_base_placeholder" style="display:none;"></div>
 				<div id="select_rarity" style="display:inline;"><label class="label">Rarity: </label><select id="dropdown_rarity" class="new-dropdown" style="min-width:0px;" onChange="setRarity(this.value)"></select></div>
 				<div id="select_name" style="display:inline;"><label class="label">Name: </label><select id="dropdown_name" class="new-dropdown" onChange="setName(this.value)"></select></div>
-				<div id="select_ilvl"><label class="label" for="ilvl">Level: </label><input id="ilvl" name="ilvl" class="num-input" type="number" min="1" max="99" value="90" onchange="setILVL2(this.value)"></div>
+				<div id="select_ilvl"><label class="label" for="ilvl">Level: </label><input id="ilvl" name="ilvl" class="num-input" type="number" min="1" max="99" value="85" onchange="setILVL2(this.value)"></div>
 			</div>
 			<div style="display:inline-table;"><br></div>
 			<div id="editing_2" style="background-color:#222; max-width:800px; display:table;">
@@ -178,8 +194,6 @@
 				<div id="select_price" style="display:none;"><label class="label" for="price">Price: </label><input id="price" name="price" class="num-input" style="max-width:60px" type="number" min="0" max="35000" value="499" onchange="setPrice(this.value)"></div>
 				<div id="select_quantity" style="display:none;"><label class="label" for="quantity">Quantity: </label><input id="quantity" name="quantity" class="num-input" style="max-width:60px" type="number" min="0" max="511" value="1" onchange="setQuantity(this.value)"></div>
 				<div id="select_amount" style="display:none;"><label class="label" for="amount">Amount: </label><input id="amount" name="amount" class="num-input" style="max-width:70px" type="number" min="1" max="990000" value="5000" onchange="setAmount(this.value)"></div>
-				
-				<div id="simulate_custom" style="display:none;"><button onClick="setItemFromCustom()" style="float:right; margin-top:-22px;">Simulate this Item</button></div>
 			</div>
 			<div style="display:table;"></div>
 		</div>
