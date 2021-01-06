@@ -1,5 +1,5 @@
 
-var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"common"};
+var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"regular"};
 var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:85,CHARSTAT70:0,CHARSTAT13:1000};
 var item_settings = {ID:false, ILVL_return:85};
 var settings = {auto_difficulty:true,version:0,validation:1,auto_simulate:1,max_errors:50,error_limit:1};
@@ -59,6 +59,7 @@ function loadItems() {
 			var item = equipment[group][itemNew];
 			var addon = "";
 			if (item == equipment[group][0]) { addon = "<option class='gray-all' style='color:gray' disabled>" + item.name + "</option>" }
+			else if (typeof(item.color) != 'undefined') { addon = "<option style='color:"+colors[getColor(item)]+"'>" + item.name + "</option>" }
 			else if (typeof(item.rarity) != 'undefined') { addon = "<option class='dropdown-"+item.rarity+"'>" + item.name + "</option>" }
 			else { addon = "<option class='dropdown-unique'>" + item.name + "</option>" }
 			choices += addon
@@ -172,7 +173,7 @@ function setItem(value) {
 				if (itemToCompare.rarity == "set") { itemToCompare.SET = true }
 				else if (itemToCompare.rarity == "rare") { itemToCompare.RARE = true }
 				else if (itemToCompare.rarity == "magic") { itemToCompare.MAG = true }
-				else if (itemToCompare.rarity == "common") { itemToCompare.NMAG = true; itemToCompare.always_id = true; }
+				else if (itemToCompare.rarity == "regular") { itemToCompare.NMAG = true; itemToCompare.always_id = true; }
 				else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; }
 				else if (itemToCompare.rarity == "unique") { itemToCompare.UNI = true }
 				else if (itemToCompare.rarity == "craft") { itemToCompare.always_id = true }
@@ -191,7 +192,7 @@ function setItem(value) {
 			if (itemToCompare.ID == true) {
 				// affix codes translated to in-game codes
 				for (affix in itemToCompare) { for (code in codes) { if (affix == code) { itemToCompare[codes[code]] = itemToCompare[affix] } } }
-				if (typeof(itemToCompare.sup) != 'undefined') { if (itemToCompare.sup > 0) { if (typeof(itemToCompare.ED) == 'undefined') { itemToCompare.ED = 0 }; itemToCompare.ED += itemToCompare.sup; itemToCompare.SUP = true; if (item.rarity == "common") { itemToCompare.NAME = "Superior "+itemToCompare.NAME } } }
+				if (typeof(itemToCompare.sup) != 'undefined') { if (itemToCompare.sup > 0) { if (typeof(itemToCompare.ED) == 'undefined') { itemToCompare.ED = 0 }; itemToCompare.ED += itemToCompare.sup; itemToCompare.SUP = true; if (item.rarity == "regular") { itemToCompare.NAME = "Superior "+itemToCompare.NAME } } }
 				if (typeof(itemToCompare.ethereal) != 'undefined' && itemToCompare.ethereal == 1) { itemToCompare.ETH = true }
 				if (itemToCompare.CODE == "aq2" || itemToCompare.CODE == "cq2" || itemToCompare.CODE == "aqv" || itemToCompare.CODE == "cqv") { itemToCompare.QUANTITY = 500; character.CHARSTAT70 = 500; }
 				itemToCompare.DEF = Math.ceil((~~itemToCompare.base_defense * (1+~~item.ethereal*0.5) * (1+~~item.e_def/100+~~item.sup/100)) + ~~item.defense + Math.floor(~~item.defense_per_level*character.CLVL))
@@ -542,7 +543,7 @@ function parseFile(file,num) {
 						if (desc_output_total != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's description overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's description gets overwritten (but not blanked) from lack of continuation
 						desc_output_total = ""
 					} else {
-						if (desc_output_total != "" && output_total == "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item description on hidden item) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item description isn't hidden, but the item is
+						if (desc_output_total != "" && output_total == "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item description on hidden item) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item description isn't hidden, but the item is
 					}
 				}
 				document.getElementById("o"+num).innerHTML += "#"+num+" Match found at line "+line_num+" after checking "+rules_checked+" rules ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l>"
@@ -646,16 +647,13 @@ function parseFile(file,num) {
 // ---------------------------------
 function getColor(item) {
 	var color = "WHITE";
-	if (item.UNI == true) { color = "GOLD" }
+	if (typeof(item.color) != 'undefined') { color = item.color }
 	else if (item.MAG == true) { color = "BLUE" }
 	else if (item.RARE == true) { color = "YELLOW" }
 	else if (item.UNI == true) { color = "GOLD" }
 	else if (item.SET == true) { color = "GREEN" }
 	else if (item.NMAG == true && (item.ETH == true || item.SOCK != 0)) { color = "GRAY" }
-	else if (item.rarity == "craft") { color = "ORANGE" }
-	else if ((item.ARMOR == true || item.WEAPON == true || item.CODE == "rin" || item.CODE == "amu") && item.NMAG != true  && item.MAG != true  && item.RARE != true  && item.UNI != true  && item.SET != true ) { color = "ORANGE" }
-	else if (item.RUNE > 0) { color = "ORANGE" }
-	else if (item.CODE == "cx5" || item.CODE == "cx6" || item.CODE == "cx7" || item.CODE == "maz" || item.CODE == "ma4" || item.CODE == "ma5" || item.CODE == "ma6" || item.CODE == "ma2" || item.CODE == "cx8" || item.CODE == "wss") { color = "PURPLE" }
+	else if (item.rarity == "craft" || ((item.ARMOR == true || item.WEAPON == true || item.CODE == "rin" || item.CODE == "amu") && item.NMAG != true  && item.MAG != true  && item.RARE != true  && item.UNI != true  && item.SET != true)) { color = "ORANGE" }
 	return color
 }
 

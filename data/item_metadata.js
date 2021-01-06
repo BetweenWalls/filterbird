@@ -1329,8 +1329,9 @@ map_mf_gf:{index:["map_mf_gf"], format:["Magic and Gold Find: +","%"]},
 pd2:1,
 quant_min:1,
 quant_max:1,
-static_ILVL:1,	// TODO: implement (for items with unchanging ILVL)
-color_stuck:1,	// TODO: implement (for items that can't have their original %NAME% color changed)
+static_ILVL:1,
+color_stuck:1,
+color:1,
 
 skill_Cold_Enchant:{index:["skill_Cold_Enchant"], format:["+"," to Cold Enchant (Sorceress only)"]},
 skill_Inferno:{index:["skill_Inferno"], format:["+"," to Inferno (Sorceress only)"]},
