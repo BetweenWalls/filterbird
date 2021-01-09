@@ -379,7 +379,7 @@ function parseFile(file,num) {
 					if (c == "RUNENUM" || c == "RUNENAME") { c = "RUNE" }
 					var number = false;
 					if (isNaN(Number(c)) == false) { cond_list[cond] = Number(c); number = true; }
-					if (((c == "GEMLEVEL" || c == "GEMTYPE") && itemToCompare.type != "gem") || (c == "RUNE" && itemToCompare.type != "rune") || (c == "GOLD" && itemToCompare.CODE != "GOLD")) { c_falsify = true }
+					if (((c == "GEMLEVEL" || c == "GEMTYPE") && itemToCompare.type != "gem") || (c == "RUNE" && itemToCompare.type != "rune") || (c == "GOLD" && itemToCompare.CODE != "GOLD")) { c_falsify = true }	// TODO: Other codes may work similarly to this, rather than simply being set to 0 if they aren't recognized (example: in PD2, DIFFICULTY matches on every item if it is 0, 1, or 2) ...but is it really worth implementing invalid codes correctly?
 					if (number == false && c != "(" && c != ")" && c != "≤" && c != "≥" && c != "<" && c != ">" && c != "=" && c != "|" && c != "&" && c != "+" && c != "!") {
 						// check valid conditions
 						if (settings.validation == 1 && errors < settings.max_errors) {
@@ -481,7 +481,7 @@ function parseFile(file,num) {
 									var k = ok_list[ok];
 									document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized keyword on line "+line_num+": <l style='color:#cc5'>"+"%"+ok_list[ok]+"%"+"</l> ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"; errors++; // displays an error if the rule has an unrecognized/invalid keyword
 									if (settings.version == 0 && (k == "DARK_GREEN" || k == "NL" || k == "QTY" || k == "RANGE" || k == "WPNSPD" || k == "MAP")) {
-										if (notices.pd2_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PD2 code(s) detected - the PD2 version of FilterBird can be enabled from the menu." }	// TODO: Also notify on the many notifications (BORDER, MAP, DOT, PX, NOTIFY)
+										if (notices.pd2_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PD2 code(s) detected - the PD2 version of FilterBird can be enabled from the menu." }	// TODO: Also display notice for notification keywords (BORDER, MAP, DOT, PX, NOTIFY)
 										notices.pd2_conditions = 1
 									} else if (settings.version == 1 && (k == "DGREEN" || k == "CLVL")) {
 										if (notices.pod_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PoD code(s) detected - the PoD version of FilterBird can be enabled from the menu." }
@@ -546,6 +546,7 @@ function parseFile(file,num) {
 						if (desc_output_total != "" && output_total == "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item description on hidden item) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item description isn't hidden, but the item is
 					}
 				}
+				// TODO: Would it be useful to show a warning if %CONTINUE% is used on a hidden item?
 				document.getElementById("o"+num).innerHTML += "#"+num+" Match found at line "+line_num+" after checking "+rules_checked+" rules ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l>"
 				if (output == "") { document.getElementById("o"+num).innerHTML += " //hidden" }
 				document.getElementById("o"+num).innerHTML += "<br>"
@@ -606,6 +607,7 @@ function parseFile(file,num) {
 		} else if (key == "ref") {
 			if (o == "ref_CLVL") { temp = character.CLVL }
 			else if (o == "ref_NAME") { blank = true }
+			else if (settings.version == 1 && o == "ref_RUNENAME" && itemToCompare.RUNE > 0) { color = colors["ORANGE"]; temp = itemToCompare.RUNENAME; }
 			else { temp = itemToCompare[o.split("_")[1]] }
 		} else if (o == " " || o == "\t" || o == "‗") {
 			blank = true
@@ -638,6 +640,7 @@ function parseFile(file,num) {
 		for (let d = description_multi.length-2; d >= 0; d--) { description = description + "<br>" + description_multi[d] }
 	}
 	if (errors >= settings.max_errors) { document.getElementById("o"+num).innerHTML += " ... There may be additional errors. The first "+settings.max_errors+" errors were displayed.<br>" }
+	else if (settings.error_limit == 0 && errors >= 50) { document.getElementById("o"+num).innerHTML += " ... In total, "+errors+" errors were displayed.<br>" }
 	return [display,description]
 }
 
@@ -888,6 +891,7 @@ function toggleOriginalChoices(checked) {
 //	v: version (0 = PoD, 1 = PD2)
 // ---------------------------------
 function changeVersion(v) {
+	var prev_version = settings.version;
 	document.getElementById("version"+v).checked = true
 	v = Number(v)
 	settings.version = v
@@ -899,8 +903,10 @@ function changeVersion(v) {
 		params.set('v','PoD')
 		window.history.replaceState({}, '', `${location.pathname}`)
 	}
-	setPD2Codes()
-	simulate()
+	if (prev_version != v) {
+		setPD2Codes()
+		simulate()
+	}
 }
 
 // toggleAutoSimulation - 
