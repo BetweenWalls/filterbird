@@ -102,14 +102,14 @@ ItemDisplay[GEMTYPE=5]: %NAME%%ORANGE%Sapphire%CONTINUE% //Sapphires
 ItemDisplay[GEMTYPE=6]: %NAME%%ORANGE%Topaz%CONTINUE% //Topazes
 ItemDisplay[GEMTYPE=7]: %NAME%%ORANGE%Skull%CONTINUE% //Skulls
 //Append quantity after stacks
-ItemDisplay[RUNE>0 QTY>1]: %NAME% %GOLD%x%RED%%QTY%
+ItemDisplay[RUNE>0 QTY>1]: %GOLD%[%LIGHT_GRAY%%RUNENUM%%GOLD%] %NAME% %GOLD%x%RED%%QTY%
 ItemDisplay[GEM>3 QTY>1]: %NAME% %GOLD%x%RED%%QTY%
 
 
 //Display prettier runes with rune number in name
-ItemDisplay[RUNE<14]: %GOLD%[%LIGHT_GRAY%%RUNENUM%%GOLD%] %RUNENAME%%BORDER-00%%MAP-1D%%NOTIFY-F%																//el-shael
-ItemDisplay[RUNE>13 RUNE<20]: %RED%¤ %ORANGE%[%WHITE%%RUNENUM%%ORANGE%] %RUNENAME% %RED%¤%BORDER-00%%MAP-60%%NOTIFY-8%											//dol-fal
-ItemDisplay[RUNE>19 RUNE<23]: %PURPLE%¥%RED%¤ %RED%[%WHITE%%RUNENUM%%RED%] %RUNENAME% %RED%¤%PURPLE%¥%BORDER-00%%MAP-62%%NOTIFY-1%								//lem, pul, um
+ItemDisplay[RUNE<14 RUNE>0]: %GOLD%[%LIGHT_GRAY%%RUNENUM%%GOLD%] %RUNENAME%%BORDER-00%%MAP-1D%%NOTIFY-F%	//el-shael
+ItemDisplay[RUNE>13 RUNE<20]: %RED%¤ %ORANGE%[%WHITE%%RUNENUM%%ORANGE%] %RUNENAME% %RED%¤%BORDER-00%%MAP-60%%NOTIFY-8%	    //dol-fal
+ItemDisplay[RUNE>19 RUNE<23]: %PURPLE%¥%RED%¤ %RED%[%WHITE%%RUNENUM%%RED%] %RUNENAME% %RED%¤%PURPLE%¥%BORDER-00%%MAP-62%%NOTIFY-1%	//lem, pul, um
 ItemDisplay[RUNE>22]: %WHITE%[%DARK_GREEN%Holy shit%WHITE%]%NL%%PURPLE%ØØ %PURPLE%[%WHITE%%RUNENUM%%PURPLE%] %ORANGE%%RUNENAME% %PURPLE%[%WHITE%%RUNENUM%%PURPLE%] %PURPLE%ØØ%NL%%WHITE%[%DARK_GREEN%Holy shit%WHITE%]%BORDER-9B%%MAP-60%%NOTIFY-B%		//mal-zod																										// Shows the quantity of runes in a stack
 
 
@@ -156,17 +156,17 @@ ItemDisplay[NMAG ED=14]: %NAME% %BLUE%ED%WHITE%-%RED%14%CONTINUE%
 ItemDisplay[NMAG ED=15]: %NAME% %BLUE%ED%WHITE%-%RED%15%CONTINUE%
 
 //Append $ if the item has a value higher than 10k and player is below lvl 24, 20k and player below 45, 30k always
-ItemDisplay[NMAG CLVL<24 PRICE>9999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %WHITE%%NAME%%CONTINUE%
+ItemDisplay[NMAG SOCK=0 !ETH CLVL<24 PRICE>9999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %WHITE%%NAME%%CONTINUE%
 ItemDisplay[NMAG (ETH OR SOCK>0) CLVL<24 PRICE>9999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %GRAY%%NAME%%CONTINUE%
 ItemDisplay[MAG CLVL<24 PRICE>9999]: %DARK_GREEN%$ %BLUE%%NAME%%CONTINUE%
 ItemDisplay[RARE CLVL<24 PRICE>9999]: %DARK_GREEN%$ %YELLOW%%NAME%%CONTINUE%
 
-ItemDisplay[NMAG CLVL>23 CLVL<45 PRICE>19999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %WHITE%%NAME%%CONTINUE%
+ItemDisplay[NMAG SOCK=0 !ETH CLVL>23 CLVL<45 PRICE>19999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %WHITE%%NAME%%CONTINUE%
 ItemDisplay[NMAG (ETH OR SOCK>0) CLVL>23 CLVL<45 PRICE>19999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %GRAY%%NAME%%CONTINUE%
 ItemDisplay[MAG CLVL>23 CLVL<45 PRICE>19999]: %DARK_GREEN%$ %BLUE%%NAME%%CONTINUE%
 ItemDisplay[RARE CLVL>23 CLVL<45 PRICE>19999]: %DARK_GREEN%$ %YELLOW%%NAME%%CONTINUE%
 
-ItemDisplay[NMAG CLVL>44 PRICE>34999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %WHITE%%NAME%%CONTINUE%
+ItemDisplay[NMAG SOCK=0 !ETH CLVL>44 PRICE>34999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %WHITE%%NAME%%CONTINUE%
 ItemDisplay[NMAG (ETH OR SOCK>0) CLVL>44 PRICE>34999 (ARMOR OR WEAPON)]: %DARK_GREEN%$ %GRAY%%NAME%%CONTINUE%
 ItemDisplay[MAG CLVL>44 PRICE>34999]: %DARK_GREEN%$ %BLUE%%NAME%%CONTINUE%
 ItemDisplay[RARE CLVL>44 PRICE>34999]: %DARK_GREEN%$ %YELLOW%%NAME%%CONTINUE%
@@ -207,8 +207,6 @@ ItemDisplay[SET !ID (uh9 OR xul OR ne9 OR utc OR xmg)]: %NAME%%NL%%DARK_GREEN%Tr
 ItemDisplay[SET !ID (9vo OR xcl OR xrn OR mbl)]: %NAME%%NL%%DARK_GREEN%Hwanin
 ItemDisplay[SET !ID (6cs OR ult OR ci0)]: %NAME%%NL%%DARK_GREEN%Naj
 ItemDisplay[SET !ID (7ls OR upl OR xhl)]: %NAME%%NL%%DARK_GREEN%Sazabi
-
-
 
 
 // ------------------------------
@@ -455,7 +453,7 @@ ItemDisplay[NMAG !INF !RW bsd (SOCK=4 OR SOCK=5)]: %NAME%
 ItemDisplay[NMAG !INF !RW bsd SOCK=0 ILVL>25]: %NAME%
 
 //1H Axes - Norm
-ItemDisplay[NMAG !INF !RW CLVL<5+5 wax (SOCK=2 OR SOCK=3 OR SOCK=4)]: %NAME%
+ItemDisplay[NMAG !INF !RW CLVL<35 wax (SOCK=2 OR SOCK=3 OR SOCK=4)]: %NAME%
 
 //Shields - Norm
 ItemDisplay[NMAG !INF !RW CLVL<40 (((lrg OR kit) SOCK=3) OR ((spk OR bsh) SOCK=2))]: %NAME%
@@ -473,7 +471,8 @@ ItemDisplay[NMAG !INF !RW CLVL<30 cbw (SOCK=2 OR SOCK=3)]: %NAME%
 ItemDisplay[NMAG !INF !RW CLVL<30 rxb (SOCK=2 OR SOCK=3)]: %NAME%
 
 //Armors - Norm
-ItemDisplay[NMAG !INF !RW CLVL<30 (qui OR lea OR hla OR stu OR rng OR scl OR brs OR chn OR spl OR fld OR ltp OR aar) (SOCK=2 OR SOCK=3)]: %NAME%
+ItemDisplay[NMAG !INF !RW CLVL<30 (qui OR lea OR hla OR stu OR rng OR scl OR brs OR chn OR spl OR fld OR ltp OR aar) SOCK=2]: %NAME%{%ORANGE%Prudence, Smoke, Stealth%NL%%TAN%Possible RWs:}%CONTINUE% // All tiers, 2os
+ItemDisplay[NMAG !INF !RW CLVL<30 (qui OR lea OR hla OR stu OR rng OR scl OR brs OR chn OR spl OR fld OR ltp OR aar) SOCK=3]: %NAME%{%ORANGE%Principle, Rain, Treach, Wealth%NL%Lionheart, Myth, Peace,%NL%Enlighten, Gloom,%NL%Bone, Dragon, Duress, Enigma,%NL%%TAN%Possible RWs:}%CONTINUE% // All tiers, 3os
 
 //Helms - Norm
 ItemDisplay[NMAG !INF !RW CLVL<30 (cap OR skp OR hlm OR fhl OR msk OR bhm) (SOCK=2 OR SOCK=3)]: %NAME%
@@ -494,7 +493,7 @@ ItemDisplay[NMAG !INF !RW CLVL<80 SIN NORM !SOCK=1 !SOCK=2 !ETH]: %NAME%
 //Exceptional bases
 //-----------------
 //Polearms - NM
-ItemDisplay[NMAG !INF !RW (9s8 OR 9vo OR 9pa OR 9br OR 9tr) ((SOCK=4 OR SOCK=5) OR (SOCK=0 (ED>9 OR ETH)))]: %NAME%/(reformatted for FilterBird)
+ItemDisplay[NMAG !INF !RW (9s8 OR 9vo OR 9pa OR 9br OR 9tr) ((SOCK=4 OR SOCK=5) OR (SOCK=0 (ED>9 OR ETH)))]: %NAME%
 
 //1H Axes - NM
 ItemDisplay[NMAG !INF !RW CLVL<85 9wa (SOCK=2 OR SOCK=3 OR SOCK=4)]: %NAME%
@@ -516,8 +515,9 @@ ItemDisplay[NMAG !INF !RW CLVL<65 8rx SOCK=0 ED>9]: %NAME%
 ItemDisplay[NMAG !INF !RW CLVL<65 am7 (SOCK=2 OR SOCK=3 OR SOCK=4)]: %NAME%
 
 //Armors - NM
-ItemDisplay[NMAG !INF !RW CLVL<65 (xui OR xea OR xla OR xtu OR xng OR xcl OR xrs OR xtp) (SOCK=2 OR SOCK=3)]: %NAME%
-ItemDisplay[NMAG !INF !RW (xtp OR xld) (ED>9 OR ETH) SOCK=0]: %NAME%
+ItemDisplay[NMAG !INF !RW CLVL<65 (xui OR xea OR xla OR xtu OR xng OR xcl OR xrs OR xtp) SOCK=2]: %NAME%{%ORANGE%Prudence, Smoke, Stealth%NL%%TAN%Possible RWs:}
+ItemDisplay[NMAG !INF !RW CLVL<65 (xui OR xea OR xla OR xtu OR xng OR xcl OR xrs OR xtp) SOCK=3]: %NAME%{%ORANGE%Principle, Rain, Treach, Wealth%NL%Lionheart, Myth, Peace,%NL%Enlighten, Gloom,%NL%Bone, Dragon, Duress, Enigma,%NL%%TAN%Possible RWs:}
+ItemDisplay[NMAG !INF !RW (xtp OR xld) (ED>9 OR ETH) SOCK=0]: %NAME%{%TAN%& Perfect Topaz for sockets%NL%Larzuk or cube w/ Tal Rune, Thul Rune,}
 
 //Helms - NM
 ItemDisplay[NMAG !INF !RW CLVL<60 (xap OR xkp OR xlm OR xsk OR xh9) (SOCK=2 OR SOCK=3)]: %NAME%
@@ -566,8 +566,9 @@ ItemDisplay[NMAG !INF !RW amc (SOCK=2 OR SOCK=3 OR SOCK=4)]: %NAME%
 ItemDisplay[NMAG !INF !RW amc SOCK=0 ED>9]: %NAME%
 
 //Armors - Hell
-ItemDisplay[NMAG !INF !RW (uui OR uea OR ula OR utu OR urs OR utp) (SOCK=2 OR SOCK=3 OR SOCK=4)]: %NAME%
-ItemDisplay[NMAG !INF !RW (urd OR utp) (ED>9 OR ETH) SOCK=0]: %NAME%
+ItemDisplay[NMAG !INF !RW ((uui OR uea OR ula OR utu OR urs OR utp) OR ((uld OR utp) (ED>9 OR ETH))) SOCK=2]: %NAME%{%ORANGE%Prudence, Smoke, Stealth%NL%%TAN%Possible RWs:}
+ItemDisplay[NMAG !INF !RW ((uui OR uea OR ula OR utu OR urs OR utp) OR ((uld OR utp) (ED>9 OR ETH))) SOCK=3]: %NAME%{%ORANGE%Principle, Rain, Treach, Wealth%NL%Lionheart, Myth, Peace,%NL%Enlighten, Gloom,%NL%Bone, Dragon, Duress, Enigma,%NL%%TAN%Possible RWs:}
+ItemDisplay[NMAG !INF !RW ((uui OR uea OR ula OR utu OR urs OR utp) OR ((uld OR utp) (ED>9 OR ETH))) SOCK=4]: %NAME%{%ORANGE%Fortitude, Stone%NL%Bramble, Chains of Honor,%NL%%TAN%Possible RWs:}
 
 //Helms - Hell
 ItemDisplay[NMAG !INF !RW CLVL<85 (uap OR ukp OR usk OR uh9) (SOCK=2 OR SOCK=3)]: %NAME%
@@ -585,7 +586,7 @@ ItemDisplay[NMAG !INF !RW NEC ELT !SOCK=1 !ETH]: %NAME%
 ItemDisplay[NMAG !INF !RW CLVL<80 SIN ELT !SOCK=1 !SOCK=2 !ETH]: %NAME%
 
 //Zon Bows - Hell
-ItemDisplay[NMAG !INF |RW ZON ELT !SOCK=1]: %NAME%
+ItemDisplay[NMAG !INF RW ZON ELT !SOCK=1]: %NAME%
 
 
 //------------------------------------------------------------------

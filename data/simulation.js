@@ -529,6 +529,9 @@ function parseFile(file,num) {
 							if (desc_output_total != "" && desc_output != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's description overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's description gets overwritten (but not blanked)
 							desc_output_total = desc_output
 						}
+					} else {
+						if (desc_output_total != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's description overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's description gets overwritten (but not blanked) from lack of continuation
+						desc_output_total = ""
 					}
 				}
 				if (output.includes("%NAME%") == true) {
@@ -539,10 +542,7 @@ function parseFile(file,num) {
 				}
 				if (output.includes("%CONTINUE%") == false) {
 					done = true
-					if (desc_output_active == false) {
-						if (desc_output_total != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's description overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's description gets overwritten (but not blanked) from lack of continuation
-						desc_output_total = ""
-					} else {
+					if (desc_output_active == true) {
 						if (desc_output_total != "" && output_total == "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item description on hidden item) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item description isn't hidden, but the item is
 					}
 				}

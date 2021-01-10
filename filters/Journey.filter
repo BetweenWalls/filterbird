@@ -1,6 +1,6 @@
 /⃓═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 /	"Journey" Item Filter for Diablo II: Path of Diablo
-/		Date Updated:	28 DEC 2020
+/		Date Updated:	29 DEC 2020
 /		Info:		https://github.com/BetweenWalls/Journey
 /		Direct URL:	https://raw.githubusercontent.com/BetweenWalls/Journey/master/item.filter
 /⃓═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -870,81 +870,6 @@ ItemDisplay[NMAG (CL7 !WP6) ((NORM CLVL>39) OR (EXC CLVL>69 !((SOCK=0 OR SOCK>3)
 /⃓̲    low res/damage - levels 40, 70, 90
 ItemDisplay[NMAG (CL3 ((ETH (SOCK<4 SOCK>0)) OR (SOCK=1 CLVL>14) OR (SOCK=2 CLVL>79 (NORM OR EXC))))]:
 ItemDisplay[NMAG (CL3 ((CLVL>39 ((RES>0 RES<25) OR (ITEMSTAT18>0 ITEMSTAT18<40))) OR (CLVL>69 (((RES>0 RES<35) OR (ITEMSTAT18>0 ITEMSTAT18<50)) OR (NORM ((RES>0 RES<40) OR (ITEMSTAT18>0 ITEMSTAT18<55))))) OR (CLVL>89 ((RES>0 RES<40) OR (ITEMSTAT18>0 ITEMSTAT18<55)) !SOCK>2)))]: 
-
-
-/⃓̲═╡ TESTING START ╞═════════════════════════════════════════════════════════════════════════════════════════════════════
-/⃓̲ TODO: Hide any regular class items that should be hidden (to prevent them from sometimes having blank names instead of being entirely hidden)
-
-/⃓̲ Hidden: Pointmod Items
-/⃓̲ Assassin - Katars
-/ItemDisplay[NMAG CL5 (NORM OR 9ar OR 9wb OR 9xf)]:				// Katars that don't drop with pointmods (already hidden)
-/ItemDisplay[NMAG CL5 (SOCK=1 OR SOCK=2 OR 9cs OR 7xf OR 7cs)]:			// Katars that can't get 3 sockets
-/ItemDisplay[NMAG CL5 !(SK277>2 OR SK272>2 OR SK262>2 OR SK266>2 OR SK267>2 OR SK278>2 OR SK273>2 OR SK271>2 OR SK261>2 OR SK276>2 OR (SK278>1 SK277>1) OR SK270>2 OR (ELT (ETH OR ED>0)))]:		// Katars with specific rules in Assassin category (other than "+2 to any of the above skills")
-/⃓̲ Barbarian - Primal Helms
-/ItemDisplay[NMAG CL2 SOCK=1]:							// 1-socket
-/ItemDisplay[NMAG CL2 !(SK151>0 OR SK147>0 OR (SK149>1 (SK154>1 OR SK138>1)) OR SK149>2 OR SK154>2 OR SK138>2 OR SK150>2 OR SK142>2 OR SK133>2)]:		// specific rules
-/⃓̲ Druid - Pelts
-/ItemDisplay[NMAG CL1 SOCK=1]:							// 1-socket
-/ItemDisplay[NMAG CL1 !((SK237>1 SK247>1) OR SK250>2 OR SK238>2 OR SK232>2 OR SK248>2 OR SK243>2 OR SK239>2 OR ((SK249>0 OR SK250>0) (SK232>2 OR SK238>2 OR SK239>2 OR SK243>2 OR SK248>2 OR SK247>2 OR SK237>2 OR SK236>2)) OR (SK250>0 SK249>0) OR SK247>2 OR SK237>2 OR SK236>2 OR SK245>2 OR SK240>2 OR SK249>2 OR SK244>2 OR )]:		// specific rules
-/⃓̲ Necromancer - Wands & Totems
-/ItemDisplay[NMAG (CL4 OR WP12) (SOCK=1 OR wnd OR ywn OR 9wn)]:			// 1-socket or incapable of more than 1-socket (not useable for runeword)
-/ItemDisplay[NMAG (CL4 OR WP12) !()]:		// TODO
-/⃓̲ Paladin - Scepters
-/ItemDisplay[NMAG WP13 (SOCK=1 OR SOCK=2 OR scp OR 9sc OR 7sc)]:			// 1-socket or 2-socket or incapable of more than 2-socket
-/ItemDisplay[NMAG WP13 !()]:			// TODO
-/⃓̲ Sorceress - Orbs & Staves
-/ItemDisplay[NMAG CL6 !((ob5 OR oba OR obf) (SOCK>2 OR SOCK=0))]:		// 1-socket or 2-socket or incapable of more than 2-socket (not useable for runeword)
-/ItemDisplay[NMAG (CL6 OR WP11) !()]:		// TODO
-
-
-
-/⃓̲ Low Precedence Category (COPIED)	...TODO: merge here
-
-/⃓̲ Obscured/Hidden: Regular Skill-Capable Merchant Items - levels 7, 15
-/ItemDisplay[NMAG ((ILVL=12 CLVL>6) OR (ILVL=20 CLVL>14)) (WP11 OR WP12 OR WP13)]:%GRAY%
-/⃓̲ Hidden: Regular skill-capable items with poor traits for selling: eth or more than 4 inventory spaces  (ilvl 10+)
-/ItemDisplay[NMAG ILVL>9 (ETH OR wsp OR 9ws OR 7ws OR wst OR 8ws OR 6ws)]:
-
-/⃓̲ Regular Class-Related Sale Items  (shown when below 100,000 g)
-/⃓̲    with item prices (level 50+)
-/⃓̲    without item prices
-/ItemDisplay[NMAG CLVL>49 !(CHARSTAT15>100000 OR CHARSTAT14>100000) (CL6 OR WP12 OR WP13 OR WP11 OR CL5 OR CL1 OR CL2 OR CL4)]: %NAME% %GRAY%(%DGREEN%$%PRICE%%GRAY%)%DGREEN%
-/ItemDisplay[NMAG !(CHARSTAT15>100000 OR CHARSTAT14>100000) (CL6 OR WP12 OR WP13 OR WP11 OR CL5 OR CL1 OR CL2 OR CL4)]: %NAME%%DGREEN%
-
-/⃓̲ Hidden: Low-Value Sale Items  (less than 7500 gold per inventory space) - level 60
-/ItemDisplay[CLVL>59 NMAG (CL6 !(((SK51>2 OR SK52>2 OR SK53>2 OR SK54>2 OR SK55>2 OR SK56>1 OR SK57>1 OR SK58>1 OR SK59>1 OR SK60>1) ((ELT SUP) OR ((ELT OR SUP) !(ob5 OR oba OR obf)))) OR ((SK56>2 OR SK57>2 OR SK58>2 OR SK59>2 OR SK60>2) (ELT OR SUP OR !(ob5 OR oba OR obf))) OR SK61>1 OR SK62>1 OR SK63>1 OR SK64>1 OR SK65>1 OR ((SK61>0 OR SK62>0 OR SK63>0 OR SK64>0 OR SK65>0) SUP !(ob5 OR oba OR obf))))]:
-/ItemDisplay[CLVL>59 NMAG (WP11 !(((SK46>2 OR SK47>2 OR SK48>2 OR SK49>2 OR SK50>2) (SUP OR 6ss)) OR ((SK51>1 OR SK52>1 OR SK53>1 OR SK54>1 OR SK55>1) (SUP OR sst OR 8ss OR 6ss)) OR ((SK56>0 OR SK57>0 OR SK58>0 OR SK59>0 OR SK60>0) SUP) OR SK61>0 OR SK62>0 OR SK63>0 OR SK64>0 OR SK65>0 OR SK51>2 OR SK52>2 OR SK53>2 OR SK54>2 OR SK55>2 OR SK56>1 OR SK57>1 OR SK58>1 OR SK59>1 OR SK60>1 OR ((SK46>1 OR SK47>1 OR SK48>1 OR SK49>1 OR SK50>1) 6ss)))]:
-/ItemDisplay[CLVL>59 NMAG (CL4 !(((SK81>2 OR SK82>2 OR SK83>2 OR SK84>2 OR SK85>2) ELT SUP) OR ((SK86>2 OR SK87>2 OR SK88>2 OR SK89>2 OR SK90>2) SUP) OR ((SK91>1 OR SK92>1 OR SK93>1 OR SK94>1 OR SK95>1) (ELT OR SUP)) OR ((SK86>1 OR SK87>1 OR SK88>1 OR SK89>1 OR SK90>1) ELT SUP) OR SK91>2 OR SK92>2 OR SK93>2 OR SK94>2 OR SK95>2))]:
-/ItemDisplay[CLVL>59 NMAG (WP12 !(((SK71>2 OR SK72>2 OR SK73>2 OR SK74>2 OR SK75>2) ELT SUP) OR ((SK76>1 OR SK77>1 OR SK78>1 OR SK79>1 OR SK80>1) (ELT OR SUP)) OR ((SK81>0 OR SK82>0 OR SK83>0 OR SK84>0 OR SK85>0) SUP) OR SK86>0 OR SK87>0 OR SK88>0 OR SK89>0 OR SK90>0 OR SK91>0 OR SK92>0 OR SK93>0 OR SK94>0 OR SK95>0 OR SK76>2 OR SK77>2 OR SK78>2 OR SK79>2 OR SK80>2 OR SK81>1 OR SK82>1 OR SK83>1 OR SK84>1 OR SK85>1))]:
-/ItemDisplay[CLVL>59 NMAG (WP13 !(((SK101>2 OR SK102>2 OR SK103>2 OR SK104>2 OR SK105>2) ELT SUP) OR ((SK106>1 OR SK107>1 OR SK108>1 OR SK109>1 OR SK110>1) ELT) OR SK111>1 OR SK112>1 OR SK113>1 OR SK114>1 OR SK115>1 OR ((SK116>0 OR SK117>0 OR SK118>0 OR SK119>0 OR SK120>0) (ELT OR SUP)) OR SK121>0 OR SK122>0 OR SK123>0 OR SK124>0 OR SK125>0 OR ((SK106>2 OR SK107>2 OR SK108>2 OR SK109>2 OR SK110>2) SUP) OR ((SK111>0 OR SK112>0 OR SK113>0 OR SK114>0 OR SK115>0) SUP ELT) OR SK116>1 OR SK117>1 OR SK118>1 OR SK119>1 OR SK120>1))]:
-/ItemDisplay[CLVL>59 NMAG (CL2 !(((SK143>2 OR SK144>2 OR SK145>2 OR SK146>2 OR SK147>1 OR SK148>1 OR SK149>1 OR SK150>1) ELT SUP) OR ((SK147>2 OR SK148>2 OR SK149>2 OR SK150>2) (ELT OR SUP)) OR ((SK151>1 OR SK152>1 OR SK153>1 OR SK154>1 OR SK155>1) (ELT OR SUP)) OR SK151>2 OR SK152>2 OR SK153>2 OR SK154>2 OR SK155>2))]:
-/ItemDisplay[CLVL>59 NMAG (CL1 !(((SK238>2 OR SK239>2 OR SK240>2 OR SK241>2 OR SK242>1 OR SK243>1 OR SK244>1 OR SK245>1) ELT SUP) OR ((SK242>2 OR SK243>2 OR SK244>2 OR SK245>2) (ELT OR SUP)) OR ((SK246>1 OR SK247>1 OR SK248>1 OR SK249>1 OR SK250>1) (ELT OR SUP)) OR SK246>2 OR SK247>2 OR SK248>2 OR SK249>2 OR SK250>2))]:
-/ItemDisplay[CLVL>59 NMAG (CL5 !(((SK268>2 OR SK269>2 OR SK270>2 OR SK271>2 OR SK272>1 OR SK273>1 OR SK274>1 OR SK275>1) ELT SUP) OR ((SK272>2 OR SK273>2 OR SK274>2 OR SK275>2) (ELT OR SUP)) OR SK276>1 OR SK277>1 OR SK278>1 OR SK279>1 OR SK280>2))]:
-
-/⃓̲ Regular Class-Related Sale Items  (7500+ gold per inventory space)
-/⃓̲      Item Size	Items Included						Conditions Shown
-/⃓̲	2		wands, orbs  (15000+ gps, item price displayed)		below 800,000 g
-/⃓̲	2		wands, orbs  (15000+ gps)				always  (if stash isn't full)
-/⃓̲	2-3		wands, orbs, staves, scepters, claws			below 600,000 g
-/⃓̲	4		staves, class helmets, totems				below 300,000 g
-/ItemDisplay[(NMAG !(CHARSTAT15>800000 OR CHARSTAT14>800000)) (((CL6 !(ob5 OR oba OR obf)) (SK61>2 OR SK62>2 OR SK63>2 OR SK64>2 OR SK65>2 OR (SUP (SK56>2 OR SK57>2 OR SK58>2 OR SK59>2 OR SK60>2 OR SK61>1 OR SK62>1 OR SK63>1 OR SK64>1 OR SK65>1)))) OR (WP12 (SK91>0 OR SK92>0 OR SK93>0 OR SK94>0 OR SK95>0 OR ((SK86>1 OR SK87>1 OR SK88>1 OR SK89>1 OR SK90>1) OR (SUP (SK86>0 OR SK87>0 OR SK88>0 OR SK89>0 OR SK90>0))) OR ((SK81>2 OR SK82>2 OR SK83>2 OR SK84>2 OR SK85>2) OR ((ELT OR SUP) (SK81>1 OR SK82>1 OR SK83>1 OR SK84>1 OR SK85>1))) OR (SUP (SK76>2 OR SK77>2 OR SK78>2 OR SK79>2 OR SK80>2)))))]: %NAME% %GRAY%(%DGREEN%$%PRICE%%GRAY%)%DGREEN%
-/ItemDisplay[(NMAG CHARSTAT15<2500000) (((CL6 !(ob5 OR oba OR obf)) (SK61>2 OR SK62>2 OR SK63>2 OR SK64>2 OR SK65>2 OR (SUP (SK56>2 OR SK57>2 OR SK58>2 OR SK59>2 OR SK60>2 OR SK61>1 OR SK62>1 OR SK63>1 OR SK64>1 OR SK65>1)))) OR (WP12 (SK91>0 OR SK92>0 OR SK93>0 OR SK94>0 OR SK95>0 OR ((SK86>1 OR SK87>1 OR SK88>1 OR SK89>1 OR SK90>1) OR (SUP (SK86>0 OR SK87>0 OR SK88>0 OR SK89>0 OR SK90>0))) OR ((SK81>2 OR SK82>2 OR SK83>2 OR SK84>2 OR SK85>2) OR ((ELT OR SUP) (SK81>1 OR SK82>1 OR SK83>1 OR SK84>1 OR SK85>1))) OR (SUP (SK76>2 OR SK77>2 OR SK78>2 OR SK79>2 OR SK80>2)))))]: %NAME%%DGREEN%
-/ItemDisplay[(NMAG !(CHARSTAT15>600000 OR CHARSTAT14>600000)) (WP12 OR CL6 OR CL5 OR WP13 OR sst OR 8ss OR 6ss)]: %NAME% %GRAY%(%DGREEN%$%PRICE%%GRAY%)%DGREEN%
-/ItemDisplay[(NMAG !(CHARSTAT15>300000 OR CHARSTAT14>300000)) (CL1 OR CL2 OR CL4 OR WP11)]: %NAME% %GRAY%(%DGREEN%$%PRICE%%GRAY%)%DGREEN%
-/⃓̲	Same Items/Conditions, but no prices shown
-/ItemDisplay[(NMAG CHARSTAT15<2500000) (((CL6 !(ob5 OR oba OR obf)) (SK61>2 OR SK62>2 OR SK63>2 OR SK64>2 OR SK65>2 OR (SUP (SK56>2 OR SK57>2 OR SK58>2 OR SK59>2 OR SK60>2 OR SK61>1 OR SK62>1 OR SK63>1 OR SK64>1 OR SK65>1)))) OR (WP12 (SK91>0 OR SK92>0 OR SK93>0 OR SK94>0 OR SK95>0 OR ((SK86>1 OR SK87>1 OR SK88>1 OR SK89>1 OR SK90>1) OR (SUP (SK86>0 OR SK87>0 OR SK88>0 OR SK89>0 OR SK90>0))) OR ((SK81>2 OR SK82>2 OR SK83>2 OR SK84>2 OR SK85>2) OR ((ELT OR SUP) (SK81>1 OR SK82>1 OR SK83>1 OR SK84>1 OR SK85>1))) OR (SUP (SK76>2 OR SK77>2 OR SK78>2 OR SK79>2 OR SK80>2)))))]: %NAME%%DGREEN%
-/ItemDisplay[(NMAG !(CHARSTAT15>600000 OR CHARSTAT14>600000)) (WP12 OR CL6 OR CL5 OR WP13 OR sst OR 8ss OR 6ss)]: %NAME%%DGREEN%
-/ItemDisplay[(NMAG !(CHARSTAT15>300000 OR CHARSTAT14>300000)) (CL1 OR CL2 OR CL4 OR WP11)]: %NAME%%DGREEN%
-
-/⃓̲═╡ TESTING END ╞═════════════════════════════════════════════════════════════════════════════════════════════════════
-
-
-
-
-
-
-
-
 
 /⃓̲ Modification: Ethereal/Superior/Sockets
 ItemDisplay[NMAG !ETH]: %WHITE%%NAME%%CONTINUE%

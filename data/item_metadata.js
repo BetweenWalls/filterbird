@@ -1388,7 +1388,7 @@ var codes = {
 	// TODO: many skills are still unsupported, and there's no error handling for them - having multiple elements here refer to the same code (or vice versa) may not work
 	ethereal:"ETH", max_durability:"ITEMSTAT75", money:"GOLD", 
 	// TODO: ITEMSTAT57 & ITEMSTAT58 (min and max poison damage) should apply if pDamage_all is used instead of pDamage_min & pDamage_max
-	//skill_Cold_Enchant:"SK40", skill_Inferno:"SK41", skill_Lightning:"SK49", skill_Enchant_Fire:"SK52", skill_Skeleton_Mastery:"SK69", skill_Poison_Dagger:"SK73", skill_Golem_Mastery:"SK79", skill_Bone_Prison:"SK88", skill_Thorns:"SK103", skill_General_Mastery:"SK128", skill_Throwing_Mastery:"SK135", skill_Polearm_and_Spear_Mastery:"SK136", skill_Double_Throw:"SK140", skill_Combat_Reflexes:"SK141", skill_Berserk:"SK152", skill_Tiger_Strike:"SK254", skill_Blade_Sentinel:"SK257", skill_Fists_of_Fire:"SK259", skill_Dragon_Claw:"SK260", skill_Cobra_Strike:"SK265", skill_Claws_of_Thunder:"SK269", skill_Chain_Lightning_Sentry:"SK271", skill_Phoenix_Strike:"SK280", 
+	skill_Cold_Enchant:"SK40", skill_Inferno:"SK41", skill_Lightning:"SK49", skill_Enchant_Fire:"SK52", skill_Skeleton_Mastery:"SK69", skill_Poison_Dagger:"SK73", skill_Golem_Mastery:"SK79", skill_Bone_Prison:"SK88", skill_Thorns:"SK103", skill_General_Mastery:"SK128", skill_Throwing_Mastery:"SK135", skill_Polearm_and_Spear_Mastery:"SK136", skill_Double_Throw:"SK140", skill_Combat_Reflexes:"SK141", skill_Berserk:"SK152", skill_Tiger_Strike:"SK254", skill_Blade_Sentinel:"SK257", skill_Fists_of_Fire:"SK259", skill_Dragon_Claw:"SK260", skill_Cobra_Strike:"SK265", skill_Claws_of_Thunder:"SK269", skill_Chain_Lightning_Sentry:"SK271", skill_Phoenix_Strike:"SK280", 
 };
 
 var item_groups = {
