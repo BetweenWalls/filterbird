@@ -1759,7 +1759,7 @@ function setItemCodes() {
 	} else {itemToCompare.UNI = true }
 	if (itemToCompare.type == "rune") { itemToCompare.RUNENAME = itemToCompare.name.split(" ")[0] }
 	itemToCompare[itemToCompare.CODE] = true
-	if (typeof(itemToCompare.velocity) != 'undefined') { if (itemToCompare.velocity < 0) { itemToCompare.velocity += 100000 } }	// negative values overflow for this in-game code
+	//if (typeof(itemToCompare.velocity) != 'undefined') { if (itemToCompare.velocity < 0) { itemToCompare.velocity += 100000 } }	// negative values overflow for this in-game code
 	if (typeof(itemToCompare.always_id) == 'undefined') { itemToCompare.always_id = false }
 	if (itemToCompare.always_id == false && item_settings.ID == false) { itemToCompare.ID = false }
 	if (typeof(itemTemp.ethereal) != 'undefined') { if (itemTemp.ethereal == 1) { itemToCompare.ETH = true } }	// TODO: fix so that this line isn't needed twice in this function
@@ -1832,6 +1832,7 @@ function setPD2Codes() {
 		}
 		for (aff in code_affixes) {
 			if (typeof(itemToCompare[codes[aff]]) != 'undefined') { itemToCompare[code_affixes[aff]] = itemToCompare[codes[aff]] }
+			if (code_affixes[aff] == "FRW") { if (typeof(itemToCompare[codes["frw"]]) != 'undefined' || typeof(itemToCompare[codes["velocity"]]) != 'undefined') { itemToCompare[code_affixes[aff]] = ~~itemToCompare[codes["frw"]] + ~~itemToCompare[codes["velocity"]] } }	// speed penalties from armor are counted as FRW in PD2
 		}
 		for (aff in code_other) {
 			if (typeof(itemToCompare[aff]) != 'undefined') { itemToCompare[code_other[aff]] = itemToCompare[aff] }

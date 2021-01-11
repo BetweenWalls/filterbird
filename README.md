@@ -7,7 +7,14 @@ Diablo II Filter Simulation (Path of Diablo & Project Diablo II)
 * Compare aesthetics of multiple filters
 * Determine whether a filter shows what you're looking for
 * Diagnose filter problems
-* Discover how many rules are processed to display different items
+* Discover which rules are responsible for displaying/hiding different items
+
+### Notes:
+This was originally made for Path of Diablo, and some features may still reflect that for the PD2 version:
+* Unique/Set/Runeword item stats and item corruptions are from PoD
+* Skill charges were never fully implemented, so no items can be selected that would match on "CHSK" codes
+* "FOOLS" code unimplemented
+* Notifications & minimap icons unimplemented
 
 ### Future Goals:
 * Allow multiple items to be viewed simultaneously

@@ -154,7 +154,7 @@ function setItem(value) {
 					if (item.type == "jewel") { itemToCompare.CODE = "jew"; itemToCompare.base = "Jewel"; }
 					else if (item.type == "rune") { itemToCompare.RUNENAME = itemToCompare.name.split(" ")[0] }
 					else if (item.type == "gem") {
-						var g_level = [0,"Chipped","Flawed","Standard","Flawless","Perfect"];
+						var g_level = [0,"Chipped","Flawed","Normal","Flawless","Perfect"];
 						var g_type = [0,"Amethyst","Diamond","Emerald","Ruby","Sapphire","Topaz","Skull"];
 						itemToCompare.GLEVEL = g_level[itemToCompare.GEMLEVEL]
 						itemToCompare.GTYPE = g_type[itemToCompare.GEMTYPE]
@@ -378,6 +378,7 @@ function parseFile(file,num) {
 					if (c == "GEM") { c = "GEMLEVEL" }
 					if (c == "RUNENUM" || c == "RUNENAME") { c = "RUNE" }
 					var number = false;
+					var value_is_negative = false;
 					if (isNaN(Number(c)) == false) { cond_list[cond] = Number(c); number = true; }
 					if (((c == "GEMLEVEL" || c == "GEMTYPE") && itemToCompare.type != "gem") || (c == "RUNE" && itemToCompare.type != "rune") || (c == "GOLD" && itemToCompare.CODE != "GOLD")) { c_falsify = true }	// TODO: Other codes may work similarly to this, rather than simply being set to 0 if they aren't recognized (example: in PD2, DIFFICULTY matches on every item if it is 0, 1, or 2) ...but is it really worth implementing invalid codes correctly?
 					if (number == false && c != "(" && c != ")" && c != "≤" && c != "≥" && c != "<" && c != ">" && c != "=" && c != "|" && c != "&" && c != "+" && c != "!") {
@@ -406,28 +407,46 @@ function parseFile(file,num) {
 							if (recognized == false) {
 								document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized condition on line "+line_num+": <l style='color:#c55'>"+c+"</l> ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"; errors++;	// displays an error if the rule has an unrecognized/invalid condition
 							}
+							// TODO: Add notice for recognized/valid conditions that aren't fully supported? Or are those all just conditions that can't be added to selectable items? (e.g. CHSK codes for PD2)
 						}
 						// refactor conditions
 						if (c == "DIFF") { c = "DIFFICULTY" }				// these could be disabled (i.e. set to 0) for PD2 or PoD, but that wouldn't produce correct behavior since a value of 0 is normal
 						if (settings.version == 0) { if (c == "PRICE") { c = "invalid_"+c } }		// TODO: Should the price dropdown menu be available for PoD? The PRICE condition can still be invalid.
-						else { if (c.substr(0,8) == "CHARSTAT") { c = "invalid_"+c; itemToCompare[c] = 0; } }
+						else {
+							if (c.substr(0,8) == "CHARSTAT") { c = "invalid_"+c; itemToCompare[c] = 0; }
+							if (c == "GEMLEVEL" && itemToCompare[c] > 3 && itemToCompare.CODE.length == 3) { itemToCompare[c] = 0 }
+						}
 						// set condition values
-						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { if (typeof(character[c]) == 'undefined') { character[c] = 0 } }
+						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") {
+							if (typeof(character[c]) == 'undefined') { character[c] = 0 }
+							else if (~~Number(character[c]) < 0) { value_is_negative = true }
+						}
 						else if (typeof(itemToCompare[c]) == 'undefined' && (c == "GOLD" || c == "RUNE" || c == "GEMLEVEL" || c == "GEMTYPE")) { itemToCompare[c] = 0 }		// TODO: Even though '0' and 'false' seem to be equivalent here, it might be useful to only have boolean conditions be set to false
 						else if (typeof(itemToCompare[c]) == 'undefined') { itemToCompare[c] = false }
+						else if (~~Number(itemToCompare[c]) < 0) { value_is_negative = true }
 						// add to formula
 						if (c_falsify == true) { formula += "false " }
-						else if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") { formula += character[c]+" " }
-						else { formula += itemToCompare[c]+" " }
+						else if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") {
+							if (value_is_negative == true) { formula += (2000000000+Number(character[c]))+" " }			// converts negative values to their equivalent 'unsigned' value
+							else { formula += character[c]+" " }
+						}
+						else {
+							if (value_is_negative == true) { formula += (2000000000+Number(itemToCompare[c]))+" " }		// converts negative values to their equivalent 'unsigned' value
+							else { formula += itemToCompare[c]+" " }
+						}
 					} else {
 						if (c_falsify == true) { if (number == true) { c_falsify = false } }
+						else if (c == "!") { formula += "!" }
 						else if (c == "&") { formula += "&& " }
 						else if (c == "|") { formula += "|| " }
 						else if (c == "=") { formula += "== " }
 						else if (c == "≤") { formula += "<= " }
 						else if (c == "≥") { formula += ">= " }
-						else if (c == "!") { formula += "!" }
-						else { formula += c+" " }
+						else {
+							if (number == true) { if (Number(c) < 0) { value_is_negative = true } }
+							if (value_is_negative == true) { formula += (2000000000+Number(c))+" " }					// converts negative values to their equivalent 'unsigned' value
+							else { formula += c+" " }
+						}
 					}
 					if (neg_paren_close > 0 && neg_paren_close == cond) { formula += ") "; neg_paren_close = 0; }
 					if (c == "!" && cond_list.length > cond+3) { if ((isNaN(Number(cond_list[cond+1])) == false || isNaN(Number(cond_list[cond+3])) == false) && (cond_list[cond+2] == "=" || cond_list[cond+2] == ">" || cond_list[cond+2] == "<" || cond_list[cond+2] == "≤" || cond_list[cond+2] == "≥")) { formula += "( "; neg_paren_close = cond+3; } }
@@ -608,6 +627,24 @@ function parseFile(file,num) {
 			if (o == "ref_CLVL") { temp = character.CLVL }
 			else if (o == "ref_NAME") { blank = true }
 			else if (settings.version == 1 && o == "ref_RUNENAME" && itemToCompare.RUNE > 0) { color = colors["ORANGE"]; temp = itemToCompare.RUNENAME; }
+			else if (o == "ref_GLEVEL") {
+				if (itemToCompare.type == "gem") {
+					var g_level = ["NONE","Chipped","Flawed","Normal","Flawless","Perfect"];
+					itemToCompare.GLEVEL = g_level[itemToCompare.GEMLEVEL]
+					temp = itemToCompare[o.split("_")[1]]
+				} else {
+					blank = true
+				}
+			}
+			else if (o == "ref_GTYPE") {
+				if (itemToCompare.type == "gem") {
+					var g_type = [0,"Amethyst","Diamond","Emerald","Ruby","Sapphire","Topaz","Skull"];
+					itemToCompare.GTYPE = g_type[itemToCompare.GEMTYPE]
+					temp = itemToCompare[o.split("_")[1]]
+				} else {
+					blank = true
+				}
+			}
 			else { temp = itemToCompare[o.split("_")[1]] }
 		} else if (o == " " || o == "\t" || o == "‗") {
 			blank = true
