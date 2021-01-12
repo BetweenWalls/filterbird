@@ -94,7 +94,7 @@ ItemDisplay[gly OR glys]: %NAME%{%TAN%3 Flawless Topaz + Key = Perfect Topaz} //
 ItemDisplay[gpy OR gpys]: %NAME%%DOT-20% // Perfect Topaz
 
 // Runes
-ItemDisplay[RUNE<11 RUNE>0]: %DARK_GREEN%%RUNENAME% (%RUNENUM%)%DOT-76%%CONTINUE% // El-Thul/(reformatted for FilterBird)
+ItemDisplay[RUNE<11]: %DARK_GREEN%%RUNENAME% (%RUNENUM%)%DOT-76%%CONTINUE% // El-Thul
 ItemDisplay[RUNE>10 RUNE<24]: %ORANGE%%RUNENAME% (%RUNENUM%)%MAP-0B%%CONTINUE% // Amn-Mal
 ItemDisplay[RUNE>23]: %RED%%RUNENAME% (%RUNENUM%)%BORDER-50%%CONTINUE% // Ist-Zod
 ItemDisplay[RUNE>0 QTY>0]: %NAME% x%QTY%%CONTINUE% // Shows the quantity of runes for stacking purposes

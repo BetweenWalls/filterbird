@@ -1965,7 +1965,7 @@ var premade = {
 {CODE:"ceh", name:"Charged Essence of Hatred", rarity:"regular", color:"ORANGE"},
 {CODE:"bet", name:"Burning Essence of Terror", rarity:"regular", color:"ORANGE"},
 {CODE:"fed", name:"Festering Essence of Destruction", rarity:"regular", color:"ORANGE"},
-{CODE:"toa", name:"Token of Absolution", rarity:"regular", color:"ORANGE"},	// TODO: static_ILVL:1?
+{CODE:"toa", name:"Token of Absolution", rarity:"regular", color:"ORANGE", static_ILVL:1},
 {CODE:"pk1", name:"Key of Terror", rarity:"regular", color:"ORANGE"},
 {CODE:"pk2", name:"Key of Hatred", rarity:"regular", color:"ORANGE"},
 {CODE:"pk3", name:"Key of Destruction", rarity:"regular", color:"ORANGE"},

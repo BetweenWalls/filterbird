@@ -186,7 +186,7 @@ ItemDisplay[ELT SOCK>1 !RW]:	%NAME%%ORANGE%rwb%CONTINUE%
 ItemDisplay[MAG (uvg OR umg OR umc OR uvc OR ulb OR (ELT AXE))]: %NAME%%GREEN%[%ORANGE%craft%GREEN%]%CONTINUE%
 
 // Making sure Uniques, Set items and potentially decent bases always notify and show on the minimap
-ItemDisplay[UNI OR SET OR (SOCK>1 ELT)]: %NAME%%MAP-9B%/(reformatted for FilterBird)
+ItemDisplay[UNI OR SET OR (SOCK>1 ELT)]: %NAME%%MAP-9B%//(reformatted for FilterBird)
 
 /// PD2 Item Handling
 // Showing Item as is, with Notificaction and some visual appeal

@@ -54,7 +54,7 @@ ItemDisplay[gly OR glys OR gpy OR gpys]:%NAME% %ORANGE%[%YELLOW%O%ORANGE%]%CONTI
 ItemDisplay[skl OR skls OR skz OR skzs]:%NAME% %ORANGE%[%GRAY%O%ORANGE%]%CONTINUE%//Skull
 
 //Show me runes
-ItemDisplay[RUNE<18 RUNE>0]:%ORANGE%%RUNENAME% Rune %GRAY%[%TAN%%RUNENUM%%GRAY%]%CONTINUE%/(reformatted for FilterBird)
+ItemDisplay[RUNE<18]:%ORANGE%%RUNENAME% Rune %GRAY%[%TAN%%RUNENUM%%GRAY%]%CONTINUE%
 ItemDisplay[RUNE>17 AND RUNE<20]:%ORANGE%* %RUNENAME% Rune %GRAY%[%TAN%%RUNENUM%%GRAY%]%ORANGE% *%CONTINUE%
 ItemDisplay[RUNE>19 AND RUNE<26]:%DOT-62%%ORANGE%** %RUNENAME% Rune %GRAY%[%TAN%%RUNENUM%%GRAY%]%ORANGE% **%CONTINUE%
 ItemDisplay[RUNE>25]:%DOT-62%%ORANGE%*** %RUNENAME% Rune %GRAY%[%TAN%%RUNENUM%%GRAY%]%ORANGE% ***%CONTINUE%
@@ -127,7 +127,7 @@ ItemDisplay[leg OR ear OR tbk OR ibk]:%NAME%
 // *--------Runeword Bases---------*
 
 //Spirit
-ItemDisplay[NMAG crs !RW !INF !ETH SOCK=4]:%NAME% %TAN%[RW]%CONTINUE%/(reformatted for FilterBird)
+ItemDisplay[NMAG crs !RW !INF !ETH SOCK=4]:%NAME% %TAN%[RW]%CONTINUE%//(reformatted for FilterBird)
 
 //Heart of The Oak
 ItemDisplay[NMAG fla !RW !INF !ETH SOCK=4]:%NAME% %TAN%[RW]%CONTINUE%

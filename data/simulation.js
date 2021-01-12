@@ -318,6 +318,7 @@ function parseFile(file,num) {
 	if (settings.version == 1 && itemToCompare.type == "rune") { name_saved = "%ORANGE%"+name_saved }
 	var output_total = name_saved;
 	var done = false;
+	var continued = 0;
 	var rules_checked = 0;
 	var lines = file.split("\t").join("").split("­").join("•").split("\n");
 	var lines_with_tabs = file.split("­").join("•").split("\n");
@@ -372,6 +373,11 @@ function parseFile(file,num) {
 				var cond_list = cond_format.split(",");
 				var neg_paren_close = 0;
 				var c_falsify = false;
+				var used_AND = 0;
+				var used_OR = 0;
+				var possible_logic_conflict = false;
+				var unrecognized_list = [];
+				var unrecognized_conditions = false;
 				for (cond in cond_list) {
 					cond = Number(cond)
 					var c = cond_list[cond];
@@ -405,7 +411,8 @@ function parseFile(file,num) {
 								notices.pod_conditions = 1
 							}
 							if (recognized == false) {
-								document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized condition on line "+line_num+": <l style='color:#c55'>"+c+"</l> ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"; errors++;	// displays an error if the rule has an unrecognized/invalid condition
+								unrecognized_conditions = true
+								if (unrecognized_list.includes(c) == false) { unrecognized_list.push(c) }
 							}
 							// TODO: Add notice for recognized/valid conditions that aren't fully supported? Or are those all just conditions that can't be added to selectable items? (e.g. CHSK codes for PD2)
 						}
@@ -437,19 +444,33 @@ function parseFile(file,num) {
 					} else {
 						if (c_falsify == true) { if (number == true) { c_falsify = false } }
 						else if (c == "!") { formula += "!" }
-						else if (c == "&") { formula += "&& " }
-						else if (c == "|") { formula += "|| " }
+						else if (c == "&") { formula += "&& "; used_AND++; }
+						else if (c == "|") { formula += "|| "; used_OR++; }
 						else if (c == "=") { formula += "== " }
 						else if (c == "≤") { formula += "<= " }
 						else if (c == "≥") { formula += ">= " }
 						else {
+							if (settings.validation == 1 && errors < settings.max_errors) { if (c == "(" || c == ")") { used_OR = 0; used_AND = 0; } }
 							if (number == true) { if (Number(c) < 0) { value_is_negative = true } }
 							if (value_is_negative == true) { formula += (2000000000+Number(c))+" " }					// converts negative values to their equivalent 'unsigned' value
 							else { formula += c+" " }
 						}
 					}
+					if (settings.validation == 1 && errors < settings.max_errors) { if (used_AND > 0 && used_OR > 0) { possible_logic_conflict = true } }
 					if (neg_paren_close > 0 && neg_paren_close == cond) { formula += ") "; neg_paren_close = 0; }
 					if (c == "!" && cond_list.length > cond+3) { if ((isNaN(Number(cond_list[cond+1])) == false || isNaN(Number(cond_list[cond+3])) == false) && (cond_list[cond+2] == "=" || cond_list[cond+2] == ">" || cond_list[cond+2] == "<" || cond_list[cond+2] == "≤" || cond_list[cond+2] == "≥")) { formula += "( "; neg_paren_close = cond+3; } }
+				}
+				if (settings.validation == 1 && errors < settings.max_errors) {
+					if (unrecognized_conditions == true) {
+						var unrecognized_conditions_string = ": <l style='color:#c55'>"+unrecognized_list[0]+"</l>";
+						var plural_s = "";
+						if (unrecognized_list.length > 1) {
+							plural_s = "s"
+							for (let i = 1; i < unrecognized_list.length; i++) { unrecognized_conditions_string += ", <l style='color:#c55'>"+unrecognized_list[i]+"</l>" }
+						}
+						document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized condition"+plural_s+" on line "+line_num+unrecognized_conditions_string+" ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"; errors++;	// displays an error if the rule has any unrecognized/invalid conditions
+					}
+					if (possible_logic_conflict == true) { document.getElementById("o"+num).innerHTML += "#"+num+" Improper formatting on line "+line_num+": (logic operators AND/OR used together without parentheses) ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the rule uses OR and AND together without parentheses
 				}
 				match = eval(formula)
 				//if (settings.validation == 1 && errors < settings.max_errors && unbounded_match_at_zero) { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (unbounded condition) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the rule has unbounded conditions at zero	// TODO: Is this worth implementing? Impossible to know without seeing how the BH filter code functions in these cases
@@ -461,13 +482,17 @@ function parseFile(file,num) {
 			//-----------------------------------------------------------------------------------------------------------
 			// check output for invalid keywords		// TODO: reduce duplicated code
 			if (settings.validation == 1 && errors < settings.max_errors) {
+				var unrecognized_list = [];
+				var unrecognized_keywords = false;
 				var out_format = output.split("//")[0];
 				if (settings.version == 0) { out_format = out_format.split("/")[0] }
 				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
+				// TODO: Change split/join replacements to use deliminator other than "_" between the identifying key and the keyword, so no exceptions need to be made when splitting off the keyword (e.g. for [DARK,GREEN] since it contains the deliminator)
 				if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,") }
+				else { out_format = out_format.split("%DGREEN%").join(",invalid_DGREEN,").split("%CLVL%").join(",invalid_CLVL,") }
+				if (settings.version == 1) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,") }
+				else { out_format = out_format.split("%DARK_GREEN%").join(",invalid_DARK.GREEN,").split("%QTY%").join(",invalid_QTY,").split("%RANGE%").join(",invalid_RANGE,").split("%WPNSPD%").join(",invalid_WPNSPD,").split("%ALVL%").join(",invalid_ALVL,").split("%NL%").join(",invalid_NL,").split("%MAP%").join(",invalid_MAP,") }		// TODO: would it be useful to 'known' keywords that don't do anything special in either PoD or PD2 (e.g. %LIGHT_GRAY%) differently?
 				if (settings.version == 1) {
-					out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,")
-					out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,")//.split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,")
 					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
 					for (n in notifs) {									// TODO: implement more efficient way to split notification keywords
 						if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
@@ -475,14 +500,16 @@ function parseFile(file,num) {
 								var av = a.toString(16);
 								for (let b = 0; b < 16; b++) {
 									var bv = b.toString(16);
-									out_format = out_format.split(notifs[n]+av+bv+"%").join(",ignore_notif,").split(notifs[n]+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av+bv+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,")
+									if (settings.version == 1) { out_format = out_format.split(notifs[n]+av+bv+"%").join(",ignore_notif,").split(notifs[n]+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av+bv+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,") }
+									//else { out_format = out_format.split(notifs[n]+av+bv+"%").join(",invalid_notif,").split(notifs[n]+av.toUpperCase()+bv.toUpperCase()+"%").join(",invalid_notif,").split(notifs[n].toLowerCase()+av+bv+"%").join(",invalid_notif,").split(notifs[n].toLowerCase()+av.toUpperCase()+bv.toUpperCase()+"%").join(",invalid_notif,") }
 								}
 							}
 						}
 					}
 					if (out_format.includes("%NOTIFY-") || out_format.includes("%notify-")) { for (let a = 0; a < 16; a++) {
 						var av = a.toString(16);
-						out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
+						if (settings.version == 1) { out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,") }
+						//else { out_format = out_format.split("%NOTIFY-"+av+"%").join(",invalid_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",invalid_notification,").split("%notify-"+av+"%").join(",invalid_notification,").split("%notify-"+av.toUpperCase()+"%").join(",invalid_notification,") }
 					} }
 				}
 				var out_list = out_format.split(",,").join(",").split(",");
@@ -491,21 +518,27 @@ function parseFile(file,num) {
 					var key = o.split("_")[0];
 					if (key == "misc" || key == "color" || key == "ref" || (key == "ignore" && settings.version == 1) || o == " " || o == "\t" || o == "‗") {
 						// do nothing
+					} else if (key == "invalid") {
+						var uk = "%"+o.split("_")[1]+"%";
+						if (uk == "%DARK.GREEN%") { uk = "%DARK_GREEN%" }
+						unrecognized_keywords = true
+						if (unrecognized_list.includes(uk) == false) { unrecognized_list.push(uk) }
+						if (settings.version == 0) {
+							if (notices.pd2_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PD2 code(s) detected - the PD2 version of FilterBird can be enabled from the menu." }	// TODO: Also display notice for notification keywords (BORDER, MAP, DOT, PX, NOTIFY)
+							notices.pd2_conditions = 1
+						} else if (settings.version == 1) {
+							if (notices.pod_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PoD code(s) detected - the PoD version of FilterBird can be enabled from the menu." }
+							notices.pod_conditions = 1
+						}
 					} else {
 						if (o.indexOf("%") < o.lastIndexOf("%")) {
 							var ok_list = o.substring(o.indexOf("%"),o.lastIndexOf("%")+1).split("%");
 							var o_keyword = -1;
 							for (ok in ok_list) {
 								if (o_keyword == 1) {
-									var k = ok_list[ok];
-									document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized keyword on line "+line_num+": <l style='color:#cc5'>"+"%"+ok_list[ok]+"%"+"</l> ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"; errors++; // displays an error if the rule has an unrecognized/invalid keyword
-									if (settings.version == 0 && (k == "DARK_GREEN" || k == "NL" || k == "QTY" || k == "RANGE" || k == "WPNSPD" || k == "MAP")) {
-										if (notices.pd2_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PD2 code(s) detected - the PD2 version of FilterBird can be enabled from the menu." }	// TODO: Also display notice for notification keywords (BORDER, MAP, DOT, PX, NOTIFY)
-										notices.pd2_conditions = 1
-									} else if (settings.version == 1 && (k == "DGREEN" || k == "CLVL")) {
-										if (notices.pod_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PoD code(s) detected - the PoD version of FilterBird can be enabled from the menu." }
-										notices.pod_conditions = 1
-									}
+									var uk = "%"+ok_list[ok]+"%";
+									unrecognized_keywords = true
+									if (unrecognized_list.includes(uk) == false) { unrecognized_list.push(uk) }
 								}
 								o_keyword *= -1
 							}
@@ -515,6 +548,15 @@ function parseFile(file,num) {
 							//}
 						}
 					}
+				}
+				if (unrecognized_keywords == true) {
+					var unrecognized_keywords_string = ": <l style='color:#cc5'>"+unrecognized_list[0]+"</l>";
+					var plural_s = "";
+					if (unrecognized_list.length > 1) {
+						plural_s = "s"
+						for (let i = 1; i < unrecognized_list.length; i++) { unrecognized_keywords_string += ", <l style='color:#cc5'>"+unrecognized_list[i]+"</l>" }
+					}
+					document.getElementById("o"+num).innerHTML += "#"+num+" Unrecognized keyword"+plural_s+" on line "+line_num+unrecognized_keywords_string+" ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"; errors++;	// displays an error if the rule has any unrecognized/invalid keywords
 				}
 			}
 			//-----------------------------------------------------------------------------------------------------------
@@ -564,6 +606,8 @@ function parseFile(file,num) {
 					if (desc_output_active == true) {
 						if (desc_output_total != "" && output_total == "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item description on hidden item) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item description isn't hidden, but the item is
 					}
+				} else {
+					continued++
 				}
 				// TODO: Would it be useful to show a warning if %CONTINUE% is used on a hidden item?
 				document.getElementById("o"+num).innerHTML += "#"+num+" Match found at line "+line_num+" after checking "+rules_checked+" rules ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l>"
@@ -578,8 +622,23 @@ function parseFile(file,num) {
 	
 	// All lines have been checked at this point
 	if (done == false) { document.getElementById("o"+num).innerHTML += "#"+num+" No match found after checking all "+line_num+" lines ("+rules_checked+" rules) ... (default display)<br>" }
+	//else { document.getElementById("o"+num).innerHTML = document.getElementById("o"+num).innerHTML.substring(0,document.getElementById("o"+num).innerHTML.length-4)+" ... ("+line_num+" of "+lines.length+" lines checked)<br>" }	// TODO: would it be useful to show how many total lines/rules there are?
 	if (itemToCompare.ID == false && itemToCompare.always_id == false) { desc_output_total = "" }
 	if (itemToCompare.CODE == "GOLD" && output_total != "") { output_total = itemToCompare.money+" Gold"; desc_output_total = ""; }
+	
+	if (((continued > 0 && done == true) || continued > 1) && (output_total != "" || desc_output_total != "")) {
+		var out_name = output_total;
+		var out_desc = desc_output_total;
+		if (out_desc != "") { out_desc = "{"+out_desc+"}" }
+		if (out_name != "") {
+			if (out_name.charAt(0) == " ") { out_name = "&nbsp"+out_name.substr(1) }
+			if (out_name.endsWith(" ") == true) { out_name = out_name.substring(0,out_name.length-1)+"&nbsp" }
+		}
+		out_name = out_name.replace(name_saved,"%NAME%").split("%CONTINUE%").join("").split("  ").join("&nbsp&nbsp").split(" &nbsp").join("&nbsp&nbsp").split("&nbsp ").join("&nbsp&nbsp")
+		out_desc = out_desc.split("  ").join("&nbsp&nbsp").split(" &nbsp").join("&nbsp&nbsp").split("&nbsp ").join("&nbsp&nbsp")
+		document.getElementById("o"+num).innerHTML += "#"+num+" Combined Output ... "+"<l style='color:#aaa'>"+"ItemDisplay[⍰]:"+out_name+out_desc+"</l><br>"
+	}
+	
 	if (desc_output_total != "") { desc_output_total = "{%BLUE%"+desc_output_total+"}" }
 	output_total = desc_output_total+"%"+getColor(itemToCompare)+"%"+output_total
 	var description_braces = 0;

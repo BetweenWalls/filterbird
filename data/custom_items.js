@@ -412,6 +412,7 @@ function setILVL2(value) {
 //	dropdowns for possible affixes are then populated
 // ---------------------------------
 function setCustomBase() {
+	// TODO: keep track of old rarity, and don't switch to "any" base unless it's unique/set
 	var old_base = itemCustom.base;
 	var group = document.getElementById("dropdown_group").value;
 	var type = document.getElementById("dropdown_type").value;

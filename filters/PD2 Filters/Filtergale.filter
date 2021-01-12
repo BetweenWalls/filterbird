@@ -1161,7 +1161,7 @@ ItemDisplay[RARE EQ1 !ID (ILVL>65 AND ILVL<85)]:
 ItemDisplay[RARE EQ2 !ID (ILVL>65 AND ILVL<85)]: 
 ItemDisplay[RARE EQ3 !ID (ILVL>65 AND ILVL<85)]: 
 //Show Rare Elite Armor
-ItemDisplay[ELT RARE ARMOR !ID ILVL>84]: /(reformatted for FilterBird)
+ItemDisplay[ELT RARE ARMOR !ID ILVL>84]: //(reformatted for FilterBird)
 
 //MAGIC
 //Magic Diadems

@@ -302,10 +302,10 @@ ItemDisplay[NMAG (ob5 OR oba OR obf) SK53>2]: %NAME% %TAN%[Ch-Li]%CONTINUE%
 ItemDisplay[NMAG (ob5 OR oba OR obf) (SOCK=0 OR SOCK>2) (SK48>2 OR SK49>2 OR SK53>2) AND (SK63>2)]: %RED%>> %NAME% %PURPLE%of Imbalance %RED%<<
 ItemDisplay[NMAG (ob5 OR oba OR obf) (SOCK=0 OR SOCK>2) (SK48>2 OR SK49>2 OR SK53>2)]: %RED%>> %NAME% %RED%<<
 
-ItemDisplay[NMAG (ob5 OR oba OR obf) SK44>2]: %NAME% %TAN%[Frost Nova]%CONTINUE%/(reformatted for FilterBird)
-ItemDisplay[NMAG (ob5 OR oba OR obf) SK59>2]: %NAME% %TAN%[Blizz]%CONTINUE%/(reformatted for FilterBird)
-ItemDisplay[NMAG (ob5 OR oba OR obf) SK55>2]: %NAME% %TAN%[Glacial]%CONTINUE%/(reformatted for FilterBird)
-ItemDisplay[NMAG (ob5 OR oba OR obf) SK39>2]: %NAME% %TAN%[Ice Bolt]%CONTINUE%/(reformatted for FilterBird)
+ItemDisplay[NMAG (ob5 OR oba OR obf) SK44>2]: %NAME% %TAN%[Frost Nova]%CONTINUE%//(reformatted for FilterBird)
+ItemDisplay[NMAG (ob5 OR oba OR obf) SK59>2]: %NAME% %TAN%[Blizz]%CONTINUE%//(reformatted for FilterBird)
+ItemDisplay[NMAG (ob5 OR oba OR obf) SK55>2]: %NAME% %TAN%[Glacial]%CONTINUE%//(reformatted for FilterBird)
+ItemDisplay[NMAG (ob5 OR oba OR obf) SK39>2]: %NAME% %TAN%[Ice Bolt]%CONTINUE%//(reformatted for FilterBird)
 ItemDisplay[NMAG (ob5 OR oba OR obf) (SOCK=0 OR SOCK>2) (SK44>2 OR SK59>2 OR SK55>2 OR SK39>2) AND (SK65>2)]: %RED%>> %NAME% %PURPLE%of Imbalance %RED%<<
 ItemDisplay[NMAG (ob5 OR oba OR obf) (SOCK=0 OR SOCK>2) (SK44>2 OR SK59>2 OR SK55>2 OR SK39>2)]: %RED%>> %NAME% %RED%<<
 
