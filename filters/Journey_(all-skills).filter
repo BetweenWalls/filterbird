@@ -695,7 +695,7 @@ ItemDisplay[RARE !ID (EQ1 (((cap OR skp OR hlm OR fhl) CLVL>39) OR ((xap OR xkp 
 ItemDisplay[RARE !ID (CL5 ((NORM CLVL>29) OR ((9ar OR 9wb OR 9xf) CLVL>49)))]:
 ItemDisplay[RARE !ID (WP1 (((NORM !(mpi OR wax OR gax OR gix)) CLVL>39) OR ((EXC !(9mp OR 9wa OR 9ga OR 9gi)) CLVL>59) OR (7ha CLVL>79)))]:
 ItemDisplay[RARE !ID (WP2 (((mac OR mst) CLVL>39) OR ((9ma OR 9mt) CLVL>59) OR ((7ma OR 7mt) CLVL>79)))]:
-ItemDisplay[RARE !ID (((ssd OR scm OR sbr OR flc OR wsd OR 2hs) CLVL>49) OR ((9ss OR 9sm OR 9sb OR 9fc 9wd OR 92h) CLVL>79) OR ((7ss OR 7sm OR 7sb OR 7fc) CLVL>79))]:
+ItemDisplay[RARE !ID (((ssd OR scm OR sbr OR flc OR wsd OR 2hs) CLVL>49) OR ((9ss OR 9sm OR 9sb OR 9fc OR 9wd OR 92h) CLVL>79) OR ((7ss OR 7sm OR 7sb OR 7fc) CLVL>79))]:
 ItemDisplay[RARE !ID !ETH (((spr OR tri OR bar OR vou) CLVL>39) OR ((9sr OR 9tr OR 9b7 OR 9vo) CLVL>59) OR ((7sr OR 7o7) CLVL>79))]:
 ItemDisplay[RARE !ID ((!CL7 WP9) ((NORM !(hbw OR lbb OR lwb OR hxb OR rxb) CLVL>39) OR (EXC !(8hb OR 8l8 OR 8lw OR 8hx OR 8rx) CLVL>59) OR (ELT !(6hb OR 6l7 OR 6lw OR 6hx OR 6rx) CLVL>79)))]:
 ItemDisplay[RARE !ID (((!CL7 WP5) (NORM OR 9b8)) OR (WP4 !WP5 !ELT)) CLVL>49]:
