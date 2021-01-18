@@ -240,6 +240,7 @@ function loadRarity(value) {
 		options = "<option class='gray-all'>" + rarities[0] + "</option>" + "<option class='gray-all'>" + rarities[1] + "</option>" + "<option class='gray-all'>" + rarities[2] + "</option>" + "<option class='gray-all'>" + "Unique" + "</option>"	// TODO: Create method that updates specific things when changing versions, so available quiver can be changed between versions consistently
 		//if (settings.version == 0) { options = "<option class='gray-all'>" + rarities[0] + "</option>" + "<option class='gray-all'>" + rarities[1] + "</option>" + "<option class='gray-all'>" + rarities[2] + "</option>" + "<option class='gray-all'>" + "Unique" + "</option>" }
 		//else { options = "<option class='gray-all'>" + rarities[0] + "</option>" }
+		// TODO: regular quivers should never have the 'quality' dropdown for inferior/superior
 	}
 	// TODO: Adjust how Maps are implemented, so their rarity can be adjusted
 	document.getElementById("dropdown_rarity").innerHTML = options
@@ -1819,7 +1820,7 @@ function setItemCodes() {
 function setPD2Codes() {
 	var code_originals = ["EQ1","EQ2","EQ3","EQ4","EQ5","EQ6","EQ7","WP1","WP2","WP3","WP4","WP5","WP6","WP7","WP8","WP9","WP10","WP11","WP12","WP13","CL1","CL2","CL3","CL4","CL5","CL6","CL7"];
 	var code_alternates = ["HELM","CHEST","SHIELD","GLOVES","BOOTS","BELT","CIRC","AXE","MACE","SWORD","DAGGER","THROWING","JAV","SPEAR","POLEARM","BOW","XBOW","STAFF","WAND","SCEPTER","DRU","BAR","DIN","NEC","SIN","SOR","ZON"];
-	var code_affixes = {ar:"AR",fRes:"FRES",cRes:"CRES",lRes:"LRES",pRes:"PRES",frw:"FRW",damage_min:"MINDMG",damage_max:"MAXDMG",strength:"STR",dexterity:"DEX",mf:"MFIND",gf:"GFIND",damage_to_mana:"DTM",life_replenish:"REPLIFE"};
+	var code_affixes = {ar:"AR",fRes:"FRES",cRes:"CRES",lRes:"LRES",pRes:"PRES",frw:"FRW",damage_min:"MINDMG",damage_max:"MAXDMG",strength:"STR",dexterity:"DEX",mf:"MFIND",gf:"GFIND",damage_to_mana:"DTM",life_replenish:"REPLIFE",max_durability:"MAXDUR"};
 	var code_other = {req_level:"LVLREQ",QUANTITY:"QTY",mana_per_kill:"MAEK",autorepair:"REPAIR",ar_bonus:"ARPER"};
 	var selected_group_index = document.getElementById("dropdown_group").selectedIndex;
 	var reset_selected = false;
@@ -1958,7 +1959,7 @@ function setQuantity(val) {
 		* {} used for item descriptions
 		* %NL% allows multiple lines
 		* new info codes: LVLREQ, PRICE, QTY, ALVL, QLVL																						// Note: PRICE is not calculated, so the user may enter impossible values (calculation formula is unknown)
-		* new affix codes: AR, FRES, CRES, LRES, PRES, FRW, MINDMG, MAXDMG, STR, DEX, MFIND, GFIND, DTM, REPLIFE, MAEK, REPAIR, ARPER			// Note: REPAIR value of X is only 0 or 1, instead of X = Y*100/Z (Y = amount repaired, Z = seconds to repair), MINDMG/MAXDMG may not apply to all kinds of damage
+		* new affix codes: AR, FRES, CRES, LRES, PRES, FRW, MINDMG, MAXDMG, STR, DEX, MFIND, GFIND, DTM, REPLIFE, MAXDUR, MAEK, REPAIR, ARPER	// Note: REPAIR value of X is only 0 or 1, instead of X = Y*100/Z (Y = amount repaired, Z = seconds to repair), MINDMG/MAXDMG may not apply to all kinds of damage
 		* new codes for PD2 items: wss, lbox, dcma, dcbl, dcho, dcso, imra, imma, scou, rera, upma, t11, t12, t13, t14, t15, t16, t17, t18		// Note: t16, t17, t18 should be switchable between regular/magic/rare, not currently in the game: t11, t12, t13, t14, t15
 		* new keywords: %QTY%, %RANGE%, %WPNSPD%, %ALVL%
 		* new codes for stacked gems (flawless/perfect) and stacked runes: normal code + s
