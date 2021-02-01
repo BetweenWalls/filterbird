@@ -4,7 +4,7 @@
 //Add set name to set items
 //Refine the Good Unique Hyping line (GUH)
 //Display good skills on good class items
-
+//Add notifications for jewels (mag/rare), white maps
 
 
 
@@ -64,10 +64,12 @@ ItemDisplay[cqv]:
 
 
 //Grand charms and small charms - Map marker+notification+sexier name.
-ItemDisplay[MAG !ID (cm1 OR cm3)]: %RED%Ø %BLUE%%NAME% %RED%Ø%MAP-97%%NOTIFY-3%%CONTINUE%
+ItemDisplay[MAG !ID (cm1 OR cm3 OR jew OR rin OR amu)]: %RED%Ø %BLUE%%NAME% %RED%Ø%MAP-97%%NOTIFY-3%%CONTINUE%
+ItemDisplay[RARE !ID (jew OR rin OR amu)]: %RED%Ø %YELLOW%%NAME% %RED%Ø%MAP-6F%%NOTIFY-3%%CONTINUE%
 
 
 //Ignore small gold stacks, progressive system.
+ItemDisplay[CLVL>11 GOLD<100]:
 ItemDisplay[CLVL>19 GOLD<300]:
 ItemDisplay[CLVL>39 GOLD<800]:
 ItemDisplay[CLVL>59 GOLD<1000]:
@@ -194,20 +196,40 @@ ItemDisplay[UNI !ID (rin OR amu OR jew OR cm1 OR cm2 OR cm3 OR uap OR usk OR urn
 // ---------------------------
 // --         Sets          --
 // ---------------------------
+ItemDisplay[SET !ID (dr8 OR xtb OR uul OR 9mt)]: %NAME%%NL%%DARK_GREEN%Aldurs%CONTINUE%
+ItemDisplay[SET !ID (xar OR urn OR 7ws OR paf)]: %NAME%%NL%%DARK_GREEN%Griswold%CONTINUE%
+ItemDisplay[SET !ID (ba5 OR 7m7 OR uar OR zhb OR xhg OR xhb)]: %NAME%%NL%%DARK_GREEN%Immortal King%CONTINUE%
+ItemDisplay[SET !ID (ci1 OR amc OR uld OR xtg OR zvb)]: %NAME%%NL%%DARK_GREEN%M'avina%CONTINUE%
+ItemDisplay[SET !ID (xh9 OR ucl OR xmb OR 7qr)]: %NAME%%NL%%DARK_GREEN%Natalya%CONTINUE%
+ItemDisplay[SET !ID (oba OR xsk OR uth OR zmb)]: %NAME%%NL%%DARK_GREEN%Tal Rasha%CONTINUE%
+ItemDisplay[SET !ID (uh9 OR xul OR ne9 OR utc OR xmg)]: %NAME%%NL%%DARK_GREEN%Trang-oul%CONTINUE%
 
-ItemDisplay[SET !ID (dr8 OR xtb OR uul OR 9mt)]: %NAME%%NL%%DARK_GREEN%Aldurs
-ItemDisplay[SET !ID (xar OR urn OR 7ws OR paf)]: %NAME%%NL%%DARK_GREEN%Griswold
-ItemDisplay[SET !ID (ba5 OR 7m7 OR uar OR zhb OR xhg OR xhb)]: %NAME%%NL%%DARK_GREEN%Immortal King
-ItemDisplay[SET !ID (ci1 OR amc OR uld OR xtg OR zvb)]: %NAME%%NL%%DARK_GREEN%M'avina
-ItemDisplay[SET !ID (xh9 OR ucl OR xmb OR 7qr)]: %NAME%%NL%%DARK_GREEN%Natalya
-ItemDisplay[SET !ID (oba OR xsk OR uth OR zmb)]: %NAME%%NL%%DARK_GREEN%Tal Rasha
-ItemDisplay[SET !ID (uh9 OR xul OR ne9 OR utc OR xmg)]: %NAME%%NL%%DARK_GREEN%Trang-oul
+ItemDisplay[SET !ID (7wd OR 7gd)]: %NAME%%NL%%DARK_GREEN%Bul-Kathos%CONTINUE%
+ItemDisplay[SET !ID (7ma OR xrs OR uts OR uhm)]: %NAME%%NL%%DARK_GREEN%Heaven%CONTINUE%
+ItemDisplay[SET !ID (uui OR ulg OR umc OR xlb)]: %NAME%%NL%%DARK_GREEN%Discible%CONTINUE%
+ItemDisplay[SET !ID (9vo OR xcl OR xrn OR mbl)]: %NAME%%NL%%DARK_GREEN%Hwanin%CONTINUE%
+ItemDisplay[SET !ID (stu OR vbt OR xap)]: %NAME%%NL%%DARK_GREEN%Cow king%CONTINUE%
+ItemDisplay[SET !ID (6cs OR ult OR ci0)]: %NAME%%NL%%DARK_GREEN%Naj%CONTINUE%
+ItemDisplay[SET !ID (cap OR bwm OR vgl OR vbt)]: %NAME%%NL%%DARK_GREEN%Sanders%CONTINUE%
+ItemDisplay[SET !ID (7ls OR upl OR xhl)]: %NAME%%NL%%DARK_GREEN%Sazabi%CONTINUE%
+ItemDisplay[SET !ID (xml OR xvg OR ztb OR xhm)]: %NAME%%NL%%DARK_GREEN%Orphan%CONTINUE%
 
-
-ItemDisplay[SET !ID (9vo OR xcl OR xrn OR mbl)]: %NAME%%NL%%DARK_GREEN%Hwanin
-ItemDisplay[SET !ID (6cs OR ult OR ci0)]: %NAME%%NL%%DARK_GREEN%Naj
-ItemDisplay[SET !ID (7ls OR upl OR xhl)]: %NAME%%NL%%DARK_GREEN%Sazabi
-
+ItemDisplay[SET !ID (sbr OR rng)]: %NAME%%NL%%DARK_GREEN%Angelic%CONTINUE%
+ItemDisplay[SET !ID (wst OR skp OR ltp)]: %NAME%%NL%%DARK_GREEN%Arcanna%CONTINUE%
+ItemDisplay[SET !ID (swb OR qui OR tgl OR vbl)]: %NAME%%NL%%DARK_GREEN%Arctic%CONTINUE%
+ItemDisplay[SET !ID (2ax OR spl OR hlm)]: %NAME%%NL%%DARK_GREEN%Berserker%CONTINUE%
+ItemDisplay[SET !ID (bst OR chn OR msk)]: %NAME%%NL%%DARK_GREEN%Cathan%CONTINUE%
+ItemDisplay[SET !ID (gsc OR lrg)]: %NAME%%NL%%DARK_GREEN%Civerb%CONTINUE%
+ItemDisplay[SET !ID (lsd OR mgl OR sml)]: %NAME%%NL%%DARK_GREEN%Cleglaw%CONTINUE%
+ItemDisplay[SET !ID (wsd OR lgl OR lbl)]: %NAME%%NL%%DARK_GREEN%Death%CONTINUE%
+ItemDisplay[SET !ID (buc OR mbl OR mbt)]: %NAME%%NL%%DARK_GREEN%Hsarus%CONTINUE%
+ItemDisplay[SET !ID (dgr OR cap OR tbl)]: %NAME%%NL%%DARK_GREEN%Infernal%CONTINUE%
+ItemDisplay[SET !ID (crn OR tgl OR tbl)]: %NAME%%NL%%DARK_GREEN%Iratha%CONTINUE%
+ItemDisplay[SET !ID (bsd OR gts OR fhl)]: %NAME%%NL%%DARK_GREEN%Isenhart%CONTINUE%
+ItemDisplay[SET !ID (wsp OR kit OR crn)]: %NAME%%NL%%DARK_GREEN%Milabrega%CONTINUE%
+ItemDisplay[SET !ID (tow OR hbl OR hbt OR gth OR ghm OR hgl)]: %NAME%%NL%%DARK_GREEN%Sigon%CONTINUE%
+ItemDisplay[SET !ID (mpi OR bhm OR ful OR lbt)]: %NAME%%NL%%DARK_GREEN%Tancred%CONTINUE%
+ItemDisplay[SET !ID (lbb OR lea OR tbt)]: %NAME%%NL%%DARK_GREEN%Vidala%CONTINUE%
 
 // ------------------------------
 // [QUES]    Quest Items	   //
@@ -342,6 +364,7 @@ ItemDisplay[t16]: %NAME% %ORANGE%[T1]%CONTINUE% // Ruins of Viz-jun
 ItemDisplay[t18]: %NAME% [T2]%CONTINUE%// Lava Map
 ItemDisplay[t17]: %NAME% [T3]%CONTINUE% // River of Blood
 
+ItemDisplay[NMAG (t16 OR t17 OR t18)]: %NAME%%DOT-20%%MAP-1F%
 ItemDisplay[MAG (t16 OR t17 OR t18)]: %NAME%%DOT-93%%MAP-1F%
 ItemDisplay[RARE (t16 OR t17 OR t18)]: %NAME%%DOT-69%%MAP-1F%
 

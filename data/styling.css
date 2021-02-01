@@ -10,6 +10,7 @@
 	background-color: rgba(0,0,0,0.8);
 	color: white;
 	position: absolute;
+	z-index:2;
 }
 .no-selection {
 	-webkit-user-select: none;

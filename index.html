@@ -1,6 +1,6 @@
 <!--
 	"FilterBird" Filter Simulator for Diablo II
-	Copyright © 2020 BetweenWalls
+	Copyright © 2021 BetweenWalls
 	This program is available at https://betweenwalls.github.io/filterbird/
 	More information (source, copyright, contact, etc) is available at https://github.com/BetweenWalls/filterbird
 -->
@@ -32,7 +32,7 @@
 					<label for="version" onclick="changeVersion(0);"><input id="version0" type="radio" name="version" checked>Path of Diablo</label>
 				</div></div>
 				<div class="nav-dropdown-content-item"><div class="nav-option">
-					<label for="version" onclick="changeVersion(1);"><input id="version1" type="radio" name="version">Project D2 ­ ­ ­ ­ ­ ­ </label>
+					<label for="version" onclick="changeVersion(1);"><input id="version1" type="radio" name="version">Project D2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 				</div></div>
 			</div>
 		</div>
@@ -41,19 +41,19 @@
 			<div class="nav-dropdown-content">
 				<div class="nav-dropdown-content-item"><div class="nav-option">
 					<input id="original" type="checkbox" name="original" onclick="toggleOriginalChoices(this.checked);" checked>
-					<label for="original">Original Options ­ ­ </label>
+					<label for="original">Original Options&nbsp;&nbsp;&nbsp;</label>
 				</div></div>
 				<div class="nav-dropdown-content-item"><div class="nav-option">
 					<input id="non_item_custom" type="checkbox" name="non_item_custom" onclick="toggleNonItemDetails(this.checked);">
-					<label for="non_item_custom">Character Info ­ ­ ­ ­ ­ </label>
+					<label for="non_item_custom">Character Info&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 				</div></div>
 				<div class="nav-dropdown-content-item"><div class="nav-option">
 					<input id="custom" type="checkbox" name="custom" onclick="toggleCustom(this.checked);">
-					<label for="custom">Custom Item Info</label>
+					<label for="custom">Custom Item Info&nbsp;</label>
 				</div></div>
 				<div id="show_custom_format" class="nav-dropdown-content-item" style="display:none;"><div class="nav-option">
 					<input id="custom_format" type="checkbox" name="custom_format" onclick="toggleCustomFormat(this.checked);">
-					<label for="custom_format">Alternate Format ­ </label>
+					<label for="custom_format">Alternate Format&nbsp;&nbsp;</label>
 				</div></div>
 			</div>
 		</div>
@@ -62,11 +62,11 @@
 			<div class="nav-dropdown-content">
 				<div class="nav-dropdown-content-item"><div class="nav-option">
 					<input id="auto_simulate" type="checkbox" name="auto_simulate" onclick="toggleAutoSimulation(this.checked);" checked>
-					<label for="auto_simulate">Auto-Simulate ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ </label>
+					<label for="auto_simulate">Auto-Simulate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 				</div></div>
 				<div class="nav-dropdown-content-item"><div class="nav-option">
 					<input id="cond_validation" type="checkbox" name="cond_validation" onclick="toggleConditionValidation(this.checked);" checked>
-					<label for="cond_validation">Error Checking ­ ­ ­ ­ ­ ­ ­ ­ ­ ­ </label>
+					<label for="cond_validation">Error Checking&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 				</div></div>
 				<div id="show_error_limit" class="nav-dropdown-content-item" style="display:block;"><div class="nav-option">
 					<input id="error_limit" type="checkbox" name="error_limit" onclick="toggleErrorLimit(this.checked);" checked>
@@ -207,12 +207,12 @@
 
 		<div id="output_area_1" style="height:100px; width:800px; position:relative;">
 			<div style="color:white; position:absolute;">Filter #1</div>
-			<img id="background_1" src="" onClick="simulate(1)">
+			<img id="background_1" style="z-index:1;" src="" onClick="simulate(1)">
 			<div id="output_1" class="item" onmouseover="equipmentHover(1)" onmouseout="equipmentOut()"></div>
 		</div>
 		<div id="output_area_2" style="height:100px; width:800px; position:relative;">
 			<div style="color:white; position:absolute;">Filter #2</div>
-			<img id="background_2" src="" onClick="simulate(1)">
+			<img id="background_2" style="z-index:1;" src="" onClick="simulate(1)">
 			<div id="output_2" class="item" onmouseover="equipmentHover(2)" onmouseout="equipmentOut()"></div>
 		</div>
 		<br>

@@ -1439,7 +1439,7 @@ var item_types = {
 	charm:["Small Charm","Large Charm","Grand Charm"],
 	jewel:["Jewel"],
 };
-// Bases with other symbols: Two-handed Sword, Hunter's Bow, Jared's Stone, Hunter's Guise, Silver-Edged Axe
+// Bases with other symbols: Two-handed Sword, Hunter's Bow, Jared's Stone, Hunter's Guise, Silver-edged Axe
 
 var all_codes = {
 	NORM:3,EXC:3,ELT:3,NMAG:3,MAG:3,RARE:3,UNI:3,SET:3,ID:3,ETH:3,INF:3,SUP:3,RW:3,

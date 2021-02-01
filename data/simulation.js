@@ -587,24 +587,24 @@ function parseFile(file,num) {
 						if (desc_output.includes("%NAME%") == true) {
 							desc_output_total = desc_output.split("%NAME%").join(desc_output_total)
 						} else {
-							if (desc_output_total != "" && desc_output != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's description overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's description gets overwritten (but not blanked)
+							if (desc_output_total != "" && desc_output != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item's description overwritten)<br>" }	// displays a notice if the item's description gets overwritten (but not blanked)
 							desc_output_total = desc_output
 						}
 					} else {
-						if (desc_output_total != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's description overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's description gets overwritten (but not blanked) from lack of continuation
+						if (desc_output_total != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item's description overwritten)<br>" }	// displays a notice if the item's description gets overwritten (but not blanked) from lack of continuation
 						desc_output_total = ""
 					}
 				}
 				if (output.includes("%NAME%") == true) {
 					output_total = output.split("%NAME%").join(output_total)
 				} else {
-					if (output_total != name_saved && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Inadvisable formatting on line "+line_num+" (item's name overwritten) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item's title gets overwritten (but not blanked)		// TODO: Should this also apply if a previous rule simply displayed %NAME% and nothing else? (default is name_saved rather than nothing)
+					if (output_total != name_saved && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item's name overwritten)<br>" }	// displays a notice if the item's title gets overwritten (but not blanked)		// TODO: Should this also apply if a previous rule simply displayed %NAME% and nothing else? (default is name_saved rather than nothing)
 					output_total = output
 				}
 				if (output.includes("%CONTINUE%") == false) {
 					done = true
 					if (desc_output_active == true) {
-						if (desc_output_total != "" && output_total == "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item description on hidden item) ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the item description isn't hidden, but the item is
+						if (desc_output_total != "" && output_total == "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item description on hidden item)<br>" }	// displays a notice if the item description isn't hidden, but the item is
 					}
 				} else {
 					continued++
@@ -729,11 +729,13 @@ function parseFile(file,num) {
 		var display_multi = display.split("<br>");
 		display = display_multi[display_multi.length-1]
 		for (let d = display_multi.length-2; d >= 0; d--) { display = display + "<br>" + display_multi[d] }
+		if (display_multi[0].length == 0) { display += "&nbsp;" }
 	}
 	if (description.includes("<br>") == true) {
 		var description_multi = description.split("<br>");
 		description = description_multi[description_multi.length-1]
 		for (let d = description_multi.length-2; d >= 0; d--) { description = description + "<br>" + description_multi[d] }
+		if (description_multi[0].length == 0) { description += "&nbsp;" }
 	}
 	if (errors >= settings.max_errors) { document.getElementById("o"+num).innerHTML += " ... There may be additional errors. The first "+settings.max_errors+" errors were displayed.<br>" }
 	else if (settings.error_limit == 0 && errors >= 50) { document.getElementById("o"+num).innerHTML += " ... In total, "+errors+" errors were displayed.<br>" }
