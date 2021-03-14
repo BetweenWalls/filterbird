@@ -2,7 +2,7 @@
 //TalRasha's PD2 Item Filter Clean Version
 //++++++++++++++++++++++++++
 //Version 2.0
-//Updated 1/25/2021
+//Updated 13/3/2021
 //
 //╔═══════════════════╗
 //║ Table of Contents ║
@@ -219,50 +219,50 @@ ItemDisplay[t15]:%PURPLE%+ %NAME% %PURPLE%[T8]%WHITE%%MAP-9B%{%TAN%Right-click i
 //║ Gems ║
 //╚══════╝
 //Gems Chipped
-ItemDisplay[gcv OR gcvs CLVL<21]:chipped amethyst
-ItemDisplay[gcw OR gcws CLVL<21]:chipped diamond
-ItemDisplay[gcg OR gcgs CLVL<21]:chipped emerald
-ItemDisplay[gcr OR gcrs CLVL<21]:chipped ruby
-ItemDisplay[gcb OR gcbs CLVL<21]:chipped sapphire
-ItemDisplay[gcy OR gcys CLVL<21]:chipped topaz
-ItemDisplay[skc OR skcs CLVL<21]:chipped skull
-ItemDisplay[gcv OR gcvs CLVL>20]:
-ItemDisplay[gcw OR gcws CLVL>20]:
-ItemDisplay[gcg OR gcgs CLVL>20]:
-ItemDisplay[gcr OR gcrs CLVL>20]:
-ItemDisplay[gcb OR gcbs CLVL>20]:
-ItemDisplay[gcy OR gcys CLVL>20]:
-ItemDisplay[skc OR skcs CLVL>20]:
+ItemDisplay[gcv CLVL<21]:chipped amethyst
+ItemDisplay[gcw CLVL<21]:chipped diamond
+ItemDisplay[gcg CLVL<21]:chipped emerald
+ItemDisplay[gcr CLVL<21]:chipped ruby
+ItemDisplay[gcb CLVL<21]:chipped sapphire
+ItemDisplay[gcy CLVL<21]:chipped topaz
+ItemDisplay[skc CLVL<21]:chipped skull
+ItemDisplay[gcv CLVL>20]:
+ItemDisplay[gcw CLVL>20]:
+ItemDisplay[gcg CLVL>20]:
+ItemDisplay[gcr CLVL>20]:
+ItemDisplay[gcb CLVL>20]:
+ItemDisplay[gcy CLVL>20]:
+ItemDisplay[skc CLVL>20]:
 //Gems Flawed
-ItemDisplay[gfv OR gfvs CLVL<30]:flawed amethyst
-ItemDisplay[gfw OR gfws CLVL<30]:flawed diamond
-ItemDisplay[gfg OR gfgs CLVL<30]:flawed emerald
-ItemDisplay[gfr OR gfrs CLVL<30]:flawed ruby
-ItemDisplay[gfb OR gfbs CLVL<30]:flawed sapphire
-ItemDisplay[gfy OR gfys CLVL<30]:flawed topaz
-ItemDisplay[skf OR skfs CLVL<30]:flawed skull
-ItemDisplay[gfv OR gfvs CLVL>29]:
-ItemDisplay[gfw OR gfws CLVL>29]:
-ItemDisplay[gfg OR gfgs CLVL>29]:
-ItemDisplay[gfr OR gfrs CLVL>29]:
-ItemDisplay[gfb OR gfbs CLVL>29]:
-ItemDisplay[gfy OR gfys CLVL>29]:
-ItemDisplay[skf OR skfs CLVL>29]:
+ItemDisplay[gfv CLVL<30]:flawed amethyst
+ItemDisplay[gfw CLVL<30]:flawed diamond
+ItemDisplay[gfg CLVL<30]:flawed emerald
+ItemDisplay[gfr CLVL<30]:flawed ruby
+ItemDisplay[gfb CLVL<30]:flawed sapphire
+ItemDisplay[gfy CLVL<30]:flawed topaz
+ItemDisplay[skf CLVL<30]:flawed skull
+ItemDisplay[gfv CLVL>29]:
+ItemDisplay[gfw CLVL>29]:
+ItemDisplay[gfg CLVL>29]:
+ItemDisplay[gfr CLVL>29]:
+ItemDisplay[gfb CLVL>29]:
+ItemDisplay[gfy CLVL>29]:
+ItemDisplay[skf CLVL>29]:
 //Gems Normal
-ItemDisplay[gsv OR gsvs CLVL<51]:amethyst
-ItemDisplay[gsw OR gsws CLVL<51]:diamond
-ItemDisplay[gsg OR gsgs CLVL<51]:emerald
-ItemDisplay[gsr OR gsrs CLVL<51]:ruby
-ItemDisplay[gsb OR gsbs CLVL<51]:sapphire
-ItemDisplay[gsy OR gsys CLVL<51]:topaz
-ItemDisplay[sku OR skus CLVL<51]:skull
-ItemDisplay[gsv OR gsvs CLVL>50]:
-ItemDisplay[gsw OR gsws CLVL>50]:
-ItemDisplay[gsg OR gsgs CLVL>50]:
-ItemDisplay[gsr OR gsrs CLVL>50]:
-ItemDisplay[gsb OR gsbs CLVL>50]:
-ItemDisplay[gsy OR gsys CLVL>50]:
-ItemDisplay[sku OR skus CLVL>50]:
+ItemDisplay[gsv CLVL<51]:amethyst
+ItemDisplay[gsw CLVL<51]:diamond
+ItemDisplay[gsg CLVL<51]:emerald
+ItemDisplay[gsr CLVL<51]:ruby
+ItemDisplay[gsb CLVL<51]:sapphire
+ItemDisplay[gsy CLVL<51]:topaz
+ItemDisplay[sku CLVL<51]:skull
+ItemDisplay[gsv CLVL>50]:
+ItemDisplay[gsw CLVL>50]:
+ItemDisplay[gsg CLVL>50]:
+ItemDisplay[gsr CLVL>50]:
+ItemDisplay[gsb CLVL>50]:
+ItemDisplay[gsy CLVL>50]:
+ItemDisplay[sku CLVL>50]:
 //Gems flawless
 ItemDisplay[gzv OR gzvs]:%PURPLE%*%NL%%ORANGE%Amethyst%NL%%PURPLE%*%WHITE%
 ItemDisplay[glw OR glws]:%WHITE%*%NL%%ORANGE%Diamond%NL%%WHITE%*%WHITE%
@@ -272,13 +272,13 @@ ItemDisplay[glb OR glbs]:%BLUE%*%NL%%ORANGE%Sapphire%NL%%BLUE%*%WHITE%
 ItemDisplay[gly OR glys]:%YELLOW%*%NL%%ORANGE%Topaz%NL%%YELLOW%*%WHITE%
 ItemDisplay[skl OR skls]:%GRAY%*%NL%%ORANGE%Skull%NL%%GRAY%*%WHITE%
 //Gems Perfect
-ItemDisplay[gpv OR gpvs]:%ORANGE%P AMETHYST
-ItemDisplay[gpw OR gpws]:%ORANGE%P DIAMOND
-ItemDisplay[gpg OR gpgs]:%ORANGE%P EMERALD
-ItemDisplay[gpr OR gprs]:%ORANGE%P RUBY
-ItemDisplay[gpb OR gpbs]:%ORANGE%P SAPPHIRE
-ItemDisplay[gpy OR gpys]:%ORANGE%P TOPAZ
-ItemDisplay[skz OR skzs]:%ORANGE%P SKULL
+ItemDisplay[gpv OR gpvs]:%PURPLE%*%NL%%PURPLE%P Amethyst%NL%%PURPLE%*%WHITE%
+ItemDisplay[gpw OR gpws]:%WHITE%*%NL%%PURPLE%P Diamond%NL%%WHITE%*%WHITE%
+ItemDisplay[gpg OR gpgs]:%GREEN%*%NL%%PURPLE%P Emerald%NL%%GREEN%*%WHITE%
+ItemDisplay[gpr OR gprs]:%RED%*%NL%%PURPLE%P Ruby%NL%%RED%*%WHITE%
+ItemDisplay[gpb OR gpbs]:%BLUE%*%NL%%PURPLE%P Sapphire%NL%%BLUE%*%WHITE%
+ItemDisplay[gpy OR gpys]:%YELLOW%*%NL%%PURPLE%P Topaz%NL%%YELLOW%*%WHITE%
+ItemDisplay[skz OR skzs]:%GRAY%*%NL%%PURPLE%P Skull%NL%%GRAY%*%WHITE%
 //╔═════════╗
 //║ Uniques ║
 //╚═════════╝
@@ -430,7 +430,7 @@ ItemDisplay[UNI !ID 7ws]:%RED%o %PURPLE%Astreon's Iron Ward%RED% o%BORDER-A5%%DO
 //Steel Pillar
 ItemDisplay[UNI !ID 7p7]:%RED%* %PURPLE%Steel Pillar %RED%*%BORDER-A5%%DOT-62% 
 //Eth Steel Pillar
-ItemDisplay[UNI !ID 7p7]:%RED%o %PURPLE%Eth Steel Pillar%RED% o%BORDER-A5%%DOT-62% 
+ItemDisplay[UNI !ID ETH 7p7]:%RED%o %PURPLE%Eth Steel Pillar%RED% o%BORDER-A5%%DOT-62% 
 //Skull Collector
 ItemDisplay[UNI !ID 8ws]:%RED%o %PURPLE%Skull Collector%RED% o%BORDER-A5%%DOT-62% 
 //Mang Song's Lesson
@@ -485,7 +485,7 @@ ItemDisplay[UNI ETH !ID 7bk]:%RED%o %PURPLE%Eth Warshrike%RED% o%BORDER-A5%%DOT-
 //Shields//
 ///////////
 //Boneflame
-ItemDisplay[UNI !ID nef]:%RED%* %PURPLE%Boneflame %RED%*%BORDER-A5%%DOT-62% 
+ItemDisplay[UNI !ID nee]:%RED%* %PURPLE%Boneflame %RED%*%BORDER-A5%%DOT-62% 
 //Stormshield
 ItemDisplay[UNI !ID uit]:%RED%*%YELLOW%*%GREEN%*%BLUE%*%NL%%RED%o %PURPLE%Stormshield%RED% o%NL%%RED%*%YELLOW%*%GREEN%*%BLUE%*%DOT-0C%%BORDER-4B%
 //Homunculus
@@ -676,7 +676,7 @@ ItemDisplay[MAG umg]:%NAME%
 ItemDisplay[MAG uvc ILVL>84]:%ORANGE%Caster Belt+ {%ORANGE%Ith %WHITE%+ %PURPLE%P Amethyst %WHITE%+ %BLUE%Jewel}
 ItemDisplay[MAG zvb ILVL>84]:%ORANGE%Caster Belt {%ORANGE%Ith %WHITE%+ %PURPLE%P Amethyst %WHITE%+ %BLUE%Jewel}
 ItemDisplay[MAG uvc]:%NAME%
-ItemDisplay[MAG zvb]:%NAME%//(reformatted for FilterBird)
+ItemDisplay[MAG zvb]:%NAME%
 //Blood Belts (Mithril Coil/Mesh Belt) + TAL + RUBY + JEWEL
 ItemDisplay[MAG umc ILVL>84]:%ORANGE%Blood Belt+ {%ORANGE%Tal %WHITE%+ %RED%P Ruby %WHITE%+ %BLUE%Jewel}
 ItemDisplay[MAG zmb ILVL>84]:%ORANGE%Blood Belt {%ORANGE%Tal %WHITE%+ %RED%P Ruby %WHITE%+ %BLUE%Jewel}

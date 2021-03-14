@@ -3,7 +3,7 @@ var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:
 var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:85,CHARSTAT70:0,CHARSTAT13:1000};
 var item_settings = {ID:false, ILVL_return:85};
 var settings = {auto_difficulty:true,version:0,validation:1,auto_simulate:1,max_errors:50,error_limit:1};
-var notices = {duplicates:0,pd2_conditions:0,pod_conditions:0,colors:0};
+var notices = {duplicates:0,pd2_conditions:0,pod_conditions:0,colors:0,encoding:0};
 var colors = {
 	WHITE:"#dddddd",
 	GRAY:"#707070",
@@ -261,6 +261,7 @@ function simulate(manual) {
 		}
 	}
 	var messages = ""
+	if (notices.encoding == 1) { messages += "<br>An encoding issue may be preventing � characters from appearing correctly." }
 	if (notices.duplicates == 1) { messages += "<br>When two rules have identical conditions, the first rule gets checked twice instead of both rules being checked. (Not simulated)" }
 	if (notices.pd2_conditions == 1) { messages += "<br>PD2 code(s) detected - the PD2 version of FilterBird can be enabled from the menu." }
 	if (notices.pod_conditions == 1) { messages += "<br>PoD code(s) detected - the PoD version of FilterBird can be enabled from the menu." }
@@ -406,6 +407,9 @@ function parseFile(file,num) {
 								if (settings.version == 0) { recognized = true }
 								else { pod_conditions = true }
 							} }
+							if (cr.substr(0,4) == "STAT") { if (Number(cr.slice(4)) >= 0 && Number(cr.slice(4)) <= 500) {
+								recognized = true
+							} }
 							if (pod_conditions == true) {
 								if (notices.pod_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PoD code(s) detected - the PoD version of FilterBird can be enabled from the menu." }
 								notices.pod_conditions = 1
@@ -491,30 +495,34 @@ function parseFile(file,num) {
 				if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,") }
 				else { out_format = out_format.split("%DGREEN%").join(",invalid_DGREEN,").split("%CLVL%").join(",invalid_CLVL,") }
 				if (settings.version == 1) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }
-				else { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",invalid_QTY,").split("%RANGE%").join(",invalid_RANGE,").split("%WPNSPD%").join(",invalid_WPNSPD,").split("%ALVL%").join(",invalid_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }		// TODO: would it be useful for 'known' keywords that don't do anything special in either PoD or PD2 (e.g. %LIGHT_GRAY%) to be treated differently?
-				var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
-				for (n in notifs) {									// TODO: implement more efficient way to split notification keywords
-					if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
-						for (let a = 0; a < 16; a++) {
-							var av = a.toString(16);
-							for (let b = 0; b < 16; b++) {
-								var bv = b.toString(16);
-								if (settings.version == 1) { out_format = out_format.split(notifs[n]+av+bv+"%").join(",ignore_notif,").split(notifs[n]+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av+bv+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,") }
-								//else { out_format = out_format.split(notifs[n]+av+bv+"%").join(",invalid_notif,").split(notifs[n]+av.toUpperCase()+bv.toUpperCase()+"%").join(",invalid_notif,").split(notifs[n].toLowerCase()+av+bv+"%").join(",invalid_notif,").split(notifs[n].toLowerCase()+av.toUpperCase()+bv.toUpperCase()+"%").join(",invalid_notif,") }
+				else { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }		// TODO: would it be useful for 'known' keywords that don't do anything special in either PoD or PD2 (e.g. %LIGHT_GRAY%) to be treated differently?
+				out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,")
+				if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,") }
+				if (settings.version == 1) {
+					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
+					for (n in notifs) {									// TODO: implement more efficient way to split notification keywords
+						if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
+							for (let a = 0; a < 16; a++) {
+								var av = a.toString(16);
+								for (let b = 0; b < 16; b++) {
+									var bv = b.toString(16);
+									out_format = out_format.split(notifs[n]+av+bv+"%").join(",ignore_notif,").split(notifs[n]+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av+bv+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,")
+									//else { out_format = out_format.split(notifs[n]+av+bv+"%").join(",invalid_notif,").split(notifs[n]+av.toUpperCase()+bv.toUpperCase()+"%").join(",invalid_notif,").split(notifs[n].toLowerCase()+av+bv+"%").join(",invalid_notif,").split(notifs[n].toLowerCase()+av.toUpperCase()+bv.toUpperCase()+"%").join(",invalid_notif,") }
+								}
 							}
 						}
 					}
+					if (out_format.includes("%NOTIFY-") || out_format.includes("%notify-")) { for (let a = 0; a < 16; a++) {
+						var av = a.toString(16);
+						out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
+						//else { out_format = out_format.split("%NOTIFY-"+av+"%").join(",invalid_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",invalid_notification,").split("%notify-"+av+"%").join(",invalid_notification,").split("%notify-"+av.toUpperCase()+"%").join(",invalid_notification,") }
+					} }
 				}
-				if (out_format.includes("%NOTIFY-") || out_format.includes("%notify-")) { for (let a = 0; a < 16; a++) {
-					var av = a.toString(16);
-					out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
-					//else { out_format = out_format.split("%NOTIFY-"+av+"%").join(",invalid_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",invalid_notification,").split("%notify-"+av+"%").join(",invalid_notification,").split("%notify-"+av.toUpperCase()+"%").join(",invalid_notification,") }
-				} }
 				var out_list = out_format.split(",,").join(",").split(",");
 				for (out in out_list) {
 					var o = out_list[out].split("‾").join(",");
 					var key = o.split("_")[0];
-					if (key == "misc" || key == "color" || key == "ref" || (key == "ignore" && settings.version == 1) || o == " " || o == "\t" || o == "‗") {
+					if (key == "misc" || key == "color" || key == "ref" || key == "ignore" || o == " " || o == "\t" || o == "‗") {
 						// do nothing
 					} else if (key == "invalid") {
 						var uk = "%"+o.split("_")[1]+"%";
@@ -576,7 +584,7 @@ function parseFile(file,num) {
 					else if (output[i] == "\t") { output = output.substr(1); leadingTabs = true; }
 					else { i = output.length }
 				}
-				if (settings.version == 1) {
+			//	if (settings.version == 1) {
 					if (output.includes("{") == true && output.indexOf("{") < output.lastIndexOf("}")) {
 						desc_output_active = true
 						desc_output = output.substring(output.indexOf("{"),output.indexOf("}")+1)
@@ -592,7 +600,7 @@ function parseFile(file,num) {
 						if (desc_output_total != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item's description overwritten)<br>" }	// displays a notice if the item's description gets overwritten (but not blanked) from lack of continuation
 						desc_output_total = ""
 					}
-				}
+			//	}
 				if (output.includes("%NAME%") == true) {
 					output_total = output.split("%NAME%").join(output_total)
 				} else {
@@ -641,28 +649,31 @@ function parseFile(file,num) {
 	output_total = desc_output_total+"%"+getColor(itemToCompare)+"%"+output_total
 	var description_braces = 0;
 	var description_active = false;
-	if (settings.version == 1) { if (output_total.includes("{") == true && output_total.includes("}") == true) { if (output_total.indexOf("{") < output_total.lastIndexOf("}")) { description_active = true } } }
+	if (output_total.includes("{") == true && output_total.includes("}") == true) { if (output_total.indexOf("{") < output_total.lastIndexOf("}")) { description_active = true } }
 	
 	var out_format = output_total.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
 	if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }
 	if (settings.version == 1) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }
 	if (settings.version == 1) { out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,") }
-	var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
-	for (n in notifs) {
-		if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
-			for (let a = 0; a < 16; a++) {
-				var av = a.toString(16);
-				for (let b = 0; b < 16; b++) {
-					var bv = b.toString(16);
-					out_format = out_format.split(notifs[n]+av+bv+"%").join(",ignore_notif,").split(notifs[n]+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av+bv+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,")
+	if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,") }
+	if (settings.version == 1) {
+		var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
+		for (n in notifs) {
+			if (out_format.includes(notifs[n]) || out_format.includes(notifs[n].toLowerCase())) {
+				for (let a = 0; a < 16; a++) {
+					var av = a.toString(16);
+					for (let b = 0; b < 16; b++) {
+						var bv = b.toString(16);
+						out_format = out_format.split(notifs[n]+av+bv+"%").join(",ignore_notif,").split(notifs[n]+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av+bv+"%").join(",ignore_notif,").split(notifs[n].toLowerCase()+av.toUpperCase()+bv.toUpperCase()+"%").join(",ignore_notif,")
+					}
 				}
 			}
 		}
+		if (out_format.includes("%NOTIFY-") || out_format.includes("%notify-")) { for (let a = 0; a < 16; a++) {
+			var av = a.toString(16);
+			out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
+		} }
 	}
-	if (out_format.includes("%NOTIFY-") || out_format.includes("%notify-")) { for (let a = 0; a < 16; a++) {
-		var av = a.toString(16);
-		out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
-	} }
 	var out_list = out_format.split(",,").join(",").split(",");
 	if (out_list[0] == "") { out_list.shift() }
 	if (out_list[out_list.length-1] == "") { out_list.pop() }
@@ -733,6 +744,7 @@ function parseFile(file,num) {
 		for (let d = description_multi.length-2; d >= 0; d--) { description = description + "<br>" + description_multi[d] }
 		if (description_multi[0].length == 0) { description += "&nbsp;" }
 	}
+	if (display.includes("�") || display.includes("�")) { notices.encoding = 1 }
 	if (errors >= settings.max_errors) { document.getElementById("o"+num).innerHTML += " ... There may be additional errors. The first "+settings.max_errors+" errors were displayed.<br>" }
 	else if (settings.error_limit == 0 && errors >= 50) { document.getElementById("o"+num).innerHTML += " ... In total, "+errors+" errors were displayed.<br>" }
 	return [display,description]

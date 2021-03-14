@@ -1798,6 +1798,8 @@ function setItemCodes() {
 	if (typeof(itemTemp.ethereal) != 'undefined') { if (itemTemp.ethereal == 1) { itemToCompare.ETH = true } }	// TODO: fix so that this line isn't needed twice in this function
 	itemToCompare.ITEMSTAT31 = itemToCompare.DEF
 	itemToCompare.ITEMSTAT18 = itemToCompare.ITEMSTAT17
+	for (let i = 0; i <= 500; i++) { if (typeof(itemToCompare["ITEMSTAT"+i]) != 'undefined') { itemToCompare["STAT"+i] = itemToCompare["ITEMSTAT"+i] } }
+	itemToCompare.STAT72 = itemToCompare.STAT73
 	// TODO: Validate ILVL
 	if (typeof(itemToCompare.RW) == 'undefined') { itemToCompare.RW = false }
 	if (typeof(itemToCompare.NMAG) == 'undefined') { itemToCompare.NMAG = false }
