@@ -705,7 +705,7 @@ function parseFile(file,num) {
 		} else if (key == "color") {
 			blank = true
 			color = colors[o.split("_")[1]]
-			if (settings.validation == 1) { if (description_braces != 1) { text_length[1] += (((~~String(o.split("_")[1]).length+2)/2)+1) } else { text_length[2] += 3 } }
+			if (settings.validation == 1) { if (description_braces != 1) { text_length[1] += (((~~String(o.split("_")[1]).length+2)/2)+1) } else { text_length[2] += 3 } }	// TODO: if %NL% is 4, then colors are 1.66666?
 		} else if (key == "ref") {
 			if (o == "ref_CLVL") { temp = character.CLVL }
 			else if (o == "ref_NAME") { blank = true }
