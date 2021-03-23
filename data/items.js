@@ -2032,8 +2032,14 @@ var premade = {
 {CODE:"scou", name:"Orb of Destruction", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"GOLD"},
 {CODE:"rera", name:"Horadrim Orb", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"GOLD"},
 {CODE:"upmp", name:"Cartographer's Orb", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"GOLD"},
-//{CODE:"scrb", name:"Horadrim Scarab", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"GOLD"},
+{CODE:"scrb", name:"Horadrim Scarab", rarity:"regular", color:"GOLD", pd2:1, always_id:true, color_stuck:"GOLD"},
 {CODE:"lbox", name:"Larzuk's Puzzlebox", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"GOLD"},
 {CODE:"wss", name:"Worldstone Shard", rarity:"regular", color:"PURPLE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"PURPLE"},
+{CODE:"std", name:"Standard of Heroes", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, req_level:90, pd2:1, always_id:true, color_stuck:"GOLD"},
+{CODE:"utb", name:"Itherael's Path", ARMOR:true, EQ5:true, BOOTS:true, ID:false, rarity:"unique", color:"GOLD", req_level:60, pd2:1, req_strength:163, durability:18, base_defense:68, fcr:20, base:"Mirrored Boots", always_id:false},
+{CODE:"uhl", name:"Overloard's Helm", ARMOR:true, EQ1:true, HELM:true, ID:false, rarity:"unique", color:"GOLD", req_level:40, pd2:1, req_strength:142, base_defense:154, base:"Giant Conch", always_id:false},
+{CODE:"7bs", name:"Hadriel's Hand", WEAPON:true, CL5:true, SIN:true, ID:false, rarity:"unique", color:"GOLD", req_level:58, pd2:1, base_damage_min:37, base_damage_max:53, req_strength:142, req_dexterity:112, durability:32, baseSpeed:0, range:0, base:"Conquest Sword", always_id:false},
+{CODE:"7qr", name:"Aidan's Scar", WEAPON:true, WP3:true, SWORD:true, ID:false, rarity:"unique", color:"GOLD", req_level:64, pd2:1, base_damage_min:40, base_damage_max:51, req_strength:118, req_dexterity:118, durability:68, baseSpeed:0, range:1, base:"Scissors Suwayyah", always_id:false},
+{CODE:"uth", name:"Dark Abyss", ARMOR:true, EQ2:true, CHEST:true, ID:false, rarity:"unique", color:"GOLD", req_level:62, pd2:1, req_strength:208, durability:55, base_defense:541, base:"Lacquered Plate", always_id:false},
 	]
 };
