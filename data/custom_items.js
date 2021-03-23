@@ -1799,7 +1799,7 @@ function setItemCodes() {
 	itemToCompare.ITEMSTAT31 = itemToCompare.DEF
 	itemToCompare.ITEMSTAT18 = itemToCompare.ITEMSTAT17
 	for (let i = 0; i <= 500; i++) { if (typeof(itemToCompare["ITEMSTAT"+i]) != 'undefined') { itemToCompare["STAT"+i] = itemToCompare["ITEMSTAT"+i] } }
-	itemToCompare.STAT72 = itemToCompare.STAT73
+	if (typeof(itemToCompare.STAT73) != 'undefined') { itemToCompare.STAT72 = itemToCompare.STAT73 }
 	for (let i = 0; i <= 100; i++) {
 		if (i < 10) {
 			if (typeof(itemToCompare["STAT00"+i]) != 'undefined') { itemToCompare["STAT00"+i] = itemToCompare["STAT"+i] }

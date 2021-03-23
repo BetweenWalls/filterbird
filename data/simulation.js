@@ -705,11 +705,11 @@ function parseFile(file,num) {
 		} else if (key == "color") {
 			blank = true
 			color = colors[o.split("_")[1]]
-			if (description_braces != 1) { text_length[1] += ((String(o.split("_")[1]).length+2)/2+1) } else { text_length[2] += 3 }
+			if (settings.validation == 1) { if (description_braces != 1) { text_length[1] += (((~~String(o.split("_")[1]).length+2)/2)+1) } else { text_length[2] += 3 } }
 		} else if (key == "ref") {
 			if (o == "ref_CLVL") { temp = character.CLVL }
 			else if (o == "ref_NAME") { blank = true }
-			else if (settings.version == 1 && o == "ref_RUNENAME" && itemToCompare.RUNE > 0) { color = colors["ORANGE"]; temp = itemToCompare.RUNENAME; }
+			else if (settings.version == 1 && o == "ref_RUNENAME" && itemToCompare.RUNE > 0) { color = colors["ORANGE"]; temp = itemToCompare.name.split(" ")[0]; }	// TODO: why isn't itemToCompare.RUNENAME setup by this point? (for stacked runes)
 			else if (o == "ref_GLEVEL") {
 				if (itemToCompare.type == "gem") {
 					var g_level = ["NONE","Chipped","Flawed","Normal","Flawless","Perfect"];
@@ -743,17 +743,22 @@ function parseFile(file,num) {
 			if (o == "misc_NL" || o == "‗") { display += "<br>" }
 			if (o == " ") { display += "<l style='color:Black; opacity:0%;'>_</l>" }
 			else if (blank == false) { display += "<l style='color:"+color+"'>"+temp+"</l>" }
-			if (o == "misc_NL" || o == "‗" || o == " ") { text_length[1]++ }
-			if (o == "misc_NL") { text_length[0] = 0 }
-			if (o == " ") { text_length[0]++ }
-			else if (blank == false) { text_length[0] += ~~temp.length; text_length[1] += ~~String(temp).length; }
-			if (text_length[0] > text_length_highest) { text_length_highest = text_length[0] }
+			if (settings.validation == 1) {
+				if (o == "misc_NL" || o == "‗" || o == " ") { text_length[1]++ }
+				if (o == "misc_NL") { text_length[0] = 0 }
+				if (o == " ") { text_length[0]++ }
+				else if (blank == false) { text_length[0] += ~~temp.length; text_length[1] += ~~String(temp).length; }
+				if (text_length[0] > text_length_highest) { text_length_highest = text_length[0] }
+			}
 		} else {
 			if (o == "misc_NL" || o == "‗") { description += "<br>" }
 			if (o == " ") { description += "<l style='color:Black; opacity:0%;'>_</l>" }
 			else if (blank == false) { description += "<l style='color:"+color+"'>"+temp+"</l>" }
-			if (o == "misc_NL" || o == "‗" || o == " ") { text_length[2]++ }
-			else if (blank == false) { text_length[2] += ~~String(temp).length }
+			if (settings.validation == 1) {
+				if (o == "misc_NL" || o == "‗") { text_length[2]++ }
+				if (o == " ") { text_length[2]++ }
+				else if (blank == false) { text_length[2] += ~~String(temp).length }
+			}
 		}
 	}
 	if (settings.validation == 1) {
