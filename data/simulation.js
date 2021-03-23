@@ -496,7 +496,19 @@ function parseFile(file,num) {
 				var unrecognized_list = [];
 				var unrecognized_keywords = false;
 				var out_format = output.split("//")[0];
-				if (settings.version == 0) { out_format = out_format.split("/")[0] }
+				
+				// Checks name output (not description) for %NL% and displays an error if found
+				if (settings.version == 1) {
+					if (out_format.includes("{") == true && out_format.indexOf("{") < out_format.lastIndexOf("}")) {
+						var desc_output_temp = out_format.substring(out_format.indexOf("{"),out_format.indexOf("}")+1);
+						var name_output_temp = out_format.replace(desc_output_temp,"");
+						if (name_output_temp.includes("%NL%") == true) {
+							document.getElementById("o"+num).innerHTML += "#"+num+" Invalid keyword on line "+line_num+": <l style='color:#cc5'>%NL%</l> (only useable in the item's description) ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"; errors++;	// displays an error if the rule includes any invalid uses of the %NL% keyword
+						}
+					}
+				}
+				
+				if (settings.version == 0) { out_format = out_format.split("/")[0] }	// TODO: is this still necessary?
 				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
 				// TODO: Change split/join replacements to use deliminator other than "_" between the identifying key and the keyword, so no exceptions need to be made when splitting off the keyword (e.g. for [DARK,GREEN] since it contains the deliminator)
 				if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,") }
@@ -762,14 +774,14 @@ function parseFile(file,num) {
 		}
 	}
 	if (settings.validation == 1) {
-		if (text_length_highest > 50) {
-			document.getElementById("o"+num).innerHTML += "#"+num+" Warning: extremely long item name<br>"; errors++;	// displays an error if the item's name is too long to be shown in some circumstances
+		if (text_length_highest > 53) {
+			document.getElementById("o"+num).innerHTML += "#"+num+" Warning: item name is too long<br>"; errors++;	// displays an error if the item's name is too long to be shown in some circumstances
 		}
 		if (text_length[2] > 130) {
 			document.getElementById("o"+num).innerHTML += "#"+num+" Warning: item description is too long<br>"; errors++;	// displays an error if the item's description is too long
 		}
-		if (text_length[1] > 486) {
-			document.getElementById("o"+num).innerHTML += "#"+num+" Warning: item name is too long<br>"; errors++;	// displays an error if the item's name is too long
+		if (text_length[1] > 470) {
+			document.getElementById("o"+num).innerHTML += "#"+num+" Warning: there is no cow level<br>"; errors++;	// displays an error if the item's name is too long
 		}
 	}
 	// Reverses order of lines
