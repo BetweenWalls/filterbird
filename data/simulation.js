@@ -231,7 +231,7 @@ function setItem(value) {
 // ---------------------------------
 function simulate(manual) {
 	//document.body.style.cursor = "wait";
-	if (settings.auto_simulate == 0) { document.getElementById("o5").innerHTML = "<br>Auto-Simulate is disabled" }
+	if (settings.auto_simulate == 0) { document.getElementById("o5").innerHTML = "<br>Auto-Simulate is disabled. Click the 'ground' to simulate manually." }
 	else { document.getElementById("o5").innerHTML = "" }
 	if (document.getElementById("dropdown_group").selectedIndex > 9) { document.getElementById("select_price").style.display = "none" }
 	document.getElementById("o4").innerHTML = ""
@@ -409,6 +409,13 @@ function parseFile(file,num) {
 							} }
 							if (cr.substr(0,4) == "STAT") { if (Number(cr.slice(4)) >= 0 && Number(cr.slice(4)) <= 500) {
 								recognized = true
+								cond_list[cond] = ("STAT"+Number(cr.slice(4)))
+								c = cond_list[cond]
+							} }
+							if (cr.substr(0,2) == "SK") { if (Number(cr.slice(2)) >= 0 && Number(cr.slice(2)) <= 100) {
+								recognized = true
+								cond_list[cond] = ("SK"+Number(cr.slice(2)))
+								c = cond_list[cond]
 							} }
 							if (pod_conditions == true) {
 								if (notices.pod_conditions == 0) { document.getElementById("o4").innerHTML += "<br>PoD code(s) detected - the PoD version of FilterBird can be enabled from the menu." }
@@ -494,7 +501,7 @@ function parseFile(file,num) {
 				// TODO: Change split/join replacements to use deliminator other than "_" between the identifying key and the keyword, so no exceptions need to be made when splitting off the keyword (e.g. for [DARK,GREEN] since it contains the deliminator)
 				if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,") }
 				else { out_format = out_format.split("%DGREEN%").join(",invalid_DGREEN,").split("%CLVL%").join(",invalid_CLVL,") }
-				if (settings.version == 1) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }
+				if (settings.version == 1) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,") }
 				else { out_format = out_format.split("%MAP%").join(",ignore_MAP,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }		// TODO: would it be useful for 'known' keywords that don't do anything special in either PoD or PD2 (e.g. %LIGHT_GRAY%) to be treated differently?
 				out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,")
 				if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,") }
@@ -653,7 +660,7 @@ function parseFile(file,num) {
 	
 	var out_format = output_total.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
 	if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }
-	if (settings.version == 1) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }
+	if (settings.version == 1) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,") }
 	if (settings.version == 1) { out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,") }
 	if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,") }
 	if (settings.version == 1) {
@@ -711,6 +718,7 @@ function parseFile(file,num) {
 					blank = true
 				}
 			}
+			else if (o == "ref_reqlevel") { temp = ~~itemToCompare["req_level"] }
 			else { temp = itemToCompare[o.split("_")[1]] }
 		} else if (o == " " || o == "\t" || o == "‗") {
 			blank = true

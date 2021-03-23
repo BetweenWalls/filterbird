@@ -1800,6 +1800,14 @@ function setItemCodes() {
 	itemToCompare.ITEMSTAT18 = itemToCompare.ITEMSTAT17
 	for (let i = 0; i <= 500; i++) { if (typeof(itemToCompare["ITEMSTAT"+i]) != 'undefined') { itemToCompare["STAT"+i] = itemToCompare["ITEMSTAT"+i] } }
 	itemToCompare.STAT72 = itemToCompare.STAT73
+	for (let i = 0; i <= 100; i++) {
+		if (i < 10) {
+			if (typeof(itemToCompare["STAT00"+i]) != 'undefined') { itemToCompare["STAT00"+i] = itemToCompare["STAT"+i] }
+			if (typeof(itemToCompare["SK00"+i]) != 'undefined') { itemToCompare["SK00"+i] = itemToCompare["SK"+i] }
+		}
+		if (typeof(itemToCompare["STAT0"+i]) != 'undefined') { itemToCompare["STAT0"+i] = itemToCompare["STAT"+i] }
+		if (typeof(itemToCompare["SK0"+i]) != 'undefined') { itemToCompare["SK0"+i] = itemToCompare["SK"+i] }
+	}
 	// TODO: Validate ILVL
 	if (typeof(itemToCompare.RW) == 'undefined') { itemToCompare.RW = false }
 	if (typeof(itemToCompare.NMAG) == 'undefined') { itemToCompare.NMAG = false }
@@ -1977,4 +1985,9 @@ function setQuantity(val) {
 		* Infernal Torch (set wand) changed to Infernal Spike (set dagger)
 		* many unique/set/runeword item changes
 		* many skilltree changes											// pointmods are implemented, but their availability hasn't been checked
+*/
+
+
+/* TODO:
+		* lots of new codes/keywords available for PoD, including keywords such as %STAT45% (poison resistance) or %SK18% (enhanced [max] damage on non-weapons)
 */
