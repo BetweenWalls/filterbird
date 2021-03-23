@@ -576,6 +576,8 @@ function parseFile(file,num) {
 			
 			if (match == true) {
 				var desc_output_active = false;
+				var desc_output_escape = false;
+				var desc_output_temp = "";
 				// Removes comments and leading/trailing tabs and spaces
 				output = output.split("//")[0]
 				if (settings.version == 0) { output = output.split("/")[0] }
@@ -591,23 +593,27 @@ function parseFile(file,num) {
 					else if (output[i] == "\t") { output = output.substr(1); leadingTabs = true; }
 					else { i = output.length }
 				}
-			//	if (settings.version == 1) {
-					if (output.includes("{") == true && output.indexOf("{") < output.lastIndexOf("}")) {
-						desc_output_active = true
-						desc_output = output.substring(output.indexOf("{"),output.indexOf("}")+1)
-						output = output.replace(desc_output,"")
-						desc_output = desc_output.substring(1,desc_output.length-1)
-						if (desc_output.includes("%NAME%") == true) {
-							desc_output_total = desc_output.split("%NAME%").join(desc_output_total)
-						} else {
-							if (desc_output_total != "" && desc_output != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item's description overwritten)<br>" }	// displays a notice if the item's description gets overwritten (but not blanked)
-							desc_output_total = desc_output
-						}
+				
+				if (output.includes("{") == true && output.indexOf("{") < output.lastIndexOf("}")) {
+					var out_temp = output.substring(output.indexOf("{"),output.length-1);
+					out_temp = out_temp.substring(output.indexOf("}"),output.length-1);
+					if (out_temp.includes("{") == true && out_temp.indexOf("{") < out_temp.lastIndexOf("}")) { desc_output_escape = true }
+					desc_output_active = true
+					desc_output = output.substring(output.indexOf("{"),output.indexOf("}")+1)
+					output = output.replace(desc_output,"")
+					desc_output = desc_output.substring(1,desc_output.length-1)
+					if (desc_output.includes("%NAME%") == true) {
+						desc_output_total = desc_output.split("%NAME%").join(desc_output_total)
 					} else {
-						if (desc_output_total != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item's description overwritten)<br>" }	// displays a notice if the item's description gets overwritten (but not blanked) from lack of continuation
-						desc_output_total = ""
+						if (desc_output_total != "" && desc_output != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item's description overwritten)<br>" }	// displays a notice if the item's description gets overwritten (but not blanked)
+						desc_output_total = desc_output
 					}
-			//	}
+					if (desc_output_escape == true) { desc_output_temp = desc_output }
+				} else {
+					if (desc_output_total != "" && output != "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item's description overwritten)<br>" }	// displays a notice if the item's description gets overwritten (but not blanked) from lack of continuation
+					desc_output_total = ""
+				}
+				
 				if (output.includes("%NAME%") == true) {
 					output_total = output.split("%NAME%").join(output_total)
 				} else {
@@ -620,6 +626,7 @@ function parseFile(file,num) {
 						if (desc_output_total != "" && output_total == "") { document.getElementById("o"+num).innerHTML += "#"+num+" Notice for line "+line_num+" (item description on hidden item)<br>" }	// displays a notice if the item description isn't hidden, but the item is
 					}
 				} else {
+					if (desc_output_escape == true) { output_total = "{"+desc_output_temp+"}"+output_total }	// TODO: implement differently? this may only work properly if {} is used to escape
 					continued++
 				}
 				// TODO: Would it be useful to show a warning if %CONTINUE% is used on a hidden item?
@@ -685,6 +692,8 @@ function parseFile(file,num) {
 	if (out_list[0] == "") { out_list.shift() }
 	if (out_list[out_list.length-1] == "") { out_list.pop() }
 	var color = colors[getColor(itemToCompare)];
+	//var name_length = 0;
+	//var desc_length = 0;
 	for (out in out_list) {
 		var o = out_list[out].split("‾").join(",");
 		var temp = o;
@@ -696,6 +705,7 @@ function parseFile(file,num) {
 		} else if (key == "color") {
 			blank = true
 			color = colors[o.split("_")[1]]
+	//		if (description_braces != 1) { name_length += 2 } else { desc_length += 2 }
 		} else if (key == "ref") {
 			if (o == "ref_CLVL") { temp = character.CLVL }
 			else if (o == "ref_NAME") { blank = true }
@@ -733,10 +743,14 @@ function parseFile(file,num) {
 			if (o == "misc_NL" || o == "‗") { display += "<br>" }
 			if (o == " ") { display += "<l style='color:Black; opacity:0%;'>_</l>" }
 			else if (blank == false) { display += "<l style='color:"+color+"'>"+temp+"</l>" }
+	//		if (o == "misc_NL" || o == "‗" || o == " ") { name_length++ }
+	//		else if (blank == false) { name_length += ~~temp.length }
 		} else {
 			if (o == "misc_NL" || o == "‗") { description += "<br>" }
 			if (o == " ") { description += "<l style='color:Black; opacity:0%;'>_</l>" }
 			else if (blank == false) { description += "<l style='color:"+color+"'>"+temp+"</l>" }
+	//		if (o == "misc_NL" || o == "‗" || o == " ") { desc_length++ }
+	//		else if (blank == false) { desc_length += ~~temp.length }
 		}
 	}
 	// Reverses order of lines
@@ -755,6 +769,11 @@ function parseFile(file,num) {
 	if (display.includes("�") || display.includes("�")) { notices.encoding = 1 }
 	if (errors >= settings.max_errors) { document.getElementById("o"+num).innerHTML += " ... There may be additional errors. The first "+settings.max_errors+" errors were displayed.<br>" }
 	else if (settings.error_limit == 0 && errors >= 50) { document.getElementById("o"+num).innerHTML += " ... In total, "+errors+" errors were displayed.<br>" }
+	
+	// TODO: Add warnings for names/descriptions that are too long
+	//document.getElementById("o"+num).innerHTML += "#"+num+" Title Length: "+"<l style='color:#aaa'>"+name_length+"</l><br>"
+	//document.getElementById("o"+num).innerHTML += "#"+num+" Description Length: "+"<l style='color:#aaa'>"+desc_length+"</l><br>"
+	
 	return [display,description]
 }
 
