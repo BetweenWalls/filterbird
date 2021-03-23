@@ -62,44 +62,64 @@ ItemDisplay[std]: %NAME% x%QTY%%MAP-68%{%TAN%+20% Magic/Gold Find%NL%+20% Monste
 
 // PD2 Items
 ItemDisplay[wss]: %PURPLE%+ %RED%Worldstone Shard x%QTY% %PURPLE%+%RED%%MAP-62%{%TAN%Unsock Item: 50% Mod, 25% Brick, 25% Sockets%NL%Sock Item: 75% Mod, 25% Brick%NL%Maps: 70% Mod, 30% CNC%NL%%ORANGE%Cube w/ item to corrupt} // Worldstone Shard
-ItemDisplay[lbox]: %PURPLE%+ %RED%Larzuks Puzzlebox x%QTY% %PURPLE%+%RED%%MAP-62%{%TAN%Armors: 0-2%NL%2H Weapons: 0-4%NL%1H Weapons: 0-2%NL%Amazon Weapons: 0-6%NL%Bows: 0-6%NL%%ORANGE%Cube w/ unsocketed item to roll sockets} // Larzuk's Box
-ItemDisplay[rera]: %NAME% x%QTY%{%TAN%Rune or Greater, & Rare Map%NL%Cube w/ Perfect Gem, Thul%NL%%ORANGE%Reroll Rare Map} // Reroll Rare Map (Horadrim Orb)
-ItemDisplay[imra]: %NAME% x%QTY%{%TAN%or Greater, & White Map%NL%Cube w/ Jewel, Thul Rune%NL%%ORANGE%Imbue Rare Map} // Imbue Rare Map (Zakarum Orb)
-ItemDisplay[upma]: %NAME% x%QTY%{%TAN%Rune or Greater, & Magic Map%NL%Cube w/ Perfect Skull, Thul%NL%%ORANGE%Upgrade Magic to Rare} // Upgrade Magic Map to Rare Map (Angelic Orb)
-ItemDisplay[imma]: %NAME% x%QTY%{%TAN%& White Map%NL%Cube w/ Jewel,%NL%%ORANGE%Imbue Magic Map} // Imbue Magic Map (Arcane Orb)
-ItemDisplay[scou]: %NAME% x%QTY%{%TAN%Magic or Rare Map%NL%Cube w/ Hel Rune &%NL%%ORANGE%Purge Map} // Purge Map (Removes Mods and Reverts back to a White Map) (Orb of Destruction)
-ItemDisplay[upmp]: %NAME% x%QTY%{%TAN%to get a map of the next tier%NL%Cube 3 maps of the same tier%NL%%ORANGE%Uptier Maps} // Cartographer's Orb
-ItemDisplay[scrb]: %NAME%{%TAN%these are intended for groups!%NL%%RED%WARNING:%NL%%NL%%TAN%create a group dungeon%NL%Cube w/ a Tier 3 map to%NL%%ORANGE%Create Group Dungeon} // Horadrim Scarab
-ItemDisplay[NMAG (t11 OR t12 OR t13 OR t14 OR t21 OR t22 OR t23 OR t31 OR t32 OR t33 OR t34 OR t41 OR t42)]: %WHITE%%NAME%%CONTINUE% // Coloring white maps
-ItemDisplay[MAG (t11 OR t12 OR t13 OR t14 OR t21 OR t22 OR t23 OR t31 OR t32 OR t33 OR t34 OR t41 OR t42)]: %BLUE%%NAME%%CONTINUE% // Coloring magic maps
-ItemDisplay[RARE (t11 OR t12 OR t13 OR t14 OR t21 OR t22 OR t23 OR t31 OR t32 OR t33 OR t34 OR t41 OR t42)]: %YELLOW%%NAME%%CONTINUE% // Coloring rare maps
+ItemDisplay[lbox]: %PURPLE%+ %RED%Larzuks Puzzlebox x%QTY% %PURPLE%+%RED%%MAP-62%{%TAN%Armors: 0-2%NL%2H Weapons: 0-4%NL%1H Weapons: 0-2%NL%%ORANGE%Cube w/ unsocketed item to roll sockets} // Larzuk's Box
+ItemDisplay[rera]: %NAME% x%QTY%{%TAN%Rune or Greater, & Rare Map%NL%Cube w/ Perfect Gem, Thul%NL%%ORANGE%Reroll Rare Map%NL%} // Reroll Rare Map (Horadrim Orb)
+ItemDisplay[imra]: %NAME% x%QTY%{%TAN%or Greater, & White Map%NL%Cube w/ Jewel, Thul Rune%NL%%ORANGE%Imbue Rare Map%NL%} // Imbue Rare Map (Zakarum Orb)
+ItemDisplay[upma]: %NAME% x%QTY%{%TAN%Rune or Greater, & Magic Map%NL%Cube w/ Perfect Skull, Thul%NL%%ORANGE%Upgrade Magic to Rare%NL%} // Upgrade Magic Map to Rare Map (Angelic Orb)
+ItemDisplay[imma]: %NAME% x%QTY%{%TAN%& White Map%NL%Cube w/ Jewel,%NL%%ORANGE%Imbue Magic Map%NL%} // Imbue Magic Map (Arcane Orb)
+ItemDisplay[scou]: %NAME% x%QTY%{%TAN%Magic or Rare Map%NL%Cube w/ Hel Rune &%NL%%ORANGE%Purge Map%NL%} // Purge Map (Removes Mods and Reverts back to a White Map) (Orb of Destruction)
+ItemDisplay[upmp]: %NAME% x%QTY%{%TAN%to get a map of the next tier%NL%Cube 3 maps of the same tier%NL%%ORANGE%Uptier Maps%NL%} // Cartographer's Orb
+ItemDisplay[scrb]: %NAME%%MAP-62%{%TAN%these are intended for groups!%NL%%RED%WARNING:%NL%%NL%%TAN%create a group dungeon%NL%Cube w/ a Tier 3 map to%NL%%ORANGE%Create Group Dungeon%NL%} // Horadrim Scarab
+ItemDisplay[NMAG (t10 OR t11 OR t12 OR t13 OR t14 OR t15 OR t16 OR t17 OR t18 OR t19 OR t20 OR t21 OR t22 OR t23 OR t24 OR t25 OR t26 OR t27 OR t28 OR t29 OR t30 OR t31 OR t32 OR t33 OR t34 OR t35 OR t36 OR t37 OR t38 OR t39 OR t40 OR t41 OR t42 OR t43 OR t44 OR t45 OR t46 OR t47 OR t48 OR t49)]: %WHITE%%NAME%%CONTINUE% // Coloring white maps
+ItemDisplay[MAG (t10 OR t11 OR t12 OR t13 OR t14 OR t15 OR t16 OR t17 OR t18 OR t19 OR t20 OR t21 OR t22 OR t23 OR t24 OR t25 OR t26 OR t27 OR t28 OR t29 OR t30 OR t31 OR t32 OR t33 OR t34 OR t35 OR t36 OR t37 OR t38 OR t39 OR t40 OR t41 OR t42 OR t43 OR t44 OR t45 OR t46 OR t47 OR t48 OR t49)]: %BLUE%%NAME%%CONTINUE% // Coloring magic maps
+ItemDisplay[RARE (t10 OR t11 OR t12 OR t13 OR t14 OR t15 OR t16 OR t17 OR t18 OR t19 OR t20 OR t21 OR t22 OR t23 OR t24 OR t25 OR t26 OR t27 OR t28 OR t29 OR t30 OR t31 OR t32 OR t33 OR t34 OR t35 OR t36 OR t37 OR t38 OR t39 OR t40 OR t41 OR t42 OR t43 OR t44 OR t45 OR t46 OR t47 OR t48 OR t49)]: %YELLOW%%NAME%%CONTINUE% // Coloring rare maps
+ItemDisplay[t10]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
 ItemDisplay[t11]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Ruins of Viz-jun [T1]
 ItemDisplay[t12]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Horazon's Memory [T1]
 ItemDisplay[t13]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Bastion Keep [T1]
+ItemDisplay[t14]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t15]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t16]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t17]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t18]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t19]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t20]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
 ItemDisplay[t21]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Phlegethon [T2]
 ItemDisplay[t22]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Torajan Jungle [T2]
 ItemDisplay[t23]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Arreat Battlefield [T2]
 ItemDisplay[t24]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Blood Moon [T2]
+ItemDisplay[t25]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t26]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t27]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t28]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t29]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t30]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
 ItemDisplay[t31]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // River of Blood [T3]
 ItemDisplay[t32]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Throne of Insanity [T3]
 ItemDisplay[t33]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Sewers of Harrogath [T3]
 ItemDisplay[t34]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Ancestral Trial [T3]
-ItemDisplay[t35]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Cathedral of Light [T3]
-ItemDisplay[t36]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Tomb of Zoltun Kulle [T3]
-ItemDisplay[t41]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Plains of Torment [T4]
-ItemDisplay[t42]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Desert [T4]
-ItemDisplay[NMAG (t11 OR t12 OR t13 OR t14 OR t21 OR t22 OR t23 OR t31 OR t32 OR t33 OR t34 OR t41 OR t42)]: %NAME%%WHITE%{%NAME%} // Coloring white maps
-ItemDisplay[MAG (t11 OR t12 OR t13 OR t14 OR t21 OR t22 OR t23 OR t31 OR t32 OR t33 OR t34 OR t41 OR t42)]: %NAME%%BLUE%{%NAME%} // Coloring magic maps
-ItemDisplay[RARE (t11 OR t12 OR t13 OR t14 OR t21 OR t22 OR t23 OR t31 OR t32 OR t33 OR t34 OR t41 OR t42)]: %NAME%%YELLOW%{%NAME%} // Coloring rare maps
+ItemDisplay[t35]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Tomb of Zoltun Kulle [T3]
+ItemDisplay[t36]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t37]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t38]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t39]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t40]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t41]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Cathedral of Light [T4]
+ItemDisplay[t42]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t43]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t44]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t45]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t46]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t47]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t48]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t49]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[NMAG (t10 OR t11 OR t12 OR t13 OR t14 OR t15 OR t16 OR t17 OR t18 OR t19 OR t20 OR t21 OR t22 OR t23 OR t24 OR t25 OR t26 OR t27 OR t28 OR t29 OR t30 OR t31 OR t32 OR t33 OR t34 OR t35 OR t36 OR t37 OR t38 OR t39 OR t40 OR t41 OR t42 OR t43 OR t44 OR t45 OR t46 OR t47 OR t48 OR t49)]: %NAME%%WHITE%{%NAME%} // Coloring white maps
+ItemDisplay[MAG (t10 OR t11 OR t12 OR t13 OR t14 OR t15 OR t16 OR t17 OR t18 OR t19 OR t20 OR t21 OR t22 OR t23 OR t24 OR t25 OR t26 OR t27 OR t28 OR t29 OR t30 OR t31 OR t32 OR t33 OR t34 OR t35 OR t36 OR t37 OR t38 OR t39 OR t40 OR t41 OR t42 OR t43 OR t44 OR t45 OR t46 OR t47 OR t48 OR t49)]: %NAME%%BLUE%{%NAME%} // Coloring magic maps
+ItemDisplay[RARE (t10 OR t11 OR t12 OR t13 OR t14 OR t15 OR t16 OR t17 OR t18 OR t19 OR t20 OR t21 OR t22 OR t23 OR t24 OR t25 OR t26 OR t27 OR t28 OR t29 OR t30 OR t31 OR t32 OR t33 OR t34 OR t35 OR t36 OR t37 OR t38 OR t39 OR t40 OR t41 OR t42 OR t43 OR t44 OR t45 OR t46 OR t47 OR t48 OR t49)]: %NAME%%YELLOW%{%NAME%} // Coloring rare maps
 ItemDisplay[dcho]: %PURPLE%+ %RED%Black Soulstone x%QTY% %PURPLE%+%MAP-62%{%TAN%Drops from Uber Trist bosses%NL%%NL%& Pure Demonic Essence%NL%Cube w/ Prime Evil Soul} // Black Soulstone
 ItemDisplay[dcso]: %PURPLE%+ %RED%Prime Evil Soul x%QTY% %PURPLE%+%MAP-62%{%TAN%Drops from Hell Diablo & Baal%NL%%NL%& Pure Demonic Essence%NL%Cube w/ Black Soulstone} // Prime Evil Soul
 ItemDisplay[dcbl]: %PURPLE%+ %RED%Pure Demonic Essence x%QTY% %PURPLE%+%MAP-62%{%TAN%Drops from map bosses%NL%%NL%& Prime Evil Soul%NL%Cube w/ Black Soulstone} // Pure Demonic Essence
 ItemDisplay[dcma]: %PURPLE%+ %RED%Vision of Terror %PURPLE%+%MAP-62%{%TAN%to fight Uber Diablo!%NL%Right-click in Act 5 town%NL%%NL%Requires level 75} // Vision of Terror
-ItemDisplay[UNI !ID utb]: %NAME%%MAP-A5% // New DClone Unique Mirrored Boots
-ItemDisplay[UNI !ID uld]: %NAME%%MAP-A5% // New DClone Unique Kraken Shell
-ItemDisplay[UNI !ID 7bs]: %NAME%%MAP-A5% // New DClone Unique Conquest Sword
-ItemDisplay[UNI !ID 7qr]: %NAME%%MAP-A5% // New DClone Unique Scissors Suwayyah
-ItemDisplay[UNI !ID uh9]: %NAME%%MAP-A5% // New DClone Unique Bone Visage
 
 // Gems
 ItemDisplay[GEM=1 DIFF>0]: // Hide all Chipped gems past Normal difficulty
@@ -224,8 +244,8 @@ ItemDisplay[r31]: %NAME%{%TAN%2 Jah + Key = Cham%NL%} // Jah Rune
 ItemDisplay[r31s]: %NAME%{%TAN%2 Jah + Key = Cham%NL%%NL%%WHITE%Shields: +50 Life%NL%Armor/Helms: Increase Maximum Life 5%%NL%Weapons: Ignore Targets Defense%NL%} // Stacked Jah Rune
 ItemDisplay[r32]: %NAME%{%TAN%2 Cham + Key = Zod%NL%} // Cham Rune
 ItemDisplay[r32s]: %NAME%{%TAN%2 Cham + Key = Zod%NL%%NL%%WHITE%Shields: Cannot be Frozen%NL%Armor/Helms: Cannot be Frozen%NL%Weapons: Freezes Target +3%NL%} // Stacked Cham Rune
-ItemDisplay[r33]: %NAME%{%TAN%Cube w/ Perfect Skull + item to fully repair item} // Zod Rune
-ItemDisplay[r33s]: %NAME%{%TAN%Cube w/ Perfect Skull + item to fully repair item%NL%%NL%%WHITE%All Sockets: Indestructible%NL%} // Stacked Zod Rune
+ItemDisplay[r33]: %NAME%{%TAN%item to fully repair item%NL%Cube w/ Perfect Skull and} // Zod Rune
+ItemDisplay[r33s]: %NAME%{%TAN%item to fully repair item%NL%Cube w/ Perfect Skull and%NL%%NL%%WHITE%All Sockets: Indestructible%NL%} // Stacked Zod Rune
 
 // Eth & Socket in Item Name
 // Magic, Unique, Set, Rare, and Crafted items
@@ -248,6 +268,15 @@ ItemDisplay[MAG (TABSK1>1 OR TABSK8>1 OR TABSK9>1 OR TABSK10>1 OR TABSK16>1 OR T
 ItemDisplay[MAG (CLSK0>1 OR CLSK1>1 OR CLSK2>1 OR CLSK3>1 OR CLSK4>1 OR CLSK5>1 OR CLSK6>1) FCR>19 CIRC]: %NAME% %GREEN%(2/20)%BLUE% // +2 class skills, +20 FCR circlet
 ItemDisplay[MAG (CLSK0>1 AND TABSK2>2) ZON]: %NAME% %GREEN%(+5 Jav)%BLUE% // +2 Amazon, +3 Javelin Skills Javelin
 ItemDisplay[MAG TABSK2>5 ZON]: %NAME% %GREEN%(+6 Jav)%BLUE% // +6 Javelin Skills Javelin
+ItemDisplay[MAG TABSK50=3 SIN]: %NAME% %GREEN%(+3 MA)%BLUE%
+ItemDisplay[MAG TABSK49=3 SIN]: %NAME% %GREEN%(+3 SD)%BLUE%
+ItemDisplay[MAG TABSK48=3 SIN]: %NAME% %GREEN%(+3 Trap)%BLUE%
+ItemDisplay[MAG (CLSK6>1 AND SK254>2) SIN]: %NAME% %GREEN%(+5 TS)%BLUE% // +2 Assassin, +3 Tiger Strike katar
+ItemDisplay[MAG (CLSK6>1 AND SK265>2) SIN]: %NAME% %GREEN%(+5 CS)%BLUE% // +2 Assassin, +3 Cobra Strike katar
+ItemDisplay[MAG (CLSK6>1 AND SK269>2) SIN]: %NAME% %GREEN%(+5 CoT)%BLUE% // +2 Assassin, +3 Claws of Thunder katar
+ItemDisplay[MAG (CLSK6>1 AND SK275>2) SIN]: %NAME% %GREEN%(+5 DF)%BLUE% // +2 Assassin, +3 Dragon Flight katar
+ItemDisplay[MAG (CLSK6>1 AND SK280>2) SIN]: %NAME% %GREEN%(+5 PS)%BLUE% // +2 Assassin, +3 Phoenix Strike katar
+ItemDisplay[MAG (CLSK6>1 AND SK252>2) SIN]: %NAME% %GREEN%(+5 DCM)%BLUE% // +2 Assassin, +3 Dagger & Claw Mastery katar
 ItemDisplay[MAG (CLSK6>1 AND SK253>2) SIN]: %NAME% %GREEN%(+5 PH)%BLUE% // +2 Assassin, +3 Psychic Hammer katar
 ItemDisplay[MAG (CLSK6>1 AND SK273>2) SIN]: %NAME% %GREEN%(+5 MB)%BLUE% // +2 Assassin, +3 Mind Blast katar
 ItemDisplay[MAG (CLSK6>1 AND SK278>2) SIN]: %NAME% %GREEN%(+5 Ven)%BLUE% // +2 Assassin, +3 Venom katar
@@ -255,6 +284,12 @@ ItemDisplay[MAG (CLSK6>1 AND SK262>2) SIN]: %NAME% %GREEN%(+5 WoF)%BLUE% // +2 A
 ItemDisplay[MAG (CLSK6>1 AND SK276>2) SIN]: %NAME% %GREEN%(+5 DS)%BLUE% // +2 Assassin, +3 Death Sentry katar
 ItemDisplay[MAG (CLSK6>1 AND SK271>2) SIN]: %NAME% %GREEN%(+5 CLS)%BLUE% // +2 Assassin, +3 Chain Lightning Sentry katar
 ItemDisplay[MAG (CLSK6>1 AND SK366>2) SIN]: %NAME% %GREEN%(+5 LS)%BLUE% // +2 Assassin, +3 Lightning Sentry katar
+ItemDisplay[MAG (TABSK50=2 AND SK254=3) SIN]: %NAME% %GREEN%(+5 TS)%BLUE% // +2 Martial Arts, +3 Tiger Strike katar
+ItemDisplay[MAG (TABSK50=2 AND SK265=3) SIN]: %NAME% %GREEN%(+5 CS)%BLUE% // +2 Martial Arts, +3 Cobra Strike katar
+ItemDisplay[MAG (TABSK50=2 AND SK269=3) SIN]: %NAME% %GREEN%(+5 CoT)%BLUE% // +2 Martial Arts, +3 Claws of Thunder katar
+ItemDisplay[MAG (TABSK50=2 AND SK275=3) SIN]: %NAME% %GREEN%(+5 DF)%BLUE% // +2 Martial Arts, +3 Dragon Flight katar
+ItemDisplay[MAG (TABSK50=2 AND SK280=3) SIN]: %NAME% %GREEN%(+5 PS)%BLUE% // +2 Martial Arts, +3 Phoenix Strike katar
+ItemDisplay[MAG (TABSK49=2 AND SK252=3) SIN]: %NAME% %GREEN%(+5 DCM)%BLUE% // +2 Shadow Disciplines, +3 Dagger & Claw Mastery katar
 ItemDisplay[MAG (TABSK49=2 AND SK253=3) SIN]: %NAME% %GREEN%(+5 PH)%BLUE% // +2 Shadow Disciplines, +3 Psychic Hammer katar
 ItemDisplay[MAG (TABSK49=2 AND SK273=3) SIN]: %NAME% %GREEN%(+5 MB)%BLUE% // +2 Shadow Disciplines, +3 Mind Blast katar
 ItemDisplay[MAG (TABSK49=2 AND SK278=3) SIN]: %NAME% %GREEN%(+5 Ven)%BLUE% // +2 Shadow Disciplines, +3 Venom katar
@@ -262,6 +297,12 @@ ItemDisplay[MAG (TABSK48=2 AND SK262=3) SIN]: %NAME% %GREEN%(+5 WoF)%BLUE% // +2
 ItemDisplay[MAG (TABSK48=2 AND SK276=3) SIN]: %NAME% %GREEN%(+5 DS)%BLUE% // +2 Trap, +3 Death Sentry katar
 ItemDisplay[MAG (TABSK48=2 AND SK271=3) SIN]: %NAME% %GREEN%(+5 CLS)%BLUE% // +2 Trap, +3 Chain Lightning Sentry katar
 ItemDisplay[MAG (TABSK48=2 AND SK366=3) SIN]: %NAME% %GREEN%(+5 LS)%BLUE% // +2 Trap, +3 Lightning Sentry katar
+ItemDisplay[MAG (TABSK50=3 AND SK254=2) SIN]: %NAME% %GREEN%(+5 TS)%BLUE% // +3 Martial Arts, +2 Tiger Strike katar
+ItemDisplay[MAG (TABSK50=3 AND SK265=2) SIN]: %NAME% %GREEN%(+5 CS)%BLUE% // +3 Martial Arts, +2 Cobra Strike katar
+ItemDisplay[MAG (TABSK50=3 AND SK269=2) SIN]: %NAME% %GREEN%(+5 CoT)%BLUE% // +3 Martial Arts, +2 Claws of Thunder katar
+ItemDisplay[MAG (TABSK50=3 AND SK275=2) SIN]: %NAME% %GREEN%(+5 DF)%BLUE% // +3 Martial Arts, +2 Dragon Flight katar
+ItemDisplay[MAG (TABSK50=3 AND SK280=2) SIN]: %NAME% %GREEN%(+5 PS)%BLUE% // +3 Martial Arts, +2 Phoenix Strike katar
+ItemDisplay[MAG (TABSK49=3 AND SK252=2) SIN]: %NAME% %GREEN%(+5 DCM)%BLUE% // +3 Shadow Disciplines, +2 Dagger & Claw Mastery katar
 ItemDisplay[MAG (TABSK49=3 AND SK253=2) SIN]: %NAME% %GREEN%(+5 PH)%BLUE% // +3 Shadow Disciplines, +2 Psychic Hammer katar
 ItemDisplay[MAG (TABSK49=3 AND SK273=2) SIN]: %NAME% %GREEN%(+5 MB)%BLUE% // +3 Shadow Disciplines, +2 Mind Blast katar
 ItemDisplay[MAG (TABSK49=3 AND SK278=2) SIN]: %NAME% %GREEN%(+5 Ven)%BLUE% // +3 Shadow Disciplines, +2 Venom katar
@@ -269,6 +310,12 @@ ItemDisplay[MAG (TABSK48=3 AND SK262=2) SIN]: %NAME% %GREEN%(+5 WoF)%BLUE% // +3
 ItemDisplay[MAG (TABSK48=3 AND SK276=2) SIN]: %NAME% %GREEN%(+5 DS)%BLUE% // +3 Trap, +2 Death Sentry katar
 ItemDisplay[MAG (TABSK48=3 AND SK271=2) SIN]: %NAME% %GREEN%(+5 CLS)%BLUE% // +3 Trap, +2 Chain Lightning Sentry katar
 ItemDisplay[MAG (TABSK48=3 AND SK366=2) SIN]: %NAME% %GREEN%(+5 LS)%BLUE% // +3 Trap, +2 Lightning Sentry katar
+ItemDisplay[MAG (TABSK50=3 AND SK254=3) SIN]: %NAME% %GREEN%(+5 TS)%BLUE% // +3 Martial Arts, +3 Tiger Strike katar
+ItemDisplay[MAG (TABSK50=3 AND SK265=3) SIN]: %NAME% %GREEN%(+5 CS)%BLUE% // +3 Martial Arts, +3 Cobra Strike katar
+ItemDisplay[MAG (TABSK50=3 AND SK269=3) SIN]: %NAME% %GREEN%(+5 CoT)%BLUE% // +3 Martial Arts, +3 Claws of Thunder katar
+ItemDisplay[MAG (TABSK50=3 AND SK275=3) SIN]: %NAME% %GREEN%(+5 DF)%BLUE% // +3 Martial Arts, +3 Dragon Flight katar
+ItemDisplay[MAG (TABSK50=3 AND SK280=3) SIN]: %NAME% %GREEN%(+5 PS)%BLUE% // +3 Martial Arts, +3 Phoenix Strike katar
+ItemDisplay[MAG (TABSK49=3 AND SK252=3) SIN]: %NAME% %GREEN%(+5 DCM)%BLUE% // +3 Shadow Disciplines, +3 Dagger & Claw Mastery katar
 ItemDisplay[MAG (TABSK49=3 AND SK253=3) SIN]: %NAME% %GREEN%(+6 PH)%BLUE% // +3 Shadow Disciplines, +3 Psychic Hammer katar
 ItemDisplay[MAG (TABSK49=3 AND SK273=3) SIN]: %NAME% %GREEN%(+6 MB)%BLUE% // +3 Shadow Disciplines, +3 Mind Blast katar
 ItemDisplay[MAG (TABSK49=3 AND SK278=3) SIN]: %NAME% %GREEN%(+6 Ven)%BLUE% // +3 Shadow Disciplines, +3 Venom katar
@@ -329,6 +376,7 @@ ItemDisplay[UNI !ID 9tw]: %NAME%%MAP-A5% // Bartuc's Cut-Throat Greater Talons
 ItemDisplay[UNI !ID 7wb]: %NAME%%MAP-A5% // Jadetalon Wrist Sword
 ItemDisplay[UNI !ID 7cs]: %NAME%%MAP-A5% // Shadowkiller Battle Cestus
 ItemDisplay[UNI !ID 7lw]: %NAME%%MAP-A5% // Firelizard's Talons Feral Claws
+ItemDisplay[UNI !ID 7qr]: %NAME%%MAP-A5% // Aidan's Scar Scissors Suwayyah
 ItemDisplay[UNI !ID baa]: %NAME%%MAP-A5% // Arreat's Face Slayer Guard
 ItemDisplay[UNI !ID bac]: %NAME%%MAP-A5% // Wolfhowl Fury Visor
 ItemDisplay[UNI !ID bad]: %NAME%%MAP-A5% // Demonhorn's Edge Destroyer Helm
@@ -380,6 +428,7 @@ ItemDisplay[UNI !ID uui]: %NAME%%MAP-A5% // Ormus' Robes Dusk Shroud
 ItemDisplay[UNI !ID utu]: %NAME%%MAP-A5% // The Gladiator's Bane Wire Fleece
 ItemDisplay[UNI !ID upl]: %NAME%%MAP-A5% // Arkaine's Valor Balrog Skin
 ItemDisplay[UNI !ID uld]: %NAME%%MAP-A5% // Leviathan Kraken Shell
+ItemDisplay[UNI !ID uth]: %NAME%%MAP-A5% // Dark Abyss Lacquered Plate
 ItemDisplay[UNI !ID uul]: %NAME%%MAP-A5% // Steel Carapace Shadow Plate
 ItemDisplay[UNI !ID uar]: %NAME%%MAP-A5% // Templar's Might or Tyrael's Might Sacred Armor
 ItemDisplay[UNI !ID lbl]: %NAME%%MAP-A5% // Lenymo Sash
@@ -407,6 +456,7 @@ ItemDisplay[UNI !ID xtb]: %NAME%%MAP-A5% // War Traveler Battle Boots
 ItemDisplay[UNI !ID xhb]: %NAME%%MAP-A5% // Gore Rider War Boots
 ItemDisplay[UNI !ID uvb]: %NAME%%MAP-A5% // Sandstorm Trek Scarabshell Boots
 ItemDisplay[UNI !ID umb]: %NAME%%MAP-A5% // Marrowwalk Boneweave Boots
+ItemDisplay[UNI !ID utb]: %NAME%%MAP-A5% // Itherael's Path Mirrored Boots
 ItemDisplay[UNI !ID uhb]: %NAME%%MAP-A5% // Shadow Dancer Myrmidon Greaves
 ItemDisplay[UNI !ID lgl]: %NAME%%MAP-A5% // The Hand of Broc Leather Gloves
 ItemDisplay[UNI !ID vgl]: %NAME%%MAP-A5% // Bloodfist Heavy Gloves
@@ -439,6 +489,7 @@ ItemDisplay[UNI !ID xrn]: %NAME%%MAP-A5% // Crown of Thieves Grand Crown
 ItemDisplay[UNI !ID xh9]: %NAME%%MAP-A5% // Vampire Gaze Grim Helm
 ItemDisplay[UNI !ID uap]: %NAME%%MAP-A5% // Harlequin Crest Shako
 ItemDisplay[UNI !ID ulm]: %NAME%%MAP-A5% // Steel Shade Armet
+ItemDisplay[UNI !ID uhl]: %NAME%%MAP-A5% // Overlord's Helm Giant Conch
 ItemDisplay[UNI !ID uhm]: %NAME%%MAP-A5% // Veil of Steel or Nightwing's Veil Spired Helm
 ItemDisplay[UNI !ID usk]: %NAME%%MAP-A5% // Andariel's Visage Demonhead
 ItemDisplay[UNI !ID urn]: %NAME%%MAP-A5% // Crown of Ages Corona
@@ -638,6 +689,7 @@ ItemDisplay[UNI !ID 9gd]: %NAME%%MAP-A5% // Swordguard Executioner Sword
 ItemDisplay[UNI !ID 7sm]: %NAME%%MAP-A5% // Djinn Slayer Ataghan
 ItemDisplay[UNI !ID 7sb]: %NAME%%MAP-A5% // Bloodmoon Elegant Blade
 ItemDisplay[UNI !ID 7cr]: %NAME%%MAP-A5% // Lightsabre or Azurewrath Phase Blade
+ItemDisplay[UNI !ID 7bs]: %NAME%%MAP-A5% // Hadriel's Hand Conquest Sword
 ItemDisplay[UNI !ID 7ls]: %NAME%%MAP-A5% // Frostwind Cryptic Sword
 ItemDisplay[UNI !ID 7gs]: %NAME%%MAP-A5% // Flamebellow Balrog Blade
 ItemDisplay[UNI !ID 7b7]: %NAME%%MAP-A5% // Doombringer Champion Sword
@@ -839,13 +891,14 @@ ItemDisplay[RARE !ID ELT SWORD]: %NAME%%MAP-A8% // All Elite tier Swords
 ItemDisplay[RARE !ID CLVL<20 !SPEAR THROWING !ZON]: %NAME%%MAP-A8% // Show all Throwing Weapons before level 20
 ItemDisplay[RARE !ID ELT !SPEAR THROWING !ZON]: %NAME%%MAP-A8% // All Elite tier Throwing Weapons
 ItemDisplay[RARE !ID CLVL<20 WAND]: %NAME%%MAP-A8% // Show all Wands before level 20
-ItemDisplay[RARE !RW PRICE>34999 DIFF<3]: %DARK_GREEN%$ %YELLOW%%NAME% // All difficulties
-ItemDisplay[RARE !RW PRICE>20000 DIFF<2]: %DARK_GREEN%$ %YELLOW%%NAME% // Normal & Nightmare difficulty
-ItemDisplay[RARE !RW PRICE>10000 DIFF<1]: %DARK_GREEN%$ %YELLOW%%NAME% // Normal difficulty
+ItemDisplay[RARE !RW PRICE>34999 DIFF<3]: %DARK_GREEN%$ %YELLOW%%NAME%{%NAME%} // All difficulties
+ItemDisplay[RARE !RW PRICE>20000 DIFF<2]: %DARK_GREEN%$ %YELLOW%%NAME%{%NAME%} // Normal & Nightmare difficulty
+ItemDisplay[RARE !RW PRICE>10000 DIFF<1]: %DARK_GREEN%$ %YELLOW%%NAME%{%NAME%} // Normal difficulty
 
 // Rare Items Master
 ItemDisplay[RARE !ID CLVL<40]: %NAME%%MAP-A8% // Show and notify for all rares until level 39
-ItemDisplay[RARE !ID CLVL>39]: %NAME% // At level 40+, stop notifying for all rares, and only notify for the ones uncommented above. Comment out %NAME% in this line to completely hide unwanted rares at level 40+
+ItemDisplay[RARE !ID CLVL<75 (EXC OR ELT)]: %NAME%%MAP-A8% // Show and notify for all Exceptional and Elite tier rares until level 75
+ItemDisplay[RARE !ID CLVL>39]: //%NAME% // At level 40+, stop showing and notifying for all rares, and only show/notify for the ones uncommented above. Uncomment %NAME% in this line to show unwanted rares at level 40+
 
 // Crafted Items
 ItemDisplay[CRAFT ID NORM ARMOR]: %NAME%%CONTINUE%{%TAN%Rune, & Perfect Amethyst%NL%Cube w/ Ral Rune, Thul%NL%%ORANGE%Upgrade Recipe:}
@@ -917,6 +970,7 @@ ItemDisplay[MAG ILVL>71 (8hb OR 6hb OR 8cb OR 6cb OR 8lw OR 6lw)]: %NAME% %ORANG
 ItemDisplay[MAG ILVL>71 XBOW (EXC OR ELT)]: %NAME% %ORANGE%[C]%BLUE%{%GREEN%Safety:%TAN% P Eme + Sol%BLUE%Hit Power:%TAN% P Saph + Tir%NL%%RED%Blood:%TAN% P Ruby + Ort%NL%%ORANGE%Craft w/ Jewel:} // Any Crossbow
 ItemDisplay[MAG ILVL>71 ETH DAGGER (EXC OR ELT)]: %NAME% %ORANGE%[C]%BLUE%{%BLUE%Hit Power:%TAN% P Saph + Tir%NL%%PURPLE%Caster:%TAN% P Ame + Tir%NL%%RED%Blood:%TAN% P Ruby + Ort%NL%%ORANGE%Craft w/ Jewel:} // Any Eth Dagger
 ItemDisplay[MAG ILVL>71 ETH (9gl OR 7gl OR 9ts OR 7ts)]: %NAME% %ORANGE%[C]%BLUE%{%BLUE%Hit Power:%TAN% P Saph + Tir%NL%%RED%Blood:%TAN% P Ruby + Ort%NL%%ORANGE%Craft w/ Jewel:} // Good Eth Javelins
+ItemDisplay[MAG ILVL>71 (clb OR 9cl OR 7cl OR spc OR 9sp OR 7sp)]: %NAME% %ORANGE%[C]%BLUE%{%BLUE%Hit Power:%TAN% P Saph + Tir%NL%%PURPLE%Caster:%TAN% P Ame + Tir%NL%%RED%Blood:%TAN% P Ruby + Ort%NL%%ORANGE%Craft w/ Jewel:} // All Clubs
 ItemDisplay[MAG ILVL>71 ETH (9fl OR 7fl OR 9m9 OR 7m7 OR 9gm OR 7gm)]: %NAME% %ORANGE%[C]%BLUE%{%BLUE%Hit Power:%TAN% P Saph + Tir%NL%%RED%Blood:%TAN% P Ruby + Ort%NL%%ORANGE%Craft w/ Jewel:} // Good Eth Maces
 ItemDisplay[MAG ILVL>71 ETH (9vo OR 7vo OR 9s8 OR 7s8 OR 9pa OR 7pa OR 9h9 OR 7h7 OR 9wc OR 7wc)]: %NAME% %ORANGE%[C]%BLUE%{%BLUE%Hit Power:%TAN% P Saph + Tir%NL%%RED%Blood:%TAN% P Ruby + Ort%NL%%ORANGE%Craft w/ Jewel:} // Good Eth Polearms
 ItemDisplay[MAG ILVL>71 (wsp OR 9ws OR 7ws)]: %NAME% %ORANGE%[C]%BLUE%{%BLUE%Hit Power:%TAN% P Saph + Tir%NL%%PURPLE%Caster:%TAN% P Ame + Tir%NL%%RED%Blood:%TAN% P Ruby + Ort%NL%%ORANGE%Craft w/ Jewel:} // Good Scepters
@@ -936,6 +990,12 @@ ItemDisplay[MAG !ID jew]: %NAME%%DOT-97% // All unidentified jewels
 ItemDisplay[MAG !ID rin]: %NAME% // All unidentified rings
 ItemDisplay[MAG !ID SPEAR THROWING ZON]: %NAME%%MAP-97% // Javelins for 6/40
 ItemDisplay[MAG !ID (9cs OR 9lw OR 9tw OR 9qr OR 7ar OR 7wb OR 7xf OR 7cs OR 7lw OR 7tw OR 7qr)]: %NAME% // Assassin Katars, best Katars
+ItemDisplay[MAG SK254>2 SIN]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Tiger Strike
+ItemDisplay[MAG SK265>2 SIN]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Cobra Strike
+ItemDisplay[MAG SK269>2 SIN]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Claws of Thunder
+ItemDisplay[MAG SK275>2 SIN]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Dragon Flight
+ItemDisplay[MAG SK280>2 SIN]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Phoenix Strike
+ItemDisplay[MAG SK252>2 SIN]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Dagger & Claw Mastery
 ItemDisplay[MAG SK253>2 SIN]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Psychic Hammer
 ItemDisplay[MAG SK258>2 SIN]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Burst of Speed
 ItemDisplay[MAG SK267>2 SIN]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Fade
@@ -993,6 +1053,7 @@ ItemDisplay[MAG SK80>2 NEC]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Skel
 ItemDisplay[MAG SK85>2 NEC]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Blood Golem
 ItemDisplay[MAG SK90>2 NEC]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Iron Golem
 ItemDisplay[MAG SK94>2 NEC]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Fire Golem
+ItemDisplay[MAG SK95>2 NEC]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Revive
 ItemDisplay[MAG SK40>2 SOR]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Enchant Cold
 ItemDisplay[MAG SK44>2 SOR]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Frost Nova
 ItemDisplay[MAG SK59>2 SOR]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Blizzard
@@ -1004,6 +1065,7 @@ ItemDisplay[MAG SK43>2 SOR]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Tele
 ItemDisplay[MAG SK49>2 SOR]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Lightning
 ItemDisplay[MAG SK48>2 SOR]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Nova
 ItemDisplay[MAG SK53>2 SOR]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Chain Lightning
+ItemDisplay[MAG SK58>2 SOR]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Energy Shield
 ItemDisplay[MAG SK63>2 SOR]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Lightning Mastery
 ItemDisplay[MAG SK47>2 SOR]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Fireball
 ItemDisplay[MAG SK383>2 SOR]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Lesser Hydra
@@ -1035,6 +1097,7 @@ ItemDisplay[MAG SK43>2 STAFF]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Te
 ItemDisplay[MAG SK49>2 STAFF]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Lightning
 ItemDisplay[MAG SK48>2 STAFF]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Nova
 ItemDisplay[MAG SK53>2 STAFF]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Chain Lightning
+ItemDisplay[MAG SK58>2 STAFF]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Energy Shield
 ItemDisplay[MAG SK63>2 STAFF]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Lightning Mastery
 ItemDisplay[MAG SK47>2 STAFF]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Fireball
 ItemDisplay[MAG SK383>2 STAFF]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Lesser Hydra
@@ -1063,12 +1126,14 @@ ItemDisplay[MAG SK80>2 WAND]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Ske
 ItemDisplay[MAG SK85>2 WAND]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Blood Golem
 ItemDisplay[MAG SK90>2 WAND]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Iron Golem
 ItemDisplay[MAG SK94>2 WAND]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Fire Golem
-ItemDisplay[MAG !RW PRICE>34999 DIFF<3]: %DARK_GREEN%$ %BLUE%%NAME% // All difficulties
-ItemDisplay[MAG !RW PRICE>20000 DIFF<2]: %DARK_GREEN%$ %BLUE%%NAME% // Normal & Nightmare difficulty
-ItemDisplay[MAG !RW PRICE>10000 DIFF<1]: %DARK_GREEN%$ %BLUE%%NAME% // Normal difficulty
+ItemDisplay[MAG SK95>2 WAND]: %NAME% %GRAY%[%BLUE%+3%GRAY%]%BLUE%%MAP-97% // Revive
+ItemDisplay[MAG !RW PRICE>34999 DIFF<3]: %DARK_GREEN%$ %BLUE%%NAME%{%NAME%} // All difficulties
+ItemDisplay[MAG !RW PRICE>20000 DIFF<2]: %DARK_GREEN%$ %BLUE%%NAME%{%NAME%} // Normal & Nightmare difficulty
+ItemDisplay[MAG !RW PRICE>10000 DIFF<1]: %DARK_GREEN%$ %BLUE%%NAME%{%NAME%} // Normal difficulty
 
 // Magic Items Master
 ItemDisplay[MAG !ID CLVL<30]: %NAME% // Show all magics until level 29
+ItemDisplay[MAG !ID CLVL<75 (EXC OR ELT)]: %NAME% // Show all Exceptional and Elite tier magics until level 60
 ItemDisplay[MAG !ID CLVL>29]: //%NAME% // At level 30+, stop showing and notifying for all magics, and only show/notify for the ones uncommented above. Uncomment %NAME% in this line to show unwanted magics at level 30+
 
 // Base Items
@@ -1080,8 +1145,6 @@ ItemDisplay[MAG !ID CLVL>29]: //%NAME% // At level 30+, stop showing and notifyi
 //    - Superior, Non-Eth 	These lines will only show Superior Non-Ethereal items
 //    - Eth 				These lines will only show Ethereal items, regardless of Superior/Non-Superior (useful if you want Eth but don't care about Superior or not)
 //    - Superior, Eth 		These lines will only show Superior Ethereal items (has to be both)
-//
-// PLEASE NOTE *ALL* white items will show unless you remove %NAME% in the Base Items Master section (at the very bottom of filter, more info in that section).
 
 // Gold
 ItemDisplay[GOLD<25]: // Always hide gold in piles of less than 25
@@ -1135,8 +1198,10 @@ ItemDisplay[ops DIFF<1]: %ORANGE%+%WHITE%Oil // Oil Potion
 ItemDisplay[ops DIFF>0]: // Oil Potion after Normal difficulty
 
 // Scrolls & Tomes
+ItemDisplay[isc DIFF<1 CLVL<15]: ID%RED%!%WHITE%{%TAN%Continued on TP scroll...%NL%All Exc and Elt Rares until 75%NL%All Rares until character level 40%NL%My filters show:} // Scroll of Identify, showing info about filter until char level 15
 ItemDisplay[isc DIFF<1]: ID%RED%!%WHITE% // Scroll of Identify
 ItemDisplay[isc DIFF>0]: // Hides Scroll of Identify after Normal difficulty
+ItemDisplay[tsc DIFF<1 CLVL<15]: TP%BLUE%!%WHITE%{%TAN%will slowly show less clutter!%NL%Keep lvling and the filter%NL%All Exc and Elt Magics/Bases until 75%NL%All Magics/Bases until 30} // Scroll of Town Portal, showing info about filter until char level 15
 ItemDisplay[tsc DIFF<1]: TP%BLUE%!%WHITE% // Scroll of Town Portal
 ItemDisplay[tsc DIFF>0]: // Hides Scroll of Town Portal after Normal difficulty
 ItemDisplay[ibk]: %RED%!%WHITE%ID%RED%!%WHITE% // Tome of Identify
@@ -1196,6 +1261,12 @@ ItemDisplay[NMAG !INF !RW SUP SOCK=0 SIN]: %NAME%{%TAN%Larzuk for sockets}%CONTI
 ItemDisplay[NMAG !INF !RW SOCK=2 SIN]: %NAME%{%ORANGE%Strength%NL%%TAN%Possible RWs:}%CONTINUE% // All Assassin Katars, 2os
 ItemDisplay[NMAG !INF !RW SOCK=3 SIN]: %NAME%{%ORANGE%Pattern, Plague, Venom, Wind%NL%Chaos, Fury, Malice,%NL%%TAN%Possible RWs:}%CONTINUE% // All Assassin Katars, 3os
 ItemDisplay[NMAG !INF !RW CLVL<30 SIN]: %NAME%%DOT-20%%PX-00%{%NAME%} // Show and notify all Assassin Katars until character level 30
+ItemDisplay[NMAG !INF !RW SK254>2 SIN]: %NAME%%DOT-20%%PX-00%{%NAME%} // Tiger Strike
+ItemDisplay[NMAG !INF !RW SK265>2 SIN]: %NAME%%DOT-20%%PX-00%{%NAME%} // Cobra Strike
+ItemDisplay[NMAG !INF !RW SK269>2 SIN]: %NAME%%DOT-20%%PX-00%{%NAME%} // Claws of Thunder
+ItemDisplay[NMAG !INF !RW SK275>2 SIN]: %NAME%%DOT-20%%PX-00%{%NAME%} // Dragon Flight
+ItemDisplay[NMAG !INF !RW SK280>2 SIN]: %NAME%%DOT-20%%PX-00%{%NAME%} // Phoenix Strike
+ItemDisplay[NMAG !INF !RW SK252>2 SIN]: %NAME%%DOT-20%%PX-00%{%NAME%} // Dagger & Claw Mastery
 ItemDisplay[NMAG !INF !RW SK253>2 SIN]: %NAME%%DOT-20%%PX-00%{%NAME%} // Psychic Hammer
 ItemDisplay[NMAG !INF !RW SK258>2 SIN]: %NAME%%DOT-20%%PX-00%{%NAME%} // Burst of Speed
 ItemDisplay[NMAG !INF !RW SK267>2 SIN]: %NAME%%DOT-20%%PX-00%{%NAME%} // Fade
@@ -1226,16 +1297,20 @@ ItemDisplay[NMAG !INF !RW SUP SOCK=0 DRU]: %NAME%{%TAN%Larzuk for sockets}%CONTI
 ItemDisplay[NMAG !INF !RW SOCK=2 DRU]: %NAME%{%ORANGE%Lore, Nadir%NL%%TAN%Possible RWs:}%CONTINUE% // All Druid Pelts, 2os
 ItemDisplay[NMAG !INF !RW SOCK=3 DRU]: %NAME%{%ORANGE%Delirium, Dream, Radiance%NL%%TAN%Possible RWs:}%CONTINUE% // All Druid Pelts, 3os
 ItemDisplay[NMAG !INF !RW CLVL<30 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Show and notify all Druid pelts until character level 30
+ItemDisplay[NMAG !INF !RW SK229>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Molten Boulder
 ItemDisplay[NMAG !INF !RW SK234>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Fissure
 ItemDisplay[NMAG !INF !RW SK240>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Twister
 ItemDisplay[NMAG !INF !RW SK244>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Volcano
 ItemDisplay[NMAG !INF !RW SK245>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Tornado
+ItemDisplay[NMAG !INF !RW SK250>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Hurricane
+ItemDisplay[NMAG !INF !RW SK249>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Armageddon
 ItemDisplay[NMAG !INF !RW SK232>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Feral Rage
 ItemDisplay[NMAG !INF !RW SK238>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Rabies
 ItemDisplay[NMAG !INF !RW SK239>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Fire Claws
 ItemDisplay[NMAG !INF !RW SK243>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Shock Wave
 ItemDisplay[NMAG !INF !RW SK248>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Fury
 ItemDisplay[NMAG !INF !RW SK221>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Raven
+ItemDisplay[NMAG !INF !RW SK222>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Poison Creeper
 ItemDisplay[NMAG !INF !RW SK226>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Oak Sage
 ItemDisplay[NMAG !INF !RW SK227>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Summon Spirit Wolf
 ItemDisplay[NMAG !INF !RW SK236>2 DRU]: %NAME%%DOT-20%%PX-00%{%NAME%} // Heart of Wolverine
@@ -1265,11 +1340,12 @@ ItemDisplay[NMAG !INF !RW SK80>2 NEC]: %NAME%%DOT-20%%PX-00%{%NAME%} // Skeletal
 ItemDisplay[NMAG !INF !RW SK85>2 NEC]: %NAME%%DOT-20%%PX-00%{%NAME%} // Blood Golem
 ItemDisplay[NMAG !INF !RW SK90>2 NEC]: %NAME%%DOT-20%%PX-00%{%NAME%} // Iron Golem
 ItemDisplay[NMAG !INF !RW SK94>2 NEC]: %NAME%%DOT-20%%PX-00%{%NAME%} // Fire Golem
-ItemDisplay[NMAG !INF !RW !SUP SOCK=0 RES>20 DIN]: %NAME%{%TAN%& Perfect Ruby for sockets%NL%Larzuk or cube w/ Tal Rune, Amn Rune,}%CONTINUE% // All Paladin shields, 0os, Non-Superior
-ItemDisplay[NMAG !INF !RW SUP SOCK=0 RES>20 DIN]: %NAME%{%TAN%Larzuk for sockets}%CONTINUE% // All Paladin shields, 0os, Superior
-ItemDisplay[NMAG !INF !RW SOCK=2 RES>20 DIN]: %NAME%{%ORANGE%Rhyme, Splendor%NL%%TAN%Possible RWs:}%CONTINUE% // All Paladin shields, 2os
-ItemDisplay[NMAG !INF !RW SOCK=3 RES>20 DIN]: %NAME%{%ORANGE%Dream, Sanctuary%NL%Ancients Pledge, Dragon,%NL%%TAN%Possible RWs:}%CONTINUE% // All Paladin shields, 3os
-ItemDisplay[NMAG !INF !RW SOCK=4 RES>20 DIN]: %NAME%{%ORANGE%Exile, Phoenix, Spirit%NL%%TAN%Possible RWs:}%CONTINUE% // All Paladin shields, 4os
+ItemDisplay[NMAG !INF !RW SK95>2 NEC]: %NAME%%DOT-20%%PX-00%{%NAME%} // Revive
+ItemDisplay[NMAG !INF !RW !SUP SOCK=0 DIN]: %NAME%{%TAN%& Perfect Ruby for sockets%NL%Larzuk or cube w/ Tal Rune, Amn Rune,}%CONTINUE% // All Paladin shields, 0os, Non-Superior
+ItemDisplay[NMAG !INF !RW SUP SOCK=0 DIN]: %NAME%{%TAN%Larzuk for sockets}%CONTINUE% // All Paladin shields, 0os, Superior
+ItemDisplay[NMAG !INF !RW SOCK=2 DIN]: %NAME%{%ORANGE%Rhyme, Splendor%NL%%TAN%Possible RWs:}%CONTINUE% // All Paladin shields, 2os
+ItemDisplay[NMAG !INF !RW SOCK=3 DIN]: %NAME%{%ORANGE%Dream, Sanctuary%NL%Ancients Pledge, Dragon,%NL%%TAN%Possible RWs:}%CONTINUE% // All Paladin shields, 3os
+ItemDisplay[NMAG !INF !RW SOCK=4 DIN]: %NAME%{%ORANGE%Exile, Phoenix, Spirit%NL%%TAN%Possible RWs:}%CONTINUE% // All Paladin shields, 4os
 ItemDisplay[NMAG !INF !RW CLVL<30 DIN]: %NAME%%DOT-20%%PX-00%{%NAME%} // Show and notify all Paladin shields until character level 30
 ItemDisplay[NMAG !INF !RW SOCK=0 RES>20 DIN]: %NAME%%DOT-20%%PX-00%{%NAME%} // All tiers Paladin shields, 0os, 20%+ res, all variants
 ItemDisplay[NMAG !INF !RW SOCK=4 RES>20 DIN]: %NAME%%DOT-20%%PX-00%{%NAME%} // All tiers Paladin shields, 4os, 20%+ res, all variants
@@ -1290,6 +1366,7 @@ ItemDisplay[NMAG !INF !RW SK43>2 SOR]: %NAME%%DOT-20%%PX-00%{%NAME%} // Telekine
 ItemDisplay[NMAG !INF !RW SK49>2 SOR]: %NAME%%DOT-20%%PX-00%{%NAME%} // Lightning
 ItemDisplay[NMAG !INF !RW SK48>2 SOR]: %NAME%%DOT-20%%PX-00%{%NAME%} // Nova
 ItemDisplay[NMAG !INF !RW SK53>2 SOR]: %NAME%%DOT-20%%PX-00%{%NAME%} // Chain Lightning
+ItemDisplay[NMAG !INF !RW SK58>2 SOR]: %NAME%%DOT-20%%PX-00%{%NAME%} // Energy Shield
 ItemDisplay[NMAG !INF !RW SK63>2 SOR]: %NAME%%DOT-20%%PX-00%{%NAME%} // Lightning Mastery
 ItemDisplay[NMAG !INF !RW SK47>2 SOR]: %NAME%%DOT-20%%PX-00%{%NAME%} // Fireball
 ItemDisplay[NMAG !INF !RW SK383>2 SOR]: %NAME%%DOT-20%%PX-00%{%NAME%} // Lesser Hydra
@@ -1384,10 +1461,26 @@ ItemDisplay[NMAG !INF !RW SOCK=0 7wa]: %NAME%%DOT-20%%PX-00%{%NAME%} // Berserke
 ItemDisplay[NMAG !INF !RW SOCK=4 7wa]: %NAME%%DOT-20%%PX-00%{%NAME%} // Berserker Axe, 4os, all variants
 ItemDisplay[NMAG !INF !RW SOCK=5 7wa]: %NAME%%DOT-20%%PX-00%{%NAME%} // Berserker Axe, 5os, all variants
 ItemDisplay[NMAG !INF !RW SOCK=6 7wa]: %NAME%%DOT-20%%PX-00%{%NAME%} // Berserker Axe, 6os, all variants
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 7bt]: %NAME%%DOT-20%%PX-00%{%NAME%} // Decapitator, 0os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=4 7bt]: %NAME%%DOT-20%%PX-00%{%NAME%} // Decapitator, 4os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=5 7bt]: %NAME%%DOT-20%%PX-00%{%NAME%} // Decapitator, 5os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW ETH SOCK=0 7bt]: %NAME%%DOT-20%%PX-00%{%NAME%} // Decapitator, 0os, Eth
+ItemDisplay[NMAG !INF !RW ETH SOCK=4 7bt]: %NAME%%DOT-20%%PX-00%{%NAME%} // Decapitator, 4os, Eth
+ItemDisplay[NMAG !INF !RW ETH SOCK=5 7bt]: %NAME%%DOT-20%%PX-00%{%NAME%} // Decapitator, 5os, Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 7ga]: %NAME%%DOT-20%%PX-00%{%NAME%} // Champion Axe, 0os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=4 7ga]: %NAME%%DOT-20%%PX-00%{%NAME%} // Champion Axe, 4os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=5 7ga]: %NAME%%DOT-20%%PX-00%{%NAME%} // Champion Axe, 5os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=6 7ga]: %NAME%%DOT-20%%PX-00%{%NAME%} // Champion Axe, 6os, Superior, Non-Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=0 7ga]: %NAME%%DOT-20%%PX-00%{%NAME%} // Champion Axe, 0os, Eth
+ItemDisplay[NMAG !INF !RW ETH SOCK=4 7ga]: %NAME%%DOT-20%%PX-00%{%NAME%} // Champion Axe, 4os, Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=5 7ga]: %NAME%%DOT-20%%PX-00%{%NAME%} // Champion Axe, 5os, Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=6 7ga]: %NAME%%DOT-20%%PX-00%{%NAME%} // Champion Axe, 6os, Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 7gi]: %NAME%%DOT-20%%PX-00%{%NAME%} // Glorious Axe, 0os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=4 7gi]: %NAME%%DOT-20%%PX-00%{%NAME%} // Glorious Axe, 4os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=5 7gi]: %NAME%%DOT-20%%PX-00%{%NAME%} // Glorious Axe, 5os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=6 7gi]: %NAME%%DOT-20%%PX-00%{%NAME%} // Glorious Axe, 6os, Superior, Non-Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=0 7gi]: %NAME%%DOT-20%%PX-00%{%NAME%} // Glorious Axe, 0os, Eth
+ItemDisplay[NMAG !INF !RW ETH SOCK=4 7gi]: %NAME%%DOT-20%%PX-00%{%NAME%} // Glorious Axe, 4os, Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=5 7gi]: %NAME%%DOT-20%%PX-00%{%NAME%} // Glorious Axe, 5os, Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=6 7gi]: %NAME%%DOT-20%%PX-00%{%NAME%} // Glorious Axe, 6os, Eth
 ItemDisplay[NMAG !INF !RW !SUP SOCK=0 BOW !ZON]: %NAME%{%TAN%& Perfect Amethyst for sockets%NL%Larzuk or cube w/ Ral Rune, Amn Rune,}%CONTINUE% // All Bows, 0os, Non-Superior
@@ -1541,9 +1634,14 @@ ItemDisplay[NMAG !INF !RW SOCK=3 STAFF]: %NAME%{%ORANGE%Plague, Venom, Wind%NL%F
 ItemDisplay[NMAG !INF !RW SOCK=4 STAFF]: %NAME%{%ORANGE%Memory, Passion, Phoenix%NL%Heart of the Oak, Insight,%NL%Fortitude, Hand of Justice,%NL%%TAN%Possible RWs:}%CONTINUE% // All Staves, 4os
 ItemDisplay[NMAG !INF !RW SOCK=5 STAFF]: %NAME%{%ORANGE%Call to Arms, Eternity, Honor%NL%%TAN%Possible RWs:}%CONTINUE% // All Staves, 5os
 ItemDisplay[NMAG !INF !RW SOCK=6 STAFF]: %NAME%{%ORANGE%Breath of the Dying, Silence%NL%%TAN%Possible RWs:}%CONTINUE% // All Staves, 6os
+ItemDisplay[NMAG !INF !RW (SOCK=4 OR SOCK=5) SK50>0 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Shiver Armor (these lines only require +1 (or higher) to the skill as these are used for prebuffing / saving skill points)
+ItemDisplay[NMAG !INF !RW (SOCK=4 OR SOCK=5) SK60>0 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Chilling Armor (these lines only require +1 (or higher) to the skill as these are used for prebuffing / saving skill points)
+ItemDisplay[NMAG !INF !RW (SOCK=4 OR SOCK=5) SK58>0 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Energy Shield (these lines only require +1 (or higher) to the skill as these are used for prebuffing / saving skill points)
 ItemDisplay[NMAG !INF !RW SK40>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Enchant Cold
 ItemDisplay[NMAG !INF !RW SK44>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Frost Nova
+ItemDisplay[NMAG !INF !RW SK50>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Shiver Armor
 ItemDisplay[NMAG !INF !RW SK59>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Blizzard
+ItemDisplay[NMAG !INF !RW SK60>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Chilling Armor
 ItemDisplay[NMAG !INF !RW SK369>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Ice Barrage
 ItemDisplay[NMAG !INF !RW SK64>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Frozen Orb
 ItemDisplay[NMAG !INF !RW SK65>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Cold Mastery
@@ -1552,6 +1650,7 @@ ItemDisplay[NMAG !INF !RW SK43>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Teleki
 ItemDisplay[NMAG !INF !RW SK49>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Lightning
 ItemDisplay[NMAG !INF !RW SK48>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Nova
 ItemDisplay[NMAG !INF !RW SK53>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Chain Lightning
+ItemDisplay[NMAG !INF !RW SK58>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Energy Shield
 ItemDisplay[NMAG !INF !RW SK63>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Lightning Mastery
 ItemDisplay[NMAG !INF !RW SK47>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Fireball
 ItemDisplay[NMAG !INF !RW SK383>2 STAFF]: %NAME%%DOT-20%%PX-00%{%NAME%} // Lesser Hydra
@@ -1577,14 +1676,26 @@ ItemDisplay[NMAG !INF !RW SOCK=3 7cr]: %NAME%%DOT-20%%PX-00%{%NAME%} // Phase Bl
 ItemDisplay[NMAG !INF !RW SOCK=4 7cr]: %NAME%%DOT-20%%PX-00%{%NAME%} // Phase Blade, 4os, all variants
 ItemDisplay[NMAG !INF !RW SOCK=5 7cr]: %NAME%%DOT-20%%PX-00%{%NAME%} // Phase Blade, 5os, all variants
 ItemDisplay[NMAG !INF !RW SOCK=6 7cr]: %NAME%%DOT-20%%PX-00%{%NAME%} // Phase Blade, 6os, all variants
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 72h]: %NAME%%DOT-20%%PX-00%{%NAME%} // Legend Sword, 0os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=3 72h]: %NAME%%DOT-20%%PX-00%{%NAME%} // Legend Sword, 3os, Superior, Non-Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=0 72h]: %NAME%%DOT-20%%PX-00%{%NAME%} // Legend Sword, 0os, Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=3 72h]: %NAME%%DOT-20%%PX-00%{%NAME%} // Legend Sword, 3os, Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 7gs]: %NAME%%DOT-20%%PX-00%{%NAME%} // Balrog Blade, 0os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=3 7gs]: %NAME%%DOT-20%%PX-00%{%NAME%} // Balrog Blade, 3os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=4 7gs]: %NAME%%DOT-20%%PX-00%{%NAME%} // Balrog Blade, 4os, Superior, Non-Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=0 7gs]: %NAME%%DOT-20%%PX-00%{%NAME%} // Balrog Blade, 0os, Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=3 7gs]: %NAME%%DOT-20%%PX-00%{%NAME%} // Balrog Blade, 3os, Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=4 7gs]: %NAME%%DOT-20%%PX-00%{%NAME%} // Balrog Blade, 4os, Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 7fb]: %NAME%%DOT-20%%PX-00%{%NAME%} // Colossus Sword, 0os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=4 7fb]: %NAME%%DOT-20%%PX-00%{%NAME%} // Colossus Sword, 4os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=5 7fb]: %NAME%%DOT-20%%PX-00%{%NAME%} // Colossus Sword, 5os, Superior, Non-Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=0 7fb]: %NAME%%DOT-20%%PX-00%{%NAME%} // Colossus Sword, 0os, Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=4 7fb]: %NAME%%DOT-20%%PX-00%{%NAME%} // Colossus Sword, 4os, Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=5 7fb]: %NAME%%DOT-20%%PX-00%{%NAME%} // Colossus Sword, 5os, Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=0 7gd]: %NAME%%DOT-20%%PX-00%{%NAME%} // Colossus Blade, 0os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=4 7gd]: %NAME%%DOT-20%%PX-00%{%NAME%} // Colossus Blade, 4os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=5 7gd]: %NAME%%DOT-20%%PX-00%{%NAME%} // Colossus Blade, 5os, Superior, Non-Eth
+ItemDisplay[NMAG !INF !RW SUP !ETH SOCK=6 7gd]: %NAME%%DOT-20%%PX-00%{%NAME%} // Colossus Blade, 6os, Superior, Non-Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=0 7gd]: %NAME%%DOT-20%%PX-00%{%NAME%} // Colossus Blade, 0os, Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=4 7gd]: %NAME%%DOT-20%%PX-00%{%NAME%} // Colossus Blade, 4os, Eth
 ItemDisplay[NMAG !INF !RW ETH SOCK=5 7gd]: %NAME%%DOT-20%%PX-00%{%NAME%} // Colossus Blade, 5os, Eth
@@ -1617,6 +1728,7 @@ ItemDisplay[NMAG !INF !RW SK80>2 WAND]: %NAME%%DOT-20%%PX-00%{%NAME%} // Skeleta
 ItemDisplay[NMAG !INF !RW SK85>2 WAND]: %NAME%%DOT-20%%PX-00%{%NAME%} // Blood Golem
 ItemDisplay[NMAG !INF !RW SK90>2 WAND]: %NAME%%DOT-20%%PX-00%{%NAME%} // Iron Golem
 ItemDisplay[NMAG !INF !RW SK94>2 WAND]: %NAME%%DOT-20%%PX-00%{%NAME%} // Fire Golem
+ItemDisplay[NMAG !INF !RW SK95>2 WAND]: %NAME%%DOT-20%%PX-00%{%NAME%} // Revive
 ItemDisplay[NMAG !RW !ETH SOCK=0 PRICE>34999 DIFF<3 (NORM OR EXC OR ELT)]: %DARK_GREEN%$ %WHITE%%NAME%{%NAME%} // For non-eth, no sockets items
 ItemDisplay[NMAG !RW (ETH OR SOCK>0) PRICE>34999 DIFF<3 (NORM OR EXC OR ELT)]: %DARK_GREEN%$ %GRAY%%NAME%{%NAME%} // For eth or socketed items
 ItemDisplay[NMAG !RW !ETH SOCK=0 PRICE>20000 DIFF<2 (NORM OR EXC OR ELT)]: %DARK_GREEN%$ %WHITE%%NAME%{%NAME%} // For non-eth, no sockets items
@@ -1626,4 +1738,5 @@ ItemDisplay[NMAG !RW (ETH OR SOCK>0) PRICE>10000 DIFF<1 (NORM OR EXC OR ELT)]: %
 
 // Base Items Master
 ItemDisplay[NMAG !RW (ARMOR OR WEAPON) CLVL<30]: %NAME%{%NAME%} // Until level 30 notify and show all base items
+ItemDisplay[NMAG !RW (ARMOR OR WEAPON) (EXC OR ELT) CLVL<75]: %NAME%{%NAME%} // Until level 75 notify and show all Exceptional and Elite tier base items
 ItemDisplay[NMAG !RW (ARMOR OR WEAPON) CLVL>29]: {%NAME%} // At level 30+, stop showing and notifying for all base items and only show/notify for the ones uncommented above. Add %NAME% before {%NAME%} in this line to show all base items

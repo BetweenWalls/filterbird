@@ -692,8 +692,8 @@ function parseFile(file,num) {
 	if (out_list[0] == "") { out_list.shift() }
 	if (out_list[out_list.length-1] == "") { out_list.pop() }
 	var color = colors[getColor(itemToCompare)];
-	//var name_length = 0;
-	//var desc_length = 0;
+	var text_length = [0,0,0];
+	var text_length_highest = 0;
 	for (out in out_list) {
 		var o = out_list[out].split("‾").join(",");
 		var temp = o;
@@ -705,7 +705,7 @@ function parseFile(file,num) {
 		} else if (key == "color") {
 			blank = true
 			color = colors[o.split("_")[1]]
-	//		if (description_braces != 1) { name_length += 2 } else { desc_length += 2 }
+			if (description_braces != 1) { text_length[1] += ((String(o.split("_")[1]).length+2)/2+1) } else { text_length[2] += 3 }
 		} else if (key == "ref") {
 			if (o == "ref_CLVL") { temp = character.CLVL }
 			else if (o == "ref_NAME") { blank = true }
@@ -743,14 +743,28 @@ function parseFile(file,num) {
 			if (o == "misc_NL" || o == "‗") { display += "<br>" }
 			if (o == " ") { display += "<l style='color:Black; opacity:0%;'>_</l>" }
 			else if (blank == false) { display += "<l style='color:"+color+"'>"+temp+"</l>" }
-	//		if (o == "misc_NL" || o == "‗" || o == " ") { name_length++ }
-	//		else if (blank == false) { name_length += ~~temp.length }
+			if (o == "misc_NL" || o == "‗" || o == " ") { text_length[1]++ }
+			if (o == "misc_NL") { text_length[0] = 0 }
+			if (o == " ") { text_length[0]++ }
+			else if (blank == false) { text_length[0] += ~~temp.length; text_length[1] += ~~String(temp).length; }
+			if (text_length[0] > text_length_highest) { text_length_highest = text_length[0] }
 		} else {
 			if (o == "misc_NL" || o == "‗") { description += "<br>" }
 			if (o == " ") { description += "<l style='color:Black; opacity:0%;'>_</l>" }
 			else if (blank == false) { description += "<l style='color:"+color+"'>"+temp+"</l>" }
-	//		if (o == "misc_NL" || o == "‗" || o == " ") { desc_length++ }
-	//		else if (blank == false) { desc_length += ~~temp.length }
+			if (o == "misc_NL" || o == "‗" || o == " ") { text_length[2]++ }
+			else if (blank == false) { text_length[2] += ~~String(temp).length }
+		}
+	}
+	if (settings.validation == 1) {
+		if (text_length_highest > 50) {
+			document.getElementById("o"+num).innerHTML += "#"+num+" Warning: extremely long item name<br>"; errors++;	// displays an error if the item's name is too long to be shown in some circumstances
+		}
+		if (text_length[2] > 130) {
+			document.getElementById("o"+num).innerHTML += "#"+num+" Warning: item description is too long<br>"; errors++;	// displays an error if the item's description is too long
+		}
+		if (text_length[1] > 486) {
+			document.getElementById("o"+num).innerHTML += "#"+num+" Warning: item name is too long<br>"; errors++;	// displays an error if the item's name is too long
 		}
 	}
 	// Reverses order of lines
@@ -769,11 +783,6 @@ function parseFile(file,num) {
 	if (display.includes("�") || display.includes("�")) { notices.encoding = 1 }
 	if (errors >= settings.max_errors) { document.getElementById("o"+num).innerHTML += " ... There may be additional errors. The first "+settings.max_errors+" errors were displayed.<br>" }
 	else if (settings.error_limit == 0 && errors >= 50) { document.getElementById("o"+num).innerHTML += " ... In total, "+errors+" errors were displayed.<br>" }
-	
-	// TODO: Add warnings for names/descriptions that are too long
-	//document.getElementById("o"+num).innerHTML += "#"+num+" Title Length: "+"<l style='color:#aaa'>"+name_length+"</l><br>"
-	//document.getElementById("o"+num).innerHTML += "#"+num+" Description Length: "+"<l style='color:#aaa'>"+desc_length+"</l><br>"
-	
 	return [display,description]
 }
 

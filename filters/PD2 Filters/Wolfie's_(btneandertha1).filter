@@ -57,62 +57,82 @@ ItemDisplay[bey]: %ORANGE%%NAME%%WHITE% x%QTY%%MAP-68%{%TAN%Act 5 to open Uber T
 ItemDisplay[std]: %NAME% x%QTY%%MAP-68%{%TAN%+20% Magic/Gold Find%NL%+20% Monster Density%NL%+10% Experience%NL%%ORANGE%Cube w/ a map to gain%DARK_GREEN% Heroic%ORANGE% bonus:} // Standard of Heroes
 
 // Corruption Items -------------------------------------------------------------
-ItemDisplay[wss]: %PURPLE%+ %RED%Worldstone Shard x%QTY% %PURPLE%+%RED%%MAP-62%{%TAN%Unsock Item: 50% Mod, 25% Brick, 25% Sockets%NL%Sock Item: 75% Mod, 25% Brick%NL%Maps: 70% Mod, 30% CNC%NL%%ORANGE%Cube w/ item to corrupt} // Worldstone Shard
-ItemDisplay[lbox]: %PURPLE%+ %RED%Larzuks Puzzlebox x%QTY% %PURPLE%+%RED%%MAP-62%{%TAN%Armors: 0-2%NL%2H Weapons: 0-4%NL%1H Weapons: 0-2%NL%Amazon Weapons: 0-6%NL%Bows: 0-6%NL%%ORANGE%Cube w/ unsocketed item to roll sockets} // Larzuk's Box
+ItemDisplay[wss]: %PURPLE%+ %ORANGE%Worldstone Shard x%QTY% %PURPLE%+%ORANGE%%MAP-62%{%TAN%Unsock Item: 50% Mod, 25% Brick, 25% Sockets%NL%Sock Item: 75% Mod, 25% Brick%NL%Maps: 70% Mod, 30% CNC%NL%%ORANGE%Cube w/ item to corrupt} // Worldstone Shard
+ItemDisplay[lbox]: %PURPLE%+ %NAME% x%QTY% %PURPLE%+%MAP-62%{%TAN%Armors: 0-2%NL%2H Weapons: 0-4%NL%1H Weapons: 0-2%NL%%ORANGE%Cube w/ unsocketed item to roll sockets} // Larzuk's Box
 
 // Map Items --------------------------------------------------------------------
-ItemDisplay[rera]: %NAME% x%QTY%{%TAN%Rune or Greater, & Rare Map%NL%Cube w/ Perfect Gem, Thul%NL%%ORANGE%Reroll Rare Map} // Reroll Rare Map (Horadrim Orb)
-ItemDisplay[imra]: %NAME% x%QTY%{%TAN%or Greater, & White Map%NL%Cube w/ Jewel, Thul Rune%NL%%ORANGE%Imbue Rare Map} // Imbue Rare Map (Zakarum Orb)
-ItemDisplay[upma]: %NAME% x%QTY%{%TAN%Rune or Greater, & Magic Map%NL%Cube w/ Perfect Skull, Thul%NL%%ORANGE%Upgrade Magic to Rare} // Upgrade Magic Map to Rare Map (Angelic Orb)
-ItemDisplay[imma]: %NAME% x%QTY%{%TAN%& White Map%NL%Cube w/ Jewel,%NL%%ORANGE%Imbue Magic Map} // Imbue Magic Map (Arcane Orb)
-ItemDisplay[scou]: %NAME% x%QTY%{%TAN%Magic or Rare Map%NL%Cube w/ Hel Rune &%NL%%ORANGE%Purge Map} // Purge Map (Removes Mods and Reverts back to a White Map) (Orb of Destruction)
-ItemDisplay[upmp]: %NAME% x%QTY%{%TAN%to get a map of the next tier%NL%Cube 3 maps of the same tier%NL%%ORANGE%Uptier Maps} // Cartographer's Orb
-ItemDisplay[scrb]: %NAME%{%TAN%these are intended for groups!%NL%%RED%WARNING:%NL%%NL%%TAN%create a group dungeon%NL%Cube w/ a Tier 3 map to%NL%%ORANGE%Create Group Dungeon} // Horadrim Scarab
+ItemDisplay[rera]: %NAME% x%QTY%{%TAN%Rune or Greater, & Rare Map%NL%Cube w/ Perfect Gem, Thul%NL%%ORANGE%Reroll Rare Map%NL%} // Reroll Rare Map (Horadrim Orb)
+ItemDisplay[imra]: %NAME% x%QTY%{%TAN%or Greater, & White Map%NL%Cube w/ Jewel, Thul Rune%NL%%ORANGE%Imbue Rare Map%NL%} // Imbue Rare Map (Zakarum Orb)
+ItemDisplay[upma]: %NAME% x%QTY%{%TAN%Rune or Greater, & Magic Map%NL%Cube w/ Perfect Skull, Thul%NL%%ORANGE%Upgrade Magic to Rare%NL%} // Upgrade Magic Map to Rare Map (Angelic Orb)
+ItemDisplay[imma]: %NAME% x%QTY%{%TAN%& White Map%NL%Cube w/ Jewel,%NL%%ORANGE%Imbue Magic Map%NL%} // Imbue Magic Map (Arcane Orb)
+ItemDisplay[scou]: %NAME% x%QTY%{%TAN%Magic or Rare Map%NL%Cube w/ Hel Rune &%NL%%ORANGE%Purge Map%NL%} // Purge Map (Removes Mods and Reverts back to a White Map) (Orb of Destruction)
+ItemDisplay[upmp]: %NAME% x%QTY%{%TAN%to get a map of the next tier%NL%Cube 3 maps of the same tier%NL%%ORANGE%Uptier Maps%NL%} // Cartographer's Orb
+ItemDisplay[scrb]: %NAME%%MAP-62%{%TAN%these are intended for groups!%NL%%RED%WARNING:%NL%%NL%%TAN%create a group dungeon%NL%Cube w/ a Tier 3 map to%NL%%ORANGE%Create Group Dungeon%NL%} // Horadrim Scarab
 
 // Maps -------------------------------------------------------------------------
 // Coloring maps names
-ItemDisplay[NMAG (t11 OR t12 OR t13 OR t14 OR t21 OR t22 OR t23 OR t31 OR t32 OR t33 OR t34 OR t41 OR t42)]: %WHITE%%NAME%%CONTINUE% // Coloring white maps
-ItemDisplay[MAG (t11 OR t12 OR t13 OR t14 OR t21 OR t22 OR t23 OR t31 OR t32 OR t33 OR t34 OR t41 OR t42)]: %BLUE%%NAME%%CONTINUE% // Coloring magic maps
-ItemDisplay[RARE (t11 OR t12 OR t13 OR t14 OR t21 OR t22 OR t23 OR t31 OR t32 OR t33 OR t34 OR t41 OR t42)]: %YELLOW%%NAME%%CONTINUE% // Coloring rare maps
+ItemDisplay[NMAG (t10 OR t11 OR t12 OR t13 OR t14 OR t15 OR t16 OR t17 OR t18 OR t19 OR t20 OR t21 OR t22 OR t23 OR t24 OR t25 OR t26 OR t27 OR t28 OR t29 OR t30 OR t31 OR t32 OR t33 OR t34 OR t35 OR t36 OR t37 OR t38 OR t39 OR t40 OR t41 OR t42 OR t43 OR t44 OR t45 OR t46 OR t47 OR t48 OR t49)]: %WHITE%%NAME%%CONTINUE% // Coloring white maps
+ItemDisplay[MAG (t10 OR t11 OR t12 OR t13 OR t14 OR t15 OR t16 OR t17 OR t18 OR t19 OR t20 OR t21 OR t22 OR t23 OR t24 OR t25 OR t26 OR t27 OR t28 OR t29 OR t30 OR t31 OR t32 OR t33 OR t34 OR t35 OR t36 OR t37 OR t38 OR t39 OR t40 OR t41 OR t42 OR t43 OR t44 OR t45 OR t46 OR t47 OR t48 OR t49)]: %BLUE%%NAME%%CONTINUE% // Coloring magic maps
+ItemDisplay[RARE (t10 OR t11 OR t12 OR t13 OR t14 OR t15 OR t16 OR t17 OR t18 OR t19 OR t20 OR t21 OR t22 OR t23 OR t24 OR t25 OR t26 OR t27 OR t28 OR t29 OR t30 OR t31 OR t32 OR t33 OR t34 OR t35 OR t36 OR t37 OR t38 OR t39 OR t40 OR t41 OR t42 OR t43 OR t44 OR t45 OR t46 OR t47 OR t48 OR t49)]: %YELLOW%%NAME%%CONTINUE% // Coloring rare maps
 
 // Tier 1 Maps
+ItemDisplay[t10]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
 ItemDisplay[t11]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Ruins of Viz-jun [T1]
 ItemDisplay[t12]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Horazon's Memory [T1]
 ItemDisplay[t13]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Bastion Keep [T1]
+ItemDisplay[t14]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t15]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t16]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t17]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t18]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t19]: %DARK_GREEN%+ %NAME% %DARK_GREEN%[T1]%MAP-80%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
 
 // Tier 2 Maps
+ItemDisplay[t20]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
 ItemDisplay[t21]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Phlegethon [T2]
 ItemDisplay[t22]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Torajan Jungle [T2]
 ItemDisplay[t23]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Arreat Battlefield [T2]
 ItemDisplay[t24]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Blood Moon [T2]
+ItemDisplay[t25]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t26]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t27]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t28]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t29]: %YELLOW%+ %NAME% %YELLOW%[T2]%MAP-A8%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
 
 // Tier 3 Maps
+ItemDisplay[t30]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
 ItemDisplay[t31]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // River of Blood [T3]
 ItemDisplay[t32]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Throne of Insanity [T3]
 ItemDisplay[t33]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Sewers of Harrogath [T3]
 ItemDisplay[t34]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Ancestral Trial [T3]
-ItemDisplay[t35]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Cathedral of Light [T3]
-ItemDisplay[t36]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Tomb of Zoltun Kulle [T3]
+ItemDisplay[t35]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Tomb of Zoltun Kulle [T3]
+ItemDisplay[t36]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t37]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t38]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t39]: %RED%+ %NAME% %RED%[T3]%MAP-62%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
 
 // Tier 4 Maps
-ItemDisplay[t41]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Plains of Torment [T4]
-ItemDisplay[t42]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Desert [T4]
+ItemDisplay[t40]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t41]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Cathedral of Light [T4]
+ItemDisplay[t42]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t43]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t44]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t45]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t46]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t47]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t48]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
+ItemDisplay[t49]: %PURPLE%+ %NAME% %PURPLE%[T4]%MAP-9B%%CONTINUE%{%TAN%Right-click in Act 5 town to open%NL%Requires level 75} // Not actually a map (yet); just being safe
 
 // Coloring maps names
-ItemDisplay[NMAG (t11 OR t12 OR t13 OR t14 OR t21 OR t22 OR t23 OR t31 OR t32 OR t33 OR t34 OR t41 OR t42)]: %NAME%%WHITE%{%NAME%} // Coloring white maps
-ItemDisplay[MAG (t11 OR t12 OR t13 OR t14 OR t21 OR t22 OR t23 OR t31 OR t32 OR t33 OR t34 OR t41 OR t42)]: %NAME%%BLUE%{%NAME%} // Coloring magic maps
-ItemDisplay[RARE (t11 OR t12 OR t13 OR t14 OR t21 OR t22 OR t23 OR t31 OR t32 OR t33 OR t34 OR t41 OR t42)]: %NAME%%YELLOW%{%NAME%} // Coloring rare maps
+ItemDisplay[NMAG (t10 OR t11 OR t12 OR t13 OR t14 OR t15 OR t16 OR t17 OR t18 OR t19 OR t20 OR t21 OR t22 OR t23 OR t24 OR t25 OR t26 OR t27 OR t28 OR t29 OR t30 OR t31 OR t32 OR t33 OR t34 OR t35 OR t36 OR t37 OR t38 OR t39 OR t40 OR t41 OR t42 OR t43 OR t44 OR t45 OR t46 OR t47 OR t48 OR t49)]: %NAME%%WHITE%{%NAME%} // Coloring white maps
+ItemDisplay[MAG (t10 OR t11 OR t12 OR t13 OR t14 OR t15 OR t16 OR t17 OR t18 OR t19 OR t20 OR t21 OR t22 OR t23 OR t24 OR t25 OR t26 OR t27 OR t28 OR t29 OR t30 OR t31 OR t32 OR t33 OR t34 OR t35 OR t36 OR t37 OR t38 OR t39 OR t40 OR t41 OR t42 OR t43 OR t44 OR t45 OR t46 OR t47 OR t48 OR t49)]: %NAME%%BLUE%{%NAME%} // Coloring magic maps
+ItemDisplay[RARE (t10 OR t11 OR t12 OR t13 OR t14 OR t15 OR t16 OR t17 OR t18 OR t19 OR t20 OR t21 OR t22 OR t23 OR t24 OR t25 OR t26 OR t27 OR t28 OR t29 OR t30 OR t31 OR t32 OR t33 OR t34 OR t35 OR t36 OR t37 OR t38 OR t39 OR t40 OR t41 OR t42 OR t43 OR t44 OR t45 OR t46 OR t47 OR t48 OR t49)]: %NAME%%YELLOW%{%NAME%} // Coloring rare maps
 
 // Diablo Clone Items -----------------------------------------------------------
 ItemDisplay[dcho]: %RED%Black Soulstone x%QTY%%MAP-62%{%TAN%& Pure Demonic Essence%NL%Cube w/ Prime Evil Soul%NL%%NL%Drops from Uber Trist bosses} // Black Soulstone
 ItemDisplay[dcso]: %RED%Prime Evil Soul x%QTY%%MAP-62%{%TAN%& Pure Demonic Essence%NL%Cube w/ Black Soulstone%NL%%NL%Drops from Hell Diablo & Baal} // Prime Evil Soul
 ItemDisplay[dcbl]: %RED%Pure Demonic Essence x%QTY%%MAP-62%{%TAN%& Prime Evil Soul%NL%Cube w/ Black Soulstone%NL%%NL%Drops from map bosses} // Pure Demonic Essence
 ItemDisplay[dcma]: %RED%Vision of Terror%MAP-62%{%TAN%to fight Uber Diablo!%NL%Right-click in Act 5 town%NL%%NL%Requires level 75} // Vision of Terror
-ItemDisplay[UNI !ID utb]: %NAME%%MAP-A5% // New DClone Unique Mirrored Boots
-ItemDisplay[UNI !ID uld]: %NAME%%MAP-A5% // New DClone Unique Kraken Shell
-ItemDisplay[UNI !ID 7bs]: %NAME%%MAP-A5% // New DClone Unique Conquest Sword
-ItemDisplay[UNI !ID 7qr]: %NAME%%MAP-A5% // New DClone Unique Scissors Suwayyah
-ItemDisplay[UNI !ID uh9]: %NAME%%MAP-A5% // New DClone Unique Bone Visage
 
 // Gems -------------------------------------------------------------------------
 ItemDisplay[GEM=1 DIFF>0]: // Hide all Chipped gems past Normal difficulty
@@ -126,9 +146,8 @@ ItemDisplay[gfv]: %WHITE%Flawed %PURPLE%Amethyst%WHITE%{%TAN%3 Flawed Amethyst =
 ItemDisplay[gsv]: %PURPLE%Amethyst%WHITE%{%TAN%3 Amethyst = Flawless Amethyst} // Amethyst ("Normal")
 ItemDisplay[gzv]: %WHITE%+ %PURPLE%Amethyst%WHITE% +%DOT-20%{%TAN%3 Flawless Amethyst + Key = Perfect Amethyst} // Flawless Amethyst
 ItemDisplay[gzvs]: %WHITE%+ %PURPLE%Amethyst x%QTY%%WHITE% +%DOT-20%{%TAN%3 Flawless Amethyst + Key = Perfect Amethyst%NL%%NL%%WHITE%Shields: +24 Defense%NL%Armor/Helms: +8 Strength%NL%Weapons: +100 Attack Rating%NL%} // Stacked Flawless Amethyst 2x+
-ItemDisplay[gpv]: %WHITE%++ %PURPLE%Amethyst %WHITE%++{%TAN%Used in Caster crafting} // Perfect Amethyst
-ItemDisplay[gpvs QTY=1]: %WHITE%++ %PURPLE%Amethyst x%QTY% %WHITE%++{%TAN%Used in Caster crafting%NL%%NL%%WHITE%Shields: +30 Defense%NL%Armor/Helms: +10 Strength%NL%Weapons: +150 Attack Rating%NL%} // Stacked Perfect Amethyst 2x+
-ItemDisplay[gpvs QTY>1]: %WHITE%++ %PURPLE%Amethyst x%QTY% %WHITE%++%DOT-20%{%TAN%Used in Caster crafting%NL%%NL%%WHITE%Shields: +30 Defense%NL%Armor/Helms: +10 Strength%NL%Weapons: +150 Attack Rating%NL%} // Stacked Perfect Amethyst 2x+
+ItemDisplay[gpv]: %WHITE%++ %PURPLE%Amethyst %WHITE%++%DOT-20%{%TAN%Used in Caster crafting} // Perfect Amethyst
+ItemDisplay[gpvs]: %WHITE%++ %PURPLE%Amethyst x%QTY% %WHITE%++%DOT-20%{%TAN%Used in Caster crafting%NL%%NL%%WHITE%Shields: +30 Defense%NL%Armor/Helms: +10 Strength%NL%Weapons: +150 Attack Rating%NL%} // Stacked Perfect Amethyst
 
 //      Diamond
 ItemDisplay[gcw]: %WHITE%Chipped %WHITE%Diamond%WHITE%{%TAN%3 Chipped Diamond = Flawed Diamond} // Chipped Diamond
@@ -136,9 +155,8 @@ ItemDisplay[gfw]: %WHITE%Flawed %WHITE%Diamond%WHITE%{%TAN%3 Flawed Diamond = Di
 ItemDisplay[gsw]: %WHITE%Diamond%WHITE%{%TAN%3 Diamond = Flawless Diamond} // Diamond ("Normal")
 ItemDisplay[glw]: %WHITE%+ %WHITE%Diamond%WHITE% +%DOT-20%{%TAN%3 Flawless Diamond + Key = Perfect Diamond} // Flawless Diamond
 ItemDisplay[glws]: %WHITE%+ %WHITE%Diamond x%QTY%%WHITE% +%DOT-20%{%TAN%3 Flawless Diamond + Key = Perfect Diamond%NL%%NL%%WHITE%Shield: Res +14%NL%Armor/Helm: +80 Attack Rating%NL%Weapon: +54% Dmg to Undead%NL%} // Stacked Flawless Diamond 2x+
-ItemDisplay[gpw]: %WHITE%++ %WHITE%Diamond %WHITE%++ // Perfect Diamond
-ItemDisplay[gpws QTY=1]: %WHITE%++ %WHITE%Diamond x%QTY% %WHITE%++{%WHITE%Shields: All Resist +19%NL%Armor/Helms: +100 Attack Rating%NL%Weapons: +68% Damage to Undead%NL%} // Stacked Perfect Diamond 2x+
-ItemDisplay[gpws QTY>1]: %WHITE%++ %WHITE%Diamond x%QTY% %WHITE%++%DOT-20%{%WHITE%Shields: All Resist +19%NL%Armor/Helms: +100 Attack Rating%NL%Weapons: +68% Damage to Undead%NL%} // Stacked Perfect Diamond 2x+
+ItemDisplay[gpw]: %WHITE%++ %WHITE%Diamond %WHITE%++%DOT-20% // Perfect Diamond
+ItemDisplay[gpws]: %WHITE%++ %WHITE%Diamond x%QTY% %WHITE%++%DOT-20%{%WHITE%Shields: All Resist +19%NL%Armor/Helms: +100 Attack Rating%NL%Weapons: +68% Damage to Undead%NL%} // Stacked Perfect Diamond
 
 //      Emerald
 ItemDisplay[gcg]: %WHITE%Chipped %GREEN%Emerald%WHITE%{%TAN%3 Chipped Emerald = Flawed Emerald} // Chipped Emerald
@@ -146,9 +164,8 @@ ItemDisplay[gfg]: %WHITE%Flawed %GREEN%Emerald%WHITE%{%TAN%3 Flawed Emerald = Em
 ItemDisplay[gsg]: %GREEN%Emerald%WHITE%{%TAN%3 Emerald = Flawless Emerald} // Emerald ("Normal")
 ItemDisplay[glg]: %WHITE%+ %GREEN%Emerald%WHITE% +%DOT-20%{%TAN%3 Flawless Emerald + Key = Perfect Emerald} // Flawless Emerald
 ItemDisplay[glgs]: %WHITE%+ %GREEN%Emerald x%QTY%%WHITE% +%DOT-20%{%TAN%3 Flawless Emerald + Key = Perfect Emerald%NL%%NL%%WHITE%Shields: Psn Res +28%%NL%Armor/Helms: +8 Dexterity%NL%Weapons: +60 psn over 6 secs%NL%} // Stacked Flawless Emerald 2x+
-ItemDisplay[gpg]: %WHITE%++ %GREEN%Emerald %WHITE%++{%TAN%Used in Safety crafting} // Perfect Emerald
-ItemDisplay[gpgs QTY=1]: %WHITE%++ %GREEN%Emerald x%QTY% %WHITE%++{%TAN%Used in Safety crafting%NL%%NL%%WHITE%Shields: Poison Resist +40%%NL%Armor/Helms: +10 Dexterity%NL%Weapons: +100 poison damage over 7 secs%NL%} // Stacked Perfect Emerald 2x+
-ItemDisplay[gpgs QTY>1]: %WHITE%++ %GREEN%Emerald x%QTY% %WHITE%++%DOT-20%{%TAN%Used in Safety crafting%NL%%NL%%WHITE%Shields: Poison Resist +40%%NL%Armor/Helms: +10 Dexterity%NL%Weapons: +100 poison damage over 7 secs%NL%} // Stacked Perfect Emerald 2x+
+ItemDisplay[gpg]: %WHITE%++ %GREEN%Emerald %WHITE%++%DOT-20%{%TAN%Used in Safety crafting} // Perfect Emerald
+ItemDisplay[gpgs]: %WHITE%++ %GREEN%Emerald x%QTY% %WHITE%++%DOT-20%{%TAN%Used in Safety crafting%NL%%NL%%WHITE%Shields: Poison Resist +40%%NL%Armor/Helms: +10 Dexterity%NL%Weapons: +100 poison damage over 7 secs%NL%} // Stacked Perfect Emerald
 
 //      Ruby
 ItemDisplay[gcr]: %WHITE%Chipped %RED%Ruby%WHITE%{%TAN%3 Chipped Ruby = Flawed Ruby} // Chipped Ruby
@@ -156,9 +173,8 @@ ItemDisplay[gfr]: %WHITE%Flawed %RED%Ruby%WHITE%{%TAN%3 Flawed Ruby = Ruby} // F
 ItemDisplay[gsr]: %RED%Ruby%WHITE%{%TAN%3 Ruby = Flawless Ruby} // Ruby ("Normal")
 ItemDisplay[glr]: %WHITE%+ %RED%Ruby%WHITE% +%DOT-20%{%TAN%3 Flawless Ruby + Key = Perfect Ruby} // Flawless Ruby
 ItemDisplay[glrs]: %WHITE%+ %RED%Ruby x%QTY%%WHITE% +%DOT-20%{%TAN%3 Flawless Ruby + Key = Perfect Ruby%NL%%NL%%WHITE%Shields: Fire Resist +28%%NL%Armor/Helms: +31 Life%NL%Weapons: Adds 10-16 fire damage%NL%} // Stacked Flawless Ruby 2x+
-ItemDisplay[gpr]: %WHITE%++ %RED%Ruby %WHITE%++{%TAN%Used in Blood crafting} // Perfect Ruby
-ItemDisplay[gprs QTY=1]: %WHITE%++ %RED%Ruby x%QTY% %WHITE%++{%TAN%Used in Blood crafting%NL%%NL%%WHITE%Shields: Fire Resist +40%%NL%Armor/Helms: +38 Life%NL%Weapons: Adds 15-20 fire damage%NL%} // Stacked Perfect Ruby 2x+
-ItemDisplay[gprs QTY>1]: %WHITE%++ %RED%Ruby x%QTY% %WHITE%++%DOT-20%{%TAN%Used in Blood crafting%NL%%NL%%WHITE%Shields: Fire Resist +40%%NL%Armor/Helms: +38 Life%NL%Weapons: Adds 15-20 fire damage%NL%} // Stacked Perfect Ruby 2x+
+ItemDisplay[gpr]: %WHITE%++ %RED%Ruby %WHITE%++%DOT-20%{%TAN%Used in Blood crafting} // Perfect Ruby
+ItemDisplay[gprs]: %WHITE%++ %RED%Ruby x%QTY% %WHITE%++%DOT-20%{%TAN%Used in Blood crafting%NL%%NL%%WHITE%Shields: Fire Resist +40%%NL%Armor/Helms: +38 Life%NL%Weapons: Adds 15-20 fire damage%NL%} // Stacked Perfect Ruby
 
 //      Sapphire
 ItemDisplay[gcb]: %WHITE%Chipped %BLUE%Sapphire%WHITE%{%TAN%3 Chipped Sapphire = Flawed Sapphire} // Chipped Sapphire
@@ -166,9 +182,8 @@ ItemDisplay[gfb]: %WHITE%Flawed %BLUE%Sapphire%WHITE%{%TAN%3 Flawed Sapphire = S
 ItemDisplay[gsb]: %BLUE%Sapphire%WHITE%{%TAN%3 Sapphire = Flawless Sapphire} // Sapphire ("Normal")
 ItemDisplay[glb]: %WHITE%+ %BLUE%Sapphire%WHITE% +%DOT-20%{%TAN%3 Flawless Sapphire + Key = Perfect Sapphire} // Flawless Sapphire
 ItemDisplay[glbs]: %WHITE%+ %BLUE%Sapphire x%QTY%%WHITE% +%DOT-20%{%TAN%3 Flawless Sapphire + Key = Perfect Sapphire%NL%%NL%%WHITE%Shields: Cold Res +28%%NL%Armor/Helms: +31 Mana%NL%Weapons: Adds 6-10 cold dmg%NL%} // Stacked Flawless Sapphire 2x+
-ItemDisplay[gpb]: %WHITE%++ %BLUE%Sapphire %WHITE%++{%TAN%Used in Hit Power crafting} // Perfect Sapphire
-ItemDisplay[gpbs QTY=1]: %WHITE%++ %BLUE%Sapphire x%QTY% %WHITE%++{%TAN%Used in Hit Power crafting%NL%%NL%%WHITE%Shields: Cold Resist +40%%NL%Armor/Helms: +38 Mana%NL%Weapons: Adds 10-14 cold damage%NL%} // Stacked Perfect Sapphire 2x+
-ItemDisplay[gpbs QTY>1]: %WHITE%++ %BLUE%Sapphire x%QTY% %WHITE%++%DOT-20%{%TAN%Used in Hit Power crafting%NL%%NL%%WHITE%Shields: Cold Resist +40%%NL%Armor/Helms: +38 Mana%NL%Weapons: Adds 10-14 cold damage%NL%} // Stacked Perfect Sapphire 2x+
+ItemDisplay[gpb]: %WHITE%++ %BLUE%Sapphire %WHITE%++%DOT-20%{%TAN%Used in Hit Power crafting} // Perfect Sapphire
+ItemDisplay[gpbs]: %WHITE%++ %BLUE%Sapphire x%QTY% %WHITE%++%DOT-20%{%TAN%Used in Hit Power crafting%NL%%NL%%WHITE%Shields: Cold Resist +40%%NL%Armor/Helms: +38 Mana%NL%Weapons: Adds 10-14 cold damage%NL%} // Stacked Perfect Sapphire
 
 //      Skull
 ItemDisplay[skc]: %WHITE%Chipped %GRAY%Skull%WHITE%{%TAN%3 Chipped Skull = Flawed Skull} // Chipped Skull
@@ -176,9 +191,8 @@ ItemDisplay[skf]: %WHITE%Flawed %GRAY%Skull%WHITE%{%TAN%3 Flawed Skull = Skull} 
 ItemDisplay[sku]: %GRAY%Skull%WHITE%{%TAN%3 Skull = Flawless Skull} // Skull ("Normal")
 ItemDisplay[skl]: %WHITE%+ %GRAY%Skull%WHITE% +%DOT-20%{%TAN%3 Flawless Skull + Key = Perfect Skull} // Flawless Skull
 ItemDisplay[skls]: %WHITE%+ %GRAY%Skull x%QTY%%WHITE% +%DOT-20%{%TAN%3 Flawless Skull + Key = Perfect Skull%NL%%NL%%WHITE%Shield: ATDO 16%NL%Armor/Helm: Mana Reg 12%, Rep Life +4%NL%Wep: 3% Life & Mana steal%NL%} // Stacked Flawless Skull 2x+
-ItemDisplay[skz]: %WHITE%++ %GRAY%Skull %WHITE%++ // Perfect Skull
-ItemDisplay[skzs QTY=1]: %WHITE%++ %GRAY%Skull x%QTY% %WHITE%++{%WHITE%Shields: Attacker Takes Damage of 20%NL%Armor/Helms: Regen Mana 19%, Rep Life +5%NL%Weapons: 4% Life & 3% Mana steal%NL%} // Stacked Perfect Skull 2x+
-ItemDisplay[skzs QTY>1]: %WHITE%++ %GRAY%Skull x%QTY% %WHITE%++%DOT-20%{%WHITE%Shields: Attacker Takes Damage of 20%NL%Armor/Helms: Regen Mana 19%, Rep Life +5%NL%Weapons: 4% Life & 3% Mana steal%NL%} // Stacked Perfect Skull 2x+
+ItemDisplay[skz]: %WHITE%++ %GRAY%Skull %WHITE%++%DOT-20% // Perfect Skull
+ItemDisplay[skzs]: %WHITE%++ %GRAY%Skull x%QTY% %WHITE%++%DOT-20%{%WHITE%Shields: Attacker Takes Damage of 20%NL%Armor/Helms: Regen Mana 19%, Rep Life +5%NL%Weapons: 4% Life & 3% Mana steal%NL%} // Stacked Perfect Skull
 
 //      Topaz
 ItemDisplay[gcy]: %WHITE%Chipped %YELLOW%Topaz%WHITE%{%TAN%3 Chipped Topaz = Flawed Topaz} // Chipped Topaz
@@ -186,9 +200,8 @@ ItemDisplay[gfy]: %WHITE%Flawed %YELLOW%Topaz%WHITE%{%TAN%3 Flawed Topaz = Topaz
 ItemDisplay[gsy]: %YELLOW%Topaz%WHITE%{%TAN%3 Topaz = Flawless Topaz} // Topaz ("Normal")
 ItemDisplay[gly]: %WHITE%+ %YELLOW%Topaz%WHITE% +%DOT-20%{%TAN%3 Flawless Topaz + Key = Perfect Topaz} // Flawless Topaz
 ItemDisplay[glys]: %WHITE%+ %YELLOW%Topaz x%QTY%%WHITE% +%DOT-20%{%TAN%3 Flawless Topaz + Key = Perfect Topaz%NL%%NL%%WHITE%Shields: Light Res +28%%NL%Armor/Helms: 20% Magic Find%NL%Weps: Add 1-30 lightning dmg%NL%} // Stacked Flawless Topaz 2x+
-ItemDisplay[gpy]: %WHITE%++ %YELLOW%Topaz %WHITE%++ // Perfect Topaz
-ItemDisplay[gpys QTY=1]: %WHITE%++ %YELLOW%Topaz x%QTY% %WHITE%++{%WHITE%Shields: Lightning Resist +40%%NL%Armor/Helms: 24% Better Chance of Getting Magic Items%NL%Weapons: Adds 1-40 lightning damage%NL%} // Stacked Perfect Topaz 2x+
-ItemDisplay[gpys QTY>1]: %WHITE%++ %YELLOW%Topaz x%QTY% %WHITE%++%DOT-20%{%WHITE%Shields: Lightning Resist +40%%NL%Armor/Helms: 24% Better Chance of Getting Magic Items%NL%Weapons: Adds 1-40 lightning damage%NL%} // Stacked Perfect Topaz 2x+
+ItemDisplay[gpy]: %WHITE%++ %YELLOW%Topaz %WHITE%++%DOT-20% // Perfect Topaz
+ItemDisplay[gpys]: %WHITE%++ %YELLOW%Topaz x%QTY% %WHITE%++%DOT-20%{%WHITE%Shields: Lightning Resist +40%%NL%Armor/Helms: 24% Better Chance of Getting Magic Items%NL%Weapons: Adds 1-40 lightning damage%NL%} // Stacked Perfect Topaz
 
 // Runes ------------------------------------------------------------------------
 ItemDisplay[RUNE<10]: %DARK_GREEN%%RUNENAME% %DARK_GREEN%(%RUNENUM%)%DOT-76%%CONTINUE% // El-Thul
@@ -260,8 +273,8 @@ ItemDisplay[r31]: %NAME%{%TAN%2 Jah + Key = Cham%NL%} // Jah Rune
 ItemDisplay[r31s]: %NAME%{%TAN%2 Jah + Key = Cham%NL%%NL%%WHITE%Shields: +50 Life%NL%Armor/Helms: Increase Maximum Life 5%%NL%Weapons: Ignore Targets Defense%NL%} // Stacked Jah Rune
 ItemDisplay[r32]: %NAME%{%TAN%2 Cham + Key = Zod%NL%} // Cham Rune
 ItemDisplay[r32s]: %NAME%{%TAN%2 Cham + Key = Zod%NL%%NL%%WHITE%Shields: Cannot be Frozen%NL%Armor/Helms: Cannot be Frozen%NL%Weapons: Freezes Target +3%NL%} // Stacked Cham Rune
-ItemDisplay[r33]: %NAME%{%TAN%Cube w/ Perfect Skull + item to fully repair item} // Zod Rune
-ItemDisplay[r33s]: %NAME%{%TAN%Cube w/ Perfect Skull + item to fully repair item%NL%%NL%%WHITE%All Sockets: Indestructible%NL%} // Stacked Zod Rune
+ItemDisplay[r33]: %NAME%{%TAN%item to fully repair item%NL%Cube w/ Perfect Skull and} // Zod Rune
+ItemDisplay[r33s]: %NAME%{%TAN%item to fully repair item%NL%Cube w/ Perfect Skull and%NL%%NL%%WHITE%All Sockets: Indestructible%NL%} // Stacked Zod Rune
 
 // Eth/Sockets/Item Level -------------------------------------------------------
 ItemDisplay[(MAG OR UNI OR SET OR RARE OR CRAFT) ETH]: %NAME% %GRAY%[Eth]%CONTINUE% // Add "[Eth]" to ethereal item's names (eg "Quilted Armor [Eth]")
@@ -369,6 +382,7 @@ ItemDisplay[UNI !ID amf]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Thun
 
 //    Assassin
 ItemDisplay[UNI !ID 7cs]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Shadowkiller Battle Cestus
+ItemDisplay[UNI !ID 7qr]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Aidan's Scar Scissors Suwayyah
 
 //    Barbarian
 ItemDisplay[UNI !ID baa]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Arreat's Face Slayer Guard
@@ -379,6 +393,7 @@ ItemDisplay[UNI !ID bae]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Hala
 ItemDisplay[UNI !ID dra]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Jalal's Mane Totemic Mask
 ItemDisplay[UNI !ID drb]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Cerebus' Bite Blood Spirit
 ItemDisplay[UNI !ID drd]: %RED%>>%GOLD%%NAME%%RED%<<%GOLD%%MAP-A5% // Spirit Keeper Earth Spirit
+ItemDisplay[UNI !ID dre]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Ravenlore Sky Spirit
 
 //    Necromancer
 ItemDisplay[UNI !ID nea]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Homunculus Hierophant Trophy
@@ -407,6 +422,7 @@ ItemDisplay[UNI !ID uui]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Ormu
 ItemDisplay[UNI !ID utu]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // The Gladiator's Bane Wire Fleece
 ItemDisplay[UNI !ID upl]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Arkaine's Valor Balrog Skin
 ItemDisplay[UNI !ID uld]: %RED%>>%GOLD%%NAME%%RED%<<%GOLD%%MAP-A5% // Leviathan Kraken Shell
+ItemDisplay[UNI !ID uth]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Dark Abyss Lacquered Plate
 ItemDisplay[UNI !ID uul]: %RED%>>%GOLD%%NAME%%RED%<<%GOLD%%MAP-A5% // Steel Carapace Shadow Plate
 ItemDisplay[UNI !ID uar]: %ORANGE%>%PURPLE%>>%GOLD%%NAME%%PURPLE%<<%ORANGE%<%GOLD%%MAP-A5% // Templar's Might or Tyrael's Might Sacred Armor
 
@@ -422,12 +438,14 @@ ItemDisplay[UNI !ID uvc]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Nosf
 ItemDisplay[UNI !ID umc]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Verdungo's Hearty Cord Mithril Coil
 
 //    Boots
+ItemDisplay[UNI !ID hbt]: %RED%>>%GOLD%%NAME%%RED%<<%GOLD%%MAP-A5% // Tearhaunch Greaves
 ItemDisplay[UNI !ID xvb]: %RED%>>%GOLD%%NAME%%RED%<<%GOLD%%MAP-A5% // Waterwalk Sharkskin Boots
 ItemDisplay[UNI !ID xmb]: %RED%>>%GOLD%%NAME%%RED%<<%GOLD%%MAP-A5% // Silkweave Mesh Boots
 ItemDisplay[UNI !ID xtb]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // War Traveler Battle Boots
 ItemDisplay[UNI !ID xhb]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Gore Rider War Boots
 ItemDisplay[UNI !ID uvb]: %RED%>>%GOLD%%NAME%%RED%<<%GOLD%%MAP-A5% // Sandstorm Trek Scarabshell Boots
 ItemDisplay[UNI !ID umb]: %RED%>>%GOLD%%NAME%%RED%<<%GOLD%%MAP-A5% // Marrowwalk Boneweave Boots
+ItemDisplay[UNI !ID utb]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Itherael's Path Mirrored Boots
 ItemDisplay[UNI !ID uhb]: %ORANGE%>%PURPLE%>>%GOLD%%NAME%%PURPLE%<<%ORANGE%<%GOLD%%MAP-A5% // Shadow Dancer Myrmidon Greaves
 
 //    Gloves
@@ -447,6 +465,7 @@ ItemDisplay[UNI !ID xhm]: %RED%>>%GOLD%%NAME%%RED%<<%GOLD%%MAP-A5% // Valkyrie W
 ItemDisplay[UNI !ID xh9]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Vampire Gaze Grim Helm
 ItemDisplay[UNI !ID uap]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Harlequin Crest Shako
 ItemDisplay[UNI !ID ulm]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Steel Shade Armet
+ItemDisplay[UNI !ID uhl]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Overlord's Helm Giant Conch
 ItemDisplay[UNI !ID uhm]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Veil of Steel or Nightwing's Veil Spired Helm
 ItemDisplay[UNI !ID usk]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Andariel's Visage Demonhead
 ItemDisplay[UNI !ID urn]: %ORANGE%>%PURPLE%>>%GOLD%%NAME%%PURPLE%<<%ORANGE%<%GOLD%%MAP-A5% // Crown of Ages Corona
@@ -522,6 +541,7 @@ ItemDisplay[UNI 6ws]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5%{%ORANGE%Hav
 //    Swords
 ItemDisplay[UNI !ID 9fc]: %RED%>>%GOLD%%NAME%%RED%<<%GOLD%%MAP-A5% // Blade of Ali Baba Tulwar
 ItemDisplay[UNI !ID 7cr]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Lightsabre or Azurewrath Phase Blade
+ItemDisplay[UNI !ID 7bs]: %PURPLE%>>%GOLD%%NAME%%PURPLE%<<%GOLD%%MAP-A5% // Hadriel's Hand Conquest Sword
 ItemDisplay[UNI !ID 7gs]: %RED%>>%GOLD%%NAME%%RED%<<%GOLD%%MAP-A5% // Flamebellow Balrog Blade
 ItemDisplay[UNI !ID 7b7]: %RED%>>%GOLD%%NAME%%RED%<<%GOLD%%MAP-A5% // Doombringer Champion Sword
 ItemDisplay[UNI !ID 7gd]: %ORANGE%>%PURPLE%>>%GOLD%%NAME%%PURPLE%<<%ORANGE%<%GOLD%%MAP-A5% // The Grandfather Colossus Blade
@@ -745,6 +765,7 @@ ItemDisplay[MAG ILVL>71 (8hb OR 6hb OR 8cb OR 6cb OR 8lw OR 6lw)]: %NAME% %ORANG
 ItemDisplay[MAG ILVL>71 XBOW (EXC OR ELT)]: %NAME% %ORANGE%[C]%BLUE%{%GREEN%Safety:%TAN% P Eme + Sol%BLUE%Hit Power:%TAN% P Saph + Tir%NL%%RED%Blood:%TAN% P Ruby + Ort%NL%%ORANGE%Craft w/ Jewel:} // Any Crossbow
 ItemDisplay[MAG ILVL>71 ETH DAGGER (EXC OR ELT)]: %NAME% %ORANGE%[C]%BLUE%{%BLUE%Hit Power:%TAN% P Saph + Tir%NL%%PURPLE%Caster:%TAN% P Ame + Tir%NL%%RED%Blood:%TAN% P Ruby + Ort%NL%%ORANGE%Craft w/ Jewel:} // Any Eth Dagger
 ItemDisplay[MAG ILVL>71 ETH (9gl OR 7gl OR 9ts OR 7ts)]: %NAME% %ORANGE%[C]%BLUE%{%BLUE%Hit Power:%TAN% P Saph + Tir%NL%%RED%Blood:%TAN% P Ruby + Ort%NL%%ORANGE%Craft w/ Jewel:} // Good Eth Javelins
+ItemDisplay[MAG ILVL>71 (clb OR 9cl OR 7cl OR spc OR 9sp OR 7sp)]: %NAME% %ORANGE%[C]%BLUE%{%BLUE%Hit Power:%TAN% P Saph + Tir%NL%%PURPLE%Caster:%TAN% P Ame + Tir%NL%%RED%Blood:%TAN% P Ruby + Ort%NL%%ORANGE%Craft w/ Jewel:} // All Clubs
 ItemDisplay[MAG ILVL>71 ETH (9fl OR 7fl OR 9m9 OR 7m7 OR 9gm OR 7gm)]: %NAME% %ORANGE%[C]%BLUE%{%BLUE%Hit Power:%TAN% P Saph + Tir%NL%%RED%Blood:%TAN% P Ruby + Ort%NL%%ORANGE%Craft w/ Jewel:} // Good Eth Maces
 ItemDisplay[MAG ILVL>71 ETH (9vo OR 7vo OR 9s8 OR 7s8 OR 9pa OR 7pa OR 9h9 OR 7h7 OR 9wc OR 7wc)]: %NAME% %ORANGE%[C]%BLUE%{%BLUE%Hit Power:%TAN% P Saph + Tir%NL%%RED%Blood:%TAN% P Ruby + Ort%NL%%ORANGE%Craft w/ Jewel:} // Good Eth Polearms
 ItemDisplay[MAG ILVL>71 (wsp OR 9ws OR 7ws)]: %NAME% %ORANGE%[C]%BLUE%{%BLUE%Hit Power:%TAN% P Saph + Tir%NL%%PURPLE%Caster:%TAN% P Ame + Tir%NL%%RED%Blood:%TAN% P Ruby + Ort%NL%%ORANGE%Craft w/ Jewel:} // Good Scepters
@@ -1715,11 +1736,11 @@ ItemDisplay[NMAG !INF !RW SOCK=4 (72a OR 7wa)]: %NAME%%DOT-1E%{%ORANGE%Kingslaye
 ItemDisplay[NMAG !INF !RW SOCK=5 (2ax OR 72a OR 7wa)]: %NAME%%DOT-1E%{%ORANGE%Doom, Eternity, Grief, Honor%NL%Beast, Call to Arms, Death,%NL%%TAN%Possible RWs:} // All tiers, 5os
 ItemDisplay[NMAG !INF !RW SOCK=6 (7wa)]: %NAME%%DOT-1E%{%ORANGE%Last Wish, Silence%NL%Breath of the Dying,%NL%%TAN%Possible RWs:} // All tiers, 6os
 
-//          Champion Axe
-ItemDisplay[NMAG !INF !RW !SUP ETH SOCK=0 7ga]: %NAME%%DOT-1E%{%TAN%& Perfect Amethyst for sockets%NL%Larzuk or cube w/ Ral Rune, Amn Rune,} // Champion Axe, 0os, Eth
-ItemDisplay[NMAG !INF !RW SUP ETH SOCK=0 7ga]: %NAME%%DOT-1E%{%TAN%Larzuk for sockets} // Champion Axe, 0os, Superior, Eth
-ItemDisplay[NMAG !INF !RW ETH SOCK=5 7ga]: %NAME%%DOT-1E%{%ORANGE%Doom, Eternity, Grief, Honor%NL%Beast, Call to Arms, Death,%NL%%TAN%Possible RWs:} // Champion Axe, 5os, Eth
-ItemDisplay[NMAG !INF !RW ETH SOCK=6 7ga]: %NAME%%DOT-1E%{%ORANGE%Last Wish, Silence%NL%Breath of the Dying,%NL%%TAN%Possible RWs:} // Champion Axe, 6os, Eth
+//          Decapitator & Champion Axe
+ItemDisplay[NMAG !INF !RW !SUP ETH SOCK=0 (7bt OR 7ga)]: %NAME%%DOT-1E%{%TAN%& Perfect Amethyst for sockets%NL%Larzuk or cube w/ Ral Rune, Amn Rune,} // Champion Axe, 0os, Eth
+ItemDisplay[NMAG !INF !RW SUP ETH SOCK=0 (7bt OR 7ga)]: %NAME%%DOT-1E%{%TAN%Larzuk for sockets} // Champion Axe, 0os, Superior, Eth
+ItemDisplay[NMAG !INF !RW ETH SOCK=5 (7bt OR 7ga)]: %NAME%%DOT-1E%{%ORANGE%Doom, Eternity, Grief, Honor%NL%Beast, Call to Arms, Death,%NL%%TAN%Possible RWs:} // Champion Axe, 5os, Eth
+ItemDisplay[NMAG !INF !RW ETH SOCK=6 (7bt OR 7ga)]: %NAME%%DOT-1E%{%ORANGE%Last Wish, Silence%NL%Breath of the Dying,%NL%%TAN%Possible RWs:} // Champion Axe, 6os, Eth
 
 //      Base Bows
 ItemDisplay[NMAG !INF !RW SUP ED=15 SOCK=4 ELT BOW !ZON]: %NAME%%DOT-20%%PX-00%{%ORANGE%Ice, Passion, Phoenix, Wrath%NL%Harmony, Hand of Justice,%NL%Brand, Faith, Fortitude,%NL%%TAN%Possible RWs:} // 4os, Superior

@@ -29,7 +29,7 @@ ItemDisplay[NMAG CL3 RES>0]: %BLUE%RES %WHITE%%NAME%%CONTINUE%// Res prefix for 
 ItemDisplay[MAG cm1 ID]: %BLUE%SC%CONTINUE%// Identified small charms default to name "SC".
 ItemDisplay[MAG cm2 ID]: %BLUE%LC// Identified large charms default to name "LC".
 ItemDisplay[MAG cm3 ID]: %BLUE%GC%CONTINUE%// Identified grand charms default name to "GC".
-ItemDisplay[MAG (((rin OR amu OR WEAPON) ILVL>87) OR (MAG (cm1 OR cm3) ILVL>90)) ]: %NAME% %WHITE%[%RED%i%ILVL%%WHITE%]%CONTINUE%// Item level on magic rings, amulets, and weapons 88+ for crafting. Item level on small and grand charms 91+ for rerolling.//(reformatted for Filterbird)
+ItemDisplay[MAG (((rin OR amu OR WEAPON) ILVL>87) OR (MAG (cm1 OR cm3) ILVL>90)) ]: %NAME% %WHITE%[%RED%i%ILVL%%WHITE%]%CONTINUE%// Item level on magic rings, amulets, and weapons 88+ for crafting. Item level on small and grand charms 91+ for rerolling.//(reformatted for FilterBird)
 ItemDisplay[((NMAG (WEAPON OR ARMOR)) OR MAG OR RARE OR UNI OR SET) PRICE>34999]: %NAME% %DARK_GREEN%$%GOLD%35K%CONTINUE%// Non magic armor, weapons, magic, rare, unique, and set items worth 35,000 gold.
 //ItemDisplay[ALVL>79]: %NAME% %WHITE%[%RED%a%ILVL%%WHITE%]%CONTINUE%// Non magic armor, weapons, magic, rare, unique, and set items worth 35,000 gold.
 
