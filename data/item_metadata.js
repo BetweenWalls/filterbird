@@ -1474,7 +1474,7 @@ var all_codes = {
 	DRU:2,BAR:2,DIN:2,NEC:2,SIN:2,SOR:2,ZON:2,
 	HELM:2,CHEST:2,SHIELD:2,GLOVES:2,BOOTS:2,BELT:2,CIRC:2,
 	AXE:2,MACE:2,SWORD:2,DAGGER:2,THROWING:2,JAV:2,SPEAR:2,POLEARM:2,BOW:2,XBOW:2,STAFF:2,WAND:2,SCEPTER:2,
-	wss:2,lbox:2,dcma:2,dcbl:2,dcho:2,dcso:2,imra:2,imma:2,scou:2,rera:2,upma:2,upmp:2,scrb:2,
+	wss:2,lbox:2,dcma:2,dcbl:2,dcho:2,dcso:2,imra:2,imma:2,scou:2,rera:2,upma:2,upmp:2,scrb:2,ubtm:2,
 	t10:2,t11:2,t12:2,t13:2,t14:2,t15:2,t16:2,t17:2,t18:2,t20:2,t19:2,t21:2,t22:2,t23:2,t24:2,t25:2,t26:2,t27:2,t28:2,t29:2,t30:2,t31:2,t32:2,t33:2,t34:2,t35:2,t36:2,t37:2,t38:2,t39:2,t40:2,t41:2,t42:2,t43:2,t44:2,t45:2,t46:2,t47:2,t48:2,t49:2,t50:2,
 	r01s:2,r02s:2,r03s:2,r04s:2,r05s:2,r06s:2,r07s:2,r08s:2,r09s:2,r10s:2,r11s:2,r12s:2,r13s:2,r14s:2,r15s:2,r16s:2,r17s:2,r18s:2,r19s:2,r20s:2,r21s:2,r22s:2,r23s:2,r24s:2,r25s:2,r26s:2,r27s:2,r28s:2,r29s:2,r30s:2,r31s:2,r32s:2,r33s:2,
 	gzvs:2,glys:2,glbs:2,glgs:2,glrs:2,glws:2,skls:2,gpvs:2,gpys:2,gpbs:2,gpgs:2,gprs:2,gpws:2,skzs:2,
