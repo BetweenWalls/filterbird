@@ -1938,6 +1938,7 @@ var premade = {
 {CODE:"tsc", name:"Scroll of Town Portal", rarity:"regular", always_id:true, static_ILVL:1},
 {CODE:"isc", name:"Scroll of Identify", rarity:"regular", always_id:true, static_ILVL:1},
 {CODE:"ear", name:"Player Ear", rarity:"regular", always_id:true},
+{CODE:"leg",rarity:"regular", name:"Wirt's Leg", type:"mace", damage_vs_undead:50, base_damage_min:2, base_damage_max:8, durability:0, max_sockets:3, sockets:3, ilvl:76, always_id:true},
 // potions
 {CODE:"rvl", name:"Full Rejuvenation Potion", rarity:"regular", always_id:true, static_ILVL:1},
 {CODE:"rvs", name:"Rejuvenation Potion", rarity:"regular", always_id:true, static_ILVL:1},

@@ -18,6 +18,12 @@ var colors = {
 	PURPLE:"#9b2aea",
 	RED:"#a94838"
 };
+// testing variables
+var launcher_text = "";
+var launcher_data = [];
+var github_text = "";
+var github_data = [];
+var filter_text = "";
 
 // startup - runs when the page loads
 // ---------------------------------
@@ -958,6 +964,131 @@ function printAffixes() {
 	output += "---------------------------<br>"
 	document.getElementById("print").innerHTML += output
 }
+
+// testing...
+function test() {
+	// without downloading the filter files with their original encoding, there may not be a way to do this
+	/*var launcher_url = "https://raw.githubusercontent.com/Project-Diablo-2/LootFilters/main/filters.json";
+	getRequest1(launcher_url);
+	var str1 = "_¡_¢_£_¤_¥_¦_§_¨_©_ª_«_¬__®_¯_°_±_²_³_´_µ_¶_·_¸_¹_º_»_¼_½_¾_¿_À_Á_Â_Ã_Ä_Å_Æ_Ç_È_É_Ê_Ë_Ì_Í_Î_Ï_Ð_Ñ_Ò_Ó_Ô_Õ_Ö_×_Ø_Ù_Ú_Û_Ü_Ý_Þ_ß_à_á_â_ã_ä_å_æ_ç_è_é_ê_ë_ì_í_î_ï_ð_ñ_ò_ó_ô_õ_ö_÷_ø_ù_ú_û_ü_ý_þ_ÿ_";
+	var str2 = "_­_×_¤_¹_²_³_½_";
+	document.getElementById("print").innerHTML += unescape(encodeURIComponent(str1)) + "<br><br>"
+	document.getElementById("print").innerHTML += unescape(encodeURIComponent(str2)) + "<br><br>"
+	document.getElementById("print").innerHTML += str2.split("­").join("­").split("×").join("×").split("¤").join("¤").split("¹").join("¹").split("²").join("²").split("³").join("³").split("½").join("½") + "<br><br>"
+	//	.split("­").join("*").split("×").join("x").split("¤").join("=").split("¹").join("1").split("²").join("2").split("³").join("3").split("½").join("%")
+	*/
+}
+
+/*
+// testing...
+function getRequest1(url) {
+	var request = makeHttpObject();
+	request.open("GET", url, true);
+	request.send(null);
+	request.onreadystatechange = function() {
+		if (request.readyState == 4) {
+			var response_text = request.responseText
+			launcher_text = "";
+			for (let i = 0; i < response_text.length; i++) {
+				launcher_text += response_text[i]
+			}
+			launcher_data = JSON.parse(launcher_text);
+			getRequest2(launcher_data[2].url)	// TODO: select which author's github to browse (2 = BetweenWalls)
+		}
+	}
+}
+
+// testing...
+function getRequest2(url) {
+	var request = makeHttpObject();
+	request.open("GET", url, true);
+	request.send(null);
+	request.onreadystatechange = function() {
+		if (request.readyState == 4) {
+			var response_text = request.responseText
+			github_text = "";
+			for (let i = 0; i < response_text.length; i++) {
+				github_text += response_text[i]
+			}
+			github_data = JSON.parse(github_text);
+			getRequest3(github_data[1].download_url)	// TODO: select which file to browse, ignoring non-filter files (1 = Feather loot.filter)
+		}
+	}
+}
+
+// testing...
+function getRequest3(url) {
+	var request = makeHttpObject();
+	request.open("GET", url, true);
+	request.send(null);
+	request.onreadystatechange = function() {
+		if (request.readyState == 4) {
+			var response_text = request.responseText;
+			filter_text = "";
+			for (let i = 0; i < response_text.length; i++) {
+				filter_text += response_text[i]
+			}
+			// filter text known...
+			document.getElementById("print").innerHTML += launcher_text + "<br><br>"
+			document.getElementById("print").innerHTML += github_text + "<br><br>"
+			document.getElementById("filter_text_2").value = filter_text	// TODO: how to display characters correctly for ANSI encoded files?
+			
+			// these seem to be the functions PD2 uses for converting between ANSI and UTF-8... unfortunately, they don't work correctly for the characters we're interested in
+			//	unescape(encodeURIComponent(s))
+			//	decodeURIComponent(escape(s))
+			
+			// testing custom ANSI to UTF-8 conversion:
+			
+			var text1 = filter_text.substring(1,1000)
+			//var text1 = filter_text.substring(696,706)
+			//var text1 = filter_text.substring(686,694)
+			
+			//var encoder = new TextEncoder();
+			//alert(encoder.encode(text1))
+			//	(­×¤¹²³½)	32,40,239,191,189,215,164,239,191,189,239,191,189,239,191,189,239,191,189,41,13
+			//	I encodi	73,32,101,110,99,111,100,105
+			
+			var encoding = "";
+			var encoder = new TextEncoder();
+			for (let i = 0; i < text1.length; i++) {
+				
+				var encoded_array = encoder.encode(text1[i])
+				if (encoded_array.length > 1) {
+					// TODO
+					encoding += text1[i] + ": "
+					encoding += escape(text1[i]) + " "
+					for (let j = 0; j < encoded_array.length; j++) {
+						encoding += encoded_array[j] + " "
+					}
+					encoding += "<br>"
+					document.getElementById("print").innerHTML += "Ø"
+				} else {
+					document.getElementById("print").innerHTML += text1[i]
+				}
+				//var t1_bytes = text1[i].getBytes();
+				//document.getElementById("print").innerHTML += t1_bytes
+				
+				//document.getElementById("print").innerHTML += unescape(encodeURIComponent(text1[i]))
+			}
+			//document.getElementById("print").innerHTML += text1 + "<br><br>"
+			document.getElementById("print").innerHTML += "<br><br>" + encoding + "<br><br>"
+		}
+	}
+}
+
+// Makes a hypertext transfer protocol object
+function makeHttpObject() {
+	try {return new XMLHttpRequest();}
+	catch (error) {}
+	try {return new ActiveXObject("Msxml2.XMLHTTP");}
+	catch (error) {}
+	try {return new ActiveXObject("Microsoft.XMLHTTP");}
+	catch (error) {}
+	throw new Error("Could not create HTTP request object.");
+}
+*/
+
+
 
 
 
