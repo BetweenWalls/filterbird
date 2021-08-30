@@ -10,11 +10,17 @@ Diablo II Filter Simulation (Path of Diablo & Project Diablo II)
 * Discover which rules are responsible for displaying/hiding different items
 
 ### Notes:
-This was originally made for Path of Diablo, and some features may still reflect that for the PD2 version:
+By default, the simulation updates when any character/item changes are made. For large or complex filters, disable *Auto-Simulate* and/or *Error Checking* from the *Options* menu and use manual simulation instead. (click the background images)
+
+URL parameters (v=PD2, alternate=0, multiple=0, auto=0, checking=0) can be used to load the filter with certain menu options enabled/disabled. For example: https://betweenwalls.github.io/filterbird/?v=PD2&multiple=0&auto=0
+
+The background images can be changed by right-clicking them.
+
+This was originally made for Path of Diablo, and some features may still reflect that for the PD2 version.
 * Unique/Set/Runeword item stats and item corruptions are from PoD
 * Skill charges were never fully implemented, so no items can be selected that would match on "CHSK" codes
-* "FOOLS" code unimplemented
-* Notifications & minimap icons unimplemented
+* Some affix codes such as "FOOLS" are unimplemented
+* Notifications & minimap icons are unimplemented
 
 ### Future Goals:
 * Allow multiple items to be viewed simultaneously

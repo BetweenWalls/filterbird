@@ -2,7 +2,7 @@
 var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"regular"};
 var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:85,CHARSTAT70:0,CHARSTAT13:1000};
 var item_settings = {ID:false, ILVL_return:85};
-var settings = {auto_difficulty:true,version:0,validation:1,auto_simulate:1,max_errors:50,error_limit:1};
+var settings = {auto_difficulty:true,version:0,validation:1,auto_simulate:1,max_errors:50,error_limit:1,num_filters:2,background:0};
 var notices = {duplicates:0,pd2_conditions:0,pod_conditions:0,colors:0,encoding:0};
 var colors = {
 	WHITE:"#dddddd",
@@ -28,12 +28,15 @@ var filter_text = "";
 // startup - runs when the page loads
 // ---------------------------------
 function startup() {
+	document.getElementById("filter_text_1").innerHTML = "// Load filter files from your Diablo II directory or copy/paste their rules here"
+	document.getElementById("filter_text_2").innerHTML = "// Load filter files from your Diablo II directory or copy/paste their rules here"
 	loadItems()
 	loadOptions()
 	var r = Math.floor(Math.random()*5+1);
 	var background = "./images/act_"+r+".png";
 	document.getElementById("background_1").src = background
 	document.getElementById("background_2").src = background
+	settings.background = r;
 	loadCustomization()
 	
 	// TODO: Add URL parameters for these options
@@ -50,6 +53,30 @@ function startup() {
 	params = new URLSearchParams(window.location.search);
 	if (params.has('v') == true) {
 		if (params.get('v').toLowerCase() == "pd2") { changeVersion(1) }
+	}
+	if (params.has('multiple') == true) {
+		if (params.get('multiple') == "0") {
+			document.getElementById("multiple_filters").checked = false
+			toggleMultipleFilters(false)
+		}
+	}
+	if (params.has('alternate') == true) {
+		if (params.get('alternate') == "0") {
+			document.getElementById("custom_format").checked = false
+			toggleCustomFormat(false)
+		}
+	}
+	if (params.has('auto') == true) {
+		if (params.get('auto') == "0") {
+			document.getElementById("auto_simulate").checked = false
+			toggleAutoSimulation(false)
+		}
+	}
+	if (params.has('checking') == true) {
+		if (params.get('checking') == "0") {
+			document.getElementById("cond_validation").checked = false
+			toggleConditionValidation(false)
+		}
 	}
 	// TODO: Handle settings if the page is loaded irregularly (i.e. by navigating "back")
 	
@@ -237,20 +264,22 @@ function setItem(value) {
 // ---------------------------------
 function simulate(manual) {
 	//document.body.style.cursor = "wait";
-	if (settings.auto_simulate == 0) { document.getElementById("o5").innerHTML = "<br>Auto-Simulate is disabled. Click the 'ground' to simulate manually." }
-	else { document.getElementById("o5").innerHTML = "" }
+	if (settings.auto_simulate == 0) { document.getElementById("o5").innerHTML = "Auto-Simulate is disabled. Click the 'ground' to simulate manually." }
+	else { document.getElementById("o5").innerHTML = "Auto-Simulate is enabled - the simulation updates when character/item changes are made. Click the 'ground' to simulate manually." }
+	document.getElementById("multiple_spacing").innerHTML = ""
+	if (settings.num_filters == 2) { document.getElementById("multiple_spacing").innerHTML = "<br>" }
 	if (document.getElementById("dropdown_group").selectedIndex > 9) { document.getElementById("select_price").style.display = "none" }
 	document.getElementById("o4").innerHTML = ""
 	if (settings.auto_simulate == 1 || manual == 1) {
 		for (n in notices) { notices[n] = 0 }
 		document.getElementById("output_spacing").innerHTML = ""
 		document.getElementById("o3").innerHTML = ""
-		for (let num = 1; num <= 2; num++) {
+		for (let num = 1; num <= settings.num_filters; num++) {
 			document.getElementById("o"+num).innerHTML = ""
 			document.getElementById("output_"+num).innerHTML = ""
 			document.getElementById("item_desc"+num).innerHTML = ""
 		}
-		for (let num = 1; num <= 2; num++) {
+		for (let num = 1; num <= settings.num_filters; num++) {
 			var result = ["",""];
 			if (document.getElementById("filter_text_"+num).value != "") {
 				if (document.getElementById("o3").innerHTML == "") {
@@ -866,6 +895,7 @@ function equipmentHover(num) {
 	document.getElementById("tooltip_inventory").style.left = offset_x+"px"
 	document.getElementById("tooltip_inventory").style.top = offset_y+"px"
 	var extra_height = Math.max(0,(document.getElementById("tooltip_inventory").getBoundingClientRect().height - 50 - document.getElementById("output_processing_info").getBoundingClientRect().height))
+	if (settings.num_filters == 1) { extra_height += 24 }
 	document.getElementById("extra_space").style.height = extra_height+"px"
 }
 
@@ -1111,6 +1141,17 @@ CHARSTAT43	cold resist
 CHARSTAT13	experience (0 for mules ...tied to character level)
 */
 
+// changeBackground - 
+// ---------------------------------
+function changeBackground() {
+	var r = settings.background + 1;
+	if (r > 5) { r = 1 }
+	var background = "./images/act_"+r+".png";
+	document.getElementById("background_1").src = background
+	document.getElementById("background_2").src = background
+	settings.background = r
+}
+
 // toggleNonItemDetails - 
 // ---------------------------------
 function toggleNonItemDetails(checked)  {
@@ -1232,4 +1273,25 @@ function toggleErrorLimit(checked) {
 		settings.max_errors = 10000
 	}
 	simulate()
+}
+
+// toggleMultipleFilters - 
+// ---------------------------------
+function toggleMultipleFilters(checked) {
+	if (checked == true) {
+		settings.num_filters = 2
+		document.getElementById("filter_load_2").style.display = "block"
+		document.getElementById("filter_text_2").style.display = "inline"
+		document.getElementById("output_area_2").style.display = "inline"
+		document.getElementById("output_area_2").style = "height:100px; width:800px; position:relative;"
+		document.getElementById("o2").style.display = "block"
+		document.getElementById("multiple_spacing").innerHTML = "<br>"
+	} else {
+		settings.num_filters = 1
+		document.getElementById("filter_load_2").style.display = "none"
+		document.getElementById("filter_text_2").style.display = "none"
+		document.getElementById("output_area_2").style.display = "none"
+		document.getElementById("o2").style.display = "none"
+		document.getElementById("multiple_spacing").innerHTML = ""
+	}
 }
