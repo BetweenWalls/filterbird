@@ -320,6 +320,12 @@ function loadFileAsText(num) {
 	fileReader.readAsText(fileToLoad, "UTF-8");
 }
 
+// clearText - clears the text from the text area
+// ---------------------------------
+function clearText(num) {
+	document.getElementById("filter_text_"+num).value = "";
+}
+
 // parseFile - parses the filter file line by line
 //	file: text of the filter
 //	num: filter number (1 or 2)
@@ -375,9 +381,11 @@ function parseFile(file,num) {
 			var match = false;
 			var formula = "";
 			var conditions = rule.substring(0,index).concat(rule.substring(index+12)).split("]:")[0];
+			while (conditions.includes("  ")) { conditions = conditions.split("  ").join(" "); }	// remove multiple spaces within conditions
+			conditions = conditions.split("( ").join("(").split(" )").join(")")						// removes extra spaces within parentheses
 			var output = lines_with_tabs[line].substring(0,index).concat(lines_with_tabs[line].substring(index+12)).split("]:")[1];
 			if (conditions[0] == " " || conditions[conditions.length-1] == " ") {
-				if (settings.validation == 1 && errors < settings.max_errors) { document.getElementById("o"+num).innerHTML += "#"+num+" Irregular formatting on line "+line_num+" ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the rule's conditions have space on either side (cosmetic only)
+				//if (settings.validation == 1 && errors < settings.max_errors) { document.getElementById("o"+num).innerHTML += "#"+num+" Irregular formatting on line "+line_num+" ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the rule's conditions have space on either side (cosmetic only)
 				conditions = conditions.trim()
 			}
 			// check duplicate conditions
@@ -548,7 +556,7 @@ function parseFile(file,num) {
 				// TODO: Change split/join replacements to use deliminator other than "_" between the identifying key and the keyword, so no exceptions need to be made when splitting off the keyword (e.g. for [DARK,GREEN] since it contains the deliminator)
 				if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,") }
 				else { out_format = out_format.split("%DGREEN%").join(",invalid_DGREEN,").split("%CLVL%").join(",invalid_CLVL,") }
-				if (settings.version == 1) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,") }
+				if (settings.version == 1) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,") }
 				else { out_format = out_format.split("%MAP%").join(",ignore_MAP,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }		// TODO: would it be useful for 'known' keywords that don't do anything special in either PoD or PD2 (e.g. %LIGHT_GRAY%) to be treated differently?
 				out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,")
 				if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,") }
@@ -714,7 +722,7 @@ function parseFile(file,num) {
 	
 	var out_format = output_total.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
 	if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }
-	if (settings.version == 1) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,") }
+	if (settings.version == 1) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,") }
 	if (settings.version == 1) { out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,") }
 	if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,") }
 	if (settings.version == 1) {
@@ -739,8 +747,7 @@ function parseFile(file,num) {
 	if (out_list[0] == "") { out_list.shift() }
 	if (out_list[out_list.length-1] == "") { out_list.pop() }
 	var color = colors[getColor(itemToCompare)];
-	var text_length = [0,0,0];
-	var text_length_highest = 0;
+	var text_length = [0,0,0];	// name, description characters, description units
 	for (out in out_list) {
 		var o = out_list[out].split("‾").join(",");
 		var temp = o;
@@ -752,7 +759,7 @@ function parseFile(file,num) {
 		} else if (key == "color") {
 			blank = true
 			color = colors[o.split("_")[1]]
-			if (settings.validation == 1) { if (description_braces != 1) { text_length[1] += (((~~String(o.split("_")[1]).length+2)/2)+1) } else { text_length[2] += 3 } }	// TODO: if %NL% is 4, then colors are 1.66666?
+			if (settings.validation == 1) { if (description_braces == 1) { text_length[2] += 3 } }
 		} else if (key == "ref") {
 			if (o == "ref_CLVL") { temp = character.CLVL }
 			else if (o == "ref_NAME") { blank = true }
@@ -791,11 +798,8 @@ function parseFile(file,num) {
 			if (o == " ") { display += "<l style='color:Black; opacity:0%;'>_</l>" }
 			else if (blank == false) { display += "<l style='color:"+color+"'>"+temp+"</l>" }
 			if (settings.validation == 1) {
-				if (o == "misc_NL" || o == "‗" || o == " ") { text_length[1]++ }
-				if (o == "misc_NL") { text_length[0] = 0 }
 				if (o == " ") { text_length[0]++ }
-				else if (blank == false) { text_length[0] += ~~temp.length; text_length[1] += ~~String(temp).length; }
-				if (text_length[0] > text_length_highest) { text_length_highest = text_length[0] }
+				else if (blank == false) { text_length[0] += ~~temp.length; }
 			}
 		} else {
 			if (o == "misc_NL" || o == "‗") { description += "<br>" }
@@ -803,20 +807,17 @@ function parseFile(file,num) {
 			else if (blank == false) { description += "<l style='color:"+color+"'>"+temp+"</l>" }
 			if (settings.validation == 1) {
 				if (o == "misc_NL" || o == "‗") { text_length[2]++ }
-				if (o == " ") { text_length[2]++ }
-				else if (blank == false) { text_length[2] += ~~String(temp).length }
+				if (o == " ") { text_length[1]++; text_length[2]++; }
+				else if (blank == false) { text_length[1] += ~~temp.length; text_length[2] += ~~temp.length; }
 			}
 		}
 	}
 	if (settings.validation == 1) {
-		if (text_length_highest > 53) {
-			document.getElementById("o"+num).innerHTML += "#"+num+" Warning: item name is too long<br>"; errors++;	// displays an error if the item's name is too long to be shown in some circumstances
+		if (text_length[0] > 56) {
+			document.getElementById("o"+num).innerHTML += "#"+num+" Warning: item name may be too long ("+text_length[0]+" characters)<br>"; errors++;	// displays an error if the item's name is too long to be shown in some circumstances
 		}
-		if (text_length[2] > 130) {
-			document.getElementById("o"+num).innerHTML += "#"+num+" Warning: item description is too long<br>"; errors++;	// displays an error if the item's description is too long
-		}
-		if (text_length[1] > 470) {
-			document.getElementById("o"+num).innerHTML += "#"+num+" Warning: there is no cow level<br>"; errors++;	// displays an error if the item's name is too long
+		if (text_length[1] > 479 || text_length[2] > 379) {
+			document.getElementById("o"+num).innerHTML += "#"+num+" Warning: item description may be too long ("+text_length[1]+" characters, "+text_length[2]+" units)<br>"; errors++;	// displays an error if the item's description is too long		// TODO: what is the actual limit? (doesn't seem to be 1 per Char, 1 per NL, and 3 per color)
 		}
 	}
 	// Reverses order of lines
@@ -1280,7 +1281,7 @@ function toggleErrorLimit(checked) {
 function toggleMultipleFilters(checked) {
 	if (checked == true) {
 		settings.num_filters = 2
-		document.getElementById("filter_load_2").style.display = "block"
+		document.getElementById("filter_text_bar_2").style.display = "block"
 		document.getElementById("filter_text_2").style.display = "inline"
 		document.getElementById("output_area_2").style.display = "inline"
 		document.getElementById("output_area_2").style = "height:100px; width:800px; position:relative;"
@@ -1288,7 +1289,7 @@ function toggleMultipleFilters(checked) {
 		document.getElementById("multiple_spacing").innerHTML = "<br>"
 	} else {
 		settings.num_filters = 1
-		document.getElementById("filter_load_2").style.display = "none"
+		document.getElementById("filter_text_bar_2").style.display = "none"
 		document.getElementById("filter_text_2").style.display = "none"
 		document.getElementById("output_area_2").style.display = "none"
 		document.getElementById("o2").style.display = "none"

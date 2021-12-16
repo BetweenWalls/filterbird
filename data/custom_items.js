@@ -68,6 +68,8 @@ var rare_suffix = {
 	other:["Scratch","Fang","Thirst","Rend","Star","Bane","Spike","Scourge","Barb","Horn","Song","Brand","Loom"],	// dagger, throwing weapon, javelin, polearm, crossbow, wand, claw, orb, amazon weapon, quiver, jewel	(none of these were listed in the source I found, so they just use this list of generic-sounding suffixes)	...TOCHECK: determine which suffix names should actually apply
 };
 
+var most_recent_rarity = "Set";		// which item rarity was most recently selected
+
 // toggleCustom - toggles the custom item editing UI
 // ---------------------------------
 function toggleCustom(checked) {
@@ -146,7 +148,8 @@ function setType(value) {
 function loadBase(value) {
 	var options = "";
 	if (value == "any") {
-		if (document.getElementById("dropdown_group").selectedIndex = 0) {
+		// unused?
+		if (document.getElementById("dropdown_group").selectedIndex = 0) {	// TODO: improper conditional formatting, but never gets called?
 			for (val in item_types) { for (base in item_types[val]) { options += "<option class='gray-all'>" + item_types[val][base] + "</option>" } }
 			document.getElementById("dropdown_base").innerHTML = options
 			loadRarity(document.getElementById("dropdown_base").value)
@@ -191,6 +194,7 @@ function loadBase(value) {
 		if (document.getElementById("dropdown_base").options.length > 1 && document.getElementById("dropdown_type").value != "charm" && document.getElementById("dropdown_type").value != "quiver") {
 			options = "<option class='gray-all'>any</option>" + options
 			document.getElementById("dropdown_base").innerHTML = options
+			if (most_recent_rarity == "Regular" || most_recent_rarity == "Magic" || most_recent_rarity == "Rare") { document.getElementById("dropdown_base").selectedIndex = 1; }	// keep the previous rarity if possible by changing "any" to the first available base (only Set/Unique items can be selected with "any")
 		}
 		loadRarity(document.getElementById("dropdown_base").value)
 	}
@@ -199,8 +203,13 @@ function loadBase(value) {
 // ---------------------------------
 function setBase(value) {
 	if (value == "any") {
-		document.getElementById("dropdown_rarity").selectedIndex = 3;
-		document.getElementById("dropdown_rarity").value = document.getElementById("dropdown_rarity").options[3].innerHTML;
+		if (most_recent_rarity == "Set" && document.getElementById("dropdown_rarity").options.length > 4) {
+			document.getElementById("dropdown_rarity").selectedIndex = 4;
+			document.getElementById("dropdown_rarity").value = document.getElementById("dropdown_rarity").options[4].innerHTML;
+		} else {
+			document.getElementById("dropdown_rarity").selectedIndex = 3;
+			document.getElementById("dropdown_rarity").value = document.getElementById("dropdown_rarity").options[3].innerHTML;
+		}
 	}
 	loadRarity(value)
 }
@@ -253,6 +262,13 @@ function loadRarity(value) {
 			if (itemCustom.rarity == i_rarity.toLowerCase()) { new_index = i }
 		}
 	}
+	if (most_recent_rarity == "Set") {
+		for (let i = 0; i < document.getElementById("dropdown_rarity").length; i++) {
+			var i_rarity = document.getElementById("dropdown_rarity").options[i].value;
+			if (most_recent_rarity == i_rarity) { new_index = i }
+		}
+	}
+	
 	document.getElementById("dropdown_rarity").selectedIndex = new_index
 	
 	loadName(document.getElementById("dropdown_rarity").value)
@@ -302,6 +318,7 @@ function setRarity(value) {
 		}
 		document.getElementById("dropdown_rarity").selectedIndex = new_index
 	}
+	most_recent_rarity = value
 	loadName(value)
 }
 // loadName - populates the 'name' dropdown
@@ -469,12 +486,17 @@ function setCustomBase() {
 			else if (type == "jewel") { itemCustom.CODE = "jew" }
 			else if (type == "quiver") {
 				itemCustom.quiv = true
-				if (base == "Arrows") {
-					if (rarity == "Regular") { itemCustom.CODE = "aqv"; itemCustom.name = "Rusted Arrows"; itemCustom.NAME = "Rusted Arrows"; }
-					else { itemCustom.CODE = "aq2" }
-				} else if (base == "Bolts") {
-					if (rarity == "Regular") { itemCustom.CODE = "cqv"; itemCustom.name = "Rusted Bolts"; itemCustom.NAME = "Rusted Bolts"; }
-					else { itemCustom.CODE = "cq2" }
+				if (settings.version == 0) {
+					if (base == "Arrows") {
+						if (rarity == "Regular") { itemCustom.CODE = "aqv"; itemCustom.name = "Rusted Arrows"; itemCustom.NAME = "Rusted Arrows"; }
+						else  { itemCustom.CODE = "aq2" }
+					} else if (base == "Bolts") {
+						if (rarity == "Regular") { itemCustom.CODE = "cqv"; itemCustom.name = "Rusted Bolts"; itemCustom.NAME = "Rusted Bolts"; }
+						else { itemCustom.CODE = "cq2" }
+					}
+				} else {
+					if (base == "Arrows") { itemCustom.CODE = "aqv"; }
+					if (base == "Bolts") { itemCustom.CODE = "cqv"; }
 				}
 			}
 		}
@@ -1822,6 +1844,12 @@ function setItemCodes() {
 	if (typeof(itemToCompare.QUANTITY) == 'undefined') { itemToCompare.QUANTITY = 0 }
 	if (typeof(itemToCompare.range) == 'undefined') { itemToCompare.range = 0 }
 	if (typeof(itemToCompare.baseSpeed) == 'undefined') { itemToCompare.baseSpeed = 0 }
+	
+	var two_handers_1 = ["lax","bax","btx","gax","gix","9la","9ba","9bt","9ga","9gi","7la","7ba","7bt","7ga","7gi","mau","gma","9m9","9gm","7m7","7gm","2hs","clm","gis","bsw","flb","gsd","92h","9cm","9gs","9b9","9fb","9gd","72h","7cm","7gs","7b7","7fb","7gd","spr","tri","brn","spt","pik","9sr","9tr","9br","9st","9p9","7sr","7tr","7br","7st","7p7","am3","am4","am8","am9","amd","ame"];
+	var two_handers_2 = ["WP8","WP9","WP10","WP11"];
+	itemToCompare["2H"] = false;
+	for (th in two_handers_1) { if (itemToCompare.CODE == two_handers_1[th]) { itemToCompare["2H"] = true; } }
+	for (th in two_handers_2) { if (typeof(itemToCompare[two_handers_2[th]]) != 'undefined') { if (itemToCompare[two_handers_2[th]] == true) { itemToCompare["2H"] = true; } } }
 }
 
 // setPD2Codes - sets item codes for Project D2
@@ -1868,6 +1896,10 @@ function setPD2Codes() {
 				setName(document.getElementById("dropdown_name").options[0].innerHTML)
 			}
 		}
+		//var code_two_handers = ["lax","bax","btx","gax","gix","9la","9ba","9bt","9ga","9gi","7la","7ba","7bt","7ga","7gi","mau","gma","9m9","9gm","7m7","7gm","2hs","clm","gis","bsw","flb","gsd","92h","9cm","9gs","9b9","9fb","9gd","72h","7cm","7gs","7b7","7fb","7gd","WP7","WP8","WP9","WP10","WP11"];
+		//itemToCompare["2H"] = 0;
+		//for (c2h in code_two_handers) { if (itemToCompare.CODE == code_two_handers[c2h] || itemToCompare[code_two_handers[c2h]] == 1) { itemToCompare._2H = 1; } }
+		
 	} else {
 		for (aff in code_other) {
 			if (typeof(itemToCompare[code_other[aff]]) != 'undefined') { if (itemToCompare[code_other[aff]] != 0) { itemToCompare[code_other[aff]] = 0 } }
@@ -1902,6 +1934,7 @@ function setPD2Codes() {
 				setName(document.getElementById("dropdown_name").options[0].innerHTML)
 			}
 		}
+		//itemToCompare["2H"] = 0;
 		// TODO: update pointmod options if necessary
 	}
 	//if (itemToCompare.type_affix == "quiver") { setType("quiver"); reset_selected = true; }	// TODO: This kind of thing should only be called once when changing versions, rather than after every changed detail. The same principle probably applies to other parts of the program, resulting in non-immediate updates.

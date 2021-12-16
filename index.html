@@ -203,9 +203,15 @@
 		</div>
 		<div style="display:inline-table;"></div>
 		<br>
-		<label id="filter_load_1" for="fileToLoad_1" style="color:white; display:block; background-color:#555; max-width:800px; cursor:alias;">Choose Filter #1</label><input type="file" id="fileToLoad_1" name="fileToLoad_1" value="./filters/default.filter" onchange="loadFileAsText(1)"></input>
+		<div id="filter_text_bar_1" style="display:block;">
+			<label id="filter_load_1" for="fileToLoad_1" style="color:white; display:inline-table; background-color:#555; width:700px; cursor:alias;">Choose Filter #1</label><input type="file" id="fileToLoad_1" name="fileToLoad_1" value="./filters/default.filter" onchange="loadFileAsText(1)"></input>
+			<label id="filter_clear_1" for="clear_1" style="color:white; display:inline-table; background-color:#733; width:96px;">Clear Filter #1</label><input type="button" id="clear_1" name="clear_1" style="display:none;" onclick="clearText(1)"></input>
+		</div>
 		<textarea id="filter_text_1" style="width:793px;" cols="130" rows="6"></textarea>
-		<label id="filter_load_2" for="fileToLoad_2" style="color:white; display:block; background-color:#555; max-width:800px; cursor:alias;">Choose Filter #2</label><input type="file" id="fileToLoad_2" name="fileToLoad_2" value="./filters/default.filter" onchange="loadFileAsText(2)"></input>
+		<div id="filter_text_bar_2" style="display:block;">
+			<label id="filter_load_2" for="fileToLoad_2" style="color:white; display:inline-table; background-color:#555; width:700px; cursor:alias;">Choose Filter #2</label><input type="file" id="fileToLoad_2" name="fileToLoad_2" value="./filters/default.filter" onchange="loadFileAsText(2)"></input>
+			<label id="filter_clear_2" for="clear_2" style="color:white; display:inline-table; background-color:#733; width:96px;">Clear Filter #2</label><input type="button" id="clear_2" name="clear_2" style="display:none;" onclick="clearText(2)"></input>
+		</div>
 		<textarea id="filter_text_2" style="width:793px;" cols="130" rows="6"></textarea>
 		<br><br>
 

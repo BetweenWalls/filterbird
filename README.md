@@ -29,7 +29,7 @@ This was originally made for Path of Diablo, and some features may still reflect
 * Make item tooltips better match in-game tooltips
 
 ### Feedback:
-Feel free to message me ([BetweenWalls](https://www.reddit.com/message/compose/?to=BetweenWalls) on reddit, @BetweenWalls#2390 on discord)
+Feel free to message me on reddit ([BetweenWalls](https://www.reddit.com/message/compose/?to=BetweenWalls)) or discord (@BetweenWalls#2390), or open an issue here.
 
 FilterBird is open-source, so improvements can be contributed by anyone through github. Here are the basic steps:
 * Create a duplicate version of this repository (fork)
