@@ -1848,8 +1848,10 @@ function setItemCodes() {
 	var two_handers_1 = ["lax","bax","btx","gax","gix","9la","9ba","9bt","9ga","9gi","7la","7ba","7bt","7ga","7gi","mau","gma","9m9","9gm","7m7","7gm","2hs","clm","gis","bsw","flb","gsd","92h","9cm","9gs","9b9","9fb","9gd","72h","7cm","7gs","7b7","7fb","7gd","spr","tri","brn","spt","pik","9sr","9tr","9br","9st","9p9","7sr","7tr","7br","7st","7p7","am3","am4","am8","am9","amd","ame"];
 	var two_handers_2 = ["WP8","WP9","WP10","WP11"];
 	itemToCompare["2H"] = false;
+	itemToCompare["1H"] = false;
 	for (th in two_handers_1) { if (itemToCompare.CODE == two_handers_1[th]) { itemToCompare["2H"] = true; } }
 	for (th in two_handers_2) { if (typeof(itemToCompare[two_handers_2[th]]) != 'undefined') { if (itemToCompare[two_handers_2[th]] == true) { itemToCompare["2H"] = true; } } }
+	if (itemToCompare["2H"] == false && itemToCompare.WEAPON == true) { itemToCompare["1H"] = true }
 }
 
 // setPD2Codes - sets item codes for Project D2
