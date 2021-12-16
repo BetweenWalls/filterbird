@@ -1685,6 +1685,7 @@ function setValues() {
 			var code = data.corruption.categories[data.corruption.index[selected]].info["mod"+m];
 			if (typeof(itemCustomAffixes[code]) == 'undefined') { itemCustomAffixes[code] = 0 }
 			itemCustomAffixes[code] += value
+			itemCustomAffixes["STAT360"] = 100;
 		}
 	}
 	if (typeof(itemCustomAffixes["pDamage_all_bitrate"]) != 'undefined') {
