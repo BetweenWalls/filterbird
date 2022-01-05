@@ -867,7 +867,7 @@ function equipmentHover(num) {
 		if (typeof(stats[affix]) != 'undefined') { if (itemToCompare[affix] != unequipped[affix] && stats[affix] != unequipped[affix] && stats[affix] != 1 && affix != "velocity" && affix != "smite_min") {
 			var affix_info = getAffixLine(affix);
 			if (affix_info[1] != 0) {
-				if (affix == "base_damage_min" || affix == "base_defense" || affix == "req_level" || affix == "req_strength" || affix == "req_dexterity" || affix == "durability" || affix == "baseSpeed" || affix == "range" || affix == "throw_min" || affix == "base_min_alternate" || affix == "block" || affix == "velocity" || affix == "QUANTITY" || affix == "relic_experience" || affix == "relic_density" || affix == "map_tier" || affix == "map_mf_gf") { main_affixes += affix_info[0]+"<br>" }
+				if (affix == "base_damage_min" || affix == "base_defense" || affix == "req_level" || affix == "req_strength" || affix == "req_dexterity" || affix == "durability" || affix == "baseSpeed" || affix == "range" || affix == "throw_min" || affix == "base_min_alternate" || affix == "block" || affix == "velocity" || affix == "QUANTITY" || affix == "relic_experience" || affix == "relic_density" || affix == "map_tier" || affix == "map_mf_gf" || affix == "description") { main_affixes += affix_info[0]+"<br>" }
 				else { affixes += affix_info[0]+"<br>" }
 			}
 		} }
@@ -921,7 +921,7 @@ function getAffixLine(affix) {
 	var halt = false;
 	var both = 0;
 	var stat = stats[affix];
-	if (affix != "ctc" && affix != "cskill" && affix != "set_bonuses") {
+	if (affix != "ctc" && affix != "cskill" && affix != "set_bonuses" && affix != "description") {
 		if (stat.alt != null) {
 			if (typeof(source[stat.index[0]]) != 'undefined' && typeof(source[stat.index[1]]) != 'undefined') { if (source[stat.index[0]] > 0 && source[stat.index[1]] > 0) { both = 1; if (stat.index[1] == affix) { halt = true } } }
 			if (both == 0) { stat = null; stat = stats_alternate[affix]; }
@@ -963,6 +963,8 @@ function getAffixLine(affix) {
 				affix_line += line
 				if (i < source[affix].length-1) { affix_line += "<br>" }
 			}
+		} else if (affix == "description") {
+			affix_line += "<span style='color:WHITE'>"+value+"</span>"
 		}
 	}
 	var result = [affix_line,value_combined];

@@ -1338,7 +1338,9 @@ skill_Inferno:{index:["skill_Inferno"], format:["+"," to Inferno (Sorceress only
 skill_Lightning:{index:["skill_Lightning"], format:["+"," to Lightning (Sorceress only)"]},
 skill_Enchant_Fire:{index:["skill_Enchant_Fire"], format:["+"," to Enchant Fire (Sorceress only)"]},
 skill_Skeleton_Mastery:{index:["skill_Skeleton_Mastery"], format:["+"," to Skeleton Mastery (Necromancer only)"]},
+skill_Raise_Skeleton_Archer:{index:["skill_Raise_Skeleton_Archer"], format:["+"," to Raise Skeleton Archer (Necromancer only)"]},
 skill_Poison_Dagger:{index:["skill_Poison_Dagger"], format:["+"," to Poison Dagger (Necromancer only)"]},
+skill_Poison_Strike:{index:["skill_Poison_Strike"], format:["+"," to Poison Strike (Necromancer only)"]},
 skill_Golem_Mastery:{index:["skill_Golem_Mastery"], format:["+"," to Golem Mastery (Necromancer only)"]},
 skill_Bone_Prison:{index:["skill_Bone_Prison"], format:["+"," to Bone Prison (Necromancer only)"]},
 skill_Thorns:{index:["skill_Thorns"], format:["+"," to Thorns (Paladin only)"]},
@@ -1356,6 +1358,13 @@ skill_Cobra_Strike:{index:["skill_Cobra_Strike"], format:["+"," to Cobra_Strike 
 skill_Claws_of_Thunder:{index:["skill_Claws_of_Thunder"], format:["+"," to Claws_of_Thunder (Assassin only)"]},
 skill_Chain_Lightning_Sentry:{index:["skill_Chain_Lightning_Sentry"], format:["+"," to Chain Lightning Sentry (Assassin only)"]},
 skill_Phoenix_Strike:{index:["skill_Phoenix_Strike"], format:["+"," to Phoenix Strike (Assassin only)"]},
+
+// yet another temporary addition
+leap_speed:{index:["leap_speed"], format:["+","% to Leap and Leap Attack Movement Speed"]},
+gust_cdr:{index:["gust_cdr"], format:["Gust's Cooldown is Reduced by "," Seconds"]},
+enemy_pdr:{index:["enemy_pdr"], format:["","% to Enemy Physical Resistance"]},
+description:2,
+
 };
 
 var stats_alternate = {
@@ -1474,7 +1483,7 @@ var all_codes = {
 	DRU:2,BAR:2,DIN:2,NEC:2,SIN:2,SOR:2,ZON:2,
 	HELM:2,CHEST:2,SHIELD:2,GLOVES:2,BOOTS:2,BELT:2,CIRC:2,
 	AXE:2,MACE:2,SWORD:2,DAGGER:2,THROWING:2,JAV:2,SPEAR:2,POLEARM:2,BOW:2,XBOW:2,STAFF:2,WAND:2,SCEPTER:2,_1H:2,_2H:2,
-	wss:2,lbox:2,dcma:2,dcbl:2,dcho:2,dcso:2,imra:2,imma:2,scou:2,rera:2,upma:2,upmp:2,scrb:2,ubtm:2,jewf:2,rtma:2,rtmo:2,rtmv:2,cwss:2,rid:2,rtp:2,rar:2,rbe:2,ram:2,
+	wss:2,lbox:2,dcma:2,dcbl:2,dcho:2,dcso:2,imra:2,imma:2,scou:2,rera:2,upma:2,upmp:2,scrb:2,ubtm:2,jewf:2,rtma:2,rtmo:2,rtmv:2,rtmf:2,cwss:2,rid:2,rtp:2,rar:2,rbe:2,ram:2,
 	AMAZON:2,ASSASSIN:2,BARBARIAN:2,DRUID:2,NECROMANCER:2,PALADIN:2,SORCERESS:2,
 	PREFIX:2,SUFFIX:2,MAPID:2,SHOP:2,EQUIPPED:2,GEMMED:2,
 	t10:2,t11:2,t12:2,t13:2,t14:2,t15:2,t16:2,t17:2,t18:2,t20:2,t19:2,t21:2,t22:2,t23:2,t24:2,t25:2,t26:2,t27:2,t28:2,t29:2,t30:2,t31:2,t32:2,t33:2,t34:2,t35:2,t36:2,t37:2,t38:2,t39:2,t40:2,t41:2,t42:2,t43:2,t44:2,t45:2,t46:2,t47:2,t48:2,t49:2,t50:2,t60:2,t61:2,t62:2,t63:2,t64:2,t65:2,t66:2,t67:2,t68:2,t69:2,

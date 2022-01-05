@@ -2126,18 +2126,18 @@ var affixes_pointmod_pd2 = [
 // NOTE: These mod names correspond directly to variable names used elsewhere, rather than being sent through affix_item_mods[]
 //	lvl	maxlvl	lvlreq	group	mod	modmin	modmax	itype1	itype2
 //	0	1	2	3	4	5	6	7	8
-[	1,	99,	1,	1,	"skill_Dragon_Claw",	1,	3,	"h2h",	""	],	// doesn't appear naturally
-[	1,	99,	6,	2,	"skill_Fists_of_Fire",	1,	3,	"h2h",	""	],	// doesn't appear naturally
-[	1,	99,	6,	3,	"skill_Tiger_Strike",	1,	3,	"h2h",	""	],	// doesn't appear naturally
-[	12,	99,	6,	4,	"skill_Cobra_Strike",	1,	3,	"h2h",	""	],
+[	1,	99,	1,	1,	"skill_Dragon_Claw",	1,	3,	"h2h",	""	],	// can now appear naturally
+[	1,	99,	6,	2,	"skill_Fists_of_Fire",	1,	3,	"h2h",	""	],	// can now appear naturally
+[	1,	99,	6,	3,	"skill_Tiger_Strike",	1,	3,	"h2h",	""	],	// can now appear naturally
+[	1,	99,	6,	4,	"skill_Cobra_Strike",	1,	3,	"h2h",	""	],
 [	37,	99,	12,	5,	"skill_Phoenix_Strike",	1,	3,	"h2h",	""	],
-[	1,	99,	18,	6,	"skill_Dragon_Talon",	1,	3,	"h2h",	""	],	// doesn't appear naturally
+[	1,	99,	18,	6,	"skill_Dragon_Talon",	1,	3,	"h2h",	""	],	// can now appear naturally
 [	19,	99,	24,	7,	"skill_Claws_of_Thunder",	1,	3,	"h2h",	""	],
 [	25,	99,	24,	8,	"skill_Dragon_Flight",	1,	3,	"h2h",	""	],
-[	25,	99,	30,	9,	"skill_Blades_of_Ice",	1,	3,	"h2h",	""	],
-[	1,	99,	1,	10,	"skill_Claw_Mastery",	1,	3,	"h2h",	""	],	// doesn't appear naturally
-[	1,	99,	1,	11,	"skill_Psychic_Hammer",	1,	3,	"h2h",	""	],	// doesn't appear naturally
-[	1,	99,	6,	12,	"skill_Burst_of_Speed",	1,	3,	"h2h",	""	],	// doesn't appear naturally
+[	25,	99,	24,	9,	"skill_Blades_of_Ice",	1,	3,	"h2h",	""	],
+[	1,	99,	1,	10,	"skill_Claw_Mastery",	1,	3,	"h2h",	""	],	// can now appear naturally
+[	1,	99,	1,	11,	"skill_Psychic_Hammer",	1,	3,	"h2h",	""	],	// can now appear naturally
+[	1,	99,	6,	12,	"skill_Burst_of_Speed",	1,	3,	"h2h",	""	],	// can now appear naturally
 [	12,	99,	12,	14,	"skill_Weapon_Block",	1,	3,	"h2h",	""	],
 [	12,	99,	12,	15,	"skill_Cloak_of_Shadows",	1,	3,	"h2h",	""	],
 [	19,	99,	18,	16,	"skill_Fade",	1,	3,	"h2h",	""	],
@@ -2145,18 +2145,18 @@ var affixes_pointmod_pd2 = [
 [	25,	99,	24,	18,	"skill_Mind_Blast",	1,	3,	"h2h",	""	],
 [	37,	99,	30,	19,	"skill_Venom",	1,	3,	"h2h",	""	],
 [	37,	99,	30,	20,	"skill_Shadow_Master",	1,	3,	"h2h",	""	],
-[	1,	99,	1,	21,	"skill_Fire_Blast",	1,	3,	"h2h",	""	],	// doesn't appear naturally
-[	1,	99,	6,	22,	"skill_Shock_Web",	1,	3,	"h2h",	""	],	// doesn't appear naturally
-[	1,	99,	6,	23,	"skill_Blade_Sentinel",	1,	3,	"h2h",	""	],	// doesn't appear naturally
+[	1,	99,	1,	21,	"skill_Fire_Blast",	1,	3,	"h2h",	""	],	// can now appear naturally
+[	1,	99,	6,	22,	"skill_Shock_Web",	1,	3,	"h2h",	""	],	// can now appear naturally
+[	1,	99,	6,	23,	"skill_Blade_Sentinel",	1,	3,	"h2h",	""	],	// can now appear naturally
 [	12,	99,	12,	24,	"skill_Charged_Bolt_Sentry",	1,	3,	"h2h",	""	],
 [	12,	99,	12,	25,	"skill_Wake_of_Fire",	1,	3,	"h2h",	""	],
 [	19,	99,	18,	26,	"skill_Blade_Fury",	1,	3,	"h2h",	""	],
-[	25,	99,	24,	27,	"skill_Chain_Lightning_Sentry",	1,	3,	"h2h",	""	],
+[	37,	99,	30,	27,	"skill_Chain_Lightning_Sentry",	1,	3,	"h2h",	""	],
 [	25,	99,	24,	28,	"skill_Wake_of_Inferno",	1,	3,	"h2h",	""	],
 [	37,	99,	30,	29,	"skill_Death_Sentry",	1,	3,	"h2h",	""	],
 [	37,	99,	30,	30,	"skill_Blade_Shield",	1,	3,	"h2h",	""	],
 [	19,	99,	1,	31,	"skill_Dragon_Tail",	1,	3,	"h2h",	""	],
-// Lightning Sentry
+//[	25,	99,	24,	32,	"skill_Lightning_Sentry",	1,	3,	"h2h",	""	],	// extra
 
 [	1,	99,	1,	1,	"skill_Howl",	1,	3,	"phlm",	""	],
 [	1,	99,	1,	2,	"skill_Find_Potion",	1,	3,	"phlm",	""	],
@@ -2219,7 +2219,7 @@ var affixes_pointmod_pd2 = [
 [	25,	99,	24,	29,	"skill_Solar_Creeper",	1,	3,	"pelt",	""	],
 [	37,	99,	30,	30,	"skill_Spirit_of_Barbs",	1,	3,	"pelt",	""	],
 [	37,	99,	30,	31,	"skill_Summon_Grizzly",	1,	3,	"pelt",	""	],
-// Gust
+//[	19,	99,	18,	32,	"skill_Gust",	1,	3,	"pelt",	""	],	// extra
 
 [	1,	99,	1,	1,	"skill_Skeleton_Mastery",	1,	3,	"wand",	"head"	],
 [	1,	99,	1,	2,	"skill_Raise_Skeleton_Warrior",	1,	3,	"wand",	"head"	],
@@ -2250,10 +2250,10 @@ var affixes_pointmod_pd2 = [
 [	25,	99,	24,	29,	"skill_Attract",	1,	3,	"wand",	"head"	],
 [	25,	99,	24,	30,	"skill_Decrepify",	1,	3,	"wand",	"head"	],
 [	37,	99,	30,	31,	"skill_Lower_Resist",	1,	3,	"wand",	"head"	],
-// Blood Warp
-// Dark Pact
-// Curse Mastery
-// Summon Resist - not in skill tree
+//[	19,	99,	18,	32,	"skill_Blood_Warp",	1,	3,	"wand",	"head"	],	// extra
+//[	1,	99,	6,	33,	"skill_Dark_Pact",	1,	3,	"wand",	"head"	],	// extra
+//[	1,	99,	1,	34,	"skill_Curse_Mastery",	1,	3,	"wand",	"head"	],	// extra
+//[	25,	99,	24,	35,	"skill_Raise_Skeleton_Archer",	1,	3,	"wand",	"head"	],	// replaces Summon Resist
 
 [	1,	99,	1,	1,	"skill_Prayer",	1,	3,	"scep",	""	],
 [	1,	99,	1,	2,	"skill_Resist_Fire",	1,	3,	"scep",	""	],
@@ -2285,9 +2285,9 @@ var affixes_pointmod_pd2 = [
 [	25,	99,	24,	28,	"skill_Conversion",	1,	3,	"scep",	""	],
 [	25,	99,	24,	29,	"skill_Holy_Shield",	1,	3,	"scep",	""	],
 [	37,	99,	30,	30,	"skill_Fist_of_the_Heavens",	1,	3,	"scep",	""	],
-// Holy Nova
-// Holy Light
-// Joust
+//[	37,	99,	30,	31,	"skill_Holy_Nova",	1,	3,	"scep",	""	],	// extra
+//[	12,	99,	12,	32,	"skill_Holy_Light",	1,	3,	"scep",	""	],	// extra
+//[	25,	99,	24,	33,	"skill_Joust",	1,	3,	"scep",	""	],	// extra
 
 [	1,	99,	1,	1,	"skill_Ice_Bolt",	1,	3,	"staf",	"orb"	],
 [	1,	99,	1,	2,	"skill_Cold_Enchant",	1,	3,	"staf",	"orb"	],
@@ -2319,9 +2319,9 @@ var affixes_pointmod_pd2 = [
 [	25,	99,	24,	30,	"skill_Meteor",	1,	3,	"staf",	"orb"	],
 [	37,	99,	30,	31,	"skill_Fire_Mastery",	1,	3,	"staf",	"orb"	],
 [	37,	99,	30,	32,	"skill_Hydra",	1,	3,	"staf",	"orb"	],
-// Ice Barrage
-// Lesser Hydra
-// Combustion
+//[	25,	99,	24,	33,	"skill_Ice_Barrage",	1,	3,	"staf",	"orb"	],	// extra
+//[	12,	99,	12,	34,	"skill_Lesser_Hydra",	1,	3,	"staf",	"orb"	],	// extra
+//[	25,	99,	24,	35,	"skill_Combustion",	1,	3,	"staf",	"orb"	],	// extra
 ];
 
 var affixes_corruption = [

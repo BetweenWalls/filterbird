@@ -1853,6 +1853,15 @@ function setItemCodes() {
 	for (th in two_handers_1) { if (itemToCompare.CODE == two_handers_1[th]) { itemToCompare["2H"] = true; } }
 	for (th in two_handers_2) { if (typeof(itemToCompare[two_handers_2[th]]) != 'undefined') { if (itemToCompare[two_handers_2[th]] == true) { itemToCompare["2H"] = true; } } }
 	if (itemToCompare["2H"] == false && itemToCompare.WEAPON == true) { itemToCompare["1H"] = true }
+	
+	// implement missing named attribute codes:
+	itemToCompare.IAS = itemToCompare.STAT93
+	itemToCompare.STAT68 = itemToCompare.STAT93
+	itemToCompare.FCR = itemToCompare.STAT105
+	itemToCompare.FHR = itemToCompare.STAT99
+	itemToCompare.FBR = itemToCompare.STAT102
+	itemToCompare.LIFE = itemToCompare.life
+	itemToCompare.MANA = itemToCompare.mana
 }
 
 // setPD2Codes - sets item codes for Project D2
