@@ -19,23 +19,21 @@ The background images can be changed by right-clicking them.
 URL parameters (v=PD2, alternate=0, multiple=0, auto=0, checking=0) can be used to load the filter with certain menu options enabled/disabled. For example: https://betweenwalls.github.io/filterbird/?v=PD2&multiple=0&auto=0
 
 ## Known Issues
-* All PD2 item attributes are taken from PoD (with the exception of pointmod attribute names)
+* All PD2 items use the same attributes as those in the PoD version (with the exception of PD2-specific items and pointmod attribute names)
 * Nothing special is done to display item notifications or minimap icons
 * Item issues:
   * Crafted items cannot be selected
   * PD2 Maps (t11 through t39) are selectable, but their rarity isn't customizable
   * Wirt's Leg cannot have customized sockets/pointmods
   * PD2-specific equipment items aren't hidden if the PoD version is selected
-* STAT360 (item corruption) is only partially implemented - it checks whether a corruption exists, but not which corruption
-* Some conditions are unimplemented:
-  * "CHSK" codes for skill charges and "OS" codes for oskills
-  * FOOLS
-  * PREFIX, SUFFIX (PD2)
-  * AMAZON, ASSASSIN, BARBARIAN, DRUID, NECROMANCER, PALADIN, SORCERESS (PD2 - character class cannot be selected)
-  * MAPID (PD2 - character location cannot be selected)
+* Item condition issues:
+  * "CHSK" codes for skill charges and "OS" codes for oskills are unimplemented
+  * FOOLS is unimplemented
+  * Several PD2-specific conditions are unimplemented: PREFIX, SUFFIX, MAPID, AMAZON, ASSASSIN, BARBARIAN, DRUID, NECROMANCER, PALADIN, SORCERESS
+  * STAT360 (item corruption) is only partially implemented - it checks whether a corruption exists, but not which corruption
   * There may be some numbered "STAT" codes which aren't implemented - please report them
 
-## Feedback:
+## Feedback
 If you would like to improve this program, or just share feedback about how it could be improved, you can message me on reddit ([BetweenWalls](https://www.reddit.com/message/compose/?to=BetweenWalls)) or discord (@BetweenWalls#2390). You can also just open an [issue](https://github.com/BetweenWalls/filterbird/issues) here.
 
 Potential Improvements:
