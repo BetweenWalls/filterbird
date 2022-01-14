@@ -24,7 +24,7 @@ URL parameters (v=PD2, alternate=0, multiple=0, auto=0, checking=0) can be used 
 * Item issues:
   * Crafted items cannot be selected
   * PD2 Maps (t11 through t39) are selectable, but their rarity isn't customizable
-  * Wirt's Leg cannot have customized sockets/pointmods
+  * Wirt's Leg and quest weapons cannot be customized
   * PD2-specific equipment items aren't hidden if the PoD version is selected
 * Item condition issues:
   * "CHSK" codes for skill charges and "OS" codes for oskills are unimplemented

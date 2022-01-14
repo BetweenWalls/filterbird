@@ -1992,7 +1992,10 @@ function setQuantity(val) {
 		var max = document.getElementById("quantity").max;
 		if (min < itemToCompare.quant_min) { min = itemToCompare.quant_min }
 		if (max > itemToCompare.quant_max) { max = itemToCompare.quant_max }
-		if (settings.version == 1) { if (itemToCompare.CODE == "key" || itemToCompare.CODE == "tbk" || itemToCompare.CODE == "ibk") { max = 50 } }
+		if (settings.version == 1) {
+			if (itemToCompare.CODE == "key") { max = 50 }
+			else if (itemToCompare.CODE == "tbk" || itemToCompare.CODE == "ibk") { max = 80 }
+		}
 		if (val < min) { val = min }
 		if (val > max) { val = max }
 		document.getElementById("quantity").value = val
