@@ -1,5 +1,92 @@
 
-var runewords = {		// TODO: change to regular array so to fix name issues (Infinity, King's Grace, Ancient's Pledge)
+var runewords = {		// TODO: change to regular array to fix name issues (Infinity, King's Grace, Ancient's Pledge)
+	Breath_of_the_Dying:{runes:["Vex","Hel","El","Eld","Zod","Eth"], itypes:["weap"]},
+	Pride:{runes:["Cham","Sur","Io","Lo"], itypes:["pole","spea"]},
+	Hand_of_Justice:{runes:["Sur","Cham","Amn","Lo"], itypes:["weap"]},
+	Eternity:{runes:["Amn","Ber","Ist","Sol","Sur"], itypes:["mele"]},
+	Doom:{runes:["Hel","Ohm","Um","Lo","Cham"], itypes:["axe","hamm","pole","spea","swor","staf"]},
+	Last_Wish:{runes:["Jah","Mal","Jah","Sur","Jah","Ber"], itypes:["axe","hamm","swor"]},
+	Destruction:{runes:["Vex","Lo","Ber","Jah","Ko"], itypes:["pole","swor","spea"]},
+	Enigma:{runes:["Jah","Ith","Ber"], itypes:["tors"]},
+	Phoenix:{runes:["Vex","Vex","Lo","Jah"], itypes:["weap","shld"]},
+	Brand:{runes:["Jah","Lo","Mal","Gul"], itypes:["miss"]},
+	Faith:{runes:["Ohm","Jah","Lem","Eld"], itypes:["miss"]},
+	Famine:{runes:["Fal","Ohm","Ort","Jah"], itypes:["axe","hamm","swor"]},
+	Fury:{runes:["Jah","Gul","Eth"], itypes:["mele"]},
+	Dream:{runes:["Io","Jah","Pul"], itypes:["helm","shld"]},
+	Ice:{runes:["Amn","Shael","Jah","Lo"], itypes:["miss"]},
+	infinity:{runes:["Ber","Mal","Ber","Ist"], itypes:["pole","spea","staf"]},
+	Chains_of_Honor:{runes:["Dol","Um","Ber","Ist"], itypes:["tors"]},
+	Beast:{runes:["Ber","Tir","Um","Mal","Lum"], itypes:["axe","hamm","scep"]},
+	Wrath:{runes:["Pul","Lum","Ber","Mal"], itypes:["miss"]},
+	Dragon:{runes:["Sur","Lo","Sol"], itypes:["tors","shld"]},
+	Bramble:{runes:["Ral","Ohm","Sur","Eth"], itypes:["tors"]},
+	Wind:{runes:["Sur","El"], itypes:["mele"]},
+	Grief:{runes:["Eth","Tir","Lo","Mal","Ral"], itypes:["swor","axe"]},
+	Fortitude:{runes:["El","Sol","Dol","Lo"], itypes:["weap","tors"]},
+	Exile:{runes:["Vex","Ohm","Ist","Dol"], itypes:["ashd"]},
+	Call_to_Arms:{runes:["Amn","Ral","Mal","Ist","Ohm"], itypes:["weap"]},
+	Chaos:{runes:["Fal","Ohm","Um"], itypes:["h2h"]},
+	Death:{runes:["Hel","El","Vex","Ort","Gul"], itypes:["swor","axe"]},
+	Silence:{runes:["Dol","Eld","Hel","Ist","Tir","Vex"], itypes:["weap"]},
+	Heart_of_the_Oak:{runes:["Ko","Vex","Pul","Thul"], itypes:["staf","mace"]},
+	Kingslayer:{runes:["Mal","Um","Gul","Fal"], itypes:["swor","axe"]},
+	Rift:{runes:["Hel","Ko","Lem","Gul"], itypes:["pole","scep","spea"]},
+	Principle:{runes:["Ral","Gul","Eld"], itypes:["tors"]},
+	Delirium:{runes:["Lem","Ist","Io"], itypes:["helm"]},
+	Oath:{runes:["Shael","Pul","Mal","Lum"], itypes:["axe","mace","swor"]},
+	Sanctuary:{runes:["Ko","Ko","Mal"], itypes:["shld"]},
+	Venom:{runes:["Tal","Dol","Mal"], itypes:["weap"]},
+	Rain:{runes:["Ort","Mal","Ith"], itypes:["tors"]},
+	Prudence:{runes:["Mal","Tir"], itypes:["tors"]},
+	Bone:{runes:["Sol","Um","Um"], itypes:["tors"]},
+	Gloom:{runes:["Fal","Um","Pul"], itypes:["tors"]},
+	Stone:{runes:["Shael","Um","Pul","Lum"], itypes:["tors"]},
+	Duress:{runes:["Shael","Um","Thul"], itypes:["tors"]},
+	Crescent_Moon:{runes:["Shael","Um","Tir"], itypes:["axe","pole","swor","spea","h2h"]},
+	Enlightenment:{runes:["Pul","Ral","Sol"], itypes:["tors"]},
+	Lawbringer:{runes:["Amn","Lem","Ko"], itypes:["hamm","scep","swor","h2h"]},
+	Wealth:{runes:["Lem","Ko","Tir"], itypes:["tors"]},
+	Voice_of_Reason:{runes:["Lem","Ko","El","Eld"], itypes:["mace","swor","miss"]},
+	Passion:{runes:["Dol","Ort","Eld","Lem"], itypes:["weap"]},
+	Treachery:{runes:["Shael","Thul","Lem"], itypes:["tors"]},
+	Obedience:{runes:["Hel","Ko","Thul","Eth","Fal"], itypes:["pole","spea","hamm"]},
+	Lionheart:{runes:["Hel","Lum","Fal"], itypes:["tors"]},
+	Melody:{runes:["Shael","Ko","Nef"], itypes:["miss"]},
+	Harmony:{runes:["Tir","Ith","Sol","Ko"], itypes:["miss"]},
+	Memory:{runes:["Lum","Io","Sol","Eth"], itypes:["staf"]},
+	Splendor:{runes:["Eth","Lum"], itypes:["shld"]},
+	Smoke:{runes:["Nef","Lum"], itypes:["tors"]},
+	White:{runes:["Dol","Io"], itypes:["wand"]},
+	Black:{runes:["Thul","Io","Nef"], itypes:["club","hamm","mace","h2h"]},
+	Myth:{runes:["Hel","Amn","Nef"], itypes:["tors"]},
+	Peace:{runes:["Shael","Thul","Amn"], itypes:["tors"]},
+	Rhyme:{runes:["Shael","Eth"], itypes:["shld"]},
+	Honor:{runes:["Amn","El","Ith","Tir","Sol"], itypes:["mele"]},
+	Lore:{runes:["Ort","Sol"], itypes:["helm"]},
+	Insight:{runes:["Ral","Tir","Tal","Sol"], itypes:["pole","staf","spea","staf"]},
+	Radiance:{runes:["Nef","Sol","Ith"], itypes:["helm"]},
+	Spirit:{runes:["Tal","Thul","Ort","Amn"], itypes:["shld","swor","staf"]},
+	Kings_Grace:{runes:["Amn","Ral","Thul"], itypes:["swor","scep","h2h"]},
+	Edge:{runes:["Tir","Tal","Amn"], itypes:["miss"]},
+	Strength:{runes:["Amn","Tir"], itypes:["mele"]},
+	Holy_Thunder:{runes:["Eth","Ral","Ort","Tal"], itypes:["scep"]},
+	Ancients_Pledge:{runes:["Ral","Ort","Tal"], itypes:["shld"]},
+	Zephyr:{runes:["Ort","Eth"], itypes:["miss"]},
+	Leaf:{runes:["Tir","Ral"], itypes:["staf"]},
+	Stealth:{runes:["Tal","Eth"], itypes:["tors"]},
+	Malice:{runes:["Ith","El","Eth"], itypes:["mele"]},
+	Nadir:{runes:["Nef","Tir"], itypes:["helm"]},
+	Steel:{runes:["Tir","El"], itypes:["swor","axe","mace","h2h"]},
+	Pattern:{runes:["Tal","Ort","Tir"], itypes:["h2h"]},
+	Plague:{runes:["Cham","Fal","Um"], itypes:["weap"]},
+	Unending_Will:{runes:["Cham","Ohm"], itypes:["wand"]},
+	Zenith:{runes:["Jah","Zod","Ort","Thul","Ral"], itypes:["miss"]},
+};
+
+/*
+// TODO: implement differences for PD2/PoD (latter listed below)
+var runewords = {
 	Breath_of_the_Dying:{runes:["Vex","Hel","El","Eld","Zod","Eth"], itypes:["weap"]},
 	Pride:{runes:["Cham","Sur","Io","Lo"], itypes:["pole","spea"]},
 	Hand_of_Justice:{runes:["Sur","Cham","Amn","Lo"], itypes:["weap"]},
@@ -81,6 +168,7 @@ var runewords = {		// TODO: change to regular array so to fix name issues (Infin
 	Pattern:{runes:["Tal","Ort","Tir"], itypes:["h2h"]},
 	Plague:{runes:["Cham","Fal","Um"], itypes:["weap"]},
 };
+*/
 
 /* automods = 
 	Blunt Weapons		+50% damage vs undead
@@ -1362,6 +1450,7 @@ skill_Phoenix_Strike:{index:["skill_Phoenix_Strike"], format:["+"," to Phoenix S
 // yet another temporary addition
 leap_speed:{index:["leap_speed"], format:["+","% to Leap and Leap Attack Movement Speed"]},
 gust_cdr:{index:["gust_cdr"], format:["Gust's Cooldown is Reduced by "," Seconds"]},
+extra_golems:{index:["extra_golems"], format:["You May Summon "," Additional Golems"]},
 enemy_pdr:{index:["enemy_pdr"], format:["","% to Enemy Physical Resistance"]},
 description:2,
 
@@ -1507,3 +1596,16 @@ var all_codes = {
 	OS251:2,OS252:2,OS253:2,OS254:2,OS255:2,OS256:2,OS257:2,OS258:2,OS259:2,OS260:2,OS261:2,OS262:2,OS263:2,OS264:2,OS265:2,OS266:2,OS267:2,OS268:2,OS269:2,OS270:2,OS271:2,OS272:2,OS273:2,OS274:2,OS275:2,OS276:2,OS277:2,OS278:2,OS279:2,OS280:2,
 	OS357:2,OS364:2,OS367:2,OS369:2,OS371:2,OS381:2,OS383:2,OS366:2,OS374:2,OS376:2,OS378:2,OS370:2,
 };
+
+// TODO: Create list of mutually exclusive condition groups to expand syntax/error checking ...might be better to have a list of incompatible codes for all codes (except item codes, which could be handled separately) - there can only be 1 item code, and all codes are incompatible with any item code that is a subset of its' other incompatible codes (e.g. HELM is incompatible with SHIELD and all item codes that inherit SHIELD such as buc or kit)
+/*
+var code_groups = {
+	rarity:["NMAG","MAG","RARE","UNI","SET","CRAFT"], 
+	tier:["NORM","EXC","ELT"], 
+	quality:["INF","SUP"], 
+	inferior_property:["INF","ETH"], // inferior items can't be ethereal (or drop with sockets) ...also can't have pointmods with values greater than 1, although most items can't get pointmods at all so it may be better to avoid delving into item affixes
+	armor:["HELM","CHEST","SHIELD","GLOVES","BOOTS","BELT","CIRC"], 
+	weapons:["AXE","MACE","SWORD","DAGGER","SPEAR","POLEARM","BOW","XBOW","STAFF","WAND","SCEPTER","SIN","SOR"], // several major groups aren't included due to overlap (THROWING, JAV, ZON)
+	// ...this would probably require a more object-oriented program structure
+};
+*/

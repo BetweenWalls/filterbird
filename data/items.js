@@ -39,7 +39,7 @@ var unequipped = {			strength:0, dexterity:0, vitality:0, energy:0, life:0, mana
 
 /* Vanilla skills		*/	skill_Critical_Strike:0, skill_Tiger_Strike:0, skill_Cobra_Strike:0, skill_Phoenix_Strike:0, skill_Dragon_Claw:0, skill_Fists_of_Fire:0, skill_Claws_of_Thunder:0, skill_Blade_Sentinel:0, skill_Double_Throw:0, skill_Berserk:0, skill_Skeleton_Mastery:0, skill_Golem_Mastery:0, skill_Poison_Dagger:0, skill_Bone_Prison:0, skill_Thorns:0, skill_Lightning:0, skill_Inferno:0, 
 /* PD2 skills			*/	skill_Javelin_and_Spear_Mastery:0, skill_Slow_Movement:0, skill_Claw_and_Dagger_Mastery:0, skill_Chain_Lightning_Sentry:0, skill_General_Mastery:0, skill_Throwing_Mastery:0, skill_Polearm_and_Spear_Mastery:0, skill_Combat_Reflexes:0, skill_Gust:0, skill_Blood_Warp:0, skill_Raise_Skeleton_Archer:0, skill_Poison_Strike:0, skill_Curse_Mastery:0, skill_Dark_Pact:0, skill_Holy_Light:0, skill_Joust:0, skill_Holy_Nova:0, skill_Cold_Enchant:0, skill_Ice_Barrage:0, skill_Lesser_Hydra:0, skill_Enchant_Fire:0, skill_Combustion:0, 
-					leap_speed:0, gust_cdr:0, enemy_pdr:0, description:"", 
+					leap_speed:0, gust_cdr:0, extra_golems:0, enemy_pdr:0, description:"", 
 };
 
 /*
@@ -836,6 +836,8 @@ var runeword_stats = {
 {name:"Leaf", req_level:19, skills_fire_all:3, fDamage_min:5, fDamage_max:30, skill_Blaze:3, skill_Warmth:3, skill_Fire_Bolt:3, defense_per_level:2, cRes:33, mana_per_kill:2},
 {name:"Memory", req_level:37, skills_sorceress:3, fcr:33, damage_min:9, target_defense:-25, defense_bonus:50, vitality:10, energy:10, max_mana:20, phys_Lightning_Surge:[25,35], skill_Static_Field:2, skill_Energy_Shield:3},
 {name:"White", req_level:35, skills_poisonBone:3, fcr:20, flee_on_hit:25, vitality:10, mana:13, mDamage_reduced:4, skill_Summon_Mastery:4, skill_Bone_Armor:3, skill_Bone_Spear:2},
+{name:"Unending Will", req_level:67, extra_golems:[1,2], fcr:25, e_damage:50, skill_Golem_Mastery:[2,3], freezes_target:3, defense:[300,450], cRes:30, pRes:30, damage_reduced:[5,7]},
+{name:"Zenith", req_level:69, indestructible:1, aura:"Salvation", aura_lvl:[8,12], all_skills:2, frw:20, ias:20, e_damage:[200,300], itd:1, fDamage_min:205, fDamage_max:280, lDamage_min:201, lDamage_max:300, cDamage_min:203, cDamage_max:264},
 	],
     offhand: [
 {name:"Exile", req_level:57, ctc:[[15,5,"Life Tap","on striking"]], aura:"Defiance", aura_lvl:[13,16], skills_offensive:2, fbr:30, freezes_target:1, e_def:[220,260], life_replenish:7, cRes_max:5, fRes_max:5, mf:25, autorepair:1},

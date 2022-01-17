@@ -1,6 +1,6 @@
 
 var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"regular"};
-var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:85,CHARSTAT70:0,CHARSTAT13:1000};
+var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:85,CHARSTAT70:0,CHARSTAT13:1000,AMAZON:true,ASSASSIN:false,BARBARIAN:false,DRUID:false,NECROMANCER:false,PALADIN:false,SORCERESS:false,SHOP:false};
 var item_settings = {ID:false, ILVL_return:85};
 var settings = {auto_difficulty:true,version:0,validation:1,auto_simulate:1,max_errors:50,error_limit:1,num_filters:2,background:0};
 var notices = {duplicates:0,pd2_conditions:0,pod_conditions:0,colors:0,encoding:0};
@@ -487,7 +487,7 @@ function parseFile(file,num) {
 						else if (~~Number(itemToCompare[c]) < 0) { value_is_negative = true }
 						// add to formula
 						if (c_falsify == true) { formula += "false " }
-						else if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") {
+						else if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT" || c == "AMAZON" || c == "ASSASSIN" || c == "BARBARIAN" || c == "DRUID" || c == "NECROMANCER" || c == "PALADIN" || c == "SORCERESS" || c == "SHOP") {
 							if (value_is_negative == true) { formula += (2000000000+Number(character[c]))+" " }			// converts negative values to their equivalent 'unsigned' value
 							else { formula += character[c]+" " }
 						}
@@ -511,6 +511,7 @@ function parseFile(file,num) {
 						}
 					}
 					if (settings.validation == 1 && errors < settings.max_errors) { if (used_AND > 0 && used_OR > 0) { possible_logic_conflict = true } }
+					// TODO: investigate how difficult it would be to check whether a rule includes mutually exclusive conditions (e.g. NMAG MAG, SUP INF, RW MAG, INF ETH, cap AXE, or multiple item codes)
 					if (neg_paren_close > 0 && neg_paren_close == cond) { formula += ") "; neg_paren_close = 0; }
 					if (c == "!" && cond_list.length > cond+3) { if ((isNaN(Number(cond_list[cond+1])) == false || isNaN(Number(cond_list[cond+3])) == false) && (cond_list[cond+2] == "=" || cond_list[cond+2] == ">" || cond_list[cond+2] == "<" || cond_list[cond+2] == "≤" || cond_list[cond+2] == "≥")) { formula += "( "; neg_paren_close = cond+3; } }
 				}
@@ -1179,6 +1180,14 @@ function setCLVL2(value) {
 	}
 	simulate()
 }
+// setClass - 
+// ---------------------------------
+function setClass(value) {
+	var classes = ["AMAZON", "ASSASSIN", "BARBARIAN", "DRUID", "NECROMANCER", "PALADIN", "SORCERESS"];
+	for (let i = 0; i < classes.length; i++) { character[classes[i]] = false }
+	character[value.toUpperCase()] = true
+	simulate()
+}
 // setDifficulty - 
 // ---------------------------------
 function setDifficulty(selected) {
@@ -1210,6 +1219,12 @@ function setGoldChar(value) {
 	}
 	document.getElementById("gold_char").value = Number(value)
 	character.CHARSTAT14 = Number(value)
+	simulate()
+}
+// setShop - handles 'shop' checkbox
+// ---------------------------------
+function setShop(checked) {
+	character.SHOP = checked
 	simulate()
 }
 

@@ -23,13 +23,14 @@ URL parameters (v=PD2, alternate=0, multiple=0, auto=0, checking=0) can be used 
 * Nothing special is done to display item notifications or minimap icons
 * Item issues:
   * Crafted items cannot be selected
-  * PD2 Maps (t11 through t39) are selectable, but their rarity isn't customizable
   * Wirt's Leg and quest weapons cannot be customized
-  * PD2-specific equipment items aren't hidden if the PoD version is selected
+  * PD2 Maps (t11 through t39) are selectable, but their rarity isn't customizable
+  * PD2-specific equipment items and runeword options aren't hidden if the PoD version is selected (and vice versa)
 * Item condition issues:
   * "CHSK" codes for skill charges and "OS" codes for oskills are unimplemented
   * FOOLS is unimplemented
-  * Several PD2-specific conditions are unimplemented: PREFIX, SUFFIX, MAPID, AMAZON, ASSASSIN, BARBARIAN, DRUID, NECROMANCER, PALADIN, SORCERESS
+  * PRICE is not updated automatically
+  * Some PD2-specific conditions are unimplemented: PREFIX, SUFFIX, MAPID
   * STAT360 (item corruption) is only partially implemented - it checks whether a corruption exists, but not which corruption
   * There may be some numbered "STAT" codes which aren't implemented - please report them
 
@@ -43,3 +44,4 @@ Potential Improvements:
   * Allow any number of filters to be compared simultaneously
 * Make item tooltip formatting better match in-game tooltip formatting
 * Update item attributes based on the selected version
+* Expand syntax/error checking to further help with diagnosing filter problems

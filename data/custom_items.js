@@ -1045,8 +1045,10 @@ function doRuneword(selected) {
 				var i = runewords[rw].itypes[itype];
 				var ait = affix_item_types[i];
 				var match = false;
-				if (i != "mele" && i != "shld") {
+				if (i != "rod" && i != "mele" && i != "blun" && i != "shld" && i != "tkni" && i != "abow" && i != "aspe") {
 					if (itemCustom[ait] == true) { match = true }
+				} else if (i == "tkni" || i == "abow" || i == "aspe") {
+					if (itemCustom[ait[0]] == true && itemCustom[ait[1]] == true) { match = true }
 				} else {
 					for (code in ait) { if (itemCustom[ait[code]] == true) { match = true } }
 				}
@@ -1889,6 +1891,8 @@ function setPD2Codes() {
 		for (aff in code_other) {
 			if (typeof(itemToCompare[aff]) != 'undefined') { itemToCompare[code_other[aff]] = itemToCompare[aff] }
 		}
+		document.getElementById("character_class").style.display = "inline-table"
+		document.getElementById("character_shop").style.display = "inline-table"
 		document.getElementById("character_gold").style.display = "none"
 		if (selected_group_index < 9) { document.getElementById("select_price").style.display = "block" }
 		if (selected_group_index > 9) {
@@ -1927,6 +1931,8 @@ function setPD2Codes() {
 		if (typeof(itemToCompare.CL4) != 'undefined' && typeof(itemToCompare.EQ3) != 'undefined') { if (itemToCompare.CL4 == true && itemToCompare.EQ3 == true) { itemToCompare.EQ3 = false } }
 		if (typeof(itemToCompare.WP10) != 'undefined') { if (itemToCompare.WP10 == true) { itemToCompare.WP9 = true } }
 		if (typeof(itemToCompare.EQ7) != 'undefined') { if (itemToCompare.EQ7 == true) { itemToCompare.EQ1 = true } }
+		document.getElementById("character_class").style.display = "none"
+		document.getElementById("character_shop").style.display = "none"
 		document.getElementById("character_gold").style.display = "inline-table"
 		document.getElementById("select_price").style.display = "none"
 		if (selected_group_index > 9) {

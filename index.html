@@ -112,10 +112,15 @@
 			<div style="background-color:#222; display:table;">
 				<div class="new-dropdown-title">Character Info</div>
 				<div style="display:inline-table; margin-right:5px;">
-					<div><label class="label" for="clvl">Level: </label><input id="clvl" name="clvl" class="num-input" type="number" min="1" max="99" value="90" onchange="setCLVL2(this.value)"></div>
-					<div><label class="label">Difficulty: </label><select id="dropdown_difficulty" class="new-dropdown" onChange="setDifficulty(this.selectedIndex)">
+					<div style="display:inline"><label class="label" for="clvl">Level: </label><input id="clvl" name="clvl" class="num-input" type="number" min="1" max="99" value="90" onchange="setCLVL2(this.value)"></div>
+					<div id="character_class" style="display:inline"><label class="label">&nbsp;Class: </label><select id="dropdown_class" class="new-dropdown" onChange="setClass(this.value)">
+						<option class="gray-all">Amazon</option><option class="gray-all">Assassin</option><option class="gray-all">Barbarian</option><option class="gray-all">Druid</option><option class="gray-all">Necromancer</option><option class="gray-all">Paladin</option><option class="gray-all">Sorceress</option>
+					</select></div>
+					<br>
+					<div style="display:inline"><label class="label">Difficulty: </label><select id="dropdown_difficulty" class="new-dropdown" onChange="setDifficulty(this.selectedIndex)">
 						<option class="gray-all">Normal</option><option class="gray-all">Nightmare</option><option class="gray-all">Hell</option><option class="gray-all" selected>Auto (ilvl-based)</option>
 					</select></div>
+					<div id="character_shop" style="display:inline"><label class="label" for="shop">&nbsp;Shop </label><input id="shop" type="checkbox" name="shop" onchange="setShop(this.checked)"></div>
 				</div>
 				<div id="character_gold" style="display:inline-table;">
 					<div><label class="label" for="gold_stash">Gold in Stash: </label><input id="gold_stash" name="gold_stash" class="num-input" style="max-width:72px;" type="number" min="0" max="2500000" value="199000" onchange="setGoldStash(this.value)"></div>
@@ -128,10 +133,10 @@
 			<div id="editing_1" style="background-color:#222; display:table;">
 				<div class="new-dropdown-title">Basic Item Info</div>
 				<div id="select_group" style="display:inline;"><label class="label">Group: </label><select id="dropdown_group" class="new-dropdown" onChange="setGroup(this.value)"></select></div>
-				<div id="select_type" style="display:inline;"><label class="label">Type: </label><select id="dropdown_type" class="new-dropdown" onChange="setType(this.value)"></select></div>
+				<div id="select_type" style="display:inline;"><label class="label">&nbsp;Type: </label><select id="dropdown_type" class="new-dropdown" onChange="setType(this.value)"></select></div>
 				<div id="select_base"><label class="label">Base: </label><select id="dropdown_base" class="new-dropdown" onChange="setBase(this.value)"></select></div><div id="select_base_placeholder" style="display:none;"></div>
 				<div id="select_rarity" style="display:inline;"><label class="label">Rarity: </label><select id="dropdown_rarity" class="new-dropdown" style="min-width:0px;" onChange="setRarity(this.value)"></select></div>
-				<div id="select_name" style="display:inline;"><label class="label">Name: </label><select id="dropdown_name" class="new-dropdown" onChange="setName(this.value)"></select></div>
+				<div id="select_name" style="display:inline;"><label class="label">&nbsp;Name: </label><select id="dropdown_name" class="new-dropdown" onChange="setName(this.value)"></select></div>
 				<div id="select_ilvl"><label class="label" for="ilvl">Level: </label><input id="ilvl" name="ilvl" class="num-input" type="number" min="1" max="99" value="85" onchange="setILVL2(this.value)"></div>
 			</div>
 			<div style="display:inline-table;"><br></div>
