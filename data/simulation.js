@@ -472,7 +472,6 @@ function parseFile(file,num) {
 						}
 						// refactor conditions
 						if (c == "DIFF") { c = "DIFFICULTY" }				// these could be disabled (i.e. set to 0) for PD2 or PoD, but that wouldn't produce correct behavior since a value of 0 is normal
-						if (settings.version == 0) { if (c == "PRICE") { c = "invalid_"+c } }		// TODO: Should the price dropdown menu be available for PoD? The PRICE condition can still be invalid.
 						else {
 							if (c.substr(0,8) == "CHARSTAT") { c = "invalid_"+c; itemToCompare[c] = 0; }
 							if (c == "GEMLEVEL" && itemToCompare[c] > 3 && itemToCompare.CODE.length == 3) { itemToCompare[c] = 0 }
@@ -552,7 +551,6 @@ function parseFile(file,num) {
 					}
 				}
 				
-				if (settings.version == 0) { out_format = out_format.split("/")[0] }	// TODO: is this still necessary?
 				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
 				// TODO: Change split/join replacements to use deliminator other than "_" between the identifying key and the keyword, so no exceptions need to be made when splitting off the keyword (e.g. for [DARK,GREEN] since it contains the deliminator)
 				if (settings.version == 0) { out_format = out_format.split("%DGREEN%").join(",color_DGREEN,").split("%CLVL%").join(",ref_CLVL,") }
@@ -561,6 +559,8 @@ function parseFile(file,num) {
 				else { out_format = out_format.split("%MAP%").join(",ignore_MAP,").split("%DARK_GREEN%").join(",color_DGREEN,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,") }		// TODO: would it be useful for 'known' keywords that don't do anything special in either PoD or PD2 (e.g. %LIGHT_GRAY%) to be treated differently?
 				out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,")
 				if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,") }
+				if (settings.version == 0) { out_format = out_format.split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,").split("%CLASS%").join(",ref_CLASS,").split("%CL%").join(",ref_CL,").split("%QUAL%").join(",ref_QUAL,").split("%QT%").join(",ref_QT,").split("%BASENAME%").join(",ref_BASENAME,")}	// TODO: organize keywords for different versions - these lines are a mess
+				if (settings.version == 1) { out_format = out_format.split("%CLASS%").join(",invalid_CLASS,").split("%CL%").join(",invalid_CL,").split("%QUAL%").join(",invalid_QUAL,").split("%QT%").join(",invalid_QT,").split("%BASENAME%").join(",invalid_BASENAME,")}
 				if (settings.version == 1) {
 					var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
 					for (n in notifs) {									// TODO: implement more efficient way to split notification keywords
@@ -580,6 +580,12 @@ function parseFile(file,num) {
 						out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
 						//else { out_format = out_format.split("%NOTIFY-"+av+"%").join(",invalid_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",invalid_notification,").split("%notify-"+av+"%").join(",invalid_notification,").split("%notify-"+av.toUpperCase()+"%").join(",invalid_notification,") }
 					} }
+				}
+				if (settings.version == 0) {
+					for (let stat = 0; stat <= 500; stat++) {
+						if (typeof(itemToCompare["STAT"+stat]) != 'undefined') { out_format = out_format.split("%STAT"+stat+"%").join(",ref_STAT"+stat+",") }
+						else { out_format = out_format.split("%STAT"+stat+"%").join(",0,") }
+					}
 				}
 				var out_list = out_format.split(",,").join(",").split(",");
 				for (out in out_list) {
@@ -636,7 +642,6 @@ function parseFile(file,num) {
 				var desc_output_temp = "";
 				// Removes comments and leading/trailing tabs and spaces
 				output = output.split("//")[0]
-				if (settings.version == 0) { output = output.split("/")[0] }
 				var trailingTabs = false;
 				for (let i = output.length-1; i > 0; i--) {
 					if (output[i] == " " && trailingTabs == false) { output = output.substr(0,i) }
@@ -726,6 +731,7 @@ function parseFile(file,num) {
 	if (settings.version == 1) { out_format = out_format.split("%DARK_GREEN%").join(",color_DGREEN,").split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%MAP%").join(",ignore_MAP,").split("%NOTIFY-DEAD%").join(",ignore_NOTIFY-DEAD,").split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,") }
 	if (settings.version == 1) { out_format = out_format.split("%LIGHT_GRAY%").join(",color_GRAY,").split("%CORAL%").join(",color_GRAY,").split("%SAGE%").join(",color_GRAY,").split("%TEAL%").join(",color_GRAY,") }
 	if (settings.version == 0) { out_format = out_format.split("%QTY%").join(",ref_QUANTITY,").split("%RANGE%").join(",ref_range,").split("%WPNSPD%").join(",ref_baseSpeed,").split("%ALVL%").join(",ref_ALVL,").split("%NL%").join(",misc_NL,").split("%NOTIFY-ITEM%").join(",ignore_NOTIFY-ITEM,").split("%NOTIFY-WHITE%").join(",ignore_NOTIFY-WHITE,").split("%NOTIFY-GRAY%").join(",ignore_NOTIFY-GRAY,").split("%NOTIFY-BLUE%").join(",ignore_NOTIFY-BLUE,").split("%NOTIFY-YELLOW%").join(",ignore_NOTIFY-YELLOW,").split("%NOTIFY-TAN%").join(",ignore_NOTIFY-TAN,").split("%NOTIFY-GOLD%").join(",ignore_NOTIFY-GOLD,").split("%NOTIFY-GREEN%").join(",ignore_NOTIFY-GREEN,").split("%NOTIFY-DARK_GREEN%").join(",ignore_NOTIFY-DARK_GREEN,").split("%NOTIFY-BLACK%").join(",ignore_NOTIFY-BLACK,").split("%NOTIFY-PURPLE%").join(",ignore_NOTIFY-PURPLE,").split("%NOTIFY-RED%").join(",ignore_NOTIFY-RED,").split("%NOTIFY-ORANGE%").join(",ignore_NOTIFY-ORANGE,") }
+	if (settings.version == 0) { out_format = out_format.split("%LVLREQ%").join(",ref_reqlevel,").split("%CRAFTALVL%").join(",ref_CRAFTALVL,").split("%CLASS%").join(",ref_CLASS,").split("%CL%").join(",ref_CL,").split("%QUAL%").join(",ref_QUAL,").split("%QT%").join(",ref_QT,").split("%BASENAME%").join(",ref_BASENAME,")}	// TODO: organize keywords for different versions - these lines are a mess
 	if (settings.version == 1) {
 		var notifs = ["%PX-","%DOT-","%MAP-","%BORDER-"];
 		for (n in notifs) {
@@ -743,6 +749,12 @@ function parseFile(file,num) {
 			var av = a.toString(16);
 			out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
 		} }
+	}
+	if (settings.version == 0) {
+		for (let stat = 0; stat <= 500; stat++) {
+			if (typeof(itemToCompare["STAT"+stat]) != 'undefined') { out_format = out_format.split("%STAT"+stat+"%").join(",ref_STAT"+stat+",") }
+			else { out_format = out_format.split("%STAT"+stat+"%").join(",0,") }
+		}
 	}
 	var out_list = out_format.split(",,").join(",").split(",");
 	if (out_list[0] == "") { out_list.shift() }
@@ -1001,6 +1013,7 @@ function printAffixes() {
 
 // testing...
 function test() {
+	document.getElementById("print").innerHTML = ""
 	// without downloading the filter files with their original encoding, there may not be a way to do this
 	/*var launcher_url = "https://raw.githubusercontent.com/Project-Diablo-2/LootFilters/main/filters.json";
 	getRequest1(launcher_url);

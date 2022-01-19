@@ -1751,13 +1751,14 @@ function setItemFromCustom() {
 	
 	if (itemCustom.CODE == "GOLD") { document.getElementById("select_amount").style.display = "block"; setAmount(document.getElementById("amount").value) }
 	else { document.getElementById("select_amount").style.display = "none" }
-	if (typeof(itemCustom.QUANTITY) != 'undefined') { document.getElementById("select_quantity").style.display = "block"; setQuantity(itemCustom.QUANTITY) }
+	var force_simulate = false;
+	if (typeof(itemCustom.QUANTITY) != 'undefined') { document.getElementById("select_quantity").style.display = "block"; setQuantity(itemCustom.QUANTITY); force_simulate = true; }	// TODO: this extra boolean is a symptom of increasingly worse "spaghetti" code
 	else { document.getElementById("select_quantity").style.display = "none" }
 	
 	//printAffixes()
 	setItemCodes()
 	var reset_simulation = setPD2Codes()
-	if (reset_simulation == false) { simulate() }
+	if (reset_simulation == false || force_simulate == true) { simulate() }
 }
 
 // setItemCodes - sets item codes
@@ -1854,16 +1855,53 @@ function setItemCodes() {
 	itemToCompare["1H"] = false;
 	for (th in two_handers_1) { if (itemToCompare.CODE == two_handers_1[th]) { itemToCompare["2H"] = true; } }
 	for (th in two_handers_2) { if (typeof(itemToCompare[two_handers_2[th]]) != 'undefined') { if (itemToCompare[two_handers_2[th]] == true) { itemToCompare["2H"] = true; } } }
-	if (itemToCompare["2H"] == false && itemToCompare.WEAPON == true) { itemToCompare["1H"] = true }
+	if (typeof(itemToCompare.WEAPON) != 'undefined') { if (itemToCompare["2H"] == false && itemToCompare.WEAPON == true) { itemToCompare["1H"] = true } }
 	
 	// implement missing named attribute codes:
-	itemToCompare.IAS = itemToCompare.STAT93
-	itemToCompare.STAT68 = itemToCompare.STAT93
-	itemToCompare.FCR = itemToCompare.STAT105
-	itemToCompare.FHR = itemToCompare.STAT99
-	itemToCompare.FBR = itemToCompare.STAT102
-	itemToCompare.LIFE = itemToCompare.life
-	itemToCompare.MANA = itemToCompare.mana
+	if (typeof(itemToCompare.STAT93) != 'undefined') { itemToCompare.IAS = itemToCompare.STAT93; itemToCompare.STAT68 = itemToCompare.STAT93; }
+	if (typeof(itemToCompare.STAT105) != 'undefined') { itemToCompare.FCR = itemToCompare.STAT105 }
+	if (typeof(itemToCompare.STAT99) != 'undefined') { itemToCompare.FHR = itemToCompare.STAT99 }
+	if (typeof(itemToCompare.STAT102) != 'undefined') { itemToCompare.FBR = itemToCompare.STAT102 }
+	if (typeof(itemToCompare.life) != 'undefined') { itemToCompare.LIFE = itemToCompare.life }
+	if (typeof(itemToCompare.mana) != 'undefined') { itemToCompare.MANA = itemToCompare.mana }
+	
+	// implement missing PoD keywords:
+	itemToCompare.CL = ""
+	itemToCompare.CLASS = ""
+	if (typeof(itemToCompare.CL1) != 'undefined') { if (itemToCompare.CL1 == true) { itemToCompare.CL = "Dru"; itemToCompare.CLASS = "Druid"; } }
+	if (typeof(itemToCompare.CL2) != 'undefined') { if (itemToCompare.CL2 == true) { itemToCompare.CL = "Bar"; itemToCompare.CLASS = "Barbarian"; } }
+	if (typeof(itemToCompare.CL3) != 'undefined') { if (itemToCompare.CL3 == true) { itemToCompare.CL = "Pal"; itemToCompare.CLASS = "Paladin"; } }
+	if (typeof(itemToCompare.CL4) != 'undefined') { if (itemToCompare.CL4 == true) { itemToCompare.CL = "Nec"; itemToCompare.CLASS = "Necromancer"; } }
+	if (typeof(itemToCompare.CL5) != 'undefined') { if (itemToCompare.CL5 == true) { itemToCompare.CL = "Ass"; itemToCompare.CLASS = "Assassin"; } }
+	if (typeof(itemToCompare.CL6) != 'undefined') { if (itemToCompare.CL6 == true) { itemToCompare.CL = "Sor"; itemToCompare.CLASS = "Sorceress"; } }
+	if (typeof(itemToCompare.CL7) != 'undefined') { if (itemToCompare.CL7 == true) { itemToCompare.CL = "Ama"; itemToCompare.CLASS = "Amazon"; } }
+	itemToCompare.QUAL = ""
+	if (typeof(itemToCompare.rarity) != 'undefined') {
+		if (itemToCompare.SUP != true && itemToCompare.INF != true) { itemToCompare.QUAL = itemToCompare.rarity[0].toUpperCase() + itemToCompare.rarity.substring(1) }
+		else {
+			if (itemToCompare.SUP == true) { itemToCompare.QUAL = "Superior" }
+			else if (itemToCompare.INF == true) { itemToCompare.QUAL = "Inferior" }
+		}
+		if (itemToCompare.QUAL == "Regular") { itemToCompare.QUAL = "Normal" }
+	}
+	itemToCompare.QT = "None"
+	if (typeof(itemToCompare.tier) != 'undefined') {
+		if (itemToCompare.tier == 1) { itemToCompare.QT = "Normal" }
+		else if (itemToCompare.tier == 2) { itemToCompare.QT = "Exceptional" }
+		else if (itemToCompare.tier == 3) { itemToCompare.QT = "Elite" }
+	}
+	itemToCompare.BASENAME = itemToCompare.NAME
+	if (typeof(itemToCompare.base) != 'undefined') { itemToCompare.BASENAME = itemToCompare.base }
+	if (typeof(itemToCompare.RES) != 'undefined') {
+		if (typeof(itemToCompare.STAT39) == 'undefined') { itemToCompare.STAT39 = 0 }
+		if (typeof(itemToCompare.STAT41) == 'undefined') { itemToCompare.STAT41 = 0 }
+		if (typeof(itemToCompare.STAT43) == 'undefined') { itemToCompare.STAT43 = 0 }
+		if (typeof(itemToCompare.STAT45) == 'undefined') { itemToCompare.STAT45 = 0 }
+		itemToCompare.STAT39 += itemToCompare.RES
+		itemToCompare.STAT41 += itemToCompare.RES
+		itemToCompare.STAT43 += itemToCompare.RES
+		itemToCompare.STAT45 += itemToCompare.RES
+	}
 }
 
 // setPD2Codes - sets item codes for Project D2
@@ -1876,65 +1914,58 @@ function setPD2Codes() {
 	var code_other = {req_level:"LVLREQ",QUANTITY:"QTY",mana_per_kill:"MAEK",autorepair:"REPAIR",ar_bonus:"ARPER"};
 	var selected_group_index = document.getElementById("dropdown_group").selectedIndex;
 	var reset_selected = false;
+	
+	// Both PD2 and PoD seem to have all of these codes now... TODO: test PoD codes, especially whether certain groups include/exclude the same related categories
 	if (settings.version == 1) {
 		if (typeof(itemToCompare.WP5) != 'undefined' || typeof(itemToCompare.WP7) != 'undefined') { if (itemToCompare.WP5 == true || itemToCompare.WP7 == true) { itemToCompare.WP6 = true } }
 		if (typeof(itemToCompare.CL3) != 'undefined' || typeof(itemToCompare.CL4) != 'undefined') { if (itemToCompare.CL3 == true || itemToCompare.CL4 == true) { itemToCompare.EQ3 = true } }
 		if (typeof(itemToCompare.WP10) != 'undefined') { if (itemToCompare.WP10 == true) { itemToCompare.WP9 = false } }
 		if (typeof(itemToCompare.EQ7) != 'undefined') { if (itemToCompare.EQ7 == true) { itemToCompare.EQ1 = false } }
-		for (let i = 0; i < code_originals.length; i++) {
-			if (typeof(itemToCompare[code_originals[i]]) != 'undefined') { if (itemToCompare[code_originals[i]] == true) { itemToCompare[code_alternates[i]] = true } }
-		}
-		for (aff in code_affixes) {
-			if (typeof(itemToCompare[codes[aff]]) != 'undefined') { itemToCompare[code_affixes[aff]] = itemToCompare[codes[aff]] }
-			if (code_affixes[aff] == "FRW") { if (typeof(itemToCompare[codes["frw"]]) != 'undefined' || typeof(itemToCompare[codes["velocity"]]) != 'undefined') { itemToCompare[code_affixes[aff]] = ~~itemToCompare[codes["frw"]] + ~~itemToCompare[codes["velocity"]] } }	// speed penalties from armor are counted as FRW in PD2
-		}
-		for (aff in code_other) {
-			if (typeof(itemToCompare[aff]) != 'undefined') { itemToCompare[code_other[aff]] = itemToCompare[aff] }
-		}
-		document.getElementById("character_class").style.display = "inline-table"
-		document.getElementById("character_shop").style.display = "inline-table"
-		document.getElementById("character_gold").style.display = "none"
-		if (selected_group_index < 9) { document.getElementById("select_price").style.display = "block" }
-		if (selected_group_index > 9) {
-			var premade_type = itemToCompare.type_affix;
-			var selected_name_index = document.getElementById("dropdown_name").selectedIndex;
-			reset_selected = false;
-			for (i in premade[premade_type]) { if (typeof(premade[premade_type][i].pd2) != 'undefined') {
-				if (premade[premade_type][i].pd2 == 1) {
-					document.getElementById("dropdown_name").options[i].style.display = "block"
-				} else if (premade[premade_type][i].pd2 == 0) {
-					if (selected_name_index == i) { reset_selected = true }
-					document.getElementById("dropdown_name").options[i].style.display = "none"
-				}
-			} }
-			if (reset_selected == true) {
-				document.getElementById("dropdown_name").selectedIndex = 0
-				setName(document.getElementById("dropdown_name").options[0].innerHTML)
-			}
-		}
-		//var code_two_handers = ["lax","bax","btx","gax","gix","9la","9ba","9bt","9ga","9gi","7la","7ba","7bt","7ga","7gi","mau","gma","9m9","9gm","7m7","7gm","2hs","clm","gis","bsw","flb","gsd","92h","9cm","9gs","9b9","9fb","9gd","72h","7cm","7gs","7b7","7fb","7gd","WP7","WP8","WP9","WP10","WP11"];
-		//itemToCompare["2H"] = 0;
-		//for (c2h in code_two_handers) { if (itemToCompare.CODE == code_two_handers[c2h] || itemToCompare[code_two_handers[c2h]] == 1) { itemToCompare._2H = 1; } }
-		
 	} else {
-		for (aff in code_other) {
-			if (typeof(itemToCompare[code_other[aff]]) != 'undefined') { if (itemToCompare[code_other[aff]] != 0) { itemToCompare[code_other[aff]] = 0 } }
-		}
-		for (aff in code_affixes) {
-			if (typeof(itemToCompare[code_affixes[aff]]) != 'undefined') { if (itemToCompare[code_affixes[aff]] != 0) { itemToCompare[code_affixes[aff]] = 0 } }
-		}
-		for (let i = 0; i < code_alternates.length; i++) {
-			if (typeof(itemToCompare[code_alternates[i]]) != 'undefined') { if (itemToCompare[code_alternates[i]] == true) { itemToCompare[code_alternates[i]] = false } }
-		}
 		if (typeof(itemToCompare.WP5) != 'undefined' && typeof(itemToCompare.WP6) != 'undefined' && typeof(itemToCompare.WP7) != 'undefined') { if ((itemToCompare.WP5 == true && itemToCompare.WP6 == true && itemToCompare.WP7 != true) || (itemToCompare.WP7 == true && itemToCompare.WP6 == true && itemToCompare.WP5 != true)) { itemToCompare.WP6 = false } }
 		if (typeof(itemToCompare.CL3) != 'undefined' && typeof(itemToCompare.EQ3) != 'undefined') { if (itemToCompare.CL3 == true && itemToCompare.EQ3 == true) { itemToCompare.EQ3 = false } }
 		if (typeof(itemToCompare.CL4) != 'undefined' && typeof(itemToCompare.EQ3) != 'undefined') { if (itemToCompare.CL4 == true && itemToCompare.EQ3 == true) { itemToCompare.EQ3 = false } }
 		if (typeof(itemToCompare.WP10) != 'undefined') { if (itemToCompare.WP10 == true) { itemToCompare.WP9 = true } }
 		if (typeof(itemToCompare.EQ7) != 'undefined') { if (itemToCompare.EQ7 == true) { itemToCompare.EQ1 = true } }
+	}
+	// TODO: clean up setPD2Codes() so that it only includes differences between PD2 and PoD codes... many of the codes seem to be shared now
+	for (let i = 0; i < code_originals.length; i++) {
+		if (typeof(itemToCompare[code_originals[i]]) != 'undefined') { if (itemToCompare[code_originals[i]] == true) { itemToCompare[code_alternates[i]] = true } }
+	}
+	for (aff in code_affixes) {
+		if (typeof(itemToCompare[codes[aff]]) != 'undefined') { itemToCompare[code_affixes[aff]] = itemToCompare[codes[aff]] }
+		if (code_affixes[aff] == "FRW") { if (typeof(itemToCompare[codes["frw"]]) != 'undefined' || typeof(itemToCompare[codes["velocity"]]) != 'undefined') { itemToCompare[code_affixes[aff]] = ~~itemToCompare[codes["frw"]] + ~~itemToCompare[codes["velocity"]] } }	// speed penalties from armor are counted as FRW in PD2
+	}
+	for (aff in code_other) {
+		if (typeof(itemToCompare[aff]) != 'undefined') { itemToCompare[code_other[aff]] = itemToCompare[aff] }
+	}
+	if (settings.version == 1) {
+		document.getElementById("character_class").style.display = "inline-table"
+		document.getElementById("character_shop").style.display = "inline-table"
+		document.getElementById("character_gold").style.display = "none"
+		if (selected_group_index < 9) { document.getElementById("select_price").style.display = "block" }	// shows price for all equipment groups (excludes "charm", "socketable", "miscellaneous")
+		if (selected_group_index > 9) {
+			var premade_type = itemToCompare.type_affix;
+			var selected_name_index = document.getElementById("dropdown_name").selectedIndex;
+			reset_selected = false;
+			for (i in premade[premade_type]) { if (typeof(premade[premade_type][i].pd2) != 'undefined') {
+				if (premade[premade_type][i].pd2 == 1) {
+					document.getElementById("dropdown_name").options[i].style.display = "block"
+				} else if (premade[premade_type][i].pd2 == 0) {
+					if (selected_name_index == i) { reset_selected = true }
+					document.getElementById("dropdown_name").options[i].style.display = "none"
+				}
+			} }
+			if (reset_selected == true) {
+				document.getElementById("dropdown_name").selectedIndex = 0
+				setName(document.getElementById("dropdown_name").options[0].innerHTML)
+			}
+		}
+	} else {
 		document.getElementById("character_class").style.display = "none"
 		document.getElementById("character_shop").style.display = "none"
 		document.getElementById("character_gold").style.display = "inline-table"
-		document.getElementById("select_price").style.display = "none"
+		if (selected_group_index < 9) { document.getElementById("select_price").style.display = "block" }	// shows price for all equipment groups (excludes "charm", "socketable", "miscellaneous")
 		if (selected_group_index > 9) {
 			var premade_type = itemToCompare.type_affix;
 			var selected_name_index = document.getElementById("dropdown_name").selectedIndex;
@@ -1952,7 +1983,6 @@ function setPD2Codes() {
 				setName(document.getElementById("dropdown_name").options[0].innerHTML)
 			}
 		}
-		//itemToCompare["2H"] = 0;
 		// TODO: update pointmod options if necessary
 	}
 	//if (itemToCompare.type_affix == "quiver") { setType("quiver"); reset_selected = true; }	// TODO: This kind of thing should only be called once when changing versions, rather than after every changed detail. The same principle probably applies to other parts of the program, resulting in non-immediate updates.
@@ -2008,7 +2038,7 @@ function setQuantity(val) {
 		itemToCompare.QUANTITY = val
 		itemToCompare.QTY = val
 	}
-	simulate()
+	//simulate()	// moved to setItemFromCustom()
 }
 
 /* Notes about PD2 changes:

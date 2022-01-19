@@ -30,7 +30,8 @@ URL parameters (v=PD2, alternate=0, multiple=0, auto=0, checking=0) can be used 
   * "CHSK" codes for skill charges and "OS" codes for oskills are unimplemented
   * FOOLS is unimplemented
   * PRICE is not updated automatically
-  * Some PD2-specific conditions are unimplemented: PREFIX, SUFFIX, MAPID
+  * Unimplemented PoD-specific conditions: AREALVL (may be others due to poor documentation, please report them)
+  * Unimplemented PD2-specific conditions: PREFIX, SUFFIX, MAPID
   * STAT360 (item corruption) is only partially implemented - it checks whether a corruption exists, but not which corruption
   * There may be some numbered "STAT" codes which aren't implemented - please report them
 
