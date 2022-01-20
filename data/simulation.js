@@ -29,7 +29,7 @@ var filter_text = "";
 // ---------------------------------
 function startup() {
 	document.getElementById("filter_text_1").innerHTML = "// Load filter files from your Diablo II directory or copy/paste their rules here"
-	document.getElementById("filter_text_2").innerHTML = "// Load filter files from your Diablo II directory or copy/paste their rules here"
+	document.getElementById("filter_text_2").innerHTML = "// Load filter files from your Diablo II directory or copy/paste their rules here\r\n// If you're not simulating multiple filters, Filter #2 can be disabled via the menu"
 	loadItems()
 	loadOptions()
 	var r = Math.floor(Math.random()*5+1);
