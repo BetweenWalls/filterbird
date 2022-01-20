@@ -69,6 +69,7 @@ var rare_suffix = {
 };
 
 var most_recent_rarity = "Set";		// which item rarity was most recently selected
+var most_recent_rarity_misc = 2;	// which item rarity was most recently selected
 
 // toggleCustom - toggles the custom item editing UI
 // ---------------------------------
@@ -194,21 +195,24 @@ function loadBase(value) {
 		if (document.getElementById("dropdown_base").options.length > 1 && document.getElementById("dropdown_type").value != "charm" && document.getElementById("dropdown_type").value != "quiver") {
 			options = "<option class='gray-all'>any</option>" + options
 			document.getElementById("dropdown_base").innerHTML = options
-			if (most_recent_rarity == "Regular" || most_recent_rarity == "Magic" || most_recent_rarity == "Rare") { document.getElementById("dropdown_base").selectedIndex = 1; }	// keep the previous rarity if possible by changing "any" to the first available base (only Set/Unique items can be selected with "any")
+			if (most_recent_rarity == "Regular" || most_recent_rarity == "Magic" || most_recent_rarity == "Rare" || most_recent_rarity == "Craft") { document.getElementById("dropdown_base").selectedIndex = 1; }	// keep the previous rarity if possible by changing "any" to the first available base (only Set/Unique items can be selected with "any")
 		}
 		loadRarity(document.getElementById("dropdown_base").value)
 	}
 }
 // setBase - called when 'base' dropdown is used, loads the next dropdown
 // ---------------------------------
-function setBase(value) {
+function setBase(value) {						// TODO: generalize the hardcoded indexes used here
 	if (value == "any") {
-		if (most_recent_rarity == "Set" && document.getElementById("dropdown_rarity").options.length > 4) {
+		if (most_recent_rarity == "Set" && document.getElementById("dropdown_rarity").options.length > 5) {
+			document.getElementById("dropdown_rarity").selectedIndex = 5;
+			document.getElementById("dropdown_rarity").value = document.getElementById("dropdown_rarity").options[5].innerHTML;
+		} else if (most_recent_rarity == "Unique" && document.getElementById("dropdown_rarity").options.length > 4) {
 			document.getElementById("dropdown_rarity").selectedIndex = 4;
 			document.getElementById("dropdown_rarity").value = document.getElementById("dropdown_rarity").options[4].innerHTML;
 		} else {
-			document.getElementById("dropdown_rarity").selectedIndex = 3;
-			document.getElementById("dropdown_rarity").value = document.getElementById("dropdown_rarity").options[3].innerHTML;
+			document.getElementById("dropdown_rarity").selectedIndex = 1;
+			document.getElementById("dropdown_rarity").value = document.getElementById("dropdown_rarity").options[1].innerHTML;
 		}
 	}
 	loadRarity(value)
@@ -217,7 +221,7 @@ function setBase(value) {
 // ---------------------------------
 function loadRarity(value) {
 	var options = "";
-	var rarities = ["Regular","Magic","Rare"];
+	var rarities = ["Regular","Magic","Rare","Craft"];
 	for (rarity in rarities) {
 		options += "<option class='gray-all'>" + rarities[rarity] + "</option>"
 	}
@@ -294,11 +298,10 @@ function setRarity(value) {
 		document.getElementById("dropdown_base").selectedIndex = new_index;
 		// set rarity options to match the new base
 		var options = "";
-		var rarities = ["Regular","Magic","Rare"];
+		var rarities = ["Regular","Magic","Rare","Craft"];
 		for (rarity in rarities) {
 			options += "<option class='gray-all'>" + rarities[rarity] + "</option>"
 		}
-		// TODO: add "Crafted" rarity
 		var capable_unique = false;
 		var capable_set = false;
 		for (itemNew in equipment[group]) {
@@ -430,6 +433,7 @@ function setILVL2(value) {
 //	dropdowns for possible affixes are then populated
 // ---------------------------------
 function setCustomBase() {
+	document.getElementById("dropdown_rarity_misc").innerHTML = ""
 	// TODO: keep track of old rarity, and don't switch to "any" base unless it's unique/set
 	var old_base = itemCustom.base;
 	var group = document.getElementById("dropdown_group").value;
@@ -450,10 +454,15 @@ function setCustomBase() {
 			}
 		}
 		if (typeof(itemCustom.relic_experience) != 'undefined') {
-			//if (rarity == "Magic") { itemCustom.base =  }
-			if (itemCustom.rarity == "rare") {
-				itemCustom.base = itemCustom.name
-				itemCustom.name = rare_prefix[Math.floor(Math.random()*rare_prefix.length)] + " Eye"
+			var use_misc_rarity = false;
+			if (typeof(itemCustom.map_tier) != 'undefined') { if (itemCustom.map_tier > 0 && itemCustom.map_tier < 4) { use_misc_rarity = true } }
+			if (use_misc_rarity == true) {
+				loadRarityMisc()
+			} else {
+				if (itemCustom.rarity == "rare") {
+					itemCustom.base = itemCustom.name
+					itemCustom.name = rare_prefix[Math.floor(Math.random()*rare_prefix.length)] + " Eye"
+				}
 			}
 		}
 	} else {
@@ -502,7 +511,7 @@ function setCustomBase() {
 		}
 		if (rarity == "Set" || rarity == "Unique") { itemCustom.name = name }
 		else if (rarity == "Regular" || rarity == "Magic") { itemCustom.name = base }
-		else if (rarity == "Rare") {
+		else if (rarity == "Rare" || rarity == "Craft") {
 			var suffix = "";
 			if (itemCustom.shield == true) { suffix = rare_suffix["shield"][Math.floor(Math.random()*rare_suffix["shield"].length)] }
 			else if (itemCustom.ARMOR == true) { suffix = rare_suffix[group][Math.floor(Math.random()*rare_suffix[group].length)] }
@@ -550,6 +559,8 @@ function tidyBaseSelection() {
 	//else { document.getElementById("select_rarity").style.display = "inline" }
 	if (document.getElementById("dropdown_name").innerHTML == "") { document.getElementById("select_name").style.display = "none" }
 	else { document.getElementById("select_name").style.display = "inline" }
+	if (document.getElementById("dropdown_rarity_misc").innerHTML == "") { document.getElementById("select_rarity_misc").style.display = "none" }
+	else { document.getElementById("dropdown_rarity_misc").style.display = "inline" }
 }
 
 
@@ -562,18 +573,18 @@ function tidyBaseSelection() {
 // ---------------------------------
 function getMatch(kind) {
 	var result = false;
-	if (kind == "identified" && itemCustom.rarity != "regular") { result = true }
-	if (kind == "ethereal" && !((itemCustom.WEAPON != true && itemCustom.ARMOR != true) || itemCustom.rarity == "set" || itemCustom.WP9 == true || itemCustom["7cr"] == true || itemCustom.name == "Crown of Ages" || itemCustom.name == "Leviathan" || itemCustom.name == "Tyrael's Might" || itemCustom.name == "Butcher's Pupil" || itemCustom.name == "Wizardspike" || itemCustom.name == "Stormspire" || itemCustom.name == "Stormshield" || (settings.version == 0 && (itemCustom.name == "The Gavel of Pain" || itemCustom.name == "Schaefer's Hammer" || itemCustom.name == "The Cranium Basher" || itemCustom.name == "Doombringer" || itemCustom.name == "The Grandfather" || itemCustom.name == "Steel Pillar")) || itemCustom.name == "Ethereal Edge" || itemCustom.name == "Ghostflame" || itemCustom.name == "Wraith Flight" || itemCustom.name == "Shadow Killer")) { result = true }
+	if (kind == "identified" && itemCustom.rarity != "regular" && itemCustom.rarity != "craft") { result = true }
+	if (kind == "ethereal" && !((itemCustom.WEAPON != true && itemCustom.ARMOR != true) || itemCustom.rarity == "set" || itemCustom.WP9 == true || itemCustom["7cr"] == true || itemCustom.name == "Crown of Ages" || itemCustom.name == "Leviathan" || itemCustom.name == "Tyrael's Might" || itemCustom.name == "Butcher's Pupil" || itemCustom.name == "Wizardspike" || itemCustom.name == "Stormshield" || (settings.version == 0 && (itemCustom.name == "The Gavel of Pain" || itemCustom.name == "Schaefer's Hammer" || itemCustom.name == "The Cranium Basher" || itemCustom.name == "Doombringer" || itemCustom.name == "The Grandfather" || itemCustom.name == "Steel Pillar" || itemCustom.name == "Stormspire" || itemCustom.name == "Wraith Flight")) || itemCustom.name == "Ethereal Edge" || itemCustom.name == "Ghostflame" || itemCustom.name == "Shadow Killer")) { result = true }
 	if (kind == "sockets" && typeof(itemCustom.max_sockets) != 'undefined' && itemCustom.rarity == "regular") { result = true }
 	if (kind == "quality" && itemCustom.rarity == "regular" && itemCustom.affix_type != "quiver") { result = true }
 	if (kind == "automod" && itemCustom.rarity != "unique" && itemCustom.rarity != "set" && (itemCustom.CL3 || itemCustom.CL4 || itemCustom.CL6 || itemCustom.CL7)) { result = true }
 	if (kind == "pointmod" && itemCustom.rarity != "unique" && itemCustom.rarity != "set" && (itemCustom.CL1 || itemCustom.CL2 || itemCustom.CL4 || itemCustom.CL5 || itemCustom.CL6 || itemCustom.WP11 || itemCustom.WP12 || itemCustom.WP13) && !(itemCustom.CL5 == true && (itemCustom.tier == 1 || itemCustom["9ar"] == true || itemCustom["9wb"] == true || itemCustom["9xf"] == true))) { result = true }
 	if (kind == "affix" && (itemCustom.rarity == "magic" || itemCustom.rarity == "rare" || itemCustom.rarity == "craft")) { result = true }
 	if (kind == "corruption" && itemCustom.rarity != "regular" && itemCustom.type_affix != "charm" && itemCustom.type_affix != "jewel" && !(itemCustom.sockets > 0)) { result = true }
-	if (kind == "upgrade" && (itemCustom.rarity == "unique" || itemCustom.rarity == "rare" || itemCustom.rarity == "set") && (itemCustom.tier == 1 || itemCustom.tier == 2)) { result = true }
+	if (kind == "upgrade" && (itemCustom.rarity == "unique" || itemCustom.rarity == "rare" || itemCustom.rarity == "set" || itemCustom.rarity == "craft") && (itemCustom.tier == 1 || itemCustom.tier == 2)) { result = true }
 	if (kind == "superior" && itemCustom.superior == true) { result = true }
 	if (itemCustom.type_affix == "rune" || itemCustom.type_affix == "gem" || itemCustom.type_affix == "other" || itemCustom.type_affix == "misc") { result = false }
-	if (kind == "identified" && typeof(itemCustom.relic_experience) != 'undefined') { result = true }
+	if (kind == "identified" && typeof(itemCustom.relic_experience) != 'undefined' && itemCustom.rarity != "regular") { result = true }
 	return result
 }
 // getALVL - returns the 'affix level' for the item
@@ -1783,7 +1794,7 @@ function setItemCodes() {
 		else if (itemToCompare.rarity == "regular") { itemToCompare.NMAG = true; itemToCompare.always_id = true; }
 		else if (itemToCompare.rarity == "unique") { itemToCompare.UNI = true }
 		else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; }
-		else if (itemToCompare.rarity == "craft") { itemToCompare.always_id = true }
+		else if (itemToCompare.rarity == "craft") { itemToCompare.CRAFT = true; itemToCompare.always_id = true; }
 	} else {itemToCompare.UNI = true }
 	if (itemToCompare.type == "rune") { itemToCompare.RUNENAME = itemToCompare.name.split(" ")[0] }
 	itemToCompare[itemToCompare.CODE] = true
@@ -1901,6 +1912,15 @@ function setItemCodes() {
 		itemToCompare.STAT41 += itemToCompare.RES
 		itemToCompare.STAT43 += itemToCompare.RES
 		itemToCompare.STAT45 += itemToCompare.RES
+	}
+	
+	// implement FOOLS:
+	itemToCompare.FOOLS = false
+	for (let n = 1; n <= 3; n++) {
+		var e = document.getElementById("dropdown_affix_"+n);
+		if (e.options.length > 0) {
+			if (e.options[e.selectedIndex].text == "+# Damage (# per level), +# to Attack Rating (# per level)") { itemToCompare.FOOLS = true }
+		}
 	}
 }
 
@@ -2040,6 +2060,43 @@ function setQuantity(val) {
 	}
 	//simulate()	// moved to setItemFromCustom()
 }
+
+
+
+// loadRarityMisc - enables rarity dropdown for miscellaneous items (maps)
+// ---------------------------------
+function loadRarityMisc() {
+	document.getElementById("select_rarity_misc").style.display = "inline"
+	var options = "";
+	var rarities = ["Regular","Magic","Rare"];
+	for (rarity in rarities) { options += "<option class='gray-all'>" + rarities[rarity] + "</option>" }
+	document.getElementById("dropdown_rarity_misc").innerHTML = options
+	document.getElementById("dropdown_rarity_misc").selectedIndex = most_recent_rarity_misc
+	setRarityMiscInfo(most_recent_rarity_misc)
+}
+// setRarityMisc - sets rarity for miscellaneous items (maps) when the misc rarity dropdown is changed
+// ---------------------------------
+function setRarityMisc(index) {
+	setRarityMiscInfo(index)
+	tidyBaseSelection()
+	setValues()
+	simulate()
+}
+// setRarityMiscInfo - sets rarity codes for miscellaneous items
+// ---------------------------------
+function setRarityMiscInfo(index) {
+	var rarities = ["Regular","Magic","Rare"];
+	most_recent_rarity_misc = index
+	itemCustom.rarity = rarities[index].toLowerCase()
+	itemCustom.name = document.getElementById("dropdown_name").value;
+	itemCustom.base = itemCustom.name
+	if (itemCustom.rarity == "rare") {
+		itemCustom.name = rare_prefix[Math.floor(Math.random()*rare_prefix.length)] + " Eye"
+	}
+	if (index == 0) { document.getElementById("select_identified").style.display = "none" }
+	else { document.getElementById("select_identified").style.display = "block" }
+}
+
 
 /* Notes about PD2 changes:
 	Implemented

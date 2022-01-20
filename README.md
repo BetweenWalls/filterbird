@@ -19,16 +19,13 @@ The background images can be changed by right-clicking them.
 URL parameters (v=PD2, alternate=0, multiple=0, auto=0, checking=0) can be used to load the filter with certain menu options enabled/disabled. For example: https://betweenwalls.github.io/filterbird/?v=PD2&multiple=0&auto=0
 
 ## Known Issues
-* All PD2 items use the same attributes as those in the PoD version (with the exception of PD2-specific items and pointmod attribute names)
+* All PD2 items use the same attributes as those in the PoD version (with the exception of PD2-specific equipment and pointmod attribute names)
 * Nothing special is done to display item notifications or minimap icons
 * Item issues:
-  * Crafted items cannot be selected
   * Wirt's Leg and quest weapons cannot be customized
-  * PD2 Maps (t11 through t39) are selectable, but their rarity isn't customizable
   * PD2-specific equipment items and runeword options aren't hidden if the PoD version is selected (and vice versa)
 * Item condition issues:
   * "CHSK" codes for skill charges and "OS" codes for oskills are unimplemented
-  * FOOLS is unimplemented
   * PRICE is not updated automatically
   * Unimplemented PoD-specific conditions: AREALVL (may be others due to poor documentation, please report them)
   * Unimplemented PD2-specific conditions: PREFIX, SUFFIX, MAPID

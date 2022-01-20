@@ -209,7 +209,7 @@ function setItem(value) {
 				else if (itemToCompare.rarity == "regular") { itemToCompare.NMAG = true; itemToCompare.always_id = true; }
 				else if (itemToCompare.rarity == "rw") { itemToCompare.NMAG = true; itemToCompare.RW = true; itemToCompare.always_id = true; }
 				else if (itemToCompare.rarity == "unique") { itemToCompare.UNI = true }
-				else if (itemToCompare.rarity == "craft") { itemToCompare.always_id = true }
+				else if (itemToCompare.rarity == "craft") { itemToCompare.CRAFT = true; itemToCompare.always_id = true; }
 			} else { itemToCompare.UNI = true }
 			if (itemToCompare.RW == true) {
 				var rw_name = itemToCompare.name.split(" ­ ")[0].split(" ").join("_").split("'").join("");
@@ -864,7 +864,7 @@ function getColor(item) {
 	else if (item.UNI == true) { color = "GOLD" }
 	else if (item.SET == true) { color = "GREEN" }
 	else if (item.NMAG == true && (item.ETH == true || item.SOCK != 0)) { color = "GRAY" }
-	else if (item.rarity == "craft" || ((item.ARMOR == true || item.WEAPON == true || item.CODE == "rin" || item.CODE == "amu") && item.NMAG != true  && item.MAG != true  && item.RARE != true  && item.UNI != true  && item.SET != true)) { color = "ORANGE" }
+	else if (item.CRAFT == true || item.rarity == "craft" || ((item.ARMOR == true || item.WEAPON == true || item.CODE == "rin" || item.CODE == "amu") && item.NMAG != true  && item.MAG != true  && item.RARE != true  && item.UNI != true  && item.SET != true)) { color = "ORANGE" }
 	return color
 }
 
@@ -1014,6 +1014,7 @@ function printAffixes() {
 // testing...
 function test() {
 	document.getElementById("print").innerHTML = ""
+	
 	// without downloading the filter files with their original encoding, there may not be a way to do this
 	/*var launcher_url = "https://raw.githubusercontent.com/Project-Diablo-2/LootFilters/main/filters.json";
 	getRequest1(launcher_url);
