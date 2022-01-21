@@ -1,6 +1,5 @@
 
 // TODO: reduce similar/duplicated code for setSuperior/setSuperiorValue, setAutomod/setAutomodValue, setPointmod/setPointmodValue, setAffix/setAffixValue, setCorruption/setCorruptionValue
-// TODO: add crafted items
 // TODO: add option to insert socketables into items (also: Runewords)
 // TODO: add option to 'Larzuk'-socket items (mostly just relevant when a non-socket corruption is already applied)
 // TODO: update mutual compatibility of superior mod options (ar_bonus & req)
@@ -1763,13 +1762,12 @@ function setItemFromCustom() {
 	if (itemCustom.CODE == "GOLD") { document.getElementById("select_amount").style.display = "block"; setAmount(document.getElementById("amount").value) }
 	else { document.getElementById("select_amount").style.display = "none" }
 	var force_simulate = false;
-	if (typeof(itemCustom.QUANTITY) != 'undefined') { document.getElementById("select_quantity").style.display = "block"; setQuantity(itemCustom.QUANTITY); force_simulate = true; }	// TODO: this extra boolean is a symptom of increasingly worse "spaghetti" code
+	if (typeof(itemCustom.QUANTITY) != 'undefined') { document.getElementById("select_quantity").style.display = "block"; setQuantity(itemCustom.QUANTITY); }
 	else { document.getElementById("select_quantity").style.display = "none" }
 	
-	//printAffixes()
 	setItemCodes()
-	var reset_simulation = setPD2Codes()
-	if (reset_simulation == false || force_simulate == true) { simulate() }
+	var already_reset = setPD2Codes();	// if true, the program will essentially do 1 recursive loop before returning here and calling the next line twice (not good, but shouldn't be a major issue since simulate() won't execute parseFile() when the info is the same)
+	simulate()				// TODO: could this just be put inside setPD2Codes() instead?
 }
 
 // setItemCodes - sets item codes
@@ -1967,7 +1965,6 @@ function setPD2Codes() {
 		if (selected_group_index > 9) {
 			var premade_type = itemToCompare.type_affix;
 			var selected_name_index = document.getElementById("dropdown_name").selectedIndex;
-			reset_selected = false;
 			for (i in premade[premade_type]) { if (typeof(premade[premade_type][i].pd2) != 'undefined') {
 				if (premade[premade_type][i].pd2 == 1) {
 					document.getElementById("dropdown_name").options[i].style.display = "block"
@@ -1976,10 +1973,6 @@ function setPD2Codes() {
 					document.getElementById("dropdown_name").options[i].style.display = "none"
 				}
 			} }
-			if (reset_selected == true) {
-				document.getElementById("dropdown_name").selectedIndex = 0
-				setName(document.getElementById("dropdown_name").options[0].innerHTML)
-			}
 		}
 	} else {
 		document.getElementById("character_class").style.display = "none"
@@ -1989,7 +1982,6 @@ function setPD2Codes() {
 		if (selected_group_index > 9) {
 			var premade_type = itemToCompare.type_affix;
 			var selected_name_index = document.getElementById("dropdown_name").selectedIndex;
-			reset_selected = false;
 			for (i in premade[premade_type]) { if (typeof(premade[premade_type][i].pd2) != 'undefined') {
 				if (premade[premade_type][i].pd2 == 1) {
 					if (selected_name_index == i) { reset_selected = true }
@@ -1998,12 +1990,12 @@ function setPD2Codes() {
 					document.getElementById("dropdown_name").options[i].style.display = "block"
 				}
 			} }
-			if (reset_selected == true) {
-				document.getElementById("dropdown_name").selectedIndex = 0
-				setName(document.getElementById("dropdown_name").options[0].innerHTML)
-			}
 		}
 		// TODO: update pointmod options if necessary
+	}
+	if (reset_selected == true) {
+		document.getElementById("dropdown_name").selectedIndex = 0
+		setName(document.getElementById("dropdown_name").options[0].innerHTML)
 	}
 	//if (itemToCompare.type_affix == "quiver") { setType("quiver"); reset_selected = true; }	// TODO: This kind of thing should only be called once when changing versions, rather than after every changed detail. The same principle probably applies to other parts of the program, resulting in non-immediate updates.
 	return reset_selected

@@ -18,6 +18,11 @@ var colors = {
 	PURPLE:"#9b2aea",
 	RED:"#a94838"
 };
+var filter = [0,{text:"",result:["",""],o:""},{text:"",result:["",""],o:""}];	// stores most recent info, first index unused
+var item_old = {};
+var character_old = {};
+var settings_old = {};
+var messages_old = "";
 // testing variables
 var launcher_text = "";
 var launcher_data = [];
@@ -279,11 +284,31 @@ function simulate(manual) {
 			document.getElementById("output_"+num).innerHTML = ""
 			document.getElementById("item_desc"+num).innerHTML = ""
 		}
+		// compare item/character info
+		var same_both_filters = true;
+		var same_itemchar_info = true;
+		for (stat in itemToCompare) { if (typeof(item_old) != 'undefined') { if (itemToCompare[stat] != item_old[stat]) { same_itemchar_info = false } } else { same_itemchar_info = false } }
+		for (stat in item_old) { if (typeof(itemToCompare) != 'undefined') { if (item_old[stat] != itemToCompare[stat]) { same_itemchar_info = false } } else { same_itemchar_info = false } }
+		for (stat in character) { if (typeof(character_old) != 'undefined') { if (character[stat] != character_old[stat]) { same_itemchar_info = false } } else { same_itemchar_info = false } }
+		for (stat in character_old) { if (typeof(character) != 'undefined') { if (character_old[stat] != character[stat]) { same_itemchar_info = false } } else { same_itemchar_info = false } }
+		for (stat in settings) { if (settings[stat] != settings_old[stat]) { same_itemchar_info = false } }	// only 1-way comparison needed, new settings are never added
+
 		for (let num = 1; num <= settings.num_filters; num++) {
+			var same_filter_info = true;
 			var result = ["",""];
 			if (document.getElementById("filter_text_"+num).value != "") {
 				if (document.getElementById("o3").innerHTML == "") {
-					result = parseFile(document.getElementById("filter_text_"+num).value,num)	// TODO: Is there a way to handle crashes, so that Filter #2 can still be evaluated even if #1 fails? Would also help reduce duplicated code for error/notification messages as well... SO MANY work-arounds due to this issue!
+					// compare filter text and item/character info, only call parseFile() if when there have been changes
+					var filter_text_new = document.getElementById("filter_text_"+num).value;
+					if (filter_text_new != filter[num].text) { same_filter_info = false; same_both_filters = false; }
+					if (same_itemchar_info == false || same_filter_info == false) {
+						result = parseFile(filter_text_new,num)		// TODO: Is there a way to handle parseFile() crashes, so that Filter #2 can still be evaluated even if #1 fails? Would also help reduce duplicated code for error/notification messages as well... SO MANY work-arounds due to this issue!
+						filter[num].result = result
+						filter[num].o = document.getElementById("o"+num).innerHTML
+					} else {
+						result = filter[num].result
+						document.getElementById("o"+num).innerHTML = filter[num].o
+					}
 				}
 			}
 			document.getElementById("output_"+num).innerHTML = result[0]
@@ -294,6 +319,15 @@ function simulate(manual) {
 			document.getElementById("output_"+num).style.top = hei+"px"
 			if (num == 1 && document.getElementById("filter_text_2").value != "") { document.getElementById("output_spacing").innerHTML = "<br>" }
 		}
+		// store filter text and item/character info
+		filter[1].text = document.getElementById("filter_text_1").value
+		filter[2].text = document.getElementById("filter_text_2").value
+		item_old = {}
+		character_old = {}
+		settings_old = {}
+		for (stat in itemToCompare) { item_old[stat] = itemToCompare[stat] }
+		for (stat in character) { character_old[stat] = character[stat] }
+		for (stat in settings) { settings_old[stat] = settings[stat] }
 	}
 	var messages = ""
 	if (notices.encoding == 1) { messages += "<br>An encoding issue may be preventing � characters from appearing correctly." }
@@ -301,7 +335,8 @@ function simulate(manual) {
 	if (notices.pd2_conditions == 1) { messages += "<br>PD2 code(s) detected - the PD2 version of FilterBird can be enabled from the menu." }
 	if (notices.pod_conditions == 1) { messages += "<br>PoD code(s) detected - the PoD version of FilterBird can be enabled from the menu." }
 	//if (notices.colors == 1) {messages += "<br>Unsupported color keywords detected. Keywords such as %LIGHT_GRAY% just default to %GRAY% in PD2." }
-	
+	if (same_both_filters == true) { messages = messages_old }
+	messages_old = messages
 	document.getElementById("o4").innerHTML = messages
 	//document.body.style.cursor = "auto";
 }
@@ -1267,8 +1302,8 @@ function changeVersion(v) {
 		window.history.replaceState({}, '', `${location.pathname}`)
 	}
 	if (prev_version != v) {
-		setPD2Codes()
-		simulate()
+		var already_reset = setPD2Codes();
+		if (already_reset == false) { simulate() }
 	}
 }
 

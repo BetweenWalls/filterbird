@@ -19,11 +19,12 @@ The background images can be changed by right-clicking them.
 URL parameters (v=PD2, alternate=0, multiple=0, auto=0, checking=0) can be used to load the filter with certain menu options enabled/disabled. For example: https://betweenwalls.github.io/filterbird/?v=PD2&multiple=0&auto=0
 
 ## Known Issues
-* All PD2 items use the same attributes as those in the PoD version (with the exception of PD2-specific equipment and pointmod attribute names)
 * Nothing special is done to display item notifications or minimap icons
-* Item issues:
-  * Wirt's Leg and quest weapons cannot be customized
-  * PD2-specific equipment items and runeword options aren't hidden if the PoD version is selected (and vice versa)
+* All PD2 items use the same attributes as those in the PoD version (with the exception of PD2-specific equipment and pointmod attribute names)
+* PD2-specific equipment items and runeword options aren't hidden if the PoD version is selected (and vice versa)
+* Unique and set items cannot have their attributes customized
+* Crafted items don't have predetermined affixes
+* Wirt's Leg and quest weapons cannot be customized
 * Item condition issues:
   * "CHSK" codes for skill charges and "OS" codes for oskills are unimplemented
   * PRICE is not updated automatically
@@ -36,10 +37,10 @@ URL parameters (v=PD2, alternate=0, multiple=0, auto=0, checking=0) can be used 
 If you would like to improve this program, or just share feedback about how it could be improved, you can message me on reddit ([BetweenWalls](https://www.reddit.com/message/compose/?to=BetweenWalls)) or discord (@BetweenWalls#2390). You can also just open an [issue](https://github.com/BetweenWalls/filterbird/issues) here.
 
 Potential Improvements:
+* Address **known issues** listed above
 * Optimize simulation performance so that major features can be added:
   * Allow multiple items to be viewed simultaneously
   * Create option to generate variety of different items so filters can be compared effectively with just a few clicks
   * Allow any number of filters to be compared simultaneously
 * Make item tooltip formatting better match in-game tooltip formatting
-* Update item attributes based on the selected version
 * Expand syntax/error checking to further help with diagnosing filter problems
