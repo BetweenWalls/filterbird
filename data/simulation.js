@@ -1,6 +1,6 @@
 
 var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"regular"};
-var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:85,CHARSTAT70:0,CHARSTAT13:1000,AMAZON:true,ASSASSIN:false,BARBARIAN:false,DRUID:false,NECROMANCER:false,PALADIN:false,SORCERESS:false,SHOP:false};
+var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:85,CHARSTAT70:0,CHARSTAT13:1000,AMAZON:true,ASSASSIN:false,BARBARIAN:false,DRUID:false,NECROMANCER:false,PALADIN:false,SORCERESS:false,SHOP:false,FILTLVL:1};
 var item_settings = {ID:false, ILVL_return:85};
 var settings = {auto_difficulty:true,version:0,validation:1,auto_simulate:1,max_errors:50,error_limit:1,num_filters:2,background:0};
 var notices = {duplicates:0,pd2_conditions:0,pod_conditions:0,colors:0,encoding:0};
@@ -511,6 +511,7 @@ function parseFile(file,num) {
 							if (c.substr(0,8) == "CHARSTAT") { c = "invalid_"+c; itemToCompare[c] = 0; }
 							if (c == "GEMLEVEL" && itemToCompare[c] > 3 && itemToCompare.CODE.length == 3) { itemToCompare[c] = 0 }
 						}
+						if (settings.version == 0 && c == "FILTERLVL") { c = "FILTLVL" }
 						// set condition values
 						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") {
 							if (typeof(character[c]) == 'undefined') { character[c] = 0 }
@@ -521,7 +522,7 @@ function parseFile(file,num) {
 						else if (~~Number(itemToCompare[c]) < 0) { value_is_negative = true }
 						// add to formula
 						if (c_falsify == true) { formula += "false " }
-						else if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT" || c == "AMAZON" || c == "ASSASSIN" || c == "BARBARIAN" || c == "DRUID" || c == "NECROMANCER" || c == "PALADIN" || c == "SORCERESS" || c == "SHOP") {
+						else if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT" || c == "AMAZON" || c == "ASSASSIN" || c == "BARBARIAN" || c == "DRUID" || c == "NECROMANCER" || c == "PALADIN" || c == "SORCERESS" || c == "SHOP" || c == "FILTLVL") {
 							if (value_is_negative == true) { formula += (2000000000+Number(character[c]))+" " }			// converts negative values to their equivalent 'unsigned' value
 							else { formula += character[c]+" " }
 						}
@@ -615,6 +616,9 @@ function parseFile(file,num) {
 						out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
 						//else { out_format = out_format.split("%NOTIFY-"+av+"%").join(",invalid_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",invalid_notification,").split("%notify-"+av+"%").join(",invalid_notification,").split("%notify-"+av.toUpperCase()+"%").join(",invalid_notification,") }
 					} }
+				}
+				for (let lvl = 0; lvl <= 9; lvl++) {
+					out_format = out_format.split("%TIER-"+lvl+"%").join(",ignore_TIER-"+lvl+",")
 				}
 				if (settings.version == 0) {
 					for (let stat = 0; stat <= 500; stat++) {
@@ -784,6 +788,9 @@ function parseFile(file,num) {
 			var av = a.toString(16);
 			out_format = out_format.split("%NOTIFY-"+av+"%").join(",ignore_notification,").split("%NOTIFY-"+av.toUpperCase()+"%").join(",ignore_notification,").split("%notify-"+av+"%").join(",ignore_notification,").split("%notify-"+av.toUpperCase()+"%").join(",ignore_notification,")
 		} }
+	}
+	for (let lvl = 0; lvl <= 9; lvl++) {
+		out_format = out_format.split("%TIER-"+lvl+"%").join(",ignore_TIER-"+lvl+",")
 	}
 	if (settings.version == 0) {
 		for (let stat = 0; stat <= 500; stat++) {
@@ -1274,6 +1281,17 @@ function setGoldChar(value) {
 // ---------------------------------
 function setShop(checked) {
 	character.SHOP = checked
+	simulate()
+}
+// setFilterLevel - 
+// ---------------------------------
+function setFilterLevel(value) {
+	if (isNaN(value) == true || value < 0 || value > 9) {
+		value = Number(character.FILTLVL);
+		if (value > 9) { value = 9 };
+	}
+	document.getElementById("filtlvl").value = Number(value)
+	character.FILTLVL = Number(value)
 	simulate()
 }
 

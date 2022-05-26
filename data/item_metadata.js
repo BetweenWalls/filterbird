@@ -1597,6 +1597,7 @@ var all_codes = {
 	OS221:2,OS222:2,OS223:2,OS224:2,OS225:2,OS226:2,OS227:2,OS228:2,OS229:2,OS230:2,OS231:2,OS232:2,OS233:2,OS234:2,OS235:2,OS236:2,OS237:2,OS238:2,OS239:2,OS240:2,OS241:2,OS242:2,OS243:2,OS244:2,OS245:2,OS246:2,OS247:2,OS248:2,OS249:2,OS250:2,
 	OS251:2,OS252:2,OS253:2,OS254:2,OS255:2,OS256:2,OS257:2,OS258:2,OS259:2,OS260:2,OS261:2,OS262:2,OS263:2,OS264:2,OS265:2,OS266:2,OS267:2,OS268:2,OS269:2,OS270:2,OS271:2,OS272:2,OS273:2,OS274:2,OS275:2,OS276:2,OS277:2,OS278:2,OS279:2,OS280:2,
 	OS357:2,OS364:2,OS367:2,OS369:2,OS371:2,OS381:2,OS383:2,OS366:2,OS374:2,OS376:2,OS378:2,OS370:2,
+	FILTERLVL:1,FILTLVL:3
 };
 
 // TODO: Create list of mutually exclusive condition groups to expand syntax/error checking ...might be better to have a list of incompatible codes for all codes (except item codes, which could be handled separately) - there can only be 1 item code, and all codes are incompatible with any item code that is a subset of its' other incompatible codes (e.g. HELM is incompatible with SHIELD and all item codes that inherit SHIELD such as buc or kit)
