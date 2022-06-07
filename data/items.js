@@ -2034,11 +2034,14 @@ var premade = {
 {CODE:"t11", name:"Ruins of Viz-Jun Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t12", name:"Horazon's Memory Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t13", name:"Bastion Keep Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
+{CODE:"t14", name:"??? Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
+{CODE:"t15", name:"Royal Crypts Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t21", name:"Phlegethon Map", rarity:"rare", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t22", name:"Torajan Jungle Map", rarity:"magic", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t23", name:"Arreat Battlefield Map", rarity:"rare", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t24", name:"Tomb of Zultan Kulle Map", rarity:"rare", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t25", name:"Sewers of Harrogath Map", rarity:"rare", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
+{CODE:"t15", name:"Shadows of Westmarch Map", rarity:"rare", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t31", name:"River of Blood Map", rarity:"rare", map_tier:3, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t32", name:"Throne of Insanity Map", rarity:"rare", map_tier:3, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t33", name:"Lost Temple Map", rarity:"rare", map_tier:3, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
@@ -2050,6 +2053,7 @@ var premade = {
 {CODE:"t39", name:"Kehjistan Marketplace Map", rarity:"rare", map_tier:3, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t41", name:"Cathedral of Light Map", rarity:"rare", map_tier:4, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t42", name:"Plains of Torment Map", rarity:"rare", map_tier:4, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
+{CODE:"t15", name:"Sanctuary of Sin Map", rarity:"rare", map_tier:4, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t61", name:"Desert Duel Arena", rarity:"regular", pd2:1, always_id:true},
 {CODE:"t62", name:"Moor Duel Arena", rarity:"regular", pd2:1, always_id:true},
 
@@ -2062,9 +2066,13 @@ var premade = {
 {CODE:"scrb", name:"Horadrim Scarab", rarity:"regular", color:"GOLD", pd2:1, always_id:true, color_stuck:"GOLD"},
 {CODE:"std", name:"Standard of Heroes", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, req_level:90, pd2:1, always_id:true, color_stuck:"GOLD"},
 
+{CODE:"uba", name:"Relic of the Ancients", rarity:"regular", color:"ORANGE", pd2:1, always_id:true, color_stuck:"ORANGE", static_ILVL:1, description:"Use at the blood fountain in Harrogath"},
 {CODE:"ubtm", name:"Pandemonium Talisman", rarity:"regular", color:"ORANGE", pd2:1, always_id:true, color_stuck:"ORANGE", static_ILVL:1, description:"Use at the blood fountain in Harrogath"},
 {CODE:"dcma", name:"Vision of Terror", rarity:"regular", color:"ORANGE", pd2:1, always_id:true, color_stuck:"ORANGE", static_ILVL:1, description:"Use at the blood fountain in Harrogath"},
 {CODE:"rtma", name:"Voidstone", rarity:"regular", color:"ORANGE", pd2:1, always_id:true, color_stuck:"ORANGE", static_ILVL:1, description:"Use at the blood fountain in Harrogath"},
+{CODE:"ubaa", name:"Sigil of Madawc", rarity:"regular", color:"ORANGE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"ORANGE", description:"One of the three sigils of the ancients"},
+{CODE:"ubab", name:"Sigil of Talic", rarity:"regular", color:"ORANGE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"ORANGE", description:"One of the three sigils of the ancients"},
+{CODE:"ubac", name:"Sigil of Korlic", rarity:"regular", color:"ORANGE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"ORANGE", description:"One of the three sigils of the ancients"},
 {CODE:"dcbl", name:"Pure Demonic Essence", rarity:"regular", color:"ORANGE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"ORANGE"},
 {CODE:"dcho", name:"Black Soulstone", rarity:"regular", color:"ORANGE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"ORANGE"},
 {CODE:"dcso", name:"Prime Evil Soul", rarity:"regular", color:"ORANGE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"ORANGE"},
@@ -2072,11 +2080,14 @@ var premade = {
 {CODE:"rtmo", name:"Trang-Oul's Jawbone", rarity:"regular", color:"ORANGE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"ORANGE"},
 {CODE:"rtmf", name:"Ancient Bone Fragments", rarity:"regular", color:"ORANGE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"ORANGE"},
 {CODE:"cwss", name:"Tainted Worldstone Shard", rarity:"regular", color:"PURPLE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"PURPLE"},	// TODO: "color_stuck" only seems to apply to the original name?
-{CODE:"rtp", name:"unlimited TP tome", rarity:"regular", color:"GOLD", pd2:1, always_id:true, color_stuck:"GOLD", description:"Right click to use"},
-{CODE:"rid", name:"unlimited ID tome", rarity:"regular", color:"GOLD", pd2:1, always_id:true, color_stuck:"GOLD", description:"Right click to use"},
+{CODE:"rtp", name:"Horadrim Navigator", rarity:"regular", color:"GOLD", pd2:1, always_id:true, color_stuck:"GOLD", description:"Right click to use<br>Unlimited Uses"},
+{CODE:"rid", name:"Horadrim Almanac", rarity:"regular", color:"GOLD", pd2:1, always_id:true, color_stuck:"GOLD", description:"Right click to use<br>Unlimited Uses"},
 
 {CODE:"lbox", name:"Larzuk's Puzzlebox", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"GOLD"},
+{CODE:"lpp", name:"Larzuk's Puzzlepiece", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"GOLD", description:"Does not work with uniques and sets"},
 {CODE:"wss", name:"Worldstone Shard", rarity:"regular", color:"PURPLE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"PURPLE"},
 {CODE:"jewf", name:"Jewel Fragments", rarity:"regular", color:"WHITE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true},
+{CODE:"llmr", name:"Lilith's Mirror", rarity:"regular", color:"PURPLE", pd2:1, always_id:true, color_stuck:"PURPLE", description:"Cube with an item to permanently mirror it"},
+{CODE:"lsvl", name:"Vial of Lightsong", rarity:"regular", color:"PURPLE", pd2:1, always_id:true, color_stuck:"PURPLE", description:"Cube with an item to make it ethereal"},
 	]
 };

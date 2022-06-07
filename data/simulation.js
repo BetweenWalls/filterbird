@@ -409,7 +409,9 @@ function parseFile(file,num) {
 		var index_with_tabs = rule_with_tabs.indexOf("ItemDisplay[");
 		var index_end = rule.indexOf("]:");
 		if (settings.validation == 1 && errors < settings.max_errors) {
-			if (!(index >= 0 && rule_with_tabs.substring(0,index_with_tabs).length == 0) && rule_with_tabs.length > 0) { document.getElementById("o"+num).innerHTML += "#"+num+" Improper formatting on line "+line_num+" ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the line is not a rule and has other characters prior to any "/" characters
+			if (!(rule_with_tabs.substring(0,rule_with_tabs.indexOf("ItemDisplayFilterName[]:")).length == 0)) {
+				if (!(index >= 0 && rule_with_tabs.substring(0,index_with_tabs).length == 0) && rule_with_tabs.length > 0) { document.getElementById("o"+num).innerHTML += "#"+num+" Improper formatting on line "+line_num+" ... "+"<l style='color:#aaa'>"+file.split("­").join("•").split("\n")[line]+"</l><br>"; errors++; }	// displays an error if the line is not a rule and has other characters prior to any "/" characters
+			}
 		}
 		if (index >= 0 && rule_with_tabs.substring(0,index_with_tabs).length == 0) {	// line begins with ItemDisplay[
 			rules_checked += 1
