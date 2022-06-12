@@ -2,7 +2,7 @@
 var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"regular"};
 var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:85,CHARSTAT70:0,CHARSTAT13:1000,AMAZON:true,ASSASSIN:false,BARBARIAN:false,DRUID:false,NECROMANCER:false,PALADIN:false,SORCERESS:false,SHOP:false,FILTLVL:1};
 var item_settings = {ID:false, ILVL_return:85};
-var settings = {auto_difficulty:true,version:0,validation:1,auto_simulate:1,max_errors:50,error_limit:1,num_filters:2,background:0};
+var settings = {auto_difficulty:true,version:0,validation:1,auto_simulate:1,max_errors:50,error_limit:1,num_filters:2,background:0,nowrap:true,nowrap_width:800};
 var notices = {duplicates:0,pd2_conditions:0,pod_conditions:0,colors:0,encoding:0};
 var colors = {
 	WHITE:"#dddddd",
@@ -268,6 +268,7 @@ function setItem(value) {
 // simulate - begins the filter simulation process
 // ---------------------------------
 function simulate(manual) {
+	settings.nowrap_width = 800;
 	//document.body.style.cursor = "wait";
 	if (settings.auto_simulate == 0) { document.getElementById("o5").innerHTML = "Auto-Simulate is disabled. Click the 'ground' to simulate manually." }
 	else { document.getElementById("o5").innerHTML = "Auto-Simulate is enabled - the simulation updates when character/item changes are made. Click the 'ground' to simulate manually." }
@@ -318,6 +319,8 @@ function simulate(manual) {
 			document.getElementById("output_"+num).style.left = wid+"px"
 			document.getElementById("output_"+num).style.top = hei+"px"
 			if (num == 1 && document.getElementById("filter_text_2").value != "") { document.getElementById("output_spacing").innerHTML = "<br>" }
+			if (settings.nowrap == true) { document.getElementById("o"+num).style.width = settings.nowrap_width+"px" }
+			else { document.getElementById("o"+num).style.width = "auto" }
 		}
 		// store filter text and item/character info
 		filter[1].text = document.getElementById("filter_text_1").value
@@ -732,7 +735,11 @@ function parseFile(file,num) {
 					continued++
 				}
 				// TODO: Would it be useful to show a warning if %CONTINUE% is used on a hidden item?
-				document.getElementById("o"+num).innerHTML += "#"+num+" Match found at line "+line_num+" after checking "+rules_checked+" rules ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l>"
+				var rule_text = file.split("\t").join(" ").split("­").join("•").split("\n")[line];
+				var output_text = "#"+num+" Match found at line "+line_num+" after checking "+rules_checked+" rules ... "+"<l style='color:#aaa'>"+rule_text+"</l>";
+				var output_width = getTextWidth(output_text, "bold 12pt arial");
+				if (settings.nowrap_width < output_width) { settings.nowrap_width = output_width }
+				document.getElementById("o"+num).innerHTML += "#"+num+" Match found at line "+line_num+" after checking "+rules_checked+" rules ... "+"<l style='color:#aaa'>"+rule_text+"</l>"
 				if (output == "") { document.getElementById("o"+num).innerHTML += " //hidden" }
 				document.getElementById("o"+num).innerHTML += "<br>"
 			}
@@ -1362,6 +1369,19 @@ function toggleErrorLimit(checked) {
 	simulate()
 }
 
+// toggleHorizontalScroll - 
+// ---------------------------------
+function toggleHorizontalScroll(checked) {
+	if (checked == true) {
+		settings.nowrap = true
+		for (let num = 1; num <= settings.num_filters; num++) { document.getElementById("o"+num).style.width = settings.nowrap_width+"px" }
+	}
+	else {
+		settings.nowrap = false
+		for (let num = 1; num <= settings.num_filters; num++) { document.getElementById("o"+num).style.width = "auto" }
+	}
+}
+
 // toggleMultipleFilters - 
 // ---------------------------------
 function toggleMultipleFilters(checked) {
@@ -1381,4 +1401,31 @@ function toggleMultipleFilters(checked) {
 		document.getElementById("o2").style.display = "none"
 		document.getElementById("multiple_spacing").innerHTML = ""
 	}
+}
+
+/**
+  * Uses canvas.measureText to compute and return the width of the given text of given font in pixels.
+  * 
+  * @param {String} text The text to be rendered.
+  * @param {String} font The css font descriptor that text is to be rendered with (e.g. "bold 14px verdana").
+  * 
+  * @see https://stackoverflow.com/questions/118241/calculate-text-width-with-javascript/21015393#21015393
+  */
+function getTextWidth(text, font) {
+  // re-use canvas object for better performance
+  const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+  const context = canvas.getContext("2d");
+  context.font = font;
+  const metrics = context.measureText(text);
+  return metrics.width;
+}
+function getCssStyle(element, prop) {
+    return window.getComputedStyle(element, null).getPropertyValue(prop);
+}
+function getCanvasFontSize(el = document.body) {
+  const fontWeight = getCssStyle(el, 'font-weight') || 'normal';
+  const fontSize = getCssStyle(el, 'font-size') || '16px';
+  const fontFamily = getCssStyle(el, 'font-family') || 'Times New Roman';
+  
+  return `${fontWeight} ${fontSize} ${fontFamily}`;
 }

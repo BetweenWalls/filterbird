@@ -2034,7 +2034,7 @@ var premade = {
 {CODE:"t11", name:"Ruins of Viz-Jun Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t12", name:"Horazon's Memory Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t13", name:"Bastion Keep Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
-{CODE:"t14", name:"??? Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
+{CODE:"t14", name:"Sanatorium Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t15", name:"Royal Crypts Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t21", name:"Phlegethon Map", rarity:"rare", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t22", name:"Torajan Jungle Map", rarity:"magic", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
@@ -2082,12 +2082,13 @@ var premade = {
 {CODE:"cwss", name:"Tainted Worldstone Shard", rarity:"regular", color:"PURPLE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"PURPLE"},	// TODO: "color_stuck" only seems to apply to the original name?
 {CODE:"rtp", name:"Horadrim Navigator", rarity:"regular", color:"GOLD", pd2:1, always_id:true, color_stuck:"GOLD", description:"Right click to use<br>Unlimited Uses"},
 {CODE:"rid", name:"Horadrim Almanac", rarity:"regular", color:"GOLD", pd2:1, always_id:true, color_stuck:"GOLD", description:"Right click to use<br>Unlimited Uses"},
+{CODE:"rkey", name:"Skeleton Key", rarity:"regular", color:"GOLD", pd2:1, always_id:true, color_stuck:"GOLD", description:"Unlimited Use"},
+{CODE:"lsvl", name:"Vial of Lightsong", rarity:"regular", color:"PURPLE", pd2:1, always_id:true, color_stuck:"PURPLE", description:"Cube with an item to make it ethereal"},
+{CODE:"llmr", name:"Lilith's Mirror", rarity:"regular", color:"PURPLE", pd2:1, always_id:true, color_stuck:"PURPLE", description:"Cube with an item to permanently mirror it"},
 
 {CODE:"lbox", name:"Larzuk's Puzzlebox", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"GOLD"},
 {CODE:"lpp", name:"Larzuk's Puzzlepiece", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"GOLD", description:"Does not work with uniques and sets"},
 {CODE:"wss", name:"Worldstone Shard", rarity:"regular", color:"PURPLE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"PURPLE"},
 {CODE:"jewf", name:"Jewel Fragments", rarity:"regular", color:"WHITE", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true},
-{CODE:"llmr", name:"Lilith's Mirror", rarity:"regular", color:"PURPLE", pd2:1, always_id:true, color_stuck:"PURPLE", description:"Cube with an item to permanently mirror it"},
-{CODE:"lsvl", name:"Vial of Lightsong", rarity:"regular", color:"PURPLE", pd2:1, always_id:true, color_stuck:"PURPLE", description:"Cube with an item to make it ethereal"},
 	]
 };
