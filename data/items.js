@@ -2041,7 +2041,7 @@ var premade = {
 {CODE:"t23", name:"Arreat Battlefield Map", rarity:"rare", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t24", name:"Tomb of Zultan Kulle Map", rarity:"rare", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t25", name:"Sewers of Harrogath Map", rarity:"rare", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
-{CODE:"t15", name:"Shadows of Westmarch Map", rarity:"rare", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
+{CODE:"t26", name:"Shadows of Westmarch Map", rarity:"rare", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t31", name:"River of Blood Map", rarity:"rare", map_tier:3, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t32", name:"Throne of Insanity Map", rarity:"rare", map_tier:3, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t33", name:"Lost Temple Map", rarity:"rare", map_tier:3, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
@@ -2053,7 +2053,7 @@ var premade = {
 {CODE:"t39", name:"Kehjistan Marketplace Map", rarity:"rare", map_tier:3, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t41", name:"Cathedral of Light Map", rarity:"rare", map_tier:4, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t42", name:"Plains of Torment Map", rarity:"rare", map_tier:4, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
-{CODE:"t15", name:"Sanctuary of Sin Map", rarity:"rare", map_tier:4, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
+{CODE:"t43", name:"Sanctuary of Sin Map", rarity:"rare", map_tier:4, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t61", name:"Desert Duel Arena", rarity:"regular", pd2:1, always_id:true},
 {CODE:"t62", name:"Moor Duel Arena", rarity:"regular", pd2:1, always_id:true},
 
