@@ -1974,6 +1974,8 @@ function setPD2Codes() {
 				}
 			} }
 		}
+		codes["skill_Teleport"] = "SK54"
+		codes["skill_Chain_Lightning"] = "SK53"
 	} else {
 		document.getElementById("character_class").style.display = "none"
 		document.getElementById("character_shop").style.display = "none"
@@ -1991,6 +1993,8 @@ function setPD2Codes() {
 				}
 			} }
 		}
+		codes["skill_Teleport"] = "SK53"
+		codes["skill_Chain_Lightning"] = "SK54"
 		// TODO: update pointmod options if necessary
 	}
 	if (reset_selected == true) {
