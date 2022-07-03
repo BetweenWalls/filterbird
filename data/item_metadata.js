@@ -1454,6 +1454,16 @@ extra_golems:{index:["extra_golems"], format:["You May Summon "," Additional Gol
 enemy_pdr:{index:["enemy_pdr"], format:["","% to Enemy Physical Resistance"]},
 description:2,
 
+skill_Ice_Barrage:{index:["skill_Ice_Barrage"], format:["+"," to Ice Barrage (Sorceress only)"]},
+skill_Combustion:{index:["skill_Combustion"], format:["+"," to Combustion (Sorceress only)"]},
+skill_Lesser_Hydra:{index:["skill_Lesser_Hydra"], format:["+"," to Lesser Hydra (Sorceress only)"]},
+skill_Blood_Warp:{index:["skill_Blood_Warp"], format:["+"," to Blood Warp (Necromancer only)"]},
+skill_Curse_Mastery:{index:["skill_Curse_Mastery"], format:["+"," to Curse Mastery (Necromancer only)"]},
+skill_Dark_Pact:{index:["skill_Dark_Pact"], format:["+"," to Dark Pact (Necromancer only)"]},
+skill_Holy_Nova:{index:["skill_Holy_Nova"], format:["+"," to Holy Nova (Paladin only)"]},
+skill_Holy_Light:{index:["skill_Holy_Light"], format:["+"," to Holy Light (Paladin only)"]},
+skill_Joust:{index:["skill_Joust"], format:["+"," to Joust (Paladin only)"]},
+skill_Gust:{index:["skill_Gust"], format:["+"," to Gust (Druid only)"]},
 };
 
 var stats_alternate = {
@@ -1487,6 +1497,7 @@ var codes = {
 	ethereal:"ETH", max_durability:"ITEMSTAT75", money:"GOLD", 
 	// TODO: ITEMSTAT57 & ITEMSTAT58 (min and max poison damage) should apply if pDamage_all is used instead of pDamage_min & pDamage_max
 	skill_Cold_Enchant:"SK40", skill_Inferno:"SK41", skill_Lightning:"SK49", skill_Enchant_Fire:"SK52", skill_Skeleton_Mastery:"SK69", skill_Poison_Dagger:"SK73", skill_Golem_Mastery:"SK79", skill_Bone_Prison:"SK88", skill_Thorns:"SK103", skill_General_Mastery:"SK128", skill_Throwing_Mastery:"SK135", skill_Polearm_and_Spear_Mastery:"SK136", skill_Double_Throw:"SK140", skill_Combat_Reflexes:"SK141", skill_Berserk:"SK152", skill_Tiger_Strike:"SK254", skill_Blade_Sentinel:"SK257", skill_Fists_of_Fire:"SK259", skill_Dragon_Claw:"SK260", skill_Cobra_Strike:"SK265", skill_Claws_of_Thunder:"SK269", skill_Chain_Lightning_Sentry:"SK271", skill_Phoenix_Strike:"SK280", 
+	skill_Ice_Barrage:"SK369", skill_Combustion:"SK376", skill_Lesser_Hydra:"SK383", skill_Blood_Warp:"SK367", skill_Curse_Mastery:"SK374", skill_Dark_Pact:"SK381", skill_Holy_Nova:"SK364", skill_Holy_Light:"SK371", skill_Joust:"SK378", skill_Gust:"SK370", 
 };
 
 var item_groups = {
@@ -1565,6 +1576,7 @@ var all_codes = {
 	SK126:3,SK127:3,SK128:3,SK129:3,SK130:3,SK131:3,SK132:3,SK133:3,SK134:3,SK135:3,SK136:3,SK137:3,SK138:3,SK139:3,SK140:3,SK141:3,SK142:3,SK143:3,SK144:3,SK145:3,SK146:3,SK147:3,SK148:3,SK149:3,SK150:3,SK151:3,SK152:3,SK153:3,SK154:3,SK155:3,
 	SK221:3,SK222:3,SK223:3,SK224:3,SK225:3,SK226:3,SK227:3,SK228:3,SK229:3,SK230:3,SK231:3,SK232:3,SK233:3,SK234:3,SK235:3,SK236:3,SK237:3,SK238:3,SK239:3,SK240:3,SK241:3,SK242:3,SK243:3,SK244:3,SK245:3,SK246:3,SK247:3,SK248:3,SK249:3,
 	SK250:3,SK251:3,SK252:3,SK253:3,SK254:3,SK255:3,SK256:3,SK257:3,SK258:3,SK259:3,SK260:3,SK261:3,SK262:3,SK263:3,SK264:3,SK265:3,SK266:3,SK267:3,SK268:3,SK269:3,SK270:3,SK271:3,SK272:3,SK273:3,SK274:3,SK275:3,SK276:3,SK277:3,SK278:3,SK279:3,SK280:3,
+	SK369:2,SK376:2,SK383:2,SK367:2,SK3374:2,SK381:2,SK364:2,SK371:2,SK378:2,SK370:2,
 	ALLSK:3,CLSK0:3,TABSK0:3,TABSK1:3,TABSK2:3,CLSK1:3,TABSK8:3,TABSK9:3,TABSK10:3,CLSK2:3,TABSK16:3,TABSK17:3,TABSK18:3,CLSK3:3,TABSK24:3,TABSK25:3,TABSK26:3,CLSK4:3,TABSK32:3,TABSK33:3,TABSK34:3,CLSK5:3,TABSK40:3,TABSK41:3,TABSK42:3,CLSK6:3,TABSK48:3,TABSK49:3,TABSK50:3,
 	DIFFICULTY:1,GOLD:3,CLVL:3,ILVL:3,SOCK:3,DEF:3,GEMTYPE:3,GEMLEVEL:3,RUNE:3,RES:3,ED:3,LIFE:3,MANA:3,IAS:3,FCR:3,FHR:3,FBR:3,ALVL:3,
 	DIFF:3,QLVL:3,QTY:3,PRICE:3,LVLREQ:3,CRAFTALVL:3,CRAFT:3,

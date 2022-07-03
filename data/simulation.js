@@ -396,6 +396,7 @@ function parseFile(file,num) {
 	}
 	if (typeof(itemToCompare.color_stuck) != 'undefined') { name_saved = "%"+itemToCompare.color_stuck+"%"+name_saved }
 	if (settings.version == 1 && itemToCompare.type == "rune") { name_saved = "%ORANGE%"+name_saved }
+	var display_default = "<l style='color:"+colors[getColor(itemToCompare)]+"'>"+name_saved+"</l>";
 	var output_total = name_saved;
 	var done = false;
 	var continued = 0;
@@ -884,6 +885,7 @@ function parseFile(file,num) {
 			document.getElementById("o"+num).innerHTML += "#"+num+" Warning: item description may be too long ("+text_length[1]+" characters, "+text_length[2]+" units)<br>"; errors++;	// displays an error if the item's description is too long		// TODO: what is the actual limit? (doesn't seem to be 1 per Char, 1 per NL, and 3 per color)
 		}
 	}
+	if (display == "" && character.FILTLVL == 0) { display = display_default }		// Displays as vanilla if hidden and FILTLVL = 0
 	// Reverses order of lines
 	if (display.includes("<br>") == true) {
 		var display_multi = display.split("<br>");

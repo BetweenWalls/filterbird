@@ -1976,6 +1976,11 @@ function setPD2Codes() {
 		}
 		codes["skill_Teleport"] = "SK54"
 		codes["skill_Chain_Lightning"] = "SK53"
+		codes["skill_Blaze"] = "SK46"
+		codes["skill_Inferno"] = "SK41"
+		codes["skill_Lightning_Sentry"] = "SK366"
+		codes["skill_Chain_Lightning_Sentry"] = "SK271"
+		// TODO: Reset list of pointmods when changing between versions (can currently be done manually by changing the basic item info)
 	} else {
 		document.getElementById("character_class").style.display = "none"
 		document.getElementById("character_shop").style.display = "none"
@@ -1995,7 +2000,12 @@ function setPD2Codes() {
 		}
 		codes["skill_Teleport"] = "SK53"
 		codes["skill_Chain_Lightning"] = "SK54"
-		// TODO: update pointmod options if necessary
+		codes["skill_Blaze"] = "SK41"
+		codes["skill_Inferno"] = "SK46"
+		codes["skill_Lightning_Sentry"] = "SK271"
+		codes["skill_Chain_Lightning_Sentry"] = "SK366"
+		// TODO: Reset list of pointmods when changing between versions (can currently be done manually by changing the basic item info)
+		// TODO: update other pointmod options if necessary
 	}
 	if (reset_selected == true) {
 		document.getElementById("dropdown_name").selectedIndex = 0

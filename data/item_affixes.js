@@ -2156,7 +2156,7 @@ var affixes_pointmod_pd2 = [
 [	37,	99,	30,	29,	"skill_Death_Sentry",	1,	3,	"h2h",	""	],
 [	37,	99,	30,	30,	"skill_Blade_Shield",	1,	3,	"h2h",	""	],
 [	19,	99,	1,	31,	"skill_Dragon_Tail",	1,	3,	"h2h",	""	],
-//[	25,	99,	24,	32,	"skill_Lightning_Sentry",	1,	3,	"h2h",	""	],	// extra
+[	25,	99,	24,	32,	"skill_Lightning_Sentry",	1,	3,	"h2h",	""	],	// extra
 
 [	1,	99,	1,	1,	"skill_Howl",	1,	3,	"phlm",	""	],
 [	1,	99,	1,	2,	"skill_Find_Potion",	1,	3,	"phlm",	""	],
@@ -2219,7 +2219,7 @@ var affixes_pointmod_pd2 = [
 [	25,	99,	24,	29,	"skill_Solar_Creeper",	1,	3,	"pelt",	""	],
 [	37,	99,	30,	30,	"skill_Spirit_of_Barbs",	1,	3,	"pelt",	""	],
 [	37,	99,	30,	31,	"skill_Summon_Grizzly",	1,	3,	"pelt",	""	],
-//[	19,	99,	18,	32,	"skill_Gust",	1,	3,	"pelt",	""	],	// extra
+[	19,	99,	18,	32,	"skill_Gust",	1,	3,	"pelt",	""	],	// extra
 
 [	1,	99,	1,	1,	"skill_Skeleton_Mastery",	1,	3,	"wand",	"head"	],
 [	1,	99,	1,	2,	"skill_Raise_Skeleton_Warrior",	1,	3,	"wand",	"head"	],
@@ -2250,10 +2250,10 @@ var affixes_pointmod_pd2 = [
 [	25,	99,	24,	29,	"skill_Attract",	1,	3,	"wand",	"head"	],
 [	25,	99,	24,	30,	"skill_Decrepify",	1,	3,	"wand",	"head"	],
 [	37,	99,	30,	31,	"skill_Lower_Resist",	1,	3,	"wand",	"head"	],
-//[	19,	99,	18,	32,	"skill_Blood_Warp",	1,	3,	"wand",	"head"	],	// extra
-//[	1,	99,	6,	33,	"skill_Dark_Pact",	1,	3,	"wand",	"head"	],	// extra
-//[	1,	99,	1,	34,	"skill_Curse_Mastery",	1,	3,	"wand",	"head"	],	// extra
-//[	25,	99,	24,	35,	"skill_Raise_Skeleton_Archer",	1,	3,	"wand",	"head"	],	// replaces Summon Resist
+[	19,	99,	18,	32,	"skill_Blood_Warp",	1,	3,	"wand",	"head"	],	// extra
+[	1,	99,	6,	33,	"skill_Dark_Pact",	1,	3,	"wand",	"head"	],	// extra
+[	1,	99,	1,	34,	"skill_Curse_Mastery",	1,	3,	"wand",	"head"	],	// extra
+[	25,	99,	24,	35,	"skill_Raise_Skeleton_Archer",	1,	3,	"wand",	"head"	],	// replaces Summon Resist
 
 [	1,	99,	1,	1,	"skill_Prayer",	1,	3,	"scep",	""	],
 [	1,	99,	1,	2,	"skill_Resist_Fire",	1,	3,	"scep",	""	],
@@ -2285,9 +2285,9 @@ var affixes_pointmod_pd2 = [
 [	25,	99,	24,	28,	"skill_Conversion",	1,	3,	"scep",	""	],
 [	25,	99,	24,	29,	"skill_Holy_Shield",	1,	3,	"scep",	""	],
 [	37,	99,	30,	30,	"skill_Fist_of_the_Heavens",	1,	3,	"scep",	""	],
-//[	37,	99,	30,	31,	"skill_Holy_Nova",	1,	3,	"scep",	""	],	// extra
-//[	12,	99,	12,	32,	"skill_Holy_Light",	1,	3,	"scep",	""	],	// extra
-//[	25,	99,	24,	33,	"skill_Joust",	1,	3,	"scep",	""	],	// extra
+[	37,	99,	30,	31,	"skill_Holy_Nova",	1,	3,	"scep",	""	],	// extra
+[	12,	99,	12,	32,	"skill_Holy_Light",	1,	3,	"scep",	""	],	// extra
+[	25,	99,	24,	33,	"skill_Joust",	1,	3,	"scep",	""	],	// extra
 
 [	1,	99,	1,	1,	"skill_Ice_Bolt",	1,	3,	"staf",	"orb"	],
 [	1,	99,	1,	2,	"skill_Cold_Enchant",	1,	3,	"staf",	"orb"	],
@@ -2319,9 +2319,9 @@ var affixes_pointmod_pd2 = [
 [	25,	99,	24,	30,	"skill_Meteor",	1,	3,	"staf",	"orb"	],
 [	37,	99,	30,	31,	"skill_Fire_Mastery",	1,	3,	"staf",	"orb"	],
 [	37,	99,	30,	32,	"skill_Hydra",	1,	3,	"staf",	"orb"	],
-//[	25,	99,	24,	33,	"skill_Ice_Barrage",	1,	3,	"staf",	"orb"	],	// extra
-//[	12,	99,	12,	34,	"skill_Lesser_Hydra",	1,	3,	"staf",	"orb"	],	// extra
-//[	25,	99,	24,	35,	"skill_Combustion",	1,	3,	"staf",	"orb"	],	// extra
+[	25,	99,	24,	33,	"skill_Ice_Barrage",	1,	3,	"staf",	"orb"	],	// extra
+[	12,	99,	12,	34,	"skill_Lesser_Hydra",	1,	3,	"staf",	"orb"	],	// extra
+[	25,	99,	24,	35,	"skill_Combustion",	1,	3,	"staf",	"orb"	],	// extra
 ];
 
 var affixes_corruption = [
