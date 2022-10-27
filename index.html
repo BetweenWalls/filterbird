@@ -120,18 +120,18 @@
 					<div id="character_class" style="display:inline"><label class="label">&nbsp;Class: </label><select id="dropdown_class" class="new-dropdown" onChange="setClass(this.value)">
 						<option class="gray-all">Amazon</option><option class="gray-all">Assassin</option><option class="gray-all">Barbarian</option><option class="gray-all">Druid</option><option class="gray-all">Necromancer</option><option class="gray-all">Paladin</option><option class="gray-all">Sorceress</option>
 					</select></div>
+					<div style="display:inline"><label class="label" for="filtlvl">&nbsp;Filter Level: </label><input id="filtlvl" name="filtlvl" class="num-input" type="number" min="0" max="9" value="1" onchange="setFilterLevel(this.value)"></div>
 					<br>
 					<div style="display:inline"><label class="label">Difficulty: </label><select id="dropdown_difficulty" class="new-dropdown" onChange="setDifficulty(this.selectedIndex)">
 						<option class="gray-all">Normal</option><option class="gray-all">Nightmare</option><option class="gray-all">Hell</option><option class="gray-all" selected>Auto (ilvl-based)</option>
 					</select></div>
 					<div id="character_shop" style="display:inline"><label class="label" for="shop">&nbsp;Shop </label><input id="shop" type="checkbox" name="shop" onchange="setShop(this.checked)"></div>
+					<div id="character_equipped" style="display:inline"><label class="label" for="equipped">&nbsp;Equipped </label><input id="equipped" type="checkbox" name="equipped" onchange="setEquipped(this.checked)"></div>
 				</div>
 				<div id="character_gold" style="display:inline-table;">
 					<div><label class="label" for="gold_stash">Gold in Stash: </label><input id="gold_stash" name="gold_stash" class="num-input" style="max-width:72px;" type="number" min="0" max="2500000" value="199000" onchange="setGoldStash(this.value)"></div>
 					<div><label class="label" for="gold_char">Gold Carried: </label><input id="gold_char" name="gold_char" class="num-input" style="max-width:66px;" type="number" min="0" max="990000" value="199000" onchange="setGoldChar(this.value)"></div>
 				</div>
-				
-					<div style="display:inline"><label class="label" for="filtlvl">&nbsp;Filter Level: </label><input id="filtlvl" name="filtlvl" class="num-input" type="number" min="0" max="9" value="1" onchange="setFilterLevel(this.value)"></div>
 			</div>
 		</div>
 		<div id="item_editing" style="display:none;">

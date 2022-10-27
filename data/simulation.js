@@ -1,6 +1,6 @@
 
 var itemToCompare = {name:"5000 Gold",NAME:"5000 Gold",CODE:"GOLD",GOLD:5000,ID:true,always_id:true,rarity:"regular"};
-var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:85,CHARSTAT70:0,CHARSTAT13:1000,AMAZON:true,ASSASSIN:false,BARBARIAN:false,DRUID:false,NECROMANCER:false,PALADIN:false,SORCERESS:false,SHOP:false,FILTLVL:1};
+var character = {CLVL:90,CHARSTAT14:199000,CHARSTAT15:199000,DIFFICULTY:2,ILVL:85,CHARSTAT70:0,CHARSTAT13:1000,AMAZON:true,ASSASSIN:false,BARBARIAN:false,DRUID:false,NECROMANCER:false,PALADIN:false,SORCERESS:false,SHOP:false,EQUIPPED:false,FILTLVL:1};
 var item_settings = {ID:false, ILVL_return:85};
 var settings = {auto_difficulty:true,version:0,validation:1,auto_simulate:1,max_errors:50,error_limit:1,num_filters:2,background:0,nowrap:true,nowrap_width:800};
 var notices = {duplicates:0,pd2_conditions:0,pod_conditions:0,colors:0,encoding:0};
@@ -466,6 +466,7 @@ function parseFile(file,num) {
 				for (cond in cond_list) {
 					cond = Number(cond)
 					var c = cond_list[cond];
+					var nonbool_conditions = ["GOLD","RUNE","GEMLEVEL","GEMTYPE","QTY","DEF","LVLREQ","PRICE","ALVL","CRAFTALVL","QLVL","ILVL","SOCK","ED","MAXDUR","AR","RES","FRES","CRES","LRES","PRES","FRW","IAS","FCR","FHR","FBR","MINDMG","MAXDMG","STR","DEX","LIFE","MANA","MFIND","GFIND","MAEK","DTM","REPLIFE","REPAIR","ARPER","FOOLS","ALLSK"];
 					if (c == "GEM") { c = "GEMLEVEL" }
 					if (c == "RUNENUM" || c == "RUNENAME") { c = "RUNE" }
 					var number = false;
@@ -523,12 +524,17 @@ function parseFile(file,num) {
 							if (typeof(character[c]) == 'undefined') { character[c] = 0 }
 							else if (~~Number(character[c]) < 0) { value_is_negative = true }
 						}
-						else if (typeof(itemToCompare[c]) == 'undefined' && (c == "GOLD" || c == "RUNE" || c == "GEMLEVEL" || c == "GEMTYPE")) { itemToCompare[c] = 0 }		// TODO: Even though '0' and 'false' seem to be equivalent here, it might be useful to only have boolean conditions be set to false
-						else if (typeof(itemToCompare[c]) == 'undefined') { itemToCompare[c] = false }
+						else if (typeof(itemToCompare[c]) == 'undefined' && (c.substr(0,4) == "STAT" || c.substr(0,5) == "TABSK" || c.substr(0,4) == "CLSK" || c.substr(0,2) == "SK" || c.substr(0,4) == "CHSK" || c.substr(0,2) == "OS")) { itemToCompare[c] = 0 }
+						else if (typeof(itemToCompare[c]) == 'undefined') {
+							for (let i = 0; i < nonbool_conditions.length; i++) {
+								if (c == nonbool_conditions[i]) { itemToCompare[c] = 0 }
+							}
+							if (typeof(itemToCompare[c]) == 'undefined') { itemToCompare[c] = false }
+						}
 						else if (~~Number(itemToCompare[c]) < 0) { value_is_negative = true }
 						// add to formula
 						if (c_falsify == true) { formula += "false " }
-						else if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT" || c == "AMAZON" || c == "ASSASSIN" || c == "BARBARIAN" || c == "DRUID" || c == "NECROMANCER" || c == "PALADIN" || c == "SORCERESS" || c == "SHOP" || c == "FILTLVL") {
+						else if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT" || c == "AMAZON" || c == "ASSASSIN" || c == "BARBARIAN" || c == "DRUID" || c == "NECROMANCER" || c == "PALADIN" || c == "SORCERESS" || c == "SHOP" || c == "EQUIPPED" || c == "FILTLVL") {
 							if (value_is_negative == true) { formula += (2000000000+Number(character[c]))+" " }			// converts negative values to their equivalent 'unsigned' value
 							else { formula += character[c]+" " }
 						}
@@ -1292,6 +1298,20 @@ function setGoldChar(value) {
 // ---------------------------------
 function setShop(checked) {
 	character.SHOP = checked
+	if (checked == true) { if (character.EQUIPPED == true) {
+		document.getElementById("equipped").checked = false;
+		character.EQUIPPED = false;
+	} }
+	simulate()
+}
+// setEquipped - handles 'equipped' checkbox
+// ---------------------------------
+function setEquipped(checked) {
+	character.EQUIPPED = checked
+	if (checked == true) { if (character.SHOP == true) {
+		document.getElementById("shop").checked = false;
+		character.SHOP = false;
+	} }
 	simulate()
 }
 // setFilterLevel - 

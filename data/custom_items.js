@@ -595,6 +595,9 @@ function getALVL() {
 	var ilvl = itemCustom.ILVL;
 	var x = 0;
 	var alvl = 0;
+	var clvl = character.CLVL;
+	var craft_ilvl = Math.floor(ilvl/2) + Math.floor(clvl/2)
+	var craft_alvl = 0;
 	
 	if (type != "amulet" && type != "ring" && type != "quiver" && type != "charm" && type != "jewel" && type != "rune" && type != "gem" && type != "other" && type != "misc") { base_qlvl = bases[itemCustom.base.split(" ").join("_").split("-").join("_").split("'s").join("s")].qlvl; }
 	else if (itemCustom.base == "Large Charm") { base_qlvl = 14 }
@@ -610,19 +613,25 @@ function getALVL() {
 	}
 	
 	x = Math.max(ilvl,base_qlvl)
-	if (magic_lvl > 0) { x = x + magic_lvl }
+	if (magic_lvl > 0) { alvl = x + magic_lvl }
 	else {
-		// TODO/TOCHECK: what was this meant to do? it just messes up the affix level
-		//if (x < (99 - base_qlvl/2)) { x = x - base_qlvl/2 }
-		//else { x = 2*x - 99 }
+		if (x < (99 - Math.floor(base_qlvl/2))) { alvl = x - Math.floor(base_qlvl/2) }
+		else { alvl = 2*x - 99 }
 	}
-	alvl = Math.round(Math.min(x,99))
+	alvl = Math.min(alvl,99)
 	
-	itemCustom.ALVL = alvl
-	if (settings.version == 1) {
-		itemCustom.CRAFTALVL = Math.floor(character.CLVL/2) + Math.floor(ilvl/2)
-		itemCustom.QLVL = base_qlvl
+	x = Math.max(craft_ilvl,base_qlvl)
+	if (magic_lvl > 0) { craft_alvl = x + magic_lvl }
+	else {
+		if (x < (99 - Math.floor(base_qlvl/2))) { craft_alvl = x - Math.floor(base_qlvl/2) }
+		else { craft_alvl = 2*x - 99 }
 	}
+	craft_alvl = Math.min(craft_alvl,99)
+	
+	itemCustom.QLVL = base_qlvl
+	itemCustom.MAGLVL = magic_lvl
+	itemCustom.ALVL = alvl
+	itemCustom.CRAFTALVL = craft_alvl
 	return alvl
 }
 // loadEditing - disables all affix options, then enables any that are relevant to the item
@@ -1960,6 +1969,7 @@ function setPD2Codes() {
 	if (settings.version == 1) {
 		document.getElementById("character_class").style.display = "inline-table"
 		document.getElementById("character_shop").style.display = "inline-table"
+		document.getElementById("character_equipped").style.display = "inline-table"
 		document.getElementById("character_gold").style.display = "none"
 		if (selected_group_index < 9) { document.getElementById("select_price").style.display = "block" }	// shows price for all equipment groups (excludes "charm", "socketable", "miscellaneous")
 		if (selected_group_index > 9) {
@@ -1984,6 +1994,7 @@ function setPD2Codes() {
 	} else {
 		document.getElementById("character_class").style.display = "none"
 		document.getElementById("character_shop").style.display = "none"
+		document.getElementById("character_equipped").style.display = "none"
 		document.getElementById("character_gold").style.display = "inline-table"
 		if (selected_group_index < 9) { document.getElementById("select_price").style.display = "block" }	// shows price for all equipment groups (excludes "charm", "socketable", "miscellaneous")
 		if (selected_group_index > 9) {
