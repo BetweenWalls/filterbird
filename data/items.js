@@ -2036,6 +2036,7 @@ var premade = {
 {CODE:"t13", name:"Bastion Keep Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t14", name:"Sanatorium Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t15", name:"Royal Crypts Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
+{CODE:"t16", name:"Ruined Cistern Map", rarity:"rare", map_tier:1, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t21", name:"Phlegethon Map", rarity:"rare", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t22", name:"Torajan Jungle Map", rarity:"magic", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t23", name:"Arreat Battlefield Map", rarity:"rare", map_tier:2, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
@@ -2051,6 +2052,7 @@ var premade = {
 {CODE:"t37", name:"Pandemonium Citadel Map", rarity:"rare", map_tier:3, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t38", name:"Canyon of Sescheron Map", rarity:"rare", map_tier:3, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t39", name:"Kehjistan Marketplace Map", rarity:"rare", map_tier:3, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
+{CODE:"t3a", name:"Ashen Plains Map", rarity:"rare", map_tier:3, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t41", name:"Cathedral of Light Map", rarity:"rare", map_tier:4, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t42", name:"Plains of Torment Map", rarity:"rare", map_tier:4, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
 {CODE:"t43", name:"Sanctuary of Sin Map", rarity:"rare", map_tier:4, pd2:1, relic_experience:10, relic_density:100, map_mf_gf:50, always_id:false},
@@ -2063,6 +2065,7 @@ var premade = {
 {CODE:"scou", name:"Orb of Destruction", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"GOLD"},
 {CODE:"rera", name:"Horadrim Orb", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"GOLD"},
 {CODE:"upmp", name:"Cartographer's Orb", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"GOLD"},
+{CODE:"fort", name:"Orb of Fortification", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, pd2:1, always_id:true, color_stuck:"GOLD"},
 {CODE:"scrb", name:"Horadrim Scarab", rarity:"regular", color:"GOLD", pd2:1, always_id:true, color_stuck:"GOLD"},
 {CODE:"std", name:"Standard of Heroes", rarity:"regular", color:"GOLD", QUANTITY:1, quant_min:1, quant_max:50, req_level:90, pd2:1, always_id:true, color_stuck:"GOLD"},
 
