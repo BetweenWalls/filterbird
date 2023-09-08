@@ -453,6 +453,7 @@ function parseFile(file,num) {
 				}
 			}
 			if (index_end > index+12 && rule.substring(0,index).length == 0) {
+				conditions = conditions.split(",").join("‚")	// Refactors "MULTI" conditions since they use commas (uses the "Single low-9 quotation mark" instead of "comma")
 				var match_override = false;
 				var cond_format = conditions.split("  ").join(" ").split("(").join(",(,").split(")").join(",),").split("!").join(",!,").split("<=").join(",≤,").split(">=").join(",≥,").split(">").join(",>,").split("<").join(",<,").split("=").join(",=,").split(" AND ").join(" ").split(" OR ").join(",|,").split("+").join(",+,").split(" ").join(",&,").split(",,").join(",");
 				var cond_list = cond_format.split(",");
@@ -466,6 +467,7 @@ function parseFile(file,num) {
 				for (cond in cond_list) {
 					cond = Number(cond)
 					var c = cond_list[cond];
+					// TODO: Check whether the "BETEEN" operator is present and reconfigure it to use multiple conditions with ">" and "<" (may need a different solution for PREFIX/SUFFIX/AUTOMOD)
 					var nonbool_conditions = ["GOLD","RUNE","GEMLEVEL","GEMTYPE","QTY","DEF","LVLREQ","PRICE","ALVL","CRAFTALVL","QLVL","ILVL","SOCK","ED","MAXDUR","AR","RES","FRES","CRES","LRES","PRES","FRW","IAS","FCR","FHR","FBR","MINDMG","MAXDMG","STR","DEX","LIFE","MANA","MFIND","GFIND","MAEK","DTM","REPLIFE","REPAIR","ARPER","FOOLS","ALLSK"];
 					if (c == "GEM") { c = "GEMLEVEL" }
 					if (c == "RUNENUM" || c == "RUNENAME") { c = "RUNE" }
@@ -492,7 +494,7 @@ function parseFile(file,num) {
 								if (settings.version == 0) { recognized = true }
 								else { pod_conditions = true }
 							} }
-							if (cr.substr(0,4) == "STAT") { if (Number(cr.slice(4)) >= 0 && Number(cr.slice(4)) <= 500) {
+							if (cr.substr(0,4) == "STAT") { if (Number(cr.slice(4)) >= 0 && Number(cr.slice(4)) <= 504) {
 								recognized = true
 								cond_list[cond] = ("STAT"+Number(cr.slice(4)))
 								c = cond_list[cond]
@@ -588,16 +590,17 @@ function parseFile(file,num) {
 				var unrecognized_keywords = false;
 				var out_format = output.split("//")[0];
 				
+				// TODO: Rework this to check the conditions and ensure that it doesn't apply to identified items of magic rarity or higher
 				// Checks name output (not description) for %NL% and displays an error if found
-				if (settings.version == 1) {
-					if (out_format.includes("{") == true && out_format.indexOf("{") < out_format.lastIndexOf("}")) {
-						var desc_output_temp = out_format.substring(out_format.indexOf("{"),out_format.indexOf("}")+1);
-						var name_output_temp = out_format.replace(desc_output_temp,"");
-						if (name_output_temp.includes("%NL%") == true) {
-							document.getElementById("o"+num).innerHTML += "#"+num+" Invalid keyword on line "+line_num+": <l style='color:#cc5'>%NL%</l> (only useable in the item's description) ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"; errors++;	// displays an error if the rule includes any invalid uses of the %NL% keyword
-						}
-					}
-				}
+				//if (settings.version == 1) {
+				//	if (out_format.includes("{") == true && out_format.indexOf("{") < out_format.lastIndexOf("}")) {
+				//		var desc_output_temp = out_format.substring(out_format.indexOf("{"),out_format.indexOf("}")+1);
+				//		var name_output_temp = out_format.replace(desc_output_temp,"");
+				//		if (name_output_temp.includes("%NL%") == true) {
+				//			document.getElementById("o"+num).innerHTML += "#"+num+" Invalid keyword on line "+line_num+": <l style='color:#cc5'>%NL%</l> (only useable in the item's description) ... "+"<l style='color:#aaa'>"+file.split("\t").join(" ").split("­").join("•").split("\n")[line]+"</l><br>"; errors++;	// displays an error if the rule includes any invalid uses of the %NL% keyword
+				//		}
+				//	}
+				//}
 				
 				out_format = out_format.split(",").join("‾").split(" ").join(", ,").split("%CONTINUE%").join(",misc_CONTINUE,").split("%NAME%").join(",ref_NAME,").split("%WHITE%").join(",color_WHITE,").split("%GRAY%").join(",color_GRAY,").split("%BLUE%").join(",color_BLUE,").split("%YELLOW%").join(",color_YELLOW,").split("%GOLD%").join(",color_GOLD,").split("%GREEN%").join(",color_GREEN,").split("%BLACK%").join(",color_BLACK,").split("%TAN%").join(",color_TAN,").split("%PURPLE%").join(",color_PURPLE,").split("%ORANGE%").join(",color_ORANGE,").split("%RED%").join(",color_RED,").split("%ILVL%").join(",ref_ILVL,").split("%SOCKETS%").join(",ref_SOCK,").split("%PRICE%").join(",ref_PRICE,").split("%RUNENUM%").join(",ref_RUNE,").split("%RUNENAME%").join(",ref_RUNENAME,").split("%GEMLEVEL%").join(",ref_GLEVEL,").split("%GEMTYPE%").join(",ref_GTYPE,").split("%CODE%").join(",ref_CODE,").split("\t").join(",\t,").split("{").join(",{,").split("}").join(",},").split("‗").join(",‗,");
 				// TODO: Change split/join replacements to use deliminator other than "_" between the identifying key and the keyword, so no exceptions need to be made when splitting off the keyword (e.g. for [DARK,GREEN] since it contains the deliminator)
@@ -636,6 +639,31 @@ function parseFile(file,num) {
 					for (let stat = 0; stat <= 500; stat++) {
 						if (typeof(itemToCompare["STAT"+stat]) != 'undefined') { out_format = out_format.split("%STAT"+stat+"%").join(",ref_STAT"+stat+",") }
 						else { out_format = out_format.split("%STAT"+stat+"%").join(",0,") }
+					}
+				}
+				// POST-SEASON-6 CHANGES: This section is my first editing of simulation.js since a long absence and may not account for everything
+				if (settings.version == 1) {
+					out_format = out_format.split("%SOCKETS%").join(",ref_SOCK,").split("%DEF%").join(",ref_DEF,").split("%ED%").join(",ref_ED,").split("%EDEF%").join(",ref_EDEF,").split("%EDAM%").join(",ref_EDAM,").split("%AR%").join(",ref_AR,").split("%RES%").join(",ref_RES,").split("%FRES%").join(",ref_FRES,").split("%CRES%").join(",ref_CRES,").split("%LRES%").join(",ref_LRES,").split("%PRES%").join(",ref_PRES,").split("%FRW%").join(",ref_FRW,").split("%IAS%").join(",ref_IAS,").split("%FCR%").join(",ref_FCR,").split("%FHR%").join(",ref_FHR,").split("%FBR%").join(",ref_FBR,").split("%MINDMG%").join(",ref_MINDMG,").split("%MAXDMG%").join(",ref_MAXDMG,").split("%STR%").join(",ref_STR,").split("%DEX%").join(",ref_DEX,").split("%LIFE%").join(",ref_LIFE,").split("%MANA%").join(",ref_MANA,").split("%MFIND%").join(",ref_MFIND,").split("%GFIND%").join(",ref_GFIND,").split("%MAEK%").join(",ref_MAEK,").split("%DTM%").join(",ref_DTM,").split("%REPLIFE%").join(",ref_REPLIFE,").split("%REPAIR%").join(",ref_REPAIR,").split("%ARPER%").join(",ref_ARPER,").split("%FOOLS%").join(",ref_FOOLS,").split("%%").join(",ref_,")
+					for (let stat = 0; stat <= 504; stat++) {
+						if (typeof(itemToCompare["STAT"+stat]) != 'undefined') { out_format = out_format.split("%STAT"+stat+"%").join(",ref_STAT"+stat+",") }
+						else { out_format = out_format.split("%STAT"+stat+"%").join(",0,") }
+						if (typeof(itemToCompare["CHARSTAT"+stat]) != 'undefined') { out_format = out_format.split("%CHARSTAT"+stat+"%").join(",ref_CHARSTAT"+stat+",") }
+						else { out_format = out_format.split("%CHARSTAT"+stat+"%").join(",0,") }
+					}
+					for (let stat = 6; stat <= 384; stat++) {
+						if (typeof(itemToCompare["SK"+stat]) != 'undefined') { out_format = out_format.split("%SK"+stat+"%").join(",ref_SK"+stat+",") }
+						else { out_format = out_format.split("%SK"+stat+"%").join(",0,") }
+						if (stat == 155) { stat = 220 }
+						if (stat == 280) { stat = 363 }
+					}
+					for (let stat = 0; stat <= 50; stat++) {
+						if (typeof(itemToCompare["TABSK"+stat]) != 'undefined') { out_format = out_format.split("%TABSK"+stat+"%").join(",ref_TABSK"+stat+",") }
+						else { out_format = out_format.split("%TABSK"+stat+"%").join(",0,") }
+						if (stat == 2 || stat == 10 || stat == 18 || stat == 26 || stat == 34 || stat == 42) { stat += 5 }
+					}
+					for (let stat = 0; stat <= 6; stat++) {
+						if (typeof(itemToCompare["CLSK"+stat]) != 'undefined') { out_format = out_format.split("%CLSK"+stat+"%").join(",ref_CLSK"+stat+",") }
+						else { out_format = out_format.split("%CLSK"+stat+"%").join(",0,") }
 					}
 				}
 				var out_list = out_format.split(",,").join(",").split(",");
@@ -812,6 +840,31 @@ function parseFile(file,num) {
 		for (let stat = 0; stat <= 500; stat++) {
 			if (typeof(itemToCompare["STAT"+stat]) != 'undefined') { out_format = out_format.split("%STAT"+stat+"%").join(",ref_STAT"+stat+",") }
 			else { out_format = out_format.split("%STAT"+stat+"%").join(",0,") }
+		}
+	}
+	// POST-SEASON-6 CHANGES: This section is my first editing of simulation.js since a long absence and may not account for everything
+	if (settings.version == 1) {
+		out_format = out_format.split("%SOCKETS%").join(",ref_SOCK,").split("%DEF%").join(",ref_DEF,").split("%ED%").join(",ref_ED,").split("%EDEF%").join(",ref_EDEF,").split("%EDAM%").join(",ref_EDAM,").split("%AR%").join(",ref_AR,").split("%RES%").join(",ref_RES,").split("%FRES%").join(",ref_FRES,").split("%CRES%").join(",ref_CRES,").split("%LRES%").join(",ref_LRES,").split("%PRES%").join(",ref_PRES,").split("%FRW%").join(",ref_FRW,").split("%IAS%").join(",ref_IAS,").split("%FCR%").join(",ref_FCR,").split("%FHR%").join(",ref_FHR,").split("%FBR%").join(",ref_FBR,").split("%MINDMG%").join(",ref_MINDMG,").split("%MAXDMG%").join(",ref_MAXDMG,").split("%STR%").join(",ref_STR,").split("%DEX%").join(",ref_DEX,").split("%LIFE%").join(",ref_LIFE,").split("%MANA%").join(",ref_MANA,").split("%MFIND%").join(",ref_MFIND,").split("%GFIND%").join(",ref_GFIND,").split("%MAEK%").join(",ref_MAEK,").split("%DTM%").join(",ref_DTM,").split("%REPLIFE%").join(",ref_REPLIFE,").split("%REPAIR%").join(",ref_REPAIR,").split("%ARPER%").join(",ref_ARPER,").split("%FOOLS%").join(",ref_FOOLS,").split("%%").join(",ref_,")
+			for (let stat = 0; stat <= 504; stat++) {
+			if (typeof(itemToCompare["STAT"+stat]) != 'undefined') { out_format = out_format.split("%STAT"+stat+"%").join(",ref_STAT"+stat+",") }
+			else { out_format = out_format.split("%STAT"+stat+"%").join(",0,") }
+			if (typeof(itemToCompare["CHARSTAT"+stat]) != 'undefined') { out_format = out_format.split("%CHARSTAT"+stat+"%").join(",ref_CHARSTAT"+stat+",") }
+			else { out_format = out_format.split("%CHARSTAT"+stat+"%").join(",0,") }
+		}
+		for (let stat = 6; stat <= 384; stat++) {
+			if (typeof(itemToCompare["SK"+stat]) != 'undefined') { out_format = out_format.split("%SK"+stat+"%").join(",ref_SK"+stat+",") }
+			else { out_format = out_format.split("%SK"+stat+"%").join(",0,") }
+			if (stat == 155) { stat = 220 }
+			if (stat == 280) { stat = 363 }
+		}
+		for (let stat = 0; stat <= 50; stat++) {
+			if (typeof(itemToCompare["TABSK"+stat]) != 'undefined') { out_format = out_format.split("%TABSK"+stat+"%").join(",ref_TABSK"+stat+",") }
+			else { out_format = out_format.split("%TABSK"+stat+"%").join(",0,") }
+			if (stat == 2 || stat == 10 || stat == 18 || stat == 26 || stat == 34 || stat == 42) { stat += 5 }
+		}
+		for (let stat = 0; stat <= 6; stat++) {
+			if (typeof(itemToCompare["CLSK"+stat]) != 'undefined') { out_format = out_format.split("%CLSK"+stat+"%").join(",ref_CLSK"+stat+",") }
+			else { out_format = out_format.split("%CLSK"+stat+"%").join(",0,") }
 		}
 	}
 	var out_list = out_format.split(",,").join(",").split(",");
