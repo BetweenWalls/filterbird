@@ -521,6 +521,7 @@ function parseFile(file,num) {
 							if (c == "GEMLEVEL" && itemToCompare[c] > 3 && itemToCompare.CODE.length == 3) { itemToCompare[c] = 0 }
 						}
 						if (settings.version == 0 && c == "FILTERLVL") { c = "FILTLVL" }
+						if (settings.version == 1 && c == "CLASS") { c = "CLAZ" }
 						// set condition values
 						if (c == "CLVL" || c == "DIFFICULTY" || c.substr(0,8) == "CHARSTAT") {
 							if (typeof(character[c]) == 'undefined') { character[c] = 0 }
